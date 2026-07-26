@@ -1,0 +1,6 @@
+name = "sk8-scoop"
+compatibility_date = "2026-07-24"
+pages_build_output_dir = "."
+
+# The D1 database is deliberately bound in the Cloudflare Pages dashboard.
+# Binding name required by the website Functions: DB

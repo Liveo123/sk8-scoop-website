@@ -1,0 +1,16 @@
+[
+  {
+    "id":"example-1",
+    "title":"Example local event",
+    "date":"2026-08-01",
+    "time":"10:00",
+    "area":"Cheadle",
+    "venue":"Example venue",
+    "cost":"Free",
+    "category":"Family",
+    "description":"A placeholder showing how approved events will appear. Replace it with a verified event before publication.",
+    "booking_url":"",
+    "source_url":"",
+    "status":"example"
+  }
+]
