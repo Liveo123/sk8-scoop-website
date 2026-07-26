@@ -195,7 +195,7 @@ if(menu&&nav){
   modal.innerHTML=`<div class="signup-modal-backdrop" data-close-signup></div>
     <section class="signup-modal-card" role="dialog" aria-modal="true" aria-labelledby="signup-modal-title">
       <button class="signup-modal-close" type="button" aria-label="Close signup" data-close-signup>×</button>
-      <div class="signup-modal-art"><span>FRIDAY</span><strong>The useful local stuff, before the group chat asks.</strong><small>Cheadle · Cheadle Hulme · Gatley · Heald Green</small></div>
+      <div class="signup-modal-art"><span>ONE FREE LOCAL EMAIL</span><strong>Every Friday, without the endless scroll.</strong><small>Cheadle · Cheadle Hulme · Gatley · Heald Green</small></div>
       <div class="signup-modal-copy">
         <div class="eyebrow">Join 260+ local readers</div>
         <h2 id="signup-modal-title">Get the free Friday Scoop.</h2>
