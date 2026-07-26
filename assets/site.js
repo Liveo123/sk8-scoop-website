@@ -1,6 +1,7 @@
 const menu=document.querySelector('.menu-btn');
 const nav=document.querySelector('.nav');
-if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'Close':'Menu';});}
+const setMenuLabel=(open)=>{if(!menu)return;menu.setAttribute('aria-expanded',String(open));const label=menu.querySelector('span:last-child');if(label)label.textContent=open?'Close':'Menu';else menu.textContent=open?'Close':'Menu';};
+if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');setMenuLabel(open);});}
 document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
 
 const SK8_CONFIG=window.SK8_CONFIG||{};
@@ -65,6 +66,35 @@ window.sk8Track=sk8Track;
       const u=new URL(href,location.href);
       if(link.dataset.campaignLink!==undefined||[...u.searchParams.keys()].some(k=>k.startsWith('utm_'))) sk8Track('campaign_link_click',params);
     }catch(e){}
+  });
+})();
+
+// v7.6: submit MailerLite forms in the background and keep visitors on SK8 Scoop.
+(function mailerLiteSignup(){
+  document.querySelectorAll('[data-signup-form]').forEach(form=>form.removeAttribute('target'));
+  document.addEventListener('submit',async event=>{
+    const form=event.target.closest&&event.target.closest('[data-signup-form]');
+    if(!form)return;
+    event.preventDefault();
+    form.removeAttribute('target');
+    if(!form.reportValidity())return;
+    let status=form.nextElementSibling&&form.nextElementSibling.classList.contains('signup-status')?form.nextElementSibling:null;
+    if(!status){status=document.createElement('p');status.className='signup-status';status.setAttribute('role','status');form.insertAdjacentElement('afterend',status);}
+    const button=form.querySelector('button[type="submit"]');
+    const original=button?button.textContent:'';
+    if(button){button.disabled=true;button.textContent='Joining…';}
+    status.className='signup-status show';status.textContent='Adding you to SK8 Scoop…';
+    try{
+      const body=new URLSearchParams();
+      for(const [key,value] of new FormData(form).entries()) body.append(key,String(value));
+      await fetch(form.action,{method:'POST',mode:'no-cors',body,keepalive:true});
+      status.className='signup-status show success';status.textContent='You’re in. Opening the welcome page…';
+      const success=form.matches('[data-qr-form]')?'/qr-success/':'/signup-success/';
+      window.setTimeout(()=>location.assign(success),350);
+    }catch(error){
+      status.className='signup-status show error';status.textContent='That did not complete. Please try again or email contact@sk8scoop.com.';
+      if(button){button.disabled=false;button.textContent=original;}
+    }
   });
 })();
 
@@ -156,8 +186,8 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
 
 // Close mobile menu after a navigation choice and on Escape.
 if(menu&&nav){
-  nav.addEventListener('click',e=>{if(e.target.closest('a')&&nav.classList.contains('open')){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='Menu';}});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='Menu';menu.focus();}});
+  nav.addEventListener('click',e=>{if(e.target.closest('a')&&nav.classList.contains('open')){nav.classList.remove('open');setMenuLabel(false);}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');setMenuLabel(false);menu.focus();}});
 }
 
 // Track meaningful starts, package choices and standard lead/contact signals only after confirmed actions.
@@ -200,7 +230,7 @@ if(menu&&nav){
         <div class="eyebrow">Join 260+ local readers</div>
         <h2 id="signup-modal-title">Get the free Friday Scoop.</h2>
         <p>Weekend plans, useful updates, new openings and money-saving local ideas in one quick email.</p>
-        <form class="signup signup-modal-form" action="https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe" method="post" target="_blank" data-signup-form data-form-position="modal">
+        <form class="signup signup-modal-form" action="https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe" method="post" data-signup-form data-form-position="modal">
           <label class="sr-only" for="modal-email">Email address</label>
           <input id="modal-email" type="email" name="fields[email]" inputmode="email" autocomplete="email" placeholder="Your email address" required>
           <button class="button" type="submit">Send me the free Friday Scoop</button>
