@@ -184,3 +184,42 @@ if(menu&&nav){
     if(e.target.matches('select[name="submission_type"]')) sk8Track('business_submission_type_selected',{submission_type:e.target.value||'none'});
   });
 })();
+
+// v7.3: keep the header "Join free" action in place instead of jumping down the homepage.
+(function signupModal(){
+  const triggers=[...document.querySelectorAll('.nav-join,[data-open-signup]')];
+  if(!triggers.length)return;
+  const modal=document.createElement('div');
+  modal.className='signup-modal';
+  modal.hidden=true;
+  modal.innerHTML=`<div class="signup-modal-backdrop" data-close-signup></div>
+    <section class="signup-modal-card" role="dialog" aria-modal="true" aria-labelledby="signup-modal-title">
+      <button class="signup-modal-close" type="button" aria-label="Close signup" data-close-signup>×</button>
+      <div class="signup-modal-art"><span>FRIDAY</span><strong>The useful local stuff, before the group chat asks.</strong><small>Cheadle · Cheadle Hulme · Gatley · Heald Green</small></div>
+      <div class="signup-modal-copy">
+        <div class="eyebrow">Join 260+ local readers</div>
+        <h2 id="signup-modal-title">Get the free Friday Scoop.</h2>
+        <p>Weekend plans, useful updates, new openings and money-saving local ideas in one quick email.</p>
+        <form class="signup signup-modal-form" action="https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe" method="post" target="_blank" data-signup-form data-form-position="modal">
+          <label class="sr-only" for="modal-email">Email address</label>
+          <input id="modal-email" type="email" name="fields[email]" inputmode="email" autocomplete="email" placeholder="Your email address" required>
+          <button class="button" type="submit">Send me the free Friday Scoop</button>
+        </form>
+        <small>Local, useful and free. No spam. Unsubscribe whenever you like. <a href="/privacy.html">Privacy</a>.</small>
+      </div>
+    </section>`;
+  document.body.appendChild(modal);
+  let lastTrigger=null;
+  const open=trigger=>{
+    lastTrigger=trigger;modal.hidden=false;document.body.classList.add('modal-open');
+    requestAnimationFrame(()=>{modal.classList.add('is-open');const input=modal.querySelector('input[type=email]');if(input)input.focus();});
+    sk8Track('signup_modal_open',{trigger_location:trigger.closest('header')?'header':'page'});
+  };
+  const close=()=>{
+    modal.classList.remove('is-open');document.body.classList.remove('modal-open');
+    setTimeout(()=>{modal.hidden=true;if(lastTrigger)lastTrigger.focus();},180);
+  };
+  triggers.forEach(trigger=>trigger.addEventListener('click',event=>{event.preventDefault();open(trigger);}));
+  modal.querySelectorAll('[data-close-signup]').forEach(el=>el.addEventListener('click',close));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!modal.hidden)close();});
+})();
