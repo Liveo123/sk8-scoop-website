@@ -130,7 +130,32 @@ export default {
 
 async function ensureSchema(db) {
   if (schemaReady) return;
-  await db.exec(SCHEMA);
+
+  // The production schema is applied through the D1 console/migrations.
+  // At request time, only verify that the expected tables are present.
+  // Running the full DDL block on every new Worker isolate can fail before
+  // protected API routes (such as /api/qr-stats) reach their auth checks.
+  const requiredTables = [
+    'advertiser_enquiries',
+    'business_submissions',
+    'event_submissions',
+    'qr_events',
+    'subscriber_preferences'
+  ];
+
+  const placeholders = requiredTables.map(() => '?').join(',');
+  const result = await db
+    .prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name IN (${placeholders})`)
+    .bind(...requiredTables)
+    .all();
+
+  const found = new Set((result.results || []).map(row => row.name));
+  const missing = requiredTables.filter(name => !found.has(name));
+
+  if (missing.length) {
+    throw new Error(`Missing D1 tables: ${missing.join(', ')}`);
+  }
+
   schemaReady = true;
 }
 
