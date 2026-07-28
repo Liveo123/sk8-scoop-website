@@ -28,9 +28,14 @@ SK8 Scoop is a local utility and commerce company whose core product is a free w
 - Mobile menu and responsive layouts.
 
 ## Important configuration
-Open `assets/config.js` and add only public IDs or approved payment links:
-- `ga4MeasurementId`
-- `metaPixelId`
+`assets/config.js` contains these public tracking IDs:
+- GA4 `G-8L0ER92Y7L`
+- Meta Pixel `4649116095416763`
+
+Both providers are consent-gated. Do not replace the consent controls with
+unconditional tracking scripts.
+
+Add only public IDs or approved payment links to this file:
 - Stripe Payment Links for `local_spotlight`, `monthly_partner`, `category_partner`
 
 Never put passwords, API secrets, private keys or Cloudflare admin tokens in public website files.

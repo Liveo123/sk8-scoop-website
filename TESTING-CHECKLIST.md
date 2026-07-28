@@ -40,7 +40,13 @@ Test at 320px, 375px, 390px, 430px and 768px.
 - Growth pages are not published as empty placeholders.
 
 ## Analytics
-Use GA4 DebugView or Realtime after IDs are configured.
+Use GA4 DebugView or Realtime and Meta Test Events after deployment.
+- In a new private window, neither `googletagmanager.com` nor `connect.facebook.net` loads before a choice.
+- `Reject optional` keeps both providers unloaded.
+- `Allow both` loads GA4 `G-8L0ER92Y7L` and Meta Pixel `4649116095416763`.
+- `Choose separately` respects each individual checkbox.
+- The `Privacy choices` button reopens the controls.
+- Withdrawing consent stops future tracking and clears first-party GA/Meta cookies where the site can do so.
 - `homepage_visit`
 - `signup_form_view`
 - `signup_form_submit`

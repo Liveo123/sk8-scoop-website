@@ -1,6 +1,14 @@
 # Analytics events in SK8 Scoop v7
 
-The analytics loader activates only when valid IDs are entered in `assets/config.js`.
+The configured IDs are:
+
+- GA4: `G-8L0ER92Y7L`
+- Meta Pixel: `4649116095416763`
+
+Neither provider loads until a visitor gives the relevant consent. Visitors
+can allow both, reject both or choose Google Analytics and Meta Pixel
+separately. The choice is remembered for up to 90 days and can be reopened
+through the `Privacy choices` button.
 
 ## Page and content events
 

@@ -5,34 +5,57 @@ if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle
 document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
 
 const SK8_CONFIG=window.SK8_CONFIG||{};
-window.dataLayer=window.dataLayer||[];
-window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+const SK8_CONSENT_KEY='sk8_privacy_choices_v1';
+const SK8_CONSENT_DAYS=90;
+const readConsent=()=>{
+  try{
+    const choice=JSON.parse(localStorage.getItem(SK8_CONSENT_KEY)||'null');
+    if(!choice||choice.version!==1||!choice.expiresAt||Date.now()>choice.expiresAt){
+      localStorage.removeItem(SK8_CONSENT_KEY);
+      return null;
+    }
+    return choice;
+  }catch(e){return null;}
+};
+let sk8Consent=readConsent();
+let ga4Loaded=false;
+let metaLoaded=false;
 
-(function loadAnalytics(){
+function loadAnalytics(){
   const ga4=String(SK8_CONFIG.ga4MeasurementId||'').trim();
-  if(ga4&&!document.querySelector('script[data-sk8-ga4]')){
+  if(sk8Consent&&sk8Consent.analytics&&/^G-[A-Z0-9]+$/i.test(ga4)&&!ga4Loaded){
+    ga4Loaded=true;
+    window.dataLayer=window.dataLayer||[];
+    window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+    window.gtag('consent','default',{
+      analytics_storage:'granted',
+      ad_storage:'denied',
+      ad_user_data:'denied',
+      ad_personalization:'denied'
+    });
     const s=document.createElement('script');s.async=true;s.src=`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4)}`;s.dataset.sk8Ga4='true';document.head.appendChild(s);
-    window.gtag('js',new Date());window.gtag('config',ga4,{send_page_view:true});
+    window.gtag('js',new Date());window.gtag('config',ga4,{send_page_view:true,allow_google_signals:false,allow_ad_personalization_signals:false});
   }
   const pixel=String(SK8_CONFIG.metaPixelId||'').trim();
-  if(pixel&&!window.fbq){
+  if(sk8Consent&&sk8Consent.marketing&&/^\d{10,20}$/.test(pixel)&&!metaLoaded){
+    metaLoaded=true;
     const f=function(){f.callMethod?f.callMethod.apply(f,arguments):f.queue.push(arguments)};f.queue=[];f.loaded=true;f.version='2.0';window.fbq=f;
     const s=document.createElement('script');s.async=true;s.src='https://connect.facebook.net/en_US/fbevents.js';document.head.appendChild(s);
     window.fbq('init',pixel);window.fbq('track','PageView');
   }
-})();
+}
+loadAnalytics();
 
 function sk8Track(name,params={}){
   const payload={...params,page_path:location.pathname};
-  window.dataLayer.push({event:name,...payload});
-  if(typeof window.gtag==='function') window.gtag('event',name,payload);
-  if(typeof window.fbq==='function') window.fbq('trackCustom',name,payload);
+  if(sk8Consent&&sk8Consent.analytics&&typeof window.gtag==='function') window.gtag('event',name,payload);
+  if(sk8Consent&&sk8Consent.marketing&&typeof window.fbq==='function') window.fbq('trackCustom',name,payload);
 }
 window.sk8Track=sk8Track;
 
-(function pageEvents(){
+const sk8PageEventName=()=>{
   const page=document.body.dataset.page||'';
-  const names={
+  return {
     home:'homepage_visit',
     advertise:'advertising_page_visit',
     'summer-guide':'summer_guide_visit',
@@ -40,8 +63,12 @@ window.sk8Track=sk8Track;
     preferences:'preferences_page_visit',
     'latest-issue':'latest_issue_page_visit',
     'signup-success':'signup_completed'
-  };
-  if(names[page]) sk8Track(names[page]);
+  }[page]||'';
+};
+const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(name);};
+
+(function pageEvents(){
+  sk8TrackCurrentPage();
 
   const observed=new WeakSet();
   const observer='IntersectionObserver' in window?new IntersectionObserver(entries=>entries.forEach(entry=>{
@@ -67,6 +94,90 @@ window.sk8Track=sk8Track;
       if(link.dataset.campaignLink!==undefined||[...u.searchParams.keys()].some(k=>k.startsWith('utm_'))) sk8Track('campaign_link_click',params);
     }catch(e){}
   });
+})();
+
+(function privacyChoices(){
+  const panel=document.createElement('section');
+  panel.className='privacy-choices';
+  panel.hidden=true;
+  panel.setAttribute('role','dialog');
+  panel.setAttribute('aria-label','Privacy choices');
+  panel.innerHTML=`<div class="privacy-choices-copy">
+      <strong>Choose how this site measures visits</strong>
+      <p>Optional Google Analytics helps improve SK8 Scoop. Meta Pixel measures Facebook advertising. Neither loads unless you allow it. <a href="/privacy.html">Privacy details</a>.</p>
+    </div>
+    <div class="privacy-choices-actions" data-privacy-summary>
+      <button class="privacy-button allow" type="button" data-consent-all>Allow both</button>
+      <button class="privacy-button reject" type="button" data-consent-none>Reject optional</button>
+      <button class="privacy-text-button" type="button" data-consent-choose>Choose separately</button>
+    </div>
+    <div class="privacy-choices-settings" data-privacy-settings hidden>
+      <label><input type="checkbox" data-consent-analytics> <span><strong>Google Analytics</strong><small>Page visits, referrals and useful actions.</small></span></label>
+      <label><input type="checkbox" data-consent-marketing> <span><strong>Meta Pixel</strong><small>Facebook advert measurement and audience building.</small></span></label>
+      <div class="privacy-settings-actions">
+        <button class="privacy-button allow" type="button" data-consent-save>Save choices</button>
+        <button class="privacy-text-button" type="button" data-consent-back>Back</button>
+      </div>
+    </div>`;
+  document.body.appendChild(panel);
+
+  const launcher=document.createElement('button');
+  launcher.className='privacy-choices-launcher';
+  launcher.type='button';
+  launcher.textContent='Privacy choices';
+  launcher.hidden=true;
+  document.body.appendChild(launcher);
+
+  const summary=panel.querySelector('[data-privacy-summary]');
+  const settings=panel.querySelector('[data-privacy-settings]');
+  const analytics=panel.querySelector('[data-consent-analytics]');
+  const marketing=panel.querySelector('[data-consent-marketing]');
+  const showSummary=()=>{summary.hidden=false;settings.hidden=true;};
+  const showSettings=()=>{
+    analytics.checked=Boolean(sk8Consent&&sk8Consent.analytics);
+    marketing.checked=Boolean(sk8Consent&&sk8Consent.marketing);
+    summary.hidden=true;settings.hidden=false;
+  };
+  const open=()=>{
+    showSummary();panel.hidden=false;launcher.hidden=true;
+    panel.querySelector('button').focus();
+  };
+  const clearTrackingCookies=()=>{
+    document.cookie.split(';').map(item=>item.split('=')[0].trim()).filter(name=>/^(_ga|_fbp|_fbc)/.test(name)).forEach(name=>{
+      document.cookie=`${name}=; Max-Age=0; path=/; SameSite=Lax`;
+      document.cookie=`${name}=; Max-Age=0; path=/; domain=.${location.hostname.replace(/^www\./,'')}; SameSite=Lax`;
+    });
+  };
+  const save=(allowAnalytics,allowMarketing)=>{
+    const previousAnalytics=Boolean(sk8Consent&&sk8Consent.analytics);
+    const previousMarketing=Boolean(sk8Consent&&sk8Consent.marketing);
+    sk8Consent={
+      version:1,
+      analytics:Boolean(allowAnalytics),
+      marketing:Boolean(allowMarketing),
+      savedAt:new Date().toISOString(),
+      expiresAt:Date.now()+(SK8_CONSENT_DAYS*24*60*60*1000)
+    };
+    try{localStorage.setItem(SK8_CONSENT_KEY,JSON.stringify(sk8Consent));}catch(e){}
+    if((previousAnalytics&&!sk8Consent.analytics)||(previousMarketing&&!sk8Consent.marketing)){
+      clearTrackingCookies();
+      location.reload();
+      return;
+    }
+    loadAnalytics();
+    sk8TrackCurrentPage();
+    panel.hidden=true;launcher.hidden=false;
+  };
+
+  panel.querySelector('[data-consent-all]').addEventListener('click',()=>save(true,true));
+  panel.querySelector('[data-consent-none]').addEventListener('click',()=>save(false,false));
+  panel.querySelector('[data-consent-choose]').addEventListener('click',showSettings);
+  panel.querySelector('[data-consent-save]').addEventListener('click',()=>save(analytics.checked,marketing.checked));
+  panel.querySelector('[data-consent-back]').addEventListener('click',showSummary);
+  launcher.addEventListener('click',open);
+
+  if(sk8Consent) launcher.hidden=false;
+  else panel.hidden=false;
 })();
 
 // v7.6: submit MailerLite forms in the background and keep visitors on SK8 Scoop.
@@ -107,7 +218,6 @@ window.sk8Track=sk8Track;
   const posterId=match?String(Number(match[1])).padStart(2,'0'):'';
   const code=posterId?`poster_${posterId}`:rawContent;
   const qr={code,poster_id:posterId,venue:(p.get('venue')||'').trim(),area:(p.get('area')||'SK8').trim(),source:(p.get('utm_source')||'local_business_display').trim(),medium:(p.get('utm_medium')||'qr').trim(),campaign:(p.get('utm_campaign')||'local_displays_2026').trim()};
-  try{localStorage.setItem('sk8_qr_source',JSON.stringify({...qr,first_seen:new Date().toISOString()}));}catch(e){}
   document.querySelectorAll('[data-field-code]').forEach(el=>el.value=qr.code);
   document.querySelectorAll('[data-field-venue]').forEach(el=>el.value=qr.venue||'unknown');
   document.querySelectorAll('[data-field-area]').forEach(el=>el.value=qr.area);
@@ -121,7 +231,6 @@ window.sk8Track=sk8Track;
   sk8Track('qr_landing_view',eventData);
   const form=document.querySelector('[data-qr-form]');
   if(form) form.addEventListener('submit',()=>{
-    try{sessionStorage.setItem('sk8_qr_submit',JSON.stringify({...eventData,submitted_at:new Date().toISOString()}));}catch(e){}
     sk8Track('qr_signup_submit',eventData);
   });
 })();

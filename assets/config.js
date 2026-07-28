@@ -1,6 +1,6 @@
 window.SK8_CONFIG = {
-  ga4MeasurementId: "",
-  metaPixelId: "",
+  ga4MeasurementId: "G-8L0ER92Y7L",
+  metaPixelId: "4649116095416763",
   publicStats: {
     subscriberCount: 282,
     issuesPublished: 5,
