@@ -26,7 +26,7 @@ through the `Privacy choices` button.
 - `signup_completed`
 - `form_start`
 
-A reliable `signup_completed` event requires MailerLite to redirect successful signups to `/signup-success/`.
+The website only opens `/signup-success/` or `/qr-success/` after MailerLite returns `success: true`, so `signup_completed` now represents an accepted MailerLite response.
 
 ## Reader action events
 
@@ -55,4 +55,4 @@ A reliable `signup_completed` event requires MailerLite to redirect successful s
 - `qr_landing_view`
 - `qr_signup_submit`
 
-QR visits and form submissions are also stored in D1 when the `DB` binding is active.
+QR visits, signup attempts and MailerLite-accepted responses are stored separately in D1 when the `DB` binding is active.

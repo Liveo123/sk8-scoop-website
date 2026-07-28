@@ -2,7 +2,7 @@ window.SK8_CONFIG = {
   ga4MeasurementId: "G-8L0ER92Y7L",
   metaPixelId: "4649116095416763",
   publicStats: {
-    subscriberCount: 282,
+    subscriberCount: 286,
     issuesPublished: 5,
     checkedDate: "28 July 2026",
     latestMainSendRecipients: 256,

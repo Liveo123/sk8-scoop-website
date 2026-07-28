@@ -41,11 +41,14 @@ Add only public IDs or approved payment links to this file:
 Never put passwords, API secrets, private keys or Cloudflare admin tokens in public website files.
 
 ## MailerLite completion event
-The website now tracks `signup_completed` on `/signup-success/` and `/qr-success/`. To make this a genuine completed-signup signal, configure MailerLite to redirect successful subscriptions to:
+The website now reads MailerLite's JSON response and only opens `/signup-success/` or `/qr-success/` after MailerLite returns `success: true`.
 
-`https://www.sk8scoop.com/signup-success/`
+For QR reporting, D1 keeps separate counts for:
 
-Until that redirect is configured and tested, use `signup_form_submit` as a form-attempt metric and MailerLite as the source of truth for confirmed subscribers.
+- `form_submit` — a visitor attempted the form;
+- `form_success` — MailerLite returned an accepted response.
+
+An accepted response may belong to an existing subscriber, so MailerLite group membership remains the source of truth for net-new subscribers.
 
 ## Database update
 Run the full `schema.sql` in the existing Cloudflare D1 database. It is non-destructive and uses `CREATE TABLE IF NOT EXISTS`.
@@ -60,7 +63,7 @@ No weak placeholder growth pages were published. See `GROWTH-PAGES-ROADMAP.md` f
 
 ## v7 conversion and commerce update
 
-- Conversion-led homepage with dated public proof: 282 active subscribers on 28 July 2026 and 5 issues.
+- Conversion-led homepage with dated public proof: 286 subscribers in the main group on 28 July 2026 and 5 issues.
 - Advertising page uses Issue 5 main-send and resend figures as dated evidence, not as an average.
 - £35 Local Spotlight, £79 Monthly Partner and £129 Category Partner pilot packages.
 - Simplified advertiser enquiry and structured business-submission forms.

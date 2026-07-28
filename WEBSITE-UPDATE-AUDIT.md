@@ -4,7 +4,7 @@
 
 - The v6 homepage was accurate but visually dense, with a very large headline and a long sequence of similarly weighted sections.
 - Navigation exposed the empty What’s On page, weakening usefulness. The route is preserved but now `noindex` and removed from primary navigation until enough verified events exist.
-- Signup proof was weak. Dated public figures now come from one config object: 282 active subscribers on 28 July 2026 and 5 issues.
+- Signup proof was weak. Dated public figures now come from one config object: 286 subscribers in the main group on 28 July 2026 and 5 issues.
 - Advertising packages needed clearer deliverables, dated evidence, capacity limits and a shorter enquiry form.
 - Business submissions needed stronger grouping and a clearer distinction between editorial review and paid visibility.
 - Mobile cards and footer structure needed stronger visual rhythm and larger, clearer actions.

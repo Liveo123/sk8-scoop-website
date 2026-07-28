@@ -3,7 +3,7 @@
 ## Homepage
 
 - Stronger first-screen signup proposition.
-- Dated proof: 282+ readers and 5 issues, checked 28 July 2026.
+- Dated proof: 286+ readers and 5 issues, checked 28 July 2026.
 - More attractive newsletter preview.
 - Five clearer reader benefits.
 - Stronger latest-issue and Summer Guide sections.

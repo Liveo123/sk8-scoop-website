@@ -162,7 +162,7 @@ async function ensureSchema(db) {
 
 async function handleQrEvent(request, env) {
   const data = await readJson(request);
-  const allowed = ['view', 'form_submit'];
+  const allowed = ['view', 'form_submit', 'form_success'];
   if (!allowed.includes(data.event_type)) return json({ error: 'Invalid event.' }, 400);
   const clean = value => String(value || '').slice(0, 180);
   await env.DB.prepare(`INSERT INTO qr_events (event_type,qr_code,poster_id,venue,area,campaign,source,medium,path,created_at) VALUES (?,?,?,?,?,?,?,?,?,datetime('now'))`)
@@ -174,12 +174,13 @@ async function handleQrStats(request, env) {
   const auth = request.headers.get('authorization') || '';
   if (!env.ADMIN_TOKEN) return json({ error: 'The admin token has not been configured.' }, 503);
   if (auth !== `Bearer ${env.ADMIN_TOKEN}`) return json({ error: 'Unauthorised.' }, 401);
-  const rows = (await env.DB.prepare(`SELECT poster_id,qr_code,MAX(venue) venue,MAX(area) area,SUM(CASE WHEN event_type='view' THEN 1 ELSE 0 END) views,SUM(CASE WHEN event_type='form_submit' THEN 1 ELSE 0 END) form_submits,MAX(created_at) last_seen FROM qr_events GROUP BY qr_code,poster_id ORDER BY poster_id`).all()).results || [];
+  const rows = (await env.DB.prepare(`SELECT poster_id,qr_code,MAX(venue) venue,MAX(area) area,SUM(CASE WHEN event_type='view' THEN 1 ELSE 0 END) views,SUM(CASE WHEN event_type='form_submit' THEN 1 ELSE 0 END) form_attempts,SUM(CASE WHEN event_type='form_success' THEN 1 ELSE 0 END) form_successes,MAX(created_at) last_seen FROM qr_events GROUP BY qr_code,poster_id ORDER BY poster_id`).all()).results || [];
   const totals = rows.reduce((total, row) => ({
     views: total.views + Number(row.views || 0),
-    form_submits: total.form_submits + Number(row.form_submits || 0),
+    form_attempts: total.form_attempts + Number(row.form_attempts || 0),
+    form_successes: total.form_successes + Number(row.form_successes || 0),
     live_posters: LIVE_POSTER_COUNT
-  }), { views: 0, form_submits: 0, live_posters: LIVE_POSTER_COUNT });
+  }), { views: 0, form_attempts: 0, form_successes: 0, live_posters: LIVE_POSTER_COUNT });
   return json({ rows, totals });
 }
 

@@ -180,7 +180,8 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
   else panel.hidden=false;
 })();
 
-// v7.6: submit MailerLite forms in the background and keep visitors on SK8 Scoop.
+// v8.2: submit MailerLite forms in the background, but only report success
+// after MailerLite returns a readable {success:true} response.
 (function mailerLiteSignup(){
   document.querySelectorAll('[data-signup-form]').forEach(form=>form.removeAttribute('target'));
   document.addEventListener('submit',async event=>{
@@ -198,12 +199,20 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
     try{
       const body=new URLSearchParams();
       for(const [key,value] of new FormData(form).entries()) body.append(key,String(value));
-      await fetch(form.action,{method:'POST',mode:'no-cors',body,keepalive:true});
+      const response=await fetch(form.action,{method:'POST',headers:{accept:'application/json'},body});
+      let result={};
+      try{result=await response.json();}catch(error){throw new Error('MailerLite returned an unreadable response.');}
+      if(!response.ok||result.success!==true){
+        const fieldErrors=result&&result.errors&&result.errors.fields;
+        const firstError=fieldErrors&&Object.values(fieldErrors).flat().find(Boolean);
+        throw new Error(firstError||'MailerLite did not accept this subscription.');
+      }
+      form.dispatchEvent(new CustomEvent('sk8:mailerlite-success',{bubbles:true,detail:{result}}));
       status.className='signup-status show success';status.textContent='You’re in. Opening the welcome page…';
       const success=form.matches('[data-qr-form]')?'/qr-success/':'/signup-success/';
       window.setTimeout(()=>location.assign(success),350);
     }catch(error){
-      status.className='signup-status show error';status.textContent='That did not complete. Please try again or email contact@sk8scoop.com.';
+      status.className='signup-status show error';status.textContent=error&&error.message?error.message:'That did not complete. Please try again or email contact@sk8scoop.com.';
       if(button){button.disabled=false;button.textContent=original;}
     }
   });
@@ -245,7 +254,12 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
   const venueLabel=document.querySelector('[data-venue-label]');if(venueLabel&&venue) venueLabel.textContent=`Thanks to ${venue} for displaying SK8 Scoop.`;
   const payload={event_type:'view',qr_code:code,poster_id:match?String(Number(match[1])).padStart(2,'0'):'',venue:venue||'unknown',area:area||'unknown',campaign:p.get('utm_campaign')||'local_displays_2026',source:p.get('utm_source')||'local_business_display',medium:p.get('utm_medium')||'qr',path:location.pathname};
   try{navigator.sendBeacon('/api/qr-event',new Blob([JSON.stringify(payload)],{type:'application/json'}));}catch(e){}
-  const form=document.querySelector('[data-qr-form]');if(form) form.addEventListener('submit',()=>{const sub={...payload,event_type:'form_submit',email_domain:(new FormData(form).get('fields[email]')||'').toString().split('@')[1]||''};try{navigator.sendBeacon('/api/qr-event',new Blob([JSON.stringify(sub)],{type:'application/json'}));}catch(e){}});
+  const recordQrEvent=eventType=>{const sub={...payload,event_type:eventType};try{navigator.sendBeacon('/api/qr-event',new Blob([JSON.stringify(sub)],{type:'application/json'}));}catch(e){}};
+  const form=document.querySelector('[data-qr-form]');
+  if(form){
+    form.addEventListener('submit',()=>recordQrEvent('form_submit'));
+    form.addEventListener('sk8:mailerlite-success',()=>recordQrEvent('form_success'));
+  }
 })();
 
 (function whatsOn(){
@@ -288,8 +302,9 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
         row.venue||'Unknown',
         row.area||'—',
         row.views||0,
-        row.form_submits||0,
-        `${row.views?Math.round(Number(row.form_submits||0)/Number(row.views)*100):0}%`,
+        row.form_attempts||0,
+        row.form_successes||0,
+        `${row.views?Math.round(Number(row.form_successes||0)/Number(row.views)*100):0}%`,
         row.last_seen||'—'
       ];
       values.forEach(value=>{const td=document.createElement('td');td.textContent=String(value);tr.appendChild(td);});
@@ -316,17 +331,19 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
           venue:record.venue||existing.venue||'Unknown',
           area:record.area||existing.area||'—',
           views:Number(existing.views||0),
-          form_submits:Number(existing.form_submits||0)
+          form_attempts:Number(existing.form_attempts||existing.form_submits||0),
+          form_successes:Number(existing.form_successes||0)
         };
       });
       recorded.forEach(row=>merged.push(row));
       merged.sort((a,b)=>normaliseCode(a).localeCompare(normaliseCode(b),undefined,{numeric:true}));
       document.querySelector('[data-total-views]').textContent=out.totals.views||0;
-      document.querySelector('[data-total-submits]').textContent=out.totals.form_submits||0;
+      document.querySelector('[data-total-attempts]').textContent=out.totals.form_attempts||out.totals.form_submits||0;
+      document.querySelector('[data-total-successes]').textContent=out.totals.form_successes||0;
       document.querySelector('[data-live-posters]').textContent=liveLocations.length||out.totals.live_posters||0;
-      document.querySelector('[data-conversion]').textContent=out.totals.views?`${Math.round(out.totals.form_submits/out.totals.views*100)}%`:'0%';
+      document.querySelector('[data-conversion]').textContent=out.totals.views?`${Math.round(Number(out.totals.form_successes||0)/Number(out.totals.views)*100)}%`:'0%';
       renderRows(merged);
-      status.textContent=`Aggregate scan data loaded for ${liveLocations.length||out.totals.live_posters||0} live placements. Confirmed subscribers must still be reconciled from MailerLite.`;
+      status.textContent=`Aggregate scan data loaded for ${liveLocations.length||out.totals.live_posters||0} live placements. “MailerLite accepted” means the form returned success; net-new subscribers must still be reconciled from MailerLite.`;
     }catch(e){
       status.textContent='The dashboard could not be loaded. Check the admin token and try again.';
     }
@@ -393,7 +410,7 @@ if(menu&&nav){
 (function signupModal(){
   const triggers=[...document.querySelectorAll('.nav-join,[data-open-signup]')];
   if(!triggers.length)return;
-  const readerCount=Number(SK8_CONFIG.publicStats&&SK8_CONFIG.publicStats.subscriberCount)||282;
+  const readerCount=Number(SK8_CONFIG.publicStats&&SK8_CONFIG.publicStats.subscriberCount)||286;
   const modal=document.createElement('div');
   modal.className='signup-modal';
   modal.hidden=true;
