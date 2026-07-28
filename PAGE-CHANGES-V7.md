@@ -3,7 +3,7 @@
 ## Homepage
 
 - Stronger first-screen signup proposition.
-- Dated proof: 260+ readers and 5 issues.
+- Dated proof: 282+ readers and 5 issues, checked 28 July 2026.
 - More attractive newsletter preview.
 - Five clearer reader benefits.
 - Stronger latest-issue and Summer Guide sections.
@@ -14,7 +14,7 @@
 ## Advertising
 
 - Current audience snapshot added.
-- Issue 5 main-send figures clearly labelled as dated evidence, not averages.
+- Issue 5 main-send and resend figures clearly labelled as dated evidence, not averages.
 - Packages clarified:
   - Local Spotlight - £35
   - Monthly Partner - £79/month

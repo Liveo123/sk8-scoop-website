@@ -165,7 +165,63 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
 
 (function qrDashboard(){
   const root=document.querySelector('[data-qr-dashboard]');if(!root)return;const token=document.querySelector('[data-admin-token]');const status=document.querySelector('[data-dashboard-status]');const body=document.querySelector('[data-dashboard-body]');
-  const load=async()=>{status.textContent='Loading…';try{const r=await fetch('/api/qr-stats',{headers:{authorization:`Bearer ${token.value}`}});const out=await r.json();if(!r.ok)throw new Error(out.error||'Failed');document.querySelector('[data-total-views]').textContent=out.totals.views||0;document.querySelector('[data-total-submits]').textContent=out.totals.form_submits||0;document.querySelector('[data-live-posters]').textContent=out.totals.live_posters||0;document.querySelector('[data-conversion]').textContent=out.totals.views?`${Math.round(out.totals.form_submits/out.totals.views*100)}%`:'0%';body.innerHTML=out.rows.map(r=>`<tr><td>${r.poster_id||'Generic'}</td><td>${r.venue||'Unknown'}</td><td>${r.area||'—'}</td><td>${r.views||0}</td><td>${r.form_submits||0}</td><td>${r.views?Math.round(r.form_submits/r.views*100):0}%</td><td>${r.last_seen||'—'}</td></tr>`).join('');status.textContent='Aggregate scan data loaded. Confirmed subscriber counts should be reconciled from MailerLite.';}catch(e){status.textContent='Enter the admin token configured in Cloudflare to load private statistics.';}};
+  const normaliseCode=row=>{
+    if(row.qr_code&&/^poster_\d{2}$/.test(row.qr_code))return row.qr_code;
+    const id=String(row.poster_id||'').match(/\d{1,2}/);
+    return id?`poster_${String(Number(id[0])).padStart(2,'0')}`:row.qr_code||'generic';
+  };
+  const renderRows=rows=>{
+    body.replaceChildren();
+    rows.forEach(row=>{
+      const tr=document.createElement('tr');
+      const values=[
+        row.poster_id||'Generic',
+        row.venue||'Unknown',
+        row.area||'—',
+        row.views||0,
+        row.form_submits||0,
+        `${row.views?Math.round(Number(row.form_submits||0)/Number(row.views)*100):0}%`,
+        row.last_seen||'—'
+      ];
+      values.forEach(value=>{const td=document.createElement('td');td.textContent=String(value);tr.appendChild(td);});
+      body.appendChild(tr);
+    });
+  };
+  const load=async()=>{
+    status.textContent='Loading…';
+    try{
+      const [r,locations]=await Promise.all([
+        fetch('/api/qr-stats',{headers:{authorization:`Bearer ${token.value}`}}),
+        sk8LoadQrLocations()
+      ]);
+      const out=await r.json();if(!r.ok)throw new Error(out.error||'Failed');
+      const recorded=new Map((out.rows||[]).map(row=>[normaliseCode(row),row]));
+      const liveLocations=Object.entries(locations).filter(([,record])=>record.status==='live');
+      const merged=liveLocations.map(([code,record])=>{
+        const existing=recorded.get(code)||{};
+        recorded.delete(code);
+        return {
+          ...existing,
+          qr_code:code,
+          poster_id:code.replace('poster_',''),
+          venue:record.venue||existing.venue||'Unknown',
+          area:record.area||existing.area||'—',
+          views:Number(existing.views||0),
+          form_submits:Number(existing.form_submits||0)
+        };
+      });
+      recorded.forEach(row=>merged.push(row));
+      merged.sort((a,b)=>normaliseCode(a).localeCompare(normaliseCode(b),undefined,{numeric:true}));
+      document.querySelector('[data-total-views]').textContent=out.totals.views||0;
+      document.querySelector('[data-total-submits]').textContent=out.totals.form_submits||0;
+      document.querySelector('[data-live-posters]').textContent=liveLocations.length||out.totals.live_posters||0;
+      document.querySelector('[data-conversion]').textContent=out.totals.views?`${Math.round(out.totals.form_submits/out.totals.views*100)}%`:'0%';
+      renderRows(merged);
+      status.textContent=`Aggregate scan data loaded for ${liveLocations.length||out.totals.live_posters||0} live placements. Confirmed subscribers must still be reconciled from MailerLite.`;
+    }catch(e){
+      status.textContent='The dashboard could not be loaded. Check the admin token and try again.';
+    }
+  };
   document.querySelector('[data-load-dashboard]').addEventListener('click',load);
 })();
 
@@ -177,9 +233,18 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
     subscriberCount:stats.subscriberCount||'',
     subscriberCountPlus:stats.subscriberCount?`${stats.subscriberCount}+`:'',
     issuesPublished:stats.issuesPublished||'',
+    latestMainSendRecipients:stats.latestMainSendRecipients||'',
+    latestMainSendOpens:stats.latestMainSendOpens||'',
+    latestMainOpenRate:stats.latestMainOpenRate||'',
+    latestResendRecipients:stats.latestResendRecipients||'',
+    latestResendOpens:stats.latestResendOpens||'',
+    latestResendOpenRate:stats.latestResendOpenRate||'',
+    latestCombinedOpens:stats.latestCombinedOpens||'',
     latestOpenRate:stats.latestOpenRate||'',
+    latestCombinedClicks:stats.latestCombinedClicks||'',
     latestClickRate:stats.latestClickRate||'',
-    checkedDate:stats.checkedDate||''
+    checkedDate:stats.checkedDate||'',
+    latestMetricsCheckedDate:stats.latestMetricsCheckedDate||''
   };
   document.querySelectorAll('[data-stat]').forEach(el=>{const key=el.dataset.stat;if(values[key]!==undefined&&values[key]!=='')el.textContent=values[key];});
 })();
@@ -219,6 +284,7 @@ if(menu&&nav){
 (function signupModal(){
   const triggers=[...document.querySelectorAll('.nav-join,[data-open-signup]')];
   if(!triggers.length)return;
+  const readerCount=Number(SK8_CONFIG.publicStats&&SK8_CONFIG.publicStats.subscriberCount)||282;
   const modal=document.createElement('div');
   modal.className='signup-modal';
   modal.hidden=true;
@@ -227,7 +293,7 @@ if(menu&&nav){
       <button class="signup-modal-close" type="button" aria-label="Close signup" data-close-signup>×</button>
       <div class="signup-modal-art"><span>ONE FREE LOCAL EMAIL</span><strong>Every Friday, without the endless scroll.</strong><small>Cheadle · Cheadle Hulme · Gatley · Heald Green</small></div>
       <div class="signup-modal-copy">
-        <div class="eyebrow">Join 260+ local readers</div>
+        <div class="eyebrow">Join ${readerCount}+ local readers</div>
         <h2 id="signup-modal-title">Get the free Friday Scoop.</h2>
         <p>Weekend plans, useful updates, new openings and money-saving local ideas in one quick email.</p>
         <form class="signup signup-modal-form" action="https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe" method="post" data-signup-form data-form-position="modal">

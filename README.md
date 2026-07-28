@@ -55,8 +55,8 @@ No weak placeholder growth pages were published. See `GROWTH-PAGES-ROADMAP.md` f
 
 ## v7 conversion and commerce update
 
-- Conversion-led homepage with dated public proof: 260 subscribers and 5 issues.
-- Advertising page uses Issue 5 main-send figures as dated evidence, not as an average.
+- Conversion-led homepage with dated public proof: 282 active subscribers on 28 July 2026 and 5 issues.
+- Advertising page uses Issue 5 main-send and resend figures as dated evidence, not as an average.
 - £35 Local Spotlight, £79 Monthly Partner and £129 Category Partner pilot packages.
 - Simplified advertiser enquiry and structured business-submission forms.
 - Original logo, MailerLite forms, QR attribution, analytics loader and Cloudflare Functions preserved.

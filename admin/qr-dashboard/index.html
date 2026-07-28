@@ -1,1 +1,79 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>QR dashboard | SK8 Scoop</title><link rel="stylesheet" href="../../assets/styles.css"></head><body><main data-qr-dashboard><section class="hero-compact"><div class="wrap"><div class="eyebrow">Private operating view</div><h1>Local display performance.</h1><p>Aggregate QR scans and form submissions. This page never displays subscriber email addresses.</p><div class="admin-tools"><input type="password" data-admin-token placeholder="Cloudflare admin token"><button class="button" data-load-dashboard>Load dashboard</button></div><p data-dashboard-status class="fine">Enter the admin token configured in Cloudflare.</p></div></section><section class="content"><div class="wrap"><div class="dashboard-grid"><div class="metric"><span>Landing views</span><strong data-total-views>0</strong></div><div class="metric"><span>Form submissions</span><strong data-total-submits>0</strong></div><div class="metric"><span>Live posters</span><strong data-live-posters>11</strong></div><div class="metric"><span>Page conversion</span><strong data-conversion>0%</strong></div></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Poster</th><th>Venue</th><th>Area</th><th>Views</th><th>Submits</th><th>Conversion</th><th>Last seen</th></tr></thead><tbody data-dashboard-body></tbody></table></div><div class="section"><div class="notice"><strong>Important:</strong> form submissions are not the same as confirmed MailerLite subscribers. Reconcile them against the `Local Business QR Displays – 2026` group before awarding adverts or quoting results.</div></div></div></section></main><script src="../../assets/site.js"></script></body></html>
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Publisher dashboard | SK8 Scoop</title>
+  <link rel="stylesheet" href="../../assets/styles.css">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"></head>
+<body>
+<main data-qr-dashboard>
+  <section class="hero-compact">
+    <div class="wrap">
+      <div class="eyebrow">Private operating view</div>
+      <h1>SK8 Scoop publisher dashboard.</h1>
+      <p>Local-display performance and the latest newsletter snapshot. This page never displays subscriber email addresses.</p>
+      <div class="admin-tools">
+        <input type="password" data-admin-token placeholder="Cloudflare admin token" autocomplete="current-password">
+        <button class="button" type="button" data-load-dashboard>Load QR results</button>
+      </div>
+      <p data-dashboard-status class="fine">Enter the admin token configured in Cloudflare.</p>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap">
+      <div class="section-kicker-row">
+        <div>
+          <div class="eyebrow">Newsletter performance</div>
+          <h2>Issue 5, including the resend.</h2>
+        </div>
+        <p>Checked <strong data-stat="latestMetricsCheckedDate">28 July 2026</strong>. Opens are useful directionally; clicks and confirmed subscribers remain stronger evidence.</p>
+      </div>
+      <div class="dashboard-grid newsletter-dashboard-grid">
+        <div class="metric"><span>Original recipients</span><strong data-stat="latestMainSendRecipients">256</strong></div>
+        <div class="metric"><span>Original open rate</span><strong data-stat="latestMainOpenRate">37.89%</strong><small><span data-stat="latestMainSendOpens">97</span> recorded opens</small></div>
+        <div class="metric"><span>Resend recipients</span><strong data-stat="latestResendRecipients">174</strong></div>
+        <div class="metric"><span>Resend open rate</span><strong data-stat="latestResendOpenRate">20.69%</strong><small><span data-stat="latestResendOpens">36</span> recorded opens</small></div>
+        <div class="metric featured-metric"><span>Recorded opens including resend</span><strong data-stat="latestCombinedOpens">133</strong></div>
+        <div class="metric featured-metric"><span>Effective open rate including resend</span><strong data-stat="latestOpenRate">52.0%</strong></div>
+        <div class="metric"><span>Recorded clicks across both sends</span><strong data-stat="latestCombinedClicks">11</strong></div>
+        <div class="metric"><span>Combined click reach</span><strong data-stat="latestClickRate">4.3%</strong></div>
+      </div>
+      <div class="notice">
+        <strong>How the combined open rate is calculated:</strong>
+        97 original recorded opens plus 36 resend recorded opens gives 133 against the original 256 recipients, or about 52.0%. The two percentages are not averaged or simply added. Late opens can create slight overlap, so treat this as recorded reach rather than a perfect headcount.
+      </div>
+
+      <div class="section-kicker-row dashboard-section-heading">
+        <div>
+          <div class="eyebrow">QR poster performance</div>
+          <h2>Seventeen live placements.</h2>
+        </div>
+        <p>Each Stockroom poster remains separately tracked. Posters with no scans yet still appear after the dashboard loads.</p>
+      </div>
+      <div class="dashboard-grid">
+        <div class="metric"><span>Landing views</span><strong data-total-views>0</strong></div>
+        <div class="metric"><span>Form submissions</span><strong data-total-submits>0</strong></div>
+        <div class="metric"><span>Live posters</span><strong data-live-posters>17</strong></div>
+        <div class="metric"><span>Page conversion</span><strong data-conversion>0%</strong></div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Poster</th><th>Venue</th><th>Area</th><th>Views</th><th>Submits</th><th>Conversion</th><th>Last seen</th></tr>
+          </thead>
+          <tbody data-dashboard-body></tbody>
+        </table>
+      </div>
+      <div class="section">
+        <div class="notice"><strong>Important:</strong> form submissions are not the same as confirmed MailerLite subscribers. Reconcile them against the Local Business QR Displays – 2026 group before awarding adverts or quoting results.</div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="../../assets/config.js"></script>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

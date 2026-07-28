@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS subscriber_preferences (
 `;
 
 let schemaReady = false;
+const LIVE_POSTER_COUNT = 17;
 
 export default {
   async fetch(request, env) {
@@ -177,8 +178,8 @@ async function handleQrStats(request, env) {
   const totals = rows.reduce((total, row) => ({
     views: total.views + Number(row.views || 0),
     form_submits: total.form_submits + Number(row.form_submits || 0),
-    live_posters: 11
-  }), { views: 0, form_submits: 0, live_posters: 11 });
+    live_posters: LIVE_POSTER_COUNT
+  }), { views: 0, form_submits: 0, live_posters: LIVE_POSTER_COUNT });
   return json({ rows, totals });
 }
 
