@@ -34,7 +34,13 @@ function loadAnalytics(){
       ad_personalization:'denied'
     });
     const s=document.createElement('script');s.async=true;s.src=`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4)}`;s.dataset.sk8Ga4='true';document.head.appendChild(s);
-    window.gtag('js',new Date());window.gtag('config',ga4,{send_page_view:true,allow_google_signals:false,allow_ad_personalization_signals:false});
+    window.gtag('js',new Date());window.gtag('config',ga4,{
+      send_page_view:true,
+      allow_google_signals:false,
+      allow_ad_personalization_signals:false,
+      content_group:'SK8 Scoop website',
+      transport_type:'beacon'
+    });
   }
   const pixel=String(SK8_CONFIG.metaPixelId||'').trim();
   if(sk8Consent&&sk8Consent.marketing&&/^\d{10,20}$/.test(pixel)&&!metaLoaded){
@@ -46,8 +52,15 @@ function loadAnalytics(){
 }
 loadAnalytics();
 
+const sk8PageContext=()=>({
+  page_name:document.body.dataset.page||'unknown',
+  page_title:document.title,
+  page_location:location.href,
+  page_path:location.pathname,
+  content_group:'SK8 Scoop website'
+});
 function sk8Track(name,params={}){
-  const payload={...params,page_path:location.pathname};
+  const payload={...sk8PageContext(),...params};
   if(sk8Consent&&sk8Consent.analytics&&typeof window.gtag==='function') window.gtag('event',name,payload);
   if(sk8Consent&&sk8Consent.marketing&&typeof window.fbq==='function') window.fbq('trackCustom',name,payload);
 }
@@ -62,6 +75,11 @@ const sk8PageEventName=()=>{
     'business-submissions':'business_submission_page_visit',
     preferences:'preferences_page_visit',
     'latest-issue':'latest_issue_page_visit',
+    about:'about_page_visit',
+    archive:'archive_page_visit',
+    'submit-event':'event_submission_page_visit',
+    'whats-on':'whats_on_page_visit',
+    'summer-guide-success':'summer_guide_signup_completed',
     'signup-success':'signup_completed'
   }[page]||'';
 };
@@ -91,6 +109,13 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
     if(eventName) sk8Track(eventName,params);
     try{
       const u=new URL(href,location.href);
+      const linkDomain=u.hostname||'';
+      const detailedParams={...params,link_domain:linkDomain};
+      if(u.protocol==='mailto:') sk8Track('contact_click',{...detailedParams,contact_method:'email',link_url:'mailto:contact@sk8scoop.com'});
+      else if(u.protocol==='tel:') sk8Track('contact_click',{...detailedParams,contact_method:'telephone',link_url:'telephone'});
+      else if(u.origin!==location.origin) sk8Track('outbound_click',detailedParams);
+      if(/(^|\.)preview\.mailerlite\.io$/i.test(linkDomain)&&eventName!=='latest_issue_click') sk8Track('latest_issue_click',detailedParams);
+      if(/(^|\.)facebook\.com$/i.test(linkDomain)) sk8Track('social_click',{...detailedParams,social_network:'Facebook'});
       if(link.dataset.campaignLink!==undefined||[...u.searchParams.keys()].some(k=>k.startsWith('utm_'))) sk8Track('campaign_link_click',params);
     }catch(e){}
   });
@@ -207,11 +232,15 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
         const firstError=fieldErrors&&Object.values(fieldErrors).flat().find(Boolean);
         throw new Error(firstError||'MailerLite did not accept this subscription.');
       }
+      const formPosition=form.dataset.formPosition||'unknown';
+      const signupSource=form.matches('[data-qr-form]')?'local_qr':'website';
+      sk8Track('sign_up',{method:'MailerLite',form_position:formPosition,signup_source:signupSource});
       form.dispatchEvent(new CustomEvent('sk8:mailerlite-success',{bubbles:true,detail:{result}}));
       status.className='signup-status show success';status.textContent='You’re in. Opening the welcome page…';
       const success=form.matches('[data-qr-form]')?'/qr-success/':'/signup-success/';
       window.setTimeout(()=>location.assign(success),350);
     }catch(error){
+      sk8Track('form_error',{form_kind:'newsletter_signup',form_position:form.dataset.formPosition||'unknown',error_type:'mailerlite_rejected_or_unreadable'});
       status.className='signup-status show error';status.textContent=error&&error.message?error.message:'That did not complete. Please try again or email contact@sk8scoop.com.';
       if(button){button.disabled=false;button.textContent=original;}
     }
@@ -274,8 +303,8 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
 (function apiForm(){
   document.querySelectorAll('[data-api-form]').forEach(form=>form.addEventListener('submit',async ev=>{
     ev.preventDefault();const status=form.querySelector('[data-form-status]');const btn=form.querySelector('button[type=submit]');btn.disabled=true;status.className='status-box show';status.textContent='Sending…';
-    try{const formData=new FormData(form);const data={};for(const [k,v] of formData.entries()){if(data[k]) data[k]=Array.isArray(data[k])?[...data[k],v]:[data[k],v];else data[k]=v;}const r=await fetch(form.action,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const out=await r.json();if(!r.ok)throw new Error(out.error||'Submission failed');status.className='status-box show success';status.textContent=out.message||'Thank you. Your submission has been received for review.';const successEvent=form.dataset.successEvent;if(successEvent) sk8Track(successEvent,{form_action:form.action});form.reset();}
-    catch(e){status.className='status-box show error';status.textContent='This could not be sent automatically. Please email contact@sk8scoop.com instead.';}finally{btn.disabled=false;}
+    try{const formData=new FormData(form);const data={};for(const [k,v] of formData.entries()){if(data[k]) data[k]=Array.isArray(data[k])?[...data[k],v]:[data[k],v];else data[k]=v;}const r=await fetch(form.action,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const out=await r.json();if(!r.ok)throw new Error(out.error||'Submission failed');status.className='status-box show success';status.textContent=out.message||'Thank you. Your submission has been received for review.';const successEvent=form.dataset.successEvent;if(successEvent) sk8Track(successEvent,{form_action:form.action,form_kind:form.dataset.formKind||'unknown'});if(form.dataset.formKind==='advertiser')sk8Track('generate_lead',{lead_source:'advertising_enquiry',form_action:form.action});form.reset();}
+    catch(e){sk8Track('form_error',{form_kind:form.dataset.formKind||'api_form',error_type:'api_submission_failed'});status.className='status-box show error';status.textContent='This could not be sent automatically. Please email contact@sk8scoop.com instead.';}finally{btn.disabled=false;}
   }));
 })();
 
