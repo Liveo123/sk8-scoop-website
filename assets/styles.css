@@ -237,6 +237,14 @@ html,body{overflow-x:clip}@media(max-width:560px){.v75-doodle-bike{display:none}
 .clean-signup input{background:#fff}
 .form-reassurance{font-size:.89rem;color:#55696c;margin:10px 0 0}
 .hero-actions{margin-top:16px}
+.clean-signup button,.stacked-signup button,.final-signup button,.signup-modal-form button,.qr-signup button{background:var(--teal);color:#fff;box-shadow:0 8px 20px rgba(15,100,112,.2)}
+.clean-signup button:hover,.stacked-signup button:hover,.final-signup button:hover,.signup-modal-form button:hover,.qr-signup button:hover{background:var(--teal2)}
+.button.hero-secondary{background:#fff;color:var(--teal);border:2px solid var(--teal);box-shadow:none}
+.button.hero-secondary:hover{background:var(--pale-teal,#eaf4f2);color:var(--teal2)}
+.nav .nav-join{background:var(--teal);color:#fff}
+.nav .nav-join:hover{background:var(--teal2);color:#fff}
+.final-cta .final-signup button,.v7-final .final-signup button{background:#b84e00;color:#fff}
+.final-cta .final-signup button:hover,.v7-final .final-signup button:hover{background:#8f3d00}
 .clean-hero-visual{margin:0;background:#fff;border:1px solid #dbe4e0;border-radius:24px;padding:10px;box-shadow:0 22px 48px rgba(18,45,49,.15);overflow:hidden;position:relative}
 .clean-hero-visual:before{content:"LOCAL LIFE, SORTED";position:absolute;z-index:2;top:24px;left:24px;background:#0f6470;color:#fff;padding:8px 12px;border-radius:8px;font:900 .74rem/1 Inter,Arial,sans-serif;letter-spacing:.08em}
 .clean-hero-visual img{display:block;width:100%;aspect-ratio:2/1;object-fit:cover;border-radius:16px}

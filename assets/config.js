@@ -2,9 +2,9 @@ window.SK8_CONFIG = {
   ga4MeasurementId: "G-8L0ER92Y7L",
   metaPixelId: "4649116095416763",
   publicStats: {
-    subscriberCount: 286,
-    issuesPublished: 5,
-    checkedDate: "28 July 2026",
+    subscriberCount: 300,
+    issuesPublished: 6,
+    checkedDate: "31 July 2026",
     latestMainSendRecipients: 256,
     latestMainSendOpens: 97,
     latestMainOpenRate: "37.89%",
@@ -15,7 +15,7 @@ window.SK8_CONFIG = {
     latestOpenRate: "52.0%",
     latestCombinedClicks: 11,
     latestClickRate: "4.3%",
-    latestIssueDate: "24 July 2026",
+    latestIssueDate: "31 July 2026",
     latestMetricsCheckedDate: "28 July 2026"
   },
   stripeLinks: {

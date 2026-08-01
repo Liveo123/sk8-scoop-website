@@ -15,11 +15,13 @@ Test at 320px, 375px, 390px, 430px and 768px.
 
 ## Links and domains
 - Main logo returns to the homepage.
-- Latest issue opens Issue 5.
-- Summer Guide opens `https://summer-guide.sk8scoop.com`.
+- `/latest` shows Issue 6 and its **Read Issue 6** button opens the verified MailerLite web version.
+- `/latest-issue` redirects to `/latest` so old links keep working.
+- Public Summer Guide promotion opens `https://summer-guide.sk8scoop.com`.
+- Post-signup and welcome-email Summer Guide links open `https://sk8scoop-uyx0q8.subscribepage.io`.
 - Facebook opens the supplied SK8 Scoop profile.
 - Email links use `contact@sk8scoop.com`.
-- No hidden or private Summer Guide link is exposed.
+- The direct Summer Guide link appears only after signup or in subscriber emails, not as the public acquisition CTA.
 - Privacy, Terms and Editorial Policy load.
 
 ## Forms

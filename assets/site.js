@@ -439,7 +439,7 @@ if(menu&&nav){
 (function signupModal(){
   const triggers=[...document.querySelectorAll('.nav-join,[data-open-signup]')];
   if(!triggers.length)return;
-  const readerCount=Number(SK8_CONFIG.publicStats&&SK8_CONFIG.publicStats.subscriberCount)||286;
+  const readerCount=Number(SK8_CONFIG.publicStats&&SK8_CONFIG.publicStats.subscriberCount)||300;
   const modal=document.createElement('div');
   modal.className='signup-modal';
   modal.hidden=true;
@@ -454,7 +454,7 @@ if(menu&&nav){
         <form class="signup signup-modal-form" action="https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe" method="post" data-signup-form data-form-position="modal">
           <label class="sr-only" for="modal-email">Email address</label>
           <input id="modal-email" type="email" name="fields[email]" inputmode="email" autocomplete="email" placeholder="Your email address" required>
-          <button class="button" type="submit">Send me the free Friday Scoop</button>
+          <button class="button" type="submit">Subscribe free</button>
         </form>
         <small>Local, useful and free. No spam. Unsubscribe whenever you like. <a href="/privacy.html">Privacy</a>.</small>
       </div>
