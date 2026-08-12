@@ -1,0 +1,13 @@
+--- a/index.html
++++ b/index.html
+@@
+-  <figure class="clean-hero-visual"><img src="assets/images/hero-family-town.webp" alt="Family walking together beside a park and a British high street" width="1400" height="700" fetchpriority="high"><figcaption><span>Cheadle</span><span>Cheadle Hulme</span><span>Gatley</span><span>Heald Green</span></figcaption></figure>
++  <figure class="clean-hero-visual"><img src="assets/images/hero-family-market-clean.webp" alt="Mother and two children walking through a local makers market" width="1122" height="1402" fetchpriority="high"><figcaption><span>Cheadle</span><span>Cheadle Hulme</span><span>Gatley</span><span>Heald Green</span></figcaption></figure>
+--- a/assets/styles.css
++++ b/assets/styles.css
+@@
+-.clean-hero-visual img{display:block;width:100%;aspect-ratio:2/1;object-fit:cover;border-radius:16px}
++.clean-hero-visual img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:16px}
+@@
+-  .wrap{width:min(100% - 24px,1120px)}.brand{width:185px!important}.menu-btn{padding:10px 11px}.clean-hero-copy h1{font-size:clamp(2.75rem,14vw,3.75rem)}.clean-hero-copy .hero-lead{font-size:1.1rem}.clean-signup{box-shadow:none}.clean-hero-visual{padding:7px;border-radius:18px}.clean-hero-visual img{aspect-ratio:1.35/1}.clean-hero-visual:before{top:16px;left:16px;font-size:.66rem}.clean-proof-grid strong{font-size:1.35rem}.clean-proof-grid span{font-size:.72rem}.clean-benefit-grid{grid-template-columns:1fr}.clean-benefit{min-height:auto}.clean-split{padding:19px;border-radius:18px}.clean-photo-card img{height:220px}.clean-photo-card.portrait img{height:260px}
++  .wrap{width:min(100% - 24px,1120px)}.brand{width:185px!important}.menu-btn{padding:10px 11px}.clean-hero-copy h1{font-size:clamp(2.75rem,14vw,3.75rem)}.clean-hero-copy .hero-lead{font-size:1.1rem}.clean-signup{box-shadow:none}.clean-hero-visual{padding:7px;border-radius:18px}.clean-hero-visual img{aspect-ratio:4/5;object-position:center top}.clean-hero-visual:before{top:16px;left:16px;font-size:.66rem}.clean-proof-grid strong{font-size:1.35rem}.clean-proof-grid span{font-size:.72rem}.clean-benefit-grid{grid-template-columns:1fr}.clean-benefit{min-height:auto}.clean-split{padding:19px;border-radius:18px}.clean-photo-card img{height:220px}.clean-photo-card.portrait img{height:260px}
