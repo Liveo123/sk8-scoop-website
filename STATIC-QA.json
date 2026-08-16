@@ -1,0 +1,48 @@
+{
+  "index.html": {
+    "has_issue8": true,
+    "has_old_issue7_current_phrase": false,
+    "uses_patch_css": true,
+    "uses_existing_site_js": true
+  },
+  "latest/index.html": {
+    "has_issue8": true,
+    "has_old_issue7_current_phrase": false,
+    "uses_patch_css": true,
+    "uses_existing_site_js": true
+  },
+  "archive.html": {
+    "has_issue8": true,
+    "has_old_issue7_current_phrase": false,
+    "uses_patch_css": true,
+    "uses_existing_site_js": true
+  },
+  "about.html": {
+    "has_issue8": false,
+    "has_old_issue7_current_phrase": false,
+    "uses_patch_css": true,
+    "uses_existing_site_js": true
+  },
+  "signup-success/index.html": {
+    "has_issue8": true,
+    "has_old_issue7_current_phrase": false,
+    "uses_patch_css": true,
+    "uses_existing_site_js": true
+  },
+  "index_form": {
+    "mailer_action_preserved": true,
+    "data_signup_form_preserved": true,
+    "required_email_preserved": true
+  },
+  "archive_issue8_url": true,
+  "archive_issue7_preserved": true,
+  "config": {
+    "subscriber_413": true,
+    "issues_8": true,
+    "open_33_91": true,
+    "ctor_12_41": true,
+    "combined_open_63_86": true,
+    "combined_ctor_10_85": true
+  },
+  "combined_open_calculation": "137 + 121 = 258; 258 / 404 = 63.86%"
+}
