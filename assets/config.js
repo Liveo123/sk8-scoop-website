@@ -7,9 +7,9 @@ window.SK8_CONFIG = {
     issuesPublished: 8,
     checkedDate: "16 August 2026",
     latestMainSendRecipients: 404,
-    latestMainOpenRate: "33.91%",
-    latestClickRate: "4.21%",
-    latestCTOR: "12.41%",
+    latestMainOpenRate: "63.86%",
+    latestClickRate: "6.93%",
+    latestCTOR: "10.85%",
     latestIssueDate: "14 August 2026",
     latestMetricsCheckedDate: "16 August 2026"
   },

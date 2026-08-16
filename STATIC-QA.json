@@ -1,22 +1,22 @@
 {
   "canonical": {
     "subscribers": 411,
-    "issues_published": 8,
-    "current_issue": 8,
-    "issue8_url": "https://preview.mailerlite.io/preview/2462354/emails/195857688022747045",
-    "combined_open_rate": "63.86%",
-    "combined_ctor": "10.85%"
+    "issues": 8,
+    "open_reach": "63.86%",
+    "click_reach": "6.93%",
+    "ctor": "10.85%",
+    "issue8_url": "https://preview.mailerlite.io/preview/2462354/emails/195857688022747045"
   },
-  "checks": {
-    "config_has_411": true,
-    "config_has_issue8": true,
-    "config_has_issue8_url": true,
-    "homepage_has_411": true,
-    "latest_has_issue8": true,
-    "latest_has_issue8_url": true,
-    "advertise_has_411": true,
-    "archive_has_issue8": true,
-    "archive_preserves_issue7_url": true
+  "advertiser_snapshot": {
+    "open_reach_present": true,
+    "click_reach_present": true,
+    "ctor_present": true,
+    "ctor_label_present": true,
+    "subscriber_411_present": true
   },
-  "unexpected_stale_values": {}
+  "unexpected_stale_values": {
+    "archive.html": [
+      "413"
+    ]
+  }
 }
