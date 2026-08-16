@@ -7,6 +7,10 @@ document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().g
 const SK8_CONFIG=window.SK8_CONFIG||{};
 const SK8_CONSENT_KEY='sk8_privacy_choices_v1';
 const SK8_CONSENT_DAYS=90;
+const SK8_ATTRIBUTION_KEY='sk8_signup_attribution_v1';
+const SK8_ATTRIBUTION_DAYS=90;
+let sk8QrLocationMap=null;
+let sk8CurrentAttributionOverride=null;
 const readConsent=()=>{
   try{
     const choice=JSON.parse(localStorage.getItem(SK8_CONSENT_KEY)||'null');
@@ -20,6 +24,270 @@ const readConsent=()=>{
 let sk8Consent=readConsent();
 let ga4Loaded=false;
 let metaLoaded=false;
+
+const readStoredJson=key=>{
+  try{return JSON.parse(localStorage.getItem(key)||'null');}catch(e){return null;}
+};
+const writeStoredJson=(key,value)=>{
+  try{localStorage.setItem(key,JSON.stringify(value));}catch(e){}
+};
+const clearStoredJson=key=>{
+  try{localStorage.removeItem(key);}catch(e){}
+};
+const slugWords=value=>String(value||'').trim().replace(/[_-]+/g,' ').replace(/\s+/g,' ');
+const titleCase=value=>slugWords(value).split(' ').filter(Boolean).map(word=>{
+  const upper=word.toUpperCase();
+  if(['SK8','QR','UK'].includes(upper)) return upper;
+  if(upper==='CTA') return 'CTA';
+  if(/^\d{4}$/.test(word)) return word;
+  return word.charAt(0).toUpperCase()+word.slice(1).toLowerCase();
+}).join(' ');
+const labelOrFallback=(value,fallback='')=>titleCase(value)||fallback;
+const sourceLabel=value=>{
+  const slug=String(value||'').trim().toLowerCase();
+  if(!slug) return '';
+  return {
+    facebook:'Facebook',
+    instagram:'Instagram',
+    meta:'Meta',
+    whatsapp:'WhatsApp',
+    google:'Google',
+    bing:'Bing',
+    duckduckgo:'DuckDuckGo',
+    yahoo:'Yahoo',
+    newsletter:'Newsletter',
+    email:'Email',
+    offline:'Offline',
+    direct:'Direct'
+  }[slug]||labelOrFallback(value);
+};
+const conversionPageLabel=()=>{
+  const page=document.body.dataset.page||'';
+  return {
+    home:'Homepage',
+    'latest-issue':'Latest Issue',
+    archive:'Archive',
+    about:'About',
+    localqr:'Local QR',
+    'summer-guide':'Summer Guide',
+    advertise:'Advertise',
+    preferences:'Preferences',
+    'business-submissions':'Business Submissions',
+    'submit-event':'Submit Event'
+  }[page]||labelOrFallback(location.pathname.replace(/^\/+|\/+$/g,'').split('/').filter(Boolean).pop()||'Homepage','Homepage');
+};
+const searchSourceFromHost=host=>{
+  const value=String(host||'').toLowerCase();
+  if(/(^|\.)google\./.test(value)) return 'Google';
+  if(/(^|\.)bing\.com$/.test(value)) return 'Bing';
+  if(/(^|\.)duckduckgo\.com$/.test(value)) return 'DuckDuckGo';
+  if(/(^|\.)search\.yahoo\.com$/.test(value)||/(^|\.)yahoo\./.test(value)) return 'Yahoo';
+  return '';
+};
+const referrerUrl=()=>{
+  try{return document.referrer?new URL(document.referrer):null;}catch(e){return null;}
+};
+const currentUtm=()=>{
+  const params=new URLSearchParams(location.search);
+  return {
+    source:(params.get('utm_source')||'').trim(),
+    medium:(params.get('utm_medium')||'').trim(),
+    campaign:(params.get('utm_campaign')||'').trim(),
+    content:(params.get('utm_content')||'').trim()
+  };
+};
+const meaningfulAttribution=value=>{
+  if(!value) return false;
+  const channel=String(value.acquisition_channel||'').trim();
+  return Boolean(channel&&channel!=='Direct'&&channel!=='Unknown');
+};
+const normaliseAttribution=value=>({
+  acquisition_channel:String(value&&value.acquisition_channel||'').trim(),
+  signup_source:String(value&&value.signup_source||'').trim(),
+  signup_campaign:String(value&&value.signup_campaign||'').trim(),
+  signup_content:String(value&&value.signup_content||'').trim()
+});
+const defaultDirectAttribution=()=>{
+  const referrer=referrerUrl();
+  if(!referrer) return {acquisition_channel:'Direct',signup_source:'Direct',signup_campaign:'',signup_content:''};
+  return {acquisition_channel:'Unknown',signup_source:sourceLabel(referrer.hostname.replace(/^www\./,''))||'Unknown',signup_campaign:'',signup_content:''};
+};
+const qrSourceLabel=record=>{
+  if(record&&record.venue) return `${record.venue} QR`;
+  if(record&&record.area) return `${record.area} QR`;
+  if(record&&record.poster_id) return `Poster ${record.poster_id} QR`;
+  return 'Local QR';
+};
+function deriveAttribution(options={}){
+  const utm=options.utm||currentUtm();
+  const referrer=options.referrer||referrerUrl();
+  const qrRecord=options.qrRecord||null;
+  const source=String(utm.source||'').toLowerCase();
+  const medium=String(utm.medium||'').toLowerCase();
+  const campaign=labelOrFallback(utm.campaign);
+  const content=labelOrFallback(utm.content);
+  const searchSource=searchSourceFromHost(source)||searchSourceFromHost(referrer&&referrer.hostname);
+  if(qrRecord||medium==='qr'||source==='offline'){
+    const qrCampaign=campaign||labelOrFallback(qrRecord&&qrRecord.campaign)||'QR Venue Programme';
+    const qrContent=content||labelOrFallback(qrRecord&&qrRecord.code)||'QR';
+    return {
+      acquisition_channel:'Offline QR',
+      signup_source:qrSourceLabel(qrRecord),
+      signup_campaign:qrCampaign,
+      signup_content:qrContent
+    };
+  }
+  if(/paid|cpc|ppc|ad/.test(medium)||((source==='facebook'||source==='instagram'||source==='meta')&&medium==='paid_social')){
+    return {
+      acquisition_channel:'Paid Social',
+      signup_source:sourceLabel(source)||'Paid Social',
+      signup_campaign:campaign,
+      signup_content:content
+    };
+  }
+  if(source==='facebook'&&medium==='group'){
+    const groupLabel=content||'Facebook Group';
+    return {
+      acquisition_channel:'Organic Social',
+      signup_source:groupLabel,
+      signup_campaign:campaign,
+      signup_content:groupLabel
+    };
+  }
+  if(['facebook','instagram'].includes(source)&&(/social|organic/.test(medium)||medium==='page'||medium==='post')){
+    return {
+      acquisition_channel:'Organic Social',
+      signup_source:sourceLabel(source),
+      signup_campaign:campaign,
+      signup_content:content
+    };
+  }
+  if(['newsletter','email'].includes(source)||['email','owned','internal'].includes(medium)){
+    return {
+      acquisition_channel:'SK8 Owned',
+      signup_source:sourceLabel(source)||'Newsletter',
+      signup_campaign:campaign,
+      signup_content:content
+    };
+  }
+  if(['referral','reader_referral','share','shared','whatsapp'].includes(medium)){
+    return {
+      acquisition_channel:'Referral',
+      signup_source:sourceLabel(source)||'Reader Referral',
+      signup_campaign:campaign,
+      signup_content:content
+    };
+  }
+  if(['partner','organiser','organizer','business','community'].includes(medium)){
+    return {
+      acquisition_channel:'Partner / Organiser',
+      signup_source:labelOrFallback(utm.content)||sourceLabel(source)||'Partner Share',
+      signup_campaign:campaign,
+      signup_content:content
+    };
+  }
+  if(searchSource||medium==='organic'||medium==='search'){
+    return {
+      acquisition_channel:'Organic Search',
+      signup_source:searchSource||sourceLabel(source)||'Search',
+      signup_campaign:campaign,
+      signup_content:content
+    };
+  }
+  if(source&&medium){
+    return {
+      acquisition_channel:'Unknown',
+      signup_source:sourceLabel(source)||'Unknown',
+      signup_campaign:campaign,
+      signup_content:content
+    };
+  }
+  if(referrer&&referrer.origin!==location.origin){
+    const referralHost=referrer.hostname.replace(/^www\./,'');
+    if(searchSourceFromHost(referralHost)){
+      return {
+        acquisition_channel:'Organic Search',
+        signup_source:searchSourceFromHost(referralHost),
+        signup_campaign:'',
+        signup_content:''
+      };
+    }
+    if(/(^|\.)(facebook|m\.facebook|l\.facebook)\.com$/.test(referralHost)){
+      return {
+        acquisition_channel:'Organic Social',
+        signup_source:'Facebook',
+        signup_campaign:'',
+        signup_content:''
+      };
+    }
+    return {
+      acquisition_channel:'Unknown',
+      signup_source:sourceLabel(referralHost)||'Unknown',
+      signup_campaign:'',
+      signup_content:''
+    };
+  }
+  return defaultDirectAttribution();
+}
+const readStoredAttribution=()=>{
+  const stored=readStoredJson(SK8_ATTRIBUTION_KEY);
+  if(!stored||stored.version!==1||!stored.expiresAt||Date.now()>stored.expiresAt){
+    clearStoredJson(SK8_ATTRIBUTION_KEY);
+    return null;
+  }
+  return stored;
+};
+const storeFirstTouch=(candidate,{allowRefine=false}={})=>{
+  const next=normaliseAttribution(candidate);
+  const current=readStoredAttribution();
+  if(!meaningfulAttribution(next)) return current;
+  if(current&&meaningfulAttribution(current)){
+    const canRefine=allowRefine&&current.acquisition_channel==='Offline QR'&&next.acquisition_channel==='Offline QR';
+    if(!canRefine) return current;
+  }
+  const stored={
+    version:1,
+    ...next,
+    savedAt:new Date().toISOString(),
+    landing_path:location.pathname,
+    expiresAt:Date.now()+(SK8_ATTRIBUTION_DAYS*24*60*60*1000)
+  };
+  writeStoredJson(SK8_ATTRIBUTION_KEY,stored);
+  return stored;
+};
+const ensureSignupField=(form,name)=>{
+  let field=form.querySelector(`input[name="${name}"]`);
+  if(!field){
+    field=document.createElement('input');
+    field.type='hidden';
+    field.name=name;
+    form.appendChild(field);
+  }
+  return field;
+};
+const signupAttribution=()=>{
+  const current=normaliseAttribution(sk8CurrentAttributionOverride||deriveAttribution());
+  const stored=readStoredAttribution();
+  const base=meaningfulAttribution(stored)?stored:current;
+  const fallback=meaningfulAttribution(base)?base:defaultDirectAttribution();
+  return {
+    acquisition_channel:fallback.acquisition_channel||'Unknown',
+    signup_source:fallback.signup_source||'Unknown',
+    signup_campaign:fallback.signup_campaign||'',
+    signup_content:fallback.signup_content||'',
+    signup_landing_page:conversionPageLabel()
+  };
+};
+const applyAttributionToForm=form=>{
+  const attribution=signupAttribution();
+  ensureSignupField(form,'fields[acquisition_channel]').value=attribution.acquisition_channel;
+  ensureSignupField(form,'fields[signup_source]').value=attribution.signup_source;
+  ensureSignupField(form,'fields[signup_campaign]').value=attribution.signup_campaign;
+  ensureSignupField(form,'fields[signup_content]').value=attribution.signup_content;
+  ensureSignupField(form,'fields[signup_landing_page]').value=attribution.signup_landing_page;
+  return attribution;
+};
+storeFirstTouch(deriveAttribution());
 
 function loadAnalytics(){
   const ga4=String(SK8_CONFIG.ga4MeasurementId||'').trim();
@@ -65,6 +333,13 @@ function sk8Track(name,params={}){
   if(sk8Consent&&sk8Consent.marketing&&typeof window.fbq==='function') window.fbq('trackCustom',name,payload);
 }
 window.sk8Track=sk8Track;
+window.SK8AttributionDebug={
+  deriveAttribution,
+  signupAttribution,
+  readStoredAttribution,
+  conversionPageLabel
+};
+document.querySelectorAll('[data-signup-form]').forEach(form=>applyAttributionToForm(form));
 
 const sk8PageEventName=()=>{
   const page=document.body.dataset.page||'';
@@ -222,6 +497,7 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
     if(button){button.disabled=true;button.textContent='Joining…';}
     status.className='signup-status show';status.textContent='Adding you to SK8 Scoop…';
     try{
+      const attribution=applyAttributionToForm(form);
       const body=new URLSearchParams();
       for(const [key,value] of new FormData(form).entries()) body.append(key,String(value));
       const response=await fetch(form.action,{method:'POST',headers:{accept:'application/json'},body});
@@ -234,7 +510,7 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
       }
       const formPosition=form.dataset.formPosition||'unknown';
       const signupSource=form.matches('[data-qr-form]')?'local_qr':'website';
-      sk8Track('sign_up',{method:'MailerLite',form_position:formPosition,signup_source:signupSource});
+      sk8Track('sign_up',{method:'MailerLite',form_position:formPosition,signup_source:signupSource,acquisition_channel:attribution.acquisition_channel,signup_campaign:attribution.signup_campaign||'(none)'});
       form.dispatchEvent(new CustomEvent('sk8:mailerlite-success',{bubbles:true,detail:{result}}));
       status.className='signup-status show success';status.textContent='You’re in. Opening the welcome page…';
       const success=form.matches('[data-qr-form]')?'/qr-success/':'/signup-success/';
@@ -273,7 +549,7 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
   });
 })();
 
-async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-locations.json',{cache:'no-store'});return r.ok?await r.json():{};}catch(e){return {};}}
+async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-locations.json',{cache:'no-store'});sk8QrLocationMap=r.ok?await r.json():{};return sk8QrLocationMap;}catch(e){sk8QrLocationMap={};return sk8QrLocationMap;}}
 
 (async function enrichQrVenue(){
   if(document.body.dataset.page!=='localqr') return;
@@ -281,6 +557,9 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
   const map=await sk8LoadQrLocations();const record=map[code]||{};const venue=p.get('venue')||record.venue||'';const area=p.get('area')||record.area||'';
   document.querySelectorAll('[data-field-venue]').forEach(el=>el.value=venue||'unknown');document.querySelectorAll('[data-field-area]').forEach(el=>el.value=area||'SK8');
   const venueLabel=document.querySelector('[data-venue-label]');if(venueLabel&&venue) venueLabel.textContent=`Thanks to ${venue} for displaying SK8 Scoop.`;
+  sk8CurrentAttributionOverride=deriveAttribution({qrRecord:{code,poster_id:match?String(Number(match[1])).padStart(2,'0'):'',venue,area,campaign:p.get('utm_campaign')||'local_displays_2026'}});
+  storeFirstTouch(sk8CurrentAttributionOverride,{allowRefine:true});
+  document.querySelectorAll('[data-signup-form]').forEach(form=>applyAttributionToForm(form));
   const payload={event_type:'view',qr_code:code,poster_id:match?String(Number(match[1])).padStart(2,'0'):'',venue:venue||'unknown',area:area||'unknown',campaign:p.get('utm_campaign')||'local_displays_2026',source:p.get('utm_source')||'local_business_display',medium:p.get('utm_medium')||'qr',path:location.pathname};
   try{navigator.sendBeacon('/api/qr-event',new Blob([JSON.stringify(payload)],{type:'application/json'}));}catch(e){}
   const recordQrEvent=eventType=>{const sub={...payload,event_type:eventType};try{navigator.sendBeacon('/api/qr-event',new Blob([JSON.stringify(sub)],{type:'application/json'}));}catch(e){}};
