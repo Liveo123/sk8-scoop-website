@@ -4,7 +4,7 @@ This supersedes the earlier Issue 8 package.
 
 ## Correct current figures
 
-- Subscribers: **413**
+- Subscribers: **411**
 - Issues published: **8**
 - Issue 8 recorded opens across main + resend: **258**
 - Combined recorded open reach: **63.86%** (258 / original 404-recipient audience)
@@ -30,9 +30,9 @@ Do not replace `assets/site.js`, Cloudflare Worker/D1 files, QR files, analytics
 
 ## What fixes the screenshots you reported
 
-1. `advertise.html` now replaces the old 385+/7/52.0%/4.3% Issue 5 snapshot with 413/8/63.86%/6.93% and an Issue 8 explanation.
-2. `index.html` has a static 413 fallback in the signup reassurance and 413/8 in the proof strip.
-3. `latest/index.html` has static Issue 8 content, the supplied Issue 8 URL, 413 subscribers, 63.86% combined open rate and 10.85% combined CTOR.
+1. `advertise.html` now replaces the old 411/7/52.0%/4.3% Issue 5 snapshot with 411/8/63.86%/6.93% and an Issue 8 explanation.
+2. `index.html` has a static 411 fallback in the signup reassurance and 411/8 in the proof strip.
+3. `latest/index.html` has static Issue 8 content, the supplied Issue 8 URL, 411 subscribers, 63.86% combined open rate and 10.85% combined CTOR.
 4. `assets/issue8-update.css` now uses a final high-specificity `object-position: center top` override on the homepage and latest-page hero image. This prevents the old centred crop from removing the upper part of the image.
 5. `archive.html` keeps Issue 7 historically and adds Issue 8 first.
 
@@ -50,4 +50,4 @@ Hard-refresh after Cloudflare deploy (`Ctrl+F5`) because the old HTML/CSS may be
 - `/about.html`
 - `/signup-success/`
 
-Expected visible values: 413 subscribers, 8 issues, Issue 8 current, 63.86% combined open rate, 10.85% CTOR on latest, and 6.93% combined click reach on the advertiser snapshot.
+Expected visible values: 411 subscribers, 8 issues, Issue 8 current, 63.86% combined open rate, 10.85% CTOR on latest, and 6.93% combined click reach on the advertiser snapshot.

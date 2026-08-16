@@ -1,28 +1,22 @@
 {
-  "canonical_values": {
-    "subscribers": 413,
+  "canonical": {
+    "subscribers": 411,
     "issues_published": 8,
-    "issue8_combined_recorded_opens": 258,
-    "issue8_combined_open_rate": "63.86%",
-    "issue8_combined_clicks": 28,
-    "issue8_combined_click_reach": "6.93%",
-    "issue8_combined_ctor": "10.85%",
-    "issue8_url": "https://preview.mailerlite.io/preview/2462354/emails/195857688022747045"
+    "current_issue": 8,
+    "issue8_url": "https://preview.mailerlite.io/preview/2462354/emails/195857688022747045",
+    "combined_open_rate": "63.86%",
+    "combined_ctor": "10.85%"
   },
-  "files_in_bundle": [
-    "README-UPLOAD.md",
-    "STATIC-QA.json",
-    "about.html",
-    "advertise.html",
-    "archive.html",
-    "assets/config.js",
-    "assets/freshness.js",
-    "assets/issue8-update.css",
-    "index.html",
-    "latest/index.html",
-    "signup-success/index.html"
-  ],
-  "unexpected_stale_strings": {},
-  "image_fix": "hero image uses object-position:center top with high-specificity final override",
-  "advertiser_page_added": true
+  "checks": {
+    "config_has_411": true,
+    "config_has_issue8": true,
+    "config_has_issue8_url": true,
+    "homepage_has_411": true,
+    "latest_has_issue8": true,
+    "latest_has_issue8_url": true,
+    "advertise_has_411": true,
+    "archive_has_issue8": true,
+    "archive_preserves_issue7_url": true
+  },
+  "unexpected_stale_values": {}
 }
