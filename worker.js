@@ -70,6 +70,33 @@ CREATE TABLE IF NOT EXISTS business_submissions (
 CREATE INDEX IF NOT EXISTS idx_business_submissions_status ON business_submissions(status);
 CREATE INDEX IF NOT EXISTS idx_business_submissions_type ON business_submissions(submission_type);
 
+CREATE TABLE IF NOT EXISTS reader_submissions (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ submission_type TEXT NOT NULL,
+ subject TEXT NOT NULL,
+ message TEXT NOT NULL,
+ source_url TEXT,
+ name TEXT,
+ email TEXT,
+ status TEXT NOT NULL DEFAULT 'pending',
+ created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_reader_submissions_status ON reader_submissions(status);
+CREATE INDEX IF NOT EXISTS idx_reader_submissions_type ON reader_submissions(submission_type);
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ name TEXT NOT NULL,
+ email TEXT NOT NULL,
+ contact_type TEXT NOT NULL,
+ subject TEXT NOT NULL,
+ message TEXT NOT NULL,
+ status TEXT NOT NULL DEFAULT 'pending',
+ created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_contact_messages_status ON contact_messages(status);
+CREATE INDEX IF NOT EXISTS idx_contact_messages_type ON contact_messages(contact_type);
+
 CREATE TABLE IF NOT EXISTS subscriber_preferences (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  email TEXT NOT NULL UNIQUE,
@@ -102,24 +129,14 @@ export default {
 
       await ensureSchema(env.DB);
 
-      if (url.pathname === '/api/qr-event' && request.method === 'POST') {
-        return handleQrEvent(request, env);
-      }
-      if (url.pathname === '/api/qr-stats' && request.method === 'GET') {
-        return handleQrStats(request, env);
-      }
-      if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') {
-        return handleAdvertiserEnquiry(request, env);
-      }
-      if (url.pathname === '/api/business-submission' && request.method === 'POST') {
-        return handleBusinessSubmission(request, env);
-      }
-      if (url.pathname === '/api/submit-event' && request.method === 'POST') {
-        return handleSubmitEvent(request, env);
-      }
-      if (url.pathname === '/api/save-preferences' && request.method === 'POST') {
-        return handleSavePreferences(request, env);
-      }
+      if (url.pathname === '/api/qr-event' && request.method === 'POST') return handleQrEvent(request, env);
+      if (url.pathname === '/api/qr-stats' && request.method === 'GET') return handleQrStats(request, env);
+      if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') return handleAdvertiserEnquiry(request, env);
+      if (url.pathname === '/api/business-submission' && request.method === 'POST') return handleBusinessSubmission(request, env);
+      if (url.pathname === '/api/submit-event' && request.method === 'POST') return handleSubmitEvent(request, env);
+      if (url.pathname === '/api/reader-submission' && request.method === 'POST') return handleReaderSubmission(request, env);
+      if (url.pathname === '/api/contact-message' && request.method === 'POST') return handleContactMessage(request, env);
+      if (url.pathname === '/api/save-preferences' && request.method === 'POST') return handleSavePreferences(request, env);
 
       return json({ error: 'Not found.' }, 404);
     } catch (error) {
@@ -131,32 +148,23 @@ export default {
 
 async function ensureSchema(db) {
   if (schemaReady) return;
-
-  // The production schema is applied through the D1 console/migrations.
-  // At request time, only verify that the expected tables are present.
-  // Running the full DDL block on every new Worker isolate can fail before
-  // protected API routes (such as /api/qr-stats) reach their auth checks.
   const requiredTables = [
     'advertiser_enquiries',
     'business_submissions',
+    'contact_messages',
     'event_submissions',
     'qr_events',
+    'reader_submissions',
     'subscriber_preferences'
   ];
-
   const placeholders = requiredTables.map(() => '?').join(',');
   const result = await db
     .prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name IN (${placeholders})`)
     .bind(...requiredTables)
     .all();
-
   const found = new Set((result.results || []).map(row => row.name));
   const missing = requiredTables.filter(name => !found.has(name));
-
-  if (missing.length) {
-    throw new Error(`Missing D1 tables: ${missing.join(', ')}`);
-  }
-
+  if (missing.length) throw new Error(`Missing D1 tables: ${missing.join(', ')}`);
   schemaReady = true;
 }
 
@@ -222,6 +230,33 @@ async function handleSubmitEvent(request, env) {
   await env.DB.prepare(`INSERT INTO event_submissions (event_name,event_date,event_time,venue,area,cost,booking_url,description,contact_name,email,image_note,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,'pending',datetime('now'))`)
     .bind(c(d.event_name, 160), c(d.event_date, 20), c(d.event_time, 80), c(d.venue, 220), c(d.area, 80), c(d.cost, 100), c(d.booking_url, 500), c(d.description, 1200), c(d.contact_name, 120), c(d.email, 200), c(d.image_note, 400)).run();
   return json({ message: 'Thank you. The event is in the moderation queue for checking.' });
+}
+
+async function handleReaderSubmission(request, env) {
+  const d = await readJson(request);
+  const required = ['submission_type', 'subject', 'message', 'terms_accepted'];
+  if (required.some(key => !String(d[key] || '').trim())) return json({ error: 'Please complete all required fields.' }, 400);
+  const allowed = ['competition_answer', 'comment', 'correction', 'local_tip', 'photo_note', 'story_idea', 'other'];
+  if (!allowed.includes(String(d.submission_type))) return json({ error: 'Please choose a valid submission type.' }, 400);
+  if (d.email && !isEmail(d.email)) return json({ error: 'Please provide a valid email address or leave it blank.' }, 400);
+  if (d.source_url && !isUrl(d.source_url)) return json({ error: 'Please provide a valid link or leave it blank.' }, 400);
+  const c = (value, length = 3000) => String(value || '').trim().slice(0, length);
+  await env.DB.prepare(`INSERT INTO reader_submissions (submission_type,subject,message,source_url,name,email,status,created_at) VALUES (?,?,?,?,?,?,'pending',datetime('now'))`)
+    .bind(c(d.submission_type, 60), c(d.subject, 180), c(d.message, 3000), c(d.source_url, 500), c(d.name, 120), c(d.email, 200)).run();
+  return json({ message: 'Thank you. Your submission has been received by SK8 Scoop.' });
+}
+
+async function handleContactMessage(request, env) {
+  const d = await readJson(request);
+  const required = ['name', 'email', 'contact_type', 'subject', 'message', 'terms_accepted'];
+  if (required.some(key => !String(d[key] || '').trim())) return json({ error: 'Please complete all required fields.' }, 400);
+  if (!isEmail(d.email)) return json({ error: 'Please provide a valid email address.' }, 400);
+  const allowed = ['general', 'partnership', 'advertising', 'privacy', 'other'];
+  if (!allowed.includes(String(d.contact_type))) return json({ error: 'Please choose a valid contact type.' }, 400);
+  const c = (value, length = 3000) => String(value || '').trim().slice(0, length);
+  await env.DB.prepare(`INSERT INTO contact_messages (name,email,contact_type,subject,message,status,created_at) VALUES (?,?,?,?,?,'pending',datetime('now'))`)
+    .bind(c(d.name, 120), c(d.email, 200), c(d.contact_type, 60), c(d.subject, 180), c(d.message, 3000)).run();
+  return json({ message: 'Thank you. Your message has been saved for SK8 Scoop to reply to.' });
 }
 
 async function handleSavePreferences(request, env) {
