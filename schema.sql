@@ -69,6 +69,33 @@ CREATE TABLE IF NOT EXISTS business_submissions (
 CREATE INDEX IF NOT EXISTS idx_business_submissions_status ON business_submissions(status);
 CREATE INDEX IF NOT EXISTS idx_business_submissions_type ON business_submissions(submission_type);
 
+CREATE TABLE IF NOT EXISTS reader_submissions (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ submission_type TEXT NOT NULL,
+ subject TEXT NOT NULL,
+ message TEXT NOT NULL,
+ source_url TEXT,
+ name TEXT,
+ email TEXT,
+ status TEXT NOT NULL DEFAULT 'pending',
+ created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_reader_submissions_status ON reader_submissions(status);
+CREATE INDEX IF NOT EXISTS idx_reader_submissions_type ON reader_submissions(submission_type);
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ name TEXT NOT NULL,
+ email TEXT NOT NULL,
+ contact_type TEXT NOT NULL,
+ subject TEXT NOT NULL,
+ message TEXT NOT NULL,
+ status TEXT NOT NULL DEFAULT 'pending',
+ created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_contact_messages_status ON contact_messages(status);
+CREATE INDEX IF NOT EXISTS idx_contact_messages_type ON contact_messages(contact_type);
+
 CREATE TABLE IF NOT EXISTS subscriber_preferences (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  email TEXT NOT NULL UNIQUE,
