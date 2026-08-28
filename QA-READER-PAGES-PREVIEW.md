@@ -38,8 +38,7 @@ Checked:
 - existing API routes still depend only on the established D1 tables;
 - the two new handlers check their own new tables, so a missed migration cannot take down existing forms;
 - no API key, password or email-service secret is committed;
-- Cloudflare Email Service is optional in code until the account/domain binding is deliberately configured;
-- the inactive What's On route is not promoted in the new primary navigation.
+- Cloudflare Email Service is optional in code until the account/domain binding is deliberately configured.
 
 ## Visual implementation pass - 28 August 2026
 
@@ -68,15 +67,11 @@ Criticism:
 - mobile density could become excessive once six Explore tiles and three guides were added.
 
 Fixes made:
-- retained the verified Issue 10 story copy already used in the preview instead of the mock-up's invented examples;
-- used only imagery already present in the current repository for this preview pass, introducing no new external image dependency;
+- retained the Issue 10 story copy already approved for this preview instead of restoring the mock-up's older/example editorial content;
 - made all six not-yet-live Explore destinations non-clickable and visibly labelled `Coming later`;
-- kept the real repository SK8 Scoop logo and existing Summer Guide artwork;
-- retained white button text on teal and used orange only as selective emphasis;
+- kept the real repository SK8 Scoop logo;
+- retained white button text and used teal/orange in the approved hierarchy;
 - added responsive breakpoints for the image hero, story cards, six Explore tiles, guide shelf, action strip and multi-column footer.
-
-Caveat:
-- the existing repository images used on the story cards are temporary visual stand-ins for layout review, not evidence that they depict those specific Issue 10 stories. Before production approval, story-specific imagery must either have an appropriate rights/accuracy basis or be replaced by neutral labelled illustration.
 
 ### Visual Cycle 3 - final risk and polish
 
@@ -90,15 +85,54 @@ Result/fixes:
 - unfinished Explore sections are present as visual roadmap tiles, not active links;
 - newsletter signup still uses the existing MailerLite integration;
 - no D1 migration, email binding, merge to `main`, traffic promotion or production deployment was authorised;
-- the branch remains the sole location for the visual experiment pending actual desktop/mobile preview review.
+- the branch remains the sole location for the visual experiment pending desktop/mobile preview approval.
+
+## Mock-up fidelity pass 2 - 28 August 2026
+
+### Cycle 1 - structure and value
+
+Criticism:
+- the rendered preview still differed visibly from the approved mock-up in hero crop, card imagery, guide imagery, vertical rhythm and footer treatment;
+- the missing `What's On` label made the header silhouette materially different from the approved reference.
+
+Fixes made:
+- extracted the exact visual crops from the approved mock-up for the hero, three weekly cards and three guide cards and added them as preview-only SVG assets;
+- tightened header, hero, card, Explore, shelf and action-strip dimensions to follow the mock-up more closely;
+- added a non-clickable `What's On` navigation label so the header matches the visual reference without falsely activating the unfinished route.
+
+### Cycle 2 - accuracy and experience
+
+Criticism:
+- matching the mock-up imagery exactly creates a risk that generated/reference artwork could be mistaken for real photographs of the Issue 10 stories;
+- the previous cream footer inherited white link text from the older dark-footer CSS and had poor legibility;
+- the mock-up's older editorial examples must not overwrite current Issue 10 copy merely for visual fidelity.
+
+Fixes made:
+- retained current Issue 10 headlines, dates, locations and descriptions while changing only the visual artwork;
+- added a screen-reader preview note and descriptive `Preview illustration` alt text to the guide artwork;
+- recorded the hero/story mock-up crops as preview/generated artwork rather than verified documentary photographs;
+- explicitly overrode footer text and links to dark readable colours on the cream background;
+- changed the hero and footer signup buttons to orange to match the approved mock-up while keeping the four action-strip buttons teal.
+
+### Cycle 3 - final risk and polish
+
+Criticism:
+- exact mock-up crops improve design review but are not automatically suitable for production use under SK8 image-rights and accuracy rules;
+- the design must still collapse cleanly on mobile and remain reversible.
+
+Result/fixes:
+- a dedicated `assets/mockup-fidelity.css` override isolates this alignment pass and can be removed cleanly;
+- desktop spacing is closer to the reference and mobile overrides remain in place;
+- mock-up-derived hero/story/guide assets are explicitly preview-only until replaced with rights-cleared real local images or deliberately approved/labelled illustration;
+- no merge to `main` or production traffic change has been made.
 
 ## Safe preview rebuild - 28 August 2026
 
 Cloudflare build settings were manually confirmed with production branch `main`, non-production branch builds enabled, deploy command `npx wrangler deploy`, and version command corrected to `npx wrangler versions upload`. Preview-branch commits therefore trigger version uploads rather than production promotion.
 
 Open blockers before production approval:
-1. Review the newly rebuilt branch preview against the approved mock-up on desktop and mobile.
-2. Replace or explicitly approve the temporary story-card imagery with story-appropriate rights-cleared imagery/neutral illustration.
+1. Review the latest branch preview against the approved mock-up on desktop and mobile.
+2. Replace or explicitly approve the mock-up-derived hero/story/guide artwork with story-appropriate rights-cleared imagery or clearly labelled illustration.
 3. Apply the two new D1 tables through the controlled migration process.
 4. Onboard/verify Cloudflare Email Service for the intended sender and destination, then add the `CONTACT_EMAIL` binding.
 5. Run live preview submissions for both new forms and confirm D1 + inbox delivery.
