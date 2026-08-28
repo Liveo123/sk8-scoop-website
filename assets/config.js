@@ -32,7 +32,8 @@
         ['start','/start/','Where to start'],
         ['join','/join/','Join'],
         ['submit','/submit/','Submit'],
-        ['contact','/contact/','Contact']
+        ['contact','/contact/','Contact'],
+        ['advertise','/advertise.html','Advertise']
       ];
       nav.innerHTML = links.map(([key,href,label]) => `<a${active===key?' class="active" aria-current="page"':''} href="${href}">${label}</a>`).join('') + `<a class="button nav-join reader-nav-join${active==='join'?' active':''}" href="/join/">Join free</a>`;
     }
