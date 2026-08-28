@@ -174,6 +174,43 @@ Result/fixes:
 - the Issue 8/Issue 10 configuration mismatch, dated public statistics and advertiser-pricing freshness remain explicit blockers rather than being hidden by design polish;
 - production remains untouched.
 
+## Guide image + £20 advertiser refinement - 28 August 2026
+
+### Cycle 1 - structure and value
+
+Criticism:
+- the 50 Secrets card showed an empty image area in the rendered preview;
+- the first-advert summary looked like a small dashboard dropped into an otherwise editorial page;
+- its small type weakened the £20 test rather than making the offer easier to understand.
+
+Fixes made:
+- changed the 50 Secrets artwork from a CSS background into a real `<img>` element with descriptive alt text and a dark fallback background;
+- kept the artwork cropped by the card itself so it fills the available landscape area cleanly;
+- replaced the compact advertiser metric panel with a calmer offer card integrated into the hero;
+- reduced hero headline wrapping and increased the size of the price, feature headings and supporting copy.
+
+### Cycle 2 - accuracy and experience
+
+Criticism:
+- the £20 test must reflect the current user-approved pilot rather than the older £35/£79/£129 package structure;
+- performance reporting must demonstrate value without manufacturing campaign data;
+- paid visibility must remain clearly separate from editorial judgement.
+
+Fixes made:
+- retained the user-approved current £20 first-advert test as the only upfront pilot offer on this preview;
+- kept one labelled advert, one main reader action, tracked response where practical and a post-campaign report;
+- rebuilt the partial report example with bracketed placeholders clearly labelled as format only;
+- retained explicit wording that advertising does not buy favourable editorial coverage or guarantee sales.
+
+### Cycle 3 - final risk and polish
+
+Checked/fixed:
+- main navigation includes Advertise alongside the requested reader pages;
+- the advertiser hero and report example have desktop and mobile-specific layout rules;
+- the Secrets image container has a visible fallback instead of failing to a blank white panel;
+- the sharper family image remains on the Cheap & Free card;
+- `main` remains untouched and the work stays on the preview branch.
+
 ## Safe preview rebuild - 28 August 2026
 
 Cloudflare build settings were manually confirmed with production branch `main`, non-production branch builds enabled, deploy command `npx wrangler deploy`, and version command corrected to `npx wrangler versions upload`. Preview-branch commits therefore trigger version uploads rather than production promotion.
@@ -183,10 +220,9 @@ Open blockers before production approval:
 2. Replace or explicitly approve the mock-up-derived hero/story/guide artwork with story-appropriate rights-cleared imagery or clearly labelled illustration.
 3. Resolve the website freshness mismatch: the homepage preview uses Issue 10 while `assets/config.js` and `/latest` still contain Issue 8 website data until a verified Issue 10 public destination is available.
 4. Re-verify public subscriber/performance statistics before publication.
-5. Re-verify advertiser pricing against the current approved Advertising & Meta pricing record before publishing the refreshed Advertise page.
-6. Apply the two new D1 tables through the controlled migration process.
-7. Onboard/verify Cloudflare Email Service for the intended sender and destination, then add the `CONTACT_EMAIL` binding.
-8. Run live preview submissions for both new forms and confirm D1 + inbox delivery.
-9. Replace the preview-time dynamic stylesheet/navigation loader with static page references if the design is approved for production, to avoid a flash of the older styling on slower connections.
+5. Apply the two new D1 tables through the controlled migration process.
+6. Onboard/verify Cloudflare Email Service for the intended sender and destination, then add the `CONTACT_EMAIL` binding.
+7. Run live preview submissions for both new forms and confirm D1 + inbox delivery.
+8. Replace the preview-time dynamic stylesheet/navigation loader with static page references if the design is approved for production, to avoid a flash of the older styling on slower connections.
 
 No production merge or deployment is authorised by this QA record.
