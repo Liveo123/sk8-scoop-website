@@ -51,6 +51,31 @@ body.v7:not(.reader-home) .button.secondary{background:var(--sk8-teal);color:#ff
 /* Improve form sidebars and utility notices. */
 .submission-sidebar .policy-panel,.policy-panel{border-radius:14px}
 .notice{border-radius:10px}
+/* Guides: use a real img element for generated preview art and keep a visible fallback. */
+body[data-page="guides"] .reader-story-image-file{position:relative;padding:0;overflow:hidden;background:linear-gradient(135deg,#0f6470,#102f34)}
+body[data-page="guides"] .reader-story-image-file img{display:block;width:100%;height:100%;min-height:180px;object-fit:cover;object-position:center}
+body[data-page="guides"] .reader-story-image-file>span{position:absolute;left:14px;top:14px;z-index:2}
+/* Advertise: make the pilot feel integrated, legible and editorial rather than like a tiny dashboard. */
+body[data-page="advertise"] .ad-v7-hero{padding:46px 0 40px}
+body[data-page="advertise"] .ad-hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);gap:38px;align-items:center;padding:38px 40px;background:rgba(255,253,248,.96)}
+body[data-page="advertise"] .ad-hero-copy h1{font-family:Arial,sans-serif;font-size:clamp(3.2rem,5.1vw,5.15rem);line-height:.96;max-width:650px;margin:14px 0 20px}
+body[data-page="advertise"] .ad-hero-copy .hero-lead{font-size:1.15rem;line-height:1.55;max-width:650px}
+body[data-page="advertise"] .ad-offer-card{background:#edf6f4;border:1px solid #c8dfdb;border-radius:18px;padding:32px 34px;box-shadow:none;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+body[data-page="advertise"] .ad-offer-card .eyebrow{font-size:.76rem;margin-bottom:8px}
+body[data-page="advertise"] .ad-offer-price{display:flex;align-items:baseline;gap:14px;padding:4px 0 22px;border-bottom:1px solid #c8dfdb}
+body[data-page="advertise"] .ad-offer-price strong{font-family:Georgia,serif;font-size:5rem;line-height:.95;color:#14383e}
+body[data-page="advertise"] .ad-offer-price span{font-size:1.2rem;font-weight:850;color:#14383e}
+body[data-page="advertise"] .ad-offer-points{list-style:none;padding:22px 0 10px;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:20px 24px}
+body[data-page="advertise"] .ad-offer-points li{min-width:0}
+body[data-page="advertise"] .ad-offer-points b{display:block;font-family:Georgia,serif;font-size:1.2rem;line-height:1.15;color:#14383e;margin-bottom:5px}
+body[data-page="advertise"] .ad-offer-points span{display:block;font-size:.93rem;line-height:1.42;color:#496064}
+body[data-page="advertise"] .ad-offer-note{font-size:1rem;line-height:1.55;color:#334d52;margin:12px 0 0}
+body[data-page="advertise"] #reporting .report-grid{grid-template-columns:.92fr 1.08fr;align-items:start}
+body[data-page="advertise"] .advert-report-example{background:#fff;border:1px solid #cfd9d6;border-top:5px solid var(--sk8-teal);border-radius:16px;padding:26px;box-shadow:0 12px 28px rgba(19,45,49,.06)}
+body[data-page="advertise"] .advert-report-example h3{font-family:Arial,sans-serif;font-size:1.65rem;margin:8px 0 18px;color:#14383e}
+body[data-page="advertise"] .advert-report-row{display:grid;grid-template-columns:145px 1fr;gap:18px;padding:13px 0;border-top:1px solid #e3e8e5}
+body[data-page="advertise"] .advert-report-row b{font-size:.95rem;color:#14383e}
+body[data-page="advertise"] .advert-report-row span{font-size:.95rem;color:#536568}
 /* Mobile */
-@media(max-width:900px){body[data-page="latest-issue"] .latest-hero-grid{grid-template-columns:1fr}body[data-page="latest-issue"] .latest-visual-stack>img{aspect-ratio:16/10}body[data-page="latest-issue"] .latest-join-card{margin:-36px 14px 0}body[data-page="preferences"] .two-col{grid-template-columns:1fr}}
-@media(max-width:680px){.policy-sections{padding:22px!important}.sitemap-group{padding:20px!important}body[data-page="latest-issue"] .latest-join-card{margin:12px 0 0}body[data-page="latest-issue"] .issue-facts{border-left:0;border-top:1px solid var(--sk8-line);padding:20px 0 0;margin-top:20px}}
+@media(max-width:900px){body[data-page="latest-issue"] .latest-hero-grid{grid-template-columns:1fr}body[data-page="latest-issue"] .latest-visual-stack>img{aspect-ratio:16/10}body[data-page="latest-issue"] .latest-join-card{margin:-36px 14px 0}body[data-page="preferences"] .two-col{grid-template-columns:1fr}body[data-page="advertise"] .ad-hero-grid{grid-template-columns:1fr;padding:28px}body[data-page="advertise"] .ad-offer-card{min-height:0}body[data-page="advertise"] #reporting .report-grid{grid-template-columns:1fr}}
+@media(max-width:680px){.policy-sections{padding:22px!important}.sitemap-group{padding:20px!important}body[data-page="latest-issue"] .latest-join-card{margin:12px 0 0}body[data-page="latest-issue"] .issue-facts{border-left:0;border-top:1px solid var(--sk8-line);padding:20px 0 0;margin-top:20px}body[data-page="advertise"] .ad-hero-grid{padding:20px}body[data-page="advertise"] .ad-hero-copy h1{font-size:clamp(2.8rem,13vw,4.2rem)}body[data-page="advertise"] .ad-offer-card{padding:24px}body[data-page="advertise"] .ad-offer-price strong{font-size:4rem}body[data-page="advertise"] .ad-offer-points{grid-template-columns:1fr;gap:14px}body[data-page="advertise"] .advert-report-row{grid-template-columns:1fr;gap:4px}}
