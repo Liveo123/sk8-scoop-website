@@ -1,0 +1,86 @@
+/* Secondary public-page refresh, preview branch only. Extends the approved homepage visual system. */
+:root{--sk8-cream:#fff9ed;--sk8-paper:#fff;--sk8-ink:#132d31;--sk8-teal:#0f6470;--sk8-teal-dark:#0b525b;--sk8-orange:#f8791b;--sk8-line:#d9dfda;--sk8-soft:#f5f4ef;--sk8-mist:#eaf4f2;--sk8-muted:#56676a}
+body.reader-page,body.v7:not(.reader-home){background:#fff;color:var(--sk8-ink)}
+body.reader-page .site-header,body.v7:not(.reader-home) .site-header{background:rgba(255,255,255,.97);border-bottom:1px solid #e5e8e4;backdrop-filter:blur(12px)}
+body.reader-page .header-row,body.v7:not(.reader-home) .header-row{min-height:86px}
+body.reader-page .brand img,body.v7:not(.reader-home) .brand img{max-width:245px}
+body.reader-page .nav,body.v7:not(.reader-home) .nav{gap:20px;font-size:.92rem}
+body.reader-page .nav a,body.v7:not(.reader-home) .nav a{position:relative}
+body.reader-page .nav a.active:not(.button):after,body.v7:not(.reader-home) .nav a.active:not(.button):after{content:"";position:absolute;left:10px;right:10px;bottom:3px;height:2px;background:var(--sk8-teal);border-radius:999px}
+body.reader-page .nav .button,body.v7:not(.reader-home) .nav .button{background:var(--sk8-orange);color:#fff;box-shadow:0 8px 20px rgba(248,121,27,.18);border-radius:7px}
+body.reader-page .page-hero,body.v7:not(.reader-home) .page-hero{padding:62px 0 44px;background:linear-gradient(135deg,#fffaf0 0%,#fff 62%,rgba(15,100,112,.055) 100%);border-bottom:1px solid #eceeea}
+body.reader-page .page-hero h1,body.v7:not(.reader-home) .page-hero h1{font-family:Arial,sans-serif;font-weight:800;letter-spacing:-.045em;line-height:.96;color:#073f48;max-width:900px}
+body.reader-page .hero-lead,body.v7:not(.reader-home) .hero-lead{max-width:760px;color:#31464a;line-height:1.55}
+body.reader-page .eyebrow,body.v7:not(.reader-home) .eyebrow{letter-spacing:.11em;font-size:.72rem}
+body.reader-page .reader-content{padding:44px 0 72px}
+body.reader-page .reader-panel,body.reader-page .reader-form,body.reader-page .reader-route,body.v7:not(.reader-home) .card,body.v7:not(.reader-home) .archive-card,body.v7:not(.reader-home) .form-card,body.v7:not(.reader-home) .package-card{border:1px solid var(--sk8-line);border-radius:14px;box-shadow:0 10px 26px rgba(19,45,49,.055);background:#fff}
+body.reader-page .reader-panel{padding:28px}
+body.reader-page .reader-panel h2,body.reader-page .reader-route h2,body.reader-page .reader-aside h2{font-family:Arial,sans-serif!important;font-weight:800;letter-spacing:-.025em;color:#102f34}
+body.reader-page .reader-route{position:relative;min-height:215px;padding:28px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+body.reader-page .reader-route:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(19,45,49,.09);border-color:#a9c8c4}
+body.reader-page .reader-route .eyebrow{margin-bottom:24px}
+body.reader-page .reader-route p{max-width:490px;line-height:1.5}
+body.reader-page .reader-form{padding:30px}
+body.reader-page .reader-form label{color:#18383d}
+body.reader-page .reader-form input,body.reader-page .reader-form select,body.reader-page .reader-form textarea{border:1px solid #c9d1ce;border-radius:7px;padding:14px;background:#fff;transition:border .15s ease,box-shadow .15s ease}
+body.reader-page .reader-form input:focus,body.reader-page .reader-form select:focus,body.reader-page .reader-form textarea:focus{outline:0;border-color:var(--sk8-teal);box-shadow:0 0 0 3px rgba(15,100,112,.11)}
+body.reader-page .reader-aside{background:linear-gradient(180deg,#eef7f5,#e8f2ef);border:1px solid #cde0dc;border-radius:14px;padding:28px}
+body.reader-page .reader-aside h2+ p{margin-top:0}
+body.reader-page .join-benefits{gap:14px}
+body.reader-page .join-benefits div{min-height:150px;border-radius:12px;box-shadow:0 8px 20px rgba(19,45,49,.045)}
+body.reader-page .join-benefits strong{display:block;color:var(--sk8-teal);font-size:1.03rem;margin-bottom:7px}
+body.reader-page .button{min-height:46px;border-radius:7px}
+body.reader-page .reader-signup{max-width:700px}
+/* About: editorial storytelling, influenced by restrained editorial/property sites. */
+body[data-page="about"] .about-hero-grid{grid-template-columns:1.12fr .88fr;gap:46px;align-items:center}
+body[data-page="about"] .about-map-card{border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--sk8-line);box-shadow:0 18px 42px rgba(19,45,49,.1)}
+body[data-page="about"] .about-map-card img{aspect-ratio:4/3;object-fit:cover;display:block}
+body[data-page="about"] .about-map-card figcaption{padding:14px 16px;color:#4f6164;font-size:.84rem}
+body[data-page="about"] .story-grid{gap:42px;align-items:start}
+body[data-page="about"] .mission-card{border-radius:16px;background:#0f6470;color:#fff;padding:30px;box-shadow:0 18px 40px rgba(15,100,112,.16)}
+body[data-page="about"] .mission-card blockquote{font-family:Georgia,serif;font-size:1.75rem;line-height:1.16;margin:16px 0 18px}
+body[data-page="about"] .current-facts{border-top:1px solid var(--sk8-line);padding-top:18px}
+body[data-page="about"] .fact-row>div{border-right:1px solid var(--sk8-line)}
+body[data-page="about"] .fact-row>div:last-child{border-right:0}
+/* Archive: stronger issue hierarchy, like a publication archive rather than a file list. */
+body[data-page="archive"] .archive-hero-grid{grid-template-columns:1.12fr .88fr;gap:44px;align-items:center}
+body[data-page="archive"] .archive-hero-art{background:#f0f6f4;border-radius:18px;padding:18px;border:1px solid var(--sk8-line)}
+body[data-page="archive"] .archive-hero-art img{aspect-ratio:16/10;object-fit:cover;border-radius:12px;width:100%}
+body[data-page="archive"] .v7-archive{grid-template-columns:repeat(3,1fr);gap:16px}
+body[data-page="archive"] .archive-card{min-height:235px;padding:22px;display:flex;flex-direction:column}
+body[data-page="archive"] .archive-card.featured-issue{grid-column:span 2;background:linear-gradient(135deg,#fff,#f1f7f5);border-color:#b7d0cb}
+body[data-page="archive"] .archive-card h2{font-family:Arial,sans-serif;font-weight:800;font-size:1.35rem;line-height:1.17;letter-spacing:-.025em}
+body[data-page="archive"] .archive-card .button,body[data-page="archive"] .archive-card .text-link{margin-top:auto;align-self:flex-start}
+/* Summer guide: let the seasonal sub-brand be brighter while keeping SK8 structure. */
+body[data-page="summer-guide"] .summer-v7-hero{background:linear-gradient(135deg,#fff9ed 0%,#fff 55%,#eaf6f3 100%)}
+body[data-page="summer-guide"] .summer-hero-grid{grid-template-columns:.82fr 1.18fr;gap:54px;align-items:center}
+body[data-page="summer-guide"] .summer-cover-wrap{background:#fff;border:1px solid var(--sk8-line);border-radius:20px;padding:20px;box-shadow:0 22px 50px rgba(19,45,49,.12);transform:rotate(-1deg)}
+body[data-page="summer-guide"] .summer-cover-wrap img{display:block;width:100%;max-height:480px;object-fit:contain}
+body[data-page="summer-guide"] .utility-card-grid{gap:14px}
+body[data-page="summer-guide"] .utility-card{border-radius:14px;border:1px solid rgba(19,45,49,.08);box-shadow:0 9px 22px rgba(19,45,49,.055);min-height:210px}
+body[data-page="summer-guide"] .summer-band{background:#eef7f5}
+body[data-page="summer-guide"] .summer-inline-visual{border-radius:16px;box-shadow:0 14px 30px rgba(19,45,49,.1)}
+/* Advertising: make it credible, calm and outcome-led rather than brochure-like. */
+body[data-page="advertise"] .ad-v7-hero{background:linear-gradient(135deg,#fffaf0 0%,#fff 57%,#eef7f5 100%)}
+body[data-page="advertise"] .ad-hero-grid{grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+body[data-page="advertise"] .ad-campaign-visual{border-radius:18px;box-shadow:0 20px 45px rgba(19,45,49,.12)}
+body[data-page="advertise"] .ad-proof-panel{border-radius:14px;box-shadow:0 16px 38px rgba(19,45,49,.12)}
+body[data-page="advertise"] .proof-bar{border-top:1px solid var(--sk8-line);border-bottom:1px solid var(--sk8-line)}
+body[data-page="advertise"] .package-grid{gap:16px}
+body[data-page="advertise"] .package-card{padding:26px;box-shadow:0 10px 28px rgba(19,45,49,.06)}
+body[data-page="advertise"] .package-card.featured{transform:translateY(-7px);border:2px solid var(--sk8-orange);box-shadow:0 18px 36px rgba(248,121,27,.12)}
+body[data-page="advertise"] .premium-form{border-top:5px solid var(--sk8-teal)}
+/* Legal, trust and utility pages: calm readable editorial documents. */
+body[data-page="privacy"] .content-narrow,body[data-page="terms"] .content-narrow,body[data-page="editorial-policy"] .content-narrow{max-width:840px;background:#fff;border:1px solid var(--sk8-line);border-radius:14px;padding:32px;box-shadow:0 10px 26px rgba(19,45,49,.045)}
+body[data-page="privacy"] .content-narrow h2,body[data-page="terms"] .content-narrow h2,body[data-page="editorial-policy"] .content-narrow h2{font-family:Arial,sans-serif;font-size:1.45rem;letter-spacing:-.02em;margin-top:34px}
+/* Common footer aligned to homepage feel. */
+body.reader-page .site-footer,body.v7:not(.reader-home) .site-footer{background:#f5f4ef;color:#233c40;border-top:1px solid var(--sk8-line);padding:36px 0}
+body.reader-page .site-footer a,body.v7:not(.reader-home) .site-footer a{color:#29494e}
+body.reader-page .footer-logo,body.v7:not(.reader-home) .footer-logo{background:#fff;padding:8px;border-radius:7px;max-width:190px}
+body.reader-page .footer-links strong,body.v7:not(.reader-home) .footer-links strong{color:#102f34}
+body.reader-page .footer-small,body.v7:not(.reader-home) .footer-small{color:#607174}
+body.reader-page .final-cta,body.v7:not(.reader-home) .final-cta{background:#0f6470;color:#fff}
+body.reader-page .final-cta .button,body.v7:not(.reader-home) .final-cta .button{background:var(--sk8-orange);color:#fff}
+@media(max-width:980px){body[data-page="archive"] .v7-archive{grid-template-columns:repeat(2,1fr)}body[data-page="archive"] .archive-card.featured-issue{grid-column:span 2}body[data-page="about"] .about-hero-grid,body[data-page="archive"] .archive-hero-grid,body[data-page="summer-guide"] .summer-hero-grid,body[data-page="advertise"] .ad-hero-grid{grid-template-columns:1fr}}
+@media(max-width:820px){body.reader-page .site-header .brand img,body.v7:not(.reader-home) .site-header .brand img{max-width:210px}body.reader-page .page-hero,body.v7:not(.reader-home) .page-hero{padding:42px 0 32px}body.reader-page .page-hero h1,body.v7:not(.reader-home) .page-hero h1{font-size:clamp(2.7rem,12vw,4.3rem)}body[data-page="archive"] .v7-archive{grid-template-columns:1fr}body[data-page="archive"] .archive-card.featured-issue{grid-column:auto}body[data-page="summer-guide"] .summer-cover-wrap{max-width:380px;margin:auto}body[data-page="advertise"] .package-card.featured{transform:none}}
+@media(max-width:560px){body.reader-page .reader-content{padding-top:30px}body.reader-page .reader-panel,body.reader-page .reader-form,body.reader-page .reader-route{padding:22px}body.reader-page .reader-route{min-height:0}body[data-page="privacy"] .content-narrow,body[data-page="terms"] .content-narrow,body[data-page="editorial-policy"] .content-narrow{padding:22px}}
