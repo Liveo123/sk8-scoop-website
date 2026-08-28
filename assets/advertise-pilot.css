@@ -1,0 +1,19 @@
+/* Preview-only final alignment for the £20 advertiser pilot. */
+body.advertiser-page .ad-v7-hero{padding:34px 0 28px!important}
+body.advertiser-page .ad-v7-hero .ad-hero-grid{display:grid!important;grid-template-columns:1fr!important;gap:24px!important;align-items:start!important;padding:34px 38px!important;background:rgba(255,253,248,.97)!important;border:2px solid rgba(15,100,112,.13)!important;border-radius:24px!important;box-shadow:0 16px 28px rgba(23,52,58,.08)!important}
+body.advertiser-page .ad-hero-copy{max-width:900px!important}
+body.advertiser-page .ad-hero-copy h1{max-width:820px!important;font-size:clamp(3.35rem,5.4vw,5.4rem)!important;line-height:.94!important;margin:14px 0 20px!important}
+body.advertiser-page .ad-hero-copy .hero-lead{max-width:760px!important;font-size:1.14rem!important;line-height:1.55!important}
+body.advertiser-page .ad-offer-card{display:grid!important;grid-template-columns:190px minmax(0,1fr)!important;gap:18px 28px!important;align-items:center!important;min-height:0!important;padding:26px 30px!important;background:#edf6f4!important;border:1px solid #c8dfdb!important;border-radius:18px!important;box-shadow:none!important;color:#14383e!important}
+body.advertiser-page .ad-offer-card>.eyebrow{grid-column:1/-1!important;margin:0!important;font-size:.78rem!important;color:#0f6470!important}
+body.advertiser-page .ad-offer-price{grid-column:1!important;display:block!important;padding:0 24px 0 0!important;border:0!important;border-right:1px solid #c8dfdb!important}
+body.advertiser-page .ad-offer-price strong{display:block!important;font-size:4.35rem!important;line-height:.9!important;color:#14383e!important}
+body.advertiser-page .ad-offer-price span{display:block!important;margin-top:8px!important;font-size:1.05rem!important;line-height:1.25!important;color:#14383e!important}
+body.advertiser-page .ad-offer-points{grid-column:2!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin:0!important;padding:0!important}
+body.advertiser-page .ad-offer-points li{padding:0 12px 0 0!important;border-right:1px solid #c8dfdb!important}
+body.advertiser-page .ad-offer-points li:last-child{border-right:0!important;padding-right:0!important}
+body.advertiser-page .ad-offer-points b{display:block!important;font-family:Arial,sans-serif!important;font-size:1rem!important;line-height:1.2!important;margin-bottom:6px!important;color:#14383e!important}
+body.advertiser-page .ad-offer-points span{display:block!important;font-size:.9rem!important;line-height:1.4!important;color:#496064!important}
+body.advertiser-page .ad-offer-note{grid-column:1/-1!important;margin:0!important;padding-top:16px!important;border-top:1px solid #c8dfdb!important;font-size:1rem!important;line-height:1.5!important;color:#334d52!important}
+@media(max-width:900px){body.advertiser-page .ad-v7-hero .ad-hero-grid{padding:28px!important}body.advertiser-page .ad-offer-card{grid-template-columns:1fr!important}body.advertiser-page .ad-offer-card>.eyebrow,body.advertiser-page .ad-offer-price,body.advertiser-page .ad-offer-points,body.advertiser-page .ad-offer-note{grid-column:1!important}body.advertiser-page .ad-offer-price{border-right:0!important;border-bottom:1px solid #c8dfdb!important;padding:0 0 18px!important}body.advertiser-page .ad-offer-points{grid-template-columns:1fr 1fr!important}}
+@media(max-width:560px){body.advertiser-page .ad-v7-hero .ad-hero-grid{padding:20px!important;border-radius:18px!important}body.advertiser-page .ad-hero-copy h1{font-size:clamp(2.75rem,13vw,4rem)!important}body.advertiser-page .ad-offer-card{padding:22px!important}body.advertiser-page .ad-offer-points{grid-template-columns:1fr!important}body.advertiser-page .ad-offer-points li{border-right:0!important;border-bottom:1px solid #c8dfdb!important;padding:0 0 12px!important}body.advertiser-page .ad-offer-points li:last-child{border-bottom:0!important;padding-bottom:0!important}}
