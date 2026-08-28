@@ -43,52 +43,66 @@ Checked:
 
 ## Visual implementation pass - 28 August 2026
 
-The approved visual mock-up was translated into the preview branch without copying its invented photography or placeholder content.
+The approved visual mock-up was translated into the preview branch without copying its invented event content.
 
 ### Visual Cycle 1 - structure and value
 
-Checked the current improved homepage against the agreed low-maintenance model.
+Criticism:
+- the first coded preview was too stripped back compared with the approved mock-up;
+- the hero lacked the image-led impact of the mock-up;
+- Explore, Latest Scoop, guide cards, action strip and footer were materially simpler than the agreed design.
 
 Fixes made:
-- kept the three weekly story cards as the only significant weekly homepage editorial area;
-- kept Explore limited to routes that already exist: Latest Scoop, Guides, Archive and Where to Start;
-- kept Join, Submit and Contact prominent without turning the homepage into a directory;
-- added one clear Join free action in the primary navigation rather than multiple competing header CTAs.
+- changed the hero to an image-led composition with overlaid headline, signup and three proof points;
+- rebuilt the weekly highlights as three equal visual cards;
+- expanded Explore to six mock-up-style tiles while marking unfinished sections `Coming later` rather than presenting them as live;
+- rebuilt the middle shelf as Latest Scoop plus three guide cards;
+- changed the four reader actions into a single horizontal action strip;
+- expanded the footer into the fuller multi-column layout shown in the approved direction.
 
 ### Visual Cycle 2 - accuracy and experience
 
-Checked current content, accessibility and mobile behaviour.
+Criticism:
+- the mock-up used illustrative/generated imagery and example content that must not silently become factual production material;
+- inactive routes could mislead readers if presented as working destinations;
+- mobile density could become excessive once six Explore tiles and three guides were added.
 
 Fixes made:
-- used the real repository SK8 Scoop logo rather than recreating the masthead;
-- retained Issue 10 story copy from the approved Issue 10 production package rather than using the mock-up's invented example events;
-- did not use the generated mock-up's fake local photography as production imagery;
-- used the existing SK8 Summer Guide asset for the guide panel;
-- kept button text white on teal;
-- added responsive breakpoints so the hero, story cards, explore cards, guide panel and action cards collapse cleanly on narrower screens;
-- aligned navigation across Home, Join, Where to Start, Submit and Contact.
+- retained the verified Issue 10 story copy already used in the preview instead of the mock-up's invented examples;
+- used only imagery already present in the current repository for this preview pass, introducing no new external image dependency;
+- made all six not-yet-live Explore destinations non-clickable and visibly labelled `Coming later`;
+- kept the real repository SK8 Scoop logo and existing Summer Guide artwork;
+- retained white button text on teal and used orange only as selective emphasis;
+- added responsive breakpoints for the image hero, story cards, six Explore tiles, guide shelf, action strip and multi-column footer.
+
+Caveat:
+- the existing repository images used on the story cards are temporary visual stand-ins for layout review, not evidence that they depict those specific Issue 10 stories. Before production approval, story-specific imagery must either have an appropriate rights/accuracy basis or be replaced by neutral labelled illustration.
 
 ### Visual Cycle 3 - final risk and polish
 
-Checked the near-final preview as a sceptical launch review.
+Criticism:
+- the visual match needed to be materially closer without creating new maintenance burden or bypassing the production approval gate;
+- adding six Explore categories risked making the site look more complete than it is;
+- the redesign must remain reversible and isolated from live production.
 
-Result:
-- no production branch or deployment was changed;
-- no new external image dependency was introduced;
-- no inactive What's On section was promoted;
-- the homepage remains useful even without editorial photography, while leaving room to add properly rights-cleared local images later;
-- older permanent pages still use the previous navigation, so navigation consistency remains a launch decision rather than being silently changed across the whole site.
+Result/fixes:
+- only the three weekly highlight cards remain the significant recurring homepage editorial maintenance area;
+- unfinished Explore sections are present as visual roadmap tiles, not active links;
+- newsletter signup still uses the existing MailerLite integration;
+- no D1 migration, email binding, merge to `main`, traffic promotion or production deployment was authorised;
+- the branch remains the sole location for the visual experiment pending actual desktop/mobile preview review.
 
 ## Safe preview rebuild - 28 August 2026
 
-Cloudflare build settings were manually confirmed with production branch `main`, non-production branch builds enabled, deploy command `npx wrangler deploy`, and version command corrected to `npx wrangler versions upload`. This documentation-only commit exists solely to trigger a fresh non-production branch build using the corrected preview-safe version command. It does not change production code or authorise a production deployment.
+Cloudflare build settings were manually confirmed with production branch `main`, non-production branch builds enabled, deploy command `npx wrangler deploy`, and version command corrected to `npx wrangler versions upload`. Preview-branch commits therefore trigger version uploads rather than production promotion.
 
 Open blockers before production approval:
-1. Apply the two new D1 tables through the controlled migration process.
-2. Onboard/verify Cloudflare Email Service for the intended sender and destination, then add the `CONTACT_EMAIL` binding.
-3. Run live preview submissions for both new forms and confirm D1 + inbox delivery.
-4. Verify the Issue 10 `/latest` website content and homepage story details are still current immediately before publishing.
-5. Check the actual branch preview visually on desktop and mobile.
-6. Decide whether to roll the new navigation across the older permanent pages in the same release or a separate follow-up, to avoid mixed navigation after launch.
+1. Review the newly rebuilt branch preview against the approved mock-up on desktop and mobile.
+2. Replace or explicitly approve the temporary story-card imagery with story-appropriate rights-cleared imagery/neutral illustration.
+3. Apply the two new D1 tables through the controlled migration process.
+4. Onboard/verify Cloudflare Email Service for the intended sender and destination, then add the `CONTACT_EMAIL` binding.
+5. Run live preview submissions for both new forms and confirm D1 + inbox delivery.
+6. Verify the Issue 10 `/latest` website content and homepage story details are still current immediately before publishing.
+7. Decide whether to roll the new navigation across the older permanent pages in the same release or a separate follow-up, to avoid mixed navigation after launch.
 
 No production merge or deployment is authorised by this QA record.
