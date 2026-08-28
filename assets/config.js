@@ -1,3 +1,22 @@
+(() => {
+  const path = window.location.pathname.replace(/\/+$/,'') || '/';
+  const publicPaths = new Set([
+    '/','/latest','/about.html','/archive.html','/summer-guide.html','/advertise.html',
+    '/join','/start','/submit','/contact','/business-submissions','/submit-event',
+    '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html'
+  ]);
+  if (publicPaths.has(path)) {
+    const href = '/assets/secondary-pages.css';
+    if (!document.querySelector(`link[href="${href}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      link.dataset.sk8SecondaryDesign = 'preview';
+      document.head.appendChild(link);
+    }
+  }
+})();
+
 window.SK8_CONFIG = {
   ga4MeasurementId: "G-8L0ER92Y7L",
   metaPixelId: "4649116095416763",
