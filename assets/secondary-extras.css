@@ -1,0 +1,56 @@
+/* Page-specific refinements layered on secondary-pages.css. Preview only. */
+/* Latest issue: magazine front-door feel rather than a generic landing page. */
+body[data-page="latest-issue"] .latest-v7{background:linear-gradient(135deg,#fff9ed 0%,#fff 56%,#eaf4f2 100%)}
+body[data-page="latest-issue"] .latest-hero-grid{grid-template-columns:1.08fr .92fr;gap:46px;align-items:center}
+body[data-page="latest-issue"] .latest-visual-stack{position:relative}
+body[data-page="latest-issue"] .latest-visual-stack>img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;box-shadow:0 20px 46px rgba(19,45,49,.12)}
+body[data-page="latest-issue"] .latest-join-card{position:relative;margin:-52px 22px 0;background:#fff;border:1px solid var(--sk8-line);border-radius:14px;padding:22px;box-shadow:0 16px 36px rgba(19,45,49,.13)}
+body[data-page="latest-issue"] .latest-join-card h2{font-family:Arial,sans-serif;font-size:1.5rem;letter-spacing:-.025em}
+body[data-page="latest-issue"] .latest-join-card .signup{box-shadow:none;margin-top:14px}
+body[data-page="latest-issue"] .grid3 .card{min-height:190px}
+body[data-page="latest-issue"] .issue-proof-split{background:#fff;border:1px solid var(--sk8-line);border-radius:16px;padding:30px;box-shadow:0 10px 26px rgba(19,45,49,.055)}
+body[data-page="latest-issue"] .issue-facts{border-left:1px solid var(--sk8-line);padding-left:28px}
+/* Sitemap: visual navigation, not a technical index. */
+.sitemap-grid{gap:16px!important}
+.sitemap-group{border-radius:14px!important;padding:24px!important;box-shadow:0 10px 25px rgba(19,45,49,.05)!important}
+.sitemap-group h2{font-family:Arial,sans-serif!important;font-weight:800;letter-spacing:-.025em;color:#103d44}
+.sitemap-group a{border-top:1px solid #e8ece9!important;padding:16px 0!important}
+.sitemap-group a strong{color:var(--sk8-teal)}
+.sitemap-group a:hover strong{color:var(--sk8-orange)}
+/* Preferences: clean choice cards with clearer tap targets. */
+body[data-page="preferences"] .two-col{grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
+body[data-page="preferences"] .form-card{border-top:5px solid var(--sk8-teal);padding:28px}
+body[data-page="preferences"] .interest-fieldset{border:0;padding:0;margin:22px 0}
+body[data-page="preferences"] .interest-fieldset legend{font-weight:900;margin-bottom:12px}
+body[data-page="preferences"] .interest-option{display:flex;gap:12px;padding:14px;border:1px solid var(--sk8-line);border-radius:10px;margin:9px 0;background:#fff;cursor:pointer}
+body[data-page="preferences"] .interest-option:hover{border-color:#a9c9c4;background:#fbfdfc}
+body[data-page="preferences"] .interest-option input{margin-top:4px}
+body[data-page="preferences"] .interest-option strong{display:block;color:#163b40}
+body[data-page="preferences"] .interest-option small{display:block;color:#607174;margin-top:2px}
+body[data-page="preferences"] aside .notice{border:1px solid #c9dfdb;border-left:5px solid var(--sk8-teal);border-radius:12px;background:#edf6f4}
+/* Policies: turn dense copy into a calm reading surface, regardless of body data-page. */
+.policy-sections{max-width:850px!important;background:#fff;border:1px solid var(--sk8-line);border-radius:14px;padding:32px!important;box-shadow:0 10px 26px rgba(19,45,49,.045)}
+.policy-sections section+section{border-top:1px solid #e7ebe8;padding-top:10px;margin-top:26px}
+.policy-sections h2{font-family:Arial,sans-serif!important;font-size:1.45rem!important;letter-spacing:-.02em;margin:0 0 8px!important;color:#103d44}
+.policy-sections p{color:#3f5559;line-height:1.65}
+/* Generic public long forms. */
+.form-layout .form-card{box-shadow:0 12px 30px rgba(19,45,49,.065)}
+.form-layout .field-grid{gap:14px}
+.form-layout textarea{min-height:145px}
+.form-layout .sticky-panel{top:110px}
+/* Older public sections receive the same restrained section cadence. */
+body.v7:not(.reader-home) .section.white{background:#fff}
+body.v7:not(.reader-home) .section.soft-teal{background:#eef7f5}
+body.v7:not(.reader-home) .section-kicker-row{gap:36px;align-items:end}
+body.v7:not(.reader-home) .section-kicker-row>p{max-width:520px;color:#56676a}
+body.v7:not(.reader-home) .icon-card{border-radius:14px;box-shadow:0 8px 22px rgba(19,45,49,.045)}
+body.v7:not(.reader-home) .card-number{color:var(--sk8-teal);font-weight:900}
+/* Buttons stay decisive; orange is selective, teal carries secondary action. */
+body.v7:not(.reader-home) .button{border-radius:7px;min-height:46px}
+body.v7:not(.reader-home) .button.secondary{background:var(--sk8-teal);color:#fff;box-shadow:0 8px 18px rgba(15,100,112,.14)}
+/* Improve form sidebars and utility notices. */
+.submission-sidebar .policy-panel,.policy-panel{border-radius:14px}
+.notice{border-radius:10px}
+/* Mobile */
+@media(max-width:900px){body[data-page="latest-issue"] .latest-hero-grid{grid-template-columns:1fr}body[data-page="latest-issue"] .latest-visual-stack>img{aspect-ratio:16/10}body[data-page="latest-issue"] .latest-join-card{margin:-36px 14px 0}body[data-page="preferences"] .two-col{grid-template-columns:1fr}}
+@media(max-width:680px){.policy-sections{padding:22px!important}.sitemap-group{padding:20px!important}body[data-page="latest-issue"] .latest-join-card{margin:12px 0 0}body[data-page="latest-issue"] .issue-facts{border-left:0;border-top:1px solid var(--sk8-line);padding:20px 0 0;margin-top:20px}}
