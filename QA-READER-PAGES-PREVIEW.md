@@ -126,17 +126,67 @@ Result/fixes:
 - mock-up-derived hero/story/guide assets are explicitly preview-only until replaced with rights-cleared real local images or deliberately approved/labelled illustration;
 - no merge to `main` or production traffic change has been made.
 
+## Site-wide public-page design pass - 28 August 2026
+
+The approved homepage is now treated as the master visual system for reader-facing pages. The aim is consistency without cloning every page into the same layout.
+
+### Cycle 1 - structure and value
+
+Criticism:
+- the site had several generations of templates, so moving away from the homepage made the brand feel less coherent;
+- reader tasks such as joining, choosing where to start, submitting information and contacting SK8 Scoop were visually flatter than the homepage;
+- dense forms and archive/policy pages looked more like functional system pages than parts of a local publication.
+
+Fixes made:
+- rebuilt Join, Where to Start, Submit and Contact around a clearer task-first hierarchy;
+- expanded Where to Start into six direct reader jobs rather than organisational categories;
+- added a shared secondary-page design layer covering About, Archive, Latest Issue, Summer Guide, Advertise, detailed submission forms, Preferences, policies and the Site Map;
+- gave each page family a distinct role: editorial storytelling for About, publication hierarchy for Archive/Latest, brighter controlled expression for Summer Guide, calm outcome-led presentation for Advertise, and staged readability for forms;
+- kept admin and payment interfaces outside this cosmetic redesign so public-value work does not displace operational reliability.
+
+### Cycle 2 - accuracy and experience
+
+Criticism:
+- old navigation differed between page generations;
+- some utility/policy pages did not expose a `data-page` identity for styling;
+- the inactive What's On page contained a stale hard-coded issue reference;
+- the repository still contains dated Issue 8 website configuration and older commercial figures that must not be silently presented as current just because the design is newer.
+
+Fixes made:
+- added a preview-only public-page loader that applies the shared visual system only to known public routes;
+- unified public navigation to Home, Guides, Where to start, Join, Submit, Contact and the Join free CTA;
+- derived missing page identities for Privacy, Terms, Editorial Policy and Site Map without changing their substantive policy wording;
+- rewrote the inactive What's On holding page to remove the stale issue number while keeping it `noindex` and clearly not live;
+- preserved existing form endpoints, validation fields, consent controls and tracking hooks;
+- did not manufacture a new Issue 10 MailerLite URL or overwrite advertiser pricing without an authoritative current source.
+
+### Cycle 3 - final risk and polish
+
+Criticism:
+- a site-wide CSS change could accidentally affect admin/payment interfaces;
+- the redesign needs to remain reversible while the user compares pages in Cloudflare preview;
+- the visual refresh could obscure unresolved content-freshness problems.
+
+Result/fixes:
+- shared CSS is injected only for an explicit allow-list of public routes; admin and payment routes are excluded;
+- public navigation replacement is also limited to that allow-list;
+- the design is split into `secondary-pages.css` and `secondary-extras.css`, making rollback straightforward;
+- the Issue 8/Issue 10 configuration mismatch, dated public statistics and advertiser-pricing freshness remain explicit blockers rather than being hidden by design polish;
+- production remains untouched.
+
 ## Safe preview rebuild - 28 August 2026
 
 Cloudflare build settings were manually confirmed with production branch `main`, non-production branch builds enabled, deploy command `npx wrangler deploy`, and version command corrected to `npx wrangler versions upload`. Preview-branch commits therefore trigger version uploads rather than production promotion.
 
 Open blockers before production approval:
-1. Review the latest branch preview against the approved mock-up on desktop and mobile.
+1. Review the refreshed homepage and secondary public pages on desktop and mobile.
 2. Replace or explicitly approve the mock-up-derived hero/story/guide artwork with story-appropriate rights-cleared imagery or clearly labelled illustration.
-3. Apply the two new D1 tables through the controlled migration process.
-4. Onboard/verify Cloudflare Email Service for the intended sender and destination, then add the `CONTACT_EMAIL` binding.
-5. Run live preview submissions for both new forms and confirm D1 + inbox delivery.
-6. Verify the Issue 10 `/latest` website content and homepage story details are still current immediately before publishing.
-7. Decide whether to roll the new navigation across the older permanent pages in the same release or a separate follow-up, to avoid mixed navigation after launch.
+3. Resolve the website freshness mismatch: the homepage preview uses Issue 10 while `assets/config.js` and `/latest` still contain Issue 8 website data until a verified Issue 10 public destination is available.
+4. Re-verify public subscriber/performance statistics before publication.
+5. Re-verify advertiser pricing against the current approved Advertising & Meta pricing record before publishing the refreshed Advertise page.
+6. Apply the two new D1 tables through the controlled migration process.
+7. Onboard/verify Cloudflare Email Service for the intended sender and destination, then add the `CONTACT_EMAIL` binding.
+8. Run live preview submissions for both new forms and confirm D1 + inbox delivery.
+9. Replace the preview-time dynamic stylesheet/navigation loader with static page references if the design is approved for production, to avoid a flash of the older styling on slower connections.
 
 No production merge or deployment is authorised by this QA record.
