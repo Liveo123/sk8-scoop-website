@@ -6,14 +6,15 @@
     '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html'
   ]);
   if (publicPaths.has(path)) {
-    const href = '/assets/secondary-pages.css';
-    if (!document.querySelector(`link[href="${href}"]`)) {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = href;
-      link.dataset.sk8SecondaryDesign = 'preview';
-      document.head.appendChild(link);
-    }
+    ['/assets/secondary-pages.css','/assets/secondary-extras.css'].forEach((href) => {
+      if (!document.querySelector(`link[href="${href}"]`)) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        link.dataset.sk8SecondaryDesign = 'preview';
+        document.head.appendChild(link);
+      }
+    });
   }
 })();
 
