@@ -2,14 +2,14 @@
   const path = window.location.pathname.replace(/\/+$/,'') || '/';
   const publicPaths = new Set([
     '/','/latest','/about.html','/archive.html','/summer-guide.html','/advertise.html',
-    '/join','/start','/submit','/contact','/business-submissions','/submit-event',
+    '/join','/start','/submit','/contact','/business-submissions','/submit-event','/whats-on',
     '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html'
   ]);
   const pageIdentity = {
     '/':'home','/latest':'latest-issue','/about.html':'about','/archive.html':'archive',
     '/summer-guide.html':'summer-guide','/advertise.html':'advertise','/join':'join',
     '/start':'start','/submit':'submit','/contact':'contact','/business-submissions':'business-submissions',
-    '/submit-event':'submit-event','/preferences':'preferences','/privacy.html':'privacy',
+    '/submit-event':'submit-event','/whats-on':'whats-on','/preferences':'preferences','/privacy.html':'privacy',
     '/terms.html':'terms','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap'
   };
   if (publicPaths.has(path)) {
