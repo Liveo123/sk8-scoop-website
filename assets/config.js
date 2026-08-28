@@ -1,13 +1,13 @@
 (() => {
   const path = window.location.pathname.replace(/\/+$/,'') || '/';
   const publicPaths = new Set([
-    '/','/latest','/about.html','/archive.html','/summer-guide.html','/advertise.html',
+    '/','/latest','/about.html','/archive.html','/summer-guide.html','/guides','/advertise.html',
     '/join','/start','/submit','/contact','/business-submissions','/submit-event','/whats-on',
     '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html'
   ]);
   const pageIdentity = {
     '/':'home','/latest':'latest-issue','/about.html':'about','/archive.html':'archive',
-    '/summer-guide.html':'summer-guide','/advertise.html':'advertise','/join':'join',
+    '/summer-guide.html':'summer-guide','/guides':'guides','/advertise.html':'advertise','/join':'join',
     '/start':'start','/submit':'submit','/contact':'contact','/business-submissions':'business-submissions',
     '/submit-event':'submit-event','/whats-on':'whats-on','/preferences':'preferences','/privacy.html':'privacy',
     '/terms.html':'terms','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap'
@@ -28,7 +28,7 @@
       const active = pageIdentity[path] || '';
       const links = [
         ['home','/','Home'],
-        ['summer-guide','/summer-guide.html','Guides'],
+        ['guides','/guides/','Guides'],
         ['start','/start/','Where to start'],
         ['join','/join/','Join'],
         ['submit','/submit/','Submit'],
