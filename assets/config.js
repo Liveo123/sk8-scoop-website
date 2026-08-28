@@ -5,7 +5,15 @@
     '/join','/start','/submit','/contact','/business-submissions','/submit-event',
     '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html'
   ]);
+  const pageIdentity = {
+    '/':'home','/latest':'latest-issue','/about.html':'about','/archive.html':'archive',
+    '/summer-guide.html':'summer-guide','/advertise.html':'advertise','/join':'join',
+    '/start':'start','/submit':'submit','/contact':'contact','/business-submissions':'business-submissions',
+    '/submit-event':'submit-event','/preferences':'preferences','/privacy.html':'privacy',
+    '/terms.html':'terms','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap'
+  };
   if (publicPaths.has(path)) {
+    if (!document.body.dataset.page && pageIdentity[path]) document.body.dataset.page = pageIdentity[path];
     ['/assets/secondary-pages.css','/assets/secondary-extras.css'].forEach((href) => {
       if (!document.querySelector(`link[href="${href}"]`)) {
         const link = document.createElement('link');
@@ -15,6 +23,19 @@
         document.head.appendChild(link);
       }
     });
+    const nav = document.querySelector('#main-nav');
+    if (nav) {
+      const active = pageIdentity[path] || '';
+      const links = [
+        ['home','/','Home'],
+        ['summer-guide','/summer-guide.html','Guides'],
+        ['start','/start/','Where to start'],
+        ['join','/join/','Join'],
+        ['submit','/submit/','Submit'],
+        ['contact','/contact/','Contact']
+      ];
+      nav.innerHTML = links.map(([key,href,label]) => `<a${active===key?' class="active" aria-current="page"':''} href="${href}">${label}</a>`).join('') + `<a class="button nav-join reader-nav-join${active==='join'?' active':''}" href="/join/">Join free</a>`;
+    }
   }
 })();
 
