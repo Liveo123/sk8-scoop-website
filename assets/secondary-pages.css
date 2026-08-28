@@ -31,7 +31,7 @@ body.reader-page .join-benefits div{min-height:150px;border-radius:12px;box-shad
 body.reader-page .join-benefits strong{display:block;color:var(--sk8-teal);font-size:1.03rem;margin-bottom:7px}
 body.reader-page .button{min-height:46px;border-radius:7px}
 body.reader-page .reader-signup{max-width:700px}
-/* About: editorial storytelling, influenced by restrained editorial/property sites. */
+/* About: restrained editorial storytelling. */
 body[data-page="about"] .about-hero-grid{grid-template-columns:1.12fr .88fr;gap:46px;align-items:center}
 body[data-page="about"] .about-map-card{border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--sk8-line);box-shadow:0 18px 42px rgba(19,45,49,.1)}
 body[data-page="about"] .about-map-card img{aspect-ratio:4/3;object-fit:cover;display:block}
@@ -42,7 +42,7 @@ body[data-page="about"] .mission-card blockquote{font-family:Georgia,serif;font-
 body[data-page="about"] .current-facts{border-top:1px solid var(--sk8-line);padding-top:18px}
 body[data-page="about"] .fact-row>div{border-right:1px solid var(--sk8-line)}
 body[data-page="about"] .fact-row>div:last-child{border-right:0}
-/* Archive: stronger issue hierarchy, like a publication archive rather than a file list. */
+/* Archive: stronger publication hierarchy. */
 body[data-page="archive"] .archive-hero-grid{grid-template-columns:1.12fr .88fr;gap:44px;align-items:center}
 body[data-page="archive"] .archive-hero-art{background:#f0f6f4;border-radius:18px;padding:18px;border:1px solid var(--sk8-line)}
 body[data-page="archive"] .archive-hero-art img{aspect-ratio:16/10;object-fit:cover;border-radius:12px;width:100%}
@@ -51,7 +51,7 @@ body[data-page="archive"] .archive-card{min-height:235px;padding:22px;display:fl
 body[data-page="archive"] .archive-card.featured-issue{grid-column:span 2;background:linear-gradient(135deg,#fff,#f1f7f5);border-color:#b7d0cb}
 body[data-page="archive"] .archive-card h2{font-family:Arial,sans-serif;font-weight:800;font-size:1.35rem;line-height:1.17;letter-spacing:-.025em}
 body[data-page="archive"] .archive-card .button,body[data-page="archive"] .archive-card .text-link{margin-top:auto;align-self:flex-start}
-/* Summer guide: let the seasonal sub-brand be brighter while keeping SK8 structure. */
+/* Summer guide: brighter seasonal expression within the master brand. */
 body[data-page="summer-guide"] .summer-v7-hero{background:linear-gradient(135deg,#fff9ed 0%,#fff 55%,#eaf6f3 100%)}
 body[data-page="summer-guide"] .summer-hero-grid{grid-template-columns:.82fr 1.18fr;gap:54px;align-items:center}
 body[data-page="summer-guide"] .summer-cover-wrap{background:#fff;border:1px solid var(--sk8-line);border-radius:20px;padding:20px;box-shadow:0 22px 50px rgba(19,45,49,.12);transform:rotate(-1deg)}
@@ -60,7 +60,7 @@ body[data-page="summer-guide"] .utility-card-grid{gap:14px}
 body[data-page="summer-guide"] .utility-card{border-radius:14px;border:1px solid rgba(19,45,49,.08);box-shadow:0 9px 22px rgba(19,45,49,.055);min-height:210px}
 body[data-page="summer-guide"] .summer-band{background:#eef7f5}
 body[data-page="summer-guide"] .summer-inline-visual{border-radius:16px;box-shadow:0 14px 30px rgba(19,45,49,.1)}
-/* Advertising: make it credible, calm and outcome-led rather than brochure-like. */
+/* Advertising: calm, credible and outcome-led. */
 body[data-page="advertise"] .ad-v7-hero{background:linear-gradient(135deg,#fffaf0 0%,#fff 57%,#eef7f5 100%)}
 body[data-page="advertise"] .ad-hero-grid{grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
 body[data-page="advertise"] .ad-campaign-visual{border-radius:18px;box-shadow:0 20px 45px rgba(19,45,49,.12)}
@@ -70,9 +70,23 @@ body[data-page="advertise"] .package-grid{gap:16px}
 body[data-page="advertise"] .package-card{padding:26px;box-shadow:0 10px 28px rgba(19,45,49,.06)}
 body[data-page="advertise"] .package-card.featured{transform:translateY(-7px);border:2px solid var(--sk8-orange);box-shadow:0 18px 36px rgba(248,121,27,.12)}
 body[data-page="advertise"] .premium-form{border-top:5px solid var(--sk8-teal)}
-/* Legal, trust and utility pages: calm readable editorial documents. */
-body[data-page="privacy"] .content-narrow,body[data-page="terms"] .content-narrow,body[data-page="editorial-policy"] .content-narrow{max-width:840px;background:#fff;border:1px solid var(--sk8-line);border-radius:14px;padding:32px;box-shadow:0 10px 26px rgba(19,45,49,.045)}
-body[data-page="privacy"] .content-narrow h2,body[data-page="terms"] .content-narrow h2,body[data-page="editorial-policy"] .content-narrow h2{font-family:Arial,sans-serif;font-size:1.45rem;letter-spacing:-.02em;margin-top:34px}
+/* Submission utilities: make dense forms feel staged and calm. */
+body[data-page="business-submissions"] .submit-hero-grid{grid-template-columns:1.12fr .88fr;gap:44px;align-items:center}
+body[data-page="business-submissions"] .submission-visual-card{border-radius:16px;overflow:hidden;border:1px solid var(--sk8-line);background:#fff;box-shadow:0 16px 38px rgba(19,45,49,.09)}
+body[data-page="business-submissions"] .submission-visual-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+body[data-page="business-submissions"] .submission-quick{padding:18px 20px}
+body[data-page="business-submissions"] .submission-types{gap:12px}
+body[data-page="business-submissions"] .submission-types article{background:#fff;border:1px solid var(--sk8-line);border-radius:12px;padding:20px;box-shadow:0 7px 18px rgba(19,45,49,.045)}
+body[data-page="business-submissions"] .form-layout,body[data-page="submit-event"] .form-layout{gap:24px;align-items:start}
+body[data-page="business-submissions"] .premium-form,body[data-page="submit-event"] .premium-form{border-top:5px solid var(--sk8-teal);padding:30px;border-radius:15px}
+body[data-page="business-submissions"] .premium-form input,body[data-page="business-submissions"] .premium-form select,body[data-page="business-submissions"] .premium-form textarea,body[data-page="submit-event"] .premium-form input,body[data-page="submit-event"] .premium-form select,body[data-page="submit-event"] .premium-form textarea{border:1px solid #c8d2cf;border-radius:7px;padding:13px}
+body[data-page="business-submissions"] .form-step span{background:var(--sk8-teal);color:#fff}
+body[data-page="business-submissions"] .policy-panel,body[data-page="submit-event"] .policy-panel{border-radius:14px;background:#edf6f4;border:1px solid #cde1dc;padding:24px}
+body[data-page="business-submissions"] .sponsor-nudge{border-radius:14px;background:#fff7ed;border:1px solid #ffd6b4;padding:24px;margin-top:16px}
+/* Legal and trust pages: calm readable documents. */
+body[data-page="privacy"] .policy-sections,body[data-page="terms"] .policy-sections,body[data-page="editorial-policy"] .policy-sections{max-width:840px;background:#fff;border:1px solid var(--sk8-line);border-radius:14px;padding:32px;box-shadow:0 10px 26px rgba(19,45,49,.045)}
+body[data-page="privacy"] .policy-sections section+section,body[data-page="terms"] .policy-sections section+section,body[data-page="editorial-policy"] .policy-sections section+section{border-top:1px solid #e7ebe8;padding-top:8px}
+body[data-page="privacy"] .policy-sections h2,body[data-page="terms"] .policy-sections h2,body[data-page="editorial-policy"] .policy-sections h2{font-family:Arial,sans-serif;font-size:1.45rem;letter-spacing:-.02em;margin-top:30px}
 /* Common footer aligned to homepage feel. */
 body.reader-page .site-footer,body.v7:not(.reader-home) .site-footer{background:#f5f4ef;color:#233c40;border-top:1px solid var(--sk8-line);padding:36px 0}
 body.reader-page .site-footer a,body.v7:not(.reader-home) .site-footer a{color:#29494e}
@@ -81,6 +95,6 @@ body.reader-page .footer-links strong,body.v7:not(.reader-home) .footer-links st
 body.reader-page .footer-small,body.v7:not(.reader-home) .footer-small{color:#607174}
 body.reader-page .final-cta,body.v7:not(.reader-home) .final-cta{background:#0f6470;color:#fff}
 body.reader-page .final-cta .button,body.v7:not(.reader-home) .final-cta .button{background:var(--sk8-orange);color:#fff}
-@media(max-width:980px){body[data-page="archive"] .v7-archive{grid-template-columns:repeat(2,1fr)}body[data-page="archive"] .archive-card.featured-issue{grid-column:span 2}body[data-page="about"] .about-hero-grid,body[data-page="archive"] .archive-hero-grid,body[data-page="summer-guide"] .summer-hero-grid,body[data-page="advertise"] .ad-hero-grid{grid-template-columns:1fr}}
+@media(max-width:980px){body[data-page="archive"] .v7-archive{grid-template-columns:repeat(2,1fr)}body[data-page="archive"] .archive-card.featured-issue{grid-column:span 2}body[data-page="about"] .about-hero-grid,body[data-page="archive"] .archive-hero-grid,body[data-page="summer-guide"] .summer-hero-grid,body[data-page="advertise"] .ad-hero-grid,body[data-page="business-submissions"] .submit-hero-grid{grid-template-columns:1fr}}
 @media(max-width:820px){body.reader-page .site-header .brand img,body.v7:not(.reader-home) .site-header .brand img{max-width:210px}body.reader-page .page-hero,body.v7:not(.reader-home) .page-hero{padding:42px 0 32px}body.reader-page .page-hero h1,body.v7:not(.reader-home) .page-hero h1{font-size:clamp(2.7rem,12vw,4.3rem)}body[data-page="archive"] .v7-archive{grid-template-columns:1fr}body[data-page="archive"] .archive-card.featured-issue{grid-column:auto}body[data-page="summer-guide"] .summer-cover-wrap{max-width:380px;margin:auto}body[data-page="advertise"] .package-card.featured{transform:none}}
-@media(max-width:560px){body.reader-page .reader-content{padding-top:30px}body.reader-page .reader-panel,body.reader-page .reader-form,body.reader-page .reader-route{padding:22px}body.reader-page .reader-route{min-height:0}body[data-page="privacy"] .content-narrow,body[data-page="terms"] .content-narrow,body[data-page="editorial-policy"] .content-narrow{padding:22px}}
+@media(max-width:560px){body.reader-page .reader-content{padding-top:30px}body.reader-page .reader-panel,body.reader-page .reader-form,body.reader-page .reader-route{padding:22px}body.reader-page .reader-route{min-height:0}body[data-page="privacy"] .policy-sections,body[data-page="terms"] .policy-sections,body[data-page="editorial-policy"] .policy-sections{padding:22px}}
