@@ -79,6 +79,10 @@ Result:
 - the homepage remains useful even without editorial photography, while leaving room to add properly rights-cleared local images later;
 - older permanent pages still use the previous navigation, so navigation consistency remains a launch decision rather than being silently changed across the whole site.
 
+## Safe preview rebuild - 28 August 2026
+
+Cloudflare build settings were manually confirmed with production branch `main`, non-production branch builds enabled, deploy command `npx wrangler deploy`, and version command corrected to `npx wrangler versions upload`. This documentation-only commit exists solely to trigger a fresh non-production branch build using the corrected preview-safe version command. It does not change production code or authorise a production deployment.
+
 Open blockers before production approval:
 1. Apply the two new D1 tables through the controlled migration process.
 2. Onboard/verify Cloudflare Email Service for the intended sender and destination, then add the `CONTACT_EMAIL` binding.
