@@ -8,11 +8,19 @@
 .reader-page[data-page="submit"] .page-hero{border-top:8px solid #f8791b}
 .reader-page[data-page="contact"] .page-hero{border-top:8px solid #0f6470}
 
-/* Join: make the signup feel like the main event. */
-body[data-page="join"] .reader-content>.wrap>.reader-panel:first-child{position:relative;padding:34px;border:2px solid rgba(15,100,112,.18);box-shadow:0 18px 40px rgba(19,45,49,.09);background:linear-gradient(135deg,#fff 0%,#fffaf0 100%)}
-body[data-page="join"] .reader-content>.wrap>.reader-panel:first-child:before{content:"FRIDAY";position:absolute;right:24px;top:22px;background:#0f6470;color:#fff;border-radius:999px;padding:7px 12px;font-size:.72rem;font-weight:900;letter-spacing:.12em}
-body[data-page="join"] .reader-content>.wrap>.reader-panel:first-child h2{font-size:clamp(2rem,3.5vw,3.2rem)!important;max-width:650px;margin-top:8px}
-body[data-page="join"] .join-benefits div{position:relative;overflow:hidden;min-height:145px;padding-top:27px;box-shadow:0 8px 18px rgba(19,45,49,.045)}
+/* Join: image-led conversion panel, cropped to the page rather than showing a giant portrait. */
+body[data-page="join"] .join-conversion-panel{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(0,1.2fr);padding:0!important;overflow:hidden;border:2px solid rgba(15,100,112,.18);box-shadow:0 18px 40px rgba(19,45,49,.09);background:#fff}
+body[data-page="join"] .join-conversion-image{position:relative;min-height:490px;background:#0f535c;overflow:hidden}
+body[data-page="join"] .join-conversion-image img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center center}
+body[data-page="join"] .join-conversion-image:after{content:"";position:absolute;inset:auto 0 0;height:38%;background:linear-gradient(to bottom,transparent,rgba(5,48,54,.76));pointer-events:none}
+body[data-page="join"] .join-image-label{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;color:#fff;font-size:.76rem;font-weight:900;letter-spacing:.1em;line-height:1.35}
+body[data-page="join"] .join-conversion-copy{position:relative;padding:36px 38px 34px;background:linear-gradient(135deg,#fff 0%,#fffaf0 100%)}
+body[data-page="join"] .join-conversion-copy:before{content:"FRIDAY";position:absolute;right:26px;top:24px;background:#0f6470;color:#fff;border-radius:999px;padding:7px 12px;font-size:.72rem;font-weight:900;letter-spacing:.12em}
+body[data-page="join"] .join-conversion-copy h2{font-size:clamp(2rem,3.5vw,3.2rem)!important;max-width:620px;margin-top:8px}
+body[data-page="join"] .join-conversion-lead{max-width:650px;font-size:1.08rem;line-height:1.55;color:#455b60}
+body[data-page="join"] .reader-signup{max-width:650px}
+body[data-page="join"] .join-benefits{margin-top:24px}
+body[data-page="join"] .join-benefits div{position:relative;overflow:hidden;min-height:130px;padding-top:27px;box-shadow:0 8px 18px rgba(19,45,49,.045)}
 body[data-page="join"] .join-benefits div:before{content:"";position:absolute;left:0;top:0;right:0;height:6px;background:#0f6470}
 body[data-page="join"] .join-benefits div:nth-child(2):before{background:#f8791b}
 body[data-page="join"] .join-benefits div:nth-child(3):before{background:#e1bd56}
@@ -52,5 +60,5 @@ body[data-page="contact"] .contact-email{font-size:1.05rem;background:#fff;borde
 /* Homepage task icons: use recognisable line icons, not abstract glyphs. */
 .reader-action-mark svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-@media(max-width:900px){body[data-page="submit"] .reader-aside,body[data-page="contact"] .reader-aside{position:static}.reader-page[data-page="join"] .page-hero:after,.reader-page[data-page="start"] .page-hero:after,.reader-page[data-page="submit"] .page-hero:after,.reader-page[data-page="contact"] .page-hero:after{right:-170px;top:-120px}}
-@media(max-width:680px){body[data-page="join"] .reader-content>.wrap>.reader-panel:first-child{padding:24px}body[data-page="join"] .reader-content>.wrap>.reader-panel:first-child:before{position:static;display:inline-block;margin-bottom:12px}body[data-page="start"] .reader-route{min-height:215px;padding:24px 22px}body[data-page="start"] .reader-route .reader-link{left:22px;bottom:20px}body[data-page="submit"] .reader-form,body[data-page="contact"] .reader-form{padding:23px}.reader-page[data-page="join"] .page-hero,.reader-page[data-page="start"] .page-hero,.reader-page[data-page="submit"] .page-hero,.reader-page[data-page="contact"] .page-hero{border-top-width:5px}}
+@media(max-width:900px){body[data-page="join"] .join-conversion-panel{grid-template-columns:1fr}body[data-page="join"] .join-conversion-image{min-height:300px;max-height:350px}body[data-page="join"] .join-conversion-image img{object-position:center 45%}body[data-page="submit"] .reader-aside,body[data-page="contact"] .reader-aside{position:static}.reader-page[data-page="join"] .page-hero:after,.reader-page[data-page="start"] .page-hero:after,.reader-page[data-page="submit"] .page-hero:after,.reader-page[data-page="contact"] .page-hero:after{right:-170px;top:-120px}}
+@media(max-width:680px){body[data-page="join"] .join-conversion-image{min-height:260px;max-height:290px}body[data-page="join"] .join-conversion-copy{padding:25px 22px}body[data-page="join"] .join-conversion-copy:before{position:static;display:inline-block;margin-bottom:12px}body[data-page="join"] .join-image-label{left:18px;right:18px;bottom:16px;font-size:.69rem}body[data-page="start"] .reader-route{min-height:215px;padding:24px 22px}body[data-page="start"] .reader-route .reader-link{left:22px;bottom:20px}body[data-page="submit"] .reader-form,body[data-page="contact"] .reader-form{padding:23px}.reader-page[data-page="join"] .page-hero,.reader-page[data-page="start"] .page-hero,.reader-page[data-page="submit"] .page-hero,.reader-page[data-page="contact"] .page-hero{border-top-width:5px}}
