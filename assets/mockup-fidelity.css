@@ -19,10 +19,10 @@
 .reader-section-head h2{font-size:1.75rem!important}
 .reader-worth{padding-top:25px!important;padding-bottom:31px!important}
 .reader-card-grid{gap:18px}
-.reader-story-image{height:150px;padding:12px;background-size:cover;background-position:center;background-repeat:no-repeat}
-.story-image-one{background-image:url('images/home-story-1.webp')}
+.reader-story-image{height:150px;padding:12px;background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#e8f1ed}
+.story-image-one{background-image:url('images/home-story-1-illustration.svg')}
 .story-image-two{background-image:url('images/home-story-2.webp')}
-.story-image-three{background-image:url('images/home-story-3.webp')}
+.story-image-three{background-image:url('images/home-story-3-illustration.svg')}
 .reader-story-image span{padding:5px 9px;font-size:.66rem}
 .reader-story-body{padding:15px 16px 17px}
 .reader-story h3{font-size:1.31rem;line-height:1.12;margin-bottom:7px}
