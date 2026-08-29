@@ -43,7 +43,7 @@
 window.SK8_CONFIG = {
   ga4MeasurementId: "G-8L0ER92Y7L",
   metaPixelId: "4649116095416763",
-  formsparkContactEndpoint: "",
+  formsparkContactEndpoint: "https://submit-form.com/X3MWnWHXI",
   publicStats: {
     subscriberCount: 453,
     subscriberProof: "453",
