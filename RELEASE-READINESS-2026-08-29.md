@@ -6,7 +6,7 @@ Status: READY FOR EXPLICIT PRODUCTION APPROVAL
 
 ## Verified working
 
-- Latest Cloudflare branch-preview deployment succeeded for commit `20a0ddb6`.
+- Latest Cloudflare branch-preview deployment succeeded for commit `20a0ddb6` before this documentation-only release note commit. No runtime code changed after that successful build.
 - Contact page uses Formspark endpoint `https://submit-form.com/X3MWnWHXI`.
 - Contact form was tested end-to-end successfully: provider submission succeeded and notification reached `contact@sk8scoop.com`.
 - Production D1 database is `sk8-scoop-db`, bound to the Worker as `DB`.
@@ -27,7 +27,7 @@ PASS. The redesign remains newsletter-first. Homepage maintenance is concentrate
 PASS. Signup continues through the existing MailerLite form. Contact uses the tested Formspark route. Submit writes to the verified D1 table. Privacy confirmation remains required on Submit and Contact. Static navigation exists on the core reader pages. Issue 10 and the 453-reader proof are sourced from owner-supplied/current system evidence.
 
 ### Cycle 3 — final risk and polish
-PASS WITH HUMAN RELEASE GATE. Contact and Submit backends work, the D1 change is minimal, the latest preview build is healthy, and the PR remains draft/unmerged. No production traffic has been changed. The Company Operating Manual requires explicit human approval before a material production deployment.
+PASS WITH HUMAN RELEASE GATE. Contact and Submit backends work, the D1 change is minimal, and the PR remains draft/unmerged. No production traffic has been changed. The Company Operating Manual requires explicit human approval before a material production deployment.
 
 ## Release procedure after approval
 
