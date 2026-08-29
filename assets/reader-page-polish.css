@@ -1,0 +1,64 @@
+/* Preview-only visual polish for the four reader task pages. */
+.reader-page[data-page="join"] .page-hero,.reader-page[data-page="start"] .page-hero,.reader-page[data-page="submit"] .page-hero,.reader-page[data-page="contact"] .page-hero{position:relative;overflow:hidden;border-bottom:1px solid #e5e9e6;background:linear-gradient(135deg,#fffaf0 0%,#fff 58%,#edf7f5 100%)}
+.reader-page[data-page="join"] .page-hero:after,.reader-page[data-page="start"] .page-hero:after,.reader-page[data-page="submit"] .page-hero:after,.reader-page[data-page="contact"] .page-hero:after{content:"";position:absolute;right:-70px;top:-90px;width:330px;height:330px;border:46px solid rgba(15,100,112,.08);border-radius:50%;pointer-events:none}
+.reader-page .page-hero .wrap{position:relative;z-index:1}
+.reader-page[data-page="join"] .page-hero h1,.reader-page[data-page="start"] .page-hero h1,.reader-page[data-page="submit"] .page-hero h1,.reader-page[data-page="contact"] .page-hero h1{max-width:850px;color:#0a4650}
+.reader-page[data-page="join"] .page-hero{border-top:8px solid #f8791b}
+.reader-page[data-page="start"] .page-hero{border-top:8px solid #0f6470}
+.reader-page[data-page="submit"] .page-hero{border-top:8px solid #f8791b}
+.reader-page[data-page="contact"] .page-hero{border-top:8px solid #0f6470}
+
+/* Join: image-led conversion panel, cropped to the page rather than showing a giant portrait. */
+body[data-page="join"] .join-conversion-panel{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(0,1.2fr);padding:0!important;overflow:hidden;border:2px solid rgba(15,100,112,.18);box-shadow:0 18px 40px rgba(19,45,49,.09);background:#fff}
+body[data-page="join"] .join-conversion-image{position:relative;min-height:490px;background:#0f535c;overflow:hidden}
+body[data-page="join"] .join-conversion-image img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center center}
+body[data-page="join"] .join-conversion-image:after{content:"";position:absolute;inset:auto 0 0;height:38%;background:linear-gradient(to bottom,transparent,rgba(5,48,54,.76));pointer-events:none}
+body[data-page="join"] .join-image-label{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;color:#fff;font-size:.76rem;font-weight:900;letter-spacing:.1em;line-height:1.35}
+body[data-page="join"] .join-conversion-copy{position:relative;padding:36px 38px 34px;background:linear-gradient(135deg,#fff 0%,#fffaf0 100%)}
+body[data-page="join"] .join-conversion-copy:before{content:"FRIDAY";position:absolute;right:26px;top:24px;background:#0f6470;color:#fff;border-radius:999px;padding:7px 12px;font-size:.72rem;font-weight:900;letter-spacing:.12em}
+body[data-page="join"] .join-conversion-copy h2{font-size:clamp(2rem,3.5vw,3.2rem)!important;max-width:620px;margin-top:8px}
+body[data-page="join"] .join-conversion-lead{max-width:650px;font-size:1.08rem;line-height:1.55;color:#455b60}
+body[data-page="join"] .reader-signup{max-width:650px}
+body[data-page="join"] .join-benefits{margin-top:24px}
+body[data-page="join"] .join-benefits div{position:relative;overflow:hidden;min-height:130px;padding-top:27px;box-shadow:0 8px 18px rgba(19,45,49,.045)}
+body[data-page="join"] .join-benefits div:before{content:"";position:absolute;left:0;top:0;right:0;height:6px;background:#0f6470}
+body[data-page="join"] .join-benefits div:nth-child(2):before{background:#f8791b}
+body[data-page="join"] .join-benefits div:nth-child(3):before{background:#e1bd56}
+body[data-page="join"] .reader-two .reader-panel{min-height:205px;padding:26px}
+body[data-page="join"] .reader-two .reader-panel:first-child{background:#eef7f5}
+body[data-page="join"] .reader-two .reader-panel:last-child{background:#fff5e8}
+
+/* Start: make the choices feel like a visual route map. */
+body[data-page="start"] .reader-route-grid{gap:20px}
+body[data-page="start"] .reader-route{position:relative;min-height:235px;padding:30px 28px 26px;overflow:hidden;border:2px solid rgba(15,100,112,.12);box-shadow:0 10px 25px rgba(19,45,49,.055);transition:transform .18s ease,box-shadow .18s ease}
+body[data-page="start"] .reader-route:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(19,45,49,.09)}
+body[data-page="start"] .reader-route:before{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;margin-bottom:18px;background:#eaf4f2;color:#0f6470;font-size:1.55rem;font-weight:900}
+body[data-page="start"] .reader-route:nth-child(1):before{content:"▣"}body[data-page="start"] .reader-route:nth-child(2):before{content:"£"}body[data-page="start"] .reader-route:nth-child(3):before{content:"↶"}body[data-page="start"] .reader-route:nth-child(4):before{content:"✉"}body[data-page="start"] .reader-route:nth-child(5):before{content:"✎"}body[data-page="start"] .reader-route:nth-child(6):before{content:"●"}
+body[data-page="start"] .reader-route:nth-child(2),body[data-page="start"] .reader-route:nth-child(5){background:#fff8ed}
+body[data-page="start"] .reader-route:nth-child(3),body[data-page="start"] .reader-route:nth-child(6){background:#f4faf9}
+body[data-page="start"] .reader-route h2{font-size:1.9rem!important;max-width:480px}
+body[data-page="start"] .reader-route .reader-link{position:absolute;left:28px;bottom:24px}
+
+/* Submit: make the form feel like sending something into a local desk. */
+body[data-page="submit"] .reader-form-wrap{gap:30px;align-items:start}
+body[data-page="submit"] .reader-form{border-top:7px solid #f8791b;box-shadow:0 18px 38px rgba(19,45,49,.08);padding:32px}
+body[data-page="submit"] .reader-form h2{font-size:2rem!important;margin-bottom:6px}
+body[data-page="submit"] .reader-form label:not(.checkbox-row){padding-top:3px}
+body[data-page="submit"] .reader-form input:focus,body[data-page="submit"] .reader-form select:focus,body[data-page="submit"] .reader-form textarea:focus{outline:3px solid rgba(15,100,112,.16);border-color:#0f6470}
+body[data-page="submit"] .reader-aside{position:sticky;top:110px;border:1px solid #c7ded9;box-shadow:0 12px 28px rgba(19,45,49,.055);background:linear-gradient(180deg,#eaf4f2,#fff)}
+body[data-page="submit"] .reader-aside h2{padding-top:16px;border-top:1px solid #d6e7e3;margin-top:22px}
+body[data-page="submit"] .reader-aside h2:first-of-type{border-top:0;margin-top:8px;padding-top:0}
+body[data-page="submit"] .reader-aside:before{content:"TIP • ANSWER • COMMENT • PHOTO";display:block;background:#0f6470;color:#fff;border-radius:9px;padding:10px 12px;margin-bottom:22px;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-align:center}
+
+/* Contact: warmer, more obviously conversational. */
+body[data-page="contact"] .reader-form{border-top:7px solid #0f6470;box-shadow:0 18px 38px rgba(19,45,49,.08);padding:32px}
+body[data-page="contact"] .reader-aside{position:sticky;top:110px;background:#fff7ec;border:1px solid #ead9c5;box-shadow:0 12px 28px rgba(19,45,49,.05)}
+body[data-page="contact"] .reader-aside:before{content:"“";display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#0f6470;color:#fff;font:700 3rem/1 Georgia,serif;margin-bottom:18px}
+body[data-page="contact"] .reader-aside h2{font-size:1.45rem!important;margin-top:24px}
+body[data-page="contact"] .contact-email{font-size:1.05rem;background:#fff;border:1px solid #e2d6c6;border-radius:8px;padding:10px 12px;text-decoration:none}
+
+/* Homepage task icons: use recognisable line icons, not abstract glyphs. */
+.reader-action-mark svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+@media(max-width:900px){body[data-page="join"] .join-conversion-panel{grid-template-columns:1fr}body[data-page="join"] .join-conversion-image{min-height:300px;max-height:350px}body[data-page="join"] .join-conversion-image img{object-position:center 45%}body[data-page="submit"] .reader-aside,body[data-page="contact"] .reader-aside{position:static}.reader-page[data-page="join"] .page-hero:after,.reader-page[data-page="start"] .page-hero:after,.reader-page[data-page="submit"] .page-hero:after,.reader-page[data-page="contact"] .page-hero:after{right:-170px;top:-120px}}
+@media(max-width:680px){body[data-page="join"] .join-conversion-image{min-height:260px;max-height:290px}body[data-page="join"] .join-conversion-copy{padding:25px 22px}body[data-page="join"] .join-conversion-copy:before{position:static;display:inline-block;margin-bottom:12px}body[data-page="join"] .join-image-label{left:18px;right:18px;bottom:16px;font-size:.69rem}body[data-page="start"] .reader-route{min-height:215px;padding:24px 22px}body[data-page="start"] .reader-route .reader-link{left:22px;bottom:20px}body[data-page="submit"] .reader-form,body[data-page="contact"] .reader-form{padding:23px}.reader-page[data-page="join"] .page-hero,.reader-page[data-page="start"] .page-hero,.reader-page[data-page="submit"] .page-hero,.reader-page[data-page="contact"] .page-hero{border-top-width:5px}}

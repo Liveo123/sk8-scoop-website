@@ -82,10 +82,42 @@ CREATE TABLE IF NOT EXISTS subscriber_preferences (
  practical_updates INTEGER NOT NULL DEFAULT 0,
  updated_at TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS reader_submissions (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ submission_type TEXT NOT NULL,
+ message TEXT NOT NULL,
+ reference TEXT,
+ link TEXT,
+ name TEXT,
+ email TEXT NOT NULL,
+ status TEXT NOT NULL DEFAULT 'pending',
+ notification_status TEXT NOT NULL DEFAULT 'pending',
+ created_at TEXT NOT NULL,
+ notified_at TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_reader_submissions_status ON reader_submissions(status);
+CREATE INDEX IF NOT EXISTS idx_reader_submissions_type ON reader_submissions(submission_type);
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ name TEXT NOT NULL,
+ email TEXT NOT NULL,
+ category TEXT NOT NULL,
+ message TEXT NOT NULL,
+ status TEXT NOT NULL DEFAULT 'pending',
+ notification_status TEXT NOT NULL DEFAULT 'pending',
+ created_at TEXT NOT NULL,
+ notified_at TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_contact_messages_status ON contact_messages(status);
+CREATE INDEX IF NOT EXISTS idx_contact_messages_category ON contact_messages(category);
 `;
 
 let schemaReady = false;
 const LIVE_POSTER_COUNT = 17;
+const CONTACT_INBOX = 'contact@sk8scoop.com';
+const WEBSITE_SENDER = 'website@sk8scoop.com';
 
 export default {
   async fetch(request, env) {
@@ -120,6 +152,12 @@ export default {
       if (url.pathname === '/api/save-preferences' && request.method === 'POST') {
         return handleSavePreferences(request, env);
       }
+      if (url.pathname === '/api/reader-submission' && request.method === 'POST') {
+        return handleReaderSubmission(request, env);
+      }
+      if (url.pathname === '/api/contact-message' && request.method === 'POST') {
+        return handleContactMessage(request, env);
+      }
 
       return json({ error: 'Not found.' }, 404);
     } catch (error) {
@@ -133,9 +171,9 @@ async function ensureSchema(db) {
   if (schemaReady) return;
 
   // The production schema is applied through the D1 console/migrations.
-  // At request time, only verify that the expected tables are present.
-  // Running the full DDL block on every new Worker isolate can fail before
-  // protected API routes (such as /api/qr-stats) reach their auth checks.
+  // At request time, only verify the established tables are present.
+  // New preview-only tables are checked inside their own handlers so a
+  // missing migration cannot break unrelated production API routes.
   const requiredTables = [
     'advertiser_enquiries',
     'business_submissions',
@@ -158,6 +196,14 @@ async function ensureSchema(db) {
   }
 
   schemaReady = true;
+}
+
+async function tableExists(db, tableName) {
+  const result = await db
+    .prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name = ? LIMIT 1`)
+    .bind(tableName)
+    .first();
+  return Boolean(result && result.name === tableName);
 }
 
 async function handleQrEvent(request, env) {
@@ -233,6 +279,130 @@ async function handleSavePreferences(request, env) {
   await env.DB.prepare(`INSERT INTO subscriber_preferences (email,families_children,events,food_drink,offers_savings,home_property,pets_outdoors,practical_updates,updated_at) VALUES (?,?,?,?,?,?,?,?,datetime('now')) ON CONFLICT(email) DO UPDATE SET families_children=excluded.families_children,events=excluded.events,food_drink=excluded.food_drink,offers_savings=excluded.offers_savings,home_property=excluded.home_property,pets_outdoors=excluded.pets_outdoors,practical_updates=excluded.practical_updates,updated_at=datetime('now')`)
     .bind(email, yn('families_children'), yn('events'), yn('food_drink'), yn('offers_savings'), yn('home_property'), yn('pets_outdoors'), yn('practical_updates')).run();
   return json({ message: 'Your optional SK8 Scoop interests have been saved.' });
+}
+
+async function handleReaderSubmission(request, env) {
+  const d = await readJson(request);
+  if (String(d.website || '').trim()) return json({ message: 'Thank you. Your submission has been received.' });
+  if (!(await tableExists(env.DB, 'reader_submissions'))) return json({ error: 'Reader submissions need the pending database migration before this preview form can accept entries.' }, 503);
+
+  const allowed = ['competition_answer', 'puzzle_answer', 'comment', 'local_tip', 'story_idea', 'photo', 'other'];
+  if (!allowed.includes(String(d.submission_type || ''))) return json({ error: 'Please choose what you are sending.' }, 400);
+  if (!String(d.message || '').trim()) return json({ error: 'Please enter your answer or message.' }, 400);
+  if (!isEmail(d.email)) return json({ error: 'Please provide a valid email address.' }, 400);
+  if (String(d.privacy_confirmed || '') !== 'yes') return json({ error: 'Please confirm that SK8 Scoop may use these details to review or respond to your submission.' }, 400);
+  if (String(d.link || '').trim() && !isUrl(d.link)) return json({ error: 'Please provide a valid link beginning with http:// or https://.' }, 400);
+
+  const c = (value, length = 4000) => String(value || '').trim().slice(0, length);
+  const result = await env.DB.prepare(`INSERT INTO reader_submissions (submission_type,message,reference,link,name,email,status,notification_status,created_at) VALUES (?,?,?,?,?,?,'pending','pending',datetime('now'))`)
+    .bind(c(d.submission_type, 60), c(d.message, 4000), c(d.reference, 240), c(d.link, 500), c(d.name, 120), c(d.email, 200).toLowerCase()).run();
+
+  const rowId = result && result.meta ? result.meta.last_row_id : null;
+  const notification = await notifyInbox(env, {
+    subject: `[SK8 Scoop submission] ${labelSubmissionType(d.submission_type)}${d.reference ? ` - ${c(d.reference, 80)}` : ''}`,
+    text: [
+      'New SK8 Scoop reader submission',
+      '',
+      `Type: ${labelSubmissionType(d.submission_type)}`,
+      `Name: ${c(d.name, 120) || 'Not supplied'}`,
+      `Email: ${c(d.email, 200)}`,
+      `Reference: ${c(d.reference, 240) || 'Not supplied'}`,
+      `Link: ${c(d.link, 500) || 'Not supplied'}`,
+      '',
+      c(d.message, 4000)
+    ].join('\n')
+  });
+  await updateNotificationStatus(env.DB, 'reader_submissions', rowId, notification);
+
+  return json({ message: 'Thank you. Your submission has been saved for review.' });
+}
+
+async function handleContactMessage(request, env) {
+  const d = await readJson(request);
+  if (String(d.website || '').trim()) return json({ message: 'Thank you. Your message has been received.' });
+  if (!(await tableExists(env.DB, 'contact_messages'))) return json({ error: 'Contact messages need the pending database migration before this preview form can accept messages.' }, 503);
+
+  const allowed = ['general', 'correction', 'newsletter_problem', 'advertising', 'partnership', 'privacy', 'other'];
+  if (!String(d.name || '').trim() || !String(d.message || '').trim()) return json({ error: 'Please complete your name and message.' }, 400);
+  if (!isEmail(d.email)) return json({ error: 'Please provide a valid email address.' }, 400);
+  if (!allowed.includes(String(d.category || ''))) return json({ error: 'Please choose what your message is about.' }, 400);
+  if (String(d.privacy_confirmed || '') !== 'yes') return json({ error: 'Please confirm that SK8 Scoop may use these details to deal with your message.' }, 400);
+
+  const c = (value, length = 5000) => String(value || '').trim().slice(0, length);
+  const result = await env.DB.prepare(`INSERT INTO contact_messages (name,email,category,message,status,notification_status,created_at) VALUES (?,?,?,?,'pending','pending',datetime('now'))`)
+    .bind(c(d.name, 120), c(d.email, 200).toLowerCase(), c(d.category, 60), c(d.message, 5000)).run();
+
+  const rowId = result && result.meta ? result.meta.last_row_id : null;
+  const notification = await notifyInbox(env, {
+    subject: `[SK8 Scoop contact] ${labelContactCategory(d.category)} - ${c(d.name, 80)}`,
+    text: [
+      'New message from the SK8 Scoop contact page',
+      '',
+      `From: ${c(d.name, 120)}`,
+      `Email: ${c(d.email, 200)}`,
+      `Category: ${labelContactCategory(d.category)}`,
+      '',
+      c(d.message, 5000)
+    ].join('\n')
+  });
+  await updateNotificationStatus(env.DB, 'contact_messages', rowId, notification);
+
+  return json({ message: 'Thank you. Your message has been received by SK8 Scoop.' });
+}
+
+async function notifyInbox(env, { subject, text }) {
+  if (!env.CONTACT_EMAIL || typeof env.CONTACT_EMAIL.send !== 'function') {
+    return 'not_configured';
+  }
+
+  try {
+    await env.CONTACT_EMAIL.send({
+      to: CONTACT_INBOX,
+      from: WEBSITE_SENDER,
+      subject: safeHeader(subject),
+      text: String(text || '').slice(0, 12000)
+    });
+    return 'sent';
+  } catch (error) {
+    console.error('SK8 Scoop contact notification failed', error);
+    return 'failed';
+  }
+}
+
+async function updateNotificationStatus(db, tableName, rowId, notificationStatus) {
+  if (!rowId || !['reader_submissions', 'contact_messages'].includes(tableName)) return;
+  const notifiedAtSql = notificationStatus === 'sent' ? "datetime('now')" : 'NULL';
+  await db.prepare(`UPDATE ${tableName} SET notification_status = ?, notified_at = ${notifiedAtSql} WHERE id = ?`)
+    .bind(notificationStatus, rowId)
+    .run();
+}
+
+function labelSubmissionType(value) {
+  return ({
+    competition_answer: 'Competition answer',
+    puzzle_answer: 'Puzzle answer',
+    comment: 'Newsletter comment',
+    local_tip: 'Local tip',
+    story_idea: 'Story idea',
+    photo: 'Photo or image link',
+    other: 'Other'
+  })[String(value || '')] || 'Reader submission';
+}
+
+function labelContactCategory(value) {
+  return ({
+    general: 'General question',
+    correction: 'Correction',
+    newsletter_problem: 'Newsletter problem',
+    advertising: 'Advertising',
+    partnership: 'Partnership',
+    privacy: 'Privacy or data',
+    other: 'Other'
+  })[String(value || '')] || 'Contact message';
+}
+
+function safeHeader(value) {
+  return String(value || '').replace(/[\r\n]+/g, ' ').trim().slice(0, 180);
 }
 
 async function readJson(request) {
