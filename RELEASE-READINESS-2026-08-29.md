@@ -6,7 +6,7 @@ Status: READY FOR EXPLICIT PRODUCTION APPROVAL
 
 ## Verified working
 
-- Latest Cloudflare branch-preview deployment succeeded for commit `20a0ddb6` before this documentation-only release note commit. No runtime code changed after that successful build.
+- Cloudflare branch-preview deployment succeeded for the final runtime-code commit `20a0ddb6`; subsequent commits only update release documentation.
 - Contact page uses Formspark endpoint `https://submit-form.com/X3MWnWHXI`.
 - Contact form was tested end-to-end successfully: provider submission succeeded and notification reached `contact@sk8scoop.com`.
 - Production D1 database is `sk8-scoop-db`, bound to the Worker as `DB`.
