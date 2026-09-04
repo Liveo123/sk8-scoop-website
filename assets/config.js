@@ -71,3 +71,11 @@ window.SK8_CONFIG = {
     category_partner: ""
   }
 };
+
+(() => {
+  const script = document.createElement('script');
+  script.src = '/assets/signup-protection.js';
+  script.defer = true;
+  script.dataset.sk8SignupProtection = 'true';
+  document.head.appendChild(script);
+})();
