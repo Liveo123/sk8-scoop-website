@@ -1,0 +1,65 @@
+name: Import exact Free and Cheap Guide v5
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-free-cheap-guide-v5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-guide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download exact Drive HTML
+        run: |
+          python -m pip install --quiet beautifulsoup4 requests
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          from urllib.parse import urljoin
+          file_id='1YDvo0tsdjEbNhYnLnVxfgDzTJONe0PQ8'
+          s=requests.Session()
+          r=s.get('https://drive.google.com/uc',params={'export':'download','id':file_id},timeout=60)
+          r.raise_for_status()
+          if 'text/html' in (r.headers.get('content-type') or '').lower():
+              soup=BeautifulSoup(r.text,'html.parser')
+              form=soup.find('form',id='download-form') or soup.find('form')
+              if form is None:
+                  raise SystemExit('Google confirmation form not found')
+              action=urljoin(r.url,form.get('action',''))
+              params={}
+              for inp in form.find_all('input'):
+                  name=inp.get('name')
+                  if name:
+                      params[name]=inp.get('value','')
+              r=s.get(action,params=params,timeout=120,stream=True)
+              r.raise_for_status()
+          with open('/tmp/guide.html','wb') as f:
+              for chunk in r.iter_content(1024*1024):
+                  if chunk:
+                      f.write(chunk)
+          PY
+      - name: Verify exact source
+        run: |
+          wc -c /tmp/guide.html
+          sha256sum /tmp/guide.html
+          test "$(wc -c < /tmp/guide.html)" = "32156987"
+          echo "a37825844af3c9e4c6666e07470979477be336907ff5c58de5e4f0367360fa61  /tmp/guide.html" | sha256sum -c -
+      - name: Replace web guide without modifying it
+        run: |
+          cp /tmp/guide.html free-cheap-guide/guide/index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add free-cheap-guide/guide/index.html
+          if git diff --cached --quiet; then
+            echo "Guide already matches exact Drive source."
+            exit 0
+          fi
+          git commit -m "Publish exact v22.2 Free and Cheap Guide HTML"
+          git push origin HEAD:main
