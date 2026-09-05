@@ -7,6 +7,12 @@
   let siteKey = '';
   let initPromise = null;
 
+  const getKind = form => {
+    const explicit = String(form.dataset.signupKind || '').trim().toLowerCase();
+    if (explicit === 'guide') return 'guide';
+    return form.matches('[data-qr-form]') ? 'qr' : 'main';
+  };
+
   const getStatus = form => {
     let status = form.nextElementSibling && form.nextElementSibling.classList.contains('signup-status')
       ? form.nextElementSibling
@@ -54,13 +60,13 @@
   };
 
   const addTurnstileContainer = form => {
-    const id = `sk8-turnstile-${Math.random().toString(36).slice(2, 9)}`;
-    let container = form.parentElement && form.parentElement.querySelector(`:scope > [data-sk8-turnstile-for="${form.dataset.formPosition || 'unknown'}"]`);
+    const position = form.dataset.formPosition || 'unknown';
+    let container = form.parentElement && form.parentElement.querySelector(`:scope > [data-sk8-turnstile-for="${position}"]`);
     if (container) return container;
     container = document.createElement('div');
-    container.id = id;
+    container.id = `sk8-turnstile-${Math.random().toString(36).slice(2, 9)}`;
     container.dataset.sk8Turnstile = 'true';
-    container.dataset.sk8TurnstileFor = form.dataset.formPosition || 'unknown';
+    container.dataset.sk8TurnstileFor = position;
     container.style.marginTop = '10px';
     container.style.maxWidth = '360px';
     container.style.minHeight = '65px';
@@ -71,7 +77,7 @@
   forms.forEach(form => {
     addHoneypot(form);
     ensureHidden(form, 'sk8_started_at', startedAt);
-    ensureHidden(form, 'sk8_form_kind', form.matches('[data-qr-form]') ? 'qr' : 'main');
+    ensureHidden(form, 'sk8_form_kind', getKind(form));
     ensureHidden(form, 'cf-turnstile-response', '');
     addTurnstileContainer(form);
   });
@@ -150,23 +156,25 @@
 
     if (!form.reportValidity()) return;
 
+    const kind = getKind(form);
     const status = getStatus(form);
     const button = form.querySelector('button[type="submit"]');
     const original = button ? button.textContent : '';
     if (button) {
       button.disabled = true;
-      button.textContent = 'Joining…';
+      button.textContent = kind === 'guide' ? 'Sending…' : 'Joining…';
     }
 
     try {
       if (!turnstileReady) await initialise();
+      ensureHidden(form, 'sk8_form_kind', kind);
       const tokenField = form.querySelector('input[name="cf-turnstile-response"]');
       if (!tokenField || !String(tokenField.value || '').trim()) {
         throw new Error('Please complete the quick human check, then try again.');
       }
 
       status.className = 'signup-status show';
-      status.textContent = 'Adding you to SK8 Scoop…';
+      status.textContent = kind === 'guide' ? 'Getting your guide ready…' : 'Adding you to SK8 Scoop…';
 
       const response = await fetch('/api/newsletter-signup', {
         method: 'POST',
@@ -179,7 +187,7 @@
       }
 
       const formPosition = form.dataset.formPosition || 'unknown';
-      const signupSource = form.matches('[data-qr-form]') ? 'local_qr' : 'website';
+      const signupSource = kind === 'qr' ? 'local_qr' : kind === 'guide' ? 'free_cheap_guide' : 'website';
       if (typeof window.sk8Track === 'function') {
         window.sk8Track('sign_up', {
           method: 'MailerLite + Turnstile',
@@ -190,13 +198,13 @@
 
       form.dispatchEvent(new CustomEvent('sk8:mailerlite-success', { bubbles: true, detail: { result } }));
       status.className = 'signup-status show success';
-      status.textContent = 'You’re in. Opening the welcome page…';
-      const success = form.matches('[data-qr-form]') ? '/qr-success/' : '/signup-success/';
+      status.textContent = kind === 'guide' ? 'Done. Opening your guide…' : 'You’re in. Opening the welcome page…';
+      const success = kind === 'qr' ? '/qr-success/' : kind === 'guide' ? '/free-cheap-guide/success/' : '/signup-success/';
       window.setTimeout(() => location.assign(success), 350);
     } catch (error) {
       if (typeof window.sk8Track === 'function') {
         window.sk8Track('form_error', {
-          form_kind: 'newsletter_signup',
+          form_kind: kind,
           form_position: form.dataset.formPosition || 'unknown',
           error_type: 'captcha_or_signup_failed'
         });

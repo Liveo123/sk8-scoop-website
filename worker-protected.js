@@ -2,7 +2,8 @@ import existingWorker from './worker.js';
 
 const MAILERLITE_GROUPS = {
   main: ['190964754190174086'],
-  qr: ['190964754190174086', '193441557512193685']
+  qr: ['190964754190174086', '193441557512193685'],
+  guide: ['190964754190174086', '197763144685192678']
 };
 
 export default {
@@ -78,7 +79,7 @@ async function handleNewsletterSignup(request, env) {
   }
 
   const requestedKind = String(form.get('sk8_form_kind') || 'main');
-  const kind = requestedKind === 'qr' ? 'qr' : 'main';
+  const kind = requestedKind === 'qr' ? 'qr' : requestedKind === 'guide' ? 'guide' : 'main';
 
   const fields = {};
   for (const [key, value] of form.entries()) {
@@ -122,7 +123,7 @@ async function handleNewsletterSignup(request, env) {
     return json({ error: 'The newsletter service could not be reached. Please try again.' }, 502);
   }
 
-  return json({ success: true });
+  return json({ success: true, kind });
 }
 
 function json(body, status = 200) {
