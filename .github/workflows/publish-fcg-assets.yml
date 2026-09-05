@@ -1,0 +1,46 @@
+name: Publish Free Cheap Guide landing assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.fcg-assets/GO'
+
+permissions:
+  contents: write
+
+jobs:
+  publish-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Decode landing page images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/images
+          base64 -d .fcg-assets/hero.b64 > assets/images/free-cheap-landing-hero.webp
+          base64 -d .fcg-assets/logo.b64 > assets/images/free-cheap-guide-logo.webp
+          base64 -d .fcg-assets/free.b64 > assets/images/free-cheap-free-badge.webp
+          base64 -d .fcg-assets/rain.b64 > assets/images/free-cheap-rainy-badge.webp
+          base64 -d .fcg-assets/quick.b64 > assets/images/free-cheap-quick-bits.webp
+          base64 -d .fcg-assets/odd.b64 > assets/images/free-cheap-odd-bits.webp
+          test -s assets/images/free-cheap-landing-hero.webp
+          test -s assets/images/free-cheap-guide-logo.webp
+          test -s assets/images/free-cheap-free-badge.webp
+          test -s assets/images/free-cheap-rainy-badge.webp
+          test -s assets/images/free-cheap-quick-bits.webp
+          test -s assets/images/free-cheap-odd-bits.webp
+      - name: Commit decoded assets and clean importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .fcg-assets
+          rm -f .github/workflows/publish-fcg-assets.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Add Free & Cheap Guide landing artwork'
+          git push
