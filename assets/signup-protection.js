@@ -54,13 +54,17 @@
   };
 
   const addTurnstileContainer = form => {
-    let container = form.querySelector('[data-sk8-turnstile]');
+    const id = `sk8-turnstile-${Math.random().toString(36).slice(2, 9)}`;
+    let container = form.parentElement && form.parentElement.querySelector(`:scope > [data-sk8-turnstile-for="${form.dataset.formPosition || 'unknown'}"]`);
     if (container) return container;
     container = document.createElement('div');
+    container.id = id;
     container.dataset.sk8Turnstile = 'true';
-    container.style.marginTop = '8px';
-    container.style.minHeight = '1px';
-    form.appendChild(container);
+    container.dataset.sk8TurnstileFor = form.dataset.formPosition || 'unknown';
+    container.style.marginTop = '10px';
+    container.style.maxWidth = '360px';
+    container.style.minHeight = '65px';
+    form.insertAdjacentElement('afterend', container);
     return container;
   };
 
@@ -68,6 +72,7 @@
     addHoneypot(form);
     ensureHidden(form, 'sk8_started_at', startedAt);
     ensureHidden(form, 'sk8_form_kind', form.matches('[data-qr-form]') ? 'qr' : 'main');
+    ensureHidden(form, 'cf-turnstile-response', '');
     addTurnstileContainer(form);
   });
 
@@ -98,18 +103,34 @@
       siteKey = String(config.siteKey);
       await loadTurnstileScript();
       if (!window.turnstile) throw new Error('The human check could not load.');
+
       forms.forEach(form => {
-        const container = form.querySelector('[data-sk8-turnstile]');
+        const formPosition = form.dataset.formPosition || 'unknown';
+        const container = form.parentElement && form.parentElement.querySelector(`:scope > [data-sk8-turnstile-for="${formPosition}"]`);
         if (!container || container.dataset.rendered === 'true') return;
-        window.turnstile.render(container, {
+        const tokenField = ensureHidden(form, 'cf-turnstile-response', '');
+
+        const widgetId = window.turnstile.render(container, {
           sitekey: siteKey,
           theme: 'auto',
-          size: 'normal',
-          appearance: 'interaction-only',
-          'response-field': true,
-          'response-field-name': 'cf-turnstile-response'
+          size: 'flexible',
+          appearance: 'always',
+          'response-field': false,
+          callback: token => {
+            tokenField.value = String(token || '');
+            container.dataset.verified = token ? 'true' : 'false';
+          },
+          'expired-callback': () => {
+            tokenField.value = '';
+            container.dataset.verified = 'false';
+          },
+          'error-callback': () => {
+            tokenField.value = '';
+            container.dataset.verified = 'false';
+          }
         });
         container.dataset.rendered = 'true';
+        container.dataset.widgetId = String(widgetId);
       });
       turnstileReady = true;
     })();
@@ -185,9 +206,10 @@
         ? error.message
         : 'That did not complete. Please try again or email contact@sk8scoop.com.';
       if (window.turnstile) {
-        const container = form.querySelector('[data-sk8-turnstile]');
-        if (container) {
-          try { window.turnstile.reset(container); } catch (_) {}
+        const formPosition = form.dataset.formPosition || 'unknown';
+        const container = form.parentElement && form.parentElement.querySelector(`:scope > [data-sk8-turnstile-for="${formPosition}"]`);
+        if (container && container.dataset.widgetId) {
+          try { window.turnstile.reset(container.dataset.widgetId); } catch (_) {}
         }
       }
     } finally {
