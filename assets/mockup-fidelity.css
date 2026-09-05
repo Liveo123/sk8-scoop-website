@@ -43,7 +43,7 @@
 .reader-latest-copy h2{font-size:1.55rem!important}
 .reader-latest-copy p{font-size:.85rem}
 .reader-guide-grid{gap:9px}
-.reader-mini-guide img{height:92px;object-fit:cover}
+.reader-mini-guide img{height:92px;object-fit:cover;object-position:center}
 .reader-mini-guide div{padding:10px}
 .reader-mini-guide h3{font-size:.94rem}
 .reader-mini-guide p{font-size:.75rem}
