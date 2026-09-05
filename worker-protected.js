@@ -1,8 +1,8 @@
 import existingWorker from './worker.js';
 
-const MAILERLITE_FORMS = {
-  main: 'https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe',
-  qr: 'https://assets.mailerlite.com/jsonp/2462354/forms/193443598946010929/subscribe'
+const MAILERLITE_GROUPS = {
+  main: ['190964754190174086'],
+  qr: ['190964754190174086', '193441557512193685']
 };
 
 export default {
@@ -24,8 +24,11 @@ export default {
 };
 
 async function handleNewsletterSignup(request, env) {
-  const secret = String(env.TURNSTILE_SECRET_KEY || '').trim();
-  if (!secret) return json({ error: 'Signup protection is temporarily unavailable.' }, 503);
+  const turnstileSecret = String(env.TURNSTILE_SECRET_KEY || '').trim();
+  if (!turnstileSecret) return json({ error: 'Signup protection is temporarily unavailable.' }, 503);
+
+  const mailerLiteToken = String(env.MAILERLITE_API_TOKEN || '').trim();
+  if (!mailerLiteToken) return json({ error: 'Newsletter signup is temporarily unavailable.' }, 503);
 
   let form;
   try {
@@ -53,7 +56,7 @@ async function handleNewsletterSignup(request, env) {
   if (!token) return json({ error: 'Please complete the quick human check.' }, 400);
 
   const verifyBody = new URLSearchParams();
-  verifyBody.set('secret', secret);
+  verifyBody.set('secret', turnstileSecret);
   verifyBody.set('response', token);
   const remoteIp = request.headers.get('CF-Connecting-IP');
   if (remoteIp) verifyBody.set('remoteip', remoteIp);
@@ -76,31 +79,44 @@ async function handleNewsletterSignup(request, env) {
 
   const requestedKind = String(form.get('sk8_form_kind') || 'main');
   const kind = requestedKind === 'qr' ? 'qr' : 'main';
-  const destination = MAILERLITE_FORMS[kind];
 
-  const outgoing = new URLSearchParams();
+  const fields = {};
   for (const [key, value] of form.entries()) {
-    if (['website', 'sk8_started_at', 'sk8_form_kind', 'cf-turnstile-response'].includes(key)) continue;
-    if (typeof value === 'string') outgoing.append(key, value);
+    if (typeof value !== 'string') continue;
+    const match = /^fields\[([^\]]+)\]$/.exec(key);
+    if (!match || match[1] === 'email') continue;
+    fields[match[1]] = value;
   }
-  outgoing.set('fields[email]', email);
 
+  const payload = {
+    email,
+    fields,
+    groups: MAILERLITE_GROUPS[kind],
+    status: 'active'
+  };
+  if (remoteIp) payload.ip_address = remoteIp;
+
+  let result;
   try {
-    const response = await fetch(destination, {
+    const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
       method: 'POST',
-      headers: { accept: 'application/json' },
-      body: outgoing
+      headers: {
+        accept: 'application/json',
+        authorization: `Bearer ${mailerLiteToken}`,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(payload)
     });
-    let result;
+
     try {
       result = await response.json();
     } catch {
       return json({ error: 'The newsletter service returned an unreadable response.' }, 502);
     }
-    if (!response.ok || result.success !== true) {
-      const fieldErrors = result && result.errors && result.errors.fields;
-      const firstError = fieldErrors && Object.values(fieldErrors).flat().find(Boolean);
-      return json({ error: firstError || 'The newsletter service did not accept this signup.' }, 502);
+
+    if (!response.ok) {
+      const apiMessage = result && (result.message || result.error);
+      return json({ error: apiMessage || 'The newsletter service did not accept this signup.' }, 502);
     }
   } catch {
     return json({ error: 'The newsletter service could not be reached. Please try again.' }, 502);
