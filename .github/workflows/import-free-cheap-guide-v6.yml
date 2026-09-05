@@ -1,0 +1,121 @@
+name: Import exact Free and Cheap Guide v6
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-free-cheap-guide-v6.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-guide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download exact Drive HTML
+        run: |
+          python -m pip install --quiet beautifulsoup4 requests
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          from urllib.parse import urljoin, urlparse, parse_qs
+
+          FILE_ID='1YDvo0tsdjEbNhYnLnVxfgDzTJONe0PQ8'
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
+          s=requests.Session()
+          s.headers.update({'User-Agent': UA, 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'})
+          url='https://drive.google.com/uc'
+          params={'export':'download','id':FILE_ID}
+
+          r=s.get(url,params=params,timeout=60,allow_redirects=True)
+          r.raise_for_status()
+
+          for attempt in range(6):
+              ct=(r.headers.get('content-type') or '').lower()
+              size=len(r.content)
+              print(f'attempt={attempt} status={r.status_code} type={ct} bytes={size} url={r.url}')
+              if 'text/html' not in ct:
+                  break
+
+              soup=BeautifulSoup(r.text,'html.parser')
+
+              # Prefer Google's large-file download form.
+              forms=soup.find_all('form')
+              chosen=None
+              for f in forms:
+                  action=f.get('action','')
+                  if 'drive.usercontent.google.com' in action or 'download' in action or f.get('id')=='download-form':
+                      chosen=f
+                      break
+              if chosen is None and forms:
+                  chosen=forms[0]
+
+              if chosen is not None:
+                  action=urljoin(r.url,chosen.get('action',''))
+                  p={}
+                  for inp in chosen.find_all('input'):
+                      name=inp.get('name')
+                      if name:
+                          p[name]=inp.get('value','')
+                  # Preserve file id/export in case Google omitted them from form.
+                  p.setdefault('id',FILE_ID)
+                  p.setdefault('export','download')
+                  print('following form', action, 'keys=', sorted(p.keys()))
+                  r=s.get(action,params=p,timeout=120,allow_redirects=True)
+                  r.raise_for_status()
+                  continue
+
+              # Some Drive flows put the confirmation URL in a link instead of a form.
+              link=None
+              for a in soup.find_all('a',href=True):
+                  href=a['href']
+                  if 'confirm=' in href and ('download' in href or 'uc?' in href):
+                      link=urljoin(r.url,href)
+                      break
+              if link:
+                  print('following link', link)
+                  r=s.get(link,timeout=120,allow_redirects=True)
+                  r.raise_for_status()
+                  continue
+
+              # Fallback to a download_warning cookie token if present.
+              token=None
+              for k,v in s.cookies.items():
+                  if k.startswith('download_warning'):
+                      token=v
+                      break
+              if token:
+                  print('following cookie confirmation')
+                  r=s.get('https://drive.google.com/uc',params={'export':'download','confirm':token,'id':FILE_ID},timeout=120,allow_redirects=True)
+                  r.raise_for_status()
+                  continue
+
+              raise SystemExit('Could not locate a further Google Drive confirmation step')
+          else:
+              raise SystemExit('Too many Google Drive confirmation steps')
+
+          with open('/tmp/guide.html','wb') as f:
+              f.write(r.content)
+          PY
+      - name: Verify exact source
+        run: |
+          wc -c /tmp/guide.html
+          sha256sum /tmp/guide.html
+          test "$(wc -c < /tmp/guide.html)" = "32156987"
+          echo "a37825844af3c9e4c6666e07470979477be336907ff5c58de5e4f0367360fa61  /tmp/guide.html" | sha256sum -c -
+      - name: Replace web guide without modifying it
+        run: |
+          cp /tmp/guide.html free-cheap-guide/guide/index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add free-cheap-guide/guide/index.html
+          if git diff --cached --quiet; then
+            echo "Guide already matches exact Drive source."
+            exit 0
+          fi
+          git commit -m "Publish exact v22.2 Free and Cheap Guide HTML"
+          git push origin HEAD:main
