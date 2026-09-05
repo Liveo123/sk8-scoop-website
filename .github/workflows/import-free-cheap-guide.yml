@@ -19,7 +19,7 @@ jobs:
       - name: Download exact Drive HTML
         run: |
           python -m pip install --quiet gdown
-          gdown --id 1YDvo0tsdjEbNhYnLnVxfgDzTJONe0PQ8 --output /tmp/guide.html
+          gdown 1YDvo0tsdjEbNhYnLnVxfgDzTJONe0PQ8 --output /tmp/guide.html
       - name: Verify exact source
         run: |
           test "$(wc -c < /tmp/guide.html)" = "32156987"
