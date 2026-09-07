@@ -81,3 +81,9 @@ Before enabling the first paid Guide campaign, verify on a Cloudflare preview/de
 - CTA receives the expected UTM parameters;
 - `SPONSORED` and the editorial-independence line are visible;
 - the underlying Guide remains usable and unchanged when the slot is absent.
+
+## Current branch-only preview QA state
+
+The `pre-nue-advertiser-page` branch currently enables an obvious `SK8 Scoop Preview Test` sponsored message so the active-state rendering can be checked on the Cloudflare branch preview. It is not a real advertiser.
+
+The current test window ends automatically on 8 September 2026 at 14:00 UTC. Before PR #16 is merged, the configuration must be restored to `enabled: false` with blank campaign content and dates, and the final production candidate must be checked to contain no preview sponsor.
