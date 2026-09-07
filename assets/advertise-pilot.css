@@ -2,6 +2,7 @@
 body.advertiser-page{font-size:17px;line-height:1.62;color:#17343a}
 body.advertiser-page .section{position:relative;padding-top:72px;padding-bottom:72px}
 body.advertiser-page .section::before,body.advertiser-page .section::after{content:none!important;display:none!important;background:none!important}
+body.advertiser-page .section-kicker-row::before,body.advertiser-page .section-kicker-row::after{content:none!important;display:none!important;background:none!important;width:0!important;height:0!important;opacity:0!important}
 body.advertiser-page .section h2{font-size:clamp(2.2rem,4vw,3.35rem);line-height:1.02;letter-spacing:-.035em;margin-bottom:18px;color:#14383e}
 body.advertiser-page .section h3{font-size:1.35rem;line-height:1.2;color:#14383e}
 body.advertiser-page .section p,body.advertiser-page .card p,body.advertiser-page .policy-panel p,body.advertiser-page .notice p{font-size:1.02rem;line-height:1.62}
