@@ -60,6 +60,21 @@ The CTA URL is automatically decorated with:
 
 This gives the advertiser a campaign-specific source where their analytics support UTMs. SK8 Scoop should still keep newsletter and Guide evidence separate and label advertiser-reported downstream outcomes as advertiser-reported.
 
+## Preview QA before first live sponsor
+
+Use a short-lived test configuration on a non-production branch and confirm:
+
+- inactive configuration produces no injected slot;
+- active configuration produces exactly one slot;
+- the slot appears above guide editorial and remains visually separate;
+- mobile width does not overflow;
+- optional image and no-image states both render acceptably;
+- CTA URL receives the four expected UTM parameters;
+- slot disappears after the configured `end_at` time;
+- invalid/missing dates or CTA URL fail closed and show nothing.
+
+Then restore `enabled: false` before merging the generic mechanism if no paid sponsor is scheduled.
+
 ## Temporary limitation
 
 This first version deliberately avoids a new D1 click table or admin UI. That keeps the bridge system small. Full NUE can replace the file-based configuration with managed inventory and first-party click reporting later while retaining the same slot/product concept.
