@@ -7,6 +7,9 @@ const MAILERLITE_GROUPS = {
   guide: ['190964754190174086', '197763144685192678']
 };
 
+const CONTACT_INBOX = 'contact@sk8scoop.com';
+const WEBSITE_SENDER = 'website@sk8scoop.com';
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -152,27 +155,57 @@ async function handleAdvertiserEnquiry(request, env) {
     return json({ message: 'Thank you. Your campaign enquiry has been saved.' });
   }
 
-  const required = ['business_name', 'contact_name', 'email', 'package', 'preferred_date', 'website', 'terms_accepted'];
+  const required = ['business_name', 'contact_name', 'email', 'package', 'preferred_date', 'website', 'terms_accepted', 'goal', 'area'];
   if (required.some(key => !String(d[key] || '').trim())) return json({ error: 'Please complete all required fields.' }, 400);
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(d.email || ''))) return json({ error: 'Please provide a valid email address.' }, 400);
   if (!/^https?:\/\//i.test(String(d.website || ''))) return json({ error: 'Please provide a valid website, booking page or social profile URL.' }, 400);
   if (String(d.terms_accepted || '') !== 'yes') return json({ error: 'Please confirm the advertising terms.' }, 400);
 
-  const allowed = ['pre_nue_recommendation', 'temp_test', 'temp_grow'];
-  if (!allowed.includes(String(d.package))) return json({ error: 'Please choose a valid campaign option.' }, 400);
+  const allowedPackages = ['pre_nue_recommendation', 'temp_test', 'temp_grow'];
+  if (!allowedPackages.includes(String(d.package))) return json({ error: 'Please choose a valid campaign option.' }, 400);
+
+  const allowedGoals = ['Book', 'Enquire', 'Visit', 'Register', 'Buy or use an offer', 'Know we are here', 'Not sure'];
+  if (!allowedGoals.includes(String(d.goal))) return json({ error: 'Please choose a valid campaign goal.' }, 400);
+
+  const allowedTiming = ['As soon as possible', 'Within 2 weeks', 'Within a month', 'Later', 'Ongoing', 'Not sure'];
+  if (!allowedTiming.includes(String(d.preferred_date))) return json({ error: 'Please choose a valid campaign timing.' }, 400);
 
   const clean = (value, length = 1000) => String(value || '').trim().slice(0, length);
   const goal = clean(d.goal, 160);
   const note = clean(d.advert_copy, 800);
-  const advertCopy = [goal ? `Goal: ${goal}` : '', note].filter(Boolean).join('\n\n');
+  const advertCopy = [`Goal: ${goal}`, note].filter(Boolean).join('\n\n');
 
+  let result;
   try {
-    await env.DB.prepare(`INSERT INTO advertiser_enquiries (business_name,contact_name,email,phone,business_type,area,website,package,preferred_date,advert_copy,image_link,invoice_details,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?, 'pending',datetime('now'))`)
-      .bind(clean(d.business_name, 180), clean(d.contact_name, 120), clean(d.email, 200), clean(d.phone, 80), clean(d.business_type, 120), clean(d.area, 100), clean(d.website, 500), clean(d.package, 80), clean(d.preferred_date, 80), clean(advertCopy, 1000), clean(d.image_link, 500), clean(d.invoice_details, 500)).run();
+    result = await env.DB.prepare(`INSERT INTO advertiser_enquiries (business_name,contact_name,email,phone,business_type,area,website,package,preferred_date,advert_copy,image_link,invoice_details,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?, 'pending',datetime('now'))`)
+      .bind(clean(d.business_name, 180), clean(d.contact_name, 120), clean(d.email, 200).toLowerCase(), clean(d.phone, 80), clean(d.business_type, 120), clean(d.area, 100), clean(d.website, 500), clean(d.package, 80), clean(d.preferred_date, 80), clean(advertCopy, 1000), clean(d.image_link, 500), clean(d.invoice_details, 500)).run();
   } catch (error) {
     console.error('Advertiser enquiry insert failed', error);
     return json({ error: 'Could not save the enquiry.' }, 500);
   }
+
+  const rowId = result && result.meta ? result.meta.last_row_id : null;
+  const notification = await notifyAdvertiserInbox(env, {
+    subject: `[SK8 Scoop advertiser enquiry] ${clean(d.business_name, 100)} - ${goal}`,
+    text: [
+      'New SK8 Scoop advertiser enquiry',
+      '',
+      `Business: ${clean(d.business_name, 180)}`,
+      `Contact: ${clean(d.contact_name, 120)}`,
+      `Email: ${clean(d.email, 200).toLowerCase()}`,
+      `Phone: ${clean(d.phone, 80) || 'Not provided'}`,
+      `Area: ${clean(d.area, 100)}`,
+      `Business type: ${clean(d.business_type, 120) || 'Not provided'}`,
+      `Goal: ${goal}`,
+      `Timing: ${clean(d.preferred_date, 80)}`,
+      `Website: ${clean(d.website, 500)}`,
+      `Request: ${clean(d.package, 80)}`,
+      rowId ? `D1 enquiry ID: ${rowId}` : '',
+      '',
+      note ? `Additional note:\n${note}` : 'No additional note.'
+    ].filter(Boolean).join('\n')
+  });
+  if (notification !== 'sent') console.log(`Advertiser enquiry notification status: ${notification}`);
 
   return json({ message: 'Thank you. Your campaign enquiry has been saved. SK8 Scoop will recommend the simplest route that fits.' });
 }
@@ -248,6 +281,26 @@ function trackedUrl(sponsor) {
   } catch {
     return '';
   }
+}
+
+async function notifyAdvertiserInbox(env, { subject, text }) {
+  if (!env.CONTACT_EMAIL || typeof env.CONTACT_EMAIL.send !== 'function') return 'not_configured';
+  try {
+    await env.CONTACT_EMAIL.send({
+      from: WEBSITE_SENDER,
+      to: CONTACT_INBOX,
+      subject: safeHeader(subject),
+      text: String(text || '').slice(0, 12000)
+    });
+    return 'sent';
+  } catch (error) {
+    console.error('SK8 Scoop advertiser notification failed', error);
+    return 'failed';
+  }
+}
+
+function safeHeader(value) {
+  return String(value || '').replace(/[\r\n]+/g, ' ').trim().slice(0, 180);
 }
 
 function escapeHtml(value) {
