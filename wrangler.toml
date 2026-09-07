@@ -6,9 +6,15 @@ keep_vars = true
 [assets]
 directory = "."
 binding = "ASSETS"
-run_worker_first = [ "/api/*" ]
+run_worker_first = [ "/api/*", "/free-cheap-guide/guide", "/free-cheap-guide/guide/*" ]
 html_handling = "auto-trailing-slash"
 
 # Cloudflare will provision and bind a D1 database for this Worker.
 [[d1_databases]]
 binding = "DB"
+
+# Outbound website notifications to the SK8 Scoop inbox.
+# Requires contact@sk8scoop.com to be a verified destination in Cloudflare Email Service/Email Routing.
+[[send_email]]
+name = "CONTACT_EMAIL"
+destination_address = "contact@sk8scoop.com"
