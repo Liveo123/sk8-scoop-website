@@ -111,3 +111,13 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 );
 CREATE INDEX IF NOT EXISTS idx_contact_messages_status ON contact_messages(status);
 CREATE INDEX IF NOT EXISTS idx_contact_messages_category ON contact_messages(category);
+
+CREATE TABLE IF NOT EXISTS poll_votes (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ issue_id TEXT NOT NULL,
+ option_key TEXT NOT NULL,
+ voter_token TEXT NOT NULL,
+ created_at TEXT NOT NULL,
+ UNIQUE(issue_id, voter_token)
+);
+CREATE INDEX IF NOT EXISTS idx_poll_votes_issue ON poll_votes(issue_id);
