@@ -28,6 +28,13 @@ body.category-page .category-story-image.dark-label span{background:rgba(7,63,72
 body.category-page .category-note{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fffdf8}
 body.category-page .category-note svg{width:28px;height:28px;flex:0 0 28px;stroke:var(--teal);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 body.category-page .category-note p{margin:0}
+body.category-page .category-stat-visual{min-height:176px;padding:18px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;background:linear-gradient(135deg,#e9f5f2,#fff7eb);border-bottom:1px solid var(--line)}
+body.category-page .category-stat-visual.alt{background:linear-gradient(135deg,#fff4e8,#eef7f5)}
+body.category-page .category-stat-visual.compact strong{font-size:2.6rem}
+body.category-page .category-stat-kicker{font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+body.category-page .category-stat-visual strong{font:900 3rem/1 Arial,sans-serif;color:var(--ink);letter-spacing:-.04em;margin-top:8px}
+body.category-page .category-stat-visual small{font-size:.92rem;font-weight:800;color:#324b50;margin-top:4px}
+body.category-page .category-stat-visual b{font-size:.76rem;color:#5b6a6d;margin-top:8px}
 
 /* What's On: image-led but still restrained and in the existing visual system. */
 body[data-page="whats-on"] .page-hero{padding:48px 0 40px}
@@ -71,6 +78,7 @@ body[data-page="whats-on"] .whats-on-next-panel .whats-on-panel-icon{margin:0}
   body.reader-home .reader-explore-tile{min-height:190px}
   body.category-page .category-hero-visual,body.category-page .category-hero-visual img{min-height:235px;height:235px}
   body.category-page .category-hero-caption strong{font-size:1.08rem}
+  body.category-page .category-stat-visual{min-height:150px}
   body[data-page="whats-on"] .whats-on-empty:not([hidden]){grid-template-columns:1fr}
   body[data-page="whats-on"] .whats-on-empty-art{width:100%;height:180px}
   body[data-page="whats-on"] .whats-on-hero-visual,body[data-page="whats-on"] .whats-on-hero-visual img{min-height:235px;height:235px}
