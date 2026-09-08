@@ -36,58 +36,66 @@
     {
       "title": "What’s On",
       "description": "Events & things to do",
-      "glyph": "▦",
       "href": "/whats-on/",
-      "status": "OPEN"
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/hero-family-market-clean.webp"
     },
     {
       "title": "Free & Cheap",
       "description": "Make the most of local life for less",
-      "glyph": "£",
       "href": "/free-cheap-guide/",
-      "status": "OPEN"
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/free-cheap-landing-hero.webp"
     },
     {
       "title": "Food & Drink",
       "description": "Local spots to eat & drink",
-      "glyph": "⌑",
       "href": "",
-      "status": "NEXT"
+      "status": "NEXT",
+      "visual": "icon",
+      "icon": "food"
     },
     {
       "title": "Kids & Family",
       "description": "Days out & activities",
-      "glyph": "♙",
       "href": "",
-      "status": "NEXT"
+      "status": "NEXT",
+      "visual": "icon",
+      "icon": "family"
     },
     {
       "title": "Outdoors",
       "description": "Walks, parks & fresh air",
-      "glyph": "▲",
       "href": "",
-      "status": "NEXT"
+      "status": "NEXT",
+      "visual": "icon",
+      "icon": "outdoors"
     },
     {
       "title": "Local History",
       "description": "Stories from around here",
-      "glyph": "▥",
       "href": "",
-      "status": "NEXT"
+      "status": "NEXT",
+      "visual": "icon",
+      "icon": "history"
     },
     {
       "title": "Planning & Development",
       "description": "Changes, consultations & what they mean",
-      "glyph": "⌂",
       "href": "",
-      "status": "NEXT"
+      "status": "NEXT",
+      "visual": "icon",
+      "icon": "planning"
     },
     {
       "title": "Useful Updates",
       "description": "Roads, bins, travel & practical changes",
-      "glyph": "✓",
       "href": "",
-      "status": "NEXT"
+      "status": "NEXT",
+      "visual": "icon",
+      "icon": "updates"
     }
   ]
 }
