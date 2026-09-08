@@ -52,14 +52,14 @@
       const visual = document.createElement('figure');
       visual.className = 'whats-on-hero-visual';
       const image = document.createElement('img');
-      image.src = '/assets/images/hero-family-market-clean.webp';
-      image.alt = 'Local people enjoying a community event around SK8';
+      image.src = '/assets/images/nue/whats-on-hero.webp';
+      image.alt = 'Editorial collage of a local events map, tickets, calendar and stage lights';
       const caption = document.createElement('figcaption');
       caption.className = 'whats-on-hero-caption';
       const badge = document.createElement('span');
-      badge.textContent = 'Around SK8';
+      badge.textContent = 'What’s On';
       const strong = document.createElement('strong');
-      strong.textContent = 'Fresh local picks, checked before they are listed.';
+      strong.textContent = 'Local events, useful filters and things actually worth leaving the house for.';
       caption.append(badge, strong);
       visual.append(image, caption);
 
@@ -71,9 +71,9 @@
     if (filterGrid && !filterGrid.classList.contains('whats-on-filter-grid')) {
       filterGrid.classList.add('whats-on-filter-grid');
       const images = {
-        weekend: '/assets/images/hero-family-market-clean.webp',
+        weekend: '/assets/images/nue/whats-on-weekend.webp',
         free: '/assets/images/free-cheap-landing-hero.webp',
-        family: '/assets/images/family-picnic.webp'
+        family: '/assets/images/nue/whats-on-family.webp'
       };
       const labels = { weekend: 'THIS WEEKEND', free: 'FREE IDEAS', family: 'FAMILY' };
       ['weekend','free','family'].forEach(key => {
@@ -94,10 +94,10 @@
       const copy = document.createElement('div');
       copy.className = 'whats-on-empty-copy';
       [...empty.childNodes].forEach(node => copy.appendChild(node));
-      const art = document.createElement('img');
-      art.className = 'whats-on-empty-art';
-      art.src = '/assets/images/free-cheap-pencil-adventure.webp';
-      art.alt = 'SK8 Scoop pencil illustration of local days out and activities';
+      const art = document.createElement('div');
+      art.className = 'whats-on-empty-art whats-on-empty-illustration';
+      art.setAttribute('aria-hidden', 'true');
+      art.innerHTML = `${iconSvg('calendar')}<span class="empty-map-dot dot-one"></span><span class="empty-map-dot dot-two"></span><span class="empty-route"></span>`;
       empty.classList.add('whats-on-empty');
       empty.append(art, copy);
     }
