@@ -113,21 +113,6 @@ window.SK8_CONFIG = {
   });
 
   if (page === 'home') {
-    const cards = [...document.querySelectorAll('.reader-card-grid .reader-story')];
-    config.homeStories.forEach((story, index) => {
-      const card = cards[index];
-      if (!card) return;
-      const image = card.querySelector('.reader-story-image');
-      const label = card.querySelector('.reader-story-image span');
-      const title = card.querySelector('h3');
-      const meta = card.querySelector('.reader-meta');
-      const paragraphs = card.querySelectorAll('.reader-story-body p');
-      if (image) image.style.backgroundImage = `url("${story.image}")`;
-      if (label) { label.textContent = story.label; label.classList.toggle('orange-label', index === 1); }
-      if (title) title.textContent = story.title;
-      if (meta) meta.textContent = story.meta;
-      if (paragraphs[1]) paragraphs[1].textContent = story.summary;
-    });
     const latest = document.querySelector('.reader-latest-panel');
     if (latest) {
       const cover = latest.querySelector('.reader-latest-cover span');
