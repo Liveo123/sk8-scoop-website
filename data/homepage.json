@@ -81,8 +81,8 @@
     {
       "title": "Local History",
       "description": "Stories from around here",
-      "href": "",
-      "status": "NEXT",
+      "href": "/local-history/",
+      "status": "OPEN",
       "visual": "photo",
       "image": "/assets/images/nue/explore-local-history.webp",
       "position": "center"
@@ -90,8 +90,8 @@
     {
       "title": "Planning & Development",
       "description": "Changes, consultations & what they mean",
-      "href": "",
-      "status": "NEXT",
+      "href": "/planning/",
+      "status": "OPEN",
       "visual": "photo",
       "image": "/assets/images/nue/explore-planning.webp",
       "position": "center"
@@ -99,8 +99,8 @@
     {
       "title": "Useful Updates",
       "description": "Roads, bins, travel & practical changes",
-      "href": "",
-      "status": "NEXT",
+      "href": "/updates/",
+      "status": "OPEN",
       "visual": "photo",
       "image": "/assets/images/nue/explore-updates.webp",
       "position": "center"
