@@ -3,19 +3,17 @@
   const SUBSCRIBER_KEY = 'sk8_subscriber_recognition_v1';
   const SUBSCRIBER_DAYS = 365;
 
-  const layoutStyle = document.createElement('style');
-  layoutStyle.dataset.sk8HomepageNueLayout = 'true';
-  layoutStyle.textContent = `
-    @media (min-width: 901px) {
-      .reader-home [data-explore-grid] {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px;
-        width: 100%;
-      }
-    }
-  `;
-  document.head.appendChild(layoutStyle);
+  const iconSvg = key => {
+    const icons = {
+      food: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 7v14M20 7v14M14 14h6M17 21v20M31 7v34M31 7c5 5 6 12 2 17h-2"/></svg>',
+      family: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="17" cy="15" r="5"/><circle cx="32" cy="17" r="4"/><path d="M8 39c1-9 5-14 10-14s9 5 10 14M25 39c1-7 4-11 8-11 4 0 7 4 8 11"/></svg>',
+      outdoors: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 38 19 17l7 10 5-7 11 18H6Z"/><path d="M19 17 23 9l5 8"/></svg>',
+      history: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 12h23a6 6 0 0 1 6 6v21H16a6 6 0 0 1-6-6V12Z"/><path d="M16 12v27M21 19h12M21 25h12M21 31h8"/></svg>',
+      planning: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 8h20l8 8v24H10V8Z"/><path d="M30 8v9h8M16 24h16M16 30h12"/><path d="m17 17 3 3 6-7"/></svg>',
+      updates: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="m15 24 6 6 12-14"/></svg>'
+    };
+    return icons[key] || icons.updates;
+  };
 
   const readSubscriber = () => {
     try {
@@ -109,14 +107,40 @@
     const grid = document.querySelector('[data-explore-grid]');
     if (!grid) return;
     grid.innerHTML = '';
+
     (data.explore || []).forEach(item => {
       const isOpen = item.status === 'OPEN' && item.href;
       const node = document.createElement(isOpen ? 'a' : 'div');
       node.className = `reader-explore-tile${isOpen ? '' : ' is-soon'}`;
       if (isOpen) node.href = item.href;
-      node.innerHTML = `<span class="reader-explore-glyph" aria-hidden="true">${item.glyph || '•'}</span><strong>${item.title || ''}</strong><small>${item.description || ''}</small><em>${isOpen ? 'Open →' : 'Next to build'}</em>`;
+
+      const visual = document.createElement('span');
+      visual.className = `reader-explore-visual ${item.visual === 'photo' && item.image ? 'reader-explore-photo' : 'reader-explore-icon'}`;
+      visual.setAttribute('aria-hidden', 'true');
+      if (item.visual === 'photo' && item.image) {
+        visual.style.backgroundImage = `linear-gradient(rgba(7,63,72,.03),rgba(7,63,72,.12)),url("${item.image}")`;
+      } else {
+        visual.innerHTML = iconSvg(item.icon);
+      }
+
+      const copy = document.createElement('span');
+      copy.className = 'reader-explore-copy';
+      const title = document.createElement('strong');
+      title.textContent = item.title || '';
+      const description = document.createElement('small');
+      description.textContent = item.description || '';
+      const status = document.createElement('em');
+      status.textContent = isOpen ? 'Open →' : 'In development';
+      copy.append(title, description, status);
+      node.append(visual, copy);
       grid.appendChild(node);
     });
+  };
+
+  const syncCurrentIssueLink = () => {
+    const issue = window.SK8_CONFIG && window.SK8_CONFIG.currentIssue;
+    const button = document.querySelector('.reader-latest-copy .button');
+    if (issue && issue.url && button) button.href = issue.url;
   };
 
   const loadHomepageData = async () => {
@@ -132,5 +156,6 @@
   };
 
   applySubscriberState();
+  syncCurrentIssueLink();
   loadHomepageData();
 })();
