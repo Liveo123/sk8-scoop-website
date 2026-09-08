@@ -54,8 +54,8 @@
     {
       "title": "Food & Drink",
       "description": "Local spots to eat & drink",
-      "href": "",
-      "status": "NEXT",
+      "href": "/food-drink/",
+      "status": "OPEN",
       "visual": "photo",
       "image": "/assets/images/nue/explore-food-drink.webp",
       "position": "center"
@@ -63,8 +63,8 @@
     {
       "title": "Kids & Family",
       "description": "Days out & activities",
-      "href": "",
-      "status": "NEXT",
+      "href": "/kids-family/",
+      "status": "OPEN",
       "visual": "photo",
       "image": "/assets/images/nue/explore-kids-family.webp",
       "position": "center"
@@ -72,8 +72,8 @@
     {
       "title": "Outdoors",
       "description": "Walks, parks & fresh air",
-      "href": "",
-      "status": "NEXT",
+      "href": "/outdoors/",
+      "status": "OPEN",
       "visual": "photo",
       "image": "/assets/images/nue/explore-outdoors.webp",
       "position": "center"
