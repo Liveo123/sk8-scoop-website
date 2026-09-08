@@ -1,0 +1,93 @@
+{
+  "updated": "2026-09-08",
+  "stories": [
+    {
+      "mode": "KNOW",
+      "label": "KNOW THIS",
+      "title": "A 20mph proposal for the Nansen/Firs estate",
+      "meta": "Heald Green · Consultation closes 24 Sep",
+      "summary": "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
+      "href": "/latest",
+      "linkLabel": "Read the useful update →",
+      "image": "/assets/images/home-story-2.webp"
+    },
+    {
+      "mode": "DO",
+      "label": "DO THIS",
+      "title": "Walk Gatley Carrs",
+      "meta": "Gatley · Easy 2.9-mile / 4.7km circular",
+      "summary": "A straightforward local walk through the reserve, with the published start point and practical access notes kept clear.",
+      "href": "/latest",
+      "linkLabel": "Open the walk in Issue 11 →",
+      "image": "/assets/images/family-picnic.webp"
+    },
+    {
+      "mode": "DISCOVER",
+      "label": "DISCOVER THIS",
+      "title": "The Heald Green spy and future Dambuster",
+      "meta": "Heald Green · Local history",
+      "summary": "The Finney Lane story linking Marthe Cnockaert McKenna, Heald Green Hotel, RAF airmen and a locally recorded Guy Gibson connection.",
+      "href": "/latest",
+      "linkLabel": "Read the story in Issue 11 →",
+      "image": "https://storage.mlcdn.com/account_image/2462354/XUOl5y8Le1k2HWFPih9pWAd86ITKXij0u2kJczOX.png"
+    }
+  ],
+  "explore": [
+    {
+      "title": "What’s On",
+      "description": "Events & things to do",
+      "glyph": "▦",
+      "href": "/whats-on/",
+      "status": "OPEN"
+    },
+    {
+      "title": "Free & Cheap",
+      "description": "Make the most of local life for less",
+      "glyph": "£",
+      "href": "/free-cheap-guide/",
+      "status": "OPEN"
+    },
+    {
+      "title": "Food & Drink",
+      "description": "Local spots to eat & drink",
+      "glyph": "⌑",
+      "href": "",
+      "status": "NEXT"
+    },
+    {
+      "title": "Kids & Family",
+      "description": "Days out & activities",
+      "glyph": "♙",
+      "href": "",
+      "status": "NEXT"
+    },
+    {
+      "title": "Outdoors",
+      "description": "Walks, parks & fresh air",
+      "glyph": "▲",
+      "href": "",
+      "status": "NEXT"
+    },
+    {
+      "title": "Local History",
+      "description": "Stories from around here",
+      "glyph": "▥",
+      "href": "",
+      "status": "NEXT"
+    },
+    {
+      "title": "Planning & Development",
+      "description": "Changes, consultations & what they mean",
+      "glyph": "⌂",
+      "href": "",
+      "status": "NEXT"
+    },
+    {
+      "title": "Useful Updates",
+      "description": "Roads, bins, travel & practical changes",
+      "glyph": "✓",
+      "href": "",
+      "status": "NEXT"
+    }
+  ]
+}
