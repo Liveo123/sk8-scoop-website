@@ -3,6 +3,20 @@
   const SUBSCRIBER_KEY = 'sk8_subscriber_recognition_v1';
   const SUBSCRIBER_DAYS = 365;
 
+  const layoutStyle = document.createElement('style');
+  layoutStyle.dataset.sk8HomepageNueLayout = 'true';
+  layoutStyle.textContent = `
+    @media (min-width: 901px) {
+      .reader-home [data-explore-grid] {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+      }
+    }
+  `;
+  document.head.appendChild(layoutStyle);
+
   const readSubscriber = () => {
     try {
       const value = JSON.parse(localStorage.getItem(SUBSCRIBER_KEY) || 'null');
