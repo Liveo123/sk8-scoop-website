@@ -14,7 +14,7 @@
   };
   if (publicPaths.has(path)) {
     if (!document.body.dataset.page && pageIdentity[path]) document.body.dataset.page = pageIdentity[path];
-    ['/assets/secondary-pages.css','/assets/secondary-extras.css'].forEach((href) => {
+    ['/assets/secondary-pages.css','/assets/secondary-extras.css','/assets/nue-preview.css'].forEach((href) => {
       if (!document.querySelector(`link[href="${href}"]`)) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -28,6 +28,7 @@
       const active = pageIdentity[path] || '';
       const links = [
         ['home','/','Home'],
+        ['whats-on','/whats-on/','What’s On'],
         ['guides','/guides/','Guides'],
         ['start','/start/','Where to start'],
         ['join','/join/','Join'],
