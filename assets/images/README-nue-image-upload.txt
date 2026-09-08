@@ -1,0 +1,1 @@
+Temporary preview branch note: generated NUE artwork is being added as binary assets. Do not merge this note as production documentation.
