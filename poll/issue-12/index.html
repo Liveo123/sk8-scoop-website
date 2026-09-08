@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SK8 Scoop quick poll | Issue 12</title>
+  <meta name="description" content="A quick SK8 Scoop reader poll about how far the newsletter should search for standout events.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://www.sk8scoop.com/poll/issue-12/">
+  <meta name="theme-color" content="#0f6470">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <link rel="stylesheet" href="../../assets/reader-pages.css">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    .poll-page{background:#f6f1e8;min-height:100vh}.poll-shell{max-width:720px;margin:0 auto;padding:36px 20px 64px}.poll-brand{display:block;width:min(330px,78vw);margin:0 auto 28px}.poll-card{background:#fff;border:1px solid #d9dfda;border-radius:18px;padding:28px;box-shadow:0 8px 26px rgba(17,34,34,.06)}.poll-kicker{font-size:.82rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#0f6470}.poll-card h1{font-size:clamp(1.75rem,5vw,2.55rem);line-height:1.08;margin:.45rem 0 .7rem;color:#202729}.poll-intro{font-size:1.06rem;line-height:1.6;margin-bottom:1.4rem}.poll-options{display:grid;gap:10px;margin:18px 0}.poll-option{display:flex;align-items:flex-start;gap:12px;border:1px solid #c9d4d2;border-radius:12px;padding:15px 16px;cursor:pointer;background:#fff}.poll-option:hover,.poll-option:focus-within{border-color:#0f6470;background:#f3f8f7}.poll-option input{margin-top:3px;inline-size:20px;block-size:20px;accent-color:#0f6470}.poll-option strong{display:block;font-size:1rem}.poll-submit{width:100%;min-height:50px;border:0;border-radius:7px;background:#0f6470;color:#fff;font-weight:800;font-size:1rem;padding:12px 18px;cursor:pointer;margin-top:8px}.poll-small{font-size:.82rem;line-height:1.5;color:#5b6667;margin-top:14px}.poll-note{border-left:4px solid #e8832a;background:#fff9f2;padding:12px 14px;margin:18px 0}.results{display:none;margin-top:22px}.results.is-visible{display:block}.result-row{margin:0 0 14px}.result-head{display:flex;justify-content:space-between;gap:12px;font-weight:700;font-size:.95rem}.bar{height:12px;background:#edf1ef;border-radius:99px;overflow:hidden;margin-top:6px}.bar span{display:block;height:100%;background:#0f6470;border-radius:99px}.poll-status{margin-top:16px;font-weight:700;color:#0f6470}.poll-footer{text-align:center;font-size:.8rem;color:#687273;margin-top:20px}.poll-footer a{color:#0f6470}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:520px){.poll-shell{padding:24px 14px 48px}.poll-card{padding:22px 18px;border-radius:14px}}
+  </style>
+</head>
+<body class="poll-page">
+  <main class="poll-shell" id="main-content">
+    <a href="/" aria-label="SK8 Scoop home"><img class="poll-brand" src="../../assets/sk8-scoop-logo.webp" alt="SK8 Scoop — the useful, the local and the mildly nosy"></a>
+    <section class="poll-card" aria-labelledby="poll-title">
+      <div class="poll-kicker">Issue 12 · quick reader poll</div>
+      <h1 id="poll-title">How far should SK8 Scoop travel for a genuinely brilliant event?</h1>
+      <p class="poll-intro">This week we widened the net to Sale and Ramsbottom. Tell us how far you actually want us to go when something looks properly worth the trip.</p>
+      <form id="poll-form">
+        <fieldset style="border:0;padding:0;margin:0">
+          <legend class="sr-only">Choose one answer</legend>
+          <div class="poll-options">
+            <label class="poll-option"><input type="radio" name="poll_answer" value="keep_it_sk8" required><span><strong>Keep it in SK8 if possible</strong></span></label>
+            <label class="poll-option"><input type="radio" name="poll_answer" value="about_15_minutes"><span><strong>About 15 minutes away</strong></span></label>
+            <label class="poll-option"><input type="radio" name="poll_answer" value="up_to_30_minutes"><span><strong>Up to 30 minutes away</strong></span></label>
+            <label class="poll-option"><input type="radio" name="poll_answer" value="further_if_worth_it"><span><strong>Further, if it’s genuinely worth the trip</strong></span></label>
+          </div>
+        </fieldset>
+        <button class="poll-submit" type="submit">SEND MY VOTE</button>
+        <p class="poll-small">No name or email address is requested. This page uses a random browser token to reduce duplicate voting. You can change your answer later from the same browser.</p>
+      </form>
+      <div class="poll-status" id="poll-status" aria-live="polite"></div>
+      <div class="results" id="results" aria-live="polite">
+        <div class="poll-kicker">Running result</div>
+        <p class="poll-small" id="result-total"></p>
+        <div id="result-rows"></div>
+      </div>
+      <div class="poll-note">Links in the email do not record a vote. A vote is only counted after pressing <strong>SEND MY VOTE</strong> on this page.</div>
+    </section>
+    <div class="poll-footer"><a href="/">SK8 Scoop</a> · Cheadle · Cheadle Hulme · Gatley · Heald Green</div>
+  </main>
+<script>
+(function(){
+  var labels={keep_it_sk8:'Keep it in SK8 if possible',about_15_minutes:'About 15 minutes away',up_to_30_minutes:'Up to 30 minutes away',further_if_worth_it:'Further, if it’s genuinely worth the trip'};
+  var order=['keep_it_sk8','about_15_minutes','up_to_30_minutes','further_if_worth_it'];
+  var q=new URLSearchParams(location.search);
+  var pre=q.get('answer');
+  if(order.indexOf(pre)!==-1){var radio=document.querySelector('input[value="'+pre+'"]');if(radio)radio.checked=true;}
+  var token=localStorage.getItem('sk8_issue12_poll_token');
+  if(!token){token='sk8_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('sk8_issue12_poll_token',token);}
+  function render(data){
+    var total=Number(data.total||0), rows=document.getElementById('result-rows'); rows.innerHTML='';
+    order.forEach(function(key){var count=Number((data.counts||{})[key]||0);var pct=total?Math.round(count*100/total):0;var wrap=document.createElement('div');wrap.className='result-row';wrap.innerHTML='<div class="result-head"><span>'+labels[key]+'</span><span>'+pct+'% · '+count+'</span></div><div class="bar"><span style="width:'+pct+'%"></span></div>';rows.appendChild(wrap);});
+    document.getElementById('result-total').textContent=total===1?'1 vote so far':total+' votes so far';
+    document.getElementById('results').classList.add('is-visible');
+  }
+  fetch('/api/poll/issue-12',{headers:{accept:'application/json'}}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d)render(d)}).catch(function(){});
+  document.getElementById('poll-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var chosen=document.querySelector('input[name="poll_answer"]:checked'); if(!chosen)return;
+    var button=e.currentTarget.querySelector('button'); button.disabled=true; button.textContent='SENDING…';
+    fetch('/api/poll/issue-12',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify({answer:chosen.value,voter_token:token})})
+      .then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d}})})
+      .then(function(x){if(!x.ok)throw new Error(x.data.error||'Vote failed');document.getElementById('poll-status').textContent='Vote received. Here’s the running result.';render(x.data);button.textContent='UPDATE MY VOTE';button.disabled=false;})
+      .catch(function(err){document.getElementById('poll-status').textContent=err.message||'The vote could not be saved. Please try again.';button.textContent='SEND MY VOTE';button.disabled=false;});
+  });
+})();
+</script>
+</body>
+</html>
