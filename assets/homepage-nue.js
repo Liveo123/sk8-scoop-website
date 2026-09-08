@@ -118,7 +118,8 @@
       visual.className = `reader-explore-visual ${item.visual === 'photo' && item.image ? 'reader-explore-photo' : 'reader-explore-icon'}`;
       visual.setAttribute('aria-hidden', 'true');
       if (item.visual === 'photo' && item.image) {
-        visual.style.backgroundImage = `linear-gradient(rgba(7,63,72,.03),rgba(7,63,72,.12)),url("${item.image}")`;
+        visual.style.backgroundImage = `linear-gradient(rgba(7,63,72,.02),rgba(7,63,72,.12)),url("${item.image}")`;
+        visual.style.backgroundPosition = item.position || 'center';
       } else {
         visual.innerHTML = iconSvg(item.icon);
       }
