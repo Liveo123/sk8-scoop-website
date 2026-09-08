@@ -39,7 +39,8 @@
       "href": "/whats-on/",
       "status": "OPEN",
       "visual": "photo",
-      "image": "/assets/images/hero-family-market-clean.webp"
+      "image": "/assets/images/nue/explore-whats-on.webp",
+      "position": "center"
     },
     {
       "title": "Free & Cheap",
@@ -47,55 +48,62 @@
       "href": "/free-cheap-guide/",
       "status": "OPEN",
       "visual": "photo",
-      "image": "/assets/images/free-cheap-landing-hero.webp"
+      "image": "/assets/images/free-cheap-landing-hero.webp",
+      "position": "center"
     },
     {
       "title": "Food & Drink",
       "description": "Local spots to eat & drink",
       "href": "",
       "status": "NEXT",
-      "visual": "icon",
-      "icon": "food"
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-food-drink.webp",
+      "position": "center"
     },
     {
       "title": "Kids & Family",
       "description": "Days out & activities",
       "href": "",
       "status": "NEXT",
-      "visual": "icon",
-      "icon": "family"
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-kids-family.webp",
+      "position": "center"
     },
     {
       "title": "Outdoors",
       "description": "Walks, parks & fresh air",
       "href": "",
       "status": "NEXT",
-      "visual": "icon",
-      "icon": "outdoors"
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-outdoors.webp",
+      "position": "center"
     },
     {
       "title": "Local History",
       "description": "Stories from around here",
       "href": "",
       "status": "NEXT",
-      "visual": "icon",
-      "icon": "history"
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-local-history.webp",
+      "position": "center"
     },
     {
       "title": "Planning & Development",
       "description": "Changes, consultations & what they mean",
       "href": "",
       "status": "NEXT",
-      "visual": "icon",
-      "icon": "planning"
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-planning.webp",
+      "position": "center"
     },
     {
       "title": "Useful Updates",
       "description": "Roads, bins, travel & practical changes",
       "href": "",
       "status": "NEXT",
-      "visual": "icon",
-      "icon": "updates"
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-updates.webp",
+      "position": "center"
     }
   ]
 }
