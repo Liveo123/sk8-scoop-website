@@ -9,7 +9,7 @@
       "summary": "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
       "href": "/latest",
       "linkLabel": "Read the useful update →",
-      "graphic": "planning"
+      "image": "/assets/images/dicm/home-planning-v2.svg"
     },
     {
       "mode": "DO",
@@ -19,7 +19,7 @@
       "summary": "A straightforward local walk through the reserve, with the published start point and practical access notes kept clear.",
       "href": "/latest",
       "linkLabel": "Open the walk in Issue 11 →",
-      "graphic": "route"
+      "image": "/assets/images/dicm/home-gatley-carrs-v2.svg"
     },
     {
       "mode": "DISCOVER",
@@ -29,7 +29,7 @@
       "summary": "The Finney Lane story linking Marthe Cnockaert McKenna, Heald Green Hotel, RAF airmen and a locally recorded Guy Gibson connection.",
       "href": "/latest",
       "linkLabel": "Read the story in Issue 11 →",
-      "graphic": "history"
+      "image": "/assets/images/dicm/home-local-history-v2.svg"
     }
   ],
   "explore": [
