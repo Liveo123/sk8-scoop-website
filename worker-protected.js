@@ -35,6 +35,19 @@ export default {
       return handleIssue12PollVote(request, env);
     }
 
+    if ((url.pathname === '/free-cheap-guide/guide' || url.pathname === '/free-cheap-guide/guide/') && request.method === 'GET') {
+      const response = await existingWorker.fetch(request, env, ctx);
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.includes('text/html')) return response;
+      return new HTMLRewriter()
+        .on('body', {
+          element(element) {
+            element.append('<script src="/assets/free-cheap-guide-analytics.js" defer></script>', { html: true });
+          }
+        })
+        .transform(response);
+    }
+
     return existingWorker.fetch(request, env, ctx);
   }
 };
