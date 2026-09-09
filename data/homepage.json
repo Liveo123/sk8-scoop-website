@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08",
+  "updated": "2026-09-09",
   "stories": [
     {
       "mode": "KNOW",
@@ -48,7 +48,8 @@
       "href": "/free-cheap-guide/",
       "status": "OPEN",
       "visual": "photo",
-      "image": "/assets/images/free-cheap-landing-hero.webp",
+      "image": "/assets/images/free-cheap-guide-logo.webp",
+      "fit": "contain",
       "position": "center"
     },
     {
