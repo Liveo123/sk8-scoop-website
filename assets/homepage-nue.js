@@ -158,6 +158,10 @@
     image.src = '/assets/images/free-cheap-guide-logo.webp';
     image.alt = 'SK8 Scoop Free & Cheap Guide logo';
     image.classList.add('guide-logo-image');
+    image.style.objectFit = 'contain';
+    image.style.background = '#fff';
+    image.style.padding = '8px';
+    image.style.boxSizing = 'border-box';
   };
 
   const loadHomepageData = async () => {
