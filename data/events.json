@@ -6,12 +6,13 @@
     "time":"14:00",
     "area":"Cheadle",
     "venue":"Cheadle Library, 23 Ashfield Road, SK8 1BB",
-    "cost":"Check listing",
+    "cost":"Free",
     "category":"Family",
     "description":"A relaxed story and rhyme session for pre-school children with parents or carers.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=2&datefrom=17%2F08%2F2026+00%3A00%3A00&pageSize=60",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_CROSSCHECKED",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -26,7 +27,8 @@
     "description":"Asian street food, live music and night-market atmosphere in Stockport town centre.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=12&datefrom=02%2F09%2F2026+00%3A00%3A00",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_DIRECTORY_ONLY",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -36,12 +38,13 @@
     "time":"10:00",
     "area":"Bramhall",
     "venue":"Bramhall Village Square, SK7 1AW",
-    "cost":"Check listing",
+    "cost":"Free",
     "category":"Wellness",
-    "description":"A village-centre day bringing together local people and organisations focused on wellbeing.",
+    "description":"A free village-centre day with fitness classes, tastings, wellbeing advice, activities and local stalls.",
     "booking_url":"",
-    "source_url":"https://www.stockport.gov.uk/events?Page=12&datefrom=02%2F09%2F2026+00%3A00%3A00",
-    "verification":"official-directory",
+    "source_url":"https://www.healthystockport.co.uk/events/details/bramhall-wellness-day",
+    "verification":"OFFICIAL_CROSSCHECKED",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -51,12 +54,13 @@
     "time":"11:00",
     "area":"Heald Green",
     "venue":"Heald Green Library, Finney Lane, SK8 3JB",
-    "cost":"Check listing",
+    "cost":"Free",
     "category":"Family",
     "description":"A weekly story and rhyme session for pre-school children and their parents or carers.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=3&datefrom=03%2F09%2F2026+00%3A00%3A00&pageSize=60",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_CROSSCHECKED",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -68,10 +72,11 @@
     "venue":"Hat Works Museum, Wellington Road South, SK3 0EU",
     "cost":"Free",
     "category":"Local History",
-    "description":"Free bite-sized dives into hatting history as part of Heritage Open Days.",
+    "description":"A free 20-minute Heritage Open Days deep dive into hatting history. Booking is recommended to guarantee a place.",
     "booking_url":"",
-    "source_url":"https://www.stockport.gov.uk/events?Page=3&datefrom=03%2F09%2F2026+00%3A00%3A00&pageSize=60",
-    "verification":"official-directory",
+    "source_url":"https://www.stockport.gov.uk/events/hatting-bites-for-heritage-open-days-12-sept-pm?date=2026-09-12",
+    "verification":"OFFICIAL_CROSSCHECKED",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -86,7 +91,8 @@
     "description":"A warm, welcoming music event designed to inspire memory, conversation and friendship.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=3&datefrom=17%2F08%2F2026+00%3A00%3A00&pageSize=60",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_DIRECTORY_ONLY",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -98,10 +104,11 @@
     "venue":"Life Leisure Cheadle, Shiers Drive, SK8 1JR",
     "cost":"Free",
     "category":"Community",
-    "description":"A free, relaxed tea-or-coffee session with a biscuit and a chance to connect with other people locally.",
+    "description":"A free, relaxed tea-or-coffee session with a biscuit. No booking is required.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=29&datefrom=15%2F03%2F2026+00%3A00%3A00",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_CROSSCHECKED",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -111,12 +118,13 @@
     "time":"14:00",
     "area":"Cheadle Hulme",
     "venue":"Cheadle Hulme Library, Mellor Road, SK8 5AU",
-    "cost":"Check listing",
+    "cost":"Free",
     "category":"Family",
-    "description":"A library story session centred on sharing stories and books with young children.",
+    "description":"A free pre-school library session centred on sharing stories, rhymes and books.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=32&datefrom=21%2F08%2F2026+00%3A00%3A00",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_CROSSCHECKED",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -126,12 +134,13 @@
     "time":"11:00",
     "area":"Heald Green",
     "venue":"Heald Green Library, Finney Lane, SK8 3JB",
-    "cost":"Check listing",
+    "cost":"Free",
     "category":"Family",
-    "description":"A weekly pre-school story and rhyme session at Heald Green Library.",
+    "description":"A free weekly pre-school story and rhyme session at Heald Green Library.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=28&datefrom=09%2F03%2F2026+00%3A00%3A00",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_CROSSCHECKED",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -146,7 +155,8 @@
     "description":"A family-friendly monthly food event at Stockport Market with a jungle-themed edition.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=28&datefrom=09%2F03%2F2026+00%3A00%3A00",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_DIRECTORY_ONLY",
+    "checked":"2026-09-09",
     "status":"verified"
   },
   {
@@ -161,7 +171,8 @@
     "description":"Street food, craft ales and live music at Stockport Market.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=7&datefrom=07%2F09%2F2026+00%3A00%3A00&pageSize=60",
-    "verification":"official-directory",
+    "verification":"OFFICIAL_DIRECTORY_ONLY",
+    "checked":"2026-09-09",
     "status":"verified"
   }
 ]
