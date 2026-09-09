@@ -1,5 +1,6 @@
 {
   "updated": "2026-09-09",
+  "visualStandard": "DICM_BOS_DOUBLE_PASS",
   "stories": [
     {
       "mode": "KNOW",
