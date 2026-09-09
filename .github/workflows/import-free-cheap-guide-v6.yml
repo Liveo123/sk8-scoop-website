@@ -1,4 +1,4 @@
-name: Import exact Free and Cheap Guide with analytics
+name: Add analytics directly to Free and Cheap Guide
 
 on:
   push:
@@ -10,112 +10,44 @@ permissions:
   contents: write
 
 jobs:
-  import-guide:
+  patch-guide:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Download exact Drive HTML
-        run: |
-          python -m pip install --quiet beautifulsoup4 requests
-          python - <<'PY'
-          import requests
-          from bs4 import BeautifulSoup
-          from urllib.parse import urljoin
-
-          FILE_ID='1YDvo0tsdjEbNhYnLnVxfgDzTJONe0PQ8'
-          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
-          s=requests.Session()
-          s.headers.update({'User-Agent': UA, 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'})
-          r=s.get('https://drive.google.com/uc',params={'export':'download','id':FILE_ID},timeout=60,allow_redirects=True)
-          r.raise_for_status()
-
-          for attempt in range(6):
-              ct=(r.headers.get('content-type') or '').lower()
-              print(f'attempt={attempt} status={r.status_code} type={ct} bytes={len(r.content)} url={r.url}')
-              if 'text/html' not in ct:
-                  break
-              soup=BeautifulSoup(r.text,'html.parser')
-              forms=soup.find_all('form')
-              chosen=None
-              for f in forms:
-                  action=f.get('action','')
-                  if 'drive.usercontent.google.com' in action or 'download' in action or f.get('id')=='download-form':
-                      chosen=f
-                      break
-              if chosen is None and forms:
-                  chosen=forms[0]
-              if chosen is not None:
-                  action=urljoin(r.url,chosen.get('action',''))
-                  p={}
-                  for inp in chosen.find_all('input'):
-                      name=inp.get('name')
-                      if name:
-                          p[name]=inp.get('value','')
-                  p.setdefault('id',FILE_ID)
-                  p.setdefault('export','download')
-                  r=s.get(action,params=p,timeout=120,allow_redirects=True)
-                  r.raise_for_status()
-                  continue
-              link=None
-              for a in soup.find_all('a',href=True):
-                  href=a['href']
-                  if 'confirm=' in href and ('download' in href or 'uc?' in href):
-                      link=urljoin(r.url,href)
-                      break
-              if link:
-                  r=s.get(link,timeout=120,allow_redirects=True)
-                  r.raise_for_status()
-                  continue
-              token=None
-              for k,v in s.cookies.items():
-                  if k.startswith('download_warning'):
-                      token=v
-                      break
-              if token:
-                  r=s.get('https://drive.google.com/uc',params={'export':'download','confirm':token,'id':FILE_ID},timeout=120,allow_redirects=True)
-                  r.raise_for_status()
-                  continue
-              raise SystemExit('Could not locate a further Google Drive confirmation step')
-          else:
-              raise SystemExit('Too many Google Drive confirmation steps')
-
-          with open('/tmp/guide.html','wb') as f:
-              f.write(r.content)
-          PY
-      - name: Verify exact source
-        run: |
-          test "$(wc -c < /tmp/guide.html)" = "32156987"
-          echo "a37825844af3c9e4c6666e07470979477be336907ff5c58de5e4f0367360fa61  /tmp/guide.html" | sha256sum -c -
-      - name: Inject analytics script directly into guide HTML
+      - name: Inject analytics script into current guide HTML
         run: |
           python - <<'PY'
-          path='/tmp/guide.html'
+          path='free-cheap-guide/guide/index.html'
           marker=b'<script src="/assets/free-cheap-guide-analytics.js" defer></script>'
           with open(path,'rb') as f:
               data=f.read()
-          if marker not in data:
+          print('current bytes=', len(data))
+          if marker in data:
+              print('Analytics marker already present.')
+          else:
               lower=data.lower()
               idx=lower.rfind(b'</body>')
               if idx < 0:
                   raise SystemExit('No closing body tag found')
               data=data[:idx]+marker+data[idx:]
-          with open(path,'wb') as f:
-              f.write(data)
-          if marker not in data:
-              raise SystemExit('Analytics marker missing after injection')
-          print('patched bytes=',len(data))
+              with open(path,'wb') as f:
+                  f.write(data)
+              print('patched bytes=', len(data))
+          with open(path,'rb') as f:
+              check=f.read()
+          if marker not in check:
+              raise SystemExit('Analytics marker missing after patch')
           PY
-      - name: Publish tracking-enabled guide
+      - name: Commit tracking-enabled guide
         run: |
-          cp /tmp/guide.html free-cheap-guide/guide/index.html
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add free-cheap-guide/guide/index.html
           if git diff --cached --quiet; then
-            echo "Tracking-enabled guide already published."
+            echo "Guide already contains analytics script."
             exit 0
           fi
-          git commit -m "Add analytics to Free and Cheap Guide HTML"
+          git commit -m "Add analytics directly to Free and Cheap Guide HTML"
           git push origin HEAD:main
