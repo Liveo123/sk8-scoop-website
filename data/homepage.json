@@ -1,6 +1,6 @@
 {
   "updated": "2026-09-09",
-  "visualStandard": "DICM_BOS_DOUBLE_PASS",
+  "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
@@ -10,7 +10,10 @@
       "summary": "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
       "href": "/latest",
       "linkLabel": "Read the useful update →",
-      "image": "/assets/images/dicm/home-planning-v2.svg"
+      "visualType": "dicm",
+      "fit": "contain",
+      "image": "/assets/images/dicm/home-planning-v2.svg",
+      "alt": "Editorial map explainer of the Nansen and Firs estate 20mph consultation"
     },
     {
       "mode": "DO",
@@ -20,7 +23,10 @@
       "summary": "A straightforward local walk through the reserve, with the published start point and practical access notes kept clear.",
       "href": "/latest",
       "linkLabel": "Open the walk in Issue 11 →",
-      "image": "/assets/images/dicm/home-gatley-carrs-v2.svg"
+      "visualType": "dicm",
+      "fit": "contain",
+      "image": "/assets/images/dicm/home-gatley-carrs-v2.svg",
+      "alt": "Editorial route sketch for the Gatley Carrs walk with water, woodland and waypoints"
     },
     {
       "mode": "DISCOVER",
@@ -30,7 +36,10 @@
       "summary": "The Finney Lane story linking Marthe Cnockaert McKenna, Heald Green Hotel, RAF airmen and a locally recorded Guy Gibson connection.",
       "href": "/latest",
       "linkLabel": "Read the story in Issue 11 →",
-      "image": "/assets/images/dicm/home-local-history-v2.svg"
+      "visualType": "dicm",
+      "fit": "contain",
+      "image": "/assets/images/dicm/home-local-history-v2.svg",
+      "alt": "Archival caseboard-style explainer linking Heald Green Hotel, a spy file and an RAF connection"
     }
   ],
   "explore": [
