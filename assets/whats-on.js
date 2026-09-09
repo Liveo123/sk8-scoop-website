@@ -16,6 +16,9 @@
       music: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M19 34V13l20-4v21"/><circle cx="14" cy="35" r="5"/><circle cx="34" cy="31" r="5"/></svg>',
       outdoors: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 38 19 17l7 10 5-7 11 18H6Z"/><path d="M19 17 23 9l5 8"/></svg>',
       market: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 19h32l-4-10H12L8 19Z"/><path d="M11 19v20h26V19M17 39V27h14v12"/></svg>',
+      history: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 14h23v23H8zM12 10h23v23"/><path d="M14 21h11M14 27h8"/><circle cx="34" cy="34" r="7"/><path d="m39 39 5 5"/></svg>',
+      community: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="17" cy="16" r="5"/><circle cx="32" cy="16" r="5"/><circle cx="24" cy="27" r="4"/><path d="M7 38c1-7 5-11 10-11M41 38c-1-7-5-11-10-11M15 41c1-6 4-9 9-9s8 3 9 9"/></svg>',
+      wellness: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40C13 33 8 26 8 18c0-6 4-10 9-10 4 0 6 2 7 5 2-3 4-5 8-5 5 0 8 4 8 9 0 9-7 16-16 23Z"/><path d="M24 35V20M24 27c-5 0-8-3-9-7M24 24c4 0 7-2 9-6"/></svg>',
       default: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="9" y="10" width="30" height="29" rx="4"/><path d="M15 7v7M33 7v7M9 19h30M16 27h7M27 27h5M16 33h10"/></svg>'
     };
     return icons[key] || icons.default;
@@ -34,11 +37,14 @@
 
   const categoryIconKey = event => {
     const haystack = `${event.category || ''} ${event.title || ''} ${event.description || ''}`.toLowerCase();
-    if (/family|kids|children/.test(haystack)) return 'family';
-    if (/food|drink|cafe|restaurant/.test(haystack)) return 'food';
-    if (/music|concert|gig/.test(haystack)) return 'music';
+    if (/family|kids|children|storytime/.test(haystack)) return 'family';
+    if (/food|drink|cafe|restaurant|snack/.test(haystack)) return 'food';
+    if (/music|concert|gig|disco/.test(haystack)) return 'music';
     if (/walk|park|outdoor|nature/.test(haystack)) return 'outdoors';
     if (/market|fair|makers/.test(haystack)) return 'market';
+    if (/history|heritage|museum|hatting/.test(haystack)) return 'history';
+    if (/wellness|yoga|health/.test(haystack)) return 'wellness';
+    if (/community|brew|biscuit|social/.test(haystack)) return 'community';
     return 'default';
   };
 
@@ -168,7 +174,7 @@
   };
 
   const isFree = event => /(^|\b)free(\b|$)/i.test(String(event.cost || ''));
-  const isFamily = event => /family|kids|children/i.test(`${event.category || ''} ${event.description || ''}`);
+  const isFamily = event => /family|kids|children|storytime/i.test(`${event.category || ''} ${event.title || ''} ${event.description || ''}`);
   const isWeekend = event => {
     const date = parseDate(event.date);
     if (!date) return false;
@@ -197,10 +203,11 @@
       visual.appendChild(label);
       article.appendChild(visual);
     } else {
+      const iconKey = categoryIconKey(event);
       const visual = document.createElement('div');
-      visual.className = 'event-icon-visual';
+      visual.className = `event-icon-visual event-icon-${iconKey}`;
       visual.setAttribute('aria-hidden', 'true');
-      visual.innerHTML = iconSvg(categoryIconKey(event));
+      visual.innerHTML = `<span class="event-icon-ring">${iconSvg(iconKey)}</span>`;
       article.appendChild(visual);
     }
 
@@ -216,9 +223,14 @@
     const meta = document.createElement('p');
     meta.className = 'reader-meta';
     meta.textContent = metaText;
+    const venue = document.createElement('p');
+    venue.className = 'event-venue';
+    venue.textContent = String(event.venue || '').trim();
     const description = document.createElement('p');
     description.textContent = String(event.description || '');
-    body.append(eyebrow, heading, meta, description);
+    body.append(eyebrow, heading, meta);
+    if (venue.textContent) body.appendChild(venue);
+    body.appendChild(description);
 
     const source = safeUrl(event.booking_url || event.source_url);
     if (source) {
