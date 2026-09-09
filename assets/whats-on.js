@@ -72,7 +72,7 @@
       filterGrid.classList.add('whats-on-filter-grid');
       const images = {
         weekend: '/assets/images/nue/whats-on-weekend.webp',
-        free: '/assets/images/free-cheap-landing-hero.webp',
+        free: '/assets/images/free-cheap-guide-logo.webp',
         family: '/assets/images/nue/whats-on-family.webp'
       };
       const labels = { weekend: 'THIS WEEKEND', free: 'FREE IDEAS', family: 'FAMILY' };
@@ -83,6 +83,11 @@
         const image = document.createElement('div');
         image.className = 'reader-story-image';
         image.style.backgroundImage = `url("${images[key]}")`;
+        if (key === 'free') {
+          image.style.backgroundSize = 'contain';
+          image.style.backgroundRepeat = 'no-repeat';
+          image.style.backgroundColor = '#fff';
+        }
         const label = document.createElement('span');
         label.textContent = labels[key];
         image.appendChild(label);
