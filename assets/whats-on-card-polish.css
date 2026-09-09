@@ -3,8 +3,14 @@
 body[data-page="whats-on"] [data-events-list]{gap:18px}
 body[data-page="whats-on"] .event-listing-card{display:flex;flex-direction:column;min-height:100%;border-radius:15px;border:1px solid #d7ddd8;box-shadow:0 8px 20px rgba(19,45,49,.065);overflow:hidden;background:#fff;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
 body[data-page="whats-on"] .event-listing-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(19,45,49,.09);border-color:#b9ccc7}
-body[data-page="whats-on"] .event-scene{height:164px;display:block;background:#fff9ed;border-bottom:1px solid #dde2dd;overflow:hidden;padding:5px;box-sizing:border-box}
+body[data-page="whats-on"] .event-scene{height:178px;display:block;background:#fff9ed;border-bottom:1px solid #dde2dd;overflow:hidden;padding:5px;box-sizing:border-box;background-position:center;background-size:contain;background-repeat:no-repeat}
 body[data-page="whats-on"] .event-scene-svg{display:block;width:100%;height:100%;object-fit:contain;border-radius:10px}
+body[data-page="whats-on"] .event-scene-family{background-image:url('/assets/images/cards/event-family-illustrated.svg')}
+body[data-page="whats-on"] .event-scene-food{background-image:url('/assets/images/cards/event-food-illustrated.svg')}
+body[data-page="whats-on"] .event-scene-wellness{background-image:url('/assets/images/cards/event-wellness-illustrated.svg')}
+body[data-page="whats-on"] .event-scene-history{background-image:url('/assets/images/cards/event-history-illustrated.svg')}
+body[data-page="whats-on"] .event-scene-community{background-image:url('/assets/images/cards/event-community-illustrated.svg')}
+body[data-page="whats-on"] .event-scene-family .event-scene-svg,body[data-page="whats-on"] .event-scene-food .event-scene-svg,body[data-page="whats-on"] .event-scene-wellness .event-scene-svg,body[data-page="whats-on"] .event-scene-history .event-scene-svg,body[data-page="whats-on"] .event-scene-community .event-scene-svg{visibility:hidden}
 body[data-page="whats-on"] .event-listing-card .reader-story-body{display:flex;flex:1;flex-direction:column;padding:17px 18px 18px}
 body[data-page="whats-on"] .event-listing-card .eyebrow{display:inline-flex;align-self:flex-start;margin-bottom:7px;padding:5px 8px;border-radius:999px;background:#edf6f4;color:#0f6470;font-size:.65rem;letter-spacing:.09em}
 body[data-page="whats-on"] .event-listing-card h3{font-size:1.25rem;line-height:1.13;margin-bottom:8px}
@@ -34,9 +40,9 @@ body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image span{margin
 body[data-page="whats-on"] .whats-on-filter-grid .reader-story-body{padding:17px 18px 18px}
 
 @media(max-width:900px){
-  body[data-page="whats-on"] .event-scene{height:175px}
+  body[data-page="whats-on"] .event-scene{height:185px}
 }
 @media(max-width:680px){
-  body[data-page="whats-on"] .event-scene{height:158px}
+  body[data-page="whats-on"] .event-scene{height:166px}
   body[data-page="whats-on"] .event-listing-card .reader-story-body{padding:16px}
 }
