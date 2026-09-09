@@ -23,16 +23,19 @@ A DICM visual is not finished merely because it is understandable. It must also 
 
 For utility cards, event-listing cards and lighter route cards, use a simpler illustrated style than full DICM while keeping a recognisable SK8 identity.
 
+The approved visual reference is the illustrated Kids & Family / Food & Drink / Outdoors card family selected on 9 September 2026. Do not reduce that reference to a plain icon tile.
+
 Approved direction:
 - cream or off-white base
 - deep teal / ink as the visual anchor
 - natural greens where relevant
 - small orange or lime accents
-- hand-drawn editorial scene fragments rather than abstract pastel blobs
-- one clear focal icon or pictogram integrated into the scene
-- enough scene detail to feel bespoke, but not enough to compete with the card copy
-- local-feeling cues such as paths, signs, trees, cafés, buildings, stalls, maps or street furniture when relevant
-- avoid generic lifestyle scenes and generic app-icon styling
+- a proper illustrated scene filling most of the image band, not an abstract gradient or isolated app-style icon
+- scene ingredients should be specific to the category: signposts, playgrounds, café boards and cups, trees, paths, buildings, market stalls, archive material, local noticeboards and similar editorial details
+- where useful, include a dark circular pictogram badge overlapping the scene, as in the approved reference
+- bold, hand-drawn editorial shapes and stronger contrast rather than washed-out pastel blobs
+- enough scene detail to feel bespoke and characterful, but not enough to compete with the card copy
+- avoid generic lifestyle scenes, wellness-app aesthetics and generic icon-library styling
 - do not repeat exactly the same vignette across unrelated categories
 
 This lighter style is intentionally separate from DICM: DICM explains; small-card illustration identifies and adds character.
