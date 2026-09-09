@@ -118,7 +118,15 @@
       visual.className = `reader-explore-visual ${item.visual === 'photo' && item.image ? 'reader-explore-photo' : 'reader-explore-icon'}`;
       visual.setAttribute('aria-hidden', 'true');
       if (item.visual === 'photo' && item.image) {
-        visual.style.backgroundImage = `linear-gradient(rgba(7,63,72,.02),rgba(7,63,72,.12)),url("${item.image}")`;
+        if (item.fit === 'contain') {
+          visual.classList.add('is-guide-logo');
+          visual.style.backgroundImage = `url("${item.image}")`;
+          visual.style.backgroundSize = 'contain';
+          visual.style.backgroundRepeat = 'no-repeat';
+          visual.style.backgroundColor = '#fff';
+        } else {
+          visual.style.backgroundImage = `linear-gradient(rgba(7,63,72,.02),rgba(7,63,72,.12)),url("${item.image}")`;
+        }
         visual.style.backgroundPosition = item.position || 'center';
       } else {
         visual.innerHTML = iconSvg(item.icon);
@@ -144,6 +152,14 @@
     if (issue && issue.url && button) button.href = issue.url;
   };
 
+  const syncFreeCheapGuideLogo = () => {
+    const image = document.querySelector('.reader-guide-grid .reader-mini-guide:first-child img');
+    if (!image) return;
+    image.src = '/assets/images/free-cheap-guide-logo.webp';
+    image.alt = 'SK8 Scoop Free & Cheap Guide logo';
+    image.classList.add('guide-logo-image');
+  };
+
   const loadHomepageData = async () => {
     try {
       const response = await fetch(DATA_URL, { cache: 'no-store' });
@@ -158,5 +174,6 @@
 
   applySubscriberState();
   syncCurrentIssueLink();
+  syncFreeCheapGuideLogo();
   loadHomepageData();
 })();
