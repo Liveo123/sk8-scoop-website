@@ -1,17 +1,26 @@
 body[data-page="around-sk8"] .around-hero{padding:48px 0 42px}
 body[data-page="around-sk8"] .around-hero-grid{display:grid;grid-template-columns:minmax(0,.88fr) minmax(420px,1.12fr);gap:38px;align-items:center}
-body[data-page="around-sk8"] .around-map{position:relative;min-height:420px;margin:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#f8f1e6,#eef7f5);box-shadow:0 14px 30px rgba(19,45,49,.11)}
-body[data-page="around-sk8"] .around-map:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(15,100,112,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(15,100,112,.055) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(180deg,rgba(0,0,0,.75),transparent)}
-body[data-page="around-sk8"] .map-river{position:absolute;left:-8%;right:-8%;top:47%;height:74px;background:rgba(94,171,190,.28);transform:rotate(-7deg);border-radius:45%}
-body[data-page="around-sk8"] .map-route{position:absolute;left:10%;right:10%;top:18%;bottom:18%;border:3px dashed rgba(15,100,112,.38);border-radius:48% 38% 52% 42%;transform:rotate(-6deg)}
-body[data-page="around-sk8"] .map-node{position:absolute;width:150px;padding:14px 14px 13px;border:1px solid var(--line);border-radius:16px;background:rgba(255,253,249,.96);box-shadow:0 10px 24px rgba(19,45,49,.09)}
+body[data-page="around-sk8"] .around-map{position:relative;min-height:420px;margin:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:radial-gradient(circle at 19% 71%,rgba(113,161,107,.22) 0 8%,transparent 8.5%),radial-gradient(circle at 74% 28%,rgba(113,161,107,.18) 0 10%,transparent 10.5%),radial-gradient(circle at 82% 77%,rgba(247,121,27,.11) 0 7%,transparent 7.5%),linear-gradient(28deg,transparent 0 24%,rgba(15,100,112,.08) 24.2% 25.4%,transparent 25.6% 47%,rgba(15,100,112,.07) 47.2% 48.2%,transparent 48.4%),linear-gradient(135deg,#f8f1e6,#eef7f5);box-shadow:0 14px 30px rgba(19,45,49,.11)}
+body[data-page="around-sk8"] .around-map:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(15,100,112,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(15,100,112,.055) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(180deg,rgba(0,0,0,.78),transparent 90%)}
+body[data-page="around-sk8"] .around-map:after{content:"SK8 FIELD MAP  ·  KNOW / DO / DISCOVER";position:absolute;left:20px;bottom:16px;padding:7px 11px;border-radius:999px;background:rgba(7,63,72,.9);color:#fff;font-size:.64rem;font-weight:900;letter-spacing:.08em;z-index:1;box-shadow:0 6px 14px rgba(19,45,49,.16)}
+body[data-page="around-sk8"] .map-river{position:absolute;left:-8%;right:-8%;top:47%;height:74px;background:linear-gradient(90deg,rgba(94,171,190,.23),rgba(94,171,190,.42),rgba(94,171,190,.22));transform:rotate(-7deg);border-radius:45%;box-shadow:inset 0 0 0 10px rgba(255,255,255,.18)}
+body[data-page="around-sk8"] .map-river:before{content:"";position:absolute;left:6%;right:6%;top:47%;height:3px;background:rgba(255,255,255,.7);border-radius:999px}
+body[data-page="around-sk8"] .map-route{position:absolute;left:10%;right:10%;top:18%;bottom:18%;border:4px dashed rgba(15,100,112,.46);border-radius:48% 38% 52% 42%;transform:rotate(-6deg);box-shadow:0 0 0 9px rgba(255,255,255,.38)}
+body[data-page="around-sk8"] .map-route:before,body[data-page="around-sk8"] .map-route:after{content:"";position:absolute;width:88px;height:5px;background:#f8791b;border-radius:999px;box-shadow:0 10px 0 rgba(214,234,0,.8)}
+body[data-page="around-sk8"] .map-route:before{left:18%;top:12%;transform:rotate(23deg)}
+body[data-page="around-sk8"] .map-route:after{right:13%;bottom:16%;transform:rotate(-18deg)}
+body[data-page="around-sk8"] .map-node{position:absolute;width:158px;padding:15px 15px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,253,249,.97);box-shadow:0 12px 27px rgba(19,45,49,.12);z-index:2}
+body[data-page="around-sk8"] .map-node:before{content:"";display:block;width:34px;height:5px;border-radius:999px;background:var(--teal);margin-bottom:9px}
+body[data-page="around-sk8"] .map-node.do:before{background:var(--orange)}
+body[data-page="around-sk8"] .map-node.discover:before{background:#9b6400}
 body[data-page="around-sk8"] .map-node b{display:block;font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
 body[data-page="around-sk8"] .map-node strong{display:block;font-size:1rem;line-height:1.15;color:var(--ink)}
 body[data-page="around-sk8"] .map-node span{display:block;margin-top:5px;font-size:.78rem;color:#506064}
-body[data-page="around-sk8"] .map-node.know{left:9%;top:12%}
-body[data-page="around-sk8"] .map-node.do{left:42%;bottom:12%}
-body[data-page="around-sk8"] .map-node.discover{right:8%;top:16%}
-body[data-page="around-sk8"] .map-pin{position:absolute;width:18px;height:18px;border-radius:50% 50% 50% 0;background:var(--orange);transform:rotate(-45deg);box-shadow:0 4px 8px rgba(0,0,0,.13)}
+body[data-page="around-sk8"] .map-node.know{left:7%;top:11%}
+body[data-page="around-sk8"] .map-node.do{left:40%;bottom:11%}
+body[data-page="around-sk8"] .map-node.discover{right:6%;top:14%}
+body[data-page="around-sk8"] .map-pin{position:absolute;width:20px;height:20px;border-radius:50% 50% 50% 0;background:var(--orange);transform:rotate(-45deg);box-shadow:0 5px 10px rgba(0,0,0,.16);z-index:3}
+body[data-page="around-sk8"] .map-pin:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;left:6px;top:6px}
 body[data-page="around-sk8"] .pin-one{left:34%;top:30%}.pin-two{left:61%;top:55%}.pin-three{right:22%;bottom:20%}
 body[data-page="around-sk8"] .around-route-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 body[data-page="around-sk8"] .around-route-card{display:flex;flex-direction:column;gap:10px;padding:20px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 8px 20px rgba(19,45,49,.06)}
@@ -19,5 +28,5 @@ body[data-page="around-sk8"] .around-route-card .eyebrow{margin:0}
 body[data-page="around-sk8"] .around-route-card h3{margin:0;font-size:1.28rem}
 body[data-page="around-sk8"] .around-route-card p{margin:0}
 body[data-page="around-sk8"] .around-route-card .button{margin-top:auto;align-self:flex-start}
-@media(max-width:900px){body[data-page="around-sk8"] .around-hero-grid{grid-template-columns:1fr}body[data-page="around-sk8"] .around-map{min-height:360px}body[data-page="around-sk8"] .around-route-grid{grid-template-columns:1fr}}
-@media(max-width:560px){body[data-page="around-sk8"] .around-map{min-height:480px}body[data-page="around-sk8"] .map-node{width:132px}.map-node.know{left:5%!important}.map-node.do{left:28%!important;bottom:8%!important}.map-node.discover{right:5%!important;top:38%!important}}
+@media(max-width:900px){body[data-page="around-sk8"] .around-hero-grid{grid-template-columns:1fr}body[data-page="around-sk8"] .around-map{min-height:390px}body[data-page="around-sk8"] .around-route-grid{grid-template-columns:1fr}}
+@media(max-width:560px){body[data-page="around-sk8"] .around-map{min-height:500px}body[data-page="around-sk8"] .around-map:after{font-size:.56rem;left:12px;right:12px;text-align:center}body[data-page="around-sk8"] .map-node{width:138px;padding:13px}.map-node.know{left:4%!important}.map-node.do{left:27%!important;bottom:10%!important}.map-node.discover{right:4%!important;top:39%!important}}
