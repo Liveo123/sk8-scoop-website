@@ -15,6 +15,15 @@
     return icons[key] || icons.updates;
   };
 
+  const storyGraphicSvg = key => {
+    const graphics = {
+      planning: '<svg viewBox="0 0 320 180" aria-hidden="true" focusable="false" style="position:absolute;inset:0;width:100%;height:100%;display:block"><rect width="320" height="180" fill="#eef7f5"/><path d="M-15 130C55 100 72 70 142 68s87 44 193 5" fill="none" stroke="#bfd9d4" stroke-width="18"/><path d="M-10 136C58 105 82 80 146 78s88 38 190 8" fill="none" stroke="#fff" stroke-width="7"/><path d="M36 24v132M105 10v156M185 18v143M265 12v150M10 48h295M18 112h280" stroke="#d7e7e3" stroke-width="2"/><circle cx="242" cy="58" r="34" fill="#f8791b"/><circle cx="242" cy="58" r="28" fill="#fff"/><text x="242" y="68" text-anchor="middle" font-size="30" font-family="Arial,sans-serif" font-weight="900" fill="#073f48">20</text><circle cx="94" cy="102" r="8" fill="#0f6470"/><circle cx="168" cy="84" r="6" fill="#d6ea00"/><path d="M94 102l74-18 74-26" stroke="#0f6470" stroke-width="3" stroke-dasharray="6 6" fill="none"/></svg>',
+      route: '<svg viewBox="0 0 320 180" aria-hidden="true" focusable="false" style="position:absolute;inset:0;width:100%;height:100%;display:block"><rect width="320" height="180" fill="#edf6ee"/><path d="M0 126C48 104 78 112 119 89s70-22 103-8 64 2 98-26v125H0Z" fill="#d7ead6"/><path d="M-20 62C42 78 70 45 117 56s72 39 119 18 72-18 106-5" fill="none" stroke="#9ed8e2" stroke-width="16"/><path d="M22 142C72 108 91 119 132 95s71-44 122-24" fill="none" stroke="#0f6470" stroke-width="4" stroke-dasharray="8 7"/><circle cx="26" cy="140" r="9" fill="#f8791b"/><circle cx="255" cy="72" r="9" fill="#f8791b"/><circle cx="145" cy="92" r="6" fill="#d6ea00"/><rect x="207" y="118" width="92" height="40" rx="20" fill="#073f48"/><text x="253" y="143" text-anchor="middle" font-size="20" font-family="Arial,sans-serif" font-weight="900" fill="#fff">2.9 mi</text></svg>',
+      history: '<svg viewBox="0 0 320 180" aria-hidden="true" focusable="false" style="position:absolute;inset:0;width:100%;height:100%;display:block"><rect width="320" height="180" fill="#f5efe4"/><path d="M20 26h178v124H20z" fill="#e7dcc9"/><path d="M32 38h154v99H32z" fill="#fffaf0"/><path d="M45 119V74l24-17 19 14 29-26 36 27v47" fill="#c9b79d"/><path d="M45 119h108" stroke="#8a775e" stroke-width="4"/><rect x="154" y="26" width="105" height="72" rx="4" fill="#d9cbb7" transform="rotate(6 154 26)"/><path d="M174 74c23-18 43-19 66-2" fill="none" stroke="#8a775e" stroke-width="5"/><circle cx="243" cy="119" r="31" fill="none" stroke="#0f6470" stroke-width="8"/><path d="m266 142 30 25" stroke="#0f6470" stroke-width="10" stroke-linecap="round"/><circle cx="99" cy="77" r="7" fill="#f8791b"/><path d="M99 84v24M87 96h24" stroke="#f8791b" stroke-width="4"/></svg>'
+    };
+    return graphics[key] || '';
+  };
+
   const readSubscriber = () => {
     try {
       const value = JSON.parse(localStorage.getItem(SUBSCRIBER_KEY) || 'null');
@@ -83,12 +92,22 @@
       const card = cards[index];
       if (!card) return;
       const image = card.querySelector('.reader-story-image');
-      const label = card.querySelector('.reader-story-image span');
+      let label = image && image.querySelector('span');
       const title = card.querySelector('h3');
       const meta = card.querySelector('.reader-meta');
       const summary = card.querySelector('[data-story-summary]');
       const link = card.querySelector('.reader-link');
-      if (image && story.image) image.style.backgroundImage = `url("${story.image}")`;
+
+      if (image && story.graphic) {
+        image.style.backgroundImage = 'none';
+        image.style.backgroundColor = '#eef7f5';
+        image.innerHTML = storyGraphicSvg(story.graphic);
+        label = document.createElement('span');
+        image.appendChild(label);
+      } else if (image && story.image) {
+        image.style.backgroundImage = `url("${story.image}")`;
+      }
+
       if (label) {
         label.textContent = story.label || story.mode || '';
         label.classList.toggle('orange-label', story.mode === 'DISCOVER');
