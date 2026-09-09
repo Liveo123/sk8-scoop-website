@@ -98,7 +98,21 @@
       const summary = card.querySelector('[data-story-summary]');
       const link = card.querySelector('.reader-link');
 
-      if (image && story.graphic) {
+      if (image && story.visualType === 'dicm' && story.image) {
+        image.classList.add('dicm-visual');
+        image.style.backgroundImage = 'none';
+        image.style.backgroundColor = '#f7faf8';
+        image.replaceChildren();
+        const art = document.createElement('img');
+        art.className = 'dicm-art';
+        art.src = story.image;
+        art.alt = story.alt || '';
+        art.loading = 'eager';
+        art.decoding = 'async';
+        label = document.createElement('span');
+        label.className = 'dicm-mode-label';
+        image.append(art, label);
+      } else if (image && story.graphic) {
         image.style.backgroundImage = 'none';
         image.style.backgroundColor = '#eef7f5';
         image.innerHTML = storyGraphicSvg(story.graphic);
