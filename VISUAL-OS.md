@@ -19,6 +19,24 @@ All diagram, infographic, chart and map visuals must use a two-pass build.
 
 A DICM visual is not finished merely because it is understandable. It must also be visually interesting and recognisably SK8 Scoop.
 
+## Small-card illustration BOS
+
+For utility cards, event-listing cards and lighter route cards, use a simpler illustrated style than full DICM while keeping a recognisable SK8 identity.
+
+Approved direction:
+- cream or off-white base
+- deep teal / ink as the visual anchor
+- natural greens where relevant
+- small orange or lime accents
+- hand-drawn editorial scene fragments rather than abstract pastel blobs
+- one clear focal icon or pictogram integrated into the scene
+- enough scene detail to feel bespoke, but not enough to compete with the card copy
+- local-feeling cues such as paths, signs, trees, cafés, buildings, stalls, maps or street furniture when relevant
+- avoid generic lifestyle scenes and generic app-icon styling
+- do not repeat exactly the same vignette across unrelated categories
+
+This lighter style is intentionally separate from DICM: DICM explains; small-card illustration identifies and adds character.
+
 ## No crop-loss rule
 
 For every image, photograph, illustration, map, diagram or chart added to the site:
