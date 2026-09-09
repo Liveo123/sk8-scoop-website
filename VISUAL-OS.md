@@ -23,7 +23,7 @@ A DICM visual is not finished merely because it is understandable. It must also 
 
 For utility cards, event-listing cards and lighter route cards, use a simpler illustrated style than full DICM while keeping a recognisable SK8 identity.
 
-The approved visual reference is the illustrated Kids & Family / Food & Drink / Outdoors card family selected on 9 September 2026. Do not reduce that reference to a plain icon tile.
+The approved visual reference is the rich illustrated Kids & Family / Food & Drink / Outdoors card family selected on 9 September 2026. Do not reduce that reference to a plain icon tile or a sparse line drawing.
 
 Approved direction:
 - cream or off-white base
@@ -37,6 +37,10 @@ Approved direction:
 - enough scene detail to feel bespoke and characterful, but not enough to compete with the card copy
 - avoid generic lifestyle scenes, wellness-app aesthetics and generic icon-library styling
 - do not repeat exactly the same vignette across unrelated categories
+
+### No substitute rule
+
+An approved raster, photograph or rich editorial illustration must never be replaced by a simplified SVG or line-art approximation just because it is easier to implement. If the approved artwork cannot yet be integrated, keep the previous approved asset in place until the correct artwork can be used. Do not create a visually weaker stand-in.
 
 This lighter style is intentionally separate from DICM: DICM explains; small-card illustration identifies and adds character.
 
@@ -67,3 +71,4 @@ Before a page is considered ready for approval, check:
 - mobile and desktop behaviour
 - alt text where the image conveys useful information
 - no generic filler imagery
+- no simplified SVG or line-art replacement for richer approved artwork
