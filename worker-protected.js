@@ -7,10 +7,11 @@ const MAILERLITE_GROUPS = {
 };
 
 const ISSUE_12_POLL_ANSWERS = [
-  'keep_it_sk8',
-  'about_15_minutes',
-  'up_to_30_minutes',
-  'further_if_worth_it'
+  'empty_shops_buildings',
+  'best_value_pub_meals',
+  'hidden_paths_shortcuts',
+  'odd_planning_applications',
+  'local_history_mysteries'
 ];
 
 export default {
