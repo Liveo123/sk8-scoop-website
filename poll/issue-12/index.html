@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SK8 Scoop quick poll | Issue 12</title>
-  <meta name="description" content="A quick SK8 Scoop reader poll about how far the newsletter should search for standout events.">
+  <meta name="description" content="A quick SK8 Scoop reader poll about what local topic the newsletter should investigate next.">
   <meta name="robots" content="noindex,follow">
   <link rel="canonical" href="https://www.sk8scoop.com/poll/issue-12/">
   <meta name="theme-color" content="#0f6470">
@@ -20,16 +20,17 @@
     <a href="/" aria-label="SK8 Scoop home"><img class="poll-brand" src="../../assets/sk8-scoop-logo.webp" alt="SK8 Scoop — the useful, the local and the mildly nosy"></a>
     <section class="poll-card" aria-labelledby="poll-title">
       <div class="poll-kicker">Issue 12 · quick reader poll</div>
-      <h1 id="poll-title">How far should SK8 Scoop travel for a genuinely brilliant event?</h1>
-      <p class="poll-intro">This week we widened the net to Sale and Ramsbottom. Tell us how far you actually want us to go when something looks properly worth the trip.</p>
+      <h1 id="poll-title">What would you most like us to investigate locally?</h1>
+      <p class="poll-intro">Pick the rabbit hole you would most like SK8 Scoop to disappear down next. Your answer will help shape future features and guides.</p>
       <form id="poll-form">
         <fieldset style="border:0;padding:0;margin:0">
           <legend class="sr-only">Choose one answer</legend>
           <div class="poll-options">
-            <label class="poll-option"><input type="radio" name="poll_answer" value="keep_it_sk8" required><span><strong>Keep it in SK8 if possible</strong></span></label>
-            <label class="poll-option"><input type="radio" name="poll_answer" value="about_15_minutes"><span><strong>About 15 minutes away</strong></span></label>
-            <label class="poll-option"><input type="radio" name="poll_answer" value="up_to_30_minutes"><span><strong>Up to 30 minutes away</strong></span></label>
-            <label class="poll-option"><input type="radio" name="poll_answer" value="further_if_worth_it"><span><strong>Further, if it’s genuinely worth the trip</strong></span></label>
+            <label class="poll-option"><input type="radio" name="poll_answer" value="empty_shops_buildings" required><span><strong>Empty shops &amp; buildings</strong></span></label>
+            <label class="poll-option"><input type="radio" name="poll_answer" value="best_value_pub_meals"><span><strong>Best-value pub meals</strong></span></label>
+            <label class="poll-option"><input type="radio" name="poll_answer" value="hidden_paths_shortcuts"><span><strong>Hidden paths &amp; shortcuts</strong></span></label>
+            <label class="poll-option"><input type="radio" name="poll_answer" value="odd_planning_applications"><span><strong>Odd planning applications</strong></span></label>
+            <label class="poll-option"><input type="radio" name="poll_answer" value="local_history_mysteries"><span><strong>Local history mysteries</strong></span></label>
           </div>
         </fieldset>
         <button class="poll-submit" type="submit">SEND MY VOTE</button>
@@ -47,8 +48,8 @@
   </main>
 <script>
 (function(){
-  var labels={keep_it_sk8:'Keep it in SK8 if possible',about_15_minutes:'About 15 minutes away',up_to_30_minutes:'Up to 30 minutes away',further_if_worth_it:'Further, if it’s genuinely worth the trip'};
-  var order=['keep_it_sk8','about_15_minutes','up_to_30_minutes','further_if_worth_it'];
+  var labels={empty_shops_buildings:'Empty shops & buildings',best_value_pub_meals:'Best-value pub meals',hidden_paths_shortcuts:'Hidden paths & shortcuts',odd_planning_applications:'Odd planning applications',local_history_mysteries:'Local history mysteries'};
+  var order=['empty_shops_buildings','best_value_pub_meals','hidden_paths_shortcuts','odd_planning_applications','local_history_mysteries'];
   var q=new URLSearchParams(location.search);
   var pre=q.get('answer');
   if(order.indexOf(pre)!==-1){var radio=document.querySelector('input[value="'+pre+'"]');if(radio)radio.checked=true;}
