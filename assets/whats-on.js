@@ -6,24 +6,6 @@
   const filters = [...document.querySelectorAll('[data-event-filter]')];
   if (!list) return;
 
-  const iconSvg = key => {
-    const icons = {
-      calendar: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="11" width="32" height="28" rx="4"/><path d="M15 7v8M33 7v8M8 19h32M16 27l5 5 11-11"/></svg>',
-      submit: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 14h24l8 8-8 8H8V14Z"/><path d="M16 22h13M14 36h22"/></svg>',
-      compass: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="m30 18-4 9-9 4 4-9 9-4Z"/></svg>',
-      family: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="17" cy="15" r="5"/><circle cx="32" cy="17" r="4"/><path d="M8 39c1-9 5-14 10-14s9 5 10 14M25 39c1-7 4-11 8-11 4 0 7 4 8 11"/></svg>',
-      food: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 7v14M20 7v14M14 14h6M17 21v20M31 7v34M31 7c5 5 6 12 2 17h-2"/></svg>',
-      music: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M19 34V13l20-4v21"/><circle cx="14" cy="35" r="5"/><circle cx="34" cy="31" r="5"/></svg>',
-      outdoors: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 38 19 17l7 10 5-7 11 18H6Z"/><path d="M19 17 23 9l5 8"/></svg>',
-      market: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 19h32l-4-10H12L8 19Z"/><path d="M11 19v20h26V19M17 39V27h14v12"/></svg>',
-      history: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 14h23v23H8zM12 10h23v23"/><path d="M14 21h11M14 27h8"/><circle cx="34" cy="34" r="7"/><path d="m39 39 5 5"/></svg>',
-      community: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="17" cy="16" r="5"/><circle cx="32" cy="16" r="5"/><circle cx="24" cy="27" r="4"/><path d="M7 38c1-7 5-11 10-11M41 38c-1-7-5-11-10-11M15 41c1-6 4-9 9-9s8 3 9 9"/></svg>',
-      wellness: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40C13 33 8 26 8 18c0-6 4-10 9-10 4 0 6 2 7 5 2-3 4-5 8-5 5 0 8 4 8 9 0 9-7 16-16 23Z"/><path d="M24 35V20M24 27c-5 0-8-3-9-7M24 24c4 0 7-2 9-6"/></svg>',
-      default: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="9" y="10" width="30" height="29" rx="4"/><path d="M15 7v7M33 7v7M9 19h30M16 27h7M27 27h5M16 33h10"/></svg>'
-    };
-    return icons[key] || icons.default;
-  };
-
   const safeUrl = value => {
     const raw = String(value || '').trim();
     if (!raw) return '';
@@ -101,7 +83,6 @@
       const art = document.createElement('div');
       art.className = 'whats-on-empty-art whats-on-empty-illustration';
       art.setAttribute('aria-hidden', 'true');
-      art.innerHTML = `${iconSvg('calendar')}<span class="empty-map-dot dot-one"></span><span class="empty-map-dot dot-two"></span><span class="empty-route"></span>`;
       empty.classList.add('whats-on-empty');
       empty.append(art, copy);
     }
@@ -111,19 +92,18 @@
       const heading = panel.querySelector('h2');
       if (!heading || panel.querySelector('.whats-on-panel-icon')) return;
       const text = heading.textContent.trim();
-      let icon = '';
-      if (text.startsWith('Curated first')) icon = 'calendar';
-      if (text.startsWith('Send in a local event')) icon = 'submit';
+      let marker = '';
+      if (text.startsWith('Curated first')) marker = 'curated';
+      if (text.startsWith('Send in a local event')) marker = 'submit';
       if (text.startsWith('Still looking')) {
-        icon = 'compass';
+        marker = 'next';
         panel.classList.add('whats-on-next-panel');
       }
-      if (!icon) return;
-      const iconWrap = document.createElement('div');
-      iconWrap.className = 'whats-on-panel-icon';
-      iconWrap.setAttribute('aria-hidden', 'true');
-      iconWrap.innerHTML = iconSvg(icon);
-      panel.prepend(iconWrap);
+      if (!marker) return;
+      const markerWrap = document.createElement('div');
+      markerWrap.className = `whats-on-panel-icon whats-on-marker-${marker}`;
+      markerWrap.setAttribute('aria-hidden', 'true');
+      panel.prepend(markerWrap);
     });
   };
 
