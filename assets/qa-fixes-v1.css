@@ -1,0 +1,34 @@
+/* Final preview QA fixes. Kept separate so late-stage corrections are easy to audit and remove. */
+
+/* GUIDES: stop the editorial labels colliding in the card tops. */
+body[data-page="guides"] .guide-visual.guide-free:before,
+body[data-page="guides"] .guide-visual.guide-summer:before{
+  align-items:flex-end!important;
+  padding:66px 22px 28px!important;
+  font-size:clamp(.98rem,1.45vw,1.16rem)!important;
+  line-height:1.08!important;
+  letter-spacing:-.02em!important;
+}
+body[data-page="guides"] .guide-visual.guide-free:before{content:"SPEND LESS.\A DO MORE LOCALLY."!important}
+body[data-page="guides"] .guide-visual.guide-summer:before{content:"SUMMER.\A SORTED QUICKLY."!important}
+body[data-page="guides"] .guide-visual.guide-free:after,
+body[data-page="guides"] .guide-visual.guide-summer:after{display:none!important;content:none!important}
+body[data-page="guides"] .guide-visual.guide-free,
+body[data-page="guides"] .guide-visual.guide-summer{min-height:258px!important}
+body[data-page="guides"] .guide-free .guide-status,
+body[data-page="guides"] .guide-summer .guide-status{top:18px!important;left:18px!important;right:auto!important}
+
+/* SUBMISSIONS: this is supporting information, not a floating toolbar. */
+body[data-page="business-submissions"] .policy-panel.sticky-panel{
+  position:static!important;
+  top:auto!important;
+  align-self:start!important;
+}
+
+@media(max-width:700px){
+  body[data-page="guides"] .guide-visual.guide-free:before,
+  body[data-page="guides"] .guide-visual.guide-summer:before{
+    padding:62px 16px 20px!important;
+    font-size:.9rem!important;
+  }
+}
