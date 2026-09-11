@@ -157,7 +157,7 @@
     container.dataset.sk8TurnstileFor = position;
     container.style.marginTop = '10px';
     container.style.maxWidth = '360px';
-    container.style.minHeight = '65px';
+    container.style.minHeight = getKind(form) === 'guide' ? '0' : '65px';
     form.insertAdjacentElement('afterend', container);
     return container;
   };
@@ -208,7 +208,7 @@
           sitekey: siteKey,
           theme: 'auto',
           size: 'flexible',
-          appearance: 'always',
+          appearance: getKind(form) === 'guide' ? 'interaction-only' : 'always',
           'response-field': false,
           callback: token => {
             tokenField.value = String(token || '');
