@@ -1,0 +1,36 @@
+name: Current content freshness
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'archive.html'
+      - 'latest/index.html'
+      - 'assets/config.js'
+      - 'data/homepage.json'
+      - 'scripts/check-current-content.mjs'
+      - '.github/workflows/current-content-freshness.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'index.html'
+      - 'archive.html'
+      - 'latest/index.html'
+      - 'assets/config.js'
+      - 'data/homepage.json'
+      - 'scripts/check-current-content.mjs'
+      - '.github/workflows/current-content-freshness.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify current content stays in sync
+        run: node scripts/check-current-content.mjs
