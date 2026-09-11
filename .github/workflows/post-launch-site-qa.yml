@@ -52,3 +52,26 @@ jobs:
           check_page 'https://www.sk8scoop.com/local-history/' 'Local History around SK8'
           check_page 'https://www.sk8scoop.com/submit/' 'action="/api/reader-submission"'
           check_page 'https://www.sk8scoop.com/contact/' 'data-form-kind="contact-message"'
+
+      - name: Verify production form routes and contact transport without creating records
+        shell: bash
+        run: |
+          expect_validation() {
+            url="$1"
+            code="$(curl -sS --max-time 20 -o /tmp/response.json -w '%{http_code}' -X POST "$url" -H 'content-type: application/json' --data '{}')"
+            if [ "$code" != "400" ]; then
+              echo "Expected validation 400 from $url, got $code"
+              cat /tmp/response.json || true
+              exit 1
+            fi
+            echo "OK validation route: $url"
+          }
+          expect_validation 'https://www.sk8scoop.com/api/reader-submission'
+          expect_validation 'https://www.sk8scoop.com/api/submit-event'
+          expect_validation 'https://www.sk8scoop.com/api/advertiser-enquiry'
+
+          contact_code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' 'https://submit-form.com/X3MWnWHXI')"
+          case "$contact_code" in
+            2*|3*|4*) echo "OK contact endpoint reachable: HTTP $contact_code" ;;
+            *) echo "Formspark contact endpoint unavailable: HTTP $contact_code"; exit 1 ;;
+          esac
