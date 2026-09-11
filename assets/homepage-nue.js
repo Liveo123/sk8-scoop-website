@@ -3,6 +3,15 @@
   const SUBSCRIBER_KEY = 'sk8_subscriber_recognition_v1';
   const SUBSCRIBER_DAYS = 365;
 
+  const ensureHomepageV3Styles = () => {
+    if (document.querySelector('link[data-sk8-homepage-v3]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/assets/homepage-v3.css';
+    link.dataset.sk8HomepageV3 = 'true';
+    document.head.appendChild(link);
+  };
+
   const iconSvg = key => {
     const icons = {
       food: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 7v14M20 7v14M14 14h6M17 21v20M31 7v34M31 7c5 5 6 12 2 17h-2"/></svg>',
@@ -107,7 +116,7 @@
         art.className = 'dicm-art';
         art.src = story.image;
         art.alt = story.alt || '';
-        art.loading = 'eager';
+        art.loading = 'lazy';
         art.decoding = 'async';
         label = document.createElement('span');
         label.className = 'dicm-mode-label';
@@ -197,6 +206,93 @@
     image.style.boxSizing = 'border-box';
   };
 
+  const applyHomepageV3 = () => {
+    const config = window.SK8_CONFIG || {};
+    const stats = config.publicStats || {};
+    const issue = config.currentIssue || {};
+
+    document.body.classList.add('homepage-v3');
+
+    const heroCopy = document.querySelector('.reader-hero-copy');
+    if (heroCopy && !heroCopy.querySelector('.home-hero-eyebrow')) {
+      const eyebrow = document.createElement('div');
+      eyebrow.className = 'home-hero-eyebrow';
+      eyebrow.textContent = 'Free Friday newsletter · SK8';
+      heroCopy.insertBefore(eyebrow, heroCopy.firstChild);
+    }
+
+    const signup = document.querySelector('.reader-hero .reader-signup');
+    if (signup) {
+      signup.setAttribute('aria-label', 'Join the free SK8 Scoop newsletter');
+      if (!signup.nextElementSibling?.classList.contains('home-signup-note')) {
+        const note = document.createElement('p');
+        note.className = 'home-signup-note';
+        note.textContent = 'No spam. Unsubscribe any time.';
+        signup.insertAdjacentElement('afterend', note);
+      }
+    }
+
+    const proof = document.querySelector('.reader-proof');
+    if (proof) {
+      proof.innerHTML = [
+        `<span><b>${stats.subscriberProof || stats.subscriberCount || '500+'}</b> local readers</span>`,
+        `<span><b>${stats.issuesPublished || 12}</b> issues published</span>`,
+        '<span><b>FRI</b> free every Friday</span>'
+      ].join('');
+    }
+
+    const worthMore = document.querySelector('.reader-worth .reader-section-head .reader-link');
+    if (worthMore) {
+      worthMore.href = '/around-sk8/';
+      worthMore.textContent = 'Explore more local stories →';
+    }
+
+    const guidesHeading = document.querySelector('.reader-guides-area .mini-head h2');
+    if (guidesHeading) guidesHeading.textContent = 'Useful guides';
+    const comingLaterGuide = document.querySelector('.reader-guide-grid .reader-mini-guide:nth-child(3)');
+    if (comingLaterGuide) comingLaterGuide.remove();
+
+    const latestEyebrow = document.querySelector('.reader-latest-copy .eyebrow');
+    if (latestEyebrow) latestEyebrow.textContent = 'Latest issue';
+
+    document.querySelectorAll('.reader-story img,.reader-mini-guide img').forEach((img) => {
+      img.loading = 'lazy';
+      img.decoding = 'async';
+    });
+
+    if (!document.querySelector('#sk8-home-schema-v3')) {
+      const schema = document.createElement('script');
+      schema.id = 'sk8-home-schema-v3';
+      schema.type = 'application/ld+json';
+      schema.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Organization',
+            '@id': 'https://www.sk8scoop.com/#organisation',
+            name: 'SK8 Scoop',
+            url: 'https://www.sk8scoop.com/',
+            description: 'Useful local news, events, guides and a free Friday newsletter for Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby SK8.'
+          },
+          {
+            '@type': 'WebSite',
+            '@id': 'https://www.sk8scoop.com/#website',
+            name: 'SK8 Scoop',
+            url: 'https://www.sk8scoop.com/',
+            publisher: {'@id': 'https://www.sk8scoop.com/#organisation'}
+          },
+          {
+            '@type': 'Periodical',
+            name: 'SK8 Scoop',
+            url: issue.url || 'https://www.sk8scoop.com/latest',
+            publisher: {'@id': 'https://www.sk8scoop.com/#organisation'}
+          }
+        ]
+      });
+      document.head.appendChild(schema);
+    }
+  };
+
   const loadHomepageData = async () => {
     try {
       const response = await fetch(DATA_URL, { cache: 'no-store' });
@@ -209,8 +305,10 @@
     }
   };
 
+  ensureHomepageV3Styles();
   applySubscriberState();
   syncCurrentIssueLink();
   syncFreeCheapGuideLogo();
+  applyHomepageV3();
   loadHomepageData();
 })();
