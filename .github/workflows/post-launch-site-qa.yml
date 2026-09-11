@@ -22,6 +22,40 @@ jobs:
       - name: Check post-launch NUE contracts
         run: node scripts/check-post-launch-v2.mjs
 
+  preview-smoke:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for the Cloudflare branch alias and verify release markers
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          base="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev"
+          check_page() {
+            path="$1"
+            marker="$2"
+            url="${base}${path}"
+            for attempt in $(seq 1 12); do
+              body="$(curl -fsSL --max-time 20 "$url" || true)"
+              if printf '%s' "$body" | grep -Fq "$marker"; then
+                echo "OK preview: $url"
+                return 0
+              fi
+              echo "Waiting for preview: $url (attempt $attempt/12)"
+              sleep 15
+            done
+            echo "FAILED preview marker: $url"
+            return 1
+          }
+          check_page '/' 'homepage-utility-promise-v1'
+          check_page '/whats-on/' 'data-event-area="Cheadle"'
+          check_page '/advertise.html' 'value="temp_test"'
+          check_page '/food-drink/' 'Food &amp; Drink around SK8'
+          check_page '/local-history/' 'Local History around SK8'
+
   live-smoke:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: preflight
