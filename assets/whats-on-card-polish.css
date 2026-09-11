@@ -10,7 +10,7 @@ body[data-page="whats-on"] .event-listing-card .eyebrow:before{content:"";width:
 body[data-page="whats-on"] .event-listing-card[data-category="food-and-drink"] .eyebrow{background:#0b4c5b;border-color:#0a3f4c;color:#fff3d0}
 body[data-page="whats-on"] .event-listing-card[data-category="wellness"] .eyebrow{background:#d7e63d;border-color:#adc21f;color:#12454d}
 body[data-page="whats-on"] .event-listing-card[data-category="family"] .eyebrow{background:#ffe2bf;border-color:#f1b56a;color:#7b4b09}
-body[data-page="whats-on"] .event-listing-card[data-category="local-history"] .eyebrow{background:#0e606b;border-color:#0b4a53;color:#fff0c7}
+body[data-page="whats-on"] .event-listing-card[data-category="local-history"] .eyebrow{background:#ead5d0;border-color:#c58b7d;color:#6f2f27}
 body[data-page="whats-on"] .event-listing-card[data-category="community"] .eyebrow{background:#f7d08d;border-color:#e0a654;color:#73440e}
 body[data-page="whats-on"] .event-listing-card[data-category="music"] .eyebrow{background:#f8c9d8;border-color:#de90ad;color:#6d2544}
 body[data-page="whats-on"] .event-listing-card[data-category="outdoors"] .eyebrow{background:#d8efda;border-color:#8cc08d;color:#1f5c34}
