@@ -23,14 +23,14 @@ jobs:
         run: node scripts/check-post-launch-v2.mjs
 
   preview-smoke:
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/post-launch-nue-v2')
     needs: preflight
     runs-on: ubuntu-latest
     steps:
       - name: Wait for the Cloudflare branch alias and verify release markers
         shell: bash
         env:
-          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
           slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
           base="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev"
