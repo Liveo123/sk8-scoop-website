@@ -59,6 +59,22 @@ body[data-page="guides"] .guides-principle .eyebrow{color:#c8e84a}
 body[data-page="guides"] .guides-principle h2{color:#fff!important;margin:.2em 0 .35em}
 body[data-page="guides"] .guides-principle p{max-width:760px;color:#e4efec;line-height:1.55}
 
+/* Stronger guide-top composition: less empty cream, no tape, official artwork kept whole. */
+body.reader-page[data-page="guides"] .guide-card:before,body.reader-page[data-page="guides"] .guide-card:after{display:none!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-free,body.reader-page[data-page="guides"] .guide-visual.guide-summer{display:flex!important;justify-content:flex-end!important;align-items:center!important;min-height:250px!important;padding:24px 28px 24px 46%!important;isolation:isolate!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-free{background:linear-gradient(100deg,#073f48 0 42%,#edf7f3 42% 100%)!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-summer{background:linear-gradient(100deg,#285c46 0 42%,#fff2d8 42% 100%)!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-free:before,body.reader-page[data-page="guides"] .guide-visual.guide-summer:before{display:flex!important;align-items:flex-end!important;content:"01 / SAVE\A SPEND LESS.\A DO MORE LOCALLY."!important;white-space:pre-line!important;position:absolute!important;inset:0 auto 0 0!important;width:42%!important;padding:66px 23px 25px!important;box-sizing:border-box!important;background:none!important;color:#fff!important;font:900 1.25rem/1.16 Arial,sans-serif!important;letter-spacing:-.025em!important;z-index:1!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-summer:before{content:"02 / SEASONAL\A SUMMER.\A SORTED QUICKLY."!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-free:after,body.reader-page[data-page="guides"] .guide-visual.guide-summer:after{content:"EVERGREEN LOCAL IDEAS";position:absolute;left:23px;bottom:20px;color:#c8e84a;font-size:.58rem;font-weight:900;letter-spacing:.11em;z-index:2}
+body.reader-page[data-page="guides"] .guide-visual.guide-summer:after{content:"PARKS · EVENTS · RAINY DAYS";color:#e8f3c0}
+body.reader-page[data-page="guides"] .guide-visual.guide-free img,body.reader-page[data-page="guides"] .guide-visual.guide-summer img{position:relative!important;z-index:2!important;width:min(100%,300px)!important;max-width:100%!important;max-height:176px!important;height:auto!important;object-fit:contain!important;padding:14px!important;border:1px solid rgba(7,63,72,.10)!important;border-radius:17px!important;background:#fff!important;box-shadow:0 14px 28px rgba(19,45,49,.11)!important}
+body.reader-page[data-page="guides"] .guide-status{left:19px!important;right:auto!important;top:19px!important;z-index:4!important;border-radius:7px!important;box-shadow:none!important}
+body.reader-page[data-page="guides"] .guide-free .guide-status{background:#c8e84a!important;color:#073f48!important}
+body.reader-page[data-page="guides"] .guide-summer .guide-status{background:#fff!important;color:#285c46!important;border:1px solid rgba(255,255,255,.35)!important}
+body.reader-page[data-page="guides"] .guide-secrets{min-height:250px!important;padding:24px!important;background:linear-gradient(145deg,#0a3b42,#0f5b64)!important}
+body.reader-page[data-page="guides"] .guide-route-board{transform:none!important;border-radius:14px!important;box-shadow:0 12px 25px rgba(19,45,49,.09)!important}
+
 /* Where to start */
 body[data-page="start"] .page-hero{padding:46px 0 32px}
 body[data-page="start"] .page-hero h1{max-width:12ch;font-size:clamp(3rem,5vw,4.45rem);line-height:.96}
@@ -100,5 +116,10 @@ body[data-page="start"] .reader-route .reader-link{margin-top:auto;padding-top:1
   body[data-page="guides"] .page-hero,
   body[data-page="start"] .page-hero{padding:34px 0 26px}
   body[data-page="guides"] .guide-visual{min-height:205px;padding:20px}
+  body.reader-page[data-page="guides"] .guide-visual.guide-free,body.reader-page[data-page="guides"] .guide-visual.guide-summer{min-height:330px!important;padding:126px 20px 20px!important;justify-content:center!important;background:linear-gradient(180deg,#073f48 0 34%,#edf7f3 34% 100%)!important}
+  body.reader-page[data-page="guides"] .guide-visual.guide-summer{background:linear-gradient(180deg,#285c46 0 34%,#fff2d8 34% 100%)!important}
+  body.reader-page[data-page="guides"] .guide-visual.guide-free:before,body.reader-page[data-page="guides"] .guide-visual.guide-summer:before{width:100%!important;height:112px!important;padding:49px 18px 14px!important;font-size:1rem!important}
+  body.reader-page[data-page="guides"] .guide-visual.guide-free:after,body.reader-page[data-page="guides"] .guide-visual.guide-summer:after{display:none!important}
+  body.reader-page[data-page="guides"] .guide-status{top:14px!important;left:14px!important}
   body[data-page="start"] .reader-route{min-height:0}
 }
