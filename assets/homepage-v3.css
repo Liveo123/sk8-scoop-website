@@ -1,0 +1,128 @@
+/* Homepage V3: post-launch design, hierarchy and mobile-density improvements. */
+
+body.reader-home{--home-surface:#fffdf8;--home-soft:#f3f8f6;--home-deep:#073f48}
+
+/* 1. Reduce the desktop header from a directory into a useful primary navigation. */
+body.reader-home .reader-header .header-row{min-height:78px;gap:18px}
+body.reader-home .reader-header .brand img{max-width:235px}
+body.reader-home .reader-header .nav{gap:12px}
+body.reader-home .reader-header .nav>a{padding:9px 5px}
+body.reader-home .reader-header .nav>a[href="/start/"],
+body.reader-home .reader-header .nav>a[href="/submit/"],
+body.reader-home .reader-header .nav>a[href="/contact/"],
+body.reader-home .reader-header .nav>a[href="/join/"]:not(.reader-nav-join){display:none}
+body.reader-home .reader-header .reader-nav-join{margin-left:4px!important;padding:11px 16px!important}
+
+/* 2. Make the hero feel like one clear decision rather than a large poster. */
+body.reader-home .reader-hero-photo{min-height:398px;background-position:center 40%}
+body.reader-home .reader-hero-overlay{min-height:398px}
+body.reader-home .reader-hero-shade{background:linear-gradient(90deg,rgba(255,250,240,.99) 0%,rgba(255,250,240,.96) 35%,rgba(255,250,240,.72) 49%,rgba(255,250,240,.12) 76%,rgba(255,250,240,0) 100%)}
+body.reader-home .reader-hero-copy{max-width:610px;padding:42px 0 38px}
+body.reader-home .home-hero-eyebrow{display:inline-flex;align-items:center;gap:7px;margin-bottom:13px;padding:6px 10px;border:1px solid #cfe0dc;border-radius:999px;background:rgba(255,255,255,.76);color:var(--teal);font-size:.72rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+body.reader-home .reader-hero h1{font-size:clamp(3.05rem,5.25vw,4.85rem);line-height:.97;margin-bottom:15px;max-width:560px;text-wrap:balance}
+body.reader-home .reader-hero-lead{font-size:1.12rem;line-height:1.48;max-width:535px;color:#273b3f}
+body.reader-home .reader-signup{max-width:535px;margin-top:20px;border-radius:10px;box-shadow:0 10px 26px rgba(19,45,49,.13)}
+body.reader-home .reader-signup input{min-height:52px;background:#fff}
+body.reader-home .reader-signup .button{min-height:52px}
+body.reader-home .home-signup-note{margin:9px 0 0;color:#516367;font-size:.78rem;font-weight:650}
+body.reader-home .reader-proof{gap:8px 10px;margin-top:17px}
+body.reader-home .reader-proof span{padding:7px 10px;border:1px solid rgba(15,100,112,.16);border-radius:999px;background:rgba(255,255,255,.72);font-size:.78rem;font-weight:800}
+body.reader-home .reader-proof b{font-size:.88rem}
+
+/* 3. Give the weekly story cards consistent rhythm and less visual noise. */
+body.reader-home .reader-worth{padding-top:38px;padding-bottom:38px}
+body.reader-home .reader-card-grid{gap:18px;align-items:stretch}
+body.reader-home .reader-story{display:flex;flex-direction:column;border-radius:16px;box-shadow:0 7px 20px rgba(19,45,49,.065);transition:transform .18s ease,box-shadow .18s ease}
+body.reader-home .reader-story:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(19,45,49,.09)}
+body.reader-home .reader-story .dicm-visual{padding:12px 12px 0!important;gap:9px;background:#f4f8f6!important}
+body.reader-home .reader-story .dicm-art{border-radius:10px;background:#fff}
+body.reader-home .reader-story .dicm-mode-label{margin-left:1px;padding:5px 9px;font-size:.66rem;letter-spacing:.08em}
+body.reader-home .reader-story-body{display:flex;flex:1;flex-direction:column;padding:17px 18px 18px}
+body.reader-home .reader-story h3{font-size:1.28rem;line-height:1.16}
+body.reader-home .reader-story p[data-story-summary]{font-size:.91rem;line-height:1.47}
+body.reader-home .reader-story-body>.reader-link{margin-top:auto;padding-top:3px}
+
+/* 4. Compress Explore SK8, especially on phones, without turning it into icon soup. */
+body.reader-home .reader-explore-section{padding-top:36px;padding-bottom:38px}
+body.reader-home [data-explore-grid]{gap:12px}
+body.reader-home .reader-explore-tile{min-height:205px;border-radius:14px;box-shadow:0 5px 15px rgba(19,45,49,.045);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+body.reader-home .reader-explore-visual{height:102px;flex-basis:102px}
+body.reader-home .reader-explore-copy{min-height:102px;padding:12px 13px 13px;gap:4px}
+body.reader-home .reader-explore-copy strong{font-size:.96rem}
+body.reader-home .reader-explore-copy small{font-size:.77rem;line-height:1.3}
+body.reader-home .reader-explore-copy em{font-size:.67rem;padding-top:3px}
+body.reader-home .reader-explore-tile:not(.is-soon):hover{transform:translateY(-3px);border-color:#bed7d2;box-shadow:0 11px 22px rgba(19,45,49,.085)}
+
+/* 5. Rebalance the Issue/Guides shelf and remove the visual wobble. */
+body.reader-home .reader-feature-row{padding-top:38px;padding-bottom:40px}
+body.reader-home .reader-content-shelf{grid-template-columns:minmax(330px,.9fr) minmax(0,1.35fr);gap:24px}
+body.reader-home .reader-panel{border-radius:16px;box-shadow:0 7px 20px rgba(19,45,49,.055)}
+body.reader-home .reader-latest-panel{grid-template-columns:118px 1fr;gap:20px;border-top:4px solid var(--orange);padding-top:16px}
+body.reader-home .reader-latest-cover{min-height:172px;transform:none;border-radius:10px}
+body.reader-home .reader-guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+body.reader-home .reader-mini-guide{border-radius:14px;box-shadow:0 5px 15px rgba(19,45,49,.045)}
+body.reader-home .reader-mini-guide:nth-child(3){display:none}
+body.reader-home .reader-mini-guide img{height:126px}
+body.reader-home .reader-mini-guide div{padding:14px}
+
+/* 6. Turn Take part from four tall boxes into a compact utility strip. */
+body.reader-home .reader-take-part{padding:22px 0!important}
+body.reader-home .reader-actions-strip{gap:10px;border:0;background:transparent;overflow:visible}
+body.reader-home .reader-action{min-height:0;padding:17px;grid-template-columns:38px 1fr;gap:11px;border:1px solid var(--line)!important;border-radius:13px;background:#fff;box-shadow:0 4px 13px rgba(19,45,49,.04)}
+body.reader-home .reader-action-mark{width:36px;height:36px;font-size:.78rem;background:#edf5f3}
+body.reader-home .reader-action h3{margin:0 0 5px;font-size:1rem}
+body.reader-home .reader-action p{min-height:0;margin:0 0 10px;font-size:.8rem;line-height:1.35}
+body.reader-home .reader-action .small-button{margin-top:0;padding:8px 10px!important;font-size:.76rem!important}
+
+/* 7. Keep the footer useful, but stop it competing with the page above. */
+body.reader-home .reader-full-footer{padding-top:24px}
+body.reader-home .reader-footer-grid{gap:22px!important}
+body.reader-home .reader-full-footer .footer-logo{max-width:160px}
+body.reader-home .reader-full-footer .footer-links a{font-size:.86rem}
+body.reader-home .reader-footer-signup{padding-left:6px}
+
+/* 8. Accessibility: strong keyboard focus and reduced-motion support. */
+body.reader-home a:focus-visible,body.reader-home button:focus-visible,body.reader-home input:focus-visible{outline:3px solid rgba(248,121,27,.52);outline-offset:3px;border-radius:6px}
+@media(prefers-reduced-motion:reduce){body.reader-home .reader-story,body.reader-home .reader-explore-tile{transition:none!important;transform:none!important}}
+
+/* 9. Performance: lower-page sections can skip rendering until they approach the viewport. */
+@supports(content-visibility:auto){
+  body.reader-home .reader-explore-section,
+  body.reader-home .reader-feature-row,
+  body.reader-home .reader-take-part{content-visibility:auto;contain-intrinsic-size:auto 620px}
+}
+
+@media(max-width:1100px){
+  body.reader-home .reader-content-shelf{grid-template-columns:1fr}
+  body.reader-home .reader-actions-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+}
+@media(max-width:820px){
+  body.reader-home .reader-header .nav>a[href="/start/"],
+  body.reader-home .reader-header .nav>a[href="/submit/"],
+  body.reader-home .reader-header .nav>a[href="/contact/"],
+  body.reader-home .reader-header .nav>a[href="/join/"]:not(.reader-nav-join){display:block}
+  body.reader-home .reader-hero-photo{background-position:64% center}
+  body.reader-home .reader-hero-shade{background:linear-gradient(90deg,rgba(255,250,240,.99) 0%,rgba(255,250,240,.94) 54%,rgba(255,250,240,.32) 100%)}
+}
+@media(max-width:680px){
+  body.reader-home .reader-hero-photo,body.reader-home .reader-hero-overlay{min-height:470px}
+  body.reader-home .reader-hero-copy{padding-top:32px;padding-bottom:34px}
+  body.reader-home .reader-hero h1{font-size:clamp(2.9rem,13.5vw,4rem)}
+  body.reader-home .reader-hero-lead{font-size:1.02rem}
+  body.reader-home .reader-signup{margin-top:17px}
+  body.reader-home .reader-proof{gap:7px}
+  body.reader-home .reader-proof span{font-size:.73rem;padding:6px 8px}
+  body.reader-home .reader-story{display:flex}
+  body.reader-home [data-explore-grid]{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  body.reader-home .reader-explore-tile{min-height:176px}
+  body.reader-home .reader-explore-visual{height:82px;flex-basis:82px}
+  body.reader-home .reader-explore-copy{min-height:94px;padding:10px 10px 11px}
+  body.reader-home .reader-explore-copy strong{font-size:.89rem}
+  body.reader-home .reader-explore-copy small{font-size:.71rem}
+  body.reader-home .reader-latest-panel{grid-template-columns:92px 1fr;gap:15px}
+  body.reader-home .reader-guide-grid{grid-template-columns:1fr}
+  body.reader-home .reader-actions-strip{grid-template-columns:1fr;gap:8px}
+  body.reader-home .reader-action{grid-template-columns:34px 1fr;padding:14px}
+  body.reader-home .reader-action-mark{width:32px;height:32px}
+}
+@media(max-width:360px){body.reader-home [data-explore-grid]{grid-template-columns:1fr}}
