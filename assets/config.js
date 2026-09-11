@@ -66,29 +66,6 @@ window.SK8_CONFIG = {
     summary: "Black pudding throwing, dragon boats, Gatley Carrs, a Cheadle Hulme pub, Abney Hall and the Ladybrook corridor.",
     url: "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619"
   },
-  homeStories: [
-    {
-      label: "WORTH THE TRIP",
-      title: "£29 Laughterama tickets are still showing",
-      meta: "Sat 5–Sun 6 Sep · Castlefield Bowl",
-      summary: "Four weekend comedy shows were still showing £29 tickets at the latest check, with street food and craft beer around the open-air arena.",
-      image: "https://storage.mlcdn.com/account_image/2462354/FXwociOldVfkiDg4c8zDVK9cQjLmfyUOeS766Vg7.jpg"
-    },
-    {
-      label: "LOCAL STORY",
-      title: "The Heald Green spy and future Dambuster",
-      meta: "Heald Green · Local history",
-      summary: "A First World War spy lived beside the Heald Green Hotel while RAF men, including a young Guy Gibson, later slept upstairs.",
-      image: "https://storage.mlcdn.com/account_image/2462354/XUOl5y8Le1k2HWFPih9pWAd86ITKXij0u2kJczOX.png"
-    },
-    {
-      label: "USEFUL UPDATE",
-      title: "A new 20mph proposal for the Nansen/Firs estate",
-      meta: "Heald Green · Consultation closes 24 Sep",
-      summary: "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
-      image: "/assets/images/home-story-2.webp"
-    }
-  ],
   stripeLinks: {
     local_spotlight: "",
     monthly_partner: "",
