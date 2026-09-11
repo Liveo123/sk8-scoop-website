@@ -6,6 +6,5 @@ Disallow: /qrlocal/
 Disallow: /qr-success/
 Disallow: /signup-success/
 Disallow: /summer-guide-success/
-Disallow: /whats-on/
 Disallow: /advertise/pay/
 Sitemap: https://www.sk8scoop.com/sitemap.xml

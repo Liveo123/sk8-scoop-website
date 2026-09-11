@@ -4,6 +4,7 @@
   const empty = document.querySelector('[data-events-empty]');
   const status = document.querySelector('[data-events-status]');
   const filters = [...document.querySelectorAll('[data-event-filter]')];
+  const areaFilters = [...document.querySelectorAll('[data-event-area]')];
   if (!list) return;
 
   const safeUrl = value => {
@@ -61,18 +62,18 @@
         const button = filterGrid.querySelector(`[data-event-filter="${key}"]`);
         const card = button && button.closest('.reader-story');
         if (!card || card.querySelector('.reader-story-image')) return;
-        const image = document.createElement('div');
-        image.className = 'reader-story-image';
-        image.style.backgroundImage = `url("${images[key]}")`;
+        const visual = document.createElement('div');
+        visual.className = 'reader-story-image';
+        visual.style.backgroundImage = `url("${images[key]}")`;
         if (key === 'free') {
-          image.style.backgroundSize = 'contain';
-          image.style.backgroundRepeat = 'no-repeat';
-          image.style.backgroundColor = '#fff';
+          visual.style.backgroundSize = 'contain';
+          visual.style.backgroundRepeat = 'no-repeat';
+          visual.style.backgroundColor = '#fff';
         }
         const label = document.createElement('span');
         label.textContent = labels[key];
-        image.appendChild(label);
-        card.prepend(image);
+        visual.appendChild(label);
+        card.prepend(visual);
       });
     }
 
@@ -111,6 +112,7 @@
 
   let events = [];
   let activeFilter = 'all';
+  let activeArea = 'all';
 
   const localToday = () => {
     const parts = new Intl.DateTimeFormat('en-GB', {
@@ -146,21 +148,40 @@
     return [saturday, sunday];
   };
 
+  const nextSevenDayBounds = () => {
+    const start = parseDate(localToday());
+    const end = new Date(start);
+    end.setUTCDate(start.getUTCDate() + 6);
+    return [start, end];
+  };
+
   const isFree = event => /(^|\b)free(\b|$)/i.test(String(event.cost || ''));
   const isFamily = event => /family|kids|children|storytime/i.test(`${event.category || ''} ${event.title || ''} ${event.description || ''}`);
+  const isToday = event => String(event.date || '') === localToday();
   const isWeekend = event => {
     const date = parseDate(event.date);
     if (!date) return false;
     const [start, end] = weekendBounds();
     return date >= start && date <= end;
   };
+  const isNextSevenDays = event => {
+    const date = parseDate(event.date);
+    if (!date) return false;
+    const [start, end] = nextSevenDayBounds();
+    return date >= start && date <= end;
+  };
 
-  const matches = event => {
+  const matchesNeed = event => {
     if (activeFilter === 'free') return isFree(event);
     if (activeFilter === 'family') return isFamily(event);
     if (activeFilter === 'weekend') return isWeekend(event);
+    if (activeFilter === 'today') return isToday(event);
+    if (activeFilter === 'week') return isNextSevenDays(event);
     return true;
   };
+
+  const matchesArea = event => activeArea === 'all' || String(event.area || '').trim().toLowerCase() === activeArea.toLowerCase();
+  const matches = event => matchesNeed(event) && matchesArea(event);
 
   const eventCard = event => {
     const article = document.createElement('article');
@@ -208,11 +229,27 @@
       link.href = source;
       link.rel = 'noopener';
       link.textContent = 'Check current details →';
+      link.addEventListener('click', () => {
+        if (typeof window.sk8Track === 'function') {
+          window.sk8Track('event_detail_click', {
+            event_id: String(event.id || '').slice(0, 120),
+            event_area: String(event.area || '').slice(0, 80),
+            event_category: category.slice(0, 80)
+          });
+        }
+      });
       body.appendChild(link);
     }
 
     article.appendChild(body);
     return article;
+  };
+
+  const filterLabel = () => {
+    const labels = { all: 'all', today: 'today', week: 'the next 7 days', weekend: 'this weekend', free: 'free', family: 'family' };
+    const need = labels[activeFilter] || activeFilter;
+    if (activeArea === 'all') return need === 'all' ? '' : ` · ${need}`;
+    return ` · ${activeArea}${need === 'all' ? '' : ` · ${need}`}`;
   };
 
   const render = () => {
@@ -221,16 +258,57 @@
     visible.forEach(event => list.appendChild(eventCard(event)));
     if (empty) empty.hidden = visible.length > 0;
     if (status) status.textContent = visible.length
-      ? `${visible.length} checked ${visible.length === 1 ? 'listing' : 'listings'} shown`
-      : 'No checked listings match this view yet.';
+      ? `${visible.length} checked ${visible.length === 1 ? 'listing' : 'listings'} shown${filterLabel()}`
+      : `No checked listings match this view${filterLabel()}.`;
     filters.forEach(button => {
       const selected = button.dataset.eventFilter === activeFilter;
       button.setAttribute('aria-pressed', String(selected));
     });
+    areaFilters.forEach(button => {
+      const selected = button.dataset.eventArea === activeArea;
+      button.setAttribute('aria-pressed', String(selected));
+    });
+  };
+
+  const syncEventSchema = () => {
+    document.getElementById('sk8-event-list-schema')?.remove();
+    const schema = document.createElement('script');
+    schema.type = 'application/ld+json';
+    schema.id = 'sk8-event-list-schema';
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Current checked events around SK8',
+      itemListElement: events.map((event, index) => {
+        const source = safeUrl(event.booking_url || event.source_url) || 'https://www.sk8scoop.com/whats-on/';
+        const startDate = `${event.date}${event.time ? `T${event.time}:00` : ''}`;
+        const item = {
+          '@type': 'Event',
+          name: String(event.title || ''),
+          startDate,
+          eventStatus: 'https://schema.org/EventScheduled',
+          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+          location: {
+            '@type': 'Place',
+            name: String(event.venue || event.area || 'SK8'),
+            address: String(event.area || '')
+          },
+          url: source,
+          description: String(event.description || '')
+        };
+        if (isFree(event)) item.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: source, availability: 'https://schema.org/InStock' };
+        return { '@type': 'ListItem', position: index + 1, item };
+      })
+    });
+    document.head.appendChild(schema);
   };
 
   filters.forEach(button => button.addEventListener('click', () => {
     activeFilter = button.dataset.eventFilter || 'all';
+    render();
+  }));
+  areaFilters.forEach(button => button.addEventListener('click', () => {
+    activeArea = button.dataset.eventArea || 'all';
     render();
   }));
 
@@ -245,6 +323,7 @@
         .filter(event => event && event.status !== 'example')
         .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && event.date >= today)
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
+      syncEventSchema();
       render();
     })
     .catch(error => {

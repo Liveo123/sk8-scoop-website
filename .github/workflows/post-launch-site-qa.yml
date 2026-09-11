@@ -1,0 +1,111 @@
+name: Post-launch site QA
+
+on:
+  pull_request:
+  push:
+    branches:
+      - improve/post-launch-nue-v2
+      - main
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check current issue freshness
+        run: node scripts/check-current-content.mjs
+      - name: Check post-launch NUE contracts
+        run: node scripts/check-post-launch-v2.mjs
+
+  preview-smoke:
+    if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/post-launch-nue-v2')
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for the Cloudflare branch alias and verify release markers
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+        run: |
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          base="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev"
+          check_page() {
+            path="$1"
+            marker="$2"
+            url="${base}${path}"
+            for attempt in $(seq 1 12); do
+              body="$(curl -fsSL --max-time 20 "$url" || true)"
+              if printf '%s' "$body" | grep -Fq "$marker"; then
+                echo "OK preview: $url"
+                return 0
+              fi
+              echo "Waiting for preview: $url (attempt $attempt/12)"
+              sleep 15
+            done
+            echo "FAILED preview marker: $url"
+            return 1
+          }
+          check_page '/' 'homepage-utility-promise-v1'
+          check_page '/whats-on/' 'data-event-area="Cheadle"'
+          check_page '/advertise.html' 'value="temp_test"'
+          check_page '/food-drink/' 'Food & Drink around SK8'
+          check_page '/local-history/' 'Local History around SK8'
+
+  live-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Cloudflare and verify changed public routes
+        shell: bash
+        run: |
+          check_page() {
+            url="$1"
+            marker="$2"
+            for attempt in $(seq 1 10); do
+              body="$(curl -fsSL --max-time 20 "$url" || true)"
+              if printf '%s' "$body" | grep -Fq "$marker"; then
+                echo "OK: $url"
+                return 0
+              fi
+              echo "Waiting for deployment: $url (attempt $attempt/10)"
+              sleep 15
+            done
+            echo "FAILED: expected marker not found at $url"
+            return 1
+          }
+          check_page 'https://www.sk8scoop.com/' 'homepage-utility-promise-v1'
+          check_page 'https://www.sk8scoop.com/whats-on/' 'data-event-area="Cheadle"'
+          check_page 'https://www.sk8scoop.com/advertise.html' 'value="temp_test"'
+          check_page 'https://www.sk8scoop.com/food-drink/' 'Food & Drink around SK8'
+          check_page 'https://www.sk8scoop.com/local-history/' 'Local History around SK8'
+          check_page 'https://www.sk8scoop.com/submit/' 'action="/api/reader-submission"'
+          check_page 'https://www.sk8scoop.com/contact/' 'data-form-kind="contact-message"'
+
+      - name: Verify production form routes and contact transport without creating records
+        shell: bash
+        run: |
+          expect_validation() {
+            url="$1"
+            code="$(curl -sS --max-time 20 -o /tmp/response.json -w '%{http_code}' -X POST "$url" -H 'content-type: application/json' --data '{}')"
+            if [ "$code" != "400" ]; then
+              echo "Expected validation 400 from $url, got $code"
+              cat /tmp/response.json || true
+              exit 1
+            fi
+            echo "OK validation route: $url"
+          }
+          expect_validation 'https://www.sk8scoop.com/api/reader-submission'
+          expect_validation 'https://www.sk8scoop.com/api/submit-event'
+          expect_validation 'https://www.sk8scoop.com/api/advertiser-enquiry'
+
+          contact_code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' 'https://submit-form.com/X3MWnWHXI')"
+          case "$contact_code" in
+            2*|3*|4*) echo "OK contact endpoint reachable: HTTP $contact_code" ;;
+            *) echo "Formspark contact endpoint unavailable: HTTP $contact_code"; exit 1 ;;
+          esac
