@@ -1,0 +1,98 @@
+name: Homepage V3 QA
+
+on:
+  pull_request:
+    paths:
+      - 'assets/homepage-v3.css'
+      - 'assets/homepage-nue.js'
+      - 'index.html'
+      - 'assets/config.js'
+      - 'scripts/check-homepage-v3.mjs'
+      - '.github/workflows/homepage-v3-qa.yml'
+  push:
+    branches:
+      - improve/homepage-v3
+      - main
+    paths:
+      - 'assets/homepage-v3.css'
+      - 'assets/homepage-nue.js'
+      - 'index.html'
+      - 'assets/config.js'
+      - 'scripts/check-homepage-v3.mjs'
+      - '.github/workflows/homepage-v3-qa.yml'
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check current content freshness
+        run: node scripts/check-current-content.mjs
+      - name: Check homepage V3 contract
+        run: node scripts/check-homepage-v3.mjs
+
+  preview-smoke:
+    if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/homepage-v3')
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Cloudflare preview and verify homepage assets
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+        run: |
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          base="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev"
+          check_marker() {
+            url="$1"
+            marker="$2"
+            for attempt in $(seq 1 12); do
+              body="$(curl -fsSL --max-time 20 "$url" || true)"
+              if printf '%s' "$body" | grep -Fq "$marker"; then
+                echo "OK preview: $url"
+                return 0
+              fi
+              echo "Waiting for preview: $url (attempt $attempt/12)"
+              sleep 15
+            done
+            echo "FAILED preview marker: $url"
+            return 1
+          }
+          check_marker "$base/" 'assets/homepage-nue.js'
+          check_marker "$base/assets/homepage-nue.js" 'Free Friday newsletter · SK8'
+          check_marker "$base/assets/homepage-nue.js" '/assets/homepage-v3.css'
+          check_marker "$base/assets/homepage-v3.css" 'Homepage V3: post-launch design'
+          check_marker "$base/assets/homepage-v3.css" '@media(max-width:360px)'
+
+  live-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for production and verify homepage V3 assets
+        shell: bash
+        run: |
+          check_marker() {
+            url="$1"
+            marker="$2"
+            for attempt in $(seq 1 12); do
+              body="$(curl -fsSL --max-time 20 "$url" || true)"
+              if printf '%s' "$body" | grep -Fq "$marker"; then
+                echo "OK production: $url"
+                return 0
+              fi
+              echo "Waiting for production: $url (attempt $attempt/12)"
+              sleep 15
+            done
+            echo "FAILED production marker: $url"
+            return 1
+          }
+          check_marker 'https://www.sk8scoop.com/' 'assets/homepage-nue.js'
+          check_marker 'https://www.sk8scoop.com/assets/homepage-nue.js' 'Free Friday newsletter · SK8'
+          check_marker 'https://www.sk8scoop.com/assets/homepage-nue.js' '/assets/homepage-v3.css'
+          check_marker 'https://www.sk8scoop.com/assets/homepage-v3.css' 'Homepage V3: post-launch design'
