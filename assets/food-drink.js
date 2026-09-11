@@ -1,13 +1,12 @@
 (() => {
-  const card = document.querySelector('[data-food-event-card]');
-  if (!card) return;
+  const summaryCard = document.querySelector('[data-food-event-summary]');
+  const countText = document.querySelector('[data-food-event-count]');
+  const nextDateText = document.querySelector('[data-food-event-next-date]');
+  const summaryCopy = document.querySelector('[data-food-event-summary-copy]');
+  const eventsSection = document.querySelector('[data-food-events-section]');
+  const eventsGrid = document.querySelector('[data-food-events-grid]');
 
-  const title = card.querySelector('[data-food-event-title]');
-  const dateText = card.querySelector('[data-food-event-date]');
-  const timeText = card.querySelector('[data-food-event-time]');
-  const placeText = card.querySelector('[data-food-event-place]');
-  const description = card.querySelector('[data-food-event-description]');
-  const link = card.querySelector('[data-food-event-link]');
+  if (!summaryCard && !eventsSection) return;
 
   const localToday = () => {
     const parts = new Intl.DateTimeFormat('en-GB', {
@@ -42,6 +41,51 @@
     }
   };
 
+  const eventCard = event => {
+    const article = document.createElement('article');
+    article.className = 'reader-story food-event-card';
+
+    const visual = document.createElement('div');
+    visual.className = 'food-event-date-block';
+    const kicker = document.createElement('span');
+    kicker.className = 'category-stat-kicker';
+    kicker.textContent = String(event.area || 'Nearby').trim();
+    const date = document.createElement('strong');
+    date.textContent = prettyDate(event.date);
+    const time = document.createElement('small');
+    time.textContent = [String(event.time || '').trim(), String(event.cost || '').trim()].filter(Boolean).join(' · ');
+    visual.append(kicker, date, time);
+
+    const body = document.createElement('div');
+    body.className = 'reader-story-body';
+    const eyebrow = document.createElement('div');
+    eyebrow.className = 'eyebrow food-event-eyebrow';
+    eyebrow.textContent = 'FOOD & DRINK';
+    const heading = document.createElement('h3');
+    heading.textContent = String(event.title || 'Food event');
+    const venue = document.createElement('p');
+    venue.className = 'food-event-venue';
+    venue.textContent = String(event.venue || '').trim();
+    const description = document.createElement('p');
+    description.textContent = String(event.description || '');
+    body.append(eyebrow, heading);
+    if (venue.textContent) body.appendChild(venue);
+    body.appendChild(description);
+
+    const source = safeUrl(event.booking_url || event.source_url);
+    if (source) {
+      const link = document.createElement('a');
+      link.className = 'reader-link';
+      link.href = source;
+      link.rel = 'noopener';
+      link.textContent = 'Check current details →';
+      body.appendChild(link);
+    }
+
+    article.append(visual, body);
+    return article;
+  };
+
   fetch('/data/events.json', { cache: 'no-store' })
     .then(response => {
       if (!response.ok) throw new Error(`Events data returned ${response.status}`);
@@ -55,30 +99,22 @@
         .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && event.date >= today)
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
 
-      const event = upcoming[0];
-      if (!event) return;
+      if (!upcoming.length) return;
 
-      if (title) title.textContent = String(event.title || 'Next food event');
-      if (dateText) dateText.textContent = prettyDate(event.date);
-      if (timeText) {
-        const bits = [String(event.time || '').trim(), String(event.cost || '').trim()].filter(Boolean);
-        timeText.textContent = bits.join(' · ');
+      const first = upcoming[0];
+      if (countText) countText.textContent = String(upcoming.length);
+      if (nextDateText) nextDateText.textContent = `Next: ${prettyDate(first.date)}`;
+      if (summaryCopy) {
+        const place = String(first.area || '').trim();
+        summaryCopy.textContent = `Next up is ${String(first.title || 'a checked food event')}${place ? ` in ${place}` : ''}. The list below updates from What’s On as new checked events are added.`;
       }
-      if (placeText) {
-        const bits = [String(event.area || '').trim(), String(event.venue || '').trim()].filter(Boolean);
-        placeText.textContent = bits.join(' · ');
-      }
-      if (description) description.textContent = String(event.description || '');
+      if (summaryCard) summaryCard.hidden = false;
 
-      const source = safeUrl(event.booking_url || event.source_url);
-      if (link && source) {
-        link.href = source;
-        link.hidden = false;
-      } else if (link) {
-        link.hidden = true;
+      if (eventsGrid) {
+        eventsGrid.replaceChildren();
+        upcoming.slice(0, 4).forEach(event => eventsGrid.appendChild(eventCard(event)));
       }
-
-      card.hidden = false;
+      if (eventsSection) eventsSection.hidden = false;
     })
     .catch(error => {
       console.error('SK8 Food & Drink event data failed to load', error);
