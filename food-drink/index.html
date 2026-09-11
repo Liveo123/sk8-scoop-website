@@ -65,17 +65,17 @@
             </div>
           </article>
 
-          <article class="reader-story" data-food-event-card hidden>
+          <article class="reader-story" data-food-event-summary hidden>
             <div class="category-stat-visual alt compact">
-              <span class="category-stat-kicker">Next checked food event</span>
-              <strong data-food-event-date>Coming up</strong>
-              <small data-food-event-time></small>
-              <b data-food-event-place></b>
+              <span class="category-stat-kicker">Checked What’s On</span>
+              <strong data-food-event-count>0</strong>
+              <small>food &amp; drink events coming up</small>
+              <b data-food-event-next-date></b>
             </div>
             <div class="reader-story-body">
-              <h3 data-food-event-title>Next food event</h3>
-              <p data-food-event-description></p>
-              <a class="button small-button" data-food-event-link href="/whats-on/" rel="noopener" hidden>Check current details</a>
+              <h3>Food events coming up</h3>
+              <p data-food-event-summary-copy>Current checked food events from the What’s On list.</p>
+              <a class="button small-button" href="#food-events">See the food events</a>
             </div>
           </article>
 
@@ -89,19 +89,31 @@
           </article>
         </div>
 
-        <div class="reader-panel" style="margin-top:22px">
+        <div class="reader-panel food-how-panel" style="margin-top:22px">
           <div class="eyebrow">How this section works</div>
           <h2>Specific beats comprehensive.</h2>
-          <p>SK8 Scoop adds a place here when there is a useful reason: a genuinely good-value offer, an opening, a change, a local curiosity or something readers keep asking about. Nearby food events are pulled from the same checked What’s On data so expired events drop away automatically.</p>
+          <p>SK8 Scoop adds a place here when there is a useful reason: a genuinely good-value offer, an opening, a change, a local curiosity or something readers keep asking about. Nearby food events come from the same checked What’s On data, so expired events drop away automatically.</p>
+          <div class="button-row"><a class="button secondary" href="/submit/">Send us a food tip</a><a class="reader-link" href="/whats-on/">Browse all What’s On →</a></div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="food-events" data-food-events-section hidden>
       <div class="wrap">
-        <div class="reader-panel">
+        <div class="section-head reader-section-head">
+          <div><div class="eyebrow">Coming up</div><h2>Food &amp; drink events nearby</h2></div>
+          <a class="reader-link" href="/whats-on/">See all What’s On →</a>
+        </div>
+        <div class="reader-card-grid food-event-grid" data-food-events-grid></div>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="wrap">
+        <div class="reader-panel food-next-panel">
           <div class="eyebrow">Next useful experience</div>
           <h2>Want something to do after lunch?</h2>
+          <p>Jump to dated local events, or head outdoors for a walk and a bit of fresh air.</p>
           <div class="button-row"><a class="button" href="/whats-on/">See What’s On</a><a class="button secondary" href="/outdoors/">Go outdoors</a></div>
         </div>
       </div>
