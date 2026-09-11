@@ -1,4 +1,92 @@
 (() => {
+  const CLARITY_PROJECT_ID = 'ygkyi5rghv';
+  const CONSENT_KEY = 'sk8_privacy_choices_v1';
+  let clarityLoaded = false;
+
+  const readConsent = () => {
+    try {
+      const choice = JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null');
+      if (!choice || choice.version !== 1 || !choice.expiresAt || Date.now() > choice.expiresAt) return null;
+      return choice;
+    } catch (_) {
+      return null;
+    }
+  };
+
+  const clearClarityCookies = () => {
+    document.cookie.split(';').map(item => item.split('=')[0].trim()).filter(name => /^(_clck|_clsk)$/.test(name)).forEach(name => {
+      document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+      document.cookie = `${name}=; Max-Age=0; path=/; domain=.${location.hostname.replace(/^www\./, '')}; SameSite=Lax`;
+    });
+  };
+
+  const grantClarityConsent = () => {
+    if (typeof window.clarity === 'function') {
+      window.clarity('consentv2', {
+        ad_Storage: 'denied',
+        analytics_Storage: 'granted'
+      });
+    }
+  };
+
+  const loadClarity = () => {
+    if (clarityLoaded) {
+      grantClarityConsent();
+      return;
+    }
+    clarityLoaded = true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', CLARITY_PROJECT_ID);
+    grantClarityConsent();
+  };
+
+  const syncClarityWithConsent = () => {
+    const consent = readConsent();
+    if (consent && consent.analytics) loadClarity();
+    else clearClarityCookies();
+  };
+
+  const updatePrivacyUi = () => {
+    const panel = document.querySelector('.privacy-choices');
+    if (!panel) return false;
+    const copy = panel.querySelector('.privacy-choices-copy p');
+    if (copy) copy.innerHTML = 'Optional Google Analytics and Microsoft Clarity help improve SK8 Scoop. Meta Pixel measures Facebook advertising. None loads unless you allow it. <a href="/privacy.html">Privacy details</a>.';
+    const analytics = panel.querySelector('[data-consent-analytics]');
+    if (analytics && analytics.parentElement) {
+      const strong = analytics.parentElement.querySelector('strong');
+      const small = analytics.parentElement.querySelector('small');
+      if (strong) strong.textContent = 'Analytics';
+      if (small) small.textContent = 'Google Analytics and Microsoft Clarity: page visits, referrals, clicks and session behaviour.';
+    }
+    return true;
+  };
+
+  syncClarityWithConsent();
+
+  document.addEventListener('click', event => {
+    if (event.target.closest('[data-consent-all], [data-consent-none], [data-consent-save]')) {
+      window.setTimeout(syncClarityWithConsent, 0);
+    }
+  }, true);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!updatePrivacyUi()) {
+        const observer = new MutationObserver(() => {
+          if (updatePrivacyUi()) observer.disconnect();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+    }, { once: true });
+  } else {
+    updatePrivacyUi();
+  }
+})();
+
+(() => {
   const forms = [...document.querySelectorAll('[data-signup-form]')];
   if (!forms.length) return;
 
