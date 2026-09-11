@@ -14,12 +14,12 @@
   };
   if (publicPaths.has(path)) {
     if (!document.body.dataset.page && pageIdentity[path]) document.body.dataset.page = pageIdentity[path];
-    ['/assets/secondary-pages.css','/assets/secondary-extras.css','/assets/nue-preview.css'].forEach((href) => {
+    ['/assets/secondary-pages.css','/assets/secondary-extras.css','/assets/nue.css'].forEach((href) => {
       if (!document.querySelector(`link[href="${href}"]`)) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = href;
-        link.dataset.sk8SecondaryDesign = 'preview';
+        link.dataset.sk8SecondaryDesign = 'production';
         document.head.appendChild(link);
       }
     });
@@ -176,4 +176,16 @@ window.SK8_CONFIG = {
   script.defer = true;
   script.dataset.sk8SignupProtection = 'true';
   document.head.appendChild(script);
+})();
+
+
+(() => {
+  ['nue-analytics.js','nue-links.js'].forEach(file => {
+    if (document.querySelector(`script[data-sk8-nue-layer="${file}"]`)) return;
+    const script = document.createElement('script');
+    script.src = `/assets/${file}`;
+    script.defer = true;
+    script.dataset.sk8NueLayer = file;
+    document.head.appendChild(script);
+  });
 })();

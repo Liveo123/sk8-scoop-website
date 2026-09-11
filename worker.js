@@ -236,7 +236,7 @@ async function handleAdvertiserEnquiry(request, env) {
   if (required.some(key => !String(d[key] || '').trim())) return json({ error: 'Please complete all required fields.' }, 400);
   if (!isEmail(d.email)) return json({ error: 'Please provide a valid email address.' }, 400);
   if (!isUrl(d.website)) return json({ error: 'Please provide a valid website or landing page.' }, 400);
-  const allowed = ['local_spotlight', 'monthly_partner', 'category_partner', 'bespoke'];
+  const allowed = ['temp_test', 'temp_grow', 'local_spotlight', 'monthly_partner', 'category_partner', 'bespoke'];
   if (!allowed.includes(String(d.package))) return json({ error: 'Please choose a valid campaign option.' }, 400);
   const c = (value, length = 1000) => String(value || '').trim().slice(0, length);
   await env.DB.prepare(`INSERT INTO advertiser_enquiries (business_name,contact_name,email,phone,business_type,area,website,package,preferred_date,advert_copy,image_link,invoice_details,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?, 'pending',datetime('now'))`)
