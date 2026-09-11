@@ -1,9 +1,15 @@
 /* Preview-only NUE polish: homepage Explore SK8 + What's On + category pages. */
 
 /* Global visual QA rule for preview: important artwork is shown whole, never silently cropped. */
-body.reader-home .dicm-visual{height:auto!important;min-height:0!important;aspect-ratio:16/9;padding:6px!important;background:#f7faf8!important;overflow:hidden}
-body.reader-home .dicm-visual .dicm-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;border-radius:8px}
-body.reader-home .dicm-visual .dicm-mode-label{position:absolute;left:18px;top:18px;z-index:4;margin:0}
+body.reader-home .dicm-visual{height:auto!important;min-height:0!important;aspect-ratio:auto;display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:10px!important;background:#f7faf8!important;overflow:hidden}
+body.reader-home .dicm-visual .dicm-art{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;border-radius:0}
+body.reader-home .dicm-visual .dicm-mode-label{position:static;order:-1;align-self:flex-start;z-index:auto;margin:0}
+
+/* Keep preview calls to action readable, including the older homepage overrides. */
+body.reader-home .button,body.reader-home .nav .button,
+body.reader-home .reader-hero .reader-signup .button,
+body.reader-home .reader-footer-signup .button,
+body[data-page="whats-on"] .button,body[data-page="whats-on"] .nav .button{background:#0f6470!important;color:#fff!important;box-shadow:0 8px 20px rgba(15,100,112,.15)}
 
 /* Homepage: eight Explore SK8 cards, four equal columns on desktop. */
 body.reader-home [data-explore-grid]{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:100%}
@@ -57,18 +63,6 @@ body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:150p
 body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.08))}
 body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image span{position:relative;z-index:1}
 body[data-page="whats-on"] [data-events-list] .reader-story-image{height:145px;background-size:contain;background-repeat:no-repeat;background-color:#edf6f4}
-body[data-page="whats-on"] .event-icon-visual{position:relative;height:145px;display:grid;place-items:center;background:linear-gradient(135deg,#eef7f5,#fff8ed);border-bottom:1px solid var(--line);overflow:hidden}
-body[data-page="whats-on"] .event-icon-visual:before,body[data-page="whats-on"] .event-icon-visual:after{content:"";position:absolute;border-radius:999px;opacity:.6}
-body[data-page="whats-on"] .event-icon-visual:before{width:120px;height:120px;right:-35px;top:-38px;background:rgba(248,121,27,.13)}
-body[data-page="whats-on"] .event-icon-visual:after{width:90px;height:90px;left:-22px;bottom:-35px;background:rgba(15,100,112,.11)}
-body[data-page="whats-on"] .event-icon-ring{position:relative;z-index:2;display:grid;place-items:center;width:74px;height:74px;border-radius:22px;background:rgba(255,255,255,.88);border:1px solid rgba(15,100,112,.16);box-shadow:0 9px 20px rgba(19,45,49,.09)}
-body[data-page="whats-on"] .event-icon-visual svg{width:45px;height:45px;stroke:var(--teal);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-body[data-page="whats-on"] .event-icon-food{background:linear-gradient(135deg,#fff1df,#eef7f5)}
-body[data-page="whats-on"] .event-icon-family{background:linear-gradient(135deg,#eef7f5,#fff7dc)}
-body[data-page="whats-on"] .event-icon-history{background:linear-gradient(135deg,#f5eadb,#eef5f3)}
-body[data-page="whats-on"] .event-icon-wellness{background:linear-gradient(135deg,#e8f5ea,#f4efe4)}
-body[data-page="whats-on"] .event-icon-music{background:linear-gradient(135deg,#f6ecf4,#edf6f4)}
-body[data-page="whats-on"] .event-icon-community{background:linear-gradient(135deg,#edf6f4,#f7f0e7)}
 body[data-page="whats-on"] .event-venue{margin-top:-4px!important;font-size:.82rem!important;font-weight:700;color:#53666a!important}
 body[data-page="whats-on"] .whats-on-empty:not([hidden]){display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;align-items:center;overflow:hidden}
 body[data-page="whats-on"] .whats-on-empty-art{width:190px;height:150px;border-radius:12px;border:1px solid var(--line);background:#eef7f5}
