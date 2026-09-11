@@ -1,0 +1,52 @@
+/* Preview-only alignment pass for the three Outdoors summary cards. */
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-top{
+  min-height:216px;
+  grid-template-rows:34px 112px 34px;
+  gap:0;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-meta{
+  min-height:34px;
+  align-items:flex-start;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-place,
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-type{
+  min-height:30px;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-main{
+  display:grid;
+  grid-template-rows:64px 34px;
+  align-content:end;
+  min-height:112px;
+  padding-top:14px;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-value{
+  display:inline-flex;
+  align-items:center;
+  min-height:58px;
+  width:max-content;
+  align-self:end;
+}
+body[data-page="outdoors"] #outdoor-picks .reader-story:nth-child(2) .outdoor-feature-value{
+  min-height:58px;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-title{
+  display:flex;
+  align-items:flex-start;
+  min-height:34px;
+  margin-top:8px;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-detail{
+  align-self:start;
+  min-height:30px;
+  margin-top:4px;
+}
+@media(max-width:680px){
+  body[data-page="outdoors"] #outdoor-picks .outdoor-feature-top{
+    min-height:0;
+    grid-template-rows:auto auto auto;
+  }
+  body[data-page="outdoors"] #outdoor-picks .outdoor-feature-main{
+    grid-template-rows:auto auto;
+    min-height:0;
+  }
+}
