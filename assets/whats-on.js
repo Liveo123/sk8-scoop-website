@@ -35,6 +35,12 @@
     }
   };
 
+  const slugifyCategory = value => String(value || 'local-event')
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'local-event';
+
   const addPageVisuals = () => {
     const heroWrap = document.querySelector('.page-hero > .wrap');
     if (heroWrap && !heroWrap.classList.contains('whats-on-hero-grid')) {
@@ -180,13 +186,16 @@
     const article = document.createElement('article');
     article.className = 'reader-story event-listing-card';
 
+    const category = String(event.category || 'LOCAL EVENT').trim() || 'LOCAL EVENT';
+    article.dataset.category = slugifyCategory(category);
+
     const imageUrl = safeUrl(event.image);
     if (imageUrl) {
       const visual = document.createElement('div');
       visual.className = 'reader-story-image';
       visual.style.backgroundImage = `url("${imageUrl}")`;
       const label = document.createElement('span');
-      label.textContent = String(event.category || 'LOCAL EVENT');
+      label.textContent = category;
       visual.appendChild(label);
       article.appendChild(visual);
     }
@@ -195,7 +204,7 @@
     body.className = 'reader-story-body';
     const eyebrow = document.createElement('div');
     eyebrow.className = 'eyebrow';
-    eyebrow.textContent = String(event.category || 'LOCAL EVENT');
+    eyebrow.textContent = category;
     const heading = document.createElement('h3');
     heading.textContent = String(event.title || '');
     const when = [prettyDate(event.date), String(event.time || '').trim()].filter(Boolean).join(' · ');
