@@ -1,0 +1,104 @@
+/* Preview-only gateway-page polish. Text-led editorial markers, not generic icon tiles. */
+
+/* Around SK8 */
+body[data-page="around-sk8"] .around-hero{padding:40px 0 36px}
+body[data-page="around-sk8"] .around-hero h1{max-width:11ch;font-size:clamp(3rem,5vw,4.55rem);line-height:.95;letter-spacing:-.05em}
+body[data-page="around-sk8"] .around-map{min-height:400px;background:radial-gradient(circle at 16% 22%,rgba(248,121,27,.10) 0 8%,transparent 8.4%),radial-gradient(circle at 81% 77%,rgba(200,232,74,.16) 0 10%,transparent 10.5%),linear-gradient(135deg,#fff8eb,#eef7f5)}
+body[data-page="around-sk8"] .around-map:after{letter-spacing:.11em}
+body[data-page="around-sk8"] .around-route-grid{gap:18px}
+body[data-page="around-sk8"] .around-route-card{position:relative;min-height:280px;padding:24px;overflow:hidden;isolation:isolate;border-radius:18px;box-shadow:0 12px 28px rgba(19,45,49,.07)}
+body[data-page="around-sk8"] .around-route-card:before{position:absolute;z-index:-1;right:16px;top:10px;color:rgba(7,63,72,.07);font:900 6.5rem/.9 Arial,sans-serif;letter-spacing:-.08em}
+body[data-page="around-sk8"] .around-route-card:nth-child(1):before{content:"01"}
+body[data-page="around-sk8"] .around-route-card:nth-child(2):before{content:"02"}
+body[data-page="around-sk8"] .around-route-card:nth-child(3):before{content:"03"}
+body[data-page="around-sk8"] .around-route-card:nth-child(1){border-top:5px solid #0f6470;background:linear-gradient(145deg,#f2f8f6,#fff)}
+body[data-page="around-sk8"] .around-route-card:nth-child(2){border-top:5px solid #f8791b;background:linear-gradient(145deg,#fff7e9,#fff)}
+body[data-page="around-sk8"] .around-route-card:nth-child(3){border-top:5px solid #a36a00;background:linear-gradient(145deg,#fff9ed,#f7f2e8)}
+body[data-page="around-sk8"] .around-route-card .eyebrow{align-self:flex-start;padding:6px 10px;border-radius:999px;background:#073f48;color:#fff;font-size:.65rem}
+body[data-page="around-sk8"] .around-route-card:nth-child(2) .eyebrow{background:#f8791b}
+body[data-page="around-sk8"] .around-route-card:nth-child(3) .eyebrow{background:#9b6400}
+body[data-page="around-sk8"] .around-route-card h3{max-width:12ch;font-size:1.6rem;line-height:1.05;letter-spacing:-.035em}
+body[data-page="around-sk8"] .around-route-card p{max-width:34ch;color:#455b60;line-height:1.5}
+body[data-page="around-sk8"] .around-route-card .button-row,
+body[data-page="around-sk8"] .around-route-card>.button{margin-top:auto;padding-top:12px}
+body[data-page="around-sk8"] .around-more-grid>.reader-panel{position:relative;min-height:225px;padding:24px 24px 22px;overflow:hidden;border-radius:18px;box-shadow:0 10px 24px rgba(19,45,49,.06)}
+body[data-page="around-sk8"] .around-more-grid>.reader-panel:before{display:inline-flex;margin-bottom:24px;padding:6px 9px;border-radius:6px;background:#073f48;color:#fff;font-size:.64rem;font-weight:900;letter-spacing:.11em}
+body[data-page="around-sk8"] .around-more-grid>.reader-panel:nth-child(1):before{content:"EAT"}
+body[data-page="around-sk8"] .around-more-grid>.reader-panel:nth-child(2):before{content:"FAMILY";background:#1b7149}
+body[data-page="around-sk8"] .around-more-grid>.reader-panel:nth-child(3):before{content:"SAVE";background:#a55a10}
+body[data-page="around-sk8"] .around-more-grid>.reader-panel h3{font-size:1.45rem;margin:0 0 9px}
+body[data-page="around-sk8"] .around-more-grid>.reader-panel p{max-width:34ch;color:#4b6064;line-height:1.48}
+body[data-page="around-sk8"] .around-more-grid>.reader-panel .reader-link{display:inline-block;margin-top:12px}
+
+/* Guides */
+body[data-page="guides"] .page-hero{padding:46px 0 34px}
+body[data-page="guides"] .page-hero h1{max-width:13ch;font-size:clamp(3rem,5vw,4.4rem);line-height:.96}
+body[data-page="guides"] .reader-content{padding-top:28px}
+body[data-page="guides"] .guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+body[data-page="guides"] .guide-card{display:flex;flex-direction:column;min-height:100%;overflow:hidden;border:1px solid #d7ddd8;border-radius:18px;background:#fff;box-shadow:0 12px 28px rgba(19,45,49,.065)}
+body[data-page="guides"] .guide-visual{position:relative;display:grid;place-items:center;min-height:230px;padding:24px;border-bottom:1px solid #dde3de;overflow:hidden;background:linear-gradient(145deg,#fff9ed,#eef7f5)}
+body[data-page="guides"] .guide-visual img{display:block;max-width:78%;max-height:180px;width:auto;height:auto;object-fit:contain}
+body[data-page="guides"] .guide-visual.guide-summer{background:#fff8ea}
+body[data-page="guides"] .guide-visual.guide-summer img{max-width:74%;max-height:190px}
+body[data-page="guides"] .guide-visual.guide-secrets{background:#0b3740}
+body[data-page="guides"] .guide-visual.guide-secrets img{max-width:88%;max-height:195px;border-radius:12px}
+body[data-page="guides"] .guide-status{position:absolute;left:18px;top:18px;padding:6px 9px;border-radius:999px;background:#0f6470;color:#fff;font-size:.63rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 5px 12px rgba(19,45,49,.12)}
+body[data-page="guides"] .guide-status.orange{background:#a55a10}
+body[data-page="guides"] .guide-body{display:flex;flex:1;flex-direction:column;padding:22px}
+body[data-page="guides"] .guide-body h3{font-size:1.55rem;line-height:1.08;margin:0 0 8px}
+body[data-page="guides"] .guide-body .reader-meta{margin-bottom:10px!important}
+body[data-page="guides"] .guide-body p{color:#4b5f63;line-height:1.5}
+body[data-page="guides"] .guide-body .button,
+body[data-page="guides"] .guide-body .reader-link{align-self:flex-start;margin-top:auto}
+body[data-page="guides"] .guide-route-board{width:100%;max-width:420px;padding:20px;border:1px solid rgba(15,100,112,.16);border-radius:16px;background:#fffdf8;box-shadow:0 10px 24px rgba(19,45,49,.08);transform:rotate(-1deg)}
+body[data-page="guides"] .guide-route-board span{display:block;color:#f8791b;font-size:.65rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+body[data-page="guides"] .guide-route-board strong{display:block;margin:10px 0 12px;color:#073f48;font-size:1.7rem;line-height:1}
+body[data-page="guides"] .guide-route-board b{display:block;padding:8px 0;border-top:1px solid #dce4df;color:#355157;font-size:.84rem}
+body[data-page="guides"] .guides-principle{margin-top:24px;padding:26px 28px;border-radius:18px;background:linear-gradient(135deg,#073f48,#0f6470);color:#fff;box-shadow:0 12px 28px rgba(7,63,72,.14)}
+body[data-page="guides"] .guides-principle .eyebrow{color:#c8e84a}
+body[data-page="guides"] .guides-principle h2{color:#fff!important;margin:.2em 0 .35em}
+body[data-page="guides"] .guides-principle p{max-width:760px;color:#e4efec;line-height:1.55}
+
+/* Where to start */
+body[data-page="start"] .page-hero{padding:46px 0 32px}
+body[data-page="start"] .page-hero h1{max-width:12ch;font-size:clamp(3rem,5vw,4.45rem);line-height:.96}
+body[data-page="start"] .reader-content{padding-top:28px}
+body[data-page="start"] .start-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+body[data-page="start"] .reader-route{position:relative;display:flex;flex-direction:column;min-height:245px;padding:25px;overflow:hidden;isolation:isolate;border-radius:18px;box-shadow:0 11px 26px rgba(19,45,49,.065)}
+body[data-page="start"] .reader-route:before{position:absolute;z-index:-1;right:17px;top:12px;color:rgba(7,63,72,.065);font:900 6rem/.9 Arial,sans-serif;letter-spacing:-.08em}
+body[data-page="start"] .reader-route:nth-child(1):before{content:"01"}
+body[data-page="start"] .reader-route:nth-child(2):before{content:"02"}
+body[data-page="start"] .reader-route:nth-child(3):before{content:"03"}
+body[data-page="start"] .reader-route:nth-child(4):before{content:"04"}
+body[data-page="start"] .reader-route:nth-child(5):before{content:"05"}
+body[data-page="start"] .reader-route:nth-child(6):before{content:"06"}
+body[data-page="start"] .reader-route:nth-child(1){border-top:5px solid #0f6470;background:linear-gradient(145deg,#edf7f5,#fff)}
+body[data-page="start"] .reader-route:nth-child(2){border-top:5px solid #c8e84a;background:linear-gradient(145deg,#fbfde9,#fff)}
+body[data-page="start"] .reader-route:nth-child(3){border-top:5px solid #f8791b;background:linear-gradient(145deg,#fff7e9,#fff)}
+body[data-page="start"] .reader-route:nth-child(4){border-top:5px solid #9b6400;background:linear-gradient(145deg,#fff9ed,#fff)}
+body[data-page="start"] .reader-route:nth-child(5){border-top:5px solid #1b7149;background:linear-gradient(145deg,#f0f8f2,#fff)}
+body[data-page="start"] .reader-route:nth-child(6){border-top:5px solid #657578;background:linear-gradient(145deg,#f5f7f6,#fff)}
+body[data-page="start"] .reader-route .eyebrow{align-self:flex-start;margin-bottom:24px;padding:6px 10px;border-radius:999px;background:#073f48;color:#fff;font-size:.65rem}
+body[data-page="start"] .reader-route:nth-child(2) .eyebrow{background:#6f8500}
+body[data-page="start"] .reader-route:nth-child(3) .eyebrow{background:#c95f10}
+body[data-page="start"] .reader-route:nth-child(4) .eyebrow{background:#8b5900}
+body[data-page="start"] .reader-route:nth-child(5) .eyebrow{background:#1b7149}
+body[data-page="start"] .reader-route:nth-child(6) .eyebrow{background:#526568}
+body[data-page="start"] .reader-route h2{max-width:15ch;font-size:1.75rem!important;line-height:1.05;margin:0 0 10px}
+body[data-page="start"] .reader-route p{max-width:48ch;color:#4a5f63;line-height:1.5}
+body[data-page="start"] .reader-route .reader-link{margin-top:auto;padding-top:14px}
+
+@media(max-width:900px){
+  body[data-page="guides"] .guide-grid,
+  body[data-page="start"] .start-route-grid{grid-template-columns:1fr}
+  body[data-page="around-sk8"] .around-more-grid{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  body[data-page="around-sk8"] .around-hero{padding:30px 0 26px}
+  body[data-page="around-sk8"] .around-map{min-height:500px}
+  body[data-page="around-sk8"] .around-route-card{min-height:0}
+  body[data-page="guides"] .page-hero,
+  body[data-page="start"] .page-hero{padding:34px 0 26px}
+  body[data-page="guides"] .guide-visual{min-height:205px;padding:20px}
+  body[data-page="start"] .reader-route{min-height:0}
+}
