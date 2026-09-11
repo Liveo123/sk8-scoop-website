@@ -44,6 +44,20 @@ An approved raster, photograph or rich editorial illustration must never be repl
 
 This lighter style is intentionally separate from DICM: DICM explains; small-card illustration identifies and adds character.
 
+## Generic SVG / utility icon ban
+
+Do not use thin-outline SVG icons, app-style icon tiles, generic pictogram boxes or other interchangeable utility-icon treatments as a default reader-facing visual language.
+
+For small utility areas, choose one of these instead:
+- a bespoke illustrated mini-panel in the approved SK8 style
+- a text-led editorial marker, number, label, ticket, ribbon or colour block
+- a strong page-specific photograph, diagram or editorial image
+- no decorative visual at all when typography and layout are enough
+
+If an SVG is merely being used because it is quick to draw an icon, do not use it.
+
+Existing full editorial illustrations, diagrams and DICM assets are judged by visual quality, not by file extension alone. A rich SVG illustration can remain temporarily if it genuinely meets the DICM or approved illustrated-card standard, but generic line-art or icon-library-looking SVGs should be removed from visible reader-facing UI.
+
 ## No crop-loss rule
 
 For every image, photograph, illustration, map, diagram or chart added to the site:
@@ -72,3 +86,4 @@ Before a page is considered ready for approval, check:
 - alt text where the image conveys useful information
 - no generic filler imagery
 - no simplified SVG or line-art replacement for richer approved artwork
+- no generic outline SVG / utility icon treatment in visible reader-facing UI
