@@ -48,6 +48,20 @@ body.category-page .category-stat-visual strong{font:900 3rem/1 Arial,sans-serif
 body.category-page .category-stat-visual small{font-size:.92rem;font-weight:800;color:#324b50;margin-top:4px}
 body.category-page .category-stat-visual b{font-size:.76rem;color:#5b6a6d;margin-top:8px}
 
+/* Food & Drink: enough structure to grow without padding the page with generic directory content. */
+body[data-page="food-drink"] .food-how-panel{position:relative;overflow:hidden;background:linear-gradient(145deg,#fff,#fff8ed);border-color:#e3d8c7;box-shadow:0 10px 24px rgba(19,45,49,.06)}
+body[data-page="food-drink"] .food-how-panel:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-90px;bottom:-100px;background:rgba(248,121,27,.055);pointer-events:none}
+body[data-page="food-drink"] .food-event-grid{align-items:stretch}
+body[data-page="food-drink"] .food-event-card{display:flex;flex-direction:column;min-height:100%;overflow:hidden;border-radius:15px;box-shadow:0 8px 20px rgba(19,45,49,.06)}
+body[data-page="food-drink"] .food-event-date-block{min-height:132px;padding:19px 20px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:linear-gradient(135deg,#fff2de,#edf6f4);border-bottom:1px solid var(--line)}
+body[data-page="food-drink"] .food-event-card:nth-child(even) .food-event-date-block{background:linear-gradient(135deg,#edf6f4,#f4f7dc)}
+body[data-page="food-drink"] .food-event-date-block strong{margin-top:7px;font:900 2rem/1.05 Arial,sans-serif;color:#12383d;letter-spacing:-.035em}
+body[data-page="food-drink"] .food-event-date-block small{margin-top:7px;color:#445b5f;font-weight:800}
+body[data-page="food-drink"] .food-event-eyebrow{display:inline-flex;align-self:flex-start;padding:5px 9px;border-radius:999px;background:#0b4c5b;color:#fff3d0;font-size:.65rem;font-weight:900;letter-spacing:.09em}
+body[data-page="food-drink"] .food-event-venue{font-size:.82rem!important;line-height:1.4;color:#53666a!important;font-weight:700;margin-bottom:10px!important}
+body[data-page="food-drink"] .food-event-card .reader-link{margin-top:auto;padding-top:3px}
+body[data-page="food-drink"] .food-next-panel{background:linear-gradient(145deg,#fff,#f4faf8);box-shadow:0 10px 24px rgba(19,45,49,.055)}
+
 /* What's On: image-led but still restrained and in the existing visual system. */
 body[data-page="whats-on"] .page-hero{padding:48px 0 40px}
 body[data-page="whats-on"] .whats-on-hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:34px;align-items:center}
@@ -87,6 +101,7 @@ body[data-page="whats-on"] .whats-on-next-panel .whats-on-panel-icon{margin:0}
   body.reader-home .reader-explore-visual{height:112px;flex-basis:112px}
   body.category-page .category-hero-caption strong{font-size:1.08rem}
   body.category-page .category-stat-visual{min-height:150px}
+  body[data-page="food-drink"] .food-event-date-block{min-height:112px}
   body[data-page="whats-on"] .whats-on-empty:not([hidden]){grid-template-columns:1fr}
   body[data-page="whats-on"] .whats-on-empty-art{width:100%;height:180px}
   body[data-page="whats-on"] .whats-on-hero-caption strong{font-size:1.12rem}
