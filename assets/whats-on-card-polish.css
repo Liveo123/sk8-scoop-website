@@ -26,7 +26,25 @@ body[data-page="whats-on"] .event-listing-card .event-venue:after{content:"";pos
 body[data-page="whats-on"] .event-listing-card .reader-story-body>p:not(.reader-meta):not(.event-venue){font-size:.88rem;line-height:1.46;color:#45585c;margin-bottom:14px}
 body[data-page="whats-on"] .event-listing-card .reader-link{margin-top:auto;padding-top:3px;font-size:.86rem}
 
-/* Lower utility panels stay restrained. */
+/* Lower utility panels use restrained editorial cards rather than generic icon boxes. */
+body[data-page="whats-on"] .whats-on-info-shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:stretch}
+body[data-page="whats-on"] .whats-on-info-card{position:relative;min-height:360px;padding:30px 30px 28px;border:1px solid #d4ddd8;border-radius:18px;overflow:hidden;box-shadow:0 12px 30px rgba(19,45,49,.07);isolation:isolate}
+body[data-page="whats-on"] .whats-on-info-card:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:#0f6470;z-index:-1}
+body[data-page="whats-on"] .whats-on-info-card:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-95px;bottom:-105px;background:rgba(15,100,112,.055);z-index:-1}
+body[data-page="whats-on"] .whats-on-info-curated{background:linear-gradient(145deg,#ffffff 0%,#f4faf8 100%)}
+body[data-page="whats-on"] .whats-on-info-submit{background:linear-gradient(145deg,#ffffff 0%,#fff7ed 100%)}
+body[data-page="whats-on"] .whats-on-info-submit:before{background:#f8791b}
+body[data-page="whats-on"] .whats-on-info-submit:after{background:rgba(248,121,27,.06)}
+body[data-page="whats-on"] .whats-on-info-card .whats-on-panel-icon{display:grid;place-items:center;width:76px;height:76px;margin:0 0 20px;border-radius:24px;border:0;background:#073f48;box-shadow:0 10px 24px rgba(7,63,72,.17);overflow:visible}
+body[data-page="whats-on"] .whats-on-info-submit .whats-on-panel-icon{background:#0f6470;box-shadow:0 10px 24px rgba(15,100,112,.16)}
+body[data-page="whats-on"] .whats-on-info-card .whats-on-panel-icon:after{content:"";position:absolute;right:-7px;top:-4px;width:17px;height:5px;border-radius:999px;background:#f8791b;transform:rotate(-45deg);box-shadow:-7px -7px 0 -1px #f8791b}
+body[data-page="whats-on"] .whats-on-info-card .whats-on-panel-icon svg{width:50px;height:50px;display:block;stroke:none;fill:none}
+body[data-page="whats-on"] .whats-on-info-card>.eyebrow{margin-bottom:8px;color:#0f6470;font-size:.67rem;font-weight:900;letter-spacing:.11em}
+body[data-page="whats-on"] .whats-on-info-card h2{max-width:16ch;margin:0 0 14px;font-size:2.45rem;line-height:1.01;letter-spacing:-.035em;color:#12383d}
+body[data-page="whats-on"] .whats-on-info-card p{max-width:58ch;margin:0;color:#354f53;font-size:1rem;line-height:1.55}
+body[data-page="whats-on"] .whats-on-info-card .button{margin-top:20px}
+
+/* Remaining utility panel icon treatment. */
 body[data-page="whats-on"] .whats-on-panel-icon{position:relative;display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:#073f48;border:6px solid #fff;box-shadow:0 9px 20px rgba(7,63,72,.14);margin-bottom:17px;overflow:visible}
 body[data-page="whats-on"] .whats-on-panel-icon:after{content:"";position:absolute;right:-12px;top:-6px;width:18px;height:5px;border-radius:999px;background:#f8791b;transform:rotate(-42deg);box-shadow:-7px -7px 0 -1px #f8791b}
 body[data-page="whats-on"] .whats-on-panel-icon svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
@@ -46,7 +64,13 @@ body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image:after{displ
 body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image span{display:none!important}
 body[data-page="whats-on"] .whats-on-filter-grid .reader-story-body{padding:17px 18px 18px}
 
+@media(max-width:900px){
+  body[data-page="whats-on"] .whats-on-info-shelf{grid-template-columns:1fr}
+  body[data-page="whats-on"] .whats-on-info-card{min-height:0}
+}
 @media(max-width:680px){
   body[data-page="whats-on"] .event-listing-card .reader-story-body{padding:16px}
   body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:154px;min-height:154px}
+  body[data-page="whats-on"] .whats-on-info-card{padding:24px 22px}
+  body[data-page="whats-on"] .whats-on-info-card h2{font-size:2rem}
 }
