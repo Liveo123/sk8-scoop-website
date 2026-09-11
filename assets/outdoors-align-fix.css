@@ -1,0 +1,49 @@
+/* Preview-only alignment correction for the three Outdoors summary panels.
+   Keeps the approved editorial treatment but forces shared internal rows. */
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-top{
+  min-height:214px;
+  grid-template-rows:32px 108px 32px;
+  align-content:stretch;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-meta{
+  min-height:32px;
+  align-items:flex-start;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-main{
+  display:grid;
+  grid-template-rows:62px 28px;
+  align-content:end;
+  align-items:end;
+  min-height:108px;
+  padding-top:14px;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-value{
+  display:inline-flex;
+  align-items:center;
+  min-height:54px;
+  width:fit-content;
+  margin:0;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-title{
+  display:flex;
+  align-items:flex-end;
+  min-height:28px;
+  margin-top:0;
+}
+body[data-page="outdoors"] #outdoor-picks .outdoor-feature-detail{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  margin-top:0;
+}
+@media(max-width:680px){
+  body[data-page="outdoors"] #outdoor-picks .outdoor-feature-top{
+    min-height:198px;
+    grid-template-rows:32px 94px 32px;
+  }
+  body[data-page="outdoors"] #outdoor-picks .outdoor-feature-main{
+    grid-template-rows:56px 26px;
+    min-height:94px;
+    padding-top:10px;
+  }
+}
