@@ -82,17 +82,55 @@ body[data-page="submit"] .reader-aside p,
 body[data-page="contact"] .reader-aside p{color:#4a6064;line-height:1.48}
 body[data-page="contact"] .contact-email{padding:8px 10px;border-radius:7px;background:#fff;border:1px solid rgba(15,100,112,.18)}
 
+/* Specialist submissions */
+body[data-page="submit-event"] .page-hero,
+body[data-page="business-submissions"] .page-hero{padding:44px 0 34px;background:linear-gradient(135deg,#fffaf0,#fff 60%,#eef7f5)}
+body[data-page="submit-event"] .page-hero h1,
+body[data-page="business-submissions"] .page-hero h1{max-width:13ch;font-size:clamp(3rem,5vw,4.45rem);line-height:.96;letter-spacing:-.045em}
+body[data-page="business-submissions"] .submit-hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(320px,.7fr);gap:34px;align-items:center}
+body[data-page="business-submissions"] .submission-brief-board{position:relative;padding:24px;border:1px solid #d8dfdb;border-radius:18px;background:#fff;box-shadow:0 14px 32px rgba(19,45,49,.07);overflow:hidden}
+body[data-page="business-submissions"] .submission-brief-board:before{content:"";position:absolute;right:-64px;top:-62px;width:170px;height:170px;border-radius:50%;background:rgba(200,232,74,.18)}
+body[data-page="business-submissions"] .submission-brief-label{display:inline-flex;margin-bottom:19px;padding:6px 9px;border-radius:7px;background:#073f48;color:#fff;font-size:.64rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+body[data-page="business-submissions"] .submission-brief-board h2{max-width:12ch;margin:0 0 15px;color:#12383d;font-size:1.7rem;line-height:1.04}
+body[data-page="business-submissions"] .submission-brief-list{display:grid;gap:0;border-top:1px solid #e0e6e2}
+body[data-page="business-submissions"] .submission-brief-list div{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid #e5e9e6}
+body[data-page="business-submissions"] .submission-brief-list span{color:#f8791b;font-size:.68rem;font-weight:900}
+body[data-page="business-submissions"] .submission-brief-list strong{color:#355055;font-size:.88rem;line-height:1.35}
+body[data-page="business-submissions"] .submission-types{grid-template-columns:repeat(4,1fr);gap:12px}
+body[data-page="business-submissions"] .submission-types article{position:relative;min-height:190px;padding:20px;border-radius:15px;overflow:hidden}
+body[data-page="business-submissions"] .submission-types article>span{display:inline-flex;margin-bottom:20px;padding:6px 9px;border-radius:7px;background:#073f48;color:#fff;font-size:.63rem;font-weight:900;letter-spacing:.1em}
+body[data-page="business-submissions"] .submission-types article:nth-child(2)>span{background:#1b7149}
+body[data-page="business-submissions"] .submission-types article:nth-child(3)>span{background:#a55a10}
+body[data-page="business-submissions"] .submission-types article:nth-child(4)>span{background:#0f6470}
+body[data-page="business-submissions"] .submission-types article h3{font-size:1.2rem;line-height:1.08}
+body[data-page="business-submissions"] .premium-form,
+body[data-page="submit-event"] .premium-form{border-radius:18px;box-shadow:0 12px 28px rgba(19,45,49,.06)}
+body[data-page="business-submissions"] .form-step{padding:19px 0 10px;border-top:1px solid #e2e7e4}
+body[data-page="business-submissions"] .form-step:first-child{padding-top:0;border-top:0}
+body[data-page="submit-event"] .policy-panel,
+body[data-page="business-submissions"] .policy-panel{border-radius:16px;background:linear-gradient(155deg,#eef7f5,#fff9ed);box-shadow:0 8px 20px rgba(19,45,49,.045)}
+body[data-page="submit-event"] .policy-panel h3,
+body[data-page="business-submissions"] .policy-panel h3{margin-top:0;color:#12383d}
+body[data-page="submit-event"] .policy-panel h3+ul,
+body[data-page="business-submissions"] .policy-panel h3+ul{margin-bottom:24px}
+body[data-page="submit-event"] .premium-form:before{content:"EVENT CHECKLIST";display:inline-flex;margin-bottom:18px;padding:6px 9px;border-radius:7px;background:#073f48;color:#fff;font-size:.63rem;font-weight:900;letter-spacing:.11em}
+body[data-page="submit-event"] .premium-form h2{margin-top:0}
+
 @media(max-width:940px){
   body[data-page="join"] .join-conversion-panel,
   body[data-page="submit"] .reader-form-wrap,
-  body[data-page="contact"] .reader-form-wrap{grid-template-columns:1fr}
+  body[data-page="contact"] .reader-form-wrap,
+  body[data-page="business-submissions"] .submit-hero-grid{grid-template-columns:1fr}
   body[data-page="join"] .join-brief-board{min-height:360px}
   body[data-page="join"] .join-brief-title{margin-top:34px}
+  body[data-page="business-submissions"] .submission-types{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:700px){
   body[data-page="join"] .page-hero,
   body[data-page="submit"] .page-hero,
-  body[data-page="contact"] .page-hero{padding:34px 0 26px}
+  body[data-page="contact"] .page-hero,
+  body[data-page="submit-event"] .page-hero,
+  body[data-page="business-submissions"] .page-hero{padding:34px 0 26px}
   body[data-page="join"] .join-conversion-copy{padding:24px 20px}
   body[data-page="join"] .join-brief-board{min-height:330px;padding:22px}
   body[data-page="join"] .join-benefits{grid-template-columns:1fr}
@@ -101,4 +139,5 @@ body[data-page="contact"] .contact-email{padding:8px 10px;border-radius:7px;back
   body[data-page="contact"] .reader-form{padding:24px 20px}
   body[data-page="submit"] .reader-form:before,
   body[data-page="contact"] .reader-form:before{position:static;display:inline-flex;margin-bottom:14px}
+  body[data-page="business-submissions"] .submission-types{grid-template-columns:1fr}
 }
