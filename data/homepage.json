@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09",
+  "updated": "2026-09-11",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
@@ -8,8 +8,8 @@
       "title": "A 20mph proposal for the Nansen/Firs estate",
       "meta": "Heald Green · Consultation closes 24 Sep",
       "summary": "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
-      "href": "/latest",
-      "linkLabel": "Read the useful update →",
+      "href": "/planning/nansen-firs-20mph/",
+      "linkLabel": "See the proposal and deadline →",
       "visualType": "dicm",
       "fit": "contain",
       "image": "/assets/images/dicm/home-planning-v2.svg",
@@ -18,28 +18,28 @@
     {
       "mode": "DO",
       "label": "DO THIS",
-      "title": "Walk Gatley Carrs",
-      "meta": "Gatley · Easy 2.9-mile / 4.7km circular",
-      "summary": "A straightforward local walk through the reserve, with the published start point and practical access notes kept clear.",
-      "href": "/latest",
-      "linkLabel": "Open the walk in Issue 11 →",
+      "title": "Bramhall Wellness Day is free this Saturday",
+      "meta": "Bramhall Village Square · Sat 12 Sep · from 10am",
+      "summary": "A free village-centre day with fitness tasters, wellbeing advice, activities, screenings, children’s crafts and a market.",
+      "href": "/whats-on/",
+      "linkLabel": "See this weekend’s checked listings →",
       "visualType": "dicm",
       "fit": "contain",
-      "image": "/assets/images/dicm/home-gatley-carrs-v2.svg",
-      "alt": "Editorial route sketch for the Gatley Carrs walk with water, woodland and waypoints"
+      "image": "/assets/images/nue/whats-on-weekend.webp",
+      "alt": "SK8 Scoop editorial artwork for this weekend’s local events"
     },
     {
       "mode": "DISCOVER",
       "label": "DISCOVER THIS",
-      "title": "The Heald Green spy and future Dambuster",
-      "meta": "Heald Green · Local history",
-      "summary": "The Finney Lane story linking Marthe Cnockaert McKenna, Heald Green Hotel, RAF airmen and a locally recorded Guy Gibson connection.",
-      "href": "/latest",
-      "linkLabel": "Read the story in Issue 11 →",
+      "title": "The five lives of Gatley Carrs",
+      "meta": "Gatley · Working wetland, landfill and nature reserve",
+      "summary": "Gatley Carrs has been willow-working ground, a Victorian botanical curiosity, landfill and, after restoration, today’s local nature reserve.",
+      "href": "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619#gatley-carrs",
+      "linkLabel": "Read the Issue 12 feature →",
       "visualType": "dicm",
       "fit": "contain",
-      "image": "/assets/images/dicm/home-local-history-v2.svg",
-      "alt": "Archival caseboard-style explainer linking Heald Green Hotel, a spy file and an RAF connection"
+      "image": "https://storage.mlcdn.com/account_image/2462354/zi7YYuN8AWd9s2fNgj7RqZHYxsadbgJMyzFsasu2.jpg",
+      "alt": "Illustrated Five Lives of Gatley Carrs timeline, from working wetlands to restoration and the present-day nature reserve"
     }
   ],
   "explore": [
