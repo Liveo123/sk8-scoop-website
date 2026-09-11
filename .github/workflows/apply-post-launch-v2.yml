@@ -1,0 +1,39 @@
+name: Apply post-launch NUE v2 migration
+
+on:
+  push:
+    branches:
+      - improve/post-launch-nue-v2
+    paths:
+      - 'scripts/apply-post-launch-v2.mjs'
+      - '.github/workflows/apply-post-launch-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: improve/post-launch-nue-v2
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply guarded migration
+        run: node scripts/apply-post-launch-v2.mjs
+      - name: Commit generated source changes
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Apply post-launch NUE v2 site migration"
+          git push origin HEAD:improve/post-launch-nue-v2
