@@ -29,8 +29,11 @@ const indexablePages = [
   'local-history/index.html','planning/index.html','updates/index.html','around-sk8/index.html'
 ];
 for (const file of indexablePages) excludes(file,'noindex');
+excludes('robots.txt','Disallow: /whats-on/');
+contains('robots.txt','Sitemap: https://www.sk8scoop.com/sitemap.xml');
 for (const route of ['/whats-on/','/food-drink/','/kids-family/','/outdoors/','/local-history/','/planning/','/updates/','/around-sk8/']) {
   contains('sitemap.xml',`https://www.sk8scoop.com${route}`);
+  contains('sitemap.html',`href="${route.replace(/^\//,'')}"`);
 }
 
 // What’s On usefulness and search structure.
