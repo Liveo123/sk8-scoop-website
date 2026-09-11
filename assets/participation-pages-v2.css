@@ -1,0 +1,143 @@
+/* Preview-only Join / Submit / Contact polish.
+   Uses text-led editorial boards and routing labels instead of generic SVG icon tiles. */
+
+/* Shared compact heroes */
+body[data-page="join"] .page-hero,
+body[data-page="submit"] .page-hero,
+body[data-page="contact"] .page-hero{padding:44px 0 32px}
+body[data-page="join"] .page-hero h1,
+body[data-page="submit"] .page-hero h1,
+body[data-page="contact"] .page-hero h1{max-width:13ch;font-size:clamp(3rem,5vw,4.5rem);line-height:.96}
+body[data-page="submit"] .page-hero h1{max-width:15ch}
+body[data-page="contact"] .page-hero h1{max-width:12ch}
+
+/* JOIN */
+body[data-page="join"] .reader-content{padding-top:30px}
+body[data-page="join"] .join-conversion-panel{display:grid;grid-template-columns:minmax(300px,.76fr) minmax(0,1.24fr);gap:0;padding:0;overflow:hidden;border-radius:20px;box-shadow:0 15px 34px rgba(19,45,49,.08)}
+body[data-page="join"] .join-brief-board{position:relative;display:flex;flex-direction:column;min-height:465px;padding:28px;overflow:hidden;isolation:isolate;background:linear-gradient(155deg,#073f48 0%,#0f6470 72%,#155c62 100%);color:#fff}
+body[data-page="join"] .join-brief-board:before{content:"";position:absolute;z-index:-1;right:-95px;bottom:-105px;width:280px;height:280px;border-radius:45% 55% 52% 48%;background:rgba(200,232,74,.16);transform:rotate(-12deg)}
+body[data-page="join"] .join-brief-board:after{content:"";position:absolute;z-index:-1;left:-65px;top:155px;width:180px;height:180px;border-radius:50%;border:30px solid rgba(248,121,27,.11)}
+body[data-page="join"] .join-brief-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+body[data-page="join"] .join-brief-brand{font-size:.72rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#c8e84a}
+body[data-page="join"] .join-brief-day{padding:6px 9px;border-radius:7px;background:#f8791b;color:#fff;font-size:.64rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;transform:rotate(1deg)}
+body[data-page="join"] .join-brief-title{margin-top:54px}
+body[data-page="join"] .join-brief-title span{display:block;margin-bottom:8px;color:#dce9e6;font-size:.68rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+body[data-page="join"] .join-brief-title strong{display:block;max-width:7ch;font-size:clamp(3.1rem,5vw,4.7rem);line-height:.86;letter-spacing:-.07em;color:#fff}
+body[data-page="join"] .join-brief-issue{display:flex;align-items:end;gap:12px;margin-top:28px}
+body[data-page="join"] .join-brief-issue small{padding-bottom:7px;color:#c8d9d5;font-size:.64rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+body[data-page="join"] .join-brief-issue b{font-size:2.2rem;line-height:1;color:#c8e84a}
+body[data-page="join"] .join-brief-lines{display:grid;gap:0;margin-top:26px;border-top:1px solid rgba(255,255,255,.18)}
+body[data-page="join"] .join-brief-lines span{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:.78rem;font-weight:850;letter-spacing:.04em}
+body[data-page="join"] .join-brief-foot{display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:28px;color:#e6efec;font-size:.72rem;font-weight:800}
+body[data-page="join"] .join-conversion-copy{padding:34px 36px 32px}
+body[data-page="join"] .join-conversion-copy h2{font-size:clamp(2rem,3vw,2.75rem)!important;line-height:1.02;margin:.18em 0 .35em}
+body[data-page="join"] .join-conversion-lead{max-width:600px;font-size:1.02rem;line-height:1.55;color:#42585c}
+body[data-page="join"] .reader-signup{margin-top:20px}
+body[data-page="join"] .join-benefits{grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
+body[data-page="join"] .join-benefits div{position:relative;min-height:160px;padding:18px 17px;border-radius:13px;background:#f7faf8;overflow:hidden}
+body[data-page="join"] .join-benefits div:before{display:block;margin-bottom:13px;color:#f8791b;font-size:.65rem;font-weight:900;letter-spacing:.12em}
+body[data-page="join"] .join-benefits div:nth-child(1):before{content:"01 / USEFUL"}
+body[data-page="join"] .join-benefits div:nth-child(2):before{content:"02 / LOCAL"}
+body[data-page="join"] .join-benefits div:nth-child(3):before{content:"03 / QUICK"}
+body[data-page="join"] .join-benefits p{margin-bottom:0;font-size:.86rem;line-height:1.45;color:#4a5d61}
+body[data-page="join"] .reader-two{gap:16px}
+body[data-page="join"] .reader-two .reader-panel{position:relative;min-height:205px;padding:24px;overflow:hidden}
+body[data-page="join"] .reader-two .reader-panel:first-child{border-top:5px solid #f8791b;background:linear-gradient(145deg,#fff8ec,#fff)}
+body[data-page="join"] .reader-two .reader-panel:last-child{border-top:5px solid #0f6470;background:linear-gradient(145deg,#eef7f5,#fff)}
+
+/* Submit + Contact forms */
+body[data-page="submit"] .reader-content,
+body[data-page="contact"] .reader-content{padding-top:30px}
+body[data-page="submit"] .reader-form-wrap,
+body[data-page="contact"] .reader-form-wrap{grid-template-columns:minmax(0,1.2fr) minmax(280px,.62fr);gap:22px;align-items:start}
+body[data-page="submit"] .reader-form,
+body[data-page="contact"] .reader-form{position:relative;padding:30px;border-radius:18px;border-top:5px solid #0f6470;box-shadow:0 12px 28px rgba(19,45,49,.065)}
+body[data-page="submit"] .reader-form:before,
+body[data-page="contact"] .reader-form:before{position:absolute;right:24px;top:22px;padding:6px 9px;border-radius:7px;background:#073f48;color:#fff;font-size:.63rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+body[data-page="submit"] .reader-form:before{content:"SEND TO SK8"}
+body[data-page="contact"] .reader-form:before{content:"NEEDS A REPLY"}
+body[data-page="submit"] .reader-form h2,
+body[data-page="contact"] .reader-form h2{max-width:13ch;font-size:2rem!important;line-height:1.03;margin:.22em 0 .35em}
+body[data-page="submit"] .reader-form label,
+body[data-page="contact"] .reader-form label{margin-top:18px}
+body[data-page="submit"] .reader-form .button,
+body[data-page="contact"] .reader-form .button{min-width:170px;margin-top:22px;box-shadow:0 8px 18px rgba(15,100,112,.14)}
+body[data-page="submit"] .reader-aside,
+body[data-page="contact"] .reader-aside{padding:24px;border:1px solid #d2dfdb;border-radius:18px;background:linear-gradient(160deg,#eef7f5,#fff9ed);box-shadow:0 10px 24px rgba(19,45,49,.055)}
+body[data-page="submit"] .reader-aside>.eyebrow,
+body[data-page="contact"] .reader-aside>.eyebrow{display:inline-flex;margin-bottom:18px;padding:6px 9px;border-radius:999px;background:#073f48;color:#fff}
+body[data-page="submit"] .reader-aside h2,
+body[data-page="contact"] .reader-aside h2{position:relative;margin:22px 0 8px;padding-top:14px;border-top:1px solid rgba(15,100,112,.15);font-size:1.28rem!important;line-height:1.1}
+body[data-page="submit"] .reader-aside h2:before,
+body[data-page="contact"] .reader-aside h2:before{display:block;margin-bottom:8px;color:#f8791b;font-size:.62rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+body[data-page="submit"] .reader-aside h2:nth-of-type(1):before{content:"01 / EVENTS"}
+body[data-page="submit"] .reader-aside h2:nth-of-type(2):before{content:"02 / LOCAL INFO"}
+body[data-page="submit"] .reader-aside h2:nth-of-type(3):before{content:"03 / REVIEW"}
+body[data-page="contact"] .reader-aside h2:nth-of-type(1):before{content:"01 / EMAIL"}
+body[data-page="contact"] .reader-aside h2:nth-of-type(2):before{content:"02 / SUBMIT"}
+body[data-page="contact"] .reader-aside h2:nth-of-type(3):before{content:"03 / ADVERTISE"}
+body[data-page="submit"] .reader-aside h2:first-of-type,
+body[data-page="contact"] .reader-aside h2:first-of-type{margin-top:0}
+body[data-page="submit"] .reader-aside p,
+body[data-page="contact"] .reader-aside p{color:#4a6064;line-height:1.48}
+body[data-page="contact"] .contact-email{padding:8px 10px;border-radius:7px;background:#fff;border:1px solid rgba(15,100,112,.18)}
+
+/* Specialist submissions */
+body[data-page="submit-event"] .page-hero,
+body[data-page="business-submissions"] .page-hero{padding:44px 0 34px;background:linear-gradient(135deg,#fffaf0,#fff 60%,#eef7f5)}
+body[data-page="submit-event"] .page-hero h1,
+body[data-page="business-submissions"] .page-hero h1{max-width:13ch;font-size:clamp(3rem,5vw,4.45rem);line-height:.96;letter-spacing:-.045em}
+body[data-page="business-submissions"] .submit-hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(320px,.7fr);gap:34px;align-items:center}
+body[data-page="business-submissions"] .submission-brief-board{position:relative;padding:24px;border:1px solid #d8dfdb;border-radius:18px;background:#fff;box-shadow:0 14px 32px rgba(19,45,49,.07);overflow:hidden}
+body[data-page="business-submissions"] .submission-brief-board:before{content:"";position:absolute;right:-64px;top:-62px;width:170px;height:170px;border-radius:50%;background:rgba(200,232,74,.18)}
+body[data-page="business-submissions"] .submission-brief-label{display:inline-flex;margin-bottom:19px;padding:6px 9px;border-radius:7px;background:#073f48;color:#fff;font-size:.64rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+body[data-page="business-submissions"] .submission-brief-board h2{max-width:12ch;margin:0 0 15px;color:#12383d;font-size:1.7rem;line-height:1.04}
+body[data-page="business-submissions"] .submission-brief-list{display:grid;gap:0;border-top:1px solid #e0e6e2}
+body[data-page="business-submissions"] .submission-brief-list div{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid #e5e9e6}
+body[data-page="business-submissions"] .submission-brief-list span{color:#f8791b;font-size:.68rem;font-weight:900}
+body[data-page="business-submissions"] .submission-brief-list strong{color:#355055;font-size:.88rem;line-height:1.35}
+body[data-page="business-submissions"] .submission-types{grid-template-columns:repeat(4,1fr);gap:12px}
+body[data-page="business-submissions"] .submission-types article{position:relative;min-height:190px;padding:20px;border-radius:15px;overflow:hidden}
+body[data-page="business-submissions"] .submission-types article>span{display:inline-flex;margin-bottom:20px;padding:6px 9px;border-radius:7px;background:#073f48;color:#fff;font-size:.63rem;font-weight:900;letter-spacing:.1em}
+body[data-page="business-submissions"] .submission-types article:nth-child(2)>span{background:#1b7149}
+body[data-page="business-submissions"] .submission-types article:nth-child(3)>span{background:#a55a10}
+body[data-page="business-submissions"] .submission-types article:nth-child(4)>span{background:#0f6470}
+body[data-page="business-submissions"] .submission-types article h3{font-size:1.2rem;line-height:1.08}
+body[data-page="business-submissions"] .premium-form,
+body[data-page="submit-event"] .premium-form{border-radius:18px;box-shadow:0 12px 28px rgba(19,45,49,.06)}
+body[data-page="business-submissions"] .form-step{padding:19px 0 10px;border-top:1px solid #e2e7e4}
+body[data-page="business-submissions"] .form-step:first-child{padding-top:0;border-top:0}
+body[data-page="submit-event"] .policy-panel,
+body[data-page="business-submissions"] .policy-panel{border-radius:16px;background:linear-gradient(155deg,#eef7f5,#fff9ed);box-shadow:0 8px 20px rgba(19,45,49,.045)}
+body[data-page="submit-event"] .policy-panel h3,
+body[data-page="business-submissions"] .policy-panel h3{margin-top:0;color:#12383d}
+body[data-page="submit-event"] .policy-panel h3+ul,
+body[data-page="business-submissions"] .policy-panel h3+ul{margin-bottom:24px}
+body[data-page="submit-event"] .premium-form:before{content:"EVENT CHECKLIST";display:inline-flex;margin-bottom:18px;padding:6px 9px;border-radius:7px;background:#073f48;color:#fff;font-size:.63rem;font-weight:900;letter-spacing:.11em}
+body[data-page="submit-event"] .premium-form h2{margin-top:0}
+
+@media(max-width:940px){
+  body[data-page="join"] .join-conversion-panel,
+  body[data-page="submit"] .reader-form-wrap,
+  body[data-page="contact"] .reader-form-wrap,
+  body[data-page="business-submissions"] .submit-hero-grid{grid-template-columns:1fr}
+  body[data-page="join"] .join-brief-board{min-height:360px}
+  body[data-page="join"] .join-brief-title{margin-top:34px}
+  body[data-page="business-submissions"] .submission-types{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  body[data-page="join"] .page-hero,
+  body[data-page="submit"] .page-hero,
+  body[data-page="contact"] .page-hero,
+  body[data-page="submit-event"] .page-hero,
+  body[data-page="business-submissions"] .page-hero{padding:34px 0 26px}
+  body[data-page="join"] .join-conversion-copy{padding:24px 20px}
+  body[data-page="join"] .join-brief-board{min-height:330px;padding:22px}
+  body[data-page="join"] .join-benefits{grid-template-columns:1fr}
+  body[data-page="join"] .join-benefits div{min-height:0}
+  body[data-page="submit"] .reader-form,
+  body[data-page="contact"] .reader-form{padding:24px 20px}
+  body[data-page="submit"] .reader-form:before,
+  body[data-page="contact"] .reader-form:before{position:static;display:inline-flex;margin-bottom:14px}
+  body[data-page="business-submissions"] .submission-types{grid-template-columns:1fr}
+}

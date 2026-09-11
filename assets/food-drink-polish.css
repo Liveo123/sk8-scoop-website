@@ -1,0 +1,83 @@
+/* Preview-only Food & Drink card polish.
+   Text-led editorial graphics, no generic SVG icon tiles. */
+
+/* Keep every card in a row aligned and give the upper panels one shared rhythm. */
+body[data-page="food-drink"] #current-picks .reader-card-grid,
+body[data-page="food-drink"] .food-event-grid{align-items:stretch}
+body[data-page="food-drink"] #current-picks .reader-card-grid>.reader-story,
+body[data-page="food-drink"] .food-event-card{display:flex;flex-direction:column;height:100%;overflow:hidden;border-radius:17px;border:1px solid #d4ddd8;background:#fff;box-shadow:0 11px 26px rgba(19,45,49,.075)}
+body[data-page="food-drink"] #current-picks .reader-story-body,
+body[data-page="food-drink"] .food-event-card .reader-story-body{display:flex;flex:1;flex-direction:column}
+body[data-page="food-drink"] #current-picks .reader-story-body .reader-link,
+body[data-page="food-drink"] .food-event-card .reader-story-body .reader-link{margin-top:auto}
+
+/* Shared editorial header treatment. */
+body[data-page="food-drink"] #current-picks .category-stat-visual,
+body[data-page="food-drink"] .food-event-date-block{position:relative;box-sizing:border-box;overflow:hidden;isolation:isolate;border-bottom:1px solid #d6dfda}
+body[data-page="food-drink"] #current-picks .category-stat-visual{height:210px;min-height:210px;padding:24px 24px 22px;display:flex;flex-direction:column;align-items:flex-start;background:#fff9ee}
+body[data-page="food-drink"] #current-picks .category-stat-visual:after,
+body[data-page="food-drink"] .food-event-date-block:after{content:"";position:absolute;z-index:-2;border-radius:50%}
+body[data-page="food-drink"] #current-picks .category-stat-visual:after{right:-42px;bottom:-68px;width:182px;height:182px;background:rgba(15,100,112,.09)}
+
+/* Small location/category tab used across all top panels. */
+body[data-page="food-drink"] #current-picks .category-stat-kicker,
+body[data-page="food-drink"] .food-event-date-block .category-stat-kicker{display:inline-flex;align-items:center;min-height:31px;box-sizing:border-box;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.94);color:#0f6470;border:1px solid rgba(15,100,112,.19);box-shadow:0 4px 11px rgba(19,45,49,.07);font-size:.65rem;font-weight:900;letter-spacing:.11em;line-height:1;text-transform:uppercase}
+
+/* Menu-note card: designed like a compact editorial price/menu card rather than a bare stat. */
+body[data-page="food-drink"] #current-picks .reader-story:first-child .category-stat-visual{background:
+  linear-gradient(90deg,rgba(248,121,27,.13) 0 4px,transparent 4px),
+  linear-gradient(145deg,#fff8ea 0%,#eef7f4 100%)}
+body[data-page="food-drink"] #current-picks .reader-story:first-child .category-stat-visual:before{content:"MENU NOTE";position:absolute;right:20px;top:21px;display:flex;align-items:center;min-height:31px;box-sizing:border-box;padding:6px 10px;border-radius:6px;background:#073f48;color:#fff;font-size:.62rem;font-weight:900;letter-spacing:.11em;box-shadow:0 6px 14px rgba(7,63,72,.13);transform:rotate(1.5deg)}
+body[data-page="food-drink"] #current-picks .reader-story:first-child .category-stat-visual strong{display:inline-flex;align-items:center;margin-top:24px;padding:8px 14px 9px;border-radius:13px;background:#073f48;color:#fff;font-size:3.2rem;line-height:.95;letter-spacing:-.055em;box-shadow:0 9px 20px rgba(7,63,72,.15)}
+body[data-page="food-drink"] #current-picks .reader-story:first-child .category-stat-visual small{margin-top:11px;font-size:1rem;line-height:1.2;font-weight:900;color:#1e474d}
+body[data-page="food-drink"] #current-picks .reader-story:first-child .category-stat-visual b{display:inline-flex;margin-top:10px;padding:6px 9px;border-radius:6px;background:#f8791b;color:#fff;font-size:.72rem;letter-spacing:.02em;box-shadow:0 5px 12px rgba(248,121,27,.15)}
+
+/* Live-list summary: same geometry as the menu card, but a different editorial identity. */
+body[data-page="food-drink"] [data-food-event-summary] .category-stat-visual{background:
+  linear-gradient(90deg,rgba(214,234,0,.30) 0 4px,transparent 4px),
+  linear-gradient(145deg,#eef8f5 0%,#fff6dc 100%)}
+body[data-page="food-drink"] [data-food-event-summary] .category-stat-visual:before{content:"LIVE LIST";position:absolute;right:20px;top:21px;display:flex;align-items:center;min-height:31px;box-sizing:border-box;padding:6px 10px;border-radius:6px;background:#d6ea00;color:#073f48;font-size:.62rem;font-weight:900;letter-spacing:.11em;border:1px solid #b7ca18;box-shadow:0 6px 14px rgba(132,151,20,.11);transform:rotate(-1.5deg)}
+body[data-page="food-drink"] [data-food-event-summary] .category-stat-visual strong{display:inline-block;margin-top:25px;font-size:3.85rem;line-height:.88;color:#073f48;letter-spacing:-.055em;text-shadow:0 1px 0 #fff}
+body[data-page="food-drink"] [data-food-event-summary] .category-stat-visual small{margin-top:10px;max-width:19ch;font-size:1rem;line-height:1.18;font-weight:900;color:#1e474d}
+body[data-page="food-drink"] [data-food-event-summary] .category-stat-visual b{display:inline-flex;margin-top:10px;padding:6px 9px;border-radius:6px;background:#fff;border:1px solid rgba(15,100,112,.18);color:#35565b;font-size:.72rem;box-shadow:0 4px 10px rgba(19,45,49,.05)}
+
+/* Free & Cheap card: match the height of the neighbouring upper panels without cropping the logo. */
+body[data-page="food-drink"] #current-picks .reader-story:nth-child(3) .category-story-image{height:210px;min-height:210px;background-color:#fff!important;padding:15px;box-sizing:border-box;background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important}
+body[data-page="food-drink"] #current-picks .reader-story:nth-child(3) .category-story-image span{left:15px;top:15px;bottom:auto;background:#073f48;color:#fff;border:1px solid rgba(255,255,255,.5);box-shadow:0 5px 12px rgba(7,63,72,.12)}
+
+/* Dynamic food-event cards use the same aligned system, styled like compact event tickets. */
+body[data-page="food-drink"] .food-event-date-block{height:170px;min-height:170px;padding:22px 20px 18px;display:flex;flex-direction:column;align-items:flex-start;background:
+  linear-gradient(90deg,rgba(248,121,27,.12) 0 4px,transparent 4px),
+  linear-gradient(145deg,#fff8e9,#edf6f4)}
+body[data-page="food-drink"] .food-event-date-block:before{content:"WHAT'S ON";position:absolute;right:16px;top:20px;display:flex;align-items:center;min-height:31px;box-sizing:border-box;padding:6px 10px;border-radius:6px;background:#073f48;color:#fff;font-size:.58rem;font-weight:900;letter-spacing:.1em;box-shadow:0 6px 14px rgba(7,63,72,.12);transform:rotate(1.5deg)}
+body[data-page="food-drink"] .food-event-date-block:after{left:-50px;bottom:-82px;width:176px;height:176px;background:rgba(248,121,27,.09)}
+body[data-page="food-drink"] .food-event-card:nth-child(even) .food-event-date-block{background:
+  linear-gradient(90deg,rgba(15,100,112,.13) 0 4px,transparent 4px),
+  linear-gradient(145deg,#eef7f5,#f7f3d7)}
+body[data-page="food-drink"] .food-event-date-block strong{display:block;margin-top:24px;font:900 2.2rem/1 Arial,sans-serif;letter-spacing:-.045em;color:#12383d;white-space:nowrap}
+body[data-page="food-drink"] .food-event-date-block small{display:inline-flex;align-items:center;min-height:30px;box-sizing:border-box;margin-top:10px;padding:5px 8px;border-radius:6px;background:#fff;border:1px solid rgba(15,100,112,.16);box-shadow:0 4px 10px rgba(19,45,49,.045);font-size:.78rem;font-weight:800;color:#405b60}
+
+/* A quiet paper-detail system makes the headers feel designed without adding generic icons. */
+body[data-page="food-drink"] #current-picks .category-stat-visual strong,
+body[data-page="food-drink"] .food-event-date-block strong{position:relative;z-index:1}
+body[data-page="food-drink"] #current-picks .category-stat-visual .category-stat-kicker,
+body[data-page="food-drink"] .food-event-date-block .category-stat-kicker{position:relative;z-index:2}
+body[data-page="food-drink"] #current-picks .category-stat-visual:focus-within,
+body[data-page="food-drink"] .food-event-card:focus-within .food-event-date-block{outline:2px solid rgba(15,100,112,.28);outline-offset:-2px}
+
+@media(max-width:900px){
+  body[data-page="food-drink"] #current-picks .category-stat-visual,
+  body[data-page="food-drink"] #current-picks .reader-story:nth-child(3) .category-story-image{height:198px;min-height:198px}
+}
+
+@media(max-width:680px){
+  body[data-page="food-drink"] #current-picks .category-stat-visual{height:184px;min-height:184px;padding:20px}
+  body[data-page="food-drink"] #current-picks .reader-story:nth-child(3) .category-story-image{height:184px;min-height:184px}
+  body[data-page="food-drink"] #current-picks .reader-story:first-child .category-stat-visual:before,
+  body[data-page="food-drink"] [data-food-event-summary] .category-stat-visual:before{right:16px;top:17px}
+  body[data-page="food-drink"] #current-picks .reader-story:first-child .category-stat-visual strong{margin-top:18px;font-size:2.75rem}
+  body[data-page="food-drink"] [data-food-event-summary] .category-stat-visual strong{margin-top:19px;font-size:3.25rem}
+  body[data-page="food-drink"] .food-event-date-block{height:158px;min-height:158px;padding:19px 17px 16px}
+  body[data-page="food-drink"] .food-event-date-block:before{right:14px;top:17px}
+  body[data-page="food-drink"] .food-event-date-block strong{margin-top:20px;font-size:2rem}
+}

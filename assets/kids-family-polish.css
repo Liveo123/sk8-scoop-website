@@ -1,0 +1,283 @@
+/* Preview-only Kids & Family polish.
+   Editorial text-led card headers, no generic SVG icon tiles. */
+
+body[data-page="kids-family"] #family-picks .reader-card-grid>.reader-story,
+body[data-page="kids-family"] .family-event-grid>.reader-story{
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+  overflow:hidden;
+  border-radius:16px;
+  border:1px solid #d7ddd8;
+  background:#fff;
+  box-shadow:0 10px 24px rgba(19,45,49,.065);
+}
+body[data-page="kids-family"] #family-picks .reader-story-body,
+body[data-page="kids-family"] .family-event-card .reader-story-body{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+}
+body[data-page="kids-family"] #family-picks .reader-story-body .button-row,
+body[data-page="kids-family"] .family-event-card .reader-link{margin-top:auto}
+
+/* Shared top section keeps all three evergreen cards aligned. */
+body[data-page="kids-family"] .family-feature-top{
+  position:relative;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  min-height:198px;
+  padding:22px 22px 20px;
+  overflow:hidden;
+  isolation:isolate;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(145deg,#fff8e9 0%,#edf6f1 100%);
+}
+body[data-page="kids-family"] .family-feature-top:after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  right:-54px;
+  bottom:-74px;
+  width:190px;
+  height:190px;
+  border-radius:48% 52% 45% 55%;
+  background:rgba(27,113,73,.10);
+  transform:rotate(-12deg);
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(2) .family-feature-top{
+  background:linear-gradient(145deg,#eef7f2 0%,#fff2d9 100%);
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(2) .family-feature-top:after{
+  background:rgba(248,121,27,.10);
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(3) .family-feature-top{
+  background:linear-gradient(145deg,#fff5e6 0%,#edf4f5 100%);
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(3) .family-feature-top:after{
+  background:rgba(15,100,112,.10);
+}
+body[data-page="kids-family"] .family-feature-meta{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+body[data-page="kids-family"] .family-feature-place,
+body[data-page="kids-family"] .family-feature-type{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:.64rem;
+  font-weight:900;
+  letter-spacing:.105em;
+  text-transform:uppercase;
+}
+body[data-page="kids-family"] .family-feature-place{
+  color:#0f6470;
+  background:#fff;
+  border:1px solid rgba(15,100,112,.18);
+  box-shadow:0 4px 10px rgba(19,45,49,.06);
+}
+body[data-page="kids-family"] .family-feature-type{
+  border-radius:6px;
+  color:#fff;
+  background:#073f48;
+  box-shadow:0 6px 14px rgba(7,63,72,.12);
+  transform:rotate(1deg);
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(2) .family-feature-type{background:#1b7149}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(3) .family-feature-type{background:#a55a10}
+body[data-page="kids-family"] .family-feature-main{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+  min-height:92px;
+  padding-top:17px;
+}
+body[data-page="kids-family"] .family-feature-value{
+  display:inline-block;
+  padding:7px 12px 8px;
+  border-radius:12px;
+  background:#073f48;
+  color:#fff;
+  font:900 2.75rem/.92 Arial,sans-serif;
+  letter-spacing:-.045em;
+  box-shadow:0 8px 18px rgba(7,63,72,.13);
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(2) .family-feature-value{background:#1b7149}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(3) .family-feature-value{background:#0f6470}
+body[data-page="kids-family"] .family-feature-title{
+  margin-top:9px;
+  color:#1d464b;
+  font-size:1rem;
+  font-weight:900;
+  line-height:1.15;
+}
+body[data-page="kids-family"] .family-feature-detail{
+  display:inline-flex;
+  width:fit-content;
+  margin-top:11px;
+  padding:6px 9px;
+  border-radius:6px;
+  background:#fff;
+  border:1px solid rgba(15,100,112,.16);
+  color:#405b60;
+  font-size:.75rem;
+  font-weight:800;
+  line-height:1.2;
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(1) .family-feature-detail{
+  background:#d9efdf;
+  border-color:#a7cfb0;
+  color:#235f3a;
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(2) .family-feature-detail{
+  background:#ffe3bf;
+  border-color:#efb66f;
+  color:#7a4c12;
+}
+body[data-page="kids-family"] #family-picks .reader-story:nth-child(3) .family-feature-detail{
+  background:#dbeef1;
+  border-color:#a7ccd2;
+  color:#20545c;
+}
+
+/* Caveat block replaces the generic information SVG with typography and hierarchy. */
+body[data-page="kids-family"] .family-note-panel{
+  display:grid;
+  grid-template-columns:minmax(170px,.42fr) minmax(0,1fr);
+  gap:24px;
+  align-items:center;
+  margin-top:22px;
+  padding:24px 26px;
+  border:1px solid #d8ded9;
+  border-radius:16px;
+  background:linear-gradient(135deg,#fff9ed,#f2f8f5);
+  box-shadow:0 8px 20px rgba(19,45,49,.05);
+}
+body[data-page="kids-family"] .family-note-label{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding-right:22px;
+  border-right:1px solid rgba(15,100,112,.17);
+}
+body[data-page="kids-family"] .family-note-label span{
+  color:#f8791b;
+  font-size:.66rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+body[data-page="kids-family"] .family-note-label strong{
+  color:#073f48;
+  font:900 1.55rem/1 Arial,sans-serif;
+  letter-spacing:-.025em;
+}
+body[data-page="kids-family"] .family-note-panel p{margin:0;color:#354f53;line-height:1.55}
+
+/* Dated family events use a matching editorial ticket header. */
+body[data-page="kids-family"] .family-event-grid{gap:18px}
+body[data-page="kids-family"] .family-event-top{
+  position:relative;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  min-height:166px;
+  padding:21px 20px 18px;
+  overflow:hidden;
+  isolation:isolate;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(145deg,#fff8ea,#edf6f1);
+}
+body[data-page="kids-family"] .family-event-card:nth-child(even) .family-event-top{
+  background:linear-gradient(145deg,#edf6f2,#fff2dc);
+}
+body[data-page="kids-family"] .family-event-top:after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  right:-52px;
+  bottom:-72px;
+  width:165px;
+  height:165px;
+  border-radius:50%;
+  background:rgba(248,121,27,.075);
+}
+body[data-page="kids-family"] .family-event-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+}
+body[data-page="kids-family"] .family-event-area{
+  color:#0f6470;
+  font-size:.65rem;
+  font-weight:900;
+  letter-spacing:.105em;
+  text-transform:uppercase;
+}
+body[data-page="kids-family"] .family-event-stamp{
+  padding:5px 8px;
+  border-radius:6px;
+  background:#073f48;
+  color:#fff;
+  font-size:.58rem;
+  font-weight:900;
+  letter-spacing:.105em;
+  text-transform:uppercase;
+  transform:rotate(1deg);
+}
+body[data-page="kids-family"] .family-event-date{
+  align-self:end;
+  margin-top:14px;
+  color:#12383d;
+  font:900 2.25rem/.98 Arial,sans-serif;
+  letter-spacing:-.045em;
+}
+body[data-page="kids-family"] .family-event-time{
+  display:inline-flex;
+  width:fit-content;
+  margin-top:9px;
+  padding:5px 8px;
+  border-radius:6px;
+  background:#fff;
+  border:1px solid rgba(15,100,112,.15);
+  color:#405b60;
+  font-size:.76rem;
+  font-weight:800;
+}
+body[data-page="kids-family"] .family-event-eyebrow{
+  display:inline-flex;
+  align-self:flex-start;
+  margin-bottom:8px;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#ffe2bf;
+  border:1px solid #efb66f;
+  color:#7b4b09;
+  font-size:.64rem;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+body[data-page="kids-family"] .family-event-venue{
+  color:#5a6769!important;
+  font-size:.81rem!important;
+  font-weight:700;
+}
+body[data-page="kids-family"] .family-events-intro{max-width:720px;color:#486065}
+
+@media(max-width:760px){
+  body[data-page="kids-family"] .family-note-panel{grid-template-columns:1fr;gap:14px}
+  body[data-page="kids-family"] .family-note-label{padding-right:0;padding-bottom:14px;border-right:0;border-bottom:1px solid rgba(15,100,112,.17)}
+}
+@media(max-width:680px){
+  body[data-page="kids-family"] .family-feature-top{min-height:180px;padding:20px}
+  body[data-page="kids-family"] .family-event-top{min-height:150px}
+  body[data-page="kids-family"] .family-feature-value{font-size:2.45rem}
+  body[data-page="kids-family"] .family-event-date{font-size:2rem}
+}

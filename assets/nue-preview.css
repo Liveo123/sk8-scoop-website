@@ -1,0 +1,110 @@
+/* Preview-only NUE polish: homepage Explore SK8 + What's On + category pages. */
+
+/* Global visual QA rule for preview: important artwork is shown whole, never silently cropped. */
+body.reader-home .dicm-visual{height:auto!important;min-height:0!important;aspect-ratio:auto;display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:10px!important;background:#f7faf8!important;overflow:hidden}
+body.reader-home .dicm-visual .dicm-art{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;border-radius:0}
+body.reader-home .dicm-visual .dicm-mode-label{position:static;order:-1;align-self:flex-start;z-index:auto;margin:0}
+
+/* Keep preview calls to action readable, including the older homepage overrides. */
+body.reader-home .button,body.reader-home .nav .button,
+body.reader-home .reader-hero .reader-signup .button,
+body.reader-home .reader-footer-signup .button,
+body[data-page="whats-on"] .button,body[data-page="whats-on"] .nav .button{background:#0f6470!important;color:#fff!important;box-shadow:0 8px 20px rgba(15,100,112,.15)}
+
+/* Homepage: eight Explore SK8 cards, four equal columns on desktop. */
+body.reader-home [data-explore-grid]{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:100%}
+body.reader-home .reader-explore-tile{min-height:232px;padding:0;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;text-align:left;overflow:hidden;text-decoration:none;background:#fff;border-radius:15px}
+body.reader-home .reader-explore-visual{height:118px;flex:0 0 118px;display:grid;place-items:center;background:#fff8ea;border-bottom:1px solid var(--line);overflow:hidden}
+body.reader-home .reader-explore-photo{background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#fff8ea!important}
+body.reader-home .reader-explore-photo.is-guide-logo{background-color:#fff!important;background-size:contain!important}
+body.reader-home .reader-explore-icon{background:#fff8ea}
+body.reader-home .reader-explore-icon svg{width:38px;height:38px;stroke:var(--teal);fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+body.reader-home .reader-explore-copy{padding:14px 15px 15px;display:flex;flex-direction:column;gap:6px;min-height:114px}
+body.reader-home .reader-explore-copy strong{font-size:1.02rem;line-height:1.18;color:var(--ink)}
+body.reader-home .reader-explore-copy small{margin:0;color:#394d51;line-height:1.35}
+body.reader-home .reader-explore-copy em{margin-top:auto;padding-top:5px;color:var(--teal);font-weight:800}
+body.reader-home .reader-explore-tile:not(.is-soon):hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(19,45,49,.09)}
+body.reader-home .reader-explore-tile.is-soon{background:#fffdf9}
+
+/* Shared category page hero and image-led story cards. */
+body.category-page .category-hero-grid{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(340px,.97fr);gap:34px;align-items:center}
+body.category-page .category-hero-visual{position:relative;margin:0;aspect-ratio:16/9;min-height:0;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#edf6f4;box-shadow:0 14px 30px rgba(19,45,49,.12);padding:7px;box-sizing:border-box}
+body.category-page .category-hero-visual img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;border-radius:12px}
+body.category-page .category-hero-visual:after{content:"";position:absolute;inset:52% 7px 7px;background:linear-gradient(180deg,transparent,rgba(7,63,72,.74));pointer-events:none;border-radius:0 0 12px 12px}
+body.category-page .category-hero-caption{position:absolute;left:24px;right:24px;bottom:21px;z-index:2;color:#fff}
+body.category-page .category-hero-caption span{display:inline-block;margin-bottom:7px;padding:5px 9px;border-radius:999px;background:rgba(255,250,240,.96);color:var(--teal);font-size:.68rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+body.category-page .category-hero-caption strong{display:block;max-width:480px;font:800 1.28rem/1.15 Arial,sans-serif;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+body.category-page .category-story-image{height:176px;background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#edf6f4;border-bottom:1px solid var(--line);position:relative}
+body.category-page .category-story-image span{position:absolute;left:12px;bottom:12px;padding:5px 8px;border-radius:999px;background:rgba(255,250,240,.95);color:var(--teal);font-size:.66rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+body.category-page .category-story-image.dark-label span{background:rgba(7,63,72,.92);color:#fff}
+body.category-page .category-note{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fffdf8}
+body.category-page .category-note svg{width:28px;height:28px;flex:0 0 28px;stroke:var(--teal);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+body.category-page .category-note p{margin:0}
+body.category-page .category-stat-visual{min-height:176px;padding:18px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;background:linear-gradient(135deg,#e9f5f2,#fff7eb);border-bottom:1px solid var(--line)}
+body.category-page .category-stat-visual.alt{background:linear-gradient(135deg,#fff4e8,#eef7f5)}
+body.category-page .category-stat-visual.compact strong{font-size:2.6rem}
+body.category-page .category-stat-kicker{font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+body.category-page .category-stat-visual strong{font:900 3rem/1 Arial,sans-serif;color:var(--ink);letter-spacing:-.04em;margin-top:8px}
+body.category-page .category-stat-visual small{font-size:.92rem;font-weight:800;color:#324b50;margin-top:4px}
+body.category-page .category-stat-visual b{font-size:.76rem;color:#5b6a6d;margin-top:8px}
+
+/* Food & Drink: enough structure to grow without padding the page with generic directory content. */
+body[data-page="food-drink"] .food-how-panel{position:relative;overflow:hidden;background:linear-gradient(145deg,#fff,#fff8ed);border-color:#e3d8c7;box-shadow:0 10px 24px rgba(19,45,49,.06)}
+body[data-page="food-drink"] .food-how-panel:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-90px;bottom:-100px;background:rgba(248,121,27,.055);pointer-events:none}
+body[data-page="food-drink"] .food-event-grid{align-items:stretch}
+body[data-page="food-drink"] .food-event-card{display:flex;flex-direction:column;min-height:100%;overflow:hidden;border-radius:15px;box-shadow:0 8px 20px rgba(19,45,49,.06)}
+body[data-page="food-drink"] .food-event-date-block{min-height:132px;padding:19px 20px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:linear-gradient(135deg,#fff2de,#edf6f4);border-bottom:1px solid var(--line)}
+body[data-page="food-drink"] .food-event-card:nth-child(even) .food-event-date-block{background:linear-gradient(135deg,#edf6f4,#f4f7dc)}
+body[data-page="food-drink"] .food-event-date-block strong{margin-top:7px;font:900 2rem/1.05 Arial,sans-serif;color:#12383d;letter-spacing:-.035em}
+body[data-page="food-drink"] .food-event-date-block small{margin-top:7px;color:#445b5f;font-weight:800}
+body[data-page="food-drink"] .food-event-eyebrow{display:inline-flex;align-self:flex-start;padding:5px 9px;border-radius:999px;background:#0b4c5b;color:#fff3d0;font-size:.65rem;font-weight:900;letter-spacing:.09em}
+body[data-page="food-drink"] .food-event-venue{font-size:.82rem!important;line-height:1.4;color:#53666a!important;font-weight:700;margin-bottom:10px!important}
+body[data-page="food-drink"] .food-event-card .reader-link{margin-top:auto;padding-top:3px}
+body[data-page="food-drink"] .food-next-panel{background:linear-gradient(145deg,#fff,#f4faf8);box-shadow:0 10px 24px rgba(19,45,49,.055)}
+
+/* What's On: image-led but still restrained and in the existing visual system. */
+body[data-page="whats-on"] .page-hero{padding:48px 0 40px}
+body[data-page="whats-on"] .whats-on-hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:34px;align-items:center}
+body[data-page="whats-on"] .whats-on-hero-copy{min-width:0}
+body[data-page="whats-on"] .whats-on-hero-visual{position:relative;aspect-ratio:16/9;min-height:0;margin:0;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#edf6f4;box-shadow:0 14px 30px rgba(19,45,49,.12);padding:7px;box-sizing:border-box}
+body[data-page="whats-on"] .whats-on-hero-visual img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;border-radius:12px}
+body[data-page="whats-on"] .whats-on-hero-visual:after{content:"";position:absolute;inset:45% 7px 7px;background:linear-gradient(180deg,transparent,rgba(7,63,72,.8));pointer-events:none;border-radius:0 0 12px 12px}
+body[data-page="whats-on"] .whats-on-hero-caption{position:absolute;z-index:2;left:27px;right:27px;bottom:25px;color:#fff}
+body[data-page="whats-on"] .whats-on-hero-caption span{display:inline-block;padding:5px 9px;border-radius:999px;background:rgba(255,250,240,.95);color:var(--teal);font-size:.68rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+body[data-page="whats-on"] .whats-on-hero-caption strong{display:block;max-width:520px;font:800 1.4rem/1.15 Arial,sans-serif;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story{overflow:hidden}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:150px;min-height:150px;background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#edf6f4}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.08))}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image span{position:relative;z-index:1}
+body[data-page="whats-on"] [data-events-list] .reader-story-image{height:145px;background-size:contain;background-repeat:no-repeat;background-color:#edf6f4}
+body[data-page="whats-on"] .event-venue{margin-top:-4px!important;font-size:.82rem!important;font-weight:700;color:#53666a!important}
+body[data-page="whats-on"] .whats-on-empty:not([hidden]){display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;align-items:center;overflow:hidden}
+body[data-page="whats-on"] .whats-on-empty-art{width:190px;height:150px;border-radius:12px;border:1px solid var(--line);background:#eef7f5}
+body[data-page="whats-on"] .whats-on-empty-illustration{position:relative;display:grid;place-items:center;overflow:hidden}
+body[data-page="whats-on"] .whats-on-empty-illustration svg{width:62px;height:62px;stroke:var(--teal);fill:none;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round;z-index:2}
+body[data-page="whats-on"] .empty-map-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--orange)}
+body[data-page="whats-on"] .dot-one{left:28px;top:34px}.dot-two{right:31px;bottom:29px}
+body[data-page="whats-on"] .empty-route{position:absolute;width:110px;height:56px;border:2px dashed rgba(15,100,112,.28);border-radius:50%;transform:rotate(-18deg)}
+body[data-page="whats-on"] .whats-on-empty-copy h2{margin-top:5px}
+body[data-page="whats-on"] .whats-on-panel-icon{display:grid;place-items:center;width:62px;height:62px;border-radius:18px;background:#edf6f4;border:1px solid #d4e6e2;margin-bottom:16px}
+body[data-page="whats-on"] .whats-on-panel-icon svg{width:32px;height:32px;stroke:var(--teal);fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+body[data-page="whats-on"] .reader-content-shelf .reader-panel:nth-child(2) .whats-on-panel-icon{background:#fff3e5;border-color:#f1dcc2}
+body[data-page="whats-on"] .whats-on-next-panel{display:grid;grid-template-columns:72px minmax(0,1fr);gap:18px;align-items:center}
+body[data-page="whats-on"] .whats-on-next-panel .whats-on-panel-icon{margin:0}
+
+@media(max-width:900px){
+  body.reader-home [data-explore-grid]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.category-page .category-hero-grid,body[data-page="whats-on"] .whats-on-hero-grid{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  body.reader-home .reader-explore-tile{min-height:210px}
+  body.reader-home .reader-explore-visual{height:112px;flex-basis:112px}
+  body.category-page .category-hero-caption strong{font-size:1.08rem}
+  body.category-page .category-stat-visual{min-height:150px}
+  body[data-page="food-drink"] .food-event-date-block{min-height:112px}
+  body[data-page="whats-on"] .whats-on-empty:not([hidden]){grid-template-columns:1fr}
+  body[data-page="whats-on"] .whats-on-empty-art{width:100%;height:180px}
+  body[data-page="whats-on"] .whats-on-hero-caption strong{font-size:1.12rem}
+  body[data-page="whats-on"] .whats-on-next-panel{grid-template-columns:1fr}
+}
+@media(max-width:440px){body.reader-home [data-explore-grid]{grid-template-columns:1fr}}

@@ -14,7 +14,7 @@
   };
   if (publicPaths.has(path)) {
     if (!document.body.dataset.page && pageIdentity[path]) document.body.dataset.page = pageIdentity[path];
-    ['/assets/secondary-pages.css','/assets/secondary-extras.css'].forEach((href) => {
+    ['/assets/secondary-pages.css','/assets/secondary-extras.css','/assets/nue-preview.css'].forEach((href) => {
       if (!document.querySelector(`link[href="${href}"]`)) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -28,6 +28,7 @@
       const active = pageIdentity[path] || '';
       const links = [
         ['home','/','Home'],
+        ['whats-on','/whats-on/','What’s On'],
         ['guides','/guides/','Guides'],
         ['start','/start/','Where to start'],
         ['join','/join/','Join'],
@@ -45,25 +46,25 @@ window.SK8_CONFIG = {
   metaPixelId: "4649116095416763",
   formsparkContactEndpoint: "https://submit-form.com/X3MWnWHXI",
   publicStats: {
-    subscriberCount: 456,
-    subscriberProof: "456",
-    issuesPublished: 11,
-    checkedDate: "5 September 2026",
-    latestMainSendRecipients: 464,
+    subscriberCount: "500+",
+    subscriberProof: "500+",
+    issuesPublished: 12,
+    checkedDate: "11 September 2026",
+    latestMainSendRecipients: 507,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "4 September 2026",
+    latestIssueDate: "11 September 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 11,
-    dateIso: "2026-09-04",
-    dateDisplay: "Friday 4 September 2026",
-    title: "Issue 11 is out",
-    headline: "£29 comedy, a 20mph plan & Happy Place",
-    summary: "£29 Laughterama tickets, the Heald Green spy story, a new 20mph consultation, Happy Place, Gatley Carrs and more useful local picks.",
-    url: "https://preview.mailerlite.io/preview/2462354/emails/197703635729122499"
+    number: 12,
+    dateIso: "2026-09-11",
+    dateDisplay: "Friday 11 September 2026",
+    title: "Issue 12 is out",
+    headline: "Black pudding, Gatley Carrs & the secrets of Ladybrook",
+    summary: "Black pudding throwing, dragon boats, Gatley Carrs, a Cheadle Hulme pub, Abney Hall and the Ladybrook corridor.",
+    url: "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619"
   },
   homeStories: [
     {
@@ -112,21 +113,6 @@ window.SK8_CONFIG = {
   });
 
   if (page === 'home') {
-    const cards = [...document.querySelectorAll('.reader-card-grid .reader-story')];
-    config.homeStories.forEach((story, index) => {
-      const card = cards[index];
-      if (!card) return;
-      const image = card.querySelector('.reader-story-image');
-      const label = card.querySelector('.reader-story-image span');
-      const title = card.querySelector('h3');
-      const meta = card.querySelector('.reader-meta');
-      const paragraphs = card.querySelectorAll('.reader-story-body p');
-      if (image) image.style.backgroundImage = `url("${story.image}")`;
-      if (label) { label.textContent = story.label; label.classList.toggle('orange-label', index === 1); }
-      if (title) title.textContent = story.title;
-      if (meta) meta.textContent = story.meta;
-      if (paragraphs[1]) paragraphs[1].textContent = story.summary;
-    });
     const latest = document.querySelector('.reader-latest-panel');
     if (latest) {
       const cover = latest.querySelector('.reader-latest-cover span');
@@ -171,10 +157,10 @@ window.SK8_CONFIG = {
     const snapshotText = document.querySelector('.issue-proof-split > div > p');
     const factStrong = document.querySelector('.issue-facts div:first-child strong');
     const factSmall = document.querySelector('.issue-facts small');
-    if (snapshot) snapshot.textContent = `Eleven issues in, with ${stats.subscriberCount} active subscribers.`;
-    if (snapshotText) snapshotText.textContent = `MailerLite showed ${stats.subscriberCount} active subscribers when checked on ${stats.checkedDate}. It is a point-in-time figure, not a promise that the count will stay fixed.`;
+    if (snapshot) snapshot.textContent = `${stats.issuesPublished} issues in, with ${stats.subscriberCount} active subscribers.`;
+    if (snapshotText) snapshotText.textContent = `SK8 Scoop passed 500 subscribers by ${stats.checkedDate}. The public figure is deliberately rounded because the live count changes as people join and leave.`;
     if (factStrong) factStrong.textContent = stats.issuesPublished;
-    if (factSmall) factSmall.textContent = `Subscriber count checked in MailerLite on ${stats.checkedDate}. Campaign-performance figures are deliberately omitted here until the latest issue has enough data to be meaningful.`;
+    if (factSmall) factSmall.textContent = `Subscriber milestone checked on ${stats.checkedDate}. Campaign-performance figures are deliberately omitted here until the latest issue has enough data to be meaningful.`;
   }
 
   if (page === 'archive') {
@@ -186,23 +172,23 @@ window.SK8_CONFIG = {
     if (ogDescription) ogDescription.content = desc;
     const heroEyebrow = document.querySelector('.archive-v7 .eyebrow');
     const figcaption = document.querySelector('.archive-hero-art figcaption');
-    if (heroEyebrow) heroEyebrow.textContent = 'Eleven issues and counting';
-    if (figcaption) figcaption.textContent = 'Eleven useful Friday emails — and counting.';
+    if (heroEyebrow) heroEyebrow.textContent = `${stats.issuesPublished} issues and counting`;
+    if (figcaption) figcaption.textContent = `${stats.issuesPublished} useful Friday emails — and counting.`;
     const grid = document.querySelector('.v7-archive');
     const featured = grid && grid.querySelector('.featured-issue');
-    if (grid && featured && !grid.querySelector('[data-issue="11"]')) {
-      const issue11 = featured.cloneNode(true);
-      issue11.dataset.issue = '11';
-      issue11.querySelector('.tag').textContent = `Issue ${issue.number} · ${issue.dateDisplay}`;
-      issue11.querySelector('h2').textContent = issue.headline;
-      issue11.querySelector('p').textContent = issue.summary;
-      const link = issue11.querySelector('a');
+    if (grid && featured && !grid.querySelector(`[data-issue="${issue.number}"]`)) {
+      const latestIssue = featured.cloneNode(true);
+      latestIssue.dataset.issue = String(issue.number);
+      latestIssue.querySelector('.tag').textContent = `Issue ${issue.number} · ${issue.dateDisplay}`;
+      latestIssue.querySelector('h2').textContent = issue.headline;
+      latestIssue.querySelector('p').textContent = issue.summary;
+      const link = latestIssue.querySelector('a');
       link.href = issue.url;
       link.textContent = `Read Issue ${issue.number}`;
       featured.classList.remove('featured-issue');
       featured.querySelector('.button')?.classList.replace('button','text-link');
       featured.querySelector('a')?.classList.add('arrow-link');
-      grid.insertBefore(issue11, featured);
+      grid.insertBefore(latestIssue, featured);
     }
   }
 })();

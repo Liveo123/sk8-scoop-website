@@ -1,0 +1,113 @@
+/* Preview-only Outdoors layouts.
+   Text-led editorial route cards and storyboards. No generic SVG icon tiles. */
+
+body[data-page="outdoors"] .page-hero{padding:32px 0 26px}
+body[data-page="outdoors"] .category-hero-grid{grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);gap:28px;align-items:center}
+body[data-page="outdoors"] .page-hero h1{max-width:11ch;margin-bottom:16px;font-size:clamp(2.9rem,4.35vw,4rem);line-height:.97;letter-spacing:-.045em}
+body[data-page="outdoors"] .page-hero .hero-lead{max-width:650px;font-size:1.04rem;line-height:1.5}
+body[data-page="outdoors"] .page-hero .button-row{margin-top:18px}
+body[data-page="outdoors"] .category-hero-visual{width:100%;max-width:500px;justify-self:end}
+
+body[data-page="outdoors"] #outdoor-picks .reader-card-grid>.reader-story{display:flex;flex-direction:column;min-height:100%;overflow:hidden;border-radius:16px;border:1px solid #d7ddd8;background:#fff;box-shadow:0 10px 24px rgba(19,45,49,.065)}
+body[data-page="outdoors"] #outdoor-picks .reader-story-body{display:flex;flex:1;flex-direction:column}
+body[data-page="outdoors"] #outdoor-picks .reader-story-body .button-row,
+body[data-page="outdoors"] #outdoor-picks .reader-story-body>.reader-link{margin-top:auto}
+
+body[data-page="outdoors"] .outdoor-feature-top{position:relative;display:grid;grid-template-rows:auto 1fr auto;min-height:198px;padding:22px 22px 20px;overflow:hidden;isolation:isolate;border-bottom:1px solid var(--line);background:linear-gradient(145deg,#eef7f2 0%,#fff8e9 100%)}
+body[data-page="outdoors"] .outdoor-feature-top:after{content:"";position:absolute;z-index:-1;right:-58px;bottom:-78px;width:195px;height:195px;border-radius:48% 52% 44% 56%;background:rgba(27,113,73,.11);transform:rotate(-12deg)}
+body[data-page="outdoors"] .reader-story:nth-child(2) .outdoor-feature-top{background:linear-gradient(145deg,#fff8e9 0%,#edf5f5 100%)}
+body[data-page="outdoors"] .reader-story:nth-child(2) .outdoor-feature-top:after{background:rgba(15,100,112,.10)}
+body[data-page="outdoors"] .reader-story:nth-child(3) .outdoor-feature-top{background:linear-gradient(145deg,#fff4df 0%,#eef7f2 100%)}
+body[data-page="outdoors"] .reader-story:nth-child(3) .outdoor-feature-top:after{background:rgba(248,121,27,.10)}
+body[data-page="outdoors"] .outdoor-feature-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+body[data-page="outdoors"] .outdoor-feature-place,
+body[data-page="outdoors"] .outdoor-feature-type{display:inline-flex;align-items:center;min-height:30px;padding:6px 10px;border-radius:999px;font-size:.64rem;font-weight:900;letter-spacing:.105em;text-transform:uppercase}
+body[data-page="outdoors"] .outdoor-feature-place{color:#0f6470;background:#fff;border:1px solid rgba(15,100,112,.18);box-shadow:0 4px 10px rgba(19,45,49,.06)}
+body[data-page="outdoors"] .outdoor-feature-type{border-radius:6px;color:#fff;background:#073f48;box-shadow:0 6px 14px rgba(7,63,72,.12);transform:rotate(1deg)}
+body[data-page="outdoors"] .reader-story:nth-child(2) .outdoor-feature-type{background:#0f6470}
+body[data-page="outdoors"] .reader-story:nth-child(3) .outdoor-feature-type{background:#a55a10}
+body[data-page="outdoors"] .outdoor-feature-main{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:92px;padding-top:17px}
+body[data-page="outdoors"] .outdoor-feature-value{display:inline-block;padding:7px 12px 8px;border-radius:12px;background:#1b7149;color:#fff;font:900 2.65rem/.92 Arial,sans-serif;letter-spacing:-.045em;box-shadow:0 8px 18px rgba(27,113,73,.14)}
+body[data-page="outdoors"] .reader-story:nth-child(2) .outdoor-feature-value{background:#0f6470;font-size:2.2rem}
+body[data-page="outdoors"] .reader-story:nth-child(3) .outdoor-feature-value{background:#073f48}
+body[data-page="outdoors"] .outdoor-feature-title{margin-top:9px;color:#1d464b;font-size:1rem;font-weight:900;line-height:1.15}
+body[data-page="outdoors"] .outdoor-feature-detail{display:inline-flex;width:fit-content;margin-top:11px;padding:6px 9px;border-radius:6px;background:#fff;border:1px solid rgba(15,100,112,.16);color:#405b60;font-size:.75rem;font-weight:800;line-height:1.2}
+body[data-page="outdoors"] .reader-story:nth-child(1) .outdoor-feature-detail{background:#d9efdf;border-color:#a7cfb0;color:#235f3a}
+body[data-page="outdoors"] .reader-story:nth-child(2) .outdoor-feature-detail{background:#dbeef1;border-color:#a7ccd2;color:#20545c}
+body[data-page="outdoors"] .reader-story:nth-child(3) .outdoor-feature-detail{background:#ffe3bf;border-color:#efb66f;color:#7a4c12}
+
+body[data-page="outdoors"] .outdoor-route-note{display:grid;grid-template-columns:minmax(180px,.44fr) minmax(0,1fr);gap:24px;align-items:center;margin-top:22px;padding:24px 26px;border:1px solid #d8ded9;border-radius:16px;background:linear-gradient(135deg,#f1f8f4,#fff9ed);box-shadow:0 8px 20px rgba(19,45,49,.05)}
+body[data-page="outdoors"] .outdoor-route-note-label{display:flex;flex-direction:column;gap:6px;padding-right:22px;border-right:1px solid rgba(15,100,112,.17)}
+body[data-page="outdoors"] .outdoor-route-note-label span{color:#f8791b;font-size:.66rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+body[data-page="outdoors"] .outdoor-route-note-label strong{color:#073f48;font:900 1.5rem/1.05 Arial,sans-serif;letter-spacing:-.025em}
+body[data-page="outdoors"] .outdoor-route-note p{margin:0;color:#354f53;line-height:1.55}
+
+body[data-page="outdoors"] .gatley-hour{padding:48px 0;background:#f8f7f2}
+body[data-page="outdoors"] .gatley-hour-board{padding:26px;border:1px solid #d7ddd8;border-radius:20px;background:#fff;box-shadow:0 10px 26px rgba(19,45,49,.06)}
+body[data-page="outdoors"] .gatley-hour-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:20px}
+body[data-page="outdoors"] .gatley-hour-head h2{margin:.15em 0 0;color:#12383d;font-size:clamp(1.9rem,3vw,2.6rem);line-height:1.03;letter-spacing:-.035em}
+body[data-page="outdoors"] .gatley-hour-price{display:inline-flex;padding:7px 11px;border-radius:8px;background:#073f48;color:#fff;font-size:.76rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+body[data-page="outdoors"] .gatley-hour-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+body[data-page="outdoors"] .gatley-hour-step{position:relative;padding:18px;border-radius:14px;background:#f4f8f5;border:1px solid #dbe4df}
+body[data-page="outdoors"] .gatley-hour-step:nth-child(2){background:#fff8ea}
+body[data-page="outdoors"] .gatley-hour-step:nth-child(3){background:#edf6f5}
+body[data-page="outdoors"] .gatley-hour-step span{display:block;margin-bottom:9px;color:#f8791b;font-size:.64rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+body[data-page="outdoors"] .gatley-hour-step strong{display:block;margin-bottom:6px;color:#12383d;font-size:1.1rem}
+body[data-page="outdoors"] .gatley-hour-step p{margin:0;color:#486065;font-size:.88rem;line-height:1.45}
+body[data-page="outdoors"] .gatley-hour-foot{margin:16px 0 0;color:#4d6266;font-size:.86rem;line-height:1.5}
+
+/* Gatley Carrs standalone article. */
+body.outdoor-article-page .page-hero{padding:30px 0 24px;background:linear-gradient(145deg,#f3f9f5 0%,#fffaf0 100%)}
+body.outdoor-article-page .outdoor-article-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.62fr);gap:34px;align-items:end}
+body.outdoor-article-page .outdoor-article-kicker{display:inline-flex;margin-bottom:13px;padding:6px 10px;border:1px solid rgba(15,100,112,.18);border-radius:999px;background:#fff;color:#0f6470;font-size:.67rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;box-shadow:0 4px 10px rgba(19,45,49,.05)}
+body.outdoor-article-page .outdoor-article-hero h1{max-width:13ch;margin:0 0 12px;color:#12383d;font-size:clamp(2.65rem,4.7vw,4.15rem);line-height:.97;letter-spacing:-.045em}
+body.outdoor-article-page .outdoor-article-hero .hero-lead{max-width:680px;margin:0;color:#40565a;font-size:1.08rem;line-height:1.5}
+body.outdoor-article-page .outdoor-route-stamp{padding:22px;border:1px solid #d6ded9;border-radius:17px;background:#fff;box-shadow:0 10px 26px rgba(19,45,49,.07)}
+body.outdoor-article-page .outdoor-route-stamp span{display:block;color:#f8791b;font-size:.65rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+body.outdoor-article-page .outdoor-route-stamp strong{display:block;margin:10px 0 7px;color:#073f48;font:900 2.55rem/.95 Arial,sans-serif;letter-spacing:-.045em}
+body.outdoor-article-page .outdoor-route-stamp small{display:block;color:#345157;font-size:.88rem;font-weight:800;line-height:1.35}
+
+body.outdoor-article-page .outdoor-route-board-section{padding:34px 0;background:#eef7f2}
+body.outdoor-article-page .outdoor-route-board{padding:24px;border:1px solid #d4dfd8;border-radius:20px;background:#fff;box-shadow:0 12px 28px rgba(19,45,49,.065)}
+body.outdoor-article-page .outdoor-route-board-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}
+body.outdoor-article-page .outdoor-route-board-head h2{max-width:18ch;margin:.15em 0 0;color:#12383d;font-size:clamp(1.9rem,3vw,2.7rem);line-height:1.02;letter-spacing:-.035em}
+body.outdoor-article-page .outdoor-route-tag{display:inline-flex;padding:7px 10px;border-radius:7px;background:#073f48;color:#fff;font-size:.66rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;transform:rotate(1deg)}
+body.outdoor-article-page .outdoor-route-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+body.outdoor-article-page .outdoor-route-fact{padding:18px;border:1px solid #dbe4df;border-radius:14px;background:#f4f8f5}
+body.outdoor-article-page .outdoor-route-fact:nth-child(2){background:#fff8ea}
+body.outdoor-article-page .outdoor-route-fact:nth-child(3){background:#edf6f5}
+body.outdoor-article-page .outdoor-route-fact span{display:block;margin-bottom:8px;color:#f8791b;font-size:.63rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+body.outdoor-article-page .outdoor-route-fact strong{display:block;color:#12383d;font-size:1.08rem;line-height:1.25}
+body.outdoor-article-page .outdoor-route-board-note{margin:16px 0 0;padding:14px 16px;border-radius:11px;background:#073f48;color:#fff;font-size:.88rem;line-height:1.5}
+
+body.outdoor-article-page .outdoor-article-section{padding:42px 0 54px;background:#fff}
+body.outdoor-article-page .outdoor-article-layout{display:grid;grid-template-columns:minmax(0,1.28fr) minmax(260px,.58fr);gap:36px;align-items:start}
+body.outdoor-article-page .outdoor-article-copy{max-width:760px}
+body.outdoor-article-page .outdoor-article-copy h2{margin:0 0 18px;color:#12383d;font-size:clamp(1.9rem,3vw,2.55rem);line-height:1.03;letter-spacing:-.035em}
+body.outdoor-article-page .outdoor-article-copy p{margin:0 0 18px;color:#344d52;font-size:1.03rem;line-height:1.68}
+body.outdoor-article-page .outdoor-article-copy .guide-body{padding-left:20px;border-left:4px solid #1b7149}
+body.outdoor-article-page .outdoor-article-facts{display:grid;border:1px solid #d6ded9;border-radius:16px;background:#f5faf7;box-shadow:0 8px 22px rgba(19,45,49,.055);overflow:hidden}
+body.outdoor-article-page .outdoor-article-fact{padding:17px 18px;border-bottom:1px solid #e0e7e2}
+body.outdoor-article-page .outdoor-article-fact:last-child{border-bottom:0}
+body.outdoor-article-page .outdoor-article-fact span{display:block;margin-bottom:5px;color:#0f6470;font-size:.63rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+body.outdoor-article-page .outdoor-article-fact strong{display:block;color:#173b40;font-size:.98rem;line-height:1.35}
+body.outdoor-article-page .outdoor-article-actions{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:24px}
+body.outdoor-article-page .outdoor-source-note{margin-top:18px;padding:15px 17px;border:1px solid #dce2de;border-radius:12px;background:#f5faf8;color:#486065;font-size:.86rem;line-height:1.5}
+
+body.outdoor-article-page .outdoor-guide-signup-section{padding:30px 0;background:#f8f7f2}
+body.outdoor-article-page .outdoor-guide-signup{display:grid;grid-template-columns:112px minmax(0,1fr) minmax(280px,.8fr);gap:24px;align-items:center;padding:24px 26px;border-radius:20px;background:#073f48;color:#fff;box-shadow:0 14px 34px rgba(7,63,72,.14)}
+body.outdoor-article-page .outdoor-guide-logo{display:grid;place-items:center;min-height:108px;padding:10px;border-radius:16px;background:#fffdf8}
+body.outdoor-article-page .outdoor-guide-logo img{display:block;width:100%;height:auto;object-fit:contain}
+body.outdoor-article-page .outdoor-guide-copy .eyebrow{margin-bottom:6px;color:#c8e84a}
+body.outdoor-article-page .outdoor-guide-copy h2{margin:0 0 7px;color:#fff;font-size:clamp(1.55rem,2.7vw,2.25rem);line-height:1.04;letter-spacing:-.03em}
+body.outdoor-article-page .outdoor-guide-copy p{margin:0;color:#e6efec;font-size:.92rem;line-height:1.5}
+body.outdoor-article-page .outdoor-guide-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+body.outdoor-article-page .outdoor-guide-form input{min-height:48px;border:0;border-radius:10px;padding:0 13px;background:#fff;color:#263238;font:inherit}
+body.outdoor-article-page .outdoor-guide-form button{min-height:48px;border:0;border-radius:10px;padding:0 15px;background:#c8e84a;color:#263238;font:900 .9rem/1 Arial,sans-serif;cursor:pointer;white-space:nowrap}
+body.outdoor-article-page .outdoor-guide-note{margin:8px 0 0;color:#dce8e4;font-size:.72rem;line-height:1.4}
+body.outdoor-article-page .outdoor-article-next{padding:34px 0 48px;background:#f8f7f2}
+
+@media(max-width:980px){body.outdoor-article-page .outdoor-guide-signup{grid-template-columns:100px 1fr}body.outdoor-article-page .outdoor-guide-form-wrap{grid-column:1/-1}}
+@media(max-width:900px){body[data-page="outdoors"] .category-hero-grid,body.outdoor-article-page .outdoor-article-hero,body.outdoor-article-page .outdoor-article-layout{grid-template-columns:1fr}body[data-page="outdoors"] .category-hero-visual{max-width:560px;justify-self:start}body[data-page="outdoors"] .gatley-hour-steps,body.outdoor-article-page .outdoor-route-facts{grid-template-columns:1fr}}
+@media(max-width:760px){body[data-page="outdoors"] .outdoor-route-note{grid-template-columns:1fr;gap:14px}body[data-page="outdoors"] .outdoor-route-note-label{padding-right:0;padding-bottom:14px;border-right:0;border-bottom:1px solid rgba(15,100,112,.17)}}
+@media(max-width:680px){body[data-page="outdoors"] .page-hero{padding:26px 0 22px}body[data-page="outdoors"] .page-hero h1{font-size:clamp(2.5rem,12vw,3.15rem)}body[data-page="outdoors"] .category-hero-visual{max-width:none}body[data-page="outdoors"] .outdoor-feature-top{min-height:180px;padding:20px}body[data-page="outdoors"] .gatley-hour-head,body.outdoor-article-page .outdoor-route-board-head{display:block}body[data-page="outdoors"] .gatley-hour-price,body.outdoor-article-page .outdoor-route-tag{margin-top:12px}body.outdoor-article-page .page-hero{padding:26px 0 22px}body.outdoor-article-page .outdoor-article-section{padding:34px 0 44px}body.outdoor-article-page .outdoor-article-copy .guide-body{padding-left:16px}body.outdoor-article-page .outdoor-guide-signup{grid-template-columns:1fr;padding:20px}body.outdoor-article-page .outdoor-guide-logo{width:98px;min-height:92px}body.outdoor-article-page .outdoor-guide-form-wrap{grid-column:auto}body.outdoor-article-page .outdoor-guide-form{grid-template-columns:1fr}}

@@ -1,0 +1,120 @@
+{
+  "updated": "2026-09-11",
+  "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
+  "stories": [
+    {
+      "mode": "KNOW",
+      "label": "KNOW THIS",
+      "title": "A 20mph proposal for the Nansen/Firs estate",
+      "meta": "Heald Green · Consultation closes 24 Sep",
+      "summary": "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
+      "href": "/planning/nansen-firs-20mph/",
+      "linkLabel": "See the proposal and deadline →",
+      "visualType": "dicm",
+      "fit": "contain",
+      "image": "/assets/images/dicm/home-planning-v2.svg",
+      "alt": "Editorial map explainer of the Nansen and Firs estate 20mph consultation"
+    },
+    {
+      "mode": "DO",
+      "label": "DO THIS",
+      "title": "Bramhall Wellness Day is free this Saturday",
+      "meta": "Bramhall Village Square · Sat 12 Sep · from 10am",
+      "summary": "A free village-centre day with fitness tasters, wellbeing advice, activities, screenings, children’s crafts and a market.",
+      "href": "/whats-on/",
+      "linkLabel": "See this weekend’s checked listings →",
+      "visualType": "dicm",
+      "fit": "contain",
+      "image": "/assets/images/nue/whats-on-weekend.webp",
+      "alt": "SK8 Scoop editorial artwork for this weekend’s local events"
+    },
+    {
+      "mode": "DISCOVER",
+      "label": "DISCOVER THIS",
+      "title": "The five lives of Gatley Carrs",
+      "meta": "Gatley · Working wetland, landfill and nature reserve",
+      "summary": "Gatley Carrs has been willow-working ground, a Victorian botanical curiosity, landfill and, after restoration, today’s local nature reserve.",
+      "href": "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619#gatley-carrs",
+      "linkLabel": "Read the Issue 12 feature →",
+      "visualType": "dicm",
+      "fit": "contain",
+      "image": "https://storage.mlcdn.com/account_image/2462354/zi7YYuN8AWd9s2fNgj7RqZHYxsadbgJMyzFsasu2.jpg",
+      "alt": "Illustrated Five Lives of Gatley Carrs timeline, from working wetlands to restoration and the present-day nature reserve"
+    }
+  ],
+  "explore": [
+    {
+      "title": "What’s On",
+      "description": "Events & things to do",
+      "href": "/whats-on/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-whats-on.webp",
+      "position": "center"
+    },
+    {
+      "title": "Free & Cheap",
+      "description": "Make the most of local life for less",
+      "href": "/free-cheap-guide/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/free-cheap-guide-logo.webp",
+      "fit": "contain",
+      "position": "center"
+    },
+    {
+      "title": "Food & Drink",
+      "description": "Local spots to eat & drink",
+      "href": "/food-drink/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-food-drink.webp",
+      "position": "center"
+    },
+    {
+      "title": "Kids & Family",
+      "description": "Days out & activities",
+      "href": "/kids-family/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-kids-family.webp",
+      "position": "center"
+    },
+    {
+      "title": "Outdoors",
+      "description": "Walks, parks & fresh air",
+      "href": "/outdoors/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-outdoors.webp",
+      "position": "center"
+    },
+    {
+      "title": "Local History",
+      "description": "Stories from around here",
+      "href": "/local-history/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-local-history.webp",
+      "position": "center"
+    },
+    {
+      "title": "Planning & Development",
+      "description": "Changes, consultations & what they mean",
+      "href": "/planning/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-planning.webp",
+      "position": "center"
+    },
+    {
+      "title": "Useful Updates",
+      "description": "Roads, bins, travel & practical changes",
+      "href": "/updates/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-updates.webp",
+      "position": "center"
+    }
+  ]
+}
