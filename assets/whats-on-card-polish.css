@@ -5,12 +5,19 @@ body[data-page="whats-on"] .event-listing-card{display:flex;flex-direction:colum
 body[data-page="whats-on"] .event-listing-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(19,45,49,.09);border-color:#b9ccc7}
 
 body[data-page="whats-on"] .event-listing-card .reader-story-body{display:flex;flex:1;flex-direction:column;padding:17px 18px 18px}
-body[data-page="whats-on"] .event-listing-card .eyebrow{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;margin-bottom:8px;padding:6px 10px 6px 8px;border-radius:999px;background:linear-gradient(135deg,#0f6470,#073f48);color:#fff;border:1px solid rgba(248,121,27,.28);box-shadow:0 4px 10px rgba(7,63,72,.12);font-size:.65rem;font-weight:900;letter-spacing:.09em}
-body[data-page="whats-on"] .event-listing-card .eyebrow:before{content:"";width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#f8791b;box-shadow:0 0 0 2px rgba(255,249,237,.22)}
-body[data-page="whats-on"] .event-listing-card:nth-child(3n+2) .eyebrow{background:linear-gradient(135deg,#e6ef66,#c9df1c);color:#073f48;border-color:#b8ca2f;box-shadow:0 4px 10px rgba(137,155,25,.13)}
-body[data-page="whats-on"] .event-listing-card:nth-child(3n+2) .eyebrow:before{background:#0f6470;box-shadow:0 0 0 2px rgba(7,63,72,.12)}
-body[data-page="whats-on"] .event-listing-card:nth-child(3n) .eyebrow{background:linear-gradient(135deg,#ffe7ca,#ffd3a2);color:#7a3b00;border-color:#f3be83;box-shadow:0 4px 10px rgba(177,94,18,.12)}
-body[data-page="whats-on"] .event-listing-card:nth-child(3n) .eyebrow:before{background:#f8791b;box-shadow:0 0 0 2px rgba(122,59,0,.08)}
+body[data-page="whats-on"] .event-listing-card .eyebrow{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;margin-bottom:8px;padding:6px 10px 6px 8px;border-radius:999px;border:1px solid transparent;box-shadow:0 4px 10px rgba(7,63,72,.10);font-size:.65rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+body[data-page="whats-on"] .event-listing-card .eyebrow:before{content:"";width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:currentColor;opacity:.88;box-shadow:0 0 0 2px rgba(255,255,255,.34)}
+body[data-page="whats-on"] .event-listing-card[data-category="food-and-drink"] .eyebrow{background:#0b4c5b;border-color:#0a3f4c;color:#fff3d0}
+body[data-page="whats-on"] .event-listing-card[data-category="wellness"] .eyebrow{background:#d7e63d;border-color:#adc21f;color:#12454d}
+body[data-page="whats-on"] .event-listing-card[data-category="family"] .eyebrow{background:#ffe2bf;border-color:#f1b56a;color:#7b4b09}
+body[data-page="whats-on"] .event-listing-card[data-category="local-history"] .eyebrow{background:#0e606b;border-color:#0b4a53;color:#fff0c7}
+body[data-page="whats-on"] .event-listing-card[data-category="community"] .eyebrow{background:#f7d08d;border-color:#e0a654;color:#73440e}
+body[data-page="whats-on"] .event-listing-card[data-category="music"] .eyebrow{background:#f8c9d8;border-color:#de90ad;color:#6d2544}
+body[data-page="whats-on"] .event-listing-card[data-category="outdoors"] .eyebrow{background:#d8efda;border-color:#8cc08d;color:#1f5c34}
+body[data-page="whats-on"] .event-listing-card[data-category="market"] .eyebrow{background:#d9eef7;border-color:#8abed5;color:#114f66}
+body[data-page="whats-on"] .event-listing-card[data-category="arts-and-culture"] .eyebrow{background:#ece0f8;border-color:#b99bd5;color:#55346d}
+body[data-page="whats-on"] .event-listing-card[data-category="sport"] .eyebrow{background:#d9edf0;border-color:#8cbec4;color:#164f57}
+body[data-page="whats-on"] .event-listing-card[data-category="local-event"] .eyebrow{background:#edf6f4;border-color:#cfe0db;color:#0f6470}
 body[data-page="whats-on"] .event-listing-card h3{font-size:1.25rem;line-height:1.13;margin-bottom:8px}
 body[data-page="whats-on"] .event-listing-card .reader-meta{font-size:.82rem!important;margin-bottom:6px!important;color:#294a4f!important}
 body[data-page="whats-on"] .event-listing-card .event-venue{margin:0 0 10px!important;padding-left:15px;position:relative;font-size:.8rem!important;line-height:1.35;color:#5a6769!important;font-weight:700}
