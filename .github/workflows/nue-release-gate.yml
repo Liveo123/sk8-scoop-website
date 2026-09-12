@@ -1,0 +1,60 @@
+name: NUE release gate
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  issue12-release-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Block private or superseded Issue 12 event artwork
+        shell: bash
+        run: |
+          set -u
+          failed=0
+          targets=(whats-on data/events.json)
+          forbidden=(
+            'drive.google.com/uc?export=view&id=1mqzRbC8FX0e8lIRgPGQsg0YNnXYKlKNG'
+            'drive.google.com/uc?export=view&id=1V9MTmdRdVDM6ld0I3ypO5aTqUaeN6C3U'
+            'dragon-boats-sk8-illustration-v16.jpg'
+            'black-pudding-sk8-illustration-v16.jpg'
+          )
+
+          for pattern in "${forbidden[@]}"; do
+            if grep -RFn -- "$pattern" "${targets[@]}"; then
+              echo "::error::NUE release blocked: private or superseded Issue 12 artwork reference remains: $pattern"
+              failed=1
+            fi
+          done
+
+          exit "$failed"
+
+      - name: Verify Issue 12 production route lock
+        shell: bash
+        run: |
+          set -e
+          production_email='198102169520440619'
+          grep -Fq "$production_email" assets/config.js || {
+            echo '::error::assets/config.js is not locked to the actual live Issue 12 production email.'
+            exit 1
+          }
+          grep -Fq "$production_email" latest/index.html || {
+            echo '::error::Latest page is not locked to the actual live Issue 12 production email.'
+            exit 1
+          }
+          grep -Fq "$production_email" archive.html || {
+            echo '::error::Archive is not locked to the actual live Issue 12 production email.'
+            exit 1
+          }
+
+      - name: Verify NUE feature routes are indexed
+        shell: bash
+        run: |
+          set -e
+          grep -Fq 'https://www.sk8scoop.com/whats-on/dragon-boats-sale-water-park/' sitemap.xml
+          grep -Fq 'https://www.sk8scoop.com/whats-on/black-pudding-throwing-ramsbottom/' sitemap.xml
