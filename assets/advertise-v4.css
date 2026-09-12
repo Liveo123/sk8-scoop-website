@@ -1,0 +1,106 @@
+/* Advertise V4: colour and WEBSITE package pass.
+   Keeps the commercial page lively and distinctive while preserving clear labels and readable contrast. */
+
+/* HERO PROOF: four useful proof cards, four restrained SK8 tints. */
+body.advertiser-page .ad-audience-proof>div{position:relative;overflow:hidden;border-width:1px!important;box-shadow:0 8px 18px rgba(19,45,49,.055)!important}
+body.advertiser-page .ad-audience-proof>div:before{content:"";position:absolute;inset:0 auto 0 0;width:5px}
+body.advertiser-page .ad-audience-proof>div:nth-child(1){background:#e9f7f4!important;border-color:#bcded7!important}
+body.advertiser-page .ad-audience-proof>div:nth-child(1):before{background:#0f6470}
+body.advertiser-page .ad-audience-proof>div:nth-child(2){background:#fff1e6!important;border-color:#ffd2b2!important}
+body.advertiser-page .ad-audience-proof>div:nth-child(2):before{background:#f8791b}
+body.advertiser-page .ad-audience-proof>div:nth-child(3){background:#f5f9d9!important;border-color:#dde89c!important}
+body.advertiser-page .ad-audience-proof>div:nth-child(3):before{background:#a9c923}
+body.advertiser-page .ad-audience-proof>div:nth-child(4){background:#f4ecdf!important;border-color:#e5d3b7!important}
+body.advertiser-page .ad-audience-proof>div:nth-child(4):before{background:#9f6a13}
+body.advertiser-page .ad-audience-proof strong{padding-left:3px!important}
+
+/* ACTION PICKER: colour-cue the six outcomes without turning the page into a toy box. */
+body.advertiser-page .ad-goal-wrap{background:linear-gradient(135deg,#eef8f6,#fff9ed)!important;border-color:#bfd8d2!important;box-shadow:0 10px 22px rgba(19,45,49,.05)!important}
+body.advertiser-page .ad-goal-grid a{position:relative;overflow:hidden;border-width:1px!important;color:#143d43!important}
+body.advertiser-page .ad-goal-grid a:before{content:"";position:absolute;inset:auto 0 0;height:5px;background:#0f6470}
+body.advertiser-page .ad-goal-grid a:nth-child(2):before{background:#f8791b}
+body.advertiser-page .ad-goal-grid a:nth-child(3):before{background:#d2ad22}
+body.advertiser-page .ad-goal-grid a:nth-child(4):before{background:#7f9d1a}
+body.advertiser-page .ad-goal-grid a:nth-child(5):before{background:#b95310}
+body.advertiser-page .ad-goal-grid a:nth-child(6):before{background:#073f48}
+body.advertiser-page .ad-goal-grid a:nth-child(1){background:#edf8f5!important}
+body.advertiser-page .ad-goal-grid a:nth-child(2){background:#fff3e8!important}
+body.advertiser-page .ad-goal-grid a:nth-child(3){background:#fff9df!important}
+body.advertiser-page .ad-goal-grid a:nth-child(4){background:#f5f9df!important}
+body.advertiser-page .ad-goal-grid a:nth-child(5){background:#fff0e8!important}
+body.advertiser-page .ad-goal-grid a:nth-child(6){background:#eef3f3!important}
+body.advertiser-page .ad-goal-grid a.is-selected{background:#073f48!important;color:#fff!important;border-color:#073f48!important}
+body.advertiser-page .ad-goal-grid a.is-selected:before{background:#c8e84a!important}
+
+/* PACKAGE AREA: three genuinely different routes, with matching colour language. */
+body.advertiser-page .ad-package-compare{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+body.advertiser-page .ad-product-card{border-top-width:7px!important;box-shadow:0 12px 28px rgba(19,45,49,.07)!important}
+body.advertiser-page .ad-product-test{border-top-color:#0f6470!important;background:linear-gradient(180deg,#fff 0%,#f4fbf9 100%)!important}
+body.advertiser-page .ad-product-grow{border-top-color:#f8791b!important;background:linear-gradient(180deg,#fff 0%,#fff8ef 100%)!important}
+body.advertiser-page .ad-product-web{border-top-color:#a9c923!important;background:linear-gradient(180deg,#fff 0%,#f8fbe9 100%)!important}
+body.advertiser-page .ad-product-test .eyebrow{background:#073f48!important;color:#fff!important}
+body.advertiser-page .ad-product-grow .eyebrow{background:#c3530e!important;color:#fff!important}
+body.advertiser-page .ad-product-web .eyebrow{background:#d9ee59!important;color:#17383d!important}
+body.advertiser-page .ad-product-test .ad-best-for{background:#eaf6f3!important}
+body.advertiser-page .ad-product-grow .ad-best-for{background:#fff0e1!important}
+body.advertiser-page .ad-product-web .ad-best-for{background:#f2f7d8!important}
+body.advertiser-page .ad-product-test>.button{background:#0f6470!important;border-color:#0f6470!important;color:#fff!important}
+body.advertiser-page .ad-product-grow>.button{background:#f8791b!important;border-color:#f8791b!important;color:#fff!important}
+body.advertiser-page .ad-product-web>.button{background:#173f45!important;border-color:#173f45!important;color:#fff!important;box-shadow:0 8px 18px rgba(23,63,69,.13)!important}
+body.advertiser-page .ad-product-web>.button:after{content:" · SK8Scoop.com";font-size:.72em;opacity:.8}
+body.advertiser-page .ad-price-quote{font-size:2.15rem!important;color:#5d7412!important;letter-spacing:-.04em!important}
+body.advertiser-page .ad-decision-strip{border-color:#d8dfad!important;background:linear-gradient(100deg,#fff,#f7fadf)!important}
+
+/* EVIDENCE: fix the pale-on-pale problem and give the section deliberate contrast. */
+body.advertiser-page .ad-evidence-section{padding:56px 0!important;background:linear-gradient(120deg,#063d46 0%,#0f6470 55%,#174e54 100%)!important;color:#fff!important}
+body.advertiser-page .ad-evidence-section .report-grid{padding:0!important;border:0!important;background:transparent!important}
+body.advertiser-page .ad-evidence-section .report-grid>div:first-child{padding:28px;border:1px solid rgba(255,255,255,.13);border-radius:18px;background:rgba(2,39,45,.38);box-shadow:0 16px 32px rgba(0,0,0,.12)}
+body.advertiser-page .ad-evidence-section .eyebrow{color:#d8f05a!important}
+body.advertiser-page .ad-evidence-section h2{color:#fff!important;text-shadow:0 1px 0 rgba(0,0,0,.08)}
+body.advertiser-page .ad-evidence-section .report-grid>div:first-child>p{color:#dcebea!important}
+body.advertiser-page .ad-measure-grid>div{border-color:rgba(255,255,255,.18)!important;background:rgba(255,255,255,.09)!important}
+body.advertiser-page .ad-measure-grid>div:first-child{border-top:5px solid #f8791b!important}
+body.advertiser-page .ad-measure-grid>div:nth-child(2){border-top:5px solid #c8e84a!important}
+body.advertiser-page .ad-measure-grid span{color:#d8f05a!important}
+body.advertiser-page .ad-measure-grid>div:first-child span{color:#ffb073!important}
+body.advertiser-page .ad-evidence-section .advert-report-example{border-top:7px solid #d2b32b!important;background:linear-gradient(180deg,#fffef7,#fff)!important;box-shadow:0 18px 36px rgba(0,0,0,.16)!important}
+body.advertiser-page .ad-evidence-section .advert-report-example .eyebrow{color:#829900!important}
+body.advertiser-page .ad-evidence-section .advert-report-example h3{color:#153d43!important}
+body.advertiser-page .ad-evidence-section .advert-report-example .fine{color:#5c6d70!important}
+
+/* FAQ: each question gets a clearer visual identity, including the editorial boundary. */
+body.advertiser-page .ad-faq-grid details{position:relative;overflow:hidden;border-width:1px!important;background:#fff!important}
+body.advertiser-page .ad-faq-grid details:before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:#0f6470}
+body.advertiser-page .ad-faq-grid details:nth-child(2):before{background:#f8791b}
+body.advertiser-page .ad-faq-grid details:nth-child(3):before{background:#d1b028}
+body.advertiser-page .ad-faq-grid details:nth-child(4):before{background:#a9c923}
+body.advertiser-page .ad-faq-grid details:nth-child(5):before{background:#9d6a18}
+body.advertiser-page .ad-faq-grid details:nth-child(6):before{background:#073f48}
+body.advertiser-page .ad-faq-grid details:nth-child(1){background:#f2faf8!important}
+body.advertiser-page .ad-faq-grid details:nth-child(2){background:#fff5ed!important}
+body.advertiser-page .ad-faq-grid details:nth-child(3){background:#fffbe8!important}
+body.advertiser-page .ad-faq-grid details:nth-child(4){background:#f7fbe7!important}
+body.advertiser-page .ad-faq-grid details:nth-child(5){background:#fbf5e9!important}
+body.advertiser-page .ad-faq-grid details:nth-child(6){background:#f0f5f5!important}
+body.advertiser-page .ad-faq-grid summary{padding-left:7px!important}
+body.advertiser-page .ad-faq-grid details[open]{box-shadow:0 12px 24px rgba(19,45,49,.08)!important}
+
+/* FORM: make the third package feel first-class rather than bolted on. */
+body.advertiser-page .premium-form fieldset .checkbox-row:has(input[value="temp_test"]:checked){border-color:#0f6470!important;background:#edf8f5!important;box-shadow:inset 0 0 0 1px #0f6470!important}
+body.advertiser-page .premium-form fieldset .checkbox-row:has(input[value="temp_grow"]:checked){border-color:#f8791b!important;background:#fff3e8!important;box-shadow:inset 0 0 0 1px #f8791b!important}
+body.advertiser-page .premium-form fieldset .checkbox-row:has(input[value="temp_website"]:checked){border-color:#9fb91e!important;background:#f6fadf!important;box-shadow:inset 0 0 0 1px #9fb91e!important}
+
+@media(max-width:1080px){
+  body.advertiser-page .ad-package-compare{grid-template-columns:1fr 1fr!important}
+  body.advertiser-page .ad-product-web{grid-column:1/-1!important}
+  body.advertiser-page .ad-product-web .ad-package-details{display:grid!important;grid-template-columns:1fr 1fr!important;column-gap:22px!important}
+}
+@media(max-width:760px){
+  body.advertiser-page .ad-audience-proof{grid-template-columns:1fr 1fr!important}
+  body.advertiser-page .ad-package-compare{grid-template-columns:1fr!important}
+  body.advertiser-page .ad-product-web{grid-column:auto!important}
+  body.advertiser-page .ad-product-web .ad-package-details{display:block!important}
+}
+@media(max-width:480px){
+  body.advertiser-page .ad-audience-proof{grid-template-columns:1fr!important}
+}
