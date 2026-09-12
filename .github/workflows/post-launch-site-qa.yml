@@ -52,9 +52,21 @@ jobs:
           }
           check_page '/' 'homepage-utility-promise-v1'
           check_page '/whats-on/' 'data-event-area="Cheadle"'
+          check_page '/guides/' 'data-page="guides"'
+          check_page '/start/' 'data-page="start"'
+          check_page '/join/' 'data-page="join"'
+          check_page '/submit/' 'action="/api/reader-submission"'
+          check_page '/contact/' 'data-form-kind="contact-message"'
+          check_page '/submit-event/' 'action="/api/submit-event"'
+          check_page '/business-submissions/' 'action="/api/business-submission"'
           check_page '/advertise.html' 'value="temp_test"'
+          check_page '/around-sk8/' 'data-page="around-sk8"'
           check_page '/food-drink/' 'Food & Drink around SK8'
+          check_page '/kids-family/' 'Kids & Family around SK8'
+          check_page '/outdoors/' 'Outdoors around SK8'
           check_page '/local-history/' 'Local History around SK8'
+          check_page '/planning/' 'Planning & Development around SK8'
+          check_page '/updates/' 'Useful Updates around SK8'
 
   live-smoke:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -81,11 +93,21 @@ jobs:
           }
           check_page 'https://www.sk8scoop.com/' 'homepage-utility-promise-v1'
           check_page 'https://www.sk8scoop.com/whats-on/' 'data-event-area="Cheadle"'
-          check_page 'https://www.sk8scoop.com/advertise.html' 'value="temp_test"'
-          check_page 'https://www.sk8scoop.com/food-drink/' 'Food & Drink around SK8'
-          check_page 'https://www.sk8scoop.com/local-history/' 'Local History around SK8'
+          check_page 'https://www.sk8scoop.com/guides/' 'data-page="guides"'
+          check_page 'https://www.sk8scoop.com/start/' 'data-page="start"'
+          check_page 'https://www.sk8scoop.com/join/' 'data-page="join"'
           check_page 'https://www.sk8scoop.com/submit/' 'action="/api/reader-submission"'
           check_page 'https://www.sk8scoop.com/contact/' 'data-form-kind="contact-message"'
+          check_page 'https://www.sk8scoop.com/submit-event/' 'action="/api/submit-event"'
+          check_page 'https://www.sk8scoop.com/business-submissions/' 'action="/api/business-submission"'
+          check_page 'https://www.sk8scoop.com/advertise.html' 'value="temp_test"'
+          check_page 'https://www.sk8scoop.com/around-sk8/' 'data-page="around-sk8"'
+          check_page 'https://www.sk8scoop.com/food-drink/' 'Food & Drink around SK8'
+          check_page 'https://www.sk8scoop.com/kids-family/' 'Kids & Family around SK8'
+          check_page 'https://www.sk8scoop.com/outdoors/' 'Outdoors around SK8'
+          check_page 'https://www.sk8scoop.com/local-history/' 'Local History around SK8'
+          check_page 'https://www.sk8scoop.com/planning/' 'Planning & Development around SK8'
+          check_page 'https://www.sk8scoop.com/updates/' 'Useful Updates around SK8'
 
       - name: Verify production form routes and contact transport without creating records
         shell: bash
