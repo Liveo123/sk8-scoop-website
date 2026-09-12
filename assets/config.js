@@ -49,7 +49,7 @@ window.SK8_CONFIG = {
     subscriberCount: "500+",
     subscriberProof: "500+",
     issuesPublished: 12,
-    checkedDate: "11 September 2026",
+    checkedDate: "12 September 2026",
     latestMainSendRecipients: 507,
     latestMainOpenRate: null,
     latestClickRate: null,
@@ -68,25 +68,25 @@ window.SK8_CONFIG = {
   },
   homeStories: [
     {
-      label: "WORTH THE TRIP",
-      title: "£29 Laughterama tickets are still showing",
-      meta: "Sat 5–Sun 6 Sep · Castlefield Bowl",
-      summary: "Four weekend comedy shows were still showing £29 tickets at the latest check, with street food and craft beer around the open-air arena.",
-      image: "https://storage.mlcdn.com/account_image/2462354/FXwociOldVfkiDg4c8zDVK9cQjLmfyUOeS766Vg7.jpg"
-    },
-    {
-      label: "LOCAL STORY",
-      title: "The Heald Green spy and future Dambuster",
-      meta: "Heald Green · Local history",
-      summary: "A First World War spy lived beside the Heald Green Hotel while RAF men, including a young Guy Gibson, later slept upstairs.",
-      image: "https://storage.mlcdn.com/account_image/2462354/XUOl5y8Le1k2HWFPih9pWAd86ITKXij0u2kJczOX.png"
-    },
-    {
-      label: "USEFUL UPDATE",
-      title: "A new 20mph proposal for the Nansen/Firs estate",
+      label: "KNOW THIS",
+      title: "A 20mph proposal for the Nansen/Firs estate",
       meta: "Heald Green · Consultation closes 24 Sep",
       summary: "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
-      image: "/assets/images/home-story-2.webp"
+      image: "/assets/images/dicm/home-planning-v2.svg"
+    },
+    {
+      label: "DO THIS",
+      title: "Bramhall Wellness Day is free this Saturday",
+      meta: "Bramhall Village Square · Sat 12 Sep · from 10am",
+      summary: "A free village-centre day with fitness tasters, wellbeing advice, activities, screenings, children’s crafts and a market.",
+      image: "/assets/images/nue/whats-on-weekend.webp"
+    },
+    {
+      label: "DISCOVER THIS",
+      title: "The five lives of Gatley Carrs",
+      meta: "Gatley · Working wetland, landfill and nature reserve",
+      summary: "Gatley Carrs has been willow-working ground, a Victorian botanical curiosity, landfill and, after restoration, today’s local nature reserve.",
+      image: "https://storage.mlcdn.com/account_image/2462354/zi7YYuN8AWd9s2fNgj7RqZHYxsadbgJMyzFsasu2.jpg"
     }
   ],
   stripeLinks: {
