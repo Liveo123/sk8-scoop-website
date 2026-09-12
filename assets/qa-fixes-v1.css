@@ -1,106 +1,48 @@
 /* Final preview QA fixes. Kept separate so late-stage corrections are easy to audit and remove. */
 
-/* AROUND SK8: robust DICM board built from existing raster artwork. No SVG line-art and no dependency on the broken v3 background asset. */
+/* AROUND SK8: explicit raster DICM image, no SVG or CSS-drawn substitute. */
 body[data-page="around-sk8"] .around-dicm-board{
   position:relative!important;
-  display:grid!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  gap:12px!important;
-  min-height:430px!important;
-  aspect-ratio:auto!important;
+  display:block!important;
+  min-height:0!important;
+  aspect-ratio:4/3!important;
   margin:0!important;
-  padding:62px 14px 50px!important;
+  padding:0!important;
   overflow:hidden!important;
   border:1px solid #cfdad5!important;
   border-radius:22px!important;
-  background:linear-gradient(145deg,#f5f0e4,#eef6f3)!important;
+  background:#f7f4e8!important;
   box-shadow:0 18px 38px rgba(19,45,49,.11)!important;
-  isolation:isolate!important;
 }
-body[data-page="around-sk8"] .around-dicm-board:before{
-  content:""!important;
-  display:block!important;
-  position:absolute!important;
-  inset:0!important;
-  z-index:-1!important;
-  background-image:linear-gradient(rgba(15,100,112,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(15,100,112,.045) 1px,transparent 1px)!important;
-  background-size:28px 28px!important;
-}
+body[data-page="around-sk8"] .around-dicm-board:before,
 body[data-page="around-sk8"] .around-dicm-board:after{display:none!important;content:none!important}
-body[data-page="around-sk8"] .dicm-board-top{
-  display:flex!important;
-  position:absolute!important;
-  left:14px!important;
-  right:14px!important;
-  top:14px!important;
-  z-index:5!important;
-  justify-content:space-between!important;
-  align-items:center!important;
-  gap:12px!important;
-  padding-bottom:11px!important;
-  border-bottom:1px solid rgba(7,63,72,.14)!important;
+body[data-page="around-sk8"] .around-dicm-board>.around-dicm-image{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#f7f4e8!important;
 }
-body[data-page="around-sk8"] .dicm-board-top strong{font-size:.66rem!important;letter-spacing:.12em!important;color:#073f48!important}
-body[data-page="around-sk8"] .dicm-board-top span{padding:5px 8px!important;border-radius:6px!important;background:#fff!important;border:1px solid #d3ddd8!important;color:#4d6164!important;font-size:.56rem!important;font-weight:900!important;letter-spacing:.09em!important}
-body[data-page="around-sk8"] .dicm-route-line,
-body[data-page="around-sk8"] .dicm-locality{display:none!important}
-body[data-page="around-sk8"] .dicm-route-card{
-  position:relative!important;
-  left:auto!important;
-  right:auto!important;
-  top:auto!important;
-  bottom:auto!important;
-  width:auto!important;
-  min-width:0!important;
-  min-height:310px!important;
-  display:flex!important;
-  flex-direction:column!important;
-  justify-content:flex-end!important;
-  padding:18px!important;
-  overflow:hidden!important;
-  border:1px solid rgba(255,255,255,.38)!important;
-  border-radius:16px!important;
-  box-shadow:0 12px 26px rgba(19,45,49,.14)!important;
-  background-size:cover!important;
-  background-position:center!important;
-}
-body[data-page="around-sk8"] .dicm-route-card.know{background-image:linear-gradient(180deg,rgba(4,45,52,.06) 15%,rgba(4,45,52,.93) 88%),url('/assets/images/home-story-2.webp')!important}
-body[data-page="around-sk8"] .dicm-route-card.do{background-image:linear-gradient(180deg,rgba(4,45,52,.02) 12%,rgba(4,45,52,.91) 88%),url('/assets/images/park-bridge.webp')!important}
-body[data-page="around-sk8"] .dicm-route-card.discover{background-image:linear-gradient(180deg,rgba(4,45,52,.04) 12%,rgba(4,45,52,.94) 88%),url('/assets/images/free-cheap-odd-bits.webp')!important}
-body[data-page="around-sk8"] .dicm-route-card small{
-  display:inline-flex!important;
-  align-self:flex-start!important;
-  margin:0 0 auto!important;
-  padding:6px 8px!important;
-  border-radius:999px!important;
-  background:#fff!important;
-  color:#073f48!important;
-  font-size:.58rem!important;
-  font-weight:900!important;
-  letter-spacing:.11em!important;
-  box-shadow:0 5px 12px rgba(0,0,0,.12)!important;
-}
-body[data-page="around-sk8"] .dicm-route-card.do small{color:#496c2d!important}
-body[data-page="around-sk8"] .dicm-route-card.discover small{color:#815407!important}
-body[data-page="around-sk8"] .dicm-route-card strong{display:block!important;margin-top:92px!important;color:#fff!important;font-size:1.18rem!important;line-height:1.04!important;text-shadow:0 2px 8px rgba(0,0,0,.35)!important}
-body[data-page="around-sk8"] .dicm-route-card p{display:block!important;margin:8px 0 0!important;color:#edf5f2!important;font-size:.76rem!important;line-height:1.38!important}
-body[data-page="around-sk8"] .dicm-route-card b{display:block!important;margin-top:12px!important;padding-top:10px!important;border-top:1px solid rgba(255,255,255,.25)!important;color:#fff!important;font-size:.66rem!important;line-height:1.3!important}
-body[data-page="around-sk8"] .dicm-board-foot{
+body[data-page="around-sk8"] .around-dicm-board>.around-dicm-caption{
   display:inline-flex!important;
   position:absolute!important;
-  left:14px!important;
-  bottom:14px!important;
-  z-index:5!important;
-  padding:7px 9px!important;
-  border-radius:7px!important;
+  left:16px!important;
+  bottom:16px!important;
+  z-index:3!important;
+  margin:0!important;
+  padding:8px 11px!important;
+  border-radius:8px!important;
   background:#073f48!important;
   color:#fff!important;
-  font-size:.56rem!important;
+  box-shadow:0 7px 16px rgba(7,63,72,.18)!important;
+  font-size:.62rem!important;
   font-weight:900!important;
-  letter-spacing:.08em!important;
+  letter-spacing:.09em!important;
 }
 
-/* GUIDES: let the proper guide artwork breathe. Remove the slogan overlay that was covering the logos. */
+/* GUIDES: let the proper guide artwork breathe. Remove slogan overlays that covered the logos. */
 body[data-page="guides"] .guide-visual.guide-free:before,
 body[data-page="guides"] .guide-visual.guide-summer:before,
 body[data-page="guides"] .guide-visual.guide-free:after,
@@ -112,67 +54,89 @@ body[data-page="guides"] .guide-summer img{max-width:78%!important;max-height:17
 body[data-page="guides"] .guide-free .guide-status,
 body[data-page="guides"] .guide-summer .guide-status{top:16px!important;left:16px!important;right:auto!important;z-index:3!important;background:#073f48!important;color:#fff!important;box-shadow:0 5px 12px rgba(19,45,49,.10)!important}
 
-/* SUBMISSIONS: supporting information stays in the document flow. It must never chase the reader down the page. */
+/* SUBMISSIONS: supporting information stays in normal document flow and never follows the reader. */
 body[data-page="business-submissions"] .submission-sidebar,
 body[data-page="business-submissions"] .policy-panel,
 body[data-page="business-submissions"] .policy-panel.sticky-panel{position:static!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;inset:auto!important;transform:none!important;align-self:start!important}
 
-/* SUBMISSION TYPE CARDS: make the prompts part of the layout instead of floating over the copy. */
-body[data-page="business-submissions"] .submission-types{align-items:stretch!important}
+/* SUBMISSION TYPE CARDS: aligned editorial cards. The prompt strip belongs at the bottom, never over body text. */
+body[data-page="business-submissions"] .submission-types{
+  align-items:stretch!important;
+  gap:14px!important;
+}
 body[data-page="business-submissions"] .submission-types article{
+  position:relative!important;
   display:flex!important;
   flex-direction:column!important;
-  min-height:278px!important;
+  min-height:282px!important;
   height:100%!important;
-  padding:22px 20px 20px!important;
+  padding:22px 20px 18px!important;
   overflow:hidden!important;
+  border-radius:16px!important;
+  box-shadow:0 10px 24px rgba(19,45,49,.065)!important;
 }
-body[data-page="business-submissions"] .submission-types article>span{position:relative!important;z-index:2!important;align-self:flex-start!important;margin:0 0 20px!important}
-body[data-page="business-submissions"] .submission-types article h3{position:relative!important;z-index:2!important;margin:0 0 10px!important;max-width:14ch!important;font-size:1.34rem!important;line-height:1.06!important}
-body[data-page="business-submissions"] .submission-types article p{position:relative!important;z-index:2!important;margin:0 0 20px!important;max-width:none!important;line-height:1.45!important}
-body[data-page="business-submissions"] .submission-types article:after{
+body[data-page="business-submissions"] .submission-types article>span{
   position:relative!important;
-  left:auto!important;
-  right:auto!important;
-  top:auto!important;
-  bottom:auto!important;
   z-index:2!important;
-  display:inline-flex!important;
-  width:fit-content!important;
-  max-width:100%!important;
+  align-self:flex-start!important;
+  margin:0 0 20px!important;
+}
+body[data-page="business-submissions"] .submission-types article h3{
+  position:relative!important;
+  z-index:2!important;
+  min-height:2.25em!important;
+  margin:0 0 10px!important;
+  max-width:14ch!important;
+  font-size:1.34rem!important;
+  line-height:1.06!important;
+}
+body[data-page="business-submissions"] .submission-types article p{
+  position:relative!important;
+  z-index:2!important;
+  min-height:5.8em!important;
+  margin:0!important;
+  max-width:none!important;
+  color:#506267!important;
+  line-height:1.45!important;
+}
+body[data-page="business-submissions"] .submission-types article:after{
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  box-sizing:border-box!important;
   margin-top:auto!important;
-  padding:8px 10px!important;
+  padding:9px 10px!important;
   border:1px solid rgba(7,63,72,.12)!important;
-  border-radius:8px!important;
-  background:rgba(255,255,255,.94)!important;
+  border-radius:9px!important;
+  background:rgba(255,255,255,.9)!important;
   color:#365257!important;
   white-space:normal!important;
+  box-shadow:none!important;
   font-size:.59rem!important;
-  line-height:1.25!important;
   font-weight:900!important;
-  letter-spacing:.08em!important;
-  box-shadow:0 5px 11px rgba(19,45,49,.06)!important;
+  line-height:1.28!important;
+  letter-spacing:.075em!important;
 }
-body[data-page="business-submissions"] .submission-types article:before{right:12px!important;bottom:-10px!important;font-size:4.8rem!important;opacity:.7!important}
+body[data-page="business-submissions"] .submission-types article:before{
+  right:10px!important;
+  bottom:-18px!important;
+  font-size:4.8rem!important;
+  opacity:.55!important;
+}
 
 @media(max-width:900px){
-  body[data-page="around-sk8"] .around-dicm-board{grid-template-columns:1fr!important;min-height:0!important;padding:62px 14px 50px!important}
-  body[data-page="around-sk8"] .dicm-route-card{min-height:230px!important}
-  body[data-page="around-sk8"] .dicm-route-card strong{margin-top:70px!important}
   body[data-page="business-submissions"] .submission-types{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 @media(max-width:700px){
+  body[data-page="around-sk8"] .around-dicm-board{aspect-ratio:4/3!important}
+  body[data-page="around-sk8"] .around-dicm-board>.around-dicm-caption{left:10px!important;bottom:10px!important;font-size:.55rem!important}
   body[data-page="guides"] .guide-visual.guide-free,
   body[data-page="guides"] .guide-visual.guide-summer{min-height:220px!important;padding:40px 18px 22px!important}
   body[data-page="guides"] .guide-free img{max-width:72%!important;max-height:150px!important}
   body[data-page="guides"] .guide-summer img{max-width:82%!important;max-height:156px!important}
   body[data-page="business-submissions"] .submission-types{grid-template-columns:1fr!important}
-  body[data-page="business-submissions"] .submission-types article{min-height:240px!important}
-}
-@media(max-width:560px){
-  body[data-page="around-sk8"] .dicm-board-top{align-items:flex-start!important}
-  body[data-page="around-sk8"] .dicm-board-top strong{max-width:24ch!important}
-  body[data-page="around-sk8"] .dicm-route-card{min-height:215px!important}
-  body[data-page="around-sk8"] .dicm-route-card strong{margin-top:56px!important}
-  body[data-page="around-sk8"] .dicm-board-foot{font-size:.5rem!important}
+  body[data-page="business-submissions"] .submission-types article{min-height:0!important}
+  body[data-page="business-submissions"] .submission-types article h3,
+  body[data-page="business-submissions"] .submission-types article p{min-height:0!important}
+  body[data-page="business-submissions"] .submission-types article:after{margin-top:18px!important}
 }
