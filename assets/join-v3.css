@@ -18,15 +18,35 @@ body[data-page="join"] .join-brief-foot{padding-top:20px}
 body[data-page="join"] .join-conversion-copy{padding:30px 32px 28px}
 body[data-page="join"] .join-conversion-copy h2{font-size:clamp(1.95rem,3vw,2.6rem)!important}
 body[data-page="join"] .join-conversion-lead{font-size:.98rem}
-body[data-page="join"] .reader-signup{margin-top:17px;box-shadow:0 8px 20px rgba(19,45,49,.09)}
-body[data-page="join"] .join-benefits{gap:9px;margin-top:20px}
-body[data-page="join"] .join-benefits div{min-height:132px;padding:16px}
-body[data-page="join"] .join-benefits div:before{margin-bottom:9px}
-body[data-page="join"] .join-benefits p{font-size:.82rem;line-height:1.4}
-body[data-page="join"] .reader-two{margin-top:16px!important}
-body[data-page="join"] .reader-two .reader-panel{min-height:170px;padding:21px}
+
+/* Make the email action unmistakable. */
+body[data-page="join"] .join-email-form{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px 10px!important;margin-top:18px!important;padding:14px!important;border:2px solid #0f6470!important;border-radius:14px!important;background:#eef7f5!important;box-shadow:0 10px 24px rgba(15,100,112,.10)!important;overflow:visible!important}
+body[data-page="join"] .join-email-label{display:flex!important;grid-column:1/-1;align-items:baseline;justify-content:space-between;gap:12px;margin:0!important;color:#12383d!important;font-weight:900!important;line-height:1.2!important}
+body[data-page="join"] .join-email-label span{font-size:.92rem;letter-spacing:.01em}
+body[data-page="join"] .join-email-label small{color:#577075;font-size:.72rem;font-weight:700;text-align:right}
+body[data-page="join"] .join-email-form input{grid-column:1;min-width:0!important;min-height:54px!important;padding:0 16px!important;border:2px solid #0f6470!important;border-radius:9px!important;background:#fff!important;color:#12383d!important;font-size:1rem!important;box-shadow:inset 0 0 0 1px rgba(15,100,112,.04)!important}
+body[data-page="join"] .join-email-form input::placeholder{color:#718489!important;opacity:1!important}
+body[data-page="join"] .join-email-form input:focus{outline:4px solid rgba(248,121,27,.22)!important;outline-offset:2px!important;border-color:#f8791b!important}
+body[data-page="join"] .join-email-form .button{grid-column:2;min-width:128px!important;min-height:54px!important;padding:0 20px!important;border-radius:9px!important;box-shadow:0 7px 16px rgba(7,63,72,.13)!important}
+body[data-page="join"] .join-email-fine{margin:8px 0 0!important;color:#53686c!important;font-size:.76rem!important;line-height:1.35!important}
+
+/* Keep the three benefit panels tidy and make sure their labels never collide with copy. */
+body[data-page="join"] .join-benefits{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;margin-top:20px!important;align-items:stretch!important}
+body[data-page="join"] .join-benefits div{position:relative!important;display:flex!important;min-width:0!important;min-height:150px!important;flex-direction:column!important;padding:17px 16px 16px!important;border:1px solid #d8e2de!important;border-top:4px solid #0f6470!important;border-radius:12px!important;background:#f8faf8!important;overflow:visible!important;box-sizing:border-box!important}
+body[data-page="join"] .join-benefits div:nth-child(2){border-top-color:#f8791b!important}
+body[data-page="join"] .join-benefits div:nth-child(3){border-top-color:#d1b333!important}
+body[data-page="join"] .join-benefits div:before{position:static!important;display:block!important;margin:0 0 9px!important;padding:0!important;transform:none!important;line-height:1!important;color:#a85616!important;font-size:.6rem!important;font-weight:950!important;letter-spacing:.09em!important;white-space:normal!important}
+body[data-page="join"] .join-benefits div:nth-child(1):before{content:"01 / USEFUL"!important}
+body[data-page="join"] .join-benefits div:nth-child(2):before{content:"02 / LOCAL"!important}
+body[data-page="join"] .join-benefits div:nth-child(3):before{content:"03 / QUICK"!important}
+body[data-page="join"] .join-benefits strong{display:block!important;margin:0 0 8px!important;color:#12383d!important;font-size:.96rem!important;line-height:1.12!important}
+body[data-page="join"] .join-benefits p{margin:0!important;color:#4a5d61!important;font-size:.8rem!important;line-height:1.42!important;overflow-wrap:anywhere!important}
+
+body[data-page="join"] .reader-two{margin-top:16px!important;gap:16px!important}
+body[data-page="join"] .reader-two .reader-panel{display:flex!important;min-height:170px!important;flex-direction:column!important;padding:21px!important;overflow:hidden!important}
 body[data-page="join"] .reader-two .reader-panel h2{margin:.2em 0 .35em;font-size:1.55rem!important;line-height:1.08}
 body[data-page="join"] .reader-two .reader-panel p{margin-bottom:14px;color:#4c6064;line-height:1.45}
+body[data-page="join"] .reader-two .reader-panel .button,body[data-page="join"] .reader-two .reader-panel .reader-link{align-self:flex-start;margin-top:auto!important}
 
 @media(max-width:940px){
   body[data-page="join"] .page-hero .wrap{grid-template-columns:1fr;padding-bottom:54px}
@@ -44,8 +64,12 @@ body[data-page="join"] .reader-two .reader-panel p{margin-bottom:14px;color:#4c6
   body[data-page="join"] .join-brief-title{margin-top:28px}
   body[data-page="join"] .join-brief-title strong{font-size:3rem}
   body[data-page="join"] .join-conversion-copy{padding:24px 20px 22px}
-  body[data-page="join"] .join-benefits{grid-template-columns:1fr}
-  body[data-page="join"] .join-benefits div{min-height:0}
+  body[data-page="join"] .join-email-form{grid-template-columns:1fr!important}
+  body[data-page="join"] .join-email-label{align-items:flex-start;flex-direction:column;gap:4px}
+  body[data-page="join"] .join-email-label small{text-align:left}
+  body[data-page="join"] .join-email-form input,body[data-page="join"] .join-email-form .button{grid-column:1!important;width:100%!important}
+  body[data-page="join"] .join-benefits{grid-template-columns:1fr!important}
+  body[data-page="join"] .join-benefits div{min-height:0!important}
   body[data-page="join"] .reader-two{grid-template-columns:1fr}
-  body[data-page="join"] .reader-two .reader-panel{min-height:0}
+  body[data-page="join"] .reader-two .reader-panel{min-height:0!important}
 }
