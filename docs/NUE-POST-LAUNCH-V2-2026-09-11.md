@@ -20,6 +20,7 @@ Implement the highest-value improvements identified immediately after the NUE we
 8. The homepage retains “What’s good around SK8?” but tests a clearer first-screen utility promise beneath it.
 9. Food & Drink and Local History gain recognisably local rights-cleared photography with visible credit and useful alt text.
 10. The launch-era `nue-preview.css` name is retired in favour of production `nue.css`, and the Worker-first API architecture is documented with compatibility parity checks.
+11. Progressive novelty is now a standing NUE rule: likely next-step pages should reward the click with meaningfully new featured content, imagery or context instead of repeating the same editorial payload from the previous page. See `docs/NUE-RULES.md`.
 
 ## Deliberate experiments
 
