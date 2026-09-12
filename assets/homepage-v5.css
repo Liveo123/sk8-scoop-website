@@ -11,6 +11,11 @@ body.reader-home.homepage-v3 .home-resource-visual.is-contain img{width:auto!imp
 body.reader-home.homepage-v3 .home-resource-grid .home-resource-card:nth-child(2) .home-resource-visual img{max-width:70%!important;max-height:122px!important}
 body.reader-home.homepage-v3 .home-resource-grid .home-resource-card:nth-child(3) .home-resource-visual img{max-width:82%!important;max-height:112px!important}
 
+/* Keep the Discover label out of the Gatley Carrs artwork. The poster has meaningful copy in its top-left corner. */
+body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(3) .dicm-visual{display:grid!important;grid-template-rows:40px minmax(0,1fr)!important;padding:0!important;background:#f7faf8!important}
+body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(3) .dicm-art{grid-row:2!important;width:100%!important;height:100%!important;min-height:0!important;padding:6px 12px 12px!important;box-sizing:border-box!important;object-fit:contain!important;background:#f7faf8!important}
+body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(3) .dicm-mode-label{position:static!important;grid-row:1!important;align-self:center!important;justify-self:start!important;margin:0 0 0 13px!important;box-shadow:none!important}
+
 /* Participation cards should feel deliberate rather than like tiny leftovers. */
 body.reader-home.homepage-v3 .reader-action{display:grid!important;grid-template-columns:38px minmax(0,1fr)!important;align-items:start!important;min-height:142px!important}
 body.reader-home.homepage-v3 .reader-action>div{display:flex;min-height:100%;flex-direction:column}
@@ -24,4 +29,5 @@ body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"] .
 @media(max-width:680px){
   body.reader-home.homepage-v3 .reader-action{min-height:0!important}
   body.reader-home.homepage-v3 .home-resource-visual.is-contain img{max-height:108px!important}
+  body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(3) .dicm-visual{grid-template-rows:38px minmax(0,1fr)!important}
 }
