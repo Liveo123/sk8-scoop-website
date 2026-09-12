@@ -12,18 +12,6 @@
     document.head.appendChild(link);
   };
 
-  const iconSvg = key => {
-    const icons = {
-      food: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 7v14M20 7v14M14 14h6M17 21v20M31 7v34M31 7c5 5 6 12 2 17h-2"/></svg>',
-      family: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="17" cy="15" r="5"/><circle cx="32" cy="17" r="4"/><path d="M8 39c1-9 5-14 10-14s9 5 10 14M25 39c1-7 4-11 8-11 4 0 7 4 8 11"/></svg>',
-      outdoors: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 38 19 17l7 10 5-7 11 18H6Z"/><path d="M19 17 23 9l5 8"/></svg>',
-      history: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 12h23a6 6 0 0 1 6 6v21H16a6 6 0 0 1-6-6V12Z"/><path d="M16 12v27M21 19h12M21 25h12M21 31h8"/></svg>',
-      planning: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 8h20l8 8v24H10V8Z"/><path d="M30 8v9h8M16 24h16M16 30h12"/><path d="m17 17 3 3 6-7"/></svg>',
-      updates: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="m15 24 6 6 12-14"/></svg>'
-    };
-    return icons[key] || icons.updates;
-  };
-
   const storyGraphicSvg = key => {
     const graphics = {
       planning: '<svg viewBox="0 0 320 180" aria-hidden="true" focusable="false" style="position:absolute;inset:0;width:100%;height:100%;display:block"><rect width="320" height="180" fill="#eef7f5"/><path d="M-15 130C55 100 72 70 142 68s87 44 193 5" fill="none" stroke="#bfd9d4" stroke-width="18"/><path d="M-10 136C58 105 82 80 146 78s88 38 190 8" fill="none" stroke="#fff" stroke-width="7"/><path d="M36 24v132M105 10v156M185 18v143M265 12v150M10 48h295M18 112h280" stroke="#d7e7e3" stroke-width="2"/><circle cx="242" cy="58" r="34" fill="#f8791b"/><circle cx="242" cy="58" r="28" fill="#fff"/><text x="242" y="68" text-anchor="middle" font-size="30" font-family="Arial,sans-serif" font-weight="900" fill="#073f48">20</text><circle cx="94" cy="102" r="8" fill="#0f6470"/><circle cx="168" cy="84" r="6" fill="#d6ea00"/><path d="M94 102l74-18 74-26" stroke="#0f6470" stroke-width="3" stroke-dasharray="6 6" fill="none"/></svg>',
@@ -152,14 +140,15 @@
 
     (data.explore || []).forEach(item => {
       const isOpen = item.status === 'OPEN' && item.href;
+      const hasPhoto = item.visual === 'photo' && item.image;
       const node = document.createElement(isOpen ? 'a' : 'div');
       node.className = `reader-explore-tile${isOpen ? '' : ' is-soon'}`;
       if (isOpen) node.href = item.href;
 
       const visual = document.createElement('span');
-      visual.className = `reader-explore-visual ${item.visual === 'photo' && item.image ? 'reader-explore-photo' : 'reader-explore-icon'}`;
+      visual.className = `reader-explore-visual ${hasPhoto ? 'reader-explore-photo' : 'reader-explore-editorial-fallback'}`;
       visual.setAttribute('aria-hidden', 'true');
-      if (item.visual === 'photo' && item.image) {
+      if (hasPhoto) {
         if (item.fit === 'contain') {
           visual.classList.add('is-guide-logo');
           visual.style.backgroundImage = `url("${item.image}")`;
@@ -171,7 +160,14 @@
         }
         visual.style.backgroundPosition = item.position || 'center';
       } else {
-        visual.innerHTML = iconSvg(item.icon);
+        visual.textContent = 'SK8';
+        visual.style.display = 'grid';
+        visual.style.placeItems = 'center';
+        visual.style.background = '#073f48';
+        visual.style.color = '#d6ea00';
+        visual.style.fontSize = '1.15rem';
+        visual.style.fontWeight = '950';
+        visual.style.letterSpacing = '.12em';
       }
 
       const copy = document.createElement('span');
