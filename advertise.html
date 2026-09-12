@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/advertise-v2.css">
   <link rel="stylesheet" href="assets/advertise-v3.css">
   <link rel="stylesheet" href="assets/advertise-v4.css">
+  <link rel="stylesheet" href="assets/advertise-v5.css">
   <link rel="icon" href="/favicon.ico">
 </head>
 <body class="v7 advertiser-page" data-page="advertise">
@@ -98,6 +99,31 @@
   </div>
 </section>
 
+<section class="section white" id="campaign-enquiry">
+  <div class="wrap enquiry-grid">
+    <div class="ad-enquiry-guide"><div class="eyebrow">Tell us the goal</div><h2>You do not need a media brief.</h2><p>Send the useful message, the action you want local readers to take, and when it matters. SK8 Scoop can recommend TEST, GROW or a suitable WEBSITE placement.</p><div class="ad-before-form"><span>BEFORE YOU START</span><ol><li>Know what you want a reader to do.</li><li>Have the useful facts, date or offer to hand.</li><li>Have a website, booking page or social link ready.</li><li>Tell us roughly when the campaign matters.</li></ol></div></div>
+
+    <form class="form-card premium-form" action="/api/advertiser-enquiry" method="post" data-api-form data-form-kind="advertiser" data-success-event="advertising_enquiry_completed">
+      <div class="ad-form-heading"><div><div class="eyebrow">Campaign enquiry</div><h2>Advertise with SK8 Scoop</h2></div><span>ABOUT 2 MINUTES</span></div>
+      <p class="form-intro">TEST £40, GROW £90, or WEBSITE pricing agreed by placement and duration. Payment is normally due only after scope and timing are agreed, and before the campaign starts.</p>
+      <div class="field-grid"><label>Business name<input name="business_name" required></label><label>Your name<input name="contact_name" autocomplete="name" required></label></div>
+      <div class="field-grid"><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Phone <small>(optional)</small><input name="phone" autocomplete="tel"></label></div>
+      <div class="field-grid"><label>Business type <small>(optional)</small><input name="business_type" placeholder="e.g. café, class, local service"></label><label>Main area <small>(optional)</small><input name="area" placeholder="e.g. Gatley"></label></div>
+      <label>Website, booking page or social profile<input type="url" name="website" placeholder="https://" required></label>
+      <fieldset><legend>Where should we start?</legend>
+        <label class="checkbox-row"><input type="radio" name="package" value="temp_test" checked required><span><strong>TEST · £40</strong><br>One sponsored newsletter placement, one objective, one main action.</span></label>
+        <label class="checkbox-row"><input type="radio" name="package" value="temp_grow" required><span><strong>GROW · £90</strong><br>Newsletter + Free & Cheap Guide when the Guide is a genuine fit.</span></label>
+        <label class="checkbox-row"><input type="radio" name="package" value="temp_website" required><span><strong>WEBSITE · price by scope</strong><br>A clearly labelled placement on a suitable SK8Scoop.com page, with duration agreed before booking.</span></label>
+      </fieldset>
+      <label>Preferred month<input type="month" name="preferred_date" required></label>
+      <label>What would you like local readers to do?<textarea name="advert_copy" required placeholder="For example: book a table, request a quote, visit this weekend, use an offer or register for an event"></textarea></label>
+      <input type="hidden" name="image_link" value=""><input type="hidden" name="invoice_details" value="">
+      <label class="checkbox-row"><input type="checkbox" name="terms_accepted" value="yes" required><span>I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not guarantee results or favourable editorial coverage.</span></label>
+      <button class="button wide-button" type="submit">Send advertising enquiry</button><div class="status-box" data-form-status aria-live="polite"></div><p class="fine">Prefer email? <a href="mailto:contact@sk8scoop.com">contact@sk8scoop.com</a></p>
+    </form>
+  </div>
+</section>
+
 <section class="section soft-teal" id="how-it-works">
   <div class="wrap"><div class="section-kicker-row"><div><div class="eyebrow">How a campaign works</div><h2>Four small decisions. No media-planning maze.</h2></div><p>Keep the objective clear, make the commercial status obvious and learn from what readers actually do next.</p></div>
     <div class="ad-process-grid"><article><span>01</span><h3>Tell us the outcome</h3><p>Book, visit, enquire, buy, register, claim or simply build useful local awareness.</p></article><article><span>02</span><h3>SK8 shapes the placement</h3><p>We turn the useful facts into concise copy and a clear action, then recommend the smallest sensible route.</p></article><article><span>03</span><h3>You approve it</h3><p>You see the wording, commercial label, page or surface and primary action before anything runs.</p></article><article><span>04</span><h3>Run, review, decide</h3><p>Use the available evidence to repeat, change, stop or test a different surface.</p></article></div>
@@ -128,31 +154,6 @@
       <details><summary>Will the campaign renew automatically?</summary><p>No. TEST and GROW do not automatically renew. Website duration is agreed in advance. The point is to review the evidence before deciding what happens next.</p></details>
       <details><summary>Can I buy exclusivity or a sponsorship?</summary><p>Not as standard inventory. If a genuinely useful sponsorship idea exists, it can be discussed separately rather than implied as an off-the-shelf product.</p></details>
     </div>
-  </div>
-</section>
-
-<section class="section white" id="campaign-enquiry">
-  <div class="wrap enquiry-grid">
-    <div class="ad-enquiry-guide"><div class="eyebrow">Tell us the goal</div><h2>You do not need a media brief.</h2><p>Send the useful message, the action you want local readers to take, and when it matters. SK8 Scoop can recommend TEST, GROW or a suitable WEBSITE placement.</p><div class="ad-before-form"><span>BEFORE YOU START</span><ol><li>Know what you want a reader to do.</li><li>Have the useful facts, date or offer to hand.</li><li>Have a website, booking page or social link ready.</li><li>Tell us roughly when the campaign matters.</li></ol></div></div>
-
-    <form class="form-card premium-form" action="/api/advertiser-enquiry" method="post" data-api-form data-form-kind="advertiser" data-success-event="advertising_enquiry_completed">
-      <div class="ad-form-heading"><div><div class="eyebrow">Campaign enquiry</div><h2>Advertise with SK8 Scoop</h2></div><span>ABOUT 2 MINUTES</span></div>
-      <p class="form-intro">TEST £40, GROW £90, or WEBSITE pricing agreed by placement and duration. Payment is normally due only after scope and timing are agreed, and before the campaign starts.</p>
-      <div class="field-grid"><label>Business name<input name="business_name" required></label><label>Your name<input name="contact_name" autocomplete="name" required></label></div>
-      <div class="field-grid"><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Phone <small>(optional)</small><input name="phone" autocomplete="tel"></label></div>
-      <div class="field-grid"><label>Business type <small>(optional)</small><input name="business_type" placeholder="e.g. café, class, local service"></label><label>Main area <small>(optional)</small><input name="area" placeholder="e.g. Gatley"></label></div>
-      <label>Website, booking page or social profile<input type="url" name="website" placeholder="https://" required></label>
-      <fieldset><legend>Where should we start?</legend>
-        <label class="checkbox-row"><input type="radio" name="package" value="temp_test" checked required><span><strong>TEST · £40</strong><br>One sponsored newsletter placement, one objective, one main action.</span></label>
-        <label class="checkbox-row"><input type="radio" name="package" value="temp_grow" required><span><strong>GROW · £90</strong><br>Newsletter + Free & Cheap Guide when the Guide is a genuine fit.</span></label>
-        <label class="checkbox-row"><input type="radio" name="package" value="temp_website" required><span><strong>WEBSITE · price by scope</strong><br>A clearly labelled placement on a suitable SK8Scoop.com page, with duration agreed before booking.</span></label>
-      </fieldset>
-      <label>Preferred month<input type="month" name="preferred_date" required></label>
-      <label>What would you like local readers to do?<textarea name="advert_copy" required placeholder="For example: book a table, request a quote, visit this weekend, use an offer or register for an event"></textarea></label>
-      <input type="hidden" name="image_link" value=""><input type="hidden" name="invoice_details" value="">
-      <label class="checkbox-row"><input type="checkbox" name="terms_accepted" value="yes" required><span>I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not guarantee results or favourable editorial coverage.</span></label>
-      <button class="button wide-button" type="submit">Send advertising enquiry</button><div class="status-box" data-form-status aria-live="polite"></div><p class="fine">Prefer email? <a href="mailto:contact@sk8scoop.com">contact@sk8scoop.com</a></p>
-    </form>
   </div>
 </section>
 </main>
