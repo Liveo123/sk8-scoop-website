@@ -55,15 +55,18 @@ contains('index.html','Things to do, useful local updates and money-saving ideas
 // Current advertiser offer and backend contract.
 contains('advertise.html','TEST · £40');
 contains('advertise.html','GROW · £90');
+contains('advertise.html','WEBSITE · price by scope');
 contains('advertise.html','value="temp_test"');
 contains('advertise.html','value="temp_grow"');
-contains('advertise.html','data-experiment="advertiser-goal-first-v2"');
+contains('advertise.html','value="temp_website"');
+contains('advertise.html','data-experiment="advertiser-goal-first-v1"');
 excludes('advertise.html','from £35');
 excludes('advertise.html','Placements start from £35');
 contains('worker.js',"'temp_test'");
 contains('worker.js',"'temp_grow'");
 contains('functions/api/advertiser-enquiry.js',"'temp_test'");
 contains('functions/api/advertiser-enquiry.js',"'temp_grow'");
+contains('assets/advertise.js',"websiteInput.value = 'bespoke'");
 
 // Public input form contracts, checked without creating production records.
 contains('submit/index.html','action="/api/reader-submission"');
