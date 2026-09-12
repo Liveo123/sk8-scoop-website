@@ -1,46 +1,39 @@
 /* Final preview QA fixes. Kept separate so late-stage corrections are easy to audit and remove. */
 
-/* AROUND SK8: explicit raster DICM image, no SVG or CSS-drawn substitute. */
-body[data-page="around-sk8"] .around-dicm-board{
-  position:relative!important;
-  display:block!important;
-  min-height:0!important;
-  aspect-ratio:4/3!important;
-  margin:0!important;
-  padding:0!important;
-  overflow:hidden!important;
-  border:1px solid #cfdad5!important;
-  border-radius:22px!important;
-  background:#f7f4e8!important;
-  box-shadow:0 18px 38px rgba(19,45,49,.11)!important;
-}
-body[data-page="around-sk8"] .around-dicm-board:before,
-body[data-page="around-sk8"] .around-dicm-board:after{display:none!important;content:none!important}
-body[data-page="around-sk8"] .around-dicm-board>.around-dicm-image{
-  display:block!important;
-  width:100%!important;
-  height:100%!important;
-  max-width:none!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  background:#f7f4e8!important;
-}
-body[data-page="around-sk8"] .around-dicm-board>.around-dicm-caption{
-  display:inline-flex!important;
-  position:absolute!important;
-  left:16px!important;
-  bottom:16px!important;
-  z-index:3!important;
-  margin:0!important;
-  padding:8px 11px!important;
-  border-radius:8px!important;
-  background:#073f48!important;
-  color:#fff!important;
-  box-shadow:0 7px 16px rgba(7,63,72,.18)!important;
-  font-size:.62rem!important;
-  font-weight:900!important;
-  letter-spacing:.09em!important;
-}
+/* AROUND SK8: use the visible editorial field-map HTML, not the unreliable raster board. */
+body[data-page="around-sk8"] .around-dicm-board{display:none!important}
+body[data-page="around-sk8"] .around-map{display:block!important}
+body[data-page="around-sk8"] .around-locality{position:absolute;z-index:1;padding:5px 8px;border:1px solid rgba(7,63,72,.12);border-radius:7px;background:rgba(255,253,249,.91);color:#35575c;font-size:.58rem;font-weight:900;letter-spacing:.1em;box-shadow:0 5px 12px rgba(19,45,49,.07)}
+body[data-page="around-sk8"] .locality-cheadle{left:9%;bottom:18%}
+body[data-page="around-sk8"] .locality-hulme{left:37%;top:13%}
+body[data-page="around-sk8"] .locality-gatley{right:11%;top:39%}
+body[data-page="around-sk8"] .locality-heald{right:7%;bottom:14%}
+body[data-page="around-sk8"] .around-story-section{padding-top:40px;padding-bottom:42px}
+body[data-page="around-sk8"] .around-story-head{align-items:end}
+body[data-page="around-sk8"] .around-story-head>div{max-width:760px}
+body[data-page="around-sk8"] .around-story-intro{max-width:760px;margin:9px 0 0;color:#53666a;line-height:1.55}
+body[data-page="around-sk8"] .around-story-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);gap:18px;align-items:stretch}
+body[data-page="around-sk8"] .around-story-lead,
+body[data-page="around-sk8"] .around-story-compact{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 10px 25px rgba(19,45,49,.065)}
+body[data-page="around-sk8"] .around-story-lead{display:grid;grid-template-rows:300px 1fr}
+body[data-page="around-sk8"] .around-story-stack{display:grid;gap:18px}
+body[data-page="around-sk8"] .around-story-compact{display:grid;grid-template-columns:180px 1fr;min-height:230px}
+body[data-page="around-sk8"] .around-story-visual{position:relative;margin:0;overflow:hidden;background:#f3f7f5}
+body[data-page="around-sk8"] .around-story-visual img{width:100%;height:100%;display:block;object-fit:cover}
+body[data-page="around-sk8"] .around-story-visual.contain-visual{padding:12px;background:#f5f2e8}
+body[data-page="around-sk8"] .around-story-visual.contain-visual img{object-fit:contain;background:#fff;border-radius:10px}
+body[data-page="around-sk8"] .around-story-visual figcaption{position:absolute;left:12px;right:12px;bottom:10px;margin:0;padding:6px 8px;border-radius:7px;background:rgba(7,63,72,.88);color:#fff;font-size:.58rem;line-height:1.25;font-weight:800}
+body[data-page="around-sk8"] .around-story-copy{padding:20px}
+body[data-page="around-sk8"] .around-story-copy h3{margin:8px 0 8px;font-size:1.45rem;line-height:1.08}
+body[data-page="around-sk8"] .around-story-compact .around-story-copy{padding:17px 18px}
+body[data-page="around-sk8"] .around-story-compact .around-story-copy h3{font-size:1.18rem}
+body[data-page="around-sk8"] .around-story-copy p{margin:0 0 12px;color:#4e6266;line-height:1.5}
+body[data-page="around-sk8"] .around-story-meta{font-size:.79rem;font-weight:800;color:#38575d!important}
+body[data-page="around-sk8"] .around-story-label{display:inline-flex;padding:6px 9px;border-radius:999px;color:#fff;font-size:.62rem;font-weight:900;letter-spacing:.09em}
+body[data-page="around-sk8"] .know-label{background:#0f6470}
+body[data-page="around-sk8"] .do-label{background:#1b7149}
+body[data-page="around-sk8"] .discover-label{background:#9c5c00}
+body[data-page="around-sk8"] .around-story-copy .reader-link{display:inline-flex;margin-top:4px}
 
 /* GUIDES: let the proper guide artwork breathe. Remove slogan overlays that covered the logos. */
 body[data-page="guides"] .guide-visual.guide-free:before,
@@ -58,85 +51,27 @@ body[data-page="guides"] .guide-summer .guide-status{top:16px!important;left:16p
 body[data-page="business-submissions"] .submission-sidebar,
 body[data-page="business-submissions"] .policy-panel,
 body[data-page="business-submissions"] .policy-panel.sticky-panel{position:static!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;inset:auto!important;transform:none!important;align-self:start!important}
-
-/* SUBMISSION TYPE CARDS: aligned editorial cards. The prompt strip belongs at the bottom, never over body text. */
-body[data-page="business-submissions"] .submission-types{
-  align-items:stretch!important;
-  gap:14px!important;
-}
-body[data-page="business-submissions"] .submission-types article{
-  position:relative!important;
-  display:flex!important;
-  flex-direction:column!important;
-  min-height:282px!important;
-  height:100%!important;
-  padding:22px 20px 18px!important;
-  overflow:hidden!important;
-  border-radius:16px!important;
-  box-shadow:0 10px 24px rgba(19,45,49,.065)!important;
-}
-body[data-page="business-submissions"] .submission-types article>span{
-  position:relative!important;
-  z-index:2!important;
-  align-self:flex-start!important;
-  margin:0 0 20px!important;
-}
-body[data-page="business-submissions"] .submission-types article h3{
-  position:relative!important;
-  z-index:2!important;
-  min-height:2.25em!important;
-  margin:0 0 10px!important;
-  max-width:14ch!important;
-  font-size:1.34rem!important;
-  line-height:1.06!important;
-}
-body[data-page="business-submissions"] .submission-types article p{
-  position:relative!important;
-  z-index:2!important;
-  min-height:5.8em!important;
-  margin:0!important;
-  max-width:none!important;
-  color:#506267!important;
-  line-height:1.45!important;
-}
-body[data-page="business-submissions"] .submission-types article:after{
-  position:static!important;
-  display:block!important;
-  width:100%!important;
-  box-sizing:border-box!important;
-  margin-top:auto!important;
-  padding:9px 10px!important;
-  border:1px solid rgba(7,63,72,.12)!important;
-  border-radius:9px!important;
-  background:rgba(255,255,255,.9)!important;
-  color:#365257!important;
-  white-space:normal!important;
-  box-shadow:none!important;
-  font-size:.59rem!important;
-  font-weight:900!important;
-  line-height:1.28!important;
-  letter-spacing:.075em!important;
-}
-body[data-page="business-submissions"] .submission-types article:before{
-  right:10px!important;
-  bottom:-18px!important;
-  font-size:4.8rem!important;
-  opacity:.55!important;
-}
+body[data-page="business-submissions"] .submission-types{align-items:stretch!important;gap:14px!important}
+body[data-page="business-submissions"] .submission-types article{position:relative!important;display:flex!important;flex-direction:column!important;min-height:282px!important;height:100%!important;padding:22px 20px 18px!important;overflow:hidden!important;border-radius:16px!important;box-shadow:0 10px 24px rgba(19,45,49,.065)!important}
+body[data-page="business-submissions"] .submission-types article>span{position:relative!important;z-index:2!important;align-self:flex-start!important;margin:0 0 20px!important}
+body[data-page="business-submissions"] .submission-types article h3{position:relative!important;z-index:2!important;min-height:2.25em!important;margin:0 0 10px!important;max-width:14ch!important;font-size:1.34rem!important;line-height:1.06!important}
+body[data-page="business-submissions"] .submission-types article p{position:relative!important;z-index:2!important;min-height:5.8em!important;margin:0!important;max-width:none!important;color:#506267!important;line-height:1.45!important}
+body[data-page="business-submissions"] .submission-types article:after{position:static!important;display:block!important;width:100%!important;box-sizing:border-box!important;margin-top:auto!important;padding:9px 10px!important;border:1px solid rgba(7,63,72,.12)!important;border-radius:9px!important;background:rgba(255,255,255,.9)!important;color:#365257!important;white-space:normal!important;box-shadow:none!important;font-size:.59rem!important;font-weight:900!important;line-height:1.28!important;letter-spacing:.075em!important}
+body[data-page="business-submissions"] .submission-types article:before{right:10px!important;bottom:-18px!important;font-size:4.8rem!important;opacity:.55!important}
 
 @media(max-width:900px){
+  body[data-page="around-sk8"] .around-story-layout{grid-template-columns:1fr}
+  body[data-page="around-sk8"] .around-story-lead{grid-template-rows:260px 1fr}
   body[data-page="business-submissions"] .submission-types{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 @media(max-width:700px){
-  body[data-page="around-sk8"] .around-dicm-board{aspect-ratio:4/3!important}
-  body[data-page="around-sk8"] .around-dicm-board>.around-dicm-caption{left:10px!important;bottom:10px!important;font-size:.55rem!important}
-  body[data-page="guides"] .guide-visual.guide-free,
-  body[data-page="guides"] .guide-visual.guide-summer{min-height:220px!important;padding:40px 18px 22px!important}
-  body[data-page="guides"] .guide-free img{max-width:72%!important;max-height:150px!important}
-  body[data-page="guides"] .guide-summer img{max-width:82%!important;max-height:156px!important}
+  body[data-page="around-sk8"] .around-story-compact{grid-template-columns:1fr}
+  body[data-page="around-sk8"] .around-story-compact .around-story-visual{height:210px}
+  body[data-page="around-sk8"] .around-story-lead{grid-template-rows:230px 1fr}
   body[data-page="business-submissions"] .submission-types{grid-template-columns:1fr!important}
-  body[data-page="business-submissions"] .submission-types article{min-height:0!important}
-  body[data-page="business-submissions"] .submission-types article h3,
-  body[data-page="business-submissions"] .submission-types article p{min-height:0!important}
-  body[data-page="business-submissions"] .submission-types article:after{margin-top:18px!important}
+}
+@media(max-width:560px){
+  body[data-page="around-sk8"] .around-locality{font-size:.5rem;padding:4px 6px}
+  body[data-page="around-sk8"] .around-story-copy{padding:17px}
+  body[data-page="around-sk8"] .around-story-copy h3{font-size:1.25rem}
 }
