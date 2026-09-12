@@ -57,7 +57,7 @@ contains('advertise.html','TEST · £40');
 contains('advertise.html','GROW · £90');
 contains('advertise.html','value="temp_test"');
 contains('advertise.html','value="temp_grow"');
-contains('advertise.html','data-experiment="advertiser-goal-first-v1"');
+contains('advertise.html','data-experiment="advertiser-goal-first-v2"');
 excludes('advertise.html','from £35');
 excludes('advertise.html','Placements start from £35');
 contains('worker.js',"'temp_test'");
