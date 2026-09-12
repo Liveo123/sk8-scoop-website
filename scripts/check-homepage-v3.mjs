@@ -46,10 +46,13 @@ requireText(css, '.reader-story-body>.reader-link{margin-top:auto', 'story CTA a
 requireText(v4, '.reader-worth .reader-meta', 'story meta treatment');
 requireText(v4, 'height:224px!important', 'matched story visual height');
 
-// 5. Explore is a deliberate 4 x 2 desktop grid with mobile fallbacks.
+// 5. Explore is a deliberate 4 x 2 desktop grid with mobile fallbacks and no generic icon fallback.
 requireText(v4, 'grid-template-columns:repeat(4,minmax(0,1fr))!important', 'four-column desktop explore');
 requireText(v4, 'grid-template-columns:repeat(2,minmax(0,1fr))!important', 'two-column mobile explore');
 requireText(v4, '@media(max-width:420px)', 'narrow-phone fallback');
+requireText(js, 'reader-explore-editorial-fallback', 'editorial Explore fallback');
+rejectText(js, 'const iconSvg =', 'generic Explore SVG fallback helper');
+rejectText(js, 'reader-explore-icon', 'generic Explore icon fallback class');
 
 // 6. Latest issue and guides are one balanced resource shelf.
 requireText(home, 'home-resource-grid', 'resource shelf');
