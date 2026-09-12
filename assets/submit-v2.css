@@ -1,0 +1,45 @@
+/* Submit V2: compact, obvious routing with no labels crossing decorative rules. */
+body[data-page="submit"] .page-hero{padding:32px 0 28px;background:linear-gradient(120deg,#fffaf0 0%,#fff 58%,#eef7f5 100%)}
+body[data-page="submit"] .page-hero h1{max-width:14ch;margin:.14em 0 .22em;font-size:clamp(2.8rem,4.8vw,4.15rem);line-height:.95;letter-spacing:-.045em}
+body[data-page="submit"] .page-hero .hero-lead{max-width:650px;margin:0;color:#40585d;line-height:1.5}
+body[data-page="submit"] .reader-content{padding:24px 0 46px}
+body[data-page="submit"] .reader-form-wrap{grid-template-columns:minmax(0,1.18fr) minmax(300px,.68fr);gap:20px;align-items:start}
+
+body[data-page="submit"] .reader-form{padding:28px;border:1px solid #d4dfdb;border-top:0;border-radius:18px;background:#fff;box-shadow:0 12px 28px rgba(19,45,49,.06);overflow:hidden}
+body[data-page="submit"] .reader-form:before{position:static;display:inline-flex;margin:0 0 16px;padding:6px 9px;border:0;border-radius:999px;background:#073f48;color:#fff;font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+body[data-page="submit"] .reader-form h2{max-width:none!important;margin:.1em 0 .28em;font-size:clamp(1.8rem,3vw,2.3rem)!important;line-height:1.04}
+body[data-page="submit"] .reader-form>.fine{max-width:620px;margin-bottom:20px;color:#53666a;line-height:1.45}
+body[data-page="submit"] .reader-form label{display:grid;gap:7px;margin-top:16px;color:#173b40;font-weight:800}
+body[data-page="submit"] .reader-form input,
+body[data-page="submit"] .reader-form select,
+body[data-page="submit"] .reader-form textarea{width:100%;box-sizing:border-box;border:1.5px solid #bfd2cd;border-radius:9px;background:#fff;color:#173b40;font:inherit}
+body[data-page="submit"] .reader-form input,
+body[data-page="submit"] .reader-form select{min-height:50px;padding:0 13px}
+body[data-page="submit"] .reader-form textarea{min-height:150px;padding:12px 13px;resize:vertical}
+body[data-page="submit"] .reader-form input:focus,
+body[data-page="submit"] .reader-form select:focus,
+body[data-page="submit"] .reader-form textarea:focus{outline:3px solid rgba(248,121,27,.2);outline-offset:2px;border-color:#f8791b}
+body[data-page="submit"] .reader-form .checkbox-row{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;margin-top:20px;padding:14px;border:1px solid #d7e2de;border-radius:10px;background:#f7faf8;font-weight:700;line-height:1.4}
+body[data-page="submit"] .reader-form .checkbox-row input{width:20px;height:20px;min-height:0;margin:1px 0 0;accent-color:#0f6470}
+body[data-page="submit"] .reader-form .button{margin-top:20px;min-width:185px}
+
+body[data-page="submit"] .reader-aside{padding:22px;border:1px solid #d4dfdb;border-radius:18px;background:linear-gradient(160deg,#eef7f5,#fff9ed);box-shadow:0 10px 24px rgba(19,45,49,.05)}
+body[data-page="submit"] .reader-aside>.eyebrow{margin-bottom:10px}
+body[data-page="submit"] .reader-aside h2{margin:18px 0 7px;padding:16px 0 0;border-top:1px solid rgba(15,100,112,.16);font-size:1.25rem!important;line-height:1.1}
+body[data-page="submit"] .reader-aside h2:before{display:inline-flex;margin:0 0 8px;padding:4px 7px;border-radius:999px;background:#fff;color:#a45512;font-size:.58rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+body[data-page="submit"] .reader-aside h2:first-of-type{margin-top:8px}
+body[data-page="submit"] .reader-aside p{margin:0 0 10px;color:#4a6064;line-height:1.48}
+body[data-page="submit"] .reader-aside .reader-link{display:inline-flex;margin-bottom:6px;font-weight:900}
+
+@media(max-width:900px){
+  body[data-page="submit"] .reader-form-wrap{grid-template-columns:1fr}
+  body[data-page="submit"] .reader-aside{max-width:none}
+}
+@media(max-width:650px){
+  body[data-page="submit"] .page-hero{padding:27px 0 23px}
+  body[data-page="submit"] .page-hero h1{font-size:clamp(2.55rem,12.5vw,3.7rem)}
+  body[data-page="submit"] .reader-content{padding-top:18px}
+  body[data-page="submit"] .reader-form{padding:22px 18px}
+  body[data-page="submit"] .reader-aside{padding:20px 18px}
+  body[data-page="submit"] .reader-form .button{width:100%}
+}
