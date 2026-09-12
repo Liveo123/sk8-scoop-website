@@ -1,0 +1,27 @@
+/* Homepage V5: screenshot-led finishing pass for NUE Build v1.1. */
+
+/* Tighten the conversion cluster so the reassurance, proof and quick routes read as one unit. */
+body.reader-home.homepage-v3 .home-signup-note{margin:5px 0 7px!important;font-size:.76rem!important;line-height:1.35!important}
+body.reader-home.homepage-v3 .reader-proof{margin-top:0!important;gap:7px 8px!important}
+body.reader-home.homepage-v3 .home-hero-subroutes{margin-top:10px!important}
+
+/* Let guide artwork breathe instead of filling the full resource frame. */
+body.reader-home.homepage-v3 .home-resource-visual.is-contain{padding:8px;background:#fff}
+body.reader-home.homepage-v3 .home-resource-visual.is-contain img{width:auto!important;height:auto!important;max-width:78%!important;max-height:126px!important;padding:0!important;background:transparent!important;object-fit:contain!important}
+body.reader-home.homepage-v3 .home-resource-grid .home-resource-card:nth-child(2) .home-resource-visual img{max-width:70%!important;max-height:122px!important}
+body.reader-home.homepage-v3 .home-resource-grid .home-resource-card:nth-child(3) .home-resource-visual img{max-width:82%!important;max-height:112px!important}
+
+/* Participation cards should feel deliberate rather than like tiny leftovers. */
+body.reader-home.homepage-v3 .reader-action{display:grid!important;grid-template-columns:38px minmax(0,1fr)!important;align-items:start!important;min-height:142px!important}
+body.reader-home.homepage-v3 .reader-action>div{display:flex;min-height:100%;flex-direction:column}
+body.reader-home.homepage-v3 .reader-action .button{align-self:flex-start;margin-top:auto!important}
+
+/* The Cloudflare branch preview cannot reliably render the footer signup challenge.
+   On preview only, homepage-nue.js swaps the form for a clean route to /join/. */
+body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"]{display:flex;flex-direction:column;justify-content:center}
+body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"] .button{align-self:stretch;text-align:center}
+
+@media(max-width:680px){
+  body.reader-home.homepage-v3 .reader-action{min-height:0!important}
+  body.reader-home.homepage-v3 .home-resource-visual.is-contain img{max-height:108px!important}
+}
