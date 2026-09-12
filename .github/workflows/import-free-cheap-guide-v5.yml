@@ -10,76 +10,63 @@ permissions:
   contents: write
 
 jobs:
-  import-guide:
+  publish-guide:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Download approved Drive HTML
-        run: |
-          python -m pip install --quiet beautifulsoup4 requests
-          python - <<'PY'
-          import requests
-          from bs4 import BeautifulSoup
-          from urllib.parse import urljoin
 
-          file_id='1YDvo0tsdjEbNhYnLnVxfgDzTJONe0PQ8'
-          expected_size=22693871
-          s=requests.Session()
-          r=s.get('https://drive.google.com/uc', params={'export':'download','id':file_id}, timeout=120)
-          for attempt in range(8):
-              print('attempt', attempt+1, 'status', r.status_code, 'bytes', len(r.content), 'type', r.headers.get('content-type'), 'url', r.url)
-              r.raise_for_status()
-              if len(r.content) == expected_size:
-                  open('/tmp/guide.html','wb').write(r.content)
-                  print('Exact-size guide downloaded.')
-                  break
-              if len(r.content) > 5_000_000:
-                  open('/tmp/unexpected.bin','wb').write(r.content)
-                  raise SystemExit(f'Unexpected large response: {len(r.content)} bytes')
-              soup=BeautifulSoup(r.content, 'html.parser')
-              forms=soup.find_all('form')
-              print('forms', len(forms))
-              form=soup.find('form', id='download-form')
-              if form is None:
-                  form=next((f for f in forms if 'download' in (f.get('action') or '').lower()), None)
-              if form is None:
-                  links=[a.get('href') for a in soup.find_all('a', href=True) if 'download' in a.get('href','').lower() or 'confirm=' in a.get('href','').lower()]
-                  print('download-like links', links[:10])
-                  if links:
-                      r=s.get(urljoin(r.url, links[0]), timeout=180)
-                      continue
-                  raise SystemExit('No Google download form or download link found')
-              action=urljoin(r.url, form.get('action',''))
-              method=(form.get('method') or 'get').lower()
-              params={}
-              for inp in form.find_all('input'):
-                  name=inp.get('name')
-                  if name:
-                      params[name]=inp.get('value','')
-              print('form action', action, 'method', method, 'fields', sorted(params.keys()))
-              if method == 'post':
-                  r=s.post(action, data=params, timeout=180)
-              else:
-                  r=s.get(action, params=params, timeout=180)
-          else:
-              raise SystemExit('Exceeded Google download confirmation steps')
+      - name: Rebuild approved guide from payload
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, base64, bz2, hashlib
+
+          guide = Path('free-cheap-guide/guide/index.html')
+          current = guide.read_text(encoding='utf-8')
+
+          image_pattern = r'data:image/(?:webp|png|jpeg|jpg);base64,[A-Za-z0-9+/=]+'
+          images = re.findall(image_pattern, current)
+          if len(images) != 10:
+              raise SystemExit(f'Expected 10 embedded images, found {len(images)}')
+
+          payload_dir = Path('free-cheap-guide/publish-payload')
+          encoded = ''.join(
+              (payload_dir / f'chunk{i}.b64').read_text().strip()
+              for i in range(1, 6)
+          )
+
+          skeleton = bz2.decompress(base64.b64decode(encoded)).decode('utf-8')
+          rebuilt = skeleton
+          for i, img in enumerate(images):
+              token = f'__SK8_IMAGE_{i}__'
+              if token not in rebuilt:
+                  raise SystemExit(f'Missing image token {token}')
+              rebuilt = rebuilt.replace(token, img, 1)
+
+          if re.search(r'__SK8_IMAGE_\d+__', rebuilt):
+              raise SystemExit('Unreplaced image token remains')
+
+          guide.write_text(rebuilt, encoding='utf-8')
+          data = guide.read_bytes()
+          digest = hashlib.sha256(data).hexdigest()
+          print('bytes=', len(data))
+          print('sha256=', digest)
+
+          if len(data) != 22693871:
+              raise SystemExit('Unexpected output size')
+          if digest != '49e8090921b2d637c9cdbfb501008f821122bc5e87ab87b8127491c991f122e0':
+              raise SystemExit('Unexpected output hash')
           PY
-      - name: Verify exact approved source
+
+      - name: Commit approved guide
         run: |
-          wc -c /tmp/guide.html
-          sha256sum /tmp/guide.html
-          test "$(wc -c < /tmp/guide.html)" = "22693871"
-          echo "49e8090921b2d637c9cdbfb501008f821122bc5e87ab87b8127491c991f122e0  /tmp/guide.html" | sha256sum -c -
-      - name: Replace web guide without modifying it
-        run: |
-          cp /tmp/guide.html free-cheap-guide/guide/index.html
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add free-cheap-guide/guide/index.html
           if git diff --cached --quiet; then
-            echo "Guide already matches approved source."
+            echo "Guide already matches approved publish-ready version."
             exit 0
           fi
           git commit -m "Publish refreshed Free & Cheap Guide - 12 September 2026"
