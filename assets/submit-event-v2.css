@@ -26,7 +26,9 @@ body[data-page="submit-event"] .premium-form input:focus,
 body[data-page="submit-event"] .premium-form select:focus,
 body[data-page="submit-event"] .premium-form textarea:focus{outline:3px solid rgba(15,100,112,.14)!important;outline-offset:2px!important;border-color:#0f6470!important}
 body[data-page="submit-event"] .premium-form .field-grid{gap:14px!important}
-body[data-page="submit-event"] .premium-form .checkbox-row{font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:.84rem!important;font-weight:650!important}
+body[data-page="submit-event"] .premium-form .checkbox-row{display:grid!important;grid-template-columns:24px minmax(0,1fr)!important;gap:12px!important;align-items:start!important;margin:16px 0 0!important;padding:13px 15px!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:.84rem!important;font-weight:650!important;line-height:1.42!important}
+body[data-page="submit-event"] .premium-form .checkbox-row input[type="checkbox"]{width:21px!important;height:21px!important;margin:1px 0 0!important;padding:0!important;border-radius:4px!important;box-shadow:none!important}
+body[data-page="submit-event"] .premium-form .checkbox-row span{display:block!important;min-width:0!important;padding-top:1px!important}
 body[data-page="submit-event"] .premium-form .wide-button{width:100%!important;min-height:50px!important;margin-top:20px!important;background:#0f6470!important;color:#fff!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:.9rem!important;font-weight:800!important;letter-spacing:.01em!important;box-shadow:0 8px 18px rgba(15,100,112,.15)!important}
 
 /* Supporting panel stays visible but never follows the user down a long form. */
