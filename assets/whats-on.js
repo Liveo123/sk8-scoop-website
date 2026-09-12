@@ -183,20 +183,55 @@
   const matchesArea = event => activeArea === 'all' || String(event.area || '').trim().toLowerCase() === activeArea.toLowerCase();
   const matches = event => matchesNeed(event) && matchesArea(event);
 
+  const trackEventClick = (event, category, destination) => {
+    if (typeof window.sk8Track !== 'function') return;
+    window.sk8Track('event_detail_click', {
+      event_id: String(event.id || '').slice(0, 120),
+      event_area: String(event.area || '').slice(0, 80),
+      event_category: category.slice(0, 80),
+      destination: String(destination || '').slice(0, 40)
+    });
+  };
+
   const eventCard = event => {
     const article = document.createElement('article');
     article.className = 'reader-story event-listing-card';
+    article.dataset.featured = String(Boolean(event.featured));
 
     const category = String(event.category || 'LOCAL EVENT').trim() || 'LOCAL EVENT';
     article.dataset.category = slugifyCategory(category);
 
+    const detail = safeUrl(event.detail_url);
+    const source = safeUrl(event.booking_url || event.source_url);
     const imageUrl = safeUrl(event.image);
+    const fallbackUrl = safeUrl(event.image_fallback);
+
     if (imageUrl) {
       const visual = document.createElement('div');
       visual.className = 'reader-story-image';
-      visual.style.backgroundImage = `url("${imageUrl}")`;
+      const image = document.createElement('img');
+      image.src = imageUrl;
+      image.alt = String(event.image_alt || '');
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      if (event.image_width) image.width = Number(event.image_width);
+      if (event.image_height) image.height = Number(event.image_height);
+      if (fallbackUrl) image.addEventListener('error', () => {
+        if (image.src === fallbackUrl) return;
+        image.src = fallbackUrl;
+      }, { once: true });
+      if (detail) {
+        const mediaLink = document.createElement('a');
+        mediaLink.href = detail;
+        mediaLink.setAttribute('aria-label', `Read ${String(event.title || 'this feature')} on SK8 Scoop`);
+        mediaLink.addEventListener('click', () => trackEventClick(event, category, 'nue_detail'));
+        mediaLink.appendChild(image);
+        visual.appendChild(mediaLink);
+      } else {
+        visual.appendChild(image);
+      }
       const label = document.createElement('span');
-      label.textContent = category;
+      label.textContent = String(event.card_badge || category);
       visual.appendChild(label);
       article.appendChild(visual);
     }
@@ -207,7 +242,15 @@
     eyebrow.className = 'eyebrow';
     eyebrow.textContent = category;
     const heading = document.createElement('h3');
-    heading.textContent = String(event.title || '');
+    if (detail) {
+      const headingLink = document.createElement('a');
+      headingLink.href = detail;
+      headingLink.textContent = String(event.title || '');
+      headingLink.addEventListener('click', () => trackEventClick(event, category, 'nue_detail'));
+      heading.appendChild(headingLink);
+    } else {
+      heading.textContent = String(event.title || '');
+    }
     const when = [prettyDate(event.date), String(event.time || '').trim()].filter(Boolean).join(' · ');
     const metaText = [when, String(event.area || '').trim(), String(event.cost || '').trim()].filter(Boolean).join(' · ');
     const meta = document.createElement('p');
@@ -222,23 +265,34 @@
     if (venue.textContent) body.appendChild(venue);
     body.appendChild(description);
 
-    const source = safeUrl(event.booking_url || event.source_url);
-    if (source) {
-      const link = document.createElement('a');
-      link.className = 'reader-link';
-      link.href = source;
-      link.rel = 'noopener';
-      link.textContent = 'Check current details →';
-      link.addEventListener('click', () => {
-        if (typeof window.sk8Track === 'function') {
-          window.sk8Track('event_detail_click', {
-            event_id: String(event.id || '').slice(0, 120),
-            event_area: String(event.area || '').slice(0, 80),
-            event_category: category.slice(0, 80)
-          });
-        }
-      });
-      body.appendChild(link);
+    if (event.why_it_matters) {
+      const why = document.createElement('p');
+      why.className = 'event-why';
+      why.textContent = `Why it’s worth it: ${String(event.why_it_matters)}`;
+      body.appendChild(why);
+    }
+
+    if (detail || source) {
+      const actions = document.createElement('div');
+      actions.className = 'event-card-actions';
+      if (detail) {
+        const detailLink = document.createElement('a');
+        detailLink.className = 'button small-button';
+        detailLink.href = detail;
+        detailLink.textContent = String(event.cta_label || 'Read the quick guide →');
+        detailLink.addEventListener('click', () => trackEventClick(event, category, 'nue_detail'));
+        actions.appendChild(detailLink);
+      }
+      if (source) {
+        const sourceLink = document.createElement('a');
+        sourceLink.className = detail ? 'reader-link' : 'button small-button';
+        sourceLink.href = source;
+        sourceLink.rel = 'noopener';
+        sourceLink.textContent = detail ? 'Organiser details →' : 'Check current details →';
+        sourceLink.addEventListener('click', () => trackEventClick(event, category, 'organiser'));
+        actions.appendChild(sourceLink);
+      }
+      body.appendChild(actions);
     }
 
     article.appendChild(body);
@@ -280,6 +334,7 @@
       '@type': 'ItemList',
       name: 'Current checked events around SK8',
       itemListElement: events.map((event, index) => {
+        const detail = safeUrl(event.detail_url);
         const source = safeUrl(event.booking_url || event.source_url) || 'https://www.sk8scoop.com/whats-on/';
         const startDate = `${event.date}${event.time ? `T${event.time}:00` : ''}`;
         const item = {
@@ -293,7 +348,7 @@
             name: String(event.venue || event.area || 'SK8'),
             address: String(event.area || '')
           },
-          url: source,
+          url: detail || source,
           description: String(event.description || '')
         };
         if (isFree(event)) item.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: source, availability: 'https://schema.org/InStock' };
