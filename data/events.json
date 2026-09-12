@@ -44,7 +44,7 @@
     "booking_url":"",
     "source_url":"https://www.healthystockport.co.uk/events/details/bramhall-wellness-day",
     "verification":"OFFICIAL_CROSSCHECKED",
-    "checked":"2026-09-09",
+    "checked":"2026-09-12",
     "status":"verified"
   },
   {
@@ -60,7 +60,7 @@
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=3&datefrom=03%2F09%2F2026+00%3A00%3A00&pageSize=60",
     "verification":"OFFICIAL_CROSSCHECKED",
-    "checked":"2026-09-09",
+    "checked":"2026-09-12",
     "status":"verified"
   },
   {
@@ -76,7 +76,7 @@
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events/hatting-bites-for-heritage-open-days-12-sept-pm?date=2026-09-12",
     "verification":"OFFICIAL_CROSSCHECKED",
-    "checked":"2026-09-09",
+    "checked":"2026-09-12",
     "status":"verified"
   },
   {
@@ -92,7 +92,7 @@
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=3&datefrom=17%2F08%2F2026+00%3A00%3A00&pageSize=60",
     "verification":"OFFICIAL_DIRECTORY_ONLY",
-    "checked":"2026-09-09",
+    "checked":"2026-09-12",
     "status":"verified"
   },
   {
@@ -108,7 +108,7 @@
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=29&datefrom=15%2F03%2F2026+00%3A00%3A00",
     "verification":"OFFICIAL_CROSSCHECKED",
-    "checked":"2026-09-09",
+    "checked":"2026-09-12",
     "status":"verified"
   },
   {
@@ -124,7 +124,7 @@
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=32&datefrom=21%2F08%2F2026+00%3A00%3A00",
     "verification":"OFFICIAL_CROSSCHECKED",
-    "checked":"2026-09-09",
+    "checked":"2026-09-12",
     "status":"verified"
   },
   {
@@ -140,7 +140,7 @@
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=28&datefrom=09%2F03%2F2026+00%3A00%3A00",
     "verification":"OFFICIAL_CROSSCHECKED",
-    "checked":"2026-09-09",
+    "checked":"2026-09-12",
     "status":"verified"
   },
   {
@@ -156,7 +156,7 @@
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=28&datefrom=09%2F03%2F2026+00%3A00%3A00",
     "verification":"OFFICIAL_DIRECTORY_ONLY",
-    "checked":"2026-09-09",
+    "checked":"2026-09-12",
     "status":"verified"
   },
   {
@@ -171,8 +171,8 @@
     "description":"Street food, craft ales and live music at Stockport Market.",
     "booking_url":"",
     "source_url":"https://www.stockport.gov.uk/events?Page=7&datefrom=07%2F09%2F2026+00%3A00%3A00&pageSize=60",
-    "verification":"OFFICIAL_DIRECTORY_ONLY",
-    "checked":"2026-09-09",
+    "verification":"OFFICIAL_CROSSCHECKED",
+    "checked":"2026-09-12",
     "status":"verified"
   }
 ]
