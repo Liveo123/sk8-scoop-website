@@ -92,7 +92,7 @@ body[data-page="whats-on"] .event-check-link:hover{background:#dfeeea;transform:
 body[data-page="whats-on"] .whats-on-empty{display:grid;grid-template-columns:140px 1fr;gap:22px;align-items:center;margin-top:18px;padding:22px}
 body[data-page="whats-on"] .whats-on-empty-art{position:relative;min-height:120px;background:linear-gradient(145deg,#fff8ea,#edf6f4);border:1px solid #d7ddd8;border-radius:14px;display:grid!important;place-items:center;padding:16px;box-sizing:border-box}
 body[data-page="whats-on"] .whats-on-empty-art:before{content:"NO MATCHES";display:inline-block;padding:8px 10px;border-radius:6px;background:#073f48;color:#fff;font-size:.68rem;font-weight:900;letter-spacing:.11em;transform:rotate(-2deg);box-shadow:0 7px 16px rgba(7,63,72,.14)}
-body[data-page="whats-on"] .whats-on-empty-art:after{content:"TRY ANOTHER FILTER";position:absolute;bottom:18px;left:50%;transform:translateX(-50%);white-space:nowrap;color:#0f6470;font-size:.58rem;font-weight:900;letter-spacing:.08em}
+body[data-page="whats-on"] .whats-on-empty-art:after{content:"TRY ANOTHER\A FILTER";position:absolute;right:12px;bottom:12px;left:12px;white-space:pre-line;text-align:center;color:#0f6470;font-size:.54rem;font-weight:900;line-height:1.2;letter-spacing:.06em}
 
 /* Lower panels: compact, useful, no generic SVGs. */
 body[data-page="whats-on"] .whats-on-info-section{padding-top:38px;padding-bottom:34px}
