@@ -1,0 +1,42 @@
+[
+  {
+    "id":"newsletter",
+    "name":"SK8 Scoop newsletter",
+    "status":"available",
+    "label":"AVAILABLE NOW",
+    "role":"Regular local visibility inside the main Friday issue.",
+    "best_for":"One clear reader action such as visit, book, enquire or try.",
+    "commercial_note":"Clearly labelled paid placement; editorial remains independent.",
+    "enquiry_url":"/advertise.html#campaign-enquiry"
+  },
+  {
+    "id":"weekend-email",
+    "name":"Timely weekend email",
+    "status":"pilot",
+    "label":"PILOT / OPPORTUNISTIC",
+    "role":"A lighter, time-sensitive email when the audience and timing genuinely justify an extra send.",
+    "best_for":"Events, short-lived offers and things readers can act on immediately.",
+    "commercial_note":"Not guaranteed inventory; availability depends on editorial timing and audience fit.",
+    "enquiry_url":"/advertise.html#campaign-enquiry"
+  },
+  {
+    "id":"guides",
+    "name":"SK8 Scoop guides",
+    "status":"contextual",
+    "label":"CONTEXTUAL FIT",
+    "role":"Longer-life visibility inside useful guides when the business genuinely belongs in that reader context.",
+    "best_for":"Offers, attractions and services with durable relevance rather than a one-day promotion.",
+    "commercial_note":"Guide inclusion is not automatic; relevance and clear labelling come first.",
+    "enquiry_url":"/advertise.html#campaign-enquiry"
+  },
+  {
+    "id":"nue-website",
+    "name":"NUE website",
+    "status":"preparing",
+    "label":"BEING PREPARED",
+    "role":"Searchable local discovery surfaces that can eventually connect useful commercial messages to relevant pages and categories.",
+    "best_for":"Persistent local discovery once website advertising passes readiness and measurement checks.",
+    "commercial_note":"Not standard paid inventory yet. No website placement should be sold as guaranteed until the readiness gate is passed.",
+    "enquiry_url":"/advertise.html#campaign-enquiry"
+  }
+]
