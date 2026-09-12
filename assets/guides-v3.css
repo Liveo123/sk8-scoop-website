@@ -19,9 +19,25 @@ body[data-page="guides"] .guide-card[id]{scroll-margin-top:94px}
 body[data-page="guides"] .guide-grid{margin-top:18px}
 body[data-page="guides"] .guide-card .guide-body p{max-width:62ch}
 
+/* The proper guide artwork is the hero. Remove the old slogan overlays and split-panel treatment. */
+body.reader-page[data-page="guides"] .guide-visual.guide-free:before,
+body.reader-page[data-page="guides"] .guide-visual.guide-summer:before,
+body.reader-page[data-page="guides"] .guide-visual.guide-free:after,
+body.reader-page[data-page="guides"] .guide-visual.guide-summer:after{display:none!important;content:none!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-free,
+body.reader-page[data-page="guides"] .guide-visual.guide-summer{display:grid!important;place-items:center!important;min-height:225px!important;padding:42px 26px 24px!important;background:linear-gradient(145deg,#eef7f5,#fffaf0)!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-summer{background:linear-gradient(145deg,#fff7df,#f4faf5)!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-free img,
+body.reader-page[data-page="guides"] .guide-visual.guide-summer img{position:static!important;z-index:auto!important;width:auto!important;height:auto!important;max-width:72%!important;max-height:158px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;object-fit:contain!important}
+body.reader-page[data-page="guides"] .guide-visual.guide-summer img{max-width:78%!important;max-height:145px!important}
+body.reader-page[data-page="guides"] .guide-free .guide-status,
+body.reader-page[data-page="guides"] .guide-summer .guide-status{left:16px!important;top:16px!important;border-radius:999px!important;background:#073f48!important;color:#fff!important;border:0!important;box-shadow:0 5px 12px rgba(19,45,49,.10)!important}
+
 @media(max-width:700px){
   body[data-page="guides"] .page-hero{padding:24px 0 20px!important}
   body[data-page="guides"] .page-hero h1{font-size:clamp(2.45rem,11.5vw,3.35rem)!important}
   body[data-page="guides"] .guide-finder-cell{padding:14px 13px}
   body[data-page="guides"] .guide-finder-cell small{font-size:.56rem}
+  body.reader-page[data-page="guides"] .guide-visual.guide-free,
+  body.reader-page[data-page="guides"] .guide-visual.guide-summer{min-height:190px!important;padding:38px 20px 20px!important}
 }
