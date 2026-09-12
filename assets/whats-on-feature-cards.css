@@ -1,0 +1,47 @@
+/* NUE v1.1: richer event cards for approved feature imagery.
+   No crop-loss rule: actual artwork is rendered with contain and never stretched above its source width. */
+body[data-page="whats-on"] .event-listing-card .event-image-band{
+  display:grid;
+  place-items:center;
+  min-height:0;
+  height:auto;
+  padding:0;
+  background:#fff8ea;
+  overflow:hidden;
+}
+body[data-page="whats-on"] .event-listing-card .event-image-band img{
+  display:block;
+  width:100%;
+  max-width:560px;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:contain;
+  object-position:center;
+  background:#fff;
+}
+body[data-page="whats-on"] .event-listing-card .event-feature-link{
+  width:100%;
+  box-sizing:border-box;
+  margin:2px 0 10px;
+  text-align:center;
+}
+body[data-page="whats-on"] .event-listing-card .event-source-link{
+  display:inline-block;
+  margin-top:1px;
+  font-size:.8rem;
+  font-weight:780;
+  color:#5a6a6d;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+body[data-page="whats-on"] .event-listing-card:has(.event-image-band){
+  border-color:#c8d7d3;
+  box-shadow:0 12px 28px rgba(19,45,49,.085);
+}
+body[data-page="whats-on"] .event-listing-card:has(.event-image-band) h3{
+  font-size:1.35rem;
+}
+@media(max-width:680px){
+  body[data-page="whats-on"] .event-listing-card .event-image-band img{max-width:100%}
+  body[data-page="whats-on"] .event-listing-card:has(.event-image-band) h3{font-size:1.3rem}
+}

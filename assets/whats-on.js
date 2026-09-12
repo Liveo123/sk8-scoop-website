@@ -92,11 +92,11 @@
     panels.forEach(panel => {
       const heading = panel.querySelector('h2');
       if (!heading || panel.querySelector('.whats-on-panel-icon')) return;
-      const text = heading.textContent.trim();
+      const value = heading.textContent.trim();
       let marker = '';
-      if (text.startsWith('Curated first')) marker = 'curated';
-      if (text.startsWith('Send in a local event')) marker = 'submit';
-      if (text.startsWith('Still looking')) {
+      if (value.startsWith('Curated first')) marker = 'curated';
+      if (value.startsWith('Send in a local event')) marker = 'submit';
+      if (value.startsWith('Still looking')) {
         marker = 'next';
         panel.classList.add('whats-on-next-panel');
       }
@@ -193,11 +193,21 @@
     const imageUrl = safeUrl(event.image);
     if (imageUrl) {
       const visual = document.createElement('div');
-      visual.className = 'reader-story-image';
-      visual.style.backgroundImage = `url("${imageUrl}")`;
-      const label = document.createElement('span');
-      label.textContent = category;
-      visual.appendChild(label);
+      visual.className = 'reader-story-image event-image-band';
+      const image = document.createElement('img');
+      image.src = imageUrl;
+      image.alt = String(event.image_alt || `${event.title || 'Local event'} editorial image`);
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      const fallback = safeUrl(event.image_fallback);
+      if (fallback) {
+        image.addEventListener('error', () => {
+          if (image.dataset.fallbackUsed === '1') return;
+          image.dataset.fallbackUsed = '1';
+          image.src = fallback;
+        }, { once: true });
+      }
+      visual.appendChild(image);
       article.appendChild(visual);
     }
 
@@ -222,13 +232,31 @@
     if (venue.textContent) body.appendChild(venue);
     body.appendChild(description);
 
+    const featureUrl = safeUrl(event.feature_url);
+    if (featureUrl) {
+      const featureLink = document.createElement('a');
+      featureLink.className = 'button small-button event-feature-link';
+      featureLink.href = featureUrl;
+      featureLink.textContent = `${String(event.cta_label || 'Read the SK8 Scoop guide').replace(/\s*→\s*$/, '')} →`;
+      featureLink.addEventListener('click', () => {
+        if (typeof window.sk8Track === 'function') {
+          window.sk8Track('event_feature_click', {
+            event_id: String(event.id || '').slice(0, 120),
+            event_area: String(event.area || '').slice(0, 80),
+            event_category: category.slice(0, 80)
+          });
+        }
+      });
+      body.appendChild(featureLink);
+    }
+
     const source = safeUrl(event.booking_url || event.source_url);
     if (source) {
       const link = document.createElement('a');
-      link.className = 'reader-link';
+      link.className = 'reader-link event-source-link';
       link.href = source;
       link.rel = 'noopener';
-      link.textContent = 'Check current details →';
+      link.textContent = featureUrl ? 'Check organiser details →' : 'Check current details →';
       link.addEventListener('click', () => {
         if (typeof window.sk8Track === 'function') {
           window.sk8Track('event_detail_click', {
@@ -281,6 +309,7 @@
       name: 'Current checked events around SK8',
       itemListElement: events.map((event, index) => {
         const source = safeUrl(event.booking_url || event.source_url) || 'https://www.sk8scoop.com/whats-on/';
+        const feature = safeUrl(event.feature_url);
         const startDate = `${event.date}${event.time ? `T${event.time}:00` : ''}`;
         const item = {
           '@type': 'Event',
@@ -293,9 +322,11 @@
             name: String(event.venue || event.area || 'SK8'),
             address: String(event.area || '')
           },
-          url: source,
+          url: feature || source,
           description: String(event.description || '')
         };
+        const schemaImage = safeUrl(event.image_fallback || event.image);
+        if (schemaImage) item.image = schemaImage;
         if (isFree(event)) item.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: source, availability: 'https://schema.org/InStock' };
         return { '@type': 'ListItem', position: index + 1, item };
       })
