@@ -4,12 +4,20 @@
   const SUBSCRIBER_DAYS = 365;
 
   const ensureHomepageV3Styles = () => {
-    if (document.querySelector('link[data-sk8-homepage-v3]')) return;
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '/assets/homepage-v3.css';
-    link.dataset.sk8HomepageV3 = 'true';
-    document.head.appendChild(link);
+    if (!document.querySelector('link[data-sk8-homepage-v3]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/assets/homepage-v3.css';
+      link.dataset.sk8HomepageV3 = 'true';
+      document.head.appendChild(link);
+    }
+    if (!document.querySelector('link[data-sk8-homepage-v5]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/assets/homepage-v5.css';
+      link.dataset.sk8HomepageV5 = 'true';
+      document.head.appendChild(link);
+    }
   };
 
   const storyGraphicSvg = key => {
@@ -81,6 +89,14 @@
     if (footerSignup) {
       footerSignup.innerHTML = '<strong>You’re already on the list</strong><p>Jump straight to the latest useful local bits.</p><a class="button small-button" href="/latest">See what’s new →</a>';
     }
+  };
+
+  const normalisePreviewFooterSignup = () => {
+    if (!previewHost || readSubscriber()) return;
+    const footerSignup = document.querySelector('.reader-footer-signup');
+    if (!footerSignup) return;
+    footerSignup.dataset.previewSignup = 'true';
+    footerSignup.innerHTML = '<strong>Get the Scoop</strong><p>New issue every Friday.</p><a class="button small-button" href="/join/">Join free →</a>';
   };
 
   const renderStories = data => {
@@ -303,6 +319,7 @@
 
   ensureHomepageV3Styles();
   applySubscriberState();
+  normalisePreviewFooterSignup();
   syncCurrentIssueLink();
   syncFreeCheapGuideLogo();
   applyHomepageV3();
