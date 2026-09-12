@@ -4,24 +4,20 @@
   const SUBSCRIBER_DAYS = 365;
 
   const ensureHomepageV3Styles = () => {
-    if (document.querySelector('link[data-sk8-homepage-v3]')) return;
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '/assets/homepage-v3.css';
-    link.dataset.sk8HomepageV3 = 'true';
-    document.head.appendChild(link);
-  };
-
-  const iconSvg = key => {
-    const icons = {
-      food: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 7v14M20 7v14M14 14h6M17 21v20M31 7v34M31 7c5 5 6 12 2 17h-2"/></svg>',
-      family: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="17" cy="15" r="5"/><circle cx="32" cy="17" r="4"/><path d="M8 39c1-9 5-14 10-14s9 5 10 14M25 39c1-7 4-11 8-11 4 0 7 4 8 11"/></svg>',
-      outdoors: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 38 19 17l7 10 5-7 11 18H6Z"/><path d="M19 17 23 9l5 8"/></svg>',
-      history: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 12h23a6 6 0 0 1 6 6v21H16a6 6 0 0 1-6-6V12Z"/><path d="M16 12v27M21 19h12M21 25h12M21 31h8"/></svg>',
-      planning: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 8h20l8 8v24H10V8Z"/><path d="M30 8v9h8M16 24h16M16 30h12"/><path d="m17 17 3 3 6-7"/></svg>',
-      updates: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="m15 24 6 6 12-14"/></svg>'
-    };
-    return icons[key] || icons.updates;
+    if (!document.querySelector('link[data-sk8-homepage-v3]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/assets/homepage-v3.css';
+      link.dataset.sk8HomepageV3 = 'true';
+      document.head.appendChild(link);
+    }
+    if (!document.querySelector('link[data-sk8-homepage-v5]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/assets/homepage-v5.css';
+      link.dataset.sk8HomepageV5 = 'true';
+      document.head.appendChild(link);
+    }
   };
 
   const storyGraphicSvg = key => {
@@ -95,6 +91,14 @@
     }
   };
 
+  const normalisePreviewFooterSignup = () => {
+    if (!previewHost || readSubscriber()) return;
+    const footerSignup = document.querySelector('.reader-footer-signup');
+    if (!footerSignup) return;
+    footerSignup.dataset.previewSignup = 'true';
+    footerSignup.innerHTML = '<strong>Get the Scoop</strong><p>New issue every Friday.</p><a class="button small-button" href="/join/">Join free →</a>';
+  };
+
   const renderStories = data => {
     const cards = [...document.querySelectorAll('[data-home-story]')];
     (data.stories || []).forEach((story, index) => {
@@ -152,14 +156,15 @@
 
     (data.explore || []).forEach(item => {
       const isOpen = item.status === 'OPEN' && item.href;
+      const hasPhoto = item.visual === 'photo' && item.image;
       const node = document.createElement(isOpen ? 'a' : 'div');
       node.className = `reader-explore-tile${isOpen ? '' : ' is-soon'}`;
       if (isOpen) node.href = item.href;
 
       const visual = document.createElement('span');
-      visual.className = `reader-explore-visual ${item.visual === 'photo' && item.image ? 'reader-explore-photo' : 'reader-explore-icon'}`;
+      visual.className = `reader-explore-visual ${hasPhoto ? 'reader-explore-photo' : 'reader-explore-editorial-fallback'}`;
       visual.setAttribute('aria-hidden', 'true');
-      if (item.visual === 'photo' && item.image) {
+      if (hasPhoto) {
         if (item.fit === 'contain') {
           visual.classList.add('is-guide-logo');
           visual.style.backgroundImage = `url("${item.image}")`;
@@ -171,7 +176,14 @@
         }
         visual.style.backgroundPosition = item.position || 'center';
       } else {
-        visual.innerHTML = iconSvg(item.icon);
+        visual.textContent = 'SK8';
+        visual.style.display = 'grid';
+        visual.style.placeItems = 'center';
+        visual.style.background = '#073f48';
+        visual.style.color = '#d6ea00';
+        visual.style.fontSize = '1.15rem';
+        visual.style.fontWeight = '950';
+        visual.style.letterSpacing = '.12em';
       }
 
       const copy = document.createElement('span');
@@ -307,6 +319,7 @@
 
   ensureHomepageV3Styles();
   applySubscriberState();
+  normalisePreviewFooterSignup();
   syncCurrentIssueLink();
   syncFreeCheapGuideLogo();
   applyHomepageV3();

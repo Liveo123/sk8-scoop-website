@@ -1,0 +1,128 @@
+/* Homepage V4: second visual/UX pass for NUE Build v1.1.
+   Loaded statically; selectors intentionally outrank the dynamically injected V3 sheet. */
+
+body.reader-home.homepage-v3{--home-v4-ink:#12383d;--home-v4-teal:#0f6470;--home-v4-deep:#073f48;--home-v4-cream:#fffaf0;--home-v4-soft:#f4f8f6;--home-v4-line:#d6e0dc}
+
+/* 1. Hero: cleaner composition, less poster-like, stronger editorial promise. */
+body.reader-home.homepage-v3 .reader-hero-photo{min-height:420px;background-position:center 43%}
+body.reader-home.homepage-v3 .reader-hero-overlay{min-height:420px}
+body.reader-home.homepage-v3 .reader-hero-copy{max-width:650px;padding:44px 0 40px}
+body.reader-home.homepage-v3 .reader-hero h1{max-width:640px;font-size:clamp(3.2rem,5.45vw,5rem);line-height:.94;letter-spacing:-.055em;text-wrap:balance}
+body.reader-home.homepage-v3 .reader-hero-lead{max-width:590px;font-size:1.13rem;line-height:1.5}
+body.reader-home.homepage-v3 .reader-signup{max-width:560px}
+
+/* 2. Give visitors useful ways forward without forcing a signup first. */
+body.reader-home.homepage-v3 .home-hero-subroutes{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+body.reader-home.homepage-v3 .home-hero-subroutes a{display:inline-flex;align-items:center;padding:8px 10px;border:1px solid rgba(15,100,112,.24);border-radius:999px;background:rgba(255,255,255,.78);color:#075863;text-decoration:none;font-size:.76rem;font-weight:900;box-shadow:0 4px 12px rgba(19,45,49,.04)}
+body.reader-home.homepage-v3 .home-hero-subroutes a:hover{background:#fff;border-color:#0f6470;transform:translateY(-1px)}
+
+/* 3. Stronger weekly-picks introduction and hierarchy. */
+body.reader-home.homepage-v3 .reader-worth{padding-top:42px;padding-bottom:44px;background:#fff}
+body.reader-home.homepage-v3 .home-worth-head{align-items:end;margin-bottom:19px}
+body.reader-home.homepage-v3 .home-section-kicker{margin:0 0 5px;color:#0f6470;font-size:.66rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+body.reader-home.homepage-v3 .home-section-intro{max-width:650px;margin:6px 0 0;color:#53666a;font-size:.9rem;line-height:1.46}
+body.reader-home.homepage-v3 .home-worth-head h2{margin:0;font-size:clamp(1.85rem,3vw,2.55rem);line-height:1.02;letter-spacing:-.04em}
+
+/* 4. Story cards: same visual frame, more readable meta, consistent vertical rhythm. */
+body.reader-home.homepage-v3 .reader-worth .reader-card-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+body.reader-home.homepage-v3 .reader-worth .reader-story{border:1px solid var(--home-v4-line);border-radius:17px;background:#fff;box-shadow:0 9px 24px rgba(19,45,49,.065)}
+body.reader-home.homepage-v3 .reader-worth .reader-story .dicm-visual{height:224px!important;background:#f7faf8!important}
+body.reader-home.homepage-v3 .reader-worth .reader-story .dicm-art{object-position:center}
+body.reader-home.homepage-v3 .reader-worth .reader-story-body{padding:18px 19px 19px}
+body.reader-home.homepage-v3 .reader-worth .reader-story h3{margin:0 0 9px;font-size:1.34rem;line-height:1.1;letter-spacing:-.025em}
+body.reader-home.homepage-v3 .reader-worth .reader-meta{display:block;margin:0 0 11px;padding:7px 9px;border-radius:8px;background:#f2f7f5;color:#3e585c;font-size:.76rem;line-height:1.35;font-weight:780}
+body.reader-home.homepage-v3 .reader-worth .reader-story p[data-story-summary]{margin:0 0 16px;color:#455a5e;font-size:.92rem;line-height:1.5}
+body.reader-home.homepage-v3 .reader-worth .reader-link{display:inline-flex;align-items:center;padding-top:2px;font-size:.86rem;font-weight:900}
+
+/* 5. Labels feel editorial rather than pasted on. */
+body.reader-home.homepage-v3 .reader-worth .dicm-mode-label{left:13px;top:13px;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.42);box-shadow:0 6px 14px rgba(7,63,72,.16);font-size:.63rem}
+body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(2) .dicm-mode-label{background:#0f6470;color:#fff}
+body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(3) .dicm-mode-label{background:#a75b00;color:#fff}
+
+/* 6. Explore SK8: a deliberate 4 x 2 desktop grid with clearer section purpose. */
+body.reader-home.homepage-v3 .reader-explore-section{padding-top:42px;padding-bottom:46px;background:var(--home-v4-soft)}
+body.reader-home.homepage-v3 .home-explore-head{align-items:end;margin-bottom:18px}
+body.reader-home.homepage-v3 .home-explore-head h2{margin:0;font-size:clamp(1.9rem,3vw,2.5rem);line-height:1.02;letter-spacing:-.04em}
+body.reader-home.homepage-v3 [data-explore-grid]{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}
+body.reader-home.homepage-v3 .reader-explore-tile{min-height:212px;border:1px solid #d3dfda;border-radius:15px;background:#fff;overflow:hidden;box-shadow:0 7px 19px rgba(19,45,49,.05)}
+body.reader-home.homepage-v3 .reader-explore-visual{height:108px;flex-basis:108px}
+body.reader-home.homepage-v3 .reader-explore-copy{min-height:104px;padding:13px 14px 14px}
+body.reader-home.homepage-v3 .reader-explore-copy strong{font-size:1rem;line-height:1.08}
+body.reader-home.homepage-v3 .reader-explore-copy small{font-size:.76rem;line-height:1.34;color:#52666a}
+body.reader-home.homepage-v3 .reader-explore-copy em{margin-top:auto;color:#0f6470;font-size:.68rem;font-weight:900;font-style:normal}
+
+/* 7. Replace the uneven issue/guides shelf with three equal next-step resources. */
+body.reader-home.homepage-v3 .home-resources-section{padding-top:44px;padding-bottom:44px;background:#fff}
+body.reader-home.homepage-v3 .home-resources-head{align-items:end;margin-bottom:18px}
+body.reader-home.homepage-v3 .home-resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+body.reader-home.homepage-v3 .home-resource-card{display:flex;flex-direction:column;min-width:0;border:1px solid #d4dfda;border-radius:17px;background:#fff;overflow:hidden;box-shadow:0 9px 23px rgba(19,45,49,.06)}
+body.reader-home.homepage-v3 .home-resource-card:hover{transform:translateY(-2px);box-shadow:0 14px 29px rgba(19,45,49,.09)}
+body.reader-home.homepage-v3 .home-resource-visual{height:165px;min-height:165px;display:grid;place-items:center;background:#f5f8f6;overflow:hidden}
+body.reader-home.homepage-v3 .home-resource-visual img{display:block;width:100%;height:100%;object-fit:cover}
+body.reader-home.homepage-v3 .home-resource-visual.is-contain img{object-fit:contain;padding:13px;box-sizing:border-box;background:#fff}
+body.reader-home.homepage-v3 .home-resource-copy{display:flex;flex:1;flex-direction:column;padding:18px 19px 19px}
+body.reader-home.homepage-v3 .home-resource-copy .eyebrow{margin-bottom:6px;font-size:.63rem;letter-spacing:.11em}
+body.reader-home.homepage-v3 .home-resource-copy h3,body.reader-home.homepage-v3 .home-resource-copy h2{margin:0 0 9px;font-size:1.42rem;line-height:1.06;letter-spacing:-.03em}
+body.reader-home.homepage-v3 .home-resource-copy p{margin:0 0 15px;color:#4b6165;font-size:.9rem;line-height:1.48}
+body.reader-home.homepage-v3 .home-resource-copy .button,body.reader-home.homepage-v3 .home-resource-copy .reader-link{align-self:flex-start;margin-top:auto}
+body.reader-home.homepage-v3 .reader-latest-panel{display:flex!important;grid-template-columns:none!important;padding:0!important;border-top:0!important}
+body.reader-home.homepage-v3 .reader-latest-cover{height:165px!important;min-height:165px!important;width:100%;border-radius:0!important;transform:none!important;display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(145deg,#073f48,#0f6470)!important}
+body.reader-home.homepage-v3 .reader-latest-cover img{max-width:180px;height:auto!important;object-fit:contain!important;background:#fff;border-radius:6px;padding:6px}
+body.reader-home.homepage-v3 .reader-latest-cover span{margin-top:12px;color:#d6ea00;font-size:.82rem;font-weight:950;letter-spacing:.12em}
+body.reader-home.homepage-v3 .reader-latest-copy{display:flex;flex:1;flex-direction:column;padding:18px 19px 19px}
+body.reader-home.homepage-v3 .reader-latest-copy h2{font-size:1.42rem!important}
+body.reader-home.homepage-v3 .reader-latest-copy p{font-size:.9rem!important;line-height:1.48}
+body.reader-home.homepage-v3 .reader-latest-copy .reader-block-link{margin-top:10px}
+
+/* 8. Take part: no repeated Join card, just useful participation routes. */
+body.reader-home.homepage-v3 .reader-take-part{padding:36px 0 40px!important;background:#f7faf8}
+body.reader-home.homepage-v3 .home-take-part-head{margin-bottom:16px}
+body.reader-home.homepage-v3 .home-take-part-head h2{margin:0;font-size:1.9rem;letter-spacing:-.035em}
+body.reader-home.homepage-v3 .reader-actions-strip{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+body.reader-home.homepage-v3 .reader-action{min-height:100%;padding:18px!important;border-radius:14px!important}
+body.reader-home.homepage-v3 .reader-action h3{font-size:1.06rem!important}
+body.reader-home.homepage-v3 .reader-action p{font-size:.82rem!important;line-height:1.42!important}
+
+/* 9. Footer: quieter navigation, clearer signup as the final conversion point. */
+body.reader-home.homepage-v3 .reader-full-footer{padding-top:30px}
+body.reader-home.homepage-v3 .reader-footer-signup{padding:16px;border:1px solid rgba(255,255,255,.18);border-radius:13px;background:rgba(255,255,255,.06)}
+body.reader-home.homepage-v3 .reader-footer-signup strong{font-size:1rem}
+body.reader-home.homepage-v3 .reader-footer-signup p{margin:5px 0 10px;font-size:.8rem}
+
+/* 10. Consistent section rhythm and responsive behaviour. */
+body.reader-home.homepage-v3 .home-section-link{white-space:nowrap}
+body.reader-home.homepage-v3 .home-resource-card,body.reader-home.homepage-v3 .home-hero-subroutes a{transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
+
+@media(max-width:1080px){
+  body.reader-home.homepage-v3 [data-explore-grid]{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  body.reader-home.homepage-v3 .home-resource-grid{grid-template-columns:1fr 1fr}
+  body.reader-home.homepage-v3 .home-resource-grid .home-resource-card:last-child{grid-column:1/-1;max-width:620px}
+}
+@media(max-width:820px){
+  body.reader-home.homepage-v3 .reader-worth .reader-card-grid{grid-template-columns:1fr}
+  body.reader-home.homepage-v3 .reader-worth .reader-story{display:grid;grid-template-columns:minmax(190px,.75fr) minmax(0,1fr)}
+  body.reader-home.homepage-v3 .reader-worth .reader-story .dicm-visual{height:100%!important;min-height:220px}
+  body.reader-home.homepage-v3 [data-explore-grid]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.reader-home.homepage-v3 .home-resource-grid{grid-template-columns:1fr}
+  body.reader-home.homepage-v3 .home-resource-grid .home-resource-card:last-child{grid-column:auto;max-width:none}
+  body.reader-home.homepage-v3 .reader-actions-strip{grid-template-columns:1fr!important}
+}
+@media(max-width:680px){
+  body.reader-home.homepage-v3 .reader-hero-photo,body.reader-home.homepage-v3 .reader-hero-overlay{min-height:500px}
+  body.reader-home.homepage-v3 .reader-hero-copy{padding-top:32px}
+  body.reader-home.homepage-v3 .reader-hero h1{font-size:clamp(3rem,14.5vw,4.25rem)}
+  body.reader-home.homepage-v3 .home-hero-subroutes{gap:7px}
+  body.reader-home.homepage-v3 .home-hero-subroutes a{font-size:.72rem;padding:7px 9px}
+  body.reader-home.homepage-v3 .home-worth-head,body.reader-home.homepage-v3 .home-explore-head,body.reader-home.homepage-v3 .home-resources-head{align-items:flex-start;flex-direction:column;gap:8px}
+  body.reader-home.homepage-v3 .reader-worth .reader-story{display:flex;grid-template-columns:none}
+  body.reader-home.homepage-v3 .reader-worth .reader-story .dicm-visual{height:205px!important;min-height:205px}
+  body.reader-home.homepage-v3 [data-explore-grid]{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  body.reader-home.homepage-v3 .reader-explore-tile{min-height:180px}
+  body.reader-home.homepage-v3 .reader-explore-visual{height:84px;flex-basis:84px}
+  body.reader-home.homepage-v3 .home-resource-visual,body.reader-home.homepage-v3 .reader-latest-cover{height:145px!important;min-height:145px!important}
+}
+@media(max-width:420px){
+  body.reader-home.homepage-v3 [data-explore-grid]{grid-template-columns:1fr!important}
+  body.reader-home.homepage-v3 .home-hero-subroutes{display:grid;grid-template-columns:1fr}
+  body.reader-home.homepage-v3 .home-hero-subroutes a{justify-content:center}
+}

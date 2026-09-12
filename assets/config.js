@@ -80,6 +80,7 @@ window.SK8_CONFIG = {
   const page = document.body.dataset.page || '';
 
   document.querySelectorAll('[data-stat="subscriberCount"]').forEach(el => { el.textContent = stats.subscriberCount; });
+  document.querySelectorAll('[data-stat="issuesPublished"]').forEach(el => { el.textContent = stats.issuesPublished; });
   document.querySelectorAll('[data-current-issue-number]').forEach(el => { el.textContent = issue.number; });
   document.querySelectorAll('[data-current-issue-date]').forEach(el => { el.textContent = issue.dateDisplay; });
   document.querySelectorAll('[data-current-issue-title]').forEach(el => { el.textContent = issue.title; });
@@ -177,7 +178,6 @@ window.SK8_CONFIG = {
   script.dataset.sk8SignupProtection = 'true';
   document.head.appendChild(script);
 })();
-
 
 (() => {
   ['nue-analytics.js','nue-links.js'].forEach(file => {

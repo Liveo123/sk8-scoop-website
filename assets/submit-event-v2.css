@@ -1,0 +1,59 @@
+/* Submit Event V2: professional specialist form pass for NUE Build v1.1. */
+
+body[data-page="submit-event"]{background:#fffdf8}
+body[data-page="submit-event"] .page-hero{padding:34px 0 28px!important;background:linear-gradient(120deg,#fff9ee 0%,#fff 58%,#eef7f5 100%)!important;border-bottom:1px solid #e1e7e3}
+body[data-page="submit-event"] .page-hero .content-narrow{max-width:940px!important}
+body[data-page="submit-event"] .page-hero h1{max-width:11.5ch!important;margin:.15em 0 .28em!important;font-size:clamp(2.9rem,4.8vw,4.35rem)!important;line-height:.95!important;letter-spacing:-.045em!important}
+body[data-page="submit-event"] .page-hero .hero-lead{max-width:720px!important;margin-bottom:10px!important;color:#425a5e!important;font-size:1.02rem!important;line-height:1.5!important}
+body[data-page="submit-event"] .page-hero p:last-child{margin:12px 0 0!important}
+
+body[data-page="submit-event"] .section.white{padding:38px 0 54px!important}
+body[data-page="submit-event"] .form-layout{display:grid!important;grid-template-columns:minmax(0,1.18fr) minmax(290px,.62fr)!important;gap:24px!important;align-items:start!important;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+
+/* Keep the actual data-entry area calm and professional. */
+body[data-page="submit-event"] .premium-form{padding:30px!important;border:1px solid #cbdad5!important;border-top:6px solid #0f6470!important;border-radius:18px!important;background:#fff!important;box-shadow:0 14px 30px rgba(19,45,49,.07)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important}
+body[data-page="submit-event"] .premium-form:before{margin-bottom:17px!important;padding:6px 9px!important;border-radius:999px!important;background:#073f48!important;color:#fff!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:.61rem!important;font-weight:800!important;letter-spacing:.11em!important}
+body[data-page="submit-event"] .premium-form h2{margin:0 0 18px!important;color:#153d43!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:1.8rem!important;font-weight:800!important;letter-spacing:-.025em!important}
+body[data-page="submit-event"] .premium-form label{display:block!important;margin:17px 0 0!important;color:#173d43!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:.86rem!important;font-weight:700!important;line-height:1.35!important;letter-spacing:0!important}
+body[data-page="submit-event"] .premium-form label small{color:#6a787b!important;font-size:.8em!important;font-weight:500!important}
+body[data-page="submit-event"] .premium-form input,
+body[data-page="submit-event"] .premium-form select,
+body[data-page="submit-event"] .premium-form textarea{width:100%!important;margin-top:6px!important;padding:13px 14px!important;border:1.5px solid #b9cbc7!important;border-radius:9px!important;background:#fff!important;color:#233f44!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:.93rem!important;font-weight:450!important;line-height:1.4!important;box-shadow:inset 0 1px 1px rgba(19,45,49,.025)!important}
+body[data-page="submit-event"] .premium-form textarea{min-height:142px!important;resize:vertical!important}
+body[data-page="submit-event"] .premium-form input::placeholder,
+body[data-page="submit-event"] .premium-form textarea::placeholder{color:#758286!important;font-weight:450!important;opacity:1!important}
+body[data-page="submit-event"] .premium-form input:focus,
+body[data-page="submit-event"] .premium-form select:focus,
+body[data-page="submit-event"] .premium-form textarea:focus{outline:3px solid rgba(15,100,112,.14)!important;outline-offset:2px!important;border-color:#0f6470!important}
+body[data-page="submit-event"] .premium-form .field-grid{gap:14px!important}
+body[data-page="submit-event"] .premium-form .checkbox-row{display:grid!important;grid-template-columns:24px minmax(0,1fr)!important;gap:12px!important;align-items:start!important;margin:16px 0 0!important;padding:13px 15px!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:.84rem!important;font-weight:650!important;line-height:1.42!important}
+body[data-page="submit-event"] .premium-form .checkbox-row input[type="checkbox"]{width:21px!important;height:21px!important;margin:1px 0 0!important;padding:0!important;border-radius:4px!important;box-shadow:none!important}
+body[data-page="submit-event"] .premium-form .checkbox-row span{display:block!important;min-width:0!important;padding-top:1px!important}
+body[data-page="submit-event"] .premium-form .wide-button{width:100%!important;min-height:50px!important;margin-top:20px!important;background:#0f6470!important;color:#fff!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:.9rem!important;font-weight:800!important;letter-spacing:.01em!important;box-shadow:0 8px 18px rgba(15,100,112,.15)!important}
+
+/* Supporting panel stays visible but never follows the user down a long form. */
+body[data-page="submit-event"] .submission-sidebar,
+body[data-page="submit-event"] .policy-panel,
+body[data-page="submit-event"] .policy-panel.sticky-panel{position:static!important;top:auto!important;align-self:start!important;transform:none!important}
+body[data-page="submit-event"] .policy-panel{padding:24px!important;border:1px solid #cbdad5!important;border-top:6px solid #f8791b!important;border-radius:18px!important;background:linear-gradient(155deg,#fff9ef,#eef7f5)!important;box-shadow:0 10px 24px rgba(19,45,49,.055)!important}
+body[data-page="submit-event"] .policy-panel h3{margin:0 0 10px!important;color:#153d43!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:1.13rem!important;font-weight:800!important;letter-spacing:-.015em!important}
+body[data-page="submit-event"] .policy-panel h3:nth-of-type(2){margin-top:24px!important;padding-top:20px!important;border-top:1px solid rgba(15,100,112,.15)!important}
+body[data-page="submit-event"] .policy-panel p{margin:0!important;color:#506468!important;font-size:.84rem!important;line-height:1.5!important}
+body[data-page="submit-event"] .policy-panel .clean-list{display:grid!important;gap:0!important;margin:0!important;padding:0!important;list-style:none!important;counter-reset:eventhelp!important}
+body[data-page="submit-event"] .policy-panel .clean-list li{position:relative!important;padding:10px 0 10px 32px!important;border-top:1px solid rgba(15,100,112,.11)!important;color:#405a5f!important;font-size:.82rem!important;line-height:1.4!important;counter-increment:eventhelp!important}
+body[data-page="submit-event"] .policy-panel .clean-list li:first-child{border-top:0!important}
+body[data-page="submit-event"] .policy-panel .clean-list li:before{content:counter(eventhelp,decimal-leading-zero)!important;position:absolute!important;left:0!important;top:10px!important;color:#f8791b!important;font-size:.62rem!important;font-weight:900!important;letter-spacing:.04em!important}
+
+@media(max-width:900px){
+  body[data-page="submit-event"] .form-layout{grid-template-columns:1fr!important}
+  body[data-page="submit-event"] .submission-sidebar{order:-1!important}
+  body[data-page="submit-event"] .policy-panel{display:grid!important;grid-template-columns:1fr 1fr!important;column-gap:24px!important}
+  body[data-page="submit-event"] .policy-panel h3:nth-of-type(2){margin-top:0!important;padding-top:0!important;border-top:0!important}
+}
+@media(max-width:620px){
+  body[data-page="submit-event"] .page-hero{padding:28px 0 24px!important}
+  body[data-page="submit-event"] .page-hero h1{font-size:clamp(2.55rem,12vw,3.6rem)!important}
+  body[data-page="submit-event"] .premium-form{padding:22px 18px!important}
+  body[data-page="submit-event"] .policy-panel{display:block!important;padding:20px!important}
+  body[data-page="submit-event"] .policy-panel h3:nth-of-type(2){margin-top:22px!important;padding-top:18px!important;border-top:1px solid rgba(15,100,112,.15)!important}
+}

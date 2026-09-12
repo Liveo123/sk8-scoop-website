@@ -1,0 +1,66 @@
+/* Advertise V5: fix WEBSITE card formatting, move the enquiry into the buying flow, remove leftover generic decoration, and professionalise the form typography. */
+
+body.advertiser-page #campaign-enquiry,
+body.advertiser-page .premium-form{scroll-margin-top:132px}
+
+/* Remove the old crossed-line decoration from advertiser section headings. */
+body.advertiser-page .section-kicker-row:after{content:none!important;display:none!important}
+
+/* WEBSITE card: give label, title, quote and CTA their own space. */
+body.advertiser-page .ad-product-web{overflow:hidden!important}
+body.advertiser-page .ad-product-web .ad-package-head{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:16px!important;align-items:start!important}
+body.advertiser-page .ad-product-web .ad-package-head>div:first-child{min-width:0!important}
+body.advertiser-page .ad-product-web .eyebrow{display:inline-flex!important;width:auto!important;max-width:max-content!important;padding:7px 13px!important;border-radius:999px!important;line-height:1!important;white-space:nowrap!important}
+body.advertiser-page .ad-product-web h3{max-width:12ch!important;margin:10px 0 0!important;font-size:1.48rem!important;line-height:1.04!important;overflow-wrap:normal!important;word-break:normal!important}
+body.advertiser-page .ad-product-web .ad-price-quote{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:74px!important;margin:0!important;padding:9px 13px!important;border-radius:999px!important;background:#173f45!important;color:#fff!important;font-family:Arial,sans-serif!important;font-size:1.02rem!important;font-weight:900!important;letter-spacing:.01em!important;line-height:1!important;white-space:nowrap!important;box-shadow:0 6px 14px rgba(23,63,69,.12)!important}
+body.advertiser-page .ad-product-web .ad-best-for{margin-top:18px!important;padding:15px!important}
+body.advertiser-page .ad-product-web .ad-package-details>div{grid-template-columns:82px minmax(0,1fr)!important;gap:12px!important}
+body.advertiser-page .ad-product-web .ad-package-details dd{min-width:0!important;overflow-wrap:anywhere!important}
+body.advertiser-page .ad-product-web>.button{width:100%!important;min-height:48px!important;padding:12px 16px!important;text-align:center!important;line-height:1.2!important;white-space:normal!important}
+body.advertiser-page .ad-product-web>.button:after{content:none!important;display:none!important}
+
+/* Put the enquiry directly after package choice and make the hand-off feel intentional. */
+body.advertiser-page #campaign-enquiry{padding:40px 0 48px!important;background:linear-gradient(180deg,#fffaf0 0%,#fff 100%)!important;border-top:1px solid #eadfce}
+body.advertiser-page #campaign-enquiry .enquiry-grid{align-items:start!important}
+body.advertiser-page #campaign-enquiry .premium-form{margin-top:0!important}
+body.advertiser-page .ad-enquiry-guide{position:static!important;top:auto!important}
+
+/* Professional form typography: keep the editorial personality around the form, but make the data-entry area calm and businesslike. */
+body.advertiser-page .premium-form,
+body.advertiser-page .premium-form label,
+body.advertiser-page .premium-form input,
+body.advertiser-page .premium-form select,
+body.advertiser-page .premium-form textarea,
+body.advertiser-page .premium-form fieldset,
+body.advertiser-page .premium-form legend,
+body.advertiser-page .premium-form button,
+body.advertiser-page .premium-form small,
+body.advertiser-page .premium-form .checkbox-row,
+body.advertiser-page .premium-form .checkbox-row span,
+body.advertiser-page .premium-form .checkbox-row strong{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif!important;
+  letter-spacing:normal!important;
+}
+body.advertiser-page .premium-form label{font-size:.94rem!important;font-weight:760!important;line-height:1.3!important;color:#173f45!important}
+body.advertiser-page .premium-form label small{font-size:.76rem!important;font-weight:500!important;color:#6b797c!important}
+body.advertiser-page .premium-form input,
+body.advertiser-page .premium-form select,
+body.advertiser-page .premium-form textarea{font-size:1rem!important;font-weight:500!important;line-height:1.45!important;color:#203f44!important}
+body.advertiser-page .premium-form input::placeholder,
+body.advertiser-page .premium-form textarea::placeholder{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif!important;font-size:.96rem!important;font-weight:500!important;color:#778386!important;opacity:1!important}
+body.advertiser-page .premium-form fieldset legend{font-size:.96rem!important;font-weight:800!important;line-height:1.25!important;color:#0f6470!important}
+body.advertiser-page .premium-form fieldset .checkbox-row{font-size:.91rem!important;font-weight:500!important;line-height:1.45!important;color:#334f54!important}
+body.advertiser-page .premium-form fieldset .checkbox-row strong{font-size:.99rem!important;font-weight:800!important;line-height:1.3!important;color:#173f45!important}
+body.advertiser-page .premium-form .wide-button{font-size:.98rem!important;font-weight:800!important;letter-spacing:.01em!important}
+
+@media(max-width:760px){
+  body.advertiser-page .ad-product-web .ad-package-head{grid-template-columns:1fr auto!important}
+  body.advertiser-page .ad-product-web h3{max-width:13ch!important;font-size:1.42rem!important}
+  body.advertiser-page .ad-product-web .ad-package-details>div{display:grid!important;grid-template-columns:82px minmax(0,1fr)!important}
+}
+
+@media(max-width:430px){
+  body.advertiser-page .ad-product-web .ad-package-head{grid-template-columns:1fr!important}
+  body.advertiser-page .ad-product-web .ad-price-quote{justify-self:start!important}
+  body.advertiser-page .ad-product-web h3{max-width:none!important}
+}
