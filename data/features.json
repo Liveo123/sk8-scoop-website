@@ -1,0 +1,82 @@
+[
+  {
+    "id": "dragon-boats-sale-water-park-2026-09-12",
+    "slug": "dragon-boats-sale-water-park",
+    "status": "preview",
+    "label": "DO THIS",
+    "title": "Dragon boats take over Sale Water Park",
+    "dek": "A loud, splashy, free-to-watch Saturday event with 200-metre races, drummers and plenty of lakeside atmosphere.",
+    "category": "Weekend event",
+    "area": "Sale Water Park",
+    "venue": "Sale Water Park, Trafford",
+    "date": "2026-09-12",
+    "date_display": "Saturday 12 September 2026",
+    "time_display": "Race schedule depends on team numbers",
+    "cost": "Free for spectators",
+    "best_for": "A lively, low-cost Saturday excursion when you want something easy to watch rather than a heavily planned day out.",
+    "why_it_matters": "Dragon boat racing works unusually well for casual spectators: the races are short, visual and easy to understand, while the drummer and synchronised paddling give the whole thing more theatre than a normal afternoon by the lake.",
+    "when_to_go": "Go on Saturday 12 September. Check the organiser before setting off because the detailed race order depends on the number of teams taking part.",
+    "summary": [
+      "Teams race over 200 metres with paddlers working in rhythm behind a drummer at the front of the boat.",
+      "Each team is due at least three timed races before the quickest crews progress to the finals, so there should be repeated bursts of action rather than one long wait for the main event.",
+      "The Boathouse terrace is the obvious food-and-drink option. Picnics are allowed, but the organiser says not to bring glass."
+    ],
+    "useful_bits": [
+      "200-metre timed races",
+      "Drummer at the front of each crew",
+      "At least three timed races per team before finals",
+      "Free for spectators",
+      "Picnics allowed; no glass"
+    ],
+    "source_url": "https://manchesterdragonboatfestival.co.uk/",
+    "source_label": "Check the festival details",
+    "source_checked_at": "2026-09-12",
+    "feature_url": "/features/dragon-boats-sale-water-park/",
+    "image": "https://drive.google.com/uc?export=view&id=1mqzRbC8FX0e8lIRgPGQsg0YNnXYKlKNG",
+    "image_fallback": "https://res.cloudinary.com/gocq00bt/image/upload/v1789138396/sk8-scoop/issue12/dragon-boats-sk8-illustration-v16.jpg",
+    "image_alt": "SK8 Scoop editorial illustration of a dragon boat crew racing across the water with a drummer and spectators on the shore.",
+    "image_credit": "SK8 Scoop editorial illustration. Not a documentary photograph.",
+    "issue_number": 12,
+    "issue_url": "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619"
+  },
+  {
+    "id": "black-pudding-throwing-2026-09-13",
+    "slug": "black-pudding-throwing",
+    "status": "preview",
+    "label": "GO WEIRD",
+    "title": "Black pudding throwing in Ramsbottom",
+    "dek": "Competitors throw black puddings underarm at Yorkshire puddings on a 20-foot scaffold. It is free to watch and exactly as peculiar as it sounds.",
+    "category": "Quirky day out",
+    "area": "Ramsbottom · Worth the trip",
+    "venue": "Bridge Street, Ramsbottom, BL0 9AQ",
+    "date": "2026-09-13",
+    "date_display": "Sunday 13 September 2026",
+    "time_display": "11am–5pm",
+    "cost": "Free to watch",
+    "best_for": "A Sunday outing when you want something genuinely different, easy to explain to friends and inexpensive to watch.",
+    "why_it_matters": "This is one of those local-ish traditions that turns a simple contest into a proper spectator event. The rules are easy to grasp, the target is gloriously absurd and you do not need to enter to enjoy it.",
+    "when_to_go": "The event runs on Sunday 13 September from 11am to 5pm. Spectators can watch for free; entering the competition carries a small fee.",
+    "summary": [
+      "The basic challenge is beautifully simple: throw black puddings underarm and try to knock Yorkshire puddings off a scaffold around 20 feet above the ground.",
+      "You do not need to compete. Watching is free, which makes it a strong option if you want an unusual Sunday outing without committing to an expensive ticket.",
+      "Allow time for Ramsbottom itself rather than treating the contest as the whole day."
+    ],
+    "useful_bits": [
+      "Sunday 13 September · 11am–5pm",
+      "Free for spectators",
+      "Small entrant fee for competitors",
+      "Underarm black-pudding throws",
+      "Yorkshire-pudding targets on a 20-foot scaffold"
+    ],
+    "source_url": "https://www.blackpuddingthrowing.com/",
+    "source_label": "Check the event details",
+    "source_checked_at": "2026-09-12",
+    "feature_url": "/features/black-pudding-throwing/",
+    "image": "https://drive.google.com/uc?export=view&id=1V9MTmdRdVDM6ld0I3ypO5aTqUaeN6C3U",
+    "image_fallback": "https://res.cloudinary.com/gocq00bt/image/upload/v1789134703/sk8-scoop/issue12/black-pudding-sk8-illustration-v16.jpg",
+    "image_alt": "SK8 Scoop editorial illustration of competitors throwing black puddings at Yorkshire puddings during a lively village event.",
+    "image_credit": "SK8 Scoop editorial illustration. Not a documentary photograph.",
+    "issue_number": 12,
+    "issue_url": "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619"
+  }
+]
