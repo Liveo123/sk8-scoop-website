@@ -6,6 +6,11 @@
   const packageInputs = [...form.querySelectorAll('input[name="package"]')];
   const goalLinks = [...document.querySelectorAll('[data-ad-goal]')];
   const packageJumps = [...document.querySelectorAll('[data-ad-package]')];
+  const issueStat = document.querySelector('[data-stat="issuesPublished"]');
+
+  if (issueStat && window.SK8_CONFIG?.publicStats?.issuesPublished) {
+    issueStat.textContent = String(window.SK8_CONFIG.publicStats.issuesPublished);
+  }
 
   function scrollToForm(focusTarget) {
     form.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -54,4 +59,13 @@
     if (!input.checked || typeof window.sk8Track !== 'function') return;
     window.sk8Track('advertiser_route_selected', { route: input.value });
   }));
+
+  /* The established backend already accepts the generic `bespoke` route.
+     Keep the reader-facing value specific and useful, then map it only at submit time. */
+  form.addEventListener('submit', () => {
+    const websiteInput = packageInputs.find(item => item.value === 'temp_website');
+    if (!websiteInput?.checked) return;
+    websiteInput.value = 'bespoke';
+    queueMicrotask(() => { websiteInput.value = 'temp_website'; });
+  }, true);
 })();
