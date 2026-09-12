@@ -1,4 +1,13 @@
 (() => {
+  const extraStylesheet = '/assets/advertise-v5.css';
+  if (!document.querySelector(`link[href="${extraStylesheet}"]`)) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = extraStylesheet;
+    link.dataset.sk8AdvertiseV5 = 'true';
+    document.head.appendChild(link);
+  }
+
   const form = document.querySelector('[data-form-kind="advertiser"]');
   if (!form) return;
 
@@ -13,9 +22,14 @@
   }
 
   function scrollToForm(focusTarget) {
-    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const header = document.querySelector('.site-header');
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    const safeGap = 28;
+    const top = form.getBoundingClientRect().top + window.scrollY - headerHeight - safeGap;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+
     if (focusTarget) {
-      window.setTimeout(() => focusTarget.focus({ preventScroll: true }), 450);
+      window.setTimeout(() => focusTarget.focus({ preventScroll: true }), 500);
     }
   }
 
