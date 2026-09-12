@@ -1,4 +1,4 @@
-/* Advertise V5: fix WEBSITE card formatting, move the enquiry into the buying flow, and remove leftover generic decoration. */
+/* Advertise V5: fix WEBSITE card formatting, move the enquiry into the buying flow, remove leftover generic decoration, and professionalise the form typography. */
 
 body.advertiser-page #campaign-enquiry,
 body.advertiser-page .premium-form{scroll-margin-top:132px}
@@ -24,6 +24,34 @@ body.advertiser-page #campaign-enquiry{padding:40px 0 48px!important;background:
 body.advertiser-page #campaign-enquiry .enquiry-grid{align-items:start!important}
 body.advertiser-page #campaign-enquiry .premium-form{margin-top:0!important}
 body.advertiser-page .ad-enquiry-guide{position:static!important;top:auto!important}
+
+/* Professional form typography: keep the editorial personality around the form, but make the data-entry area calm and businesslike. */
+body.advertiser-page .premium-form,
+body.advertiser-page .premium-form label,
+body.advertiser-page .premium-form input,
+body.advertiser-page .premium-form select,
+body.advertiser-page .premium-form textarea,
+body.advertiser-page .premium-form fieldset,
+body.advertiser-page .premium-form legend,
+body.advertiser-page .premium-form button,
+body.advertiser-page .premium-form small,
+body.advertiser-page .premium-form .checkbox-row,
+body.advertiser-page .premium-form .checkbox-row span,
+body.advertiser-page .premium-form .checkbox-row strong{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif!important;
+  letter-spacing:normal!important;
+}
+body.advertiser-page .premium-form label{font-size:.94rem!important;font-weight:760!important;line-height:1.3!important;color:#173f45!important}
+body.advertiser-page .premium-form label small{font-size:.76rem!important;font-weight:500!important;color:#6b797c!important}
+body.advertiser-page .premium-form input,
+body.advertiser-page .premium-form select,
+body.advertiser-page .premium-form textarea{font-size:1rem!important;font-weight:500!important;line-height:1.45!important;color:#203f44!important}
+body.advertiser-page .premium-form input::placeholder,
+body.advertiser-page .premium-form textarea::placeholder{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif!important;font-size:.96rem!important;font-weight:500!important;color:#778386!important;opacity:1!important}
+body.advertiser-page .premium-form fieldset legend{font-size:.96rem!important;font-weight:800!important;line-height:1.25!important;color:#0f6470!important}
+body.advertiser-page .premium-form fieldset .checkbox-row{font-size:.91rem!important;font-weight:500!important;line-height:1.45!important;color:#334f54!important}
+body.advertiser-page .premium-form fieldset .checkbox-row strong{font-size:.99rem!important;font-weight:800!important;line-height:1.3!important;color:#173f45!important}
+body.advertiser-page .premium-form .wide-button{font-size:.98rem!important;font-weight:800!important;letter-spacing:.01em!important}
 
 @media(max-width:760px){
   body.advertiser-page .ad-product-web .ad-package-head{grid-template-columns:1fr auto!important}
