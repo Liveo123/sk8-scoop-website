@@ -1,12 +1,71 @@
-/* Preview-only What’s On card treatment.
-   Keep the existing richer artwork. Do not substitute simplified line-art approximations. */
-body[data-page="whats-on"] [data-events-list]{gap:18px}
-body[data-page="whats-on"] .event-listing-card{display:flex;flex-direction:column;min-height:100%;border-radius:15px;border:1px solid #d7ddd8;box-shadow:0 8px 20px rgba(19,45,49,.065);overflow:hidden;background:#fff;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
-body[data-page="whats-on"] .event-listing-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(19,45,49,.09);border-color:#b9ccc7}
+/* Preview-only What’s On refinement.
+   Keep the existing richer artwork. Avoid generic icon tiles and oversized empty panels. */
 
-body[data-page="whats-on"] .event-listing-card .reader-story-body{display:flex;flex:1;flex-direction:column;padding:17px 18px 18px}
-body[data-page="whats-on"] .event-listing-card .eyebrow{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;margin-bottom:8px;padding:6px 10px 6px 8px;border-radius:999px;border:1px solid transparent;box-shadow:0 4px 10px rgba(7,63,72,.10);font-size:.65rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
-body[data-page="whats-on"] .event-listing-card .eyebrow:before{content:"";width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:currentColor;opacity:.88;box-shadow:0 0 0 2px rgba(255,255,255,.34)}
+body[data-page="whats-on"] .whats-on-page-hero{padding:46px 0 38px;background:linear-gradient(135deg,#fffaf0 0%,#fff 58%,#edf7f5 100%)}
+body[data-page="whats-on"] .whats-on-hero-grid{grid-template-columns:minmax(0,.92fr) minmax(380px,.78fr);gap:46px;align-items:center}
+body[data-page="whats-on"] .whats-on-hero-copy{max-width:650px}
+body[data-page="whats-on"] .whats-on-page-hero h1{max-width:9ch;font-size:clamp(3.4rem,6vw,5.6rem);line-height:.9;letter-spacing:-.055em}
+body[data-page="whats-on"] .whats-on-page-hero .hero-lead{max-width:590px;font-size:1.02rem;line-height:1.58}
+body[data-page="whats-on"] .whats-on-hero-visual{min-height:0;border-radius:20px;border:1px solid #cddbd6;box-shadow:0 18px 38px rgba(19,45,49,.12);overflow:hidden;background:#fff}
+body[data-page="whats-on"] .whats-on-hero-visual img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+body[data-page="whats-on"] .whats-on-hero-caption{display:flex!important;align-items:center;gap:12px;padding:12px 15px!important;background:#073f48!important;color:#fff!important;position:static!important;transform:none!important}
+body[data-page="whats-on"] .whats-on-hero-caption span{flex:0 0 auto;padding:5px 8px;border-radius:999px;background:#d6ea00;color:#073f48!important;font-size:.6rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+body[data-page="whats-on"] .whats-on-hero-caption strong{font-size:.88rem;line-height:1.32;color:#fff!important}
+
+/* Quick routes: same visual family, tighter and easier to scan. */
+body[data-page="whats-on"] .whats-on-quick-section{padding-top:40px;padding-bottom:34px}
+body[data-page="whats-on"] .whats-on-quick-head{margin-bottom:18px}
+body[data-page="whats-on"] .whats-on-quick-grid{gap:16px;align-items:stretch}
+body[data-page="whats-on"] .whats-on-quick-card{display:flex;flex-direction:column;min-height:100%;border-radius:16px;border:1px solid #d7ddd8;box-shadow:0 9px 22px rgba(19,45,49,.065);overflow:hidden;background:#fff;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+body[data-page="whats-on"] .whats-on-quick-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(19,45,49,.09);border-color:#b9ccc7}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:148px;min-height:148px;padding:4px;background-color:#fff8ea!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story:nth-child(1) .reader-story-image{background-image:url('/assets/images/nue/whats-on-weekend.webp')!important}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story:nth-child(3) .reader-story-image{background-image:url('/assets/images/nue/whats-on-family.webp')!important}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image:after{display:none!important}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image span{display:none!important}
+body[data-page="whats-on"] .whats-on-quick-card .reader-story-body{display:flex;flex:1;flex-direction:column;padding:17px 18px 18px}
+body[data-page="whats-on"] .whats-on-quick-card h3{margin:.18em 0 .42em;font-size:1.32rem;line-height:1.05}
+body[data-page="whats-on"] .whats-on-quick-card p{margin:0 0 15px;color:#4f6266;font-size:.9rem;line-height:1.48}
+body[data-page="whats-on"] .whats-on-quick-card .button{align-self:flex-start;margin-top:auto}
+
+/* Listings: reduce dead space, make filter state and freshness obvious. */
+body[data-page="whats-on"] .whats-on-listings-section{padding-top:34px;padding-bottom:48px;background:#f8faf8}
+body[data-page="whats-on"] .whats-on-listings-head{align-items:end;margin-bottom:14px}
+body[data-page="whats-on"] .whats-on-listings-intro{max-width:420px;margin:0;color:#52666a;font-size:.9rem;line-height:1.45}
+body[data-page="whats-on"] .whats-on-freshness{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:0 0 14px;padding:11px 13px;border:1px solid #cfddd8;border-radius:12px;background:#fff;box-shadow:0 6px 16px rgba(19,45,49,.04);color:#476065;font-size:.78rem;font-weight:750}
+body[data-page="whats-on"] .whats-on-freshness strong{color:#073f48;font-size:.82rem}
+body[data-page="whats-on"] .whats-on-freshness span{display:inline-flex;align-items:center;gap:8px}
+body[data-page="whats-on"] .whats-on-freshness span:before{content:"";width:5px;height:5px;border-radius:50%;background:#f8791b}
+body[data-page="whats-on"] .whats-on-freshness span:last-child:before{background:#6f973a}
+body[data-page="whats-on"] .whats-on-filter-toolbar{display:grid;gap:12px;margin:0 0 9px;padding:16px;border:1px solid #c9d9d4;border-radius:16px;background:#fff;box-shadow:0 9px 22px rgba(19,45,49,.06)}
+body[data-page="whats-on"] .whats-on-filter-group{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:start}
+body[data-page="whats-on"] .whats-on-filter-group+ .whats-on-filter-group{padding-top:12px;border-top:1px solid #e1e7e4}
+body[data-page="whats-on"] .whats-on-filter-label{padding-top:8px;color:#073f48;font-size:.67rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+body[data-page="whats-on"] .whats-on-filter-buttons{display:flex;flex-wrap:wrap;gap:8px}
+body[data-page="whats-on"] .whats-on-filter-buttons .button{min-height:36px;padding:8px 12px;border-radius:8px;box-shadow:none;font-size:.78rem}
+body[data-page="whats-on"] .whats-on-filter-buttons .button[aria-pressed="true"]{background:#073f48!important;border-color:#073f48!important;color:#fff!important;box-shadow:0 5px 12px rgba(7,63,72,.16)}
+body[data-page="whats-on"] .whats-on-filter-buttons .button[aria-pressed="false"]{background:#fff!important;color:#0f6470!important;border:1px solid #bdd2cd!important}
+body[data-page="whats-on"] .whats-on-filter-buttons .button[aria-pressed="false"]:hover{background:#edf7f4!important;border-color:#0f6470!important}
+body[data-page="whats-on"] .whats-on-filter-note{margin:0 0 4px!important;font-size:.76rem!important;color:#67787a!important}
+body[data-page="whats-on"] .whats-on-status{margin:0 0 16px!important;color:#294e54!important;font-size:.8rem!important;font-weight:850!important}
+
+/* Event cards: date-forward, roomier, more readable. */
+body[data-page="whats-on"] [data-events-list]{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+body[data-page="whats-on"] .event-listing-card{display:flex;flex-direction:column;min-height:100%;border-radius:16px;border:1px solid #d6dfda;border-top:5px solid #0f6470;box-shadow:0 8px 20px rgba(19,45,49,.06);overflow:hidden;background:#fff;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+body[data-page="whats-on"] .event-listing-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(19,45,49,.095);border-color:#b8cbc5}
+body[data-page="whats-on"] .event-listing-card[data-category="wellness"]{border-top-color:#a8bf1b}
+body[data-page="whats-on"] .event-listing-card[data-category="family"]{border-top-color:#e9a54f}
+body[data-page="whats-on"] .event-listing-card[data-category="local-history"]{border-top-color:#b97d70}
+body[data-page="whats-on"] .event-listing-card[data-category="community"]{border-top-color:#d6993e}
+body[data-page="whats-on"] .event-listing-card[data-category="food-and-drink"]{border-top-color:#0b4c5b}
+body[data-page="whats-on"] .event-listing-card .reader-story-body{display:flex;flex:1;flex-direction:column;padding:18px 19px 19px}
+body[data-page="whats-on"] .event-card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+body[data-page="whats-on"] .event-date-block{display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:5px;align-items:end;min-width:70px;padding:8px 10px 7px;border-radius:11px;background:#073f48;color:#fff;box-shadow:0 7px 15px rgba(7,63,72,.13)}
+body[data-page="whats-on"] .event-date-block span{grid-column:1/3;color:#d6ea00;font-size:.59rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+body[data-page="whats-on"] .event-date-block strong{font-size:1.65rem;line-height:.92;letter-spacing:-.05em}
+body[data-page="whats-on"] .event-date-block small{padding-bottom:2px;font-size:.62rem;font-weight:900;letter-spacing:.08em}
+body[data-page="whats-on"] .event-listing-card .eyebrow{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;margin:1px 0 0;padding:6px 9px;border-radius:999px;border:1px solid transparent;box-shadow:none;font-size:.6rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+body[data-page="whats-on"] .event-listing-card .eyebrow:before{content:"";width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:currentColor;opacity:.88}
 body[data-page="whats-on"] .event-listing-card[data-category="food-and-drink"] .eyebrow{background:#0b4c5b;border-color:#0a3f4c;color:#fff3d0}
 body[data-page="whats-on"] .event-listing-card[data-category="wellness"] .eyebrow{background:#d7e63d;border-color:#adc21f;color:#12454d}
 body[data-page="whats-on"] .event-listing-card[data-category="family"] .eyebrow{background:#ffe2bf;border-color:#f1b56a;color:#7b4b09}
@@ -18,62 +77,78 @@ body[data-page="whats-on"] .event-listing-card[data-category="market"] .eyebrow{
 body[data-page="whats-on"] .event-listing-card[data-category="arts-and-culture"] .eyebrow{background:#ece0f8;border-color:#b99bd5;color:#55346d}
 body[data-page="whats-on"] .event-listing-card[data-category="sport"] .eyebrow{background:#d9edf0;border-color:#8cbec4;color:#164f57}
 body[data-page="whats-on"] .event-listing-card[data-category="local-event"] .eyebrow{background:#edf6f4;border-color:#cfe0db;color:#0f6470}
-body[data-page="whats-on"] .event-listing-card h3{font-size:1.25rem;line-height:1.13;margin-bottom:8px}
-body[data-page="whats-on"] .event-listing-card .reader-meta{font-size:.82rem!important;margin-bottom:6px!important;color:#294a4f!important}
-body[data-page="whats-on"] .event-listing-card .event-venue{margin:0 0 10px!important;padding-left:15px;position:relative;font-size:.8rem!important;line-height:1.35;color:#5a6769!important;font-weight:700}
-body[data-page="whats-on"] .event-listing-card .event-venue:before{content:"";position:absolute;left:1px;top:.35em;width:7px;height:7px;border-radius:50% 50% 50% 0;background:#f8791b;transform:rotate(-45deg)}
-body[data-page="whats-on"] .event-listing-card .event-venue:after{content:"";position:absolute;left:3px;top:.48em;width:3px;height:3px;border-radius:50%;background:#fff}
-body[data-page="whats-on"] .event-listing-card .reader-story-body>p:not(.reader-meta):not(.event-venue){font-size:.88rem;line-height:1.46;color:#45585c;margin-bottom:14px}
-body[data-page="whats-on"] .event-listing-card .reader-link{margin-top:auto;padding-top:3px;font-size:.86rem}
+body[data-page="whats-on"] .event-listing-card h3{margin:0 0 10px;font-size:1.34rem;line-height:1.08;letter-spacing:-.025em}
+body[data-page="whats-on"] .event-facts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+body[data-page="whats-on"] .event-facts span{display:inline-flex;gap:4px;align-items:center;padding:5px 7px;border-radius:7px;background:#f2f7f5;color:#355055;font-size:.7rem;line-height:1.2}
+body[data-page="whats-on"] .event-facts b{color:#0f6470;font-size:.59rem;letter-spacing:.06em;text-transform:uppercase}
+body[data-page="whats-on"] .event-venue{margin:0 0 10px!important;padding-left:15px;position:relative;font-size:.78rem!important;line-height:1.38;color:#596c70!important;font-weight:750}
+body[data-page="whats-on"] .event-venue:before{content:"";position:absolute;left:1px;top:.38em;width:7px;height:7px;border-radius:50% 50% 50% 0;background:#f8791b;transform:rotate(-45deg)}
+body[data-page="whats-on"] .event-venue:after{content:"";position:absolute;left:3px;top:.51em;width:3px;height:3px;border-radius:50%;background:#fff}
+body[data-page="whats-on"] .event-listing-card .event-description{margin:0 0 15px;color:#45595d;font-size:.89rem;line-height:1.5}
+body[data-page="whats-on"] .event-check-link{display:inline-flex;align-items:center;align-self:flex-start;margin-top:auto;padding:8px 10px;border-radius:8px;background:#edf7f5;color:#075863!important;font-size:.79rem!important;font-weight:900!important;text-decoration:none!important;transition:background .15s ease,transform .15s ease}
+body[data-page="whats-on"] .event-check-link:hover{background:#dfeeea;transform:translateX(1px)}
 
-/* Lower utility panels: typographic editorial markers, no generic icon tiles. */
-body[data-page="whats-on"] .whats-on-info-shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:stretch}
-body[data-page="whats-on"] .whats-on-info-card{position:relative;min-height:342px;padding:31px 31px 29px;border:1px solid #d4ddd8;border-radius:18px;overflow:hidden;box-shadow:0 12px 30px rgba(19,45,49,.07);isolation:isolate}
+/* Empty state stays editorial and compact. */
+body[data-page="whats-on"] .whats-on-empty{display:grid;grid-template-columns:140px 1fr;gap:22px;align-items:center;margin-top:18px;padding:22px}
+body[data-page="whats-on"] .whats-on-empty-art{position:relative;min-height:120px;background:linear-gradient(145deg,#fff8ea,#edf6f4);border:1px solid #d7ddd8;border-radius:14px;display:grid!important;place-items:center;padding:16px;box-sizing:border-box}
+body[data-page="whats-on"] .whats-on-empty-art:before{content:"NO MATCHES";display:inline-block;padding:8px 10px;border-radius:6px;background:#073f48;color:#fff;font-size:.68rem;font-weight:900;letter-spacing:.11em;transform:rotate(-2deg);box-shadow:0 7px 16px rgba(7,63,72,.14)}
+body[data-page="whats-on"] .whats-on-empty-art:after{content:"TRY ANOTHER FILTER";position:absolute;bottom:18px;left:50%;transform:translateX(-50%);white-space:nowrap;color:#0f6470;font-size:.58rem;font-weight:900;letter-spacing:.08em}
+
+/* Lower panels: compact, useful, no generic SVGs. */
+body[data-page="whats-on"] .whats-on-info-section{padding-top:38px;padding-bottom:34px}
+body[data-page="whats-on"] .whats-on-info-shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+body[data-page="whats-on"] .whats-on-info-card{position:relative;min-height:0;padding:24px 25px 23px;border:1px solid #d4ddd8;border-radius:17px;overflow:hidden;box-shadow:0 9px 22px rgba(19,45,49,.055);isolation:isolate}
 body[data-page="whats-on"] .whats-on-info-card:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:#0f6470;z-index:-1}
-body[data-page="whats-on"] .whats-on-info-card:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-112px;bottom:-128px;background:rgba(15,100,112,.055);z-index:-1}
 body[data-page="whats-on"] .whats-on-info-curated{background:linear-gradient(145deg,#ffffff 0%,#f4faf8 100%)}
 body[data-page="whats-on"] .whats-on-info-submit{background:linear-gradient(145deg,#ffffff 0%,#fff7ed 100%)}
 body[data-page="whats-on"] .whats-on-info-submit:before{background:#f8791b}
-body[data-page="whats-on"] .whats-on-info-submit:after{background:rgba(248,121,27,.065)}
-body[data-page="whats-on"] .whats-on-info-card .whats-on-panel-icon{position:relative;display:flex;width:auto;height:auto;margin:0 0 24px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;align-items:flex-end;gap:10px}
-body[data-page="whats-on"] .whats-on-info-card .whats-on-panel-icon svg{display:none!important}
-body[data-page="whats-on"] .whats-on-info-card .whats-on-panel-icon:before{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:10px;background:#073f48;color:#fff;font:900 1.08rem/1 Arial,sans-serif;letter-spacing:-.02em;box-shadow:0 8px 18px rgba(7,63,72,.15);transform:rotate(-2deg)}
-body[data-page="whats-on"] .whats-on-info-card .whats-on-panel-icon:after{display:inline-block;margin-bottom:5px;padding:6px 9px;border-radius:5px;background:#d6ea00;color:#073f48;font-size:.62rem;font-weight:900;letter-spacing:.11em;box-shadow:0 5px 12px rgba(136,153,23,.12)}
-body[data-page="whats-on"] .whats-on-info-curated .whats-on-panel-icon:before{content:"01"}
-body[data-page="whats-on"] .whats-on-info-curated .whats-on-panel-icon:after{content:"CURATE"}
-body[data-page="whats-on"] .whats-on-info-submit .whats-on-panel-icon:before{content:"02";background:#f8791b;box-shadow:0 8px 18px rgba(174,83,14,.16)}
-body[data-page="whats-on"] .whats-on-info-submit .whats-on-panel-icon:after{content:"SEND IT IN";background:#073f48;color:#fff}
-body[data-page="whats-on"] .whats-on-info-card>.eyebrow{margin-bottom:8px;color:#0f6470;font-size:.67rem;font-weight:900;letter-spacing:.11em}
-body[data-page="whats-on"] .whats-on-info-card h2{max-width:18ch;margin:0 0 14px;font-size:2.25rem;line-height:1.03;letter-spacing:-.035em;color:#12383d}
-body[data-page="whats-on"] .whats-on-info-card p{max-width:58ch;margin:0;color:#354f53;font-size:1rem;line-height:1.55}
-body[data-page="whats-on"] .whats-on-info-card .button{margin-top:20px}
+body[data-page="whats-on"] .whats-on-type-marker{display:flex;align-items:center;gap:8px;margin-bottom:17px}
+body[data-page="whats-on"] .whats-on-type-marker span{display:grid;place-items:center;width:42px;height:42px;border-radius:9px;background:#073f48;color:#fff;font-size:.82rem;font-weight:900;box-shadow:0 6px 14px rgba(7,63,72,.14)}
+body[data-page="whats-on"] .whats-on-info-submit .whats-on-type-marker span{background:#f8791b}
+body[data-page="whats-on"] .whats-on-type-marker b{padding:5px 8px;border-radius:5px;background:#d6ea00;color:#073f48;font-size:.58rem;letter-spacing:.1em}
+body[data-page="whats-on"] .whats-on-info-submit .whats-on-type-marker b{background:#073f48;color:#fff}
+body[data-page="whats-on"] .whats-on-info-card>.eyebrow{margin-bottom:7px;color:#0f6470;font-size:.64rem;font-weight:900;letter-spacing:.11em}
+body[data-page="whats-on"] .whats-on-info-card h2{max-width:18ch;margin:0 0 10px;font-size:1.9rem;line-height:1.02;letter-spacing:-.035em;color:#12383d}
+body[data-page="whats-on"] .whats-on-info-card p{max-width:60ch;margin:0;color:#3d5559;font-size:.91rem;line-height:1.5}
+body[data-page="whats-on"] .whats-on-info-card .button{margin-top:17px}
 
-/* Do not show the old dynamically inserted generic utility icon on the final CTA. */
-body[data-page="whats-on"] .whats-on-next-panel{display:block!important}
-body[data-page="whats-on"] .whats-on-next-panel .whats-on-panel-icon{display:none!important}
+/* Next step: a compact endcap rather than a second hero. */
+body[data-page="whats-on"] .whats-on-next-section{padding-top:26px;padding-bottom:42px;background:#f8faf8}
+body[data-page="whats-on"] .whats-on-next-panel{display:flex!important;justify-content:space-between;gap:28px;align-items:center;padding:26px 28px;border:1px solid #d1ddd9;border-radius:17px;background:linear-gradient(135deg,#fff 0%,#f2f8f6 100%);box-shadow:0 9px 22px rgba(19,45,49,.05)}
+body[data-page="whats-on"] .whats-on-next-panel h2{max-width:20ch;margin:.15em 0 .28em;font-size:2rem!important;line-height:1.02}
+body[data-page="whats-on"] .whats-on-next-panel p{max-width:620px;margin:0;color:#4b6266;font-size:.92rem;line-height:1.48}
+body[data-page="whats-on"] .whats-on-next-panel .button-row{flex:0 0 auto;margin:0}
+body[data-page="whats-on"] .whats-on-panel-icon{display:none!important}
 
-/* Empty state becomes a small editorial notice board rather than a line icon. */
-body[data-page="whats-on"] .whats-on-empty-art{position:relative;background:linear-gradient(145deg,#fff8ea,#edf6f4);border-color:#d7ddd8;display:grid!important;place-items:center;padding:16px;box-sizing:border-box}
-body[data-page="whats-on"] .whats-on-empty-illustration svg,body[data-page="whats-on"] .empty-map-dot,body[data-page="whats-on"] .empty-route{display:none!important}
-body[data-page="whats-on"] .whats-on-empty-art:before{content:"NO MATCHES";display:inline-block;padding:8px 10px;border-radius:6px;background:#073f48;color:#fff;font-size:.68rem;font-weight:900;letter-spacing:.11em;transform:rotate(-2deg);box-shadow:0 7px 16px rgba(7,63,72,.14)}
-body[data-page="whats-on"] .whats-on-empty-art:after{content:"TRY ANOTHER FILTER";position:absolute;bottom:20px;left:50%;transform:translateX(-50%);white-space:nowrap;color:#0f6470;font-size:.59rem;font-weight:900;letter-spacing:.08em}
-
-/* Restore the existing What’s On artwork. Free deliberately keeps the guide logo from whats-on.js. */
-body[data-page="whats-on"] .whats-on-filter-grid .reader-story{border-radius:15px;border-color:#d7ddd8;box-shadow:0 8px 20px rgba(19,45,49,.06);overflow:hidden}
-body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:164px;min-height:164px;padding:5px;background-color:#fff8ea!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important}
-body[data-page="whats-on"] .whats-on-filter-grid .reader-story:nth-child(1) .reader-story-image{background-image:url('/assets/images/nue/whats-on-weekend.webp')!important}
-body[data-page="whats-on"] .whats-on-filter-grid .reader-story:nth-child(3) .reader-story-image{background-image:url('/assets/images/nue/whats-on-family.webp')!important}
-body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image:after{display:none!important}
-body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image span{display:none!important}
-body[data-page="whats-on"] .whats-on-filter-grid .reader-story-body{padding:17px 18px 18px}
-
+@media(max-width:1080px){
+  body[data-page="whats-on"] [data-events-list]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body[data-page="whats-on"] .whats-on-hero-grid{grid-template-columns:minmax(0,1fr) minmax(330px,.8fr);gap:30px}
+}
 @media(max-width:900px){
+  body[data-page="whats-on"] .whats-on-hero-grid,
   body[data-page="whats-on"] .whats-on-info-shelf{grid-template-columns:1fr}
-  body[data-page="whats-on"] .whats-on-info-card{min-height:0}
+  body[data-page="whats-on"] .whats-on-hero-visual{max-width:620px}
+  body[data-page="whats-on"] .whats-on-listings-head{align-items:start}
+  body[data-page="whats-on"] .whats-on-listings-intro{max-width:620px}
+  body[data-page="whats-on"] .whats-on-next-panel{align-items:flex-start;flex-direction:column}
 }
 @media(max-width:680px){
-  body[data-page="whats-on"] .event-listing-card .reader-story-body{padding:16px}
-  body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:154px;min-height:154px}
-  body[data-page="whats-on"] .whats-on-info-card{padding:24px 22px}
-  body[data-page="whats-on"] .whats-on-info-card h2{font-size:1.95rem}
+  body[data-page="whats-on"] .whats-on-page-hero{padding:34px 0 28px}
+  body[data-page="whats-on"] .whats-on-page-hero h1{font-size:clamp(3rem,15vw,4rem)}
+  body[data-page="whats-on"] .whats-on-hero-caption{align-items:flex-start;flex-direction:column;gap:7px}
+  body[data-page="whats-on"] .whats-on-quick-section{padding-top:30px;padding-bottom:24px}
+  body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:145px;min-height:145px}
+  body[data-page="whats-on"] .whats-on-listings-section{padding-top:28px}
+  body[data-page="whats-on"] .whats-on-filter-toolbar{padding:13px}
+  body[data-page="whats-on"] .whats-on-filter-group{grid-template-columns:1fr;gap:6px}
+  body[data-page="whats-on"] .whats-on-filter-label{padding-top:0}
+  body[data-page="whats-on"] [data-events-list]{grid-template-columns:1fr;gap:14px}
+  body[data-page="whats-on"] .event-listing-card .reader-story-body{padding:17px}
+  body[data-page="whats-on"] .event-listing-card h3{font-size:1.28rem}
+  body[data-page="whats-on"] .whats-on-empty{grid-template-columns:1fr}
+  body[data-page="whats-on"] .whats-on-info-card{padding:22px 20px}
+  body[data-page="whats-on"] .whats-on-info-card h2{font-size:1.75rem}
+  body[data-page="whats-on"] .whats-on-next-panel{padding:22px 20px}
+  body[data-page="whats-on"] .whats-on-next-panel h2{font-size:1.7rem!important}
+  body[data-page="whats-on"] .whats-on-next-panel .button-row{width:100%}
 }
