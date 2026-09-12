@@ -16,7 +16,7 @@ After owner screenshot review, the homepage desktop header was corrected to expo
 
 ## Final automated gates
 
-At commit `dca22f84839f98697bc33bfbd8259af8f1cabd22`:
+At commit `0035c819008b5fe52e472266a08263ef4f25c6d0`:
 
 - Current content freshness — PASS
 - Homepage V3 QA — PASS
