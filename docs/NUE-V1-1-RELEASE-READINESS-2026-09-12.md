@@ -12,9 +12,11 @@ The preview branch was brought fully up to date with current `main` at merge com
 
 The only overlapping reader-facing file from the intervening main changes was `guides/index.html`. The preview keeps both the v1.1 Guide Finder/design work and the current production freshness wording: `Fully updated 12 September 2026`.
 
+After owner screenshot review, the homepage desktop header was corrected to expose the same complete navigation as the other reader pages: Home, What’s On, Guides, Where to start, Join, Submit, Contact, Advertise and the Join free CTA. The earlier homepage-only CSS that visually reduced the menu is now overridden for desktop, and the homepage QA contract explicitly guards the full menu.
+
 ## Final automated gates
 
-At commit `a7ccd873738e02d5d4ff12281acdf5809a204fec`:
+At commit `dca22f84839f98697bc33bfbd8259af8f1cabd22`:
 
 - Current content freshness — PASS
 - Homepage V3 QA — PASS
