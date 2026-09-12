@@ -23,10 +23,16 @@ requireText(config, 'subscriberCount: "500+"', 'public subscriber proof');
 requireText(config, 'number: 12', 'current issue');
 requireText(home, 'assets/homepage-v4.css', 'homepage V4 stylesheet');
 
-// 1. Header hierarchy remains simplified on desktop.
-requireText(css, 'a[href="/start/"]', 'desktop header simplification');
-requireText(css, 'a[href="/contact/"]', 'desktop header simplification');
-requireText(css, '@media(max-width:820px)', 'mobile full-nav restoration');
+// 1. Homepage desktop header exposes the same full menu as the rest of the site.
+requireText(home, 'href="start/">Where to start</a>', 'homepage Where to start navigation');
+requireText(home, 'href="join/">Join</a>', 'homepage Join navigation');
+requireText(home, 'href="submit/">Submit</a>', 'homepage Submit navigation');
+requireText(home, 'href="contact/">Contact</a>', 'homepage Contact navigation');
+requireText(v5, '@media(min-width:821px)', 'desktop full-nav restoration');
+requireText(v5, 'a[href="/start/"]', 'desktop Where to start visibility');
+requireText(v5, 'a[href="/submit/"]', 'desktop Submit visibility');
+requireText(v5, 'a[href="/contact/"]', 'desktop Contact visibility');
+requireText(v5, 'display:inline-flex!important', 'desktop full-nav visibility override');
 
 // 2. Hero hierarchy and trust cluster.
 requireText(js, 'Free Friday newsletter · SK8', 'hero eyebrow');
