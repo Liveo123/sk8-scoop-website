@@ -18,21 +18,53 @@ jobs:
           fetch-depth: 0
       - name: Download approved Drive HTML
         run: |
+          python -m pip install --quiet beautifulsoup4 requests
           python - <<'PY'
           import requests
+          from bs4 import BeautifulSoup
+          from urllib.parse import urljoin
+
           file_id='1YDvo0tsdjEbNhYnLnVxfgDzTJONe0PQ8'
-          urls=[
-              f'https://drive.usercontent.google.com/download?id={file_id}&export=download&confirm=t',
-              f'https://drive.google.com/uc?export=download&confirm=t&id={file_id}',
-          ]
-          for url in urls:
-              r=requests.get(url,timeout=180,allow_redirects=True)
-              print('attempt',url,'status',r.status_code,'bytes',len(r.content),'type',r.headers.get('content-type'))
-              if len(r.content) > 10_000_000 and b'<html' not in r.content[:1000].lower():
+          expected_size=22693871
+          s=requests.Session()
+          r=s.get('https://drive.google.com/uc', params={'export':'download','id':file_id}, timeout=120)
+          for attempt in range(8):
+              print('attempt', attempt+1, 'status', r.status_code, 'bytes', len(r.content), 'type', r.headers.get('content-type'), 'url', r.url)
+              r.raise_for_status()
+              if len(r.content) == expected_size:
                   open('/tmp/guide.html','wb').write(r.content)
+                  print('Exact-size guide downloaded.')
                   break
+              if len(r.content) > 5_000_000:
+                  open('/tmp/unexpected.bin','wb').write(r.content)
+                  raise SystemExit(f'Unexpected large response: {len(r.content)} bytes')
+              soup=BeautifulSoup(r.content, 'html.parser')
+              forms=soup.find_all('form')
+              print('forms', len(forms))
+              form=soup.find('form', id='download-form')
+              if form is None:
+                  form=next((f for f in forms if 'download' in (f.get('action') or '').lower()), None)
+              if form is None:
+                  links=[a.get('href') for a in soup.find_all('a', href=True) if 'download' in a.get('href','').lower() or 'confirm=' in a.get('href','').lower()]
+                  print('download-like links', links[:10])
+                  if links:
+                      r=s.get(urljoin(r.url, links[0]), timeout=180)
+                      continue
+                  raise SystemExit('No Google download form or download link found')
+              action=urljoin(r.url, form.get('action',''))
+              method=(form.get('method') or 'get').lower()
+              params={}
+              for inp in form.find_all('input'):
+                  name=inp.get('name')
+                  if name:
+                      params[name]=inp.get('value','')
+              print('form action', action, 'method', method, 'fields', sorted(params.keys()))
+              if method == 'post':
+                  r=s.post(action, data=params, timeout=180)
+              else:
+                  r=s.get(action, params=params, timeout=180)
           else:
-              raise SystemExit('Could not download approved guide bytes directly from Drive')
+              raise SystemExit('Exceeded Google download confirmation steps')
           PY
       - name: Verify exact approved source
         run: |
