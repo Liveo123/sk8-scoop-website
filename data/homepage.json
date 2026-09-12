@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11",
+  "updated": "2026-09-12",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
@@ -18,15 +18,15 @@
     {
       "mode": "DO",
       "label": "DO THIS",
-      "title": "Bramhall Wellness Day is free this Saturday",
-      "meta": "Bramhall Village Square · Sat 12 Sep · from 10am",
-      "summary": "A free village-centre day with fitness tasters, wellbeing advice, activities, screenings, children’s crafts and a market.",
+      "title": "See the latest checked local listings",
+      "meta": "What’s On · dates, prices and organiser links checked",
+      "summary": "Start with the current useful picks rather than an endless calendar. Past dated listings drop away automatically.",
       "href": "/whats-on/",
-      "linkLabel": "See this weekend’s checked listings →",
+      "linkLabel": "See the latest checked listings →",
       "visualType": "dicm",
       "fit": "contain",
       "image": "/assets/images/nue/whats-on-weekend.webp",
-      "alt": "SK8 Scoop editorial artwork for this weekend’s local events"
+      "alt": "SK8 Scoop editorial artwork for current local events and things to do"
     },
     {
       "mode": "DISCOVER",
