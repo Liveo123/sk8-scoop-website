@@ -30,14 +30,16 @@ body.reader-home .reader-proof{gap:8px 10px;margin-top:17px}
 body.reader-home .reader-proof span{padding:7px 10px;border:1px solid rgba(15,100,112,.16);border-radius:999px;background:rgba(255,255,255,.72);font-size:.78rem;font-weight:800}
 body.reader-home .reader-proof b{font-size:.88rem}
 
-/* 3. Give the weekly story cards consistent rhythm and less visual noise. */
+/* 3. Give the weekly story cards consistent rhythm and a deliberately matched editorial image treatment. */
 body.reader-home .reader-worth{padding-top:38px;padding-bottom:38px}
 body.reader-home .reader-card-grid{gap:18px;align-items:stretch}
-body.reader-home .reader-story{display:flex;flex-direction:column;border-radius:16px;box-shadow:0 7px 20px rgba(19,45,49,.065);transition:transform .18s ease,box-shadow .18s ease}
+body.reader-home .reader-story{display:flex;flex-direction:column;border-radius:16px;box-shadow:0 7px 20px rgba(19,45,49,.065);transition:transform .18s ease,box-shadow .18s ease;overflow:hidden}
 body.reader-home .reader-story:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(19,45,49,.09)}
-body.reader-home .reader-story .dicm-visual{padding:12px 12px 0!important;gap:9px;background:#f4f8f6!important}
-body.reader-home .reader-story .dicm-art{border-radius:10px;background:#fff}
-body.reader-home .reader-story .dicm-mode-label{margin-left:1px;padding:5px 9px;font-size:.66rem;letter-spacing:.08em}
+body.reader-home .reader-story .dicm-visual{position:relative;display:block!important;height:214px!important;padding:0!important;background:#edf4f1!important;overflow:hidden;border-bottom:1px solid #d8e2de}
+body.reader-home .reader-story .dicm-art{display:block;width:100%!important;height:100%!important;border-radius:0!important;background:#edf4f1!important;object-fit:cover;object-position:center}
+body.reader-home .reader-story .dicm-art[alt*="Ladybrook"],
+body.reader-home .reader-story .dicm-art[alt*="Five Lives"]{object-fit:contain;padding:12px;box-sizing:border-box;background:#f8faf7!important}
+body.reader-home .reader-story .dicm-mode-label{position:absolute;left:12px;top:12px;z-index:3;margin:0!important;padding:6px 10px;font-size:.66rem;letter-spacing:.08em;box-shadow:0 4px 10px rgba(7,63,72,.14)}
 body.reader-home .reader-story-body{display:flex;flex:1;flex-direction:column;padding:17px 18px 18px}
 body.reader-home .reader-story h3{font-size:1.28rem;line-height:1.16}
 body.reader-home .reader-story p[data-story-summary]{font-size:.91rem;line-height:1.47}
@@ -114,6 +116,7 @@ body.reader-home a:focus-visible,body.reader-home button:focus-visible,body.read
   body.reader-home .reader-proof{gap:7px}
   body.reader-home .reader-proof span{font-size:.73rem;padding:6px 8px}
   body.reader-home .reader-story{display:flex}
+  body.reader-home .reader-story .dicm-visual{height:196px!important}
   body.reader-home [data-explore-grid]{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
   body.reader-home .reader-explore-tile{min-height:176px}
   body.reader-home .reader-explore-visual{height:82px;flex-basis:82px}
