@@ -14,6 +14,9 @@ const ISSUE_12_POLL_ANSWERS = [
   'local_history_mysteries'
 ];
 
+const CONTACT_INBOX = 'contact@sk8scoop.com';
+const WEBSITE_SENDER = 'website@sk8scoop.com';
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -34,6 +37,14 @@ export default {
 
     if (url.pathname === '/api/poll/issue-12' && request.method === 'POST') {
       return handleIssue12PollVote(request, env);
+    }
+
+    if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') {
+      return handleAdvertiserEnquiryWithNotification(request, env, ctx);
+    }
+
+    if (url.pathname === '/api/advertiser-enquiries' && request.method === 'GET') {
+      return handleAdvertiserEnquiries(request, env);
     }
 
     if ((url.pathname === '/free-cheap-guide/guide' || url.pathname === '/free-cheap-guide/guide/') && request.method === 'GET') {
@@ -153,6 +164,95 @@ async function handleNewsletterSignup(request, env) {
   }
 
   return json({ success: true, kind });
+}
+
+async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
+  const notificationCopy = request.clone();
+  const response = await existingWorker.fetch(request, env, ctx);
+  if (!response.ok) return response;
+
+  let data = null;
+  try {
+    data = await notificationCopy.json();
+  } catch (error) {
+    console.error('Advertiser enquiry notification parse failed', error);
+    return response;
+  }
+
+  const c = (value, length = 1000) => String(value || '').trim().slice(0, length);
+  const packageLabel = {
+    temp_test: 'TEST £40',
+    temp_grow: 'GROW £90',
+    local_spotlight: 'Legacy Local Spotlight',
+    monthly_partner: 'Legacy Monthly Partner',
+    category_partner: 'Legacy Category Partner',
+    bespoke: 'Legacy Bespoke'
+  }[String(data.package || '')] || c(data.package, 80) || 'Not supplied';
+
+  const notification = await notifyAdvertiserInbox(env, {
+    subject: `[SK8 Scoop advertiser enquiry] ${c(data.business_name, 100)} - ${packageLabel}`,
+    text: [
+      'New SK8 Scoop advertiser enquiry',
+      '',
+      `Business: ${c(data.business_name, 180)}`,
+      `Contact: ${c(data.contact_name, 120)}`,
+      `Email: ${c(data.email, 200).toLowerCase()}`,
+      `Phone: ${c(data.phone, 80) || 'Not provided'}`,
+      `Area: ${c(data.area, 100) || 'Not provided'}`,
+      `Business type: ${c(data.business_type, 120) || 'Not provided'}`,
+      `Requested route: ${packageLabel}`,
+      `Preferred timing: ${c(data.preferred_date, 80)}`,
+      `Website / booking / social route: ${c(data.website, 500)}`,
+      '',
+      c(data.advert_copy, 1000) ? `Goal / useful message:\n${c(data.advert_copy, 1000)}` : 'No additional campaign note.'
+    ].join('\n')
+  });
+
+  if (notification !== 'sent') {
+    console.log(`Advertiser enquiry notification status: ${notification}`);
+  }
+
+  return response;
+}
+
+async function handleAdvertiserEnquiries(request, env) {
+  const auth = request.headers.get('authorization') || '';
+  if (!env.ADMIN_TOKEN) return json({ error: 'The admin token has not been configured.' }, 503);
+  if (auth !== `Bearer ${env.ADMIN_TOKEN}`) return json({ error: 'Unauthorised.' }, 401);
+  if (!env.DB) return json({ error: 'The website database is not connected yet.' }, 503);
+
+  try {
+    const rows = (await env.DB.prepare(`SELECT id,business_name,contact_name,email,phone,business_type,area,website,package,preferred_date,advert_copy,status,created_at FROM advertiser_enquiries ORDER BY created_at DESC LIMIT 100`).all()).results || [];
+    const counts = rows.reduce((acc, row) => {
+      const key = String(row.status || 'unknown');
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {});
+    return json({ rows, counts, returned: rows.length });
+  } catch (error) {
+    console.error('Advertiser enquiry read failed', error);
+    return json({ error: 'Could not load advertiser enquiries.' }, 500);
+  }
+}
+
+async function notifyAdvertiserInbox(env, { subject, text }) {
+  if (!env.CONTACT_EMAIL || typeof env.CONTACT_EMAIL.send !== 'function') return 'not_configured';
+  try {
+    await env.CONTACT_EMAIL.send({
+      from: WEBSITE_SENDER,
+      to: CONTACT_INBOX,
+      subject: safeHeader(subject),
+      text: String(text || '').slice(0, 12000)
+    });
+    return 'sent';
+  } catch (error) {
+    console.error('Advertiser enquiry notification failed', error);
+    return 'failed';
+  }
+}
+
+function safeHeader(value) {
+  return String(value || '').replace(/[\r\n]+/g, ' ').trim().slice(0, 180);
 }
 
 async function ensureIssue12PollTable(db) {
