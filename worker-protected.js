@@ -236,9 +236,9 @@ async function handleAdvertiserEnquiries(request, env) {
 }
 
 async function notifyAdvertiserInbox(env, { subject, text }) {
-  if (!env.CONTACT_EMAIL || typeof env.CONTACT_EMAIL.send !== 'function') return 'not_configured';
+  if (!env.ADVERTISER_EMAIL || typeof env.ADVERTISER_EMAIL.send !== 'function') return 'not_configured';
   try {
-    await env.CONTACT_EMAIL.send({
+    await env.ADVERTISER_EMAIL.send({
       from: WEBSITE_SENDER,
       to: CONTACT_INBOX,
       subject: safeHeader(subject),
