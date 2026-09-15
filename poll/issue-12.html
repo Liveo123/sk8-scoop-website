@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SK8 Scoop quick poll</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{--teal:#075d67;--ink:#17323a;--lime:#c7df43;--cream:#fffaf0;--soft:#eef7f4;--line:#d8e6e1}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.45}.wrap{max-width:620px;margin:0 auto;padding:22px 16px 48px}.brand{background:var(--teal);color:#fff;border-radius:20px;padding:18px 20px;margin-bottom:18px}.brand b{font-size:30px}.brand span{color:var(--lime);font-weight:700}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(7,93,103,.07)}h1{font-size:27px;line-height:1.1;margin:0 0 10px}.sub{margin:0 0 18px;color:#50666b}.choice{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px 14px;margin:10px 0;font-size:17px;color:var(--ink);cursor:pointer}.choice.selected{border-color:var(--teal);background:var(--soft)}button.confirm{width:100%;border:0;background:var(--teal);color:#fff;border-radius:14px;padding:15px;font-size:17px;font-weight:700;margin-top:14px;cursor:pointer}button.confirm:disabled{opacity:.5}.results{display:none;margin-top:22px}.barrow{margin:16px 0}.barlabel{display:flex;justify-content:space-between;gap:12px;font-size:15px;margin-bottom:5px}.track{height:14px;background:#e8efec;border-radius:999px;overflow:hidden}.fill{height:100%;background:var(--teal);border-radius:999px}.thanks{font-weight:700;font-size:20px;margin:0 0 5px}.small{font-size:13px;color:#65777b;margin-top:20px}.error{color:#9f2d2d;font-weight:700}.back{display:inline-block;margin-top:20px;color:var(--teal);font-weight:700;text-decoration:none}
+</style>
+</head>
+<body><main class="wrap">
+<div class="brand"><b>SK8 <span>SCOOP</span></b><br>Local stories. A brighter SK8.</div>
+<section class="card">
+<div id="votePane">
+<h1>How far should SK8 Scoop search for a genuinely excellent event?</h1>
+<p class="sub">Your answer helps decide how far we roam when SK8 itself has a quiet weekend.</p>
+<div id="choices"></div>
+<button id="confirm" class="confirm" disabled>Confirm my vote</button>
+<p id="msg" class="error" aria-live="polite"></p>
+</div>
+<div id="results" class="results">
+<p class="thanks">Thanks. Here’s how the vote looks so far.</p>
+<p class="sub" id="total"></p>
+<div id="bars"></div>
+<a class="back" href="https://www.sk8scoop.com/latest">Back to SK8 Scoop →</a>
+</div>
+<p class="small">One response per poll link. Changing your answer updates your existing vote rather than adding another.</p>
+</section></main>
+<script>
+const labels={sk8:'Keep it in SK8 if possible','15min':'About 15 minutes away','30min':'Up to 30 minutes away',further:'Further, if it is properly worth the trip'};
+const qs=new URLSearchParams(location.search);let selected=qs.get('answer');
+if(!labels[selected]) selected='';
+let token=qs.get('v')||localStorage.getItem('sk8_poll_i12_token');
+if(!token){token=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now());localStorage.setItem('sk8_poll_i12_token',token)}
+const choices=document.getElementById('choices'),confirm=document.getElementById('confirm');
+for(const [key,label] of Object.entries(labels)){const b=document.createElement('button');b.className='choice'+(key===selected?' selected':'');b.textContent=label;b.onclick=()=>{selected=key;document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');confirm.disabled=false};choices.appendChild(b)}
+confirm.disabled=!selected;
+confirm.onclick=async()=>{confirm.disabled=true;document.getElementById('msg').textContent='';try{const r=await fetch('/api/poll-vote',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({option:selected,token})});const d=await r.json();if(!r.ok)throw new Error(d.error||'Vote failed');show(d)}catch(e){document.getElementById('msg').textContent='Could not record that vote. Please try again.';confirm.disabled=false}};
+function show(d){document.getElementById('votePane').style.display='none';const results=document.getElementById('results');results.style.display='block';document.getElementById('total').textContent=d.total+' confirmed vote'+(d.total===1?'':'s');const bars=document.getElementById('bars');bars.innerHTML='';for(const [key,label] of Object.entries(labels)){const n=d.counts[key]||0,p=d.total?Math.round(n*100/d.total):0;bars.insertAdjacentHTML('beforeend',`<div class="barrow"><div class="barlabel"><span>${label}</span><strong>${p}%</strong></div><div class="track"><div class="fill" style="width:${p}%"></div></div></div>`)} }
+</script></body></html>
