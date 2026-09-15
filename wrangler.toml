@@ -13,8 +13,9 @@ html_handling = "auto-trailing-slash"
 [[d1_databases]]
 binding = "DB"
 
-# Outbound website notifications to the SK8 Scoop inbox.
+# Advertiser-enquiry notifications only.
 # Requires contact@sk8scoop.com to be a verified destination in Cloudflare Email Service/Email Routing.
+# Kept separate from CONTACT_EMAIL so this advertiser change does not alter other notification flows.
 [[send_email]]
-name = "CONTACT_EMAIL"
+name = "ADVERTISER_EMAIL"
 destination_address = "contact@sk8scoop.com"
