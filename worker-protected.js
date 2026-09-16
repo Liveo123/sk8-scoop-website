@@ -236,7 +236,10 @@ async function handleAdvertiserEnquiries(request, env) {
 }
 
 async function notifyAdvertiserInbox(env, { subject, text }) {
-  if (!env.ADVERTISER_EMAIL || typeof env.ADVERTISER_EMAIL.send !== 'function') return 'not_configured';
+  if (!env.ADVERTISER_EMAIL || typeof env.ADVERTISER_EMAIL.send !== 'function') {
+    console.error('Advertiser enquiry notification failed: ADVERTISER_EMAIL binding is not configured');
+    return 'not_configured';
+  }
   try {
     const cleanSubject = safeHeader(subject);
     const cleanText = String(text || '').slice(0, 12000).replace(/\r?\n/g, '\r\n');
@@ -252,10 +255,13 @@ async function notifyAdvertiserInbox(env, { subject, text }) {
       cleanText
     ].join('\r\n');
     const message = new EmailMessage(CONTACT_INBOX, CONTACT_INBOX, raw);
-    await env.ADVERTISER_EMAIL.send(message);
+    const result = await env.ADVERTISER_EMAIL.send(message);
+    console.log(`Advertiser enquiry notification sent${result && result.messageId ? `: ${result.messageId}` : ''}`);
     return 'sent';
   } catch (error) {
-    console.error('Advertiser enquiry notification failed', error);
+    const code = error && error.code ? String(error.code) : 'NO_CODE';
+    const message = error && error.message ? String(error.message) : String(error || 'Unknown error');
+    console.error(`Advertiser enquiry notification failed: ${code}: ${message}`);
     return 'failed';
   }
 }
