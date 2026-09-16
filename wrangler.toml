@@ -12,10 +12,3 @@ html_handling = "auto-trailing-slash"
 # Cloudflare will provision and bind a D1 database for this Worker.
 [[d1_databases]]
 binding = "DB"
-
-# Advertiser-enquiry notifications only.
-# Requires contact@sk8scoop.com to be a verified destination in Cloudflare Email Service/Email Routing.
-# Kept separate from CONTACT_EMAIL so this advertiser change does not alter other notification flows.
-[[send_email]]
-name = "ADVERTISER_EMAIL"
-destination_address = "contact@sk8scoop.com"
