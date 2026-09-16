@@ -1,3 +1,4 @@
+import { EmailMessage } from 'cloudflare:email';
 import existingWorker from './worker.js';
 
 const MAILERLITE_GROUPS = {
@@ -15,7 +16,6 @@ const ISSUE_12_POLL_ANSWERS = [
 ];
 
 const CONTACT_INBOX = 'contact@sk8scoop.com';
-const WEBSITE_SENDER = 'website@sk8scoop.com';
 
 export default {
   async fetch(request, env, ctx) {
@@ -238,12 +238,21 @@ async function handleAdvertiserEnquiries(request, env) {
 async function notifyAdvertiserInbox(env, { subject, text }) {
   if (!env.ADVERTISER_EMAIL || typeof env.ADVERTISER_EMAIL.send !== 'function') return 'not_configured';
   try {
-    await env.ADVERTISER_EMAIL.send({
-      from: WEBSITE_SENDER,
-      to: CONTACT_INBOX,
-      subject: safeHeader(subject),
-      text: String(text || '').slice(0, 12000)
-    });
+    const cleanSubject = safeHeader(subject);
+    const cleanText = String(text || '').slice(0, 12000).replace(/\r?\n/g, '\r\n');
+    const raw = [
+      `From: SK8 Scoop <${CONTACT_INBOX}>`,
+      `To: ${CONTACT_INBOX}`,
+      `Subject: ${cleanSubject}`,
+      `Date: ${new Date().toUTCString()}`,
+      'MIME-Version: 1.0',
+      'Content-Type: text/plain; charset=UTF-8',
+      'Content-Transfer-Encoding: 8bit',
+      '',
+      cleanText
+    ].join('\r\n');
+    const message = new EmailMessage(CONTACT_INBOX, CONTACT_INBOX, raw);
+    await env.ADVERTISER_EMAIL.send(message);
     return 'sent';
   } catch (error) {
     console.error('Advertiser enquiry notification failed', error);
