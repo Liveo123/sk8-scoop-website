@@ -1,4 +1,3 @@
-import { EmailMessage } from 'cloudflare:email';
 import existingWorker from './worker.js';
 
 const MAILERLITE_GROUPS = {
@@ -208,8 +207,20 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
     ].join('\n')
   });
 
-  if (notification !== 'sent') {
-    console.log(`Advertiser enquiry notification status: ${notification}`);
+  if (notification.status !== 'sent') {
+    console.log(`Advertiser enquiry notification status: ${notification.status}${notification.code ? ` (${notification.code})` : ''}`);
+  }
+
+  const isLabelledTest = /^SK8 Scoop TEST ONLY/i.test(c(data.business_name, 180));
+  if (isLabelledTest) {
+    const detail = notification.status === 'sent'
+      ? `Email notification sent${notification.messageId ? ` (${notification.messageId})` : ''}.`
+      : `Email notification ${notification.status}${notification.code ? `: ${notification.code}` : ''}${notification.message ? ` - ${notification.message}` : ''}.`;
+    return json({
+      message: `TEST DIAGNOSTIC: enquiry saved to D1. ${detail}`,
+      notification_status: notification.status,
+      notification_code: notification.code || null
+    });
   }
 
   return response;
@@ -238,36 +249,32 @@ async function handleAdvertiserEnquiries(request, env) {
 async function notifyAdvertiserInbox(env, { subject, text }) {
   if (!env.ADVERTISER_EMAIL || typeof env.ADVERTISER_EMAIL.send !== 'function') {
     console.error('Advertiser enquiry notification failed: ADVERTISER_EMAIL binding is not configured');
-    return 'not_configured';
+    return { status: 'not_configured', code: 'BINDING_MISSING', message: 'ADVERTISER_EMAIL binding is not configured' };
   }
   try {
-    const cleanSubject = safeHeader(subject);
-    const cleanText = String(text || '').slice(0, 12000).replace(/\r?\n/g, '\r\n');
-    const raw = [
-      `From: SK8 Scoop <${CONTACT_INBOX}>`,
-      `To: ${CONTACT_INBOX}`,
-      `Subject: ${cleanSubject}`,
-      `Date: ${new Date().toUTCString()}`,
-      'MIME-Version: 1.0',
-      'Content-Type: text/plain; charset=UTF-8',
-      'Content-Transfer-Encoding: 8bit',
-      '',
-      cleanText
-    ].join('\r\n');
-    const message = new EmailMessage(CONTACT_INBOX, CONTACT_INBOX, raw);
-    const result = await env.ADVERTISER_EMAIL.send(message);
+    const result = await env.ADVERTISER_EMAIL.send({
+      to: CONTACT_INBOX,
+      from: CONTACT_INBOX,
+      subject: safeHeader(subject),
+      text: String(text || '').slice(0, 12000),
+      replyTo: CONTACT_INBOX
+    });
     console.log(`Advertiser enquiry notification sent${result && result.messageId ? `: ${result.messageId}` : ''}`);
-    return 'sent';
+    return { status: 'sent', messageId: result && result.messageId ? String(result.messageId) : null };
   } catch (error) {
     const code = error && error.code ? String(error.code) : 'NO_CODE';
     const message = error && error.message ? String(error.message) : String(error || 'Unknown error');
     console.error(`Advertiser enquiry notification failed: ${code}: ${message}`);
-    return 'failed';
+    return { status: 'failed', code, message: safeDiagnostic(message) };
   }
 }
 
 function safeHeader(value) {
   return String(value || '').replace(/[\r\n]+/g, ' ').trim().slice(0, 180);
+}
+
+function safeDiagnostic(value) {
+  return String(value || '').replace(/[\r\n]+/g, ' ').replace(/[<>]/g, '').trim().slice(0, 240);
 }
 
 async function ensureIssue12PollTable(db) {
