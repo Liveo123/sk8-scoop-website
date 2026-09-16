@@ -15,6 +15,7 @@ const ISSUE_12_POLL_ANSWERS = [
 ];
 
 const CONTACT_INBOX = 'contact@sk8scoop.com';
+const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
 
 export default {
   async fetch(request, env, ctx) {
@@ -247,22 +248,47 @@ async function handleAdvertiserEnquiries(request, env) {
 }
 
 async function notifyAdvertiserInbox(env, { subject, text }) {
-  if (!env.ADVERTISER_EMAIL || typeof env.ADVERTISER_EMAIL.send !== 'function') {
-    console.error('Advertiser enquiry notification failed: ADVERTISER_EMAIL binding is not configured');
-    return { status: 'not_configured', code: 'BINDING_MISSING', message: 'ADVERTISER_EMAIL binding is not configured' };
+  const apiKey = String(env.RESEND_API_KEY || '').trim();
+  if (!apiKey) {
+    console.error('Advertiser enquiry notification failed: RESEND_API_KEY is not configured');
+    return { status: 'not_configured', code: 'RESEND_API_KEY_MISSING', message: 'RESEND_API_KEY is not configured' };
   }
+
   try {
-    const result = await env.ADVERTISER_EMAIL.send({
-      to: CONTACT_INBOX,
-      from: CONTACT_INBOX,
-      subject: safeHeader(subject),
-      text: String(text || '').slice(0, 12000),
-      replyTo: CONTACT_INBOX
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${apiKey}`,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: `SK8 Scoop <${RESEND_SENDER}>`,
+        to: [CONTACT_INBOX],
+        subject: safeHeader(subject),
+        text: String(text || '').slice(0, 12000),
+        reply_to: CONTACT_INBOX
+      })
     });
-    console.log(`Advertiser enquiry notification sent${result && result.messageId ? `: ${result.messageId}` : ''}`);
-    return { status: 'sent', messageId: result && result.messageId ? String(result.messageId) : null };
+
+    let result = null;
+    try {
+      result = await response.json();
+    } catch {
+      result = null;
+    }
+
+    if (!response.ok) {
+      const code = result && result.name ? String(result.name) : `HTTP_${response.status}`;
+      const message = result && result.message ? String(result.message) : `Resend returned HTTP ${response.status}`;
+      console.error(`Advertiser enquiry notification failed: ${code}: ${message}`);
+      return { status: 'failed', code, message: safeDiagnostic(message) };
+    }
+
+    const messageId = result && result.id ? String(result.id) : null;
+    console.log(`Advertiser enquiry notification sent via Resend${messageId ? `: ${messageId}` : ''}`);
+    return { status: 'sent', messageId };
   } catch (error) {
-    const code = error && error.code ? String(error.code) : 'NO_CODE';
+    const code = error && error.name ? String(error.name) : 'RESEND_REQUEST_FAILED';
     const message = error && error.message ? String(error.message) : String(error || 'Unknown error');
     console.error(`Advertiser enquiry notification failed: ${code}: ${message}`);
     return { status: 'failed', code, message: safeDiagnostic(message) };
