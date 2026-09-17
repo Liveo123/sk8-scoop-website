@@ -12,23 +12,29 @@ Make SK8 Scoop search available from any normal public page without building a s
 
 ## Reader behaviour
 
-### Large desktop
+### Wide desktop
 
-- Show a compact visible search field in the sticky header.
+- At `>=1440px`, show a compact visible search field alongside the full sticky-header navigation.
 - Keep the existing `Join free` action visually stronger than search.
 - Hide the duplicate plain `Join` navigation link at this width because `Join free` remains present.
 - Submit directly to the existing `/search/` results page.
 
-### Laptop / tablet / mobile
+### Laptop / tablet
 
-- Show a compact search icon in the header.
+- At `821–1439px`, keep a visible compact search field because the full navigation is moved behind a clean `Menu` button.
+- This avoids squeezing the full navigation, search field and CTA onto one row.
+- Menu opens the normal site navigation below the header.
+
+### Mobile
+
+- At `<=820px`, show a compact search icon beside the Menu control.
 - Tapping it opens a full-width search field immediately below the header.
 - Opening search closes the mobile navigation menu so the two layers do not compete.
 - Escape closes the search panel and restores focus.
 
 ### Keyboard shortcut
 
-On pages where the user is not already typing into a form, `/` focuses or opens the global search control.
+On pages where the user is not already typing into a form, `/` focuses the visible header search at widths `>=821px`, or opens the compact mobile search panel below that width.
 
 ## Search architecture
 
@@ -57,20 +63,22 @@ The first-party search log keeps the existing safeguards: obvious email addresse
 
 ## Responsive design
 
-- `>= 1280px`: visible compact input in the navigation row.
-- `< 1280px`: icon trigger plus expandable panel.
-- `<= 820px`: icon sits beside the mobile Menu control.
-- very narrow screens retain 44px controls and allow the logo to contract only when required to prevent overflow.
+- `>=1440px`: visible compact search input + full navigation + `Join free`.
+- `821–1439px`: visible compact search input + clean Menu button; navigation is collapsed behind Menu.
+- `<=820px`: search icon + Menu; search opens in a full-width panel below the header.
+- very narrow screens retain approximately 44px controls and allow the logo to contract only when required to prevent overflow.
+
+The `1440px` full-navigation threshold is deliberate. Browser QA showed that allowing the full navigation to return around `1280px` made the right-hand CTA clip at common laptop/browser widths.
 
 ## Accessibility
 
 - native `form`, `input type=search` and submit button;
 - explicit accessible labels;
 - keyboard focus styles;
-- Escape closes the compact panel;
+- Escape closes the compact mobile panel;
 - `/` shortcut is suppressed while typing or using interactive controls;
 - no colour-only state;
-- 44px compact header control targets.
+- approximately 44px compact header control targets.
 
 ## Deliberately not included
 
@@ -87,6 +95,6 @@ Those should only be considered after real reader search behaviour justifies the
 
 1. Automated preflight passes.
 2. Cloudflare branch preview smoke test passes, including global-search JS/CSS assets.
-3. Human visual check on large desktop, laptop/tablet and mobile.
+3. Human visual check on wide desktop, laptop/tablet and mobile.
 4. Confirm a preview header search arrives on `/search/` and appears as `preview_header` in Search Insights.
 5. Explicit Paul approval before merge to `main`.
