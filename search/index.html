@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Search SK8 Scoop | Find useful things around SK8</title>
+  <meta name="description" content="Search current SK8 Scoop events, guides, local stories and useful updates around Cheadle, Cheadle Hulme, Gatley and Heald Green.">
+  <link rel="canonical" href="https://www.sk8scoop.com/search/">
+  <meta name="theme-color" content="#0f6470">
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/reader-pages.css">
+  <link rel="stylesheet" href="../assets/reader-page-polish.css">
+  <link rel="stylesheet" href="../assets/nue.css">
+  <link rel="stylesheet" href="../assets/search.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body class="reader-page search-page" data-page="search">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header reader-header">
+    <div class="wrap header-row">
+      <a class="brand" href="/" aria-label="SK8 Scoop home"><img src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop — the useful, the local and the mildly nosy"></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+      <nav class="nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a><a href="/whats-on/">What’s On</a><a href="/guides/">Guides</a><a href="/around-sk8/">Around SK8</a><a href="/start/">Where to start</a><a href="/join/">Join</a><a href="/submit/">Submit</a><a href="/contact/">Contact</a><a href="/advertise.html">Advertise</a><a class="button nav-join reader-nav-join" href="/join/">Join free</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero search-page-hero">
+      <div class="wrap">
+        <div class="eyebrow">Explore SK8</div>
+        <h1>Find something around SK8.</h1>
+        <p class="hero-lead">Search current SK8 Scoop events, guides, local stories and practical updates without needing to know which section they live in.</p>
+
+        <form class="search-box" action="/search/" method="get" role="search" data-search-form>
+          <label for="sk8-search">Search SK8 Scoop</label>
+          <input id="sk8-search" name="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="Try “Gatley walk”, “free kids” or “roadworks”" data-search-input>
+          <button class="button" type="submit">Search</button>
+        </form>
+
+        <div class="search-examples" aria-label="Example searches">
+          <span>Try:</span>
+          <button class="search-example" type="button" data-search-example="Gatley walk">Gatley walk</button>
+          <button class="search-example" type="button" data-search-example="free kids">free kids</button>
+          <button class="search-example" type="button" data-search-example="Heald Green planning">Heald Green planning</button>
+          <button class="search-example" type="button" data-search-example="roadworks">roadworks</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="wrap">
+        <div class="search-tools" aria-label="Search filters">
+          <div class="search-filter-group">
+            <span class="search-filter-label">What kind of thing?</span>
+            <div class="search-filter-buttons">
+              <button class="search-filter" type="button" data-search-type="all" aria-pressed="true">All</button>
+              <button class="search-filter" type="button" data-search-type="Events" aria-pressed="false">Events</button>
+              <button class="search-filter" type="button" data-search-type="Guides" aria-pressed="false">Guides</button>
+              <button class="search-filter" type="button" data-search-type="Stories" aria-pressed="false">Stories</button>
+              <button class="search-filter" type="button" data-search-type="Useful updates" aria-pressed="false">Useful updates</button>
+            </div>
+          </div>
+          <div class="search-filter-group">
+            <span class="search-filter-label">Where?</span>
+            <div class="search-filter-buttons">
+              <button class="search-filter" type="button" data-search-area="all" aria-pressed="true">All areas</button>
+              <button class="search-filter" type="button" data-search-area="Cheadle" aria-pressed="false">Cheadle</button>
+              <button class="search-filter" type="button" data-search-area="Cheadle Hulme" aria-pressed="false">Cheadle Hulme</button>
+              <button class="search-filter" type="button" data-search-area="Gatley" aria-pressed="false">Gatley</button>
+              <button class="search-filter" type="button" data-search-area="Heald Green" aria-pressed="false">Heald Green</button>
+              <button class="search-filter" type="button" data-search-area="Nearby" aria-pressed="false">Nearby</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="search-status-row">
+          <p class="search-status" data-search-status aria-live="polite">Loading useful places to start…</p>
+          <p class="search-freshness" data-search-freshness></p>
+        </div>
+
+        <div class="search-results" data-search-results>
+          <div class="search-loading">Loading current SK8 Scoop content…</div>
+        </div>
+
+        <div class="reader-panel search-empty" data-search-empty hidden>
+          <div class="eyebrow">Nothing useful matched</div>
+          <h2>Better an honest blank than a pile of weak results.</h2>
+          <p>Try a shorter search, clear a filter, or use one of these routes.</p>
+          <div class="search-empty-routes">
+            <a class="button" href="/whats-on/">What’s On</a>
+            <a class="button secondary" href="/free-cheap-guide/">Free &amp; Cheap</a>
+            <a class="reader-link" href="/submit/">Send us something useful →</a>
+          </div>
+        </div>
+
+        <div class="reader-panel search-next">
+          <div class="eyebrow">Next useful experience</div>
+          <h2>Not sure what words to search?</h2>
+          <p>Browse Around SK8 by what you want to know, do or discover, or jump straight to current dated events.</p>
+          <div class="button-row">
+            <a class="button" href="/around-sk8/">Explore Around SK8</a>
+            <a class="button secondary" href="/whats-on/">See What’s On</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid footer-grid-wide">
+      <div class="footer-brand-block"><img class="footer-logo" src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><p>The useful, the local and the mildly nosy.</p></div>
+      <div class="footer-links"><strong>Read</strong><a href="/latest">Latest Scoop</a><a href="/guides/">Guides</a><a href="/archive.html">Archive</a></div>
+      <div class="footer-links"><strong>Explore</strong><a href="/search/">Search</a><a href="/around-sk8/">Around SK8</a><a href="/whats-on/">What’s On</a></div>
+      <div class="footer-links"><strong>Trust</strong><a href="/editorial-policy.html">Editorial policy</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+    </div>
+  </footer>
+
+  <script src="../assets/config.js"></script>
+  <script src="../assets/site.js"></script>
+  <script src="../assets/search.js"></script>
+</body>
+</html>
