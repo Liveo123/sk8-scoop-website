@@ -47,7 +47,7 @@ body.reader-home.homepage-v3 .reader-hero-photo::before{
   z-index:0;
   inset:0 0 0 43%;
   background-color:#e8e0cf;
-  background-image:url('https://res.cloudinary.com/gocq00bt/image/upload/c_crop,x_172,y_0,w_228,h_174/c_fill,w_1000,h_760,q_auto,f_auto/v1789670179/sk8-scoop/website/homepage/sk8-miniature-hero-background-2026-09-17.webp');
+  background-image:url('/assets/images/sk8-miniature-hero-background-full.webp');
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
