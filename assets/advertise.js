@@ -21,6 +21,17 @@
     issueStat.textContent = String(window.SK8_CONFIG.publicStats.issuesPublished);
   }
 
+  const goalWrap = document.querySelector('.ad-goal-wrap');
+  if (goalWrap && !goalWrap.querySelector('[data-campaign-finder-link]')) {
+    const finderLink = document.createElement('a');
+    finderLink.href = '/advertise/finder/';
+    finderLink.className = 'button secondary';
+    finderLink.dataset.campaignFinderLink = 'true';
+    finderLink.textContent = 'Not sure? Use the 4-step Campaign Finder';
+    finderLink.style.marginTop = '0.8rem';
+    goalWrap.appendChild(finderLink);
+  }
+
   const finderParams = new URLSearchParams(window.location.search);
   const finderSource = finderParams.get('finder_source');
   const finderPackage = finderParams.get('finder_package');
