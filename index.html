@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="assets/reader-page-polish.css">
   <link rel="stylesheet" href="assets/nue.css">
   <link rel="stylesheet" href="assets/homepage-v4.css">
+  <link rel="stylesheet" href="assets/homepage-search.css">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -87,6 +88,16 @@
           <div><div class="home-section-kicker">Choose a route</div><h2>What do you need?</h2></div>
           <span class="reader-muted-link">Events, cheaper ideas, food, family days out, walks, history and useful local changes.</span>
         </div>
+        <div class="home-explore-search-shell" data-experiment="nue-search-entry-v2">
+          <form class="home-explore-search" action="/search/" method="get" role="search">
+            <label for="home-site-search">Find something around SK8</label>
+            <div class="home-explore-search-row">
+              <input id="home-site-search" name="q" type="search" enterkeyhint="search" placeholder="Try “Gatley walk”, “free kids” or “roadworks”">
+              <button class="button" type="submit">Search</button>
+            </div>
+            <p class="home-explore-search-hint">Search current events, guides, local stories and practical updates. Or use the routes below.</p>
+          </form>
+        </div>
         <div class="reader-explore reader-explore-six" data-explore-grid>
           <a class="reader-explore-tile" href="/whats-on/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-whats-on.webp')"></span><span class="reader-explore-copy"><strong>What’s On</strong><small>Events &amp; things to do</small><em>Open →</em></span></a>
           <a class="reader-explore-tile" href="/free-cheap-guide/"><span class="reader-explore-visual reader-explore-photo is-guide-logo" aria-hidden="true" style="background:#fff url('/assets/images/free-cheap-guide-logo.webp') center/contain no-repeat"></span><span class="reader-explore-copy"><strong>Free &amp; Cheap</strong><small>Make the most of local life for less</small><em>Open →</em></span></a>
@@ -138,7 +149,7 @@
   <footer class="site-footer reader-full-footer">
     <div class="wrap footer-grid reader-footer-grid">
       <div class="footer-brand-block"><img class="footer-logo" src="assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><p>The useful, the local and the mildly nosy.</p><p class="footer-small">A free Friday newsletter for Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby SK8.</p></div>
-      <div class="footer-links"><strong>Explore</strong><a href="/whats-on/">What’s On</a><a href="/around-sk8/">Around SK8</a><a href="/latest">Latest Scoop</a><a href="guides/">Guides</a><a href="archive.html">Archive</a></div>
+      <div class="footer-links"><strong>Explore</strong><a href="/search/">Search</a><a href="/whats-on/">What’s On</a><a href="/around-sk8/">Around SK8</a><a href="/latest">Latest Scoop</a><a href="guides/">Guides</a><a href="archive.html">Archive</a></div>
       <div class="footer-links"><strong>Pages</strong><a href="start/">Where to start</a><a href="join/">Join</a><a href="submit/">Submit</a><a href="contact/">Contact</a><a href="advertise.html">Advertise</a></div>
       <div class="footer-links"><strong>About</strong><a href="about.html">About SK8 Scoop</a><a href="editorial-policy.html">Editorial policy</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
       <div class="reader-footer-signup"><strong>Get the Scoop</strong><p>New issue every Friday.</p><form class="signup conversion-signup" action="https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe" method="post" data-signup-form data-form-position="footer"><label class="sr-only" for="footer-email">Email address</label><input id="footer-email" type="email" name="fields[email]" autocomplete="email" placeholder="Your email address" required><button class="button" type="submit">Join free</button></form></div>
