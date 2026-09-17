@@ -15,16 +15,16 @@ A permanent search field could make the already busy SK8 Scoop navigation harder
 ### Fix
 
 - Reuse the existing `/search/` system rather than adding a second search engine.
-- Large desktop (`>=1280px`): visible compact search field + full navigation + `Join free`.
-- Laptop/tablet (`821–1279px`): visible compact search field + Menu. The full navigation moves behind Menu.
+- Wide desktop (`>=1440px`): visible compact search field + full navigation + `Join free`.
+- Laptop/tablet (`821–1439px`): visible compact search field + Menu. The full navigation moves behind Menu.
 - Mobile (`<=820px`): search icon + Menu, with a full-width search panel opening immediately under the header.
 - Keep `Join free` visually stronger whenever the full navigation is visible.
-- At large desktop width only, hide the duplicate plain `Join` link because the `Join free` action remains visible.
+- At wide desktop only, hide the duplicate plain `Join` link because the `Join free` action remains visible.
 - Do not add autocomplete, live suggestions or extra search controls before real demand supports them.
 
 ### Result
 
-The header gains a useful site-wide search entry point without turning into a second Explore menu or wasting laptop-width space.
+The header gains a useful site-wide search entry point without turning into a second Explore menu or forcing a dense navigation row onto laptop/browser widths.
 
 ## Cycle 2 — accuracy, accessibility and experience
 
@@ -39,7 +39,7 @@ Header search could conflict with the mobile menu, lose the typed query, create 
 - Compact controls are approximately 44px targets.
 - Opening mobile search closes the mobile navigation menu.
 - Escape closes the compact search panel and restores focus.
-- `/` opens/focuses search only when the reader is not already typing into or using an interactive control.
+- `/` focuses the visible inline search at `>=821px`; below that it opens the mobile panel. It is suppressed when the reader is already typing or using an interactive control.
 - The current query is repopulated in the header when already on `/search/`.
 - Empty/one-character header searches do not navigate.
 - `header_search_open` and `header_search_submit` send only interaction metadata such as query length, not raw query text.
@@ -66,30 +66,37 @@ A global feature loaded on every page creates a wider regression surface than a 
 
 ## Human screenshot review
 
-Three preview screenshots were reviewed on 17 September 2026.
+Four preview screenshots were reviewed on 17 September 2026.
 
-### Finding 1 — large desktop
+### Finding 1 — wide desktop
 
-The visible desktop search field fits the header and is easy to understand, but the plain `Join` link was still visible next to `Join free`. The cause was a selector that matched `/join/` but not the homepage's relative `join/` URL.
+The visible search field and full navigation can work together when there is genuinely enough horizontal space. The duplicate plain `Join` link must not appear beside `Join free`.
 
-**Fix:** the desktop rule now hides either form of the plain Join URL while keeping `Join free` visible.
+**Fix:** the wide-desktop rule uses a robust `href$="join/"` selector for the plain Join link while leaving the button in place.
 
-### Finding 2 — intermediate width with full navigation
+### Finding 2 — first intermediate-width attempt
 
-The first intermediate-width version showed a search icon and full navigation together, causing the right side of the navigation to run off the viewport.
+The search icon and full navigation were both present, causing the right side of the navigation to run off the viewport.
 
-**Fix:** below `1280px`, the full navigation collapses behind Menu instead of squeezing beside search.
+**Fix:** move the full navigation behind Menu at intermediate widths.
 
-### Finding 3 — intermediate width after collapse
+### Finding 3 — collapsed intermediate-width attempt
 
-The next screenshot showed the collapsed navigation fitting, but the header looked unnecessarily empty and the legacy hamburger decoration visually collided with the `Menu` label.
+The collapsed navigation fitted, but using only a small search icon wasted useful horizontal space and the legacy hamburger decoration collided with the `Menu` label.
+
+**Fix:** at `821–1439px`, use a visible compact search field plus a clean text Menu button. Keep the icon-only search pattern for mobile only.
+
+### Finding 4 — approximately 1300px browser width
+
+A later screenshot exposed a breakpoint regression: the viewport was just above the old `1280px` threshold, so the full navigation returned too early. `Join free` was clipped on the right and the header again became cramped.
 
 **Fix:**
 
-- At `821–1279px`, restore a visible compact search field because there is ample horizontal space when navigation is behind Menu.
-- Keep only the search icon below `821px`.
-- Remove the legacy decorative menu icon in the global-search responsive state and render the Menu button as a clean, centred text control with fixed minimum height/width.
-- Keep the Logo, Search and Menu controls on one stable row with explicit gaps.
+- Raise the full-navigation threshold from `1280px` to `1440px`.
+- Keep the `821–1439px` state as Logo + visible Search field + Menu.
+- Reduce the desktop logo flex width to 230px where appropriate.
+- Keep a wider 1408px header container only once the full-navigation state is active.
+- Align the `/` keyboard shortcut with the actual inline-search visibility threshold (`821px`), preventing it from focusing an invisible panel/input state.
 
 ### Preview-only observation
 
@@ -99,8 +106,8 @@ Earlier screenshots also showed a Cloudflare challenge/Turnstile connection warn
 
 After the latest preview deploys, recheck:
 
-1. large desktop: visible field, full navigation, no wrapping, only `Join free` remains as the join action;
-2. laptop/tablet (`821–1279px`): Logo + visible Search field + clean Menu button, no clipped links;
+1. wide desktop (`>=1440px`): visible field, full navigation, no clipping/wrapping, only `Join free` remains as the join action;
+2. laptop/tablet (`821–1439px`): Logo + visible Search field + clean Menu button, no clipped links;
 3. mobile (`<=820px`): Logo + Search icon + clean Menu button, panel easy to use and menu/search do not overlap;
 4. very narrow mobile: no horizontal overflow;
 5. `/` shortcut and Escape behaviour;
