@@ -63,12 +63,32 @@ A global feature loaded on every page creates a wider regression surface than a 
 - Cloudflare preview smoke checks explicitly fetch both new global-search assets.
 - Production smoke checks are prepared but will only run after an explicitly approved merge to `main`.
 
-### Remaining human check
+## Human screenshot review
 
-Automated tests cannot prove the final visual balance of the navigation. Before production approval, inspect:
+Two preview screenshots were reviewed on 17 September 2026.
 
-1. large desktop: visible field, no wrapping, `Join free` still obvious;
-2. laptop/tablet: icon opens panel cleanly and does not clash with navigation;
+### Finding 1 — large desktop
+
+The visible desktop search field fits the header and is easy to understand, but the plain `Join` link was still visible next to `Join free`. The cause was a selector that matched `/join/` but not the homepage's relative `join/` URL.
+
+**Fix:** the desktop rule now hides either form of the plain Join URL while keeping `Join free` visible.
+
+### Finding 2 — intermediate laptop / tablet width
+
+The search icon and full navigation were both present, causing the right side of the navigation to run off the viewport. This was the exact crowded state the responsive design was intended to avoid.
+
+**Fix:** below `1280px`, the full navigation now collapses behind the existing Menu control. The header becomes Logo + Search + Menu, and the search panel remains full-width below the header. The full navigation and visible desktop search field only coexist at `>=1280px`, where there is enough room.
+
+### Preview-only observation
+
+The screenshots also showed a Cloudflare challenge/Turnstile connection warning inside the newsletter signup area. That is separate from global search and should be treated as preview-environment behaviour unless it reproduces on the production domain.
+
+## Remaining human check
+
+After the updated preview deploys, recheck:
+
+1. large desktop: visible field, no wrapping, only `Join free` remains as the join action;
+2. laptop/tablet: Logo + Search + Menu fit on one line, with no clipped navigation links;
 3. mobile: Logo + Search + Menu fit, panel is easy to use, menu/search do not overlap;
 4. very narrow mobile: no horizontal overflow;
 5. `/` shortcut and Escape behaviour;
@@ -76,4 +96,4 @@ Automated tests cannot prove the final visual balance of the navigation. Before 
 
 ## Release decision
 
-Do not merge on automated QA alone. Human visual approval and one Search Insights round-trip remain the final release gate.
+Do not merge on automated QA alone. Updated human visual approval and one Search Insights round-trip remain the final release gate.
