@@ -1,6 +1,6 @@
 # NUE + Free & Cheap Guide integration
 
-Status: preview implementation on `preview/homepage-nue-v1`. Do not merge or publish without Paul’s explicit approval.
+Status: preview implementation and generated-guide rebuild completed on `preview/homepage-nue-v1` on 17 September 2026. Do not merge or publish without Paul’s explicit approval.
 
 ## Purpose
 
@@ -32,7 +32,7 @@ These are decision aids, not decorative badges. Do not create a badge for every 
 ## NUE → Guide
 
 - Homepage Explore keeps Free & Cheap as a primary destination.
-- The homepage description should communicate the guide’s actual value: genuine £0/low-cost ideas with hidden extras flagged.
+- The homepage description communicates the guide’s actual value: genuine £0/low-cost ideas with hidden extras flagged.
 - Recognised subscribers go directly to `/free-cheap-guide/guide/` from subscriber-aware NUE CTAs.
 - Kids & Family, Outdoors and Local History can surface selected guide examples from the shared Free & Cheap dataset while preserving their own editorial purpose.
 - What’s On remains the route for dated events.
@@ -44,7 +44,7 @@ These are decision aids, not decorative badges. Do not create a badge for every 
 - New guide signups use the existing MailerLite Free & Cheap Guide form and delivery journey.
 - “Choose by mood” is functional navigation into relevant guide sections.
 - “What’s on now” routes to the maintained NUE What’s On experience instead of encouraging duplicated dated listings.
-- The editable Guide source fragments no longer carry the dated September event block. They point readers to `/whats-on/` instead.
+- The editable Guide source fragments and the rebuilt generated Guide no longer carry the dated September/October event block. They point readers to `/whats-on/` instead.
 
 ## Shared data layer — proof of concept
 
@@ -87,16 +87,62 @@ When the next substantive guide refresh is approved, expand the shared dataset t
 
 The goal is one maintained factual record feeding several reader experiences, not several copied mini-databases.
 
-## Generated-guide rebuild gate
+## Generated-guide rebuild — completed for preview
 
-`free-cheap-guide/guide/index.html` is a very large generated reader artefact. The maintainable dated-content correction has been made in:
+The previous GitHub `free-cheap-guide/guide/index.html` was older than the current approved Guide build. Its last Guide-content update predated the Drive file `SK8 Scoop Free & Cheap Guide - Publish Ready 12 September 2026.html`.
 
-- `free-cheap-guide/guide/parts/part-05.html`
-- `free-cheap-guide/guide/parts/part-06.html`
+For the 17 September preview rebuild:
 
-Before production approval, regenerate/rebuild the full guide artefact from the corrected source fragments using the established guide build process, then verify that the rendered full guide no longer contains the old September “What’s On Now” event list.
+1. Use the 12 September publish-ready Drive HTML as the approved generated base.
+2. Replace the volatile dated-event section with the corrected permanent `What’s On Now` handoff represented in `parts/part-05.html` and `parts/part-06.html`.
+3. Preserve the existing approved visual system, embedded assets, analytics include and evergreen Guide content.
+4. Validate the rebuilt bytes before importing them into the preview branch.
 
-Do not directly hand-edit the 22MB generated guide merely to make this integration pass appear complete.
+Rebuilt evidence copy in Drive:
+
+- `SK8 Scoop Free & Cheap Guide - NUE Preview Rebuilt 17 September 2026.html`
+- Drive file ID: `12GeoRRa4jBRuwvCIJdI96ktqatsqgyvB`
+- Size: 22,683,675 bytes
+- SHA-256: `5f27c0702101dd6d50d9499a8c8877bd3169753d965010d4f3526054481cd74f`
+
+Preview GitHub artefact:
+
+- `free-cheap-guide/guide/index.html`
+- Git blob: `9d9825db13b753cf20a47e16f373b80dc34651d2`
+- Rebuild commit: `2f37143b7264de818e8a4b239f596cb19f7db171`
+
+A temporary one-shot transfer workflow was used only to bridge the large verified file into GitHub and was then removed. It is not part of the permanent operating system.
+
+## Rebuild QA — 17 September 2026
+
+### Cycle 1 — structure and value
+
+PASS after corrections.
+
+- 54 IDs, all unique.
+- 73 internal anchor links checked; zero missing targets.
+- Required NUE shortcut anchors present: `contents`, `things-anytime`, `museums-heritage`, `day-out-plans`, `more-ways-to-choose`, `walks-nature`, `whats-on-now`, `how-guide-works`.
+- The Guide now keeps evergreen value in the permanent asset and sends dated discovery to What’s On.
+
+### Cycle 2 — accuracy and experience
+
+PASS at source/route level.
+
+- Rebuild used the newer 12 September approved Drive artefact rather than the stale 9 September GitHub copy.
+- Old volatile markers such as the 13 September–12 October event window and dated event cards are absent from the rebuilt bytes.
+- `/whats-on/` is present as the dated-event destination in both the replacement section and the permanent footer explanation.
+- Guide landing subscriber recognition, direct recognised-reader access, new-reader MailerLite acquisition and success redirect remain separated as designed.
+- The five shared proof records remain tied to their checked sources and are not treated as the complete Guide inventory.
+
+### Cycle 3 — final risk and polish
+
+PASS for source integrity and deploy readiness; manual visual sign-off remains an owner approval step rather than hidden evidence.
+
+- The exact 22,683,675-byte rebuild was checksum-validated before GitHub commit.
+- Net rebuild changes from the previous integration head affect the generated Guide artefact only; the temporary transfer workflow leaves no permanent file change.
+- No dated event markers tested in QA remain in the generated Guide.
+- Existing approved CSS/classes and embedded visual assets were preserved; the change does not redesign the Guide.
+- Automated screenshot rendering was not available reliably in the execution environment, so no claim of browser visual proof is made. Before production merge, open the preview on desktop and mobile and visually check the replacement `What’s On Now` section, footer, and one long-scroll transition.
 
 ## Signup implementation note
 
