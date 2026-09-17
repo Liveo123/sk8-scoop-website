@@ -75,6 +75,16 @@ Fixes:
 - user agent
 - referrer URL
 
+## Automated QA
+
+The Search Insights feature code was present by commit `4d99a847330da5fff2821181009845e9b5b165bc`. The repository's three existing automated checks for that commit all completed successfully:
+
+- Current content freshness — success
+- Homepage V3 QA — success
+- Post-launch site QA — success
+
+These automated checks do not prove the D1 write/read round-trip because the private admin token is not available to the build session.
+
 ## Required preview checks
 
 1. Submit a search from the homepage and confirm it appears with source `homepage`.
