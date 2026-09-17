@@ -26,17 +26,19 @@ export async function onRequestGet({request,env}){
     const url=new URL(request.url);
     const requested=Number.parseInt(url.searchParams.get('days'),10)||30;
     const days=[7,30,90,365].includes(requested)?requested:30;
+    const scope=url.searchParams.get('scope')==='preview'?'preview':'live';
     const modifier=`-${days} days`;
+    const sourceClause=scope==='preview'?`source LIKE 'preview_%'`:`source NOT LIKE 'preview_%'`;
 
-    const totals=(await env.DB.prepare(`SELECT COUNT(*) searches,COUNT(DISTINCT query_normalised) unique_queries,SUM(CASE WHEN result_count=0 THEN 1 ELSE 0 END) zero_results,ROUND(AVG(result_count),1) avg_results FROM search_events WHERE created_at >= datetime('now',?)`).bind(modifier).first())||{};
+    const totals=(await env.DB.prepare(`SELECT COUNT(*) searches,COUNT(DISTINCT query_normalised) unique_queries,SUM(CASE WHEN result_count=0 THEN 1 ELSE 0 END) zero_results,ROUND(AVG(result_count),1) avg_results FROM search_events WHERE created_at >= datetime('now',?) AND ${sourceClause}`).bind(modifier).first())||{};
 
-    const top=(await env.DB.prepare(`SELECT query_normalised,MAX(query_text) query_text,COUNT(*) searches,ROUND(AVG(result_count),1) avg_results,SUM(CASE WHEN result_count=0 THEN 1 ELSE 0 END) zero_results,MAX(created_at) last_seen FROM search_events WHERE created_at >= datetime('now',?) GROUP BY query_normalised ORDER BY searches DESC,last_seen DESC LIMIT 25`).bind(modifier).all()).results||[];
+    const top=(await env.DB.prepare(`SELECT query_normalised,MAX(query_text) query_text,COUNT(*) searches,ROUND(AVG(result_count),1) avg_results,SUM(CASE WHEN result_count=0 THEN 1 ELSE 0 END) zero_results,MAX(created_at) last_seen FROM search_events WHERE created_at >= datetime('now',?) AND ${sourceClause} GROUP BY query_normalised ORDER BY searches DESC,last_seen DESC LIMIT 25`).bind(modifier).all()).results||[];
 
-    const unmet=(await env.DB.prepare(`SELECT query_normalised,MAX(query_text) query_text,COUNT(*) searches,MAX(created_at) last_seen FROM search_events WHERE created_at >= datetime('now',?) AND result_count=0 GROUP BY query_normalised ORDER BY searches DESC,last_seen DESC LIMIT 25`).bind(modifier).all()).results||[];
+    const unmet=(await env.DB.prepare(`SELECT query_normalised,MAX(query_text) query_text,COUNT(*) searches,MAX(created_at) last_seen FROM search_events WHERE created_at >= datetime('now',?) AND ${sourceClause} AND result_count=0 GROUP BY query_normalised ORDER BY searches DESC,last_seen DESC LIMIT 25`).bind(modifier).all()).results||[];
 
-    const recent=(await env.DB.prepare(`SELECT query_text,result_count,search_type,search_area,source,created_at FROM search_events WHERE created_at >= datetime('now',?) ORDER BY created_at DESC LIMIT 50`).bind(modifier).all()).results||[];
+    const recent=(await env.DB.prepare(`SELECT query_text,result_count,search_type,search_area,source,created_at FROM search_events WHERE created_at >= datetime('now',?) AND ${sourceClause} ORDER BY created_at DESC LIMIT 50`).bind(modifier).all()).results||[];
 
-    return json({days,totals,top,unmet,recent});
+    return json({days,scope,totals,top,unmet,recent});
   }catch(e){
     return json({error:'Could not load search insights'},500);
   }
