@@ -34,7 +34,7 @@ These are decision aids, not decorative badges. Do not create a badge for every 
 - Homepage Explore keeps Free & Cheap as a primary destination.
 - The homepage description should communicate the guide’s actual value: genuine £0/low-cost ideas with hidden extras flagged.
 - Recognised subscribers go directly to `/free-cheap-guide/guide/` from subscriber-aware NUE CTAs.
-- Kids & Family and Outdoors can surface selected guide examples from the shared Free & Cheap dataset, with prominent routes back to the full guide.
+- Kids & Family, Outdoors and Local History can surface selected guide examples from the shared Free & Cheap dataset while preserving their own editorial purpose.
 - What’s On remains the route for dated events.
 
 ## Guide → NUE
@@ -58,7 +58,9 @@ Current verified proof records checked 17 September 2026:
 - Gatley Carrs
 - Stockport Museum
 
-The Kids & Family page hydrates its matching evergreen cards from this data. The Outdoors page hydrates the Gatley Carrs access card from the same record. Existing HTML remains as a fallback if the JSON cannot be loaded.
+The Kids & Family page hydrates matching evergreen cards from this data. The Outdoors page hydrates the Gatley Carrs access card from the same record. Local History uses the Hat Works and Stockport Museum records to offer current free-entry history outings without copying their facts into a new mini-database. Existing HTML remains as a fallback where the original card already exists if the JSON cannot be loaded.
+
+Records may include a short `card_detail` for compact NUE surfaces alongside fuller `cost_text` and `caveats`; the short display field must not replace the fuller factual record.
 
 Do not interpret this file as the complete Guide inventory yet.
 
@@ -71,6 +73,7 @@ When the next substantive guide refresh is approved, expand the shared dataset t
 - area and postcode where useful
 - category
 - cost band and exact current price text
+- compact display detail where needed
 - audience tags
 - indoor/outdoor/weather tags
 - duration/visit type
