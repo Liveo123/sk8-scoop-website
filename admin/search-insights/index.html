@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Search insights | SK8 Scoop</title>
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body>
+<main data-search-insights>
+  <section class="hero-compact">
+    <div class="wrap">
+      <div class="eyebrow">Private operating view</div>
+      <h1>What are SK8 readers looking for?</h1>
+      <p>Search demand, gaps and recent reader intent. The search log does not store email addresses, IP addresses or device identifiers.</p>
+      <div class="admin-tools">
+        <input type="password" data-admin-token placeholder="Cloudflare admin token" autocomplete="current-password">
+        <select data-search-range aria-label="Time range">
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="90">Last 90 days</option>
+          <option value="365">Last 12 months</option>
+        </select>
+        <button class="button" type="button" data-load-search-insights>Load search insights</button>
+      </div>
+      <p data-search-insights-status class="fine">Enter the admin token configured in Cloudflare.</p>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap">
+      <div class="section-kicker-row">
+        <div><div class="eyebrow">Demand snapshot</div><h2>What readers are asking the site for.</h2></div>
+        <p>Use repeated searches as an editorial clue, not an automatic publishing instruction. Local relevance, verification and newsletter value still come first.</p>
+      </div>
+      <div class="dashboard-grid">
+        <div class="metric"><span>Total searches</span><strong data-total-searches>0</strong></div>
+        <div class="metric"><span>Distinct searches</span><strong data-unique-searches>0</strong></div>
+        <div class="metric featured-metric"><span>Zero-result searches</span><strong data-zero-searches>0</strong></div>
+        <div class="metric"><span>Average results shown</span><strong data-average-results>0</strong></div>
+      </div>
+
+      <div class="section-kicker-row dashboard-section-heading">
+        <div><div class="eyebrow">Repeated demand</div><h2>Top searches.</h2></div>
+        <p>Good candidates for stronger site coverage, recurring newsletter sections, new guide entries or clearer wording.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Search</th><th>Times searched</th><th>Avg results</th><th>Zero-result times</th><th>Last seen</th></tr></thead>
+          <tbody data-top-searches></tbody>
+        </table>
+      </div>
+
+      <div class="section-kicker-row dashboard-section-heading">
+        <div><div class="eyebrow">Content gaps</div><h2>Searches returning nothing.</h2></div>
+        <p>This is the sharpest list for spotting things readers want that SK8 Scoop does not currently answer.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Search</th><th>Zero-result searches</th><th>Last seen</th></tr></thead>
+          <tbody data-unmet-searches></tbody>
+        </table>
+      </div>
+
+      <div class="section-kicker-row dashboard-section-heading">
+        <div><div class="eyebrow">Recent intent</div><h2>Latest 50 searches.</h2></div>
+        <p>Useful for spotting new local questions before they become obvious trends.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>When</th><th>Search</th><th>Results</th><th>Type</th><th>Area</th><th>Source</th></tr></thead>
+          <tbody data-recent-searches></tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <div class="notice"><strong>Editorial rule:</strong> search volume is evidence of reader interest, not a ranking instruction. Do not let advertiser value influence what is featured editorially.</div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="../../assets/search-insights-admin.js"></script>
+</body>
+</html>
