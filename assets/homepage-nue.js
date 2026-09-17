@@ -70,7 +70,7 @@
       heroForm.hidden = true;
       const replacement = document.createElement('div');
       replacement.className = 'button-row';
-      replacement.innerHTML = '<a class="button" href="/latest">See what’s new</a><a class="button hero-secondary" href="/free-cheap-guide/">Open Free & Cheap</a>';
+      replacement.innerHTML = '<a class="button" href="/latest">See what’s new</a><a class="button hero-secondary" href="/free-cheap-guide/guide/">Open Free & Cheap</a>';
       heroForm.insertAdjacentElement('afterend', replacement);
     }
 
