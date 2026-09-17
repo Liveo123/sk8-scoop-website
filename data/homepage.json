@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11",
+  "updated": "2026-09-17",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
@@ -54,7 +54,7 @@
     },
     {
       "title": "Free & Cheap",
-      "description": "Make the most of local life for less",
+      "description": "£0, low-cost picks & hidden extras flagged",
       "href": "/free-cheap-guide/",
       "status": "OPEN",
       "visual": "photo",
