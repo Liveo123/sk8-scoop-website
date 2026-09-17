@@ -189,3 +189,21 @@ window.SK8_CONFIG = {
     document.head.appendChild(script);
   });
 })();
+
+(() => {
+  if (location.pathname.startsWith('/admin/') || !document.querySelector('.site-header .header-row')) return;
+  if (!document.querySelector('link[data-sk8-global-search]')) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/assets/global-search.css';
+    link.dataset.sk8GlobalSearch = 'true';
+    document.head.appendChild(link);
+  }
+  if (!document.querySelector('script[data-sk8-global-search]')) {
+    const script = document.createElement('script');
+    script.src = '/assets/global-search.js';
+    script.defer = true;
+    script.dataset.sk8GlobalSearch = 'true';
+    document.head.appendChild(script);
+  }
+})();
