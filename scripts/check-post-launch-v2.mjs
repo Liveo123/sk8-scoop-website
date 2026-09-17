@@ -91,4 +91,55 @@ contains('assets/nue-links.js','Photo: David Dixon / Geograph, CC BY-SA 2.0');
 contains('assets/nue-links.js','abney-hall-cc-benjamin-shaw.jpg');
 contains('assets/nue-links.js','Photo: Benjamin Shaw, CC BY-SA 4.0');
 
+// Search & Discovery contract: every curated internal search result must resolve to a repository route.
+expect(fs.existsSync(path.join(root,'search/index.html')), 'search/index.html is missing');
+expect(fs.existsSync(path.join(root,'assets/search.js')), 'assets/search.js is missing');
+const discovery = JSON.parse(read('data/discovery.json'));
+expect(Array.isArray(discovery.records), 'data/discovery.json records must be an array');
+for (const record of discovery.records) {
+  if (!String(record.href || '').startsWith('/')) continue;
+  const route = String(record.href).split(/[?#]/)[0];
+  let rel;
+  if (route === '/') rel = 'index.html';
+  else if (route.endsWith('/')) rel = `${route.replace(/^\//,'')}index.html`;
+  else rel = route.replace(/^\//,'');
+  expect(fs.existsSync(path.join(root,rel)), `Discovery record ${record.id || record.title} points to missing route: ${record.href}`);
+}
+
+// Newsletter archive extraction: selected articles only, never wholesale archive indexing.
+const selectedArchiveRecords = [
+  ['gatley-shouter','/local-history/gatley-shouter/'],
+  ['cheadle-station-cheshire-line-tavern','/local-history/cheadle-station-cheshire-line-tavern/'],
+  ['heald-green-mercury-frog','/local-history/heald-green-mercury-frog/'],
+  ['heald-green-east','/planning/heald-green-east/'],
+  ['secondary-school-applications-2027','/kids-family/secondary-school-applications-2027/'],
+  ['cheadle-eco-park','/planning/cheadle-eco-park/']
+];
+for (const [id,href] of selectedArchiveRecords) {
+  const record = discovery.records.find(item => item.id === id);
+  expect(record, `Missing newsletter archive discovery record: ${id}`);
+  expect(record.href === href, `${id} has unexpected discovery href: ${record.href}`);
+}
+const schoolRecord = discovery.records.find(item => item.id === 'secondary-school-applications-2027');
+expect(schoolRecord.expires === '2026-10-31', 'School application guide must expire from current search after 31 October 2026');
+for (const area of ['Cheadle','Cheadle Hulme','Gatley','Heald Green']) {
+  expect((schoolRecord.areas || []).includes(area), `School application guide missing area search coverage: ${area}`);
+}
+contains('local-history/index.html','/local-history/gatley-shouter/');
+contains('local-history/index.html','/local-history/cheadle-station-cheshire-line-tavern/');
+contains('local-history/index.html','/local-history/heald-green-mercury-frog/');
+contains('planning/index.html','/planning/heald-green-east/');
+contains('planning/index.html','/planning/cheadle-eco-park/');
+contains('kids-family/index.html','/kids-family/secondary-school-applications-2027/');
+for (const file of [
+  'local-history/gatley-shouter/index.html',
+  'local-history/cheadle-station-cheshire-line-tavern/index.html',
+  'local-history/heald-green-mercury-frog/index.html',
+  'planning/heald-green-east/index.html',
+  'planning/cheadle-eco-park/index.html',
+  'kids-family/secondary-school-applications-2027/index.html'
+]) {
+  excludes(file,'storage.mlcdn.com');
+}
+
 console.log('Post-launch NUE v2 preflight passed.');
