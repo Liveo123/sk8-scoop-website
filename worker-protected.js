@@ -14,6 +14,17 @@ const ISSUE_12_POLL_ANSWERS = [
   'local_history_mysteries'
 ];
 
+const SEARCH_TABLE_SQL = `CREATE TABLE IF NOT EXISTS search_events (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ query_text TEXT NOT NULL,
+ query_normalised TEXT NOT NULL,
+ result_count INTEGER NOT NULL DEFAULT 0,
+ search_type TEXT NOT NULL DEFAULT 'all',
+ search_area TEXT NOT NULL DEFAULT 'all',
+ source TEXT NOT NULL DEFAULT 'search_page',
+ created_at TEXT NOT NULL
+)`;
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -34,6 +45,14 @@ export default {
 
     if (url.pathname === '/api/poll/issue-12' && request.method === 'POST') {
       return handleIssue12PollVote(request, env);
+    }
+
+    if (url.pathname === '/api/search-event' && request.method === 'POST') {
+      return handleSearchEvent(request, env);
+    }
+
+    if (url.pathname === '/api/search-stats' && request.method === 'GET') {
+      return handleSearchStats(request, env);
     }
 
     if ((url.pathname === '/free-cheap-guide/guide' || url.pathname === '/free-cheap-guide/guide/') && request.method === 'GET') {
@@ -214,6 +233,102 @@ async function handleIssue12PollVote(request, env) {
   } catch (error) {
     console.error('Issue 12 poll vote error', error);
     return json({ error: 'The vote could not be saved. Please try again.' }, 503);
+  }
+}
+
+async function ensureSearchTable(db) {
+  if (!db) throw new Error('Search database unavailable');
+  await db.prepare(SEARCH_TABLE_SQL).run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_search_events_query ON search_events(query_normalised)').run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_search_events_created ON search_events(created_at)').run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_search_events_results ON search_events(result_count)').run();
+}
+
+function cleanSearchQuery(value) {
+  let text = String(value || '').trim().replace(/\s+/g, ' ').slice(0, 160);
+  text = text
+    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, '[email]')
+    .replace(/(?:https?:\/\/|www\.)\S+/gi, '[link]')
+    .replace(/(?:\+?\d[\d\s().-]{7,}\d)/g, '[phone]');
+  return text;
+}
+
+function normaliseSearchQuery(value) {
+  return String(value || '')
+    .normalize('NFKD')
+    .replace(/[’‘]/g, "'")
+    .replace(/[^a-zA-Z0-9£\[\]]+/g, ' ')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 160);
+}
+
+function cleanSearchLabel(value, fallback) {
+  return String(value || fallback).trim().slice(0, 60) || fallback;
+}
+
+async function handleSearchEvent(request, env) {
+  if (!env.DB) return json({ error: 'Search storage unavailable.' }, 503);
+
+  let data;
+  try {
+    data = await request.json();
+  } catch {
+    return json({ error: 'The search event could not be read.' }, 400);
+  }
+
+  const queryText = cleanSearchQuery(data.query);
+  const queryNormalised = normaliseSearchQuery(queryText);
+  if (queryNormalised.length < 2) return json({ error: 'Search term too short.' }, 400);
+
+  const resultCount = Math.max(0, Math.min(999, Number.parseInt(data.result_count, 10) || 0));
+  const searchType = cleanSearchLabel(data.search_type, 'all');
+  const searchArea = cleanSearchLabel(data.search_area, 'all');
+  const baseSource = ['homepage', 'search_page', 'direct'].includes(String(data.source || '')) ? String(data.source) : 'search_page';
+  const host = new URL(request.url).hostname.toLowerCase();
+  const source = host.endsWith('.workers.dev') ? `preview_${baseSource}` : baseSource;
+
+  try {
+    await ensureSearchTable(env.DB);
+    await env.DB.prepare(`INSERT INTO search_events (query_text,query_normalised,result_count,search_type,search_area,source,created_at) VALUES (?,?,?,?,?,?,datetime('now'))`)
+      .bind(queryText, queryNormalised, resultCount, searchType, searchArea, source)
+      .run();
+    await env.DB.prepare(`DELETE FROM search_events WHERE created_at < datetime('now','-365 days')`).run();
+    return json({ ok: true, scope: source.startsWith('preview_') ? 'preview' : 'live' });
+  } catch (error) {
+    console.error('Search event storage error', error);
+    return json({ error: 'Could not record search.' }, 500);
+  }
+}
+
+async function handleSearchStats(request, env) {
+  const auth = request.headers.get('authorization') || '';
+  if (!env.ADMIN_TOKEN) return json({ error: 'The admin token has not been configured.' }, 503);
+  if (auth !== `Bearer ${env.ADMIN_TOKEN}`) return json({ error: 'Unauthorised.' }, 401);
+  if (!env.DB) return json({ error: 'Search storage unavailable.' }, 503);
+
+  try {
+    await ensureSearchTable(env.DB);
+    const url = new URL(request.url);
+    const requested = Number.parseInt(url.searchParams.get('days'), 10) || 30;
+    const days = [7, 30, 90, 365].includes(requested) ? requested : 30;
+    const scope = url.searchParams.get('scope') === 'preview' ? 'preview' : 'live';
+    const modifier = `-${days} days`;
+    const sourceClause = scope === 'preview' ? `source LIKE 'preview_%'` : `source NOT LIKE 'preview_%'`;
+
+    const totals = (await env.DB.prepare(`SELECT COUNT(*) searches,COUNT(DISTINCT query_normalised) unique_queries,SUM(CASE WHEN result_count=0 THEN 1 ELSE 0 END) zero_results,ROUND(AVG(result_count),1) avg_results FROM search_events WHERE created_at >= datetime('now',?) AND ${sourceClause}`).bind(modifier).first()) || {};
+
+    const top = (await env.DB.prepare(`SELECT query_normalised,MAX(query_text) query_text,COUNT(*) searches,ROUND(AVG(result_count),1) avg_results,SUM(CASE WHEN result_count=0 THEN 1 ELSE 0 END) zero_results,MAX(created_at) last_seen FROM search_events WHERE created_at >= datetime('now',?) AND ${sourceClause} GROUP BY query_normalised ORDER BY searches DESC,last_seen DESC LIMIT 25`).bind(modifier).all()).results || [];
+
+    const unmet = (await env.DB.prepare(`SELECT query_normalised,MAX(query_text) query_text,COUNT(*) searches,MAX(created_at) last_seen FROM search_events WHERE created_at >= datetime('now',?) AND ${sourceClause} AND result_count=0 GROUP BY query_normalised ORDER BY searches DESC,last_seen DESC LIMIT 25`).bind(modifier).all()).results || [];
+
+    const recent = (await env.DB.prepare(`SELECT query_text,result_count,search_type,search_area,source,created_at FROM search_events WHERE created_at >= datetime('now',?) AND ${sourceClause} ORDER BY created_at DESC LIMIT 50`).bind(modifier).all()).results || [];
+
+    return json({ days, scope, totals, top, unmet, recent });
+  } catch (error) {
+    console.error('Search insight load error', error);
+    return json({ error: 'Could not load search insights.' }, 500);
   }
 }
 
