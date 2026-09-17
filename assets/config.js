@@ -194,6 +194,7 @@ window.SK8_CONFIG = {
 })();
 
 (() => {
+  if (document.body.dataset.page === 'free-cheap-guide') return;
   const script = document.createElement('script');
   script.src = '/assets/signup-protection.js';
   script.defer = true;
