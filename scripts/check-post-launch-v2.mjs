@@ -142,4 +142,19 @@ for (const file of [
   excludes(file,'storage.mlcdn.com');
 }
 
+// Global header search: one reusable utility, no second search engine.
+expect(fs.existsSync(path.join(root,'assets/global-search.js')), 'assets/global-search.js is missing');
+expect(fs.existsSync(path.join(root,'assets/global-search.css')), 'assets/global-search.css is missing');
+contains('assets/config.js','/assets/global-search.css');
+contains('assets/config.js','/assets/global-search.js');
+contains('assets/global-search.js',"form.action = '/search/'");
+contains('assets/global-search.js','header_search_open');
+contains('assets/global-search.js','header_search_submit');
+contains('assets/global-search.js','query_length: queryLength');
+contains('assets/global-search.js',"event.key !== '/'");
+contains('assets/global-search.css','@media(min-width:1280px)');
+contains('assets/global-search.css','@media(max-width:820px)');
+contains('assets/global-search.css','.global-search-form:focus-within');
+excludes('assets/global-search.js','query_text');
+
 console.log('Post-launch NUE v2 preflight passed.');
