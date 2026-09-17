@@ -200,3 +200,21 @@ window.SK8_CONFIG = {
   script.dataset.sk8SignupProtection = 'true';
   document.head.appendChild(script);
 })();
+
+(() => {
+  if (document.body.dataset.page !== 'free-cheap-guide') return;
+  if (!document.querySelector('link[href="/assets/free-cheap-nue.css"]')) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/assets/free-cheap-nue.css';
+    link.dataset.sk8FreeCheapNue = 'true';
+    document.head.appendChild(link);
+  }
+  if (!document.querySelector('script[src="/assets/free-cheap-nue.js"]')) {
+    const script = document.createElement('script');
+    script.src = '/assets/free-cheap-nue.js';
+    script.defer = true;
+    script.dataset.sk8FreeCheapNue = 'true';
+    document.head.appendChild(script);
+  }
+})();
