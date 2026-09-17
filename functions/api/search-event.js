@@ -47,7 +47,9 @@ export async function onRequestPost({request,env}){
     const resultCount=Math.max(0,Math.min(999,Number.parseInt(data.result_count,10)||0));
     const searchType=cleanLabel(data.search_type,'all');
     const searchArea=cleanLabel(data.search_area,'all');
-    const source=['homepage','search_page','direct'].includes(String(data.source||''))?String(data.source):'search_page';
+    const baseSource=['homepage','search_page','direct'].includes(String(data.source||''))?String(data.source):'search_page';
+    const host=new URL(request.url).hostname.toLowerCase();
+    const source=host.endsWith('.workers.dev')?`preview_${baseSource}`:baseSource;
 
     await ensureTable(env.DB);
     await env.DB.prepare(`INSERT INTO search_events (query_text,query_normalised,result_count,search_type,search_area,source,created_at) VALUES (?,?,?,?,?,?,datetime('now'))`)
@@ -56,7 +58,7 @@ export async function onRequestPost({request,env}){
     // Keep raw search intent long enough for seasonal learning without creating an indefinite log.
     await env.DB.prepare(`DELETE FROM search_events WHERE created_at < datetime('now','-365 days')`).run();
 
-    return json({ok:true});
+    return json({ok:true,scope:source.startsWith('preview_')?'preview':'live'});
   }catch(e){
     return json({error:'Could not record search'},500);
   }
