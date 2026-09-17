@@ -8,6 +8,7 @@
   const topBody=document.querySelector('[data-top-searches]');
   const unmetBody=document.querySelector('[data-unmet-searches]');
   const recentBody=document.querySelector('[data-recent-searches]');
+  const isPreview=location.hostname.toLowerCase().endsWith('.workers.dev');
 
   const setText=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=String(value??'0');};
   const formatDate=value=>{
@@ -51,7 +52,8 @@
     status.textContent='Loading search insight…';
     try{
       const days=Number(range.value)||30;
-      const response=await fetch(`/api/search-stats?days=${encodeURIComponent(days)}`,{headers:{authorization:`Bearer ${adminToken}`},cache:'no-store'});
+      const scope=isPreview?'preview':'live';
+      const response=await fetch(`/api/search-stats?days=${encodeURIComponent(days)}&scope=${scope}`,{headers:{authorization:`Bearer ${adminToken}`},cache:'no-store'});
       const data=await response.json();
       if(!response.ok) throw new Error(data.error||'Could not load search insight');
       setText('[data-total-searches]',data.totals.searches||0);
@@ -61,13 +63,21 @@
       renderTop(data.top||[]);
       renderUnmet(data.unmet||[]);
       renderRecent(data.recent||[]);
-      status.textContent=`Showing the last ${data.days} days. Search terms are stored without email, IP address or device identifiers in the search log.`;
+      const scopeText=data.scope==='preview'?'preview test searches only':'live reader searches only';
+      status.textContent=`Showing ${scopeText} from the last ${data.days} days. Search terms are stored without email, IP address or device identifiers in the search log.`;
     }catch(error){
       status.textContent=error&&error.message?error.message:'Could not load search insight.';
     }finally{
       loadButton.disabled=false;
     }
   };
+
+  if(isPreview){
+    const badge=document.createElement('p');
+    badge.className='notice';
+    badge.innerHTML='<strong>Preview mode:</strong> this dashboard shows preview test searches only. They are kept out of the normal live-reader totals.';
+    status.insertAdjacentElement('afterend',badge);
+  }
 
   loadButton.addEventListener('click',load);
   range.addEventListener('change',()=>{if(token.value.trim())load();});
