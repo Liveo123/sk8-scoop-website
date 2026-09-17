@@ -35,7 +35,8 @@ body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"]{d
 body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"] .button{align-self:stretch;text-align:center}
 
 /* Miniature SK8 hero experiment, 17 Sep 2026.
-   The image is visual atmosphere only: real heading, form, proof and links stay live HTML. */
+   The image is visual atmosphere only: real heading, form, proof and links stay live HTML.
+   Preview rebuild marker: full-resolution asset source fix. */
 body.reader-home.homepage-v3 .reader-hero-photo{
   position:relative;
   isolation:isolate;
