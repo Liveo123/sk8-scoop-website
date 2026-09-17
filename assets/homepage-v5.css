@@ -34,8 +34,29 @@ body.reader-home.homepage-v3 .reader-action .button{align-self:flex-start;margin
 body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"]{display:flex;flex-direction:column;justify-content:center}
 body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"] .button{align-self:stretch;text-align:center}
 
+/* Miniature SK8 hero experiment, 17 Sep 2026.
+   The real HTML headline/form stay live and accessible; the image is purely the scene behind them. */
+body.reader-home.homepage-v3 .reader-hero-photo{
+  background-color:#fffaf0;
+  background-image:url('https://res.cloudinary.com/gocq00bt/image/upload/sk8-scoop/website/homepage/sk8-miniature-hero-background-2026-09-17.webp');
+  background-size:cover;
+  background-position:52% center;
+  background-repeat:no-repeat;
+}
+body.reader-home.homepage-v3 .reader-hero-shade{
+  background:linear-gradient(90deg,rgba(255,250,240,.98) 0%,rgba(255,250,240,.94) 32%,rgba(255,250,240,.64) 43%,rgba(255,250,240,.18) 55%,rgba(255,250,240,0) 67%);
+}
+
+@media(max-width:900px){
+  body.reader-home.homepage-v3 .reader-hero-photo{background-position:64% center}
+  body.reader-home.homepage-v3 .reader-hero-shade{background:linear-gradient(90deg,rgba(255,250,240,.98) 0%,rgba(255,250,240,.94) 44%,rgba(255,250,240,.45) 65%,rgba(255,250,240,.06) 100%)}
+}
+
 @media(max-width:680px){
   body.reader-home.homepage-v3 .reader-action{min-height:0!important}
   body.reader-home.homepage-v3 .home-resource-visual.is-contain img{max-height:108px!important}
   body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(3) .dicm-visual{grid-template-rows:38px minmax(0,1fr)!important}
+  body.reader-home.homepage-v3 .reader-hero-photo{min-height:560px;background-position:78% center}
+  body.reader-home.homepage-v3 .reader-hero-overlay{min-height:560px}
+  body.reader-home.homepage-v3 .reader-hero-shade{background:linear-gradient(180deg,rgba(255,250,240,.99) 0%,rgba(255,250,240,.97) 45%,rgba(255,250,240,.72) 64%,rgba(255,250,240,.16) 100%)}
 }
