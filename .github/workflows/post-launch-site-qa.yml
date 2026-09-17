@@ -21,6 +21,11 @@ jobs:
         run: node scripts/check-current-content.mjs
       - name: Check post-launch NUE contracts
         run: node scripts/check-post-launch-v2.mjs
+      - name: Check advertiser growth-engine JavaScript
+        run: |
+          if [ -f worker-business-v2.js ]; then node --check worker-business-v2.js; fi
+          if [ -f assets/campaign-finder.js ]; then node --check assets/campaign-finder.js; fi
+          if [ -f assets/advertise.js ]; then node --check assets/advertise.js; fi
 
   preview-smoke:
     if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/post-launch-nue-v2')
@@ -60,6 +65,7 @@ jobs:
           check_page '/submit-event/' 'action="/api/submit-event"'
           check_page '/business-submissions/' 'action="/api/business-submission"'
           check_page '/advertise.html' 'value="temp_test"'
+          if [ -f advertise/finder/index.html ]; then check_page '/advertise/finder/' 'id="campaign-finder"'; fi
           check_page '/around-sk8/' 'data-page="around-sk8"'
           check_page '/food-drink/' 'Food & Drink around SK8'
           check_page '/kids-family/' 'Kids & Family around SK8'
@@ -101,6 +107,7 @@ jobs:
           check_page 'https://www.sk8scoop.com/submit-event/' 'action="/api/submit-event"'
           check_page 'https://www.sk8scoop.com/business-submissions/' 'action="/api/business-submission"'
           check_page 'https://www.sk8scoop.com/advertise.html' 'value="temp_test"'
+          if [ -f advertise/finder/index.html ]; then check_page 'https://www.sk8scoop.com/advertise/finder/' 'id="campaign-finder"'; fi
           check_page 'https://www.sk8scoop.com/around-sk8/' 'data-page="around-sk8"'
           check_page 'https://www.sk8scoop.com/food-drink/' 'Food & Drink around SK8'
           check_page 'https://www.sk8scoop.com/kids-family/' 'Kids & Family around SK8'
