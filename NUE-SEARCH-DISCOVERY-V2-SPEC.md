@@ -288,3 +288,7 @@ Paid content must never receive an editorial search-ranking boost. If commercial
 - Static links and JSON loads work from a Cloudflare preview.
 - Automated/basic QA and mobile visual QA pass.
 - Production remains explicitly approval-gated.
+
+## Approval state
+
+Paul approved the Search & Discovery preview visually up to this point on 17 September 2026, then requested that submitted searches also be stored to reveal reader demand. Search Insights has therefore been added to the same preview branch but remains subject to the production approval gate. No merge to `main` is authorised by this note.
