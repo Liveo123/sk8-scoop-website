@@ -153,9 +153,10 @@ contains('assets/global-search.js','header_search_submit');
 contains('assets/global-search.js','query_length: queryLength');
 contains('assets/global-search.js',"event.key !== '/'");
 contains('assets/global-search.js',"window.matchMedia('(min-width: 821px)')");
-contains('assets/global-search.css','@media(min-width:1440px)');
-contains('assets/global-search.css','@media(min-width:821px) and (max-width:1439px)');
+contains('assets/global-search.css','@media(min-width:1200px)');
+contains('assets/global-search.css','@media(min-width:821px) and (max-width:1199px)');
 contains('assets/global-search.css','@media(max-width:820px)');
+contains('assets/global-search.css','width:min(1320px,calc(100% - 24px))');
 contains('assets/global-search.css','.global-search-form:focus-within');
 excludes('assets/global-search.js','query_text');
 
