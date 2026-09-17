@@ -65,7 +65,9 @@ jobs:
           check_page '/submit-event/' 'action="/api/submit-event"'
           check_page '/business-submissions/' 'action="/api/business-submission"'
           check_page '/advertise.html' 'value="temp_test"'
-          if [ -f advertise/finder/index.html ]; then check_page '/advertise/finder/' 'id="campaign-finder"'; fi
+          check_page '/advertise/finder/' 'id="campaign-finder"'
+          check_page '/advertise/christmas-eating-out/' 'Promote Christmas bookings'
+          check_page '/advertise/pay/' 'Payment follows campaign approval'
           check_page '/around-sk8/' 'data-page="around-sk8"'
           check_page '/food-drink/' 'Food & Drink around SK8'
           check_page '/kids-family/' 'Kids & Family around SK8'
@@ -107,7 +109,9 @@ jobs:
           check_page 'https://www.sk8scoop.com/submit-event/' 'action="/api/submit-event"'
           check_page 'https://www.sk8scoop.com/business-submissions/' 'action="/api/business-submission"'
           check_page 'https://www.sk8scoop.com/advertise.html' 'value="temp_test"'
-          if [ -f advertise/finder/index.html ]; then check_page 'https://www.sk8scoop.com/advertise/finder/' 'id="campaign-finder"'; fi
+          check_page 'https://www.sk8scoop.com/advertise/finder/' 'id="campaign-finder"'
+          check_page 'https://www.sk8scoop.com/advertise/christmas-eating-out/' 'Promote Christmas bookings'
+          check_page 'https://www.sk8scoop.com/advertise/pay/' 'Payment follows campaign approval'
           check_page 'https://www.sk8scoop.com/around-sk8/' 'data-page="around-sk8"'
           check_page 'https://www.sk8scoop.com/food-drink/' 'Food & Drink around SK8'
           check_page 'https://www.sk8scoop.com/kids-family/' 'Kids & Family around SK8'
