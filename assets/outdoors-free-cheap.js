@@ -33,7 +33,7 @@
         if (place) place.textContent = item.area || 'Reserve access';
         if (value) value.textContent = item.postcode || '';
         if (title) title.textContent = 'Brookside Road';
-        if (detail) detail.textContent = Array.isArray(item.caveats) && item.caveats[0] ? item.caveats[0] : item.cost_text || '';
+        if (detail) detail.textContent = item.card_detail || (Array.isArray(item.caveats) && item.caveats[0] ? item.caveats[0] : item.cost_text || '');
         if (copy) copy.textContent = `${item.summary || ''}${item.access_text ? ` ${item.access_text}` : ''}`.trim();
         if (official && item.official_url) {
           official.href = item.official_url;
