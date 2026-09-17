@@ -15,16 +15,16 @@ A permanent search field could make the already busy SK8 Scoop navigation harder
 ### Fix
 
 - Reuse the existing `/search/` system rather than adding a second search engine.
-- Wide desktop (`>=1440px`): visible compact search field + full navigation + `Join free`.
-- Laptop/tablet (`821–1439px`): visible compact search field + Menu. The full navigation moves behind Menu.
+- Desktop (`>=1200px`): visible compact search field + full navigation + `Join free`.
+- Laptop/tablet (`821–1199px`): visible compact search field + Menu. The full navigation moves behind Menu.
 - Mobile (`<=820px`): search icon + Menu, with a full-width search panel opening immediately under the header.
 - Keep `Join free` visually stronger whenever the full navigation is visible.
-- At wide desktop only, hide the duplicate plain `Join` link because the `Join free` action remains visible.
+- Hide the duplicate plain `Join` link whenever the full navigation is shown.
 - Do not add autocomplete, live suggestions or extra search controls before real demand supports them.
 
 ### Result
 
-The header gains a useful site-wide search entry point without turning into a second Explore menu or forcing a dense navigation row onto laptop/browser widths.
+The header gains a useful site-wide search entry point while preserving the normal desktop expectation of a complete navigation bar.
 
 ## Cycle 2 — accuracy, accessibility and experience
 
@@ -66,37 +66,45 @@ A global feature loaded on every page creates a wider regression surface than a 
 
 ## Human screenshot review
 
-Four preview screenshots were reviewed on 17 September 2026.
+Five preview screenshots were reviewed on 17 September 2026.
 
-### Finding 1 — wide desktop
+### Finding 1 — first desktop version
 
-The visible search field and full navigation can work together when there is genuinely enough horizontal space. The duplicate plain `Join` link must not appear beside `Join free`.
+The visible search field and full navigation worked visually, but the plain `Join` link also appeared beside `Join free`.
 
-**Fix:** the wide-desktop rule uses a robust `href$="join/"` selector for the plain Join link while leaving the button in place.
+**Fix:** use a robust `href$="join/"` selector for the plain Join link while leaving the button in place.
 
 ### Finding 2 — first intermediate-width attempt
 
 The search icon and full navigation were both present, causing the right side of the navigation to run off the viewport.
 
-**Fix:** move the full navigation behind Menu at intermediate widths.
+**Fix:** move the full navigation behind Menu at genuinely constrained widths.
 
 ### Finding 3 — collapsed intermediate-width attempt
 
 The collapsed navigation fitted, but using only a small search icon wasted useful horizontal space and the legacy hamburger decoration collided with the `Menu` label.
 
-**Fix:** at `821–1439px`, use a visible compact search field plus a clean text Menu button. Keep the icon-only search pattern for mobile only.
+**Fix:** use a visible compact search field on laptop/tablet widths and keep the icon-only search pattern for mobile. Remove the legacy decorative hamburger in the collapsed state.
 
 ### Finding 4 — approximately 1300px browser width
 
-A later screenshot exposed a breakpoint regression: the viewport was just above the old `1280px` threshold, so the full navigation returned too early. `Join free` was clipped on the right and the header again became cramped.
+A later screenshot exposed clipping when the full navigation returned with desktop spacing that was too generous.
 
-**Fix:**
+**Initial fix:** temporarily raised the full-navigation breakpoint to `1440px`.
 
-- Raise the full-navigation threshold from `1280px` to `1440px`.
-- Keep the `821–1439px` state as Logo + visible Search field + Menu.
-- Reduce the desktop logo flex width to 230px where appropriate.
-- Keep a wider 1408px header container only once the full-navigation state is active.
-- Align the `/` keyboard shortcut with the actual inline-search visibility threshold (`821px`), preventing it from focusing an invisible panel/input state.
+### Finding 5 — desktop expectation after the temporary 1440px fix
+
+The next desktop screenshot showed Logo + Search + Menu even though the browser was clearly being used as a desktop layout. This removed useful top-level navigation and did not match the intended desktop experience.
+
+**Final fix:**
+
+- Restore full navigation from `1200px` upward.
+- Instead of hiding the navigation, make the desktop row fit properly: wider header container, 218px logo, 178px search field, tighter 10px nav gaps and slightly smaller desktop nav type.
+- Keep `Join free` visible and remove the duplicate plain `Join` link.
+- Reserve Logo + Search + Menu for `821–1199px`.
+- Keep Logo + Search icon + Menu for `<=820px`.
+
+This addresses the cause of the clipping rather than treating a normal desktop width as a tablet layout.
 
 ### Preview-only observation
 
@@ -106,9 +114,9 @@ Earlier screenshots also showed a Cloudflare challenge/Turnstile connection warn
 
 After the latest preview deploys, recheck:
 
-1. wide desktop (`>=1440px`): visible field, full navigation, no clipping/wrapping, only `Join free` remains as the join action;
-2. laptop/tablet (`821–1439px`): Logo + visible Search field + clean Menu button, no clipped links;
-3. mobile (`<=820px`): Logo + Search icon + clean Menu button, panel easy to use and menu/search do not overlap;
+1. desktop (`>=1200px`): logo + compact search + complete navigation + `Join free`, with no clipping or wrapping;
+2. laptop/tablet (`821–1199px`): Logo + visible Search field + clean Menu button;
+3. mobile (`<=820px`): Logo + Search icon + clean Menu button, with panel and menu not overlapping;
 4. very narrow mobile: no horizontal overflow;
 5. `/` shortcut and Escape behaviour;
 6. a distinctive preview header search appears as `preview_header` in Search Insights.
