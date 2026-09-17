@@ -165,7 +165,7 @@
         if (title) title.textContent = item.title || '';
         if (detail) {
           const caveat = Array.isArray(item.caveats) && item.caveats[0] ? item.caveats[0].replace(/^WATCH THE EXTRAS:\s*/i, '') : item.cost_text;
-          detail.textContent = caveat || '';
+          detail.textContent = item.card_detail || caveat || '';
         }
         heading.textContent = item.title || heading.textContent;
         if (bodyCopy) bodyCopy.textContent = item.summary || item.cost_text || bodyCopy.textContent;
