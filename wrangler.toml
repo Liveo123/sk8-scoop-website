@@ -3,6 +3,9 @@ main = "worker-protected.js"
 compatibility_date = "2026-07-24"
 keep_vars = true
 
+[secrets]
+required = [ "RESEND_API_KEY" ]
+
 [assets]
 directory = "."
 binding = "ASSETS"
