@@ -34,8 +34,42 @@ body.reader-home.homepage-v3 .reader-action .button{align-self:flex-start;margin
 body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"]{display:flex;flex-direction:column;justify-content:center}
 body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"] .button{align-self:stretch;text-align:center}
 
+/* Miniature SK8 hero experiment, 17 Sep 2026.
+   The image is visual atmosphere only: real heading, form, proof and links stay live HTML. */
+body.reader-home.homepage-v3 .reader-hero-photo{
+  position:relative;
+  isolation:isolate;
+  background:#fffaf0!important;
+}
+body.reader-home.homepage-v3 .reader-hero-photo::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:0 0 0 43%;
+  background-color:#e8e0cf;
+  background-image:url('https://raw.githubusercontent.com/Liveo123/sk8-scoop-website/101f55f2f9a6b93f94a27a5541fe76f3c3375955/assets/images/sk8-miniature-hero-background-full.webp');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+body.reader-home.homepage-v3 .reader-hero-shade{
+  z-index:1;
+  background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.99) 33%,rgba(255,250,240,.92) 41%,rgba(255,250,240,.45) 49%,rgba(255,250,240,.08) 57%,rgba(255,250,240,0) 65%);
+}
+body.reader-home.homepage-v3 .reader-hero-overlay{z-index:2}
+
+@media(max-width:900px){
+  body.reader-home.homepage-v3 .reader-hero-photo::before{inset:0 0 0 48%;background-position:48% center}
+  body.reader-home.homepage-v3 .reader-hero-shade{background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.98) 45%,rgba(255,250,240,.68) 58%,rgba(255,250,240,.12) 76%,rgba(255,250,240,0) 100%)}
+}
+
 @media(max-width:680px){
   body.reader-home.homepage-v3 .reader-action{min-height:0!important}
   body.reader-home.homepage-v3 .home-resource-visual.is-contain img{max-height:108px!important}
   body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(3) .dicm-visual{grid-template-rows:38px minmax(0,1fr)!important}
+  body.reader-home.homepage-v3 .reader-hero-photo{min-height:650px!important;background:#fffaf0!important}
+  body.reader-home.homepage-v3 .reader-hero-overlay{min-height:650px!important;align-items:flex-start}
+  body.reader-home.homepage-v3 .reader-hero-copy{padding-top:30px!important;padding-bottom:245px!important}
+  body.reader-home.homepage-v3 .reader-hero-photo::before{inset:auto 0 0 0;height:245px;background-position:center 46%}
+  body.reader-home.homepage-v3 .reader-hero-shade{background:linear-gradient(180deg,#fffaf0 0%,#fffaf0 57%,rgba(255,250,240,.96) 62%,rgba(255,250,240,.38) 74%,rgba(255,250,240,0) 88%)}
 }
