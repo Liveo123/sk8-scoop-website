@@ -15,15 +15,16 @@ A permanent search field could make the already busy SK8 Scoop navigation harder
 ### Fix
 
 - Reuse the existing `/search/` system rather than adding a second search engine.
-- Show a visible compact field only on large desktop (`>=1280px`).
-- Use a single search icon below that width, opening a full-width panel immediately under the header.
-- Keep `Join free` visually stronger.
+- Large desktop (`>=1280px`): visible compact search field + full navigation + `Join free`.
+- Laptop/tablet (`821–1279px`): visible compact search field + Menu. The full navigation moves behind Menu.
+- Mobile (`<=820px`): search icon + Menu, with a full-width search panel opening immediately under the header.
+- Keep `Join free` visually stronger whenever the full navigation is visible.
 - At large desktop width only, hide the duplicate plain `Join` link because the `Join free` action remains visible.
 - Do not add autocomplete, live suggestions or extra search controls before real demand supports them.
 
 ### Result
 
-The header gains a useful site-wide search entry point without turning into a second Explore menu.
+The header gains a useful site-wide search entry point without turning into a second Explore menu or wasting laptop-width space.
 
 ## Cycle 2 — accuracy, accessibility and experience
 
@@ -35,8 +36,8 @@ Header search could conflict with the mobile menu, lose the typed query, create 
 
 - Native GET forms submit to `/search/` and keep the existing search system as the destination.
 - Search inputs have explicit accessible labels and submit buttons have `aria-label` text.
-- Compact controls are 44px targets.
-- Opening search closes the mobile navigation menu.
+- Compact controls are approximately 44px targets.
+- Opening mobile search closes the mobile navigation menu.
 - Escape closes the compact search panel and restores focus.
 - `/` opens/focuses search only when the reader is not already typing into or using an interactive control.
 - The current query is repopulated in the header when already on `/search/`.
@@ -59,13 +60,13 @@ A global feature loaded on every page creates a wider regression surface than a 
 - Admin routes are excluded from the injected global-search assets.
 - `assets/global-search.js` and `assets/global-search.css` are loaded through the shared public configuration layer rather than copied into individual pages.
 - Both `worker-protected.js` and `functions/api/search-event.js` accept the `header` search source.
-- The existing automated NUE contract now checks the global-search assets, route target, analytics event names, responsive rules and lack of `query_text` in the header analytics code.
+- The existing automated NUE contract checks the global-search assets, route target, analytics event names, responsive rules and lack of `query_text` in the header analytics code.
 - Cloudflare preview smoke checks explicitly fetch both new global-search assets.
 - Production smoke checks are prepared but will only run after an explicitly approved merge to `main`.
 
 ## Human screenshot review
 
-Two preview screenshots were reviewed on 17 September 2026.
+Three preview screenshots were reviewed on 17 September 2026.
 
 ### Finding 1 — large desktop
 
@@ -73,23 +74,34 @@ The visible desktop search field fits the header and is easy to understand, but 
 
 **Fix:** the desktop rule now hides either form of the plain Join URL while keeping `Join free` visible.
 
-### Finding 2 — intermediate laptop / tablet width
+### Finding 2 — intermediate width with full navigation
 
-The search icon and full navigation were both present, causing the right side of the navigation to run off the viewport. This was the exact crowded state the responsive design was intended to avoid.
+The first intermediate-width version showed a search icon and full navigation together, causing the right side of the navigation to run off the viewport.
 
-**Fix:** below `1280px`, the full navigation now collapses behind the existing Menu control. The header becomes Logo + Search + Menu, and the search panel remains full-width below the header. The full navigation and visible desktop search field only coexist at `>=1280px`, where there is enough room.
+**Fix:** below `1280px`, the full navigation collapses behind Menu instead of squeezing beside search.
+
+### Finding 3 — intermediate width after collapse
+
+The next screenshot showed the collapsed navigation fitting, but the header looked unnecessarily empty and the legacy hamburger decoration visually collided with the `Menu` label.
+
+**Fix:**
+
+- At `821–1279px`, restore a visible compact search field because there is ample horizontal space when navigation is behind Menu.
+- Keep only the search icon below `821px`.
+- Remove the legacy decorative menu icon in the global-search responsive state and render the Menu button as a clean, centred text control with fixed minimum height/width.
+- Keep the Logo, Search and Menu controls on one stable row with explicit gaps.
 
 ### Preview-only observation
 
-The screenshots also showed a Cloudflare challenge/Turnstile connection warning inside the newsletter signup area. That is separate from global search and should be treated as preview-environment behaviour unless it reproduces on the production domain.
+Earlier screenshots also showed a Cloudflare challenge/Turnstile connection warning inside the newsletter signup area. That is separate from global search and should be treated as preview-environment behaviour unless it reproduces on the production domain.
 
 ## Remaining human check
 
-After the updated preview deploys, recheck:
+After the latest preview deploys, recheck:
 
-1. large desktop: visible field, no wrapping, only `Join free` remains as the join action;
-2. laptop/tablet: Logo + Search + Menu fit on one line, with no clipped navigation links;
-3. mobile: Logo + Search + Menu fit, panel is easy to use, menu/search do not overlap;
+1. large desktop: visible field, full navigation, no wrapping, only `Join free` remains as the join action;
+2. laptop/tablet (`821–1279px`): Logo + visible Search field + clean Menu button, no clipped links;
+3. mobile (`<=820px`): Logo + Search icon + clean Menu button, panel easy to use and menu/search do not overlap;
 4. very narrow mobile: no horizontal overflow;
 5. `/` shortcut and Escape behaviour;
 6. a distinctive preview header search appears as `preview_header` in Search Insights.
