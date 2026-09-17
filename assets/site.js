@@ -70,7 +70,6 @@ const conversionPageLabel=()=>{
     about:'About',
     localqr:'Local QR',
     'summer-guide':'Summer Guide',
-    'free-cheap-guide':'Free & Cheap Guide',
     advertise:'Advertise',
     preferences:'Preferences',
     'business-submissions':'Business Submissions',
@@ -348,7 +347,6 @@ const sk8PageEventName=()=>{
     home:'homepage_visit',
     advertise:'advertising_page_visit',
     'summer-guide':'summer_guide_visit',
-    'free-cheap-guide':'free_cheap_guide_visit',
     'business-submissions':'business_submission_page_visit',
     preferences:'preferences_page_visit',
     'latest-issue':'latest_issue_page_visit',
@@ -357,7 +355,6 @@ const sk8PageEventName=()=>{
     'submit-event':'event_submission_page_visit',
     'whats-on':'whats_on_page_visit',
     'summer-guide-success':'summer_guide_signup_completed',
-    'free-cheap-guide-success':'free_cheap_guide_signup_completed',
     'signup-success':'signup_completed'
   }[page]||'';
 };
@@ -512,14 +509,14 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
         throw new Error(firstError||'MailerLite did not accept this subscription.');
       }
       const formPosition=form.dataset.formPosition||'unknown';
-      const signupSource=form.matches('[data-qr-form]')?'local_qr':form.dataset.signupKind==='guide'?'free_cheap_guide':'website';
+      const signupSource=form.matches('[data-qr-form]')?'local_qr':'website';
       sk8Track('sign_up',{method:'MailerLite',form_position:formPosition,signup_source:signupSource,acquisition_channel:attribution.acquisition_channel,signup_campaign:attribution.signup_campaign||'(none)'});
       form.dispatchEvent(new CustomEvent('sk8:mailerlite-success',{bubbles:true,detail:{result}}));
-      status.className='signup-status show success';status.textContent=form.dataset.signupKind==='guide'?'You’re in. Opening the guide…':'You’re in. Opening the welcome page…';
-      const success=form.matches('[data-qr-form]')?'/qr-success/':form.dataset.signupKind==='guide'?'/free-cheap-guide/success/':'/signup-success/';
+      status.className='signup-status show success';status.textContent='You’re in. Opening the welcome page…';
+      const success=form.matches('[data-qr-form]')?'/qr-success/':'/signup-success/';
       window.setTimeout(()=>location.assign(success),350);
     }catch(error){
-      sk8Track('form_error',{form_kind:form.dataset.signupKind==='guide'?'free_cheap_guide_signup':'newsletter_signup',form_position:form.dataset.formPosition||'unknown',error_type:'mailerlite_rejected_or_unreadable'});
+      sk8Track('form_error',{form_kind:'newsletter_signup',form_position:form.dataset.formPosition||'unknown',error_type:'mailerlite_rejected_or_unreadable'});
       status.className='signup-status show error';status.textContent=error&&error.message?error.message:'That did not complete. Please try again or email contact@sk8scoop.com.';
       if(button){button.disabled=false;button.textContent=original;}
     }
@@ -609,29 +606,99 @@ async function sk8LoadQrLocations(){try{const r=await fetch('/assets/qr-location
     rows.forEach(row=>{
       const tr=document.createElement('tr');
       const values=[
-        row.poster_id||normaliseCode(row).replace('poster_',''),
-        row.venue||'',
-        row.area||'',
-        Number(row.views||0),
-        Number(row.form_submits||0),
-        Number(row.form_successes||0),
-        Number(row.confirmed_subscribers||0),
-        row.last_seen||''
+        row.poster_id||'Generic',
+        row.venue||'Unknown',
+        row.area||'—',
+        row.views||0,
+        row.form_attempts||0,
+        row.form_successes||0,
+        `${row.views?Math.round(Number(row.form_successes||0)/Number(row.views)*100):0}%`,
+        row.last_seen||'—'
       ];
-      values.forEach((value,index)=>{const td=document.createElement('td');td.textContent=String(value);if(index>=3&&index<=6)td.className='numeric';tr.appendChild(td);});
+      values.forEach(value=>{const td=document.createElement('td');td.textContent=String(value);tr.appendChild(td);});
       body.appendChild(tr);
     });
   };
   const load=async()=>{
-    status.className='status-box show';status.textContent='Loading QR results…';
+    status.textContent='Loading…';
     try{
-      const r=await fetch('/api/qr-stats',{headers:{authorization:`Bearer ${token.value.trim()}`}});const out=await r.json();if(!r.ok)throw new Error(out.error||'Could not load QR results.');renderRows(out.rows||[]);status.className='status-box show success';status.textContent=`Loaded ${out.rows.length} QR locations.`;
-    }catch(e){status.className='status-box show error';status.textContent=e.message||'Could not load QR results.';}
+      const [r,locations]=await Promise.all([
+        fetch('/api/qr-stats',{headers:{authorization:`Bearer ${token.value}`}}),
+        sk8LoadQrLocations()
+      ]);
+      const out=await r.json();if(!r.ok)throw new Error(out.error||'Failed');
+      const recorded=new Map((out.rows||[]).map(row=>[normaliseCode(row),row]));
+      const liveLocations=Object.entries(locations).filter(([,record])=>record.status==='live');
+      const merged=liveLocations.map(([code,record])=>{
+        const existing=recorded.get(code)||{};
+        recorded.delete(code);
+        return {
+          ...existing,
+          qr_code:code,
+          poster_id:code.replace('poster_',''),
+          venue:record.venue||existing.venue||'Unknown',
+          area:record.area||existing.area||'—',
+          views:Number(existing.views||0),
+          form_attempts:Number(existing.form_attempts||existing.form_submits||0),
+          form_successes:Number(existing.form_successes||0)
+        };
+      });
+      recorded.forEach(row=>merged.push(row));
+      merged.sort((a,b)=>normaliseCode(a).localeCompare(normaliseCode(b),undefined,{numeric:true}));
+      document.querySelector('[data-total-views]').textContent=out.totals.views||0;
+      document.querySelector('[data-total-attempts]').textContent=out.totals.form_attempts||out.totals.form_submits||0;
+      document.querySelector('[data-total-successes]').textContent=out.totals.form_successes||0;
+      document.querySelector('[data-live-posters]').textContent=liveLocations.length||out.totals.live_posters||0;
+      document.querySelector('[data-conversion]').textContent=out.totals.views?`${Math.round(Number(out.totals.form_successes||0)/Number(out.totals.views)*100)}%`:'0%';
+      renderRows(merged);
+      status.textContent=`Aggregate scan data loaded for ${liveLocations.length||out.totals.live_posters||0} live placements. “MailerLite accepted” means the form returned success; net-new subscribers must still be reconciled from MailerLite.`;
+    }catch(e){
+      status.textContent='The dashboard could not be loaded. Check the admin token and try again.';
+    }
   };
-  root.querySelector('[data-load-qr-stats]').addEventListener('click',load);
+  document.querySelector('[data-load-dashboard]').addEventListener('click',load);
 })();
 
-(function interactionTracking(){
+
+// v7 public statistics: one dated source in config, reused across pages.
+(function renderPublicStats(){
+  const stats=SK8_CONFIG.publicStats||{};
+  const values={
+    subscriberCount:stats.subscriberCount||'',
+    subscriberCountPlus:stats.subscriberCount?`${stats.subscriberCount}+`:'',
+    issuesPublished:stats.issuesPublished||'',
+    latestMainSendRecipients:stats.latestMainSendRecipients||'',
+    latestMainSendOpens:stats.latestMainSendOpens||'',
+    latestMainOpenRate:stats.latestMainOpenRate||'',
+    latestResendRecipients:stats.latestResendRecipients||'',
+    latestResendOpens:stats.latestResendOpens||'',
+    latestResendOpenRate:stats.latestResendOpenRate||'',
+    latestCombinedOpens:stats.latestCombinedOpens||'',
+    latestOpenRate:stats.latestOpenRate||'',
+    latestCombinedClicks:stats.latestCombinedClicks||'',
+    latestClickRate:stats.latestClickRate||'',
+    checkedDate:stats.checkedDate||'',
+    latestMetricsCheckedDate:stats.latestMetricsCheckedDate||''
+  };
+  document.querySelectorAll('[data-stat]').forEach(el=>{const key=el.dataset.stat;if(values[key]!==undefined&&values[key]!=='')el.textContent=values[key];});
+})();
+
+// Close mobile menu after a navigation choice and on Escape.
+if(menu&&nav){
+  nav.addEventListener('click',e=>{if(e.target.closest('a')&&nav.classList.contains('open')){nav.classList.remove('open');setMenuLabel(false);}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');setMenuLabel(false);menu.focus();}});
+}
+
+// Track meaningful starts, package choices and standard lead/contact signals only after confirmed actions.
+(function v7ConversionTracking(){
+  document.querySelectorAll('form').forEach(form=>{
+    let started=false;
+    form.addEventListener('focusin',()=>{
+      if(started)return;started=true;
+      const kind=form.dataset.formKind|| (form.matches('[data-signup-form]')?'newsletter_signup':'other');
+      sk8Track('form_start',{form_kind:kind,form_position:form.dataset.formPosition||'unknown'});
+    });
+  });
   document.querySelectorAll('[data-package-choice]').forEach(link=>link.addEventListener('click',()=>{
     const select=document.querySelector('#campaign-enquiry select[name="package"]');
     if(select){select.value=link.dataset.packageChoice;select.dispatchEvent(new Event('change',{bubbles:true}));}
