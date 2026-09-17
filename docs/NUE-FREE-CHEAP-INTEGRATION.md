@@ -113,6 +113,23 @@ Preview GitHub artefact:
 
 A temporary one-shot transfer workflow was used only to bridge the large verified file into GitHub and was then removed. It is not part of the permanent operating system.
 
+## Guide → What’s On handoff — completed for preview
+
+The 12 September Guide build contained a useful dated-event window. Removing that window from the permanent Guide without carrying forward still-future items would have lost reader value, so the valid future items were re-verified on 17 September and handed into `/data/events.json`.
+
+Current verified handoff additions:
+
+- Hatting Bites for Heritage Open Days — 19 September — Stockport Council.
+- Here We Are: Stockroom × Manchester Camerata — 19 September — Manchester Camerata.
+- Sharing a Shell with Manchester Camerata — 20 September — Manchester Museum.
+- Friday Club Disco — 25 September — Stockport Council.
+- Arc Saturday Art Club — 26 September — Arc.
+- Stockroom Soundsystem: Fittings, Drivers and Amplifiers — 3 October — Stockroom.
+
+Expired event rows were removed from the preview event dataset. Existing future NUE rows were retained. `whats-on.js` already removes past dates at render time and supports All, This Weekend, Free and Family views, so these handoff items immediately use the established NUE event experience rather than creating a Guide-specific calendar.
+
+The stale Bramhall Wellness Day homepage card dated 12 September was also replaced in `/data/homepage.json` with the current verified 19 September Stockroom/Manchester Camerata pick. This prevents the homepage from advertising a finished event while What’s On is current.
+
 ## Rebuild QA — 17 September 2026
 
 ### Cycle 1 — structure and value
@@ -126,23 +143,26 @@ PASS after corrections.
 
 ### Cycle 2 — accuracy and experience
 
-PASS at source/route level.
+PASS at source/route level after the event-handoff correction.
 
 - Rebuild used the newer 12 September approved Drive artefact rather than the stale 9 September GitHub copy.
-- Old volatile markers such as the 13 September–12 October event window and dated event cards are absent from the rebuilt bytes.
+- Old volatile markers such as the 13 September–12 October event window and dated event cards are absent from the rebuilt Guide bytes.
 - `/whats-on/` is present as the dated-event destination in both the replacement section and the permanent footer explanation.
+- Still-future Guide events were not discarded: six were re-verified against current organiser sources and moved into NUE What’s On.
+- The expired 12 September homepage event was replaced by a current 19 September pick.
 - Guide landing subscriber recognition, direct recognised-reader access, new-reader MailerLite acquisition and success redirect remain separated as designed.
-- The five shared proof records remain tied to their checked sources and are not treated as the complete Guide inventory.
+- The five shared evergreen proof records remain tied to their checked sources and are not treated as the complete Guide inventory.
 
 ### Cycle 3 — final risk and polish
 
-PASS for source integrity and deploy readiness; manual visual sign-off remains an owner approval step rather than hidden evidence.
+PASS for source integrity and preview deploy readiness; manual visual sign-off remains an owner approval step rather than hidden evidence.
 
 - The exact 22,683,675-byte rebuild was checksum-validated before GitHub commit.
-- Net rebuild changes from the previous integration head affect the generated Guide artefact only; the temporary transfer workflow leaves no permanent file change.
+- The large-file rebuild import itself changed the generated Guide artefact only; the temporary transfer workflow was then removed.
+- Subsequent preview-only changes are the intentional event handoff, homepage stale-event correction and this implementation record.
 - No dated event markers tested in QA remain in the generated Guide.
-- Existing approved CSS/classes and embedded visual assets were preserved; the change does not redesign the Guide.
-- Automated screenshot rendering was not available reliably in the execution environment, so no claim of browser visual proof is made. Before production merge, open the preview on desktop and mobile and visually check the replacement `What’s On Now` section, footer, and one long-scroll transition.
+- Existing approved CSS/classes and embedded visual assets were preserved; the Guide change does not redesign the approved build.
+- Automated screenshot rendering was not available reliably in the execution environment, so no claim of browser visual proof is made. Before production merge, open the preview on desktop and mobile and visually check the replacement `What’s On Now` section, footer, homepage current-event card and one long-scroll transition.
 
 ## Signup implementation note
 
