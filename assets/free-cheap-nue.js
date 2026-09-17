@@ -45,7 +45,48 @@
     form.method = 'post';
   });
 
-  const guideHref = anchor => `${GUIDE_PATH}${anchor || ''}`;
+  const shortcutMap = {
+    'Something free': '#things-anytime',
+    'Rainy afternoon': '#museums-heritage',
+    'With grandparents': '#day-out-plans',
+    'Older children & teens': '#more-ways-to-choose',
+    'Quick visit': '#more-ways-to-choose',
+    'Half-day': '#day-out-plans',
+    'Local history': '#museums-heritage',
+    'Fresh air': '#walks-nature',
+    'Worth the short trip': '#more-ways-to-choose'
+  };
+
+  const enhanceChoiceLinks = recognised => {
+    document.querySelectorAll('.mood-pills span').forEach(span => {
+      const label = (span.textContent || '').trim();
+      const anchor = shortcutMap[label] || '#start-here';
+      const link = document.createElement('a');
+      link.className = 'guide-choice-link';
+      link.textContent = label;
+      link.href = recognised ? `${GUIDE_PATH}${anchor}` : '#get-guide';
+      link.dataset.guideChoice = 'true';
+      link.dataset.guideAnchor = anchor;
+      link.dataset.linkLocation = recognised ? 'recognised-guide-choice' : 'guide-acquisition-choice';
+      span.replaceWith(link);
+    });
+
+    const band = document.querySelector('.mood-pills');
+    if (band && !band.querySelector('[data-live-events-link]')) {
+      const live = document.createElement('a');
+      live.className = 'guide-choice-link guide-choice-live';
+      live.href = '/whats-on/';
+      live.textContent = 'What’s on now';
+      live.dataset.liveEventsLink = 'true';
+      live.dataset.linkLocation = 'guide-to-whats-on';
+      band.appendChild(live);
+    }
+  };
+
+  const replaceSignupWithAccess = card => {
+    card.classList.add('guide-access-card');
+    card.innerHTML = '<h2>Your guide is ready</h2><p>You’re already recognised as a SK8 Scoop reader, so there’s no need to enter your email again.</p><div class="guide-access-actions"><a class="guide-access-button" href="/free-cheap-guide/guide/">Open the full guide</a><a class="guide-access-secondary" href="/whats-on/">See what’s on now →</a></div>';
+  };
 
   const applyRecognisedState = () => {
     const recognised = Boolean(readSubscriber());
@@ -54,11 +95,17 @@
     document.querySelectorAll('[data-guide-acquisition]').forEach(el => { el.hidden = recognised; });
     document.querySelectorAll('[data-guide-access]').forEach(el => { el.hidden = !recognised; });
 
+    if (recognised) {
+      document.querySelectorAll('.signup-card').forEach(replaceSignupWithAccess);
+    }
+
     document.querySelectorAll('[data-guide-choice]').forEach(link => {
       const anchor = link.dataset.guideAnchor || '';
-      link.href = recognised ? guideHref(anchor) : '#get-guide';
+      link.href = recognised ? `${GUIDE_PATH}${anchor}` : '#get-guide';
       link.dataset.linkLocation = recognised ? 'recognised-guide-choice' : 'guide-acquisition-choice';
     });
+
+    enhanceChoiceLinks(recognised);
 
     const navJoin = document.querySelector('.reader-nav-join');
     if (recognised && navJoin) {
@@ -81,7 +128,6 @@
         form_position: form.dataset.formPosition || 'unknown'
       });
     }
-    window.setTimeout(() => location.assign('/free-cheap-guide/success/'), 60);
   });
 
   document.addEventListener('click', event => {
