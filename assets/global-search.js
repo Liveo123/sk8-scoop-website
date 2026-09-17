@@ -43,13 +43,18 @@
     input.value = currentQuery;
     input.dataset.globalSearchInput = surface;
 
+    const source = document.createElement('input');
+    source.type = 'hidden';
+    source.name = 'source';
+    source.value = 'header';
+
     const button = document.createElement('button');
     button.type = 'submit';
     button.className = 'global-search-submit';
     button.setAttribute('aria-label', 'Search SK8 Scoop');
     button.innerHTML = iconMarkup;
 
-    form.append(label, input, button);
+    form.append(label, input, source, button);
     return form;
   };
 
