@@ -128,6 +128,7 @@
         form_position: form.dataset.formPosition || 'unknown'
       });
     }
+    window.setTimeout(() => location.assign('/free-cheap-guide/success/'), 60);
   });
 
   document.addEventListener('click', event => {
