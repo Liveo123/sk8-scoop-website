@@ -34,24 +34,41 @@ These are decision aids, not decorative badges. Do not create a badge for every 
 - Homepage Explore keeps Free & Cheap as a primary destination.
 - The homepage description should communicate the guide’s actual value: genuine £0/low-cost ideas with hidden extras flagged.
 - Recognised subscribers go directly to `/free-cheap-guide/guide/` from subscriber-aware NUE CTAs.
-- Kids & Family and Outdoors can continue surfacing selected guide examples, with prominent routes back to the full guide.
+- Kids & Family and Outdoors can surface selected guide examples from the shared Free & Cheap dataset, with prominent routes back to the full guide.
 - What’s On remains the route for dated events.
 
 ## Guide → NUE
 
 - The guide landing page uses the same recognised-subscriber state as NUE.
 - Recognised readers bypass acquisition forms and get direct full-guide access plus a What’s On route.
-- New guide signups remain attributed as Free & Cheap Guide acquisition and continue through the existing guide delivery journey.
-- “Choose by mood” becomes functional navigation into relevant guide sections.
+- New guide signups use the existing MailerLite Free & Cheap Guide form and delivery journey.
+- “Choose by mood” is functional navigation into relevant guide sections.
 - “What’s on now” routes to the maintained NUE What’s On experience instead of encouraging duplicated dated listings.
+- The editable Guide source fragments no longer carry the dated September event block. They point readers to `/whats-on/` instead.
 
-## Future data architecture
+## Shared data layer — proof of concept
 
-Do not rebuild the approved guide merely to normalise data. When the next substantive guide refresh is approved, introduce a structured Free & Cheap source dataset containing at minimum:
+`/data/free-cheap.json` is the first structured shared source. It is intentionally small while the model is proven.
+
+Current verified proof records checked 17 September 2026:
+
+- Abney Hall Park
+- Bruntwood Park
+- Hat Works
+- Gatley Carrs
+- Stockport Museum
+
+The Kids & Family page hydrates its matching evergreen cards from this data. The Outdoors page hydrates the Gatley Carrs access card from the same record. Existing HTML remains as a fallback if the JSON cannot be loaded.
+
+Do not interpret this file as the complete Guide inventory yet.
+
+## Target data architecture
+
+When the next substantive guide refresh is approved, expand the shared dataset to contain at minimum:
 
 - stable item ID
 - title
-- area
+- area and postcode where useful
 - category
 - cost band and exact current price text
 - audience tags
@@ -59,12 +76,30 @@ Do not rebuild the approved guide merely to normalise data. When the next substa
 - duration/visit type
 - access/SEND evidence fields
 - extras/caveats
-- official source URL
+- official source URL and source type
 - checked date
-- publication state
-- related NUE category routes
+- verification/publication state
+- guide anchor
+- related NUE surfaces
 
-Use that dataset to generate or populate reusable NUE excerpts and filters. The goal is one maintained factual record feeding several reader experiences, not several copied mini-databases.
+The goal is one maintained factual record feeding several reader experiences, not several copied mini-databases.
+
+## Generated-guide rebuild gate
+
+`free-cheap-guide/guide/index.html` is a very large generated reader artefact. The maintainable dated-content correction has been made in:
+
+- `free-cheap-guide/guide/parts/part-05.html`
+- `free-cheap-guide/guide/parts/part-06.html`
+
+Before production approval, regenerate/rebuild the full guide artefact from the corrected source fragments using the established guide build process, then verify that the rendered full guide no longer contains the old September “What’s On Now” event list.
+
+Do not directly hand-edit the 22MB generated guide merely to make this integration pass appear complete.
+
+## Signup implementation note
+
+The Guide landing page is deliberately excluded from the branch’s generic `signup-protection.js` path for this preview integration because that script currently expects `/api/signup-config` and `/api/newsletter-signup`, while the canonical Worker in this branch does not expose those routes. The Guide therefore uses its existing MailerLite form endpoint and its existing delivery automation, with successful Guide signups redirected to `/free-cheap-guide/success/`.
+
+This is an isolated Guide-path decision for the preview. It does not alter protection behaviour on other signup surfaces.
 
 ## Content handoff
 
