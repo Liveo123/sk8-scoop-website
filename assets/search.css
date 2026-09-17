@@ -11,6 +11,8 @@
 .search-examples>span{font-weight:700;color:#56676a;font-size:14px}
 .search-example{border:1px solid #b7cbc7;background:#fff;color:#0b525b;border-radius:999px;padding:8px 12px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
 .search-example:hover,.search-example:focus-visible{border-color:#0f6470;background:#eaf4f2}
+.search-privacy-note{max-width:760px;margin:12px 0 0;color:#56676a;font-size:13px;line-height:1.5}
+.search-privacy-note a{color:#0f6470;font-weight:700}
 .search-tools{display:grid;gap:18px;padding:20px;background:#fff;border:1px solid #d9dfda;border-radius:16px;margin-bottom:22px}
 .search-filter-group{display:grid;gap:9px}
 .search-filter-label{font-size:14px;font-weight:800;color:#132d31}
