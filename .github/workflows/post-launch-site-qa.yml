@@ -26,6 +26,8 @@ jobs:
           if [ -f worker-business-v2.js ]; then node --check worker-business-v2.js; fi
           if [ -f assets/campaign-finder.js ]; then node --check assets/campaign-finder.js; fi
           if [ -f assets/advertise.js ]; then node --check assets/advertise.js; fi
+      - name: Check advertiser growth-engine contracts
+        run: node scripts/check-advertiser-growth-engine.mjs
 
   preview-smoke:
     if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/post-launch-nue-v2')
