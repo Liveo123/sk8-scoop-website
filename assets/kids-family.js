@@ -122,3 +122,65 @@
       console.error('SK8 Kids & Family event data failed to load', error);
     });
 })();
+
+(() => {
+  const pickSection = document.querySelector('#family-picks');
+  if (!pickSection) return;
+
+  const normalise = value => String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  const prettyCheckedDate = value => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ''))) return '';
+    const [year, month, day] = value.split('-').map(Number);
+    return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+      .format(new Date(Date.UTC(year, month - 1, day)));
+  };
+
+  fetch('/data/free-cheap.json', { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error(`Free & Cheap data returned ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const items = Array.isArray(data.items) ? data.items : [];
+      const byTitle = new Map(items
+        .filter(item => item && item.verification_status === 'VERIFIED' && Array.isArray(item.nue_surfaces) && item.nue_surfaces.includes('kids-family'))
+        .map(item => [normalise(item.title), item]));
+
+      pickSection.querySelectorAll('.reader-story').forEach(card => {
+        const heading = card.querySelector('.reader-story-body h3');
+        if (!heading) return;
+        const item = byTitle.get(normalise(heading.textContent));
+        if (!item) return;
+
+        card.dataset.freeCheapId = item.id;
+        const place = card.querySelector('.family-feature-place');
+        const value = card.querySelector('.family-feature-value');
+        const title = card.querySelector('.family-feature-title');
+        const detail = card.querySelector('.family-feature-detail');
+        const bodyCopy = card.querySelector('.reader-story-body p');
+        const official = card.querySelector('.reader-story-body .reader-link');
+
+        if (place) place.textContent = item.area || '';
+        if (value) value.textContent = item.cost_band || '';
+        if (title) title.textContent = item.title || '';
+        if (detail) {
+          const caveat = Array.isArray(item.caveats) && item.caveats[0] ? item.caveats[0].replace(/^WATCH THE EXTRAS:\s*/i, '') : item.cost_text;
+          detail.textContent = caveat || '';
+        }
+        heading.textContent = item.title || heading.textContent;
+        if (bodyCopy) bodyCopy.textContent = item.summary || item.cost_text || bodyCopy.textContent;
+        if (official && item.official_url) {
+          official.href = item.official_url;
+          official.rel = 'noopener';
+          official.textContent = 'Official details →';
+        }
+      });
+
+      const checked = pickSection.querySelector('.reader-section-head .eyebrow');
+      const checkedDate = prettyCheckedDate(data.checked_date);
+      if (checked && checkedDate) checked.textContent = `Checked ${checkedDate}`;
+    })
+    .catch(error => {
+      console.error('SK8 shared Free & Cheap data failed to hydrate Kids & Family', error);
+    });
+})();
