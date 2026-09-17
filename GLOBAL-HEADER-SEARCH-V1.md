@@ -12,17 +12,17 @@ Make SK8 Scoop search available from any normal public page without building a s
 
 ## Reader behaviour
 
-### Wide desktop
+### Desktop
 
-- At `>=1440px`, show a compact visible search field alongside the full sticky-header navigation.
+- At `>=1200px`, show a compact visible search field alongside the full sticky-header navigation.
 - Keep the existing `Join free` action visually stronger than search.
 - Hide the duplicate plain `Join` navigation link at this width because `Join free` remains present.
+- Use slightly tighter desktop spacing, logo width and search width so the full navigation fits cleanly without clipping.
 - Submit directly to the existing `/search/` results page.
 
 ### Laptop / tablet
 
-- At `821–1439px`, keep a visible compact search field because the full navigation is moved behind a clean `Menu` button.
-- This avoids squeezing the full navigation, search field and CTA onto one row.
+- At `821–1199px`, keep a visible compact search field because the full navigation is moved behind a clean `Menu` button.
 - Menu opens the normal site navigation below the header.
 
 ### Mobile
@@ -63,12 +63,12 @@ The first-party search log keeps the existing safeguards: obvious email addresse
 
 ## Responsive design
 
-- `>=1440px`: visible compact search input + full navigation + `Join free`.
-- `821–1439px`: visible compact search input + clean Menu button; navigation is collapsed behind Menu.
+- `>=1200px`: compact search input + full navigation + `Join free`.
+- `821–1199px`: compact search input + clean Menu button; navigation is collapsed behind Menu.
 - `<=820px`: search icon + Menu; search opens in a full-width panel below the header.
 - very narrow screens retain approximately 44px controls and allow the logo to contract only when required to prevent overflow.
 
-The `1440px` full-navigation threshold is deliberate. Browser QA showed that allowing the full navigation to return around `1280px` made the right-hand CTA clip at common laptop/browser widths.
+The desktop full-navigation state deliberately uses a wider header container and tighter internal spacing. This preserves the normal desktop expectation of seeing the complete navigation while avoiding the clipping found in earlier preview passes.
 
 ## Accessibility
 
@@ -95,6 +95,6 @@ Those should only be considered after real reader search behaviour justifies the
 
 1. Automated preflight passes.
 2. Cloudflare branch preview smoke test passes, including global-search JS/CSS assets.
-3. Human visual check on wide desktop, laptop/tablet and mobile.
+3. Human visual check on desktop, laptop/tablet and mobile.
 4. Confirm a preview header search arrives on `/search/` and appears as `preview_header` in Search Insights.
 5. Explicit Paul approval before merge to `main`.
