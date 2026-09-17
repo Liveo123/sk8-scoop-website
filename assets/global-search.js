@@ -158,7 +158,7 @@
     const target = event.target;
     if (target && (target.matches('input,textarea,select,button,a') || target.isContentEditable)) return;
     event.preventDefault();
-    if (window.matchMedia('(min-width: 1280px)').matches) {
+    if (window.matchMedia('(min-width: 821px)').matches) {
       desktopInput.focus();
       desktopInput.select();
     } else {
@@ -171,8 +171,8 @@
     closePanel();
   });
 
-  const desktopQuery = window.matchMedia('(min-width: 1280px)');
-  const handleDesktopChange = event => { if (event.matches) closePanel(); };
-  if (typeof desktopQuery.addEventListener === 'function') desktopQuery.addEventListener('change', handleDesktopChange);
-  else if (typeof desktopQuery.addListener === 'function') desktopQuery.addListener(handleDesktopChange);
+  const inlineSearchQuery = window.matchMedia('(min-width: 821px)');
+  const handleInlineSearchChange = event => { if (event.matches) closePanel(); };
+  if (typeof inlineSearchQuery.addEventListener === 'function') inlineSearchQuery.addEventListener('change', handleInlineSearchChange);
+  else if (typeof inlineSearchQuery.addListener === 'function') inlineSearchQuery.addListener(handleInlineSearchChange);
 })();
