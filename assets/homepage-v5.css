@@ -34,8 +34,43 @@ body.reader-home.homepage-v3 .reader-action .button{align-self:flex-start;margin
 body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"]{display:flex;flex-direction:column;justify-content:center}
 body.reader-home.homepage-v3 .reader-footer-signup[data-preview-signup="true"] .button{align-self:stretch;text-align:center}
 
+/* Miniature SK8 hero experiment, 17 Sep 2026.
+   The image is visual atmosphere only: real heading, form, proof and links stay live HTML.
+   Preview rebuild marker: full-resolution asset source fix. */
+body.reader-home.homepage-v3 .reader-hero-photo{
+  position:relative;
+  isolation:isolate;
+  background:#fffaf0!important;
+}
+body.reader-home.homepage-v3 .reader-hero-photo::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:0;
+  background-color:#e8e0cf;
+  background-image:url('/assets/images/sk8-miniature-hero-hires-v3.png');
+  background-size:cover;
+  background-position:center 48%;
+  background-repeat:no-repeat;
+}
+body.reader-home.homepage-v3 .reader-hero-shade{
+  z-index:1;
+  background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.98) 25%,rgba(255,250,240,.90) 38%,rgba(255,250,240,.58) 49%,rgba(255,250,240,.20) 60%,rgba(255,250,240,0) 73%);
+}
+body.reader-home.homepage-v3 .reader-hero-overlay{z-index:2}
+
+@media(max-width:900px){
+  body.reader-home.homepage-v3 .reader-hero-photo::before{inset:0;background-position:56% 48%}
+  body.reader-home.homepage-v3 .reader-hero-shade{background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.98) 40%,rgba(255,250,240,.74) 56%,rgba(255,250,240,.20) 78%,rgba(255,250,240,0) 100%)}
+}
+
 @media(max-width:680px){
   body.reader-home.homepage-v3 .reader-action{min-height:0!important}
   body.reader-home.homepage-v3 .home-resource-visual.is-contain img{max-height:108px!important}
   body.reader-home.homepage-v3 .reader-worth .reader-story:nth-child(3) .dicm-visual{grid-template-rows:38px minmax(0,1fr)!important}
+  body.reader-home.homepage-v3 .reader-hero-photo{min-height:650px!important;background:#fffaf0!important}
+  body.reader-home.homepage-v3 .reader-hero-overlay{min-height:650px!important;align-items:flex-start}
+  body.reader-home.homepage-v3 .reader-hero-copy{padding-top:30px!important;padding-bottom:245px!important}
+  body.reader-home.homepage-v3 .reader-hero-photo::before{inset:auto 0 0 0;height:245px;background-position:center 46%}
+  body.reader-home.homepage-v3 .reader-hero-shade{background:linear-gradient(180deg,#fffaf0 0%,#fffaf0 57%,rgba(255,250,240,.96) 62%,rgba(255,250,240,.38) 74%,rgba(255,250,240,0) 88%)}
 }
