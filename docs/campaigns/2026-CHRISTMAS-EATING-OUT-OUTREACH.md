@@ -1,6 +1,6 @@
 # Christmas Eating Out 2026 supervised outreach templates
 
-Status: draft only. No sending authorised by this file.
+Status: draft-only outreach. Prospect messages are created as Gmail drafts for Paul to review and send manually. No automated cold-email sending is authorised.
 
 Use only after:
 - the business trigger has been re-verified;
@@ -9,6 +9,14 @@ Use only after:
 - the first supervised batch has Paul approval.
 
 Do not quote unverified subscriber counts, results or scarcity. Do not attach a media pack in the first contact.
+
+## Gmail sending rule
+
+- Create prospect emails as drafts only.
+- Paul sends each cold email manually from Gmail.
+- Do not schedule automatic daily cold-email sends.
+- Do not bulk-send or bypass Gmail sending limits.
+- A draft must still pass the trigger, CRM duplicate, suppression, recipient-classification and contact-route checks before it is prepared.
 
 ## First-contact email pattern
 
