@@ -174,16 +174,29 @@ async function handleStripeWebhook(request, env) {
   const session = event && event.data && event.data.object ? event.data.object : null;
   if (!session || session.object !== 'checkout.session') return json({ received: true, ignored: true });
 
+  const requestHost = new URL(request.url).hostname;
+  const productionHost = requestHost === 'www.sk8scoop.com' || requestHost === 'sk8scoop.com';
+  if ((productionHost && event.livemode !== true) || (!productionHost && event.livemode === true)) {
+    console.error(`Stripe webhook mode mismatch on ${requestHost}`);
+    return json({ error: 'Stripe mode mismatch.' }, 400);
+  }
+
   const metadata = session.metadata || {};
   const enquiryId = Number.parseInt(metadata.advertiser_enquiry_id, 10);
   const packageKey = String(metadata.sk8_product || '');
   const campaignReference = String(metadata.campaign_reference || session.client_reference_id || '').trim().slice(0, 100);
-  if (!Number.isInteger(enquiryId) || enquiryId <= 0 || !['temp_test', 'temp_grow'].includes(packageKey)) {
+  if (
+    !Number.isInteger(enquiryId) ||
+    enquiryId <= 0 ||
+    !['temp_test', 'temp_grow'].includes(packageKey) ||
+    String(metadata.approval_required || '') !== 'true' ||
+    String(session.mode || '') !== 'payment'
+  ) {
     console.log('Stripe advertiser payment ignored: missing approved enquiry metadata');
     return json({ received: true, ignored: true });
   }
 
-  const enquiry = await env.DB.prepare('SELECT id,business_name,email,status FROM advertiser_enquiries WHERE id = ? LIMIT 1').bind(enquiryId).first();
+  const enquiry = await env.DB.prepare('SELECT id,business_name,email,package,status FROM advertiser_enquiries WHERE id = ? LIMIT 1').bind(enquiryId).first();
   if (!enquiry) {
     console.log(`Stripe advertiser payment ignored: enquiry ${enquiryId} not found`);
     return json({ received: true, ignored: true });
@@ -194,7 +207,9 @@ async function handleStripeWebhook(request, env) {
   const amount = Number.isFinite(Number(session.amount_total)) ? Math.max(0, Math.trunc(Number(session.amount_total))) : 0;
   const currency = String(session.currency || 'gbp').toLowerCase().slice(0, 10);
   const expectedAmount = { temp_test: 4000, temp_grow: 9000 }[packageKey];
-  const commercialTermsMatch = currency === 'gbp' && amount === expectedAmount;
+  const packageMatches = String(enquiry.package || '') === packageKey;
+  const statusAllowsPayment = ['pending', 'approved', 'payment_sent'].includes(String(enquiry.status || ''));
+  const commercialTermsMatch = currency === 'gbp' && amount === expectedAmount && packageMatches && statusAllowsPayment;
   const isPaid = (
     event.type === 'checkout.session.async_payment_succeeded' ||
     (event.type === 'checkout.session.completed' && session.payment_status === 'paid')
