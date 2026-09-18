@@ -448,3 +448,27 @@ Subscribed only to:
 - `checkout.session.expired`
 
 The signing secret is stored in Cloudflare as `STRIPE_WEBHOOK_SECRET` and is included in both preview and production deploy-secret injection. Do not put it in GitHub.
+
+
+## 23. Security hardening before live Stripe
+
+Before connecting the live Stripe account, the advertiser branch received an additional security pass.
+
+Implemented:
+
+- Stripe remains hosted by Stripe. SK8 Scoop does not collect or process card numbers on its own pages.
+- Browser-facing responses now add baseline hardening headers: `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, `X-Frame-Options: DENY`, and a partial CSP blocking framing, object embedding and hostile base-URL changes.
+- Production SK8 domains receive HSTS for one year.
+- Private admin and approved-payment routes are returned with `Cache-Control: no-store`.
+- Advertiser form POSTs must be same-origin when an Origin header is present.
+- Advertiser enquiries now include a honeypot and minimum/maximum completion-time screen before D1 write and notification.
+- Stripe webhooks continue to require a valid signature, a configured signing secret, approved SK8 product metadata, a real advertiser enquiry ID, and the exact current GBP amount before an enquiry can be marked paid.
+- Amount or currency mismatches are recorded as `review_required`, not paid.
+- PR diff was scanned for Stripe, Resend and webhook-secret patterns; no live secret is committed in GitHub.
+
+Important operational notes:
+
+- The private advertiser page is noindex but noindex is not a security control. Its API remains protected by a high-entropy `ADMIN_TOKEN`. Cloudflare Access would be a worthwhile later defence-in-depth improvement if the private operating UI grows.
+- The advertiser enquiry endpoint is now materially harder to spam, but Cloudflare rate limiting can still be added later if automated abuse appears.
+- A fresh live Stripe webhook secret should be copied directly from Stripe to Cloudflare and should not be pasted into chat or committed to GitHub.
+- The previously disclosed sandbox webhook secret is test-only. The Resend API credential previously shown during debugging should be rotated before final production launch as good secret-hygiene practice.
