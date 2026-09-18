@@ -106,7 +106,7 @@
       value: valueLabels[v.value],
       state: 'test',
       badge: 'TEST',
-      title: 'Start with TEST £40.',
+      title: 'Start with TEST.',
       price: '£40',
       doFirst: v.goal === 'awareness'
         ? 'You have a specific message worth testing. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.'
@@ -147,8 +147,8 @@
         doFirst: 'Ask SK8 Scoop to confirm that the offer is genuinely relevant to core SK8 readers before choosing a paid package.',
         why: ['Your main customer area is nearby rather than inside the core SK8 area.'],
         alternative: '',
-        package: '',
-        cta: 'Ask SK8 Scoop to check the fit'
+        package: 'human_review',
+        cta: 'Request a local-fit check'
       };
     }
 
@@ -254,7 +254,7 @@
         ...base,
         state: 'grow',
         badge: 'GROW CANDIDATE',
-        title: 'GROW £90 looks like the right route, subject to a Guide fit check.',
+        title: 'GROW looks like the right route, subject to a Guide fit check.',
         price: '£90',
         doFirst: 'Before booking, SK8 Scoop will check that the free or low-cost proposition genuinely belongs in the Free & Cheap Guide.',
         why: [
