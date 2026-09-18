@@ -19,6 +19,14 @@ export default {
       return handleStripeWebhook(request, env);
     }
 
+    if (
+      url.pathname === '/api/stripe-e2e-test-status' &&
+      request.method === 'GET' &&
+      url.hostname === 'sk8-business-growth-engine-v2-sk8-scoop.quiet-term-e047.workers.dev'
+    ) {
+      return handleStripeE2eTestStatus(env);
+    }
+
     return siteWorker.fetch(request, env, ctx);
   }
 };
@@ -96,6 +104,35 @@ async function ensureAdvertiserPaymentsTable(db) {
   await db.prepare(ADVERTISER_PAYMENTS_SQL).run();
   await db.prepare('CREATE INDEX IF NOT EXISTS idx_advertiser_payments_enquiry ON advertiser_payments(advertiser_enquiry_id)').run();
   await db.prepare('CREATE INDEX IF NOT EXISTS idx_advertiser_payments_status ON advertiser_payments(status)').run();
+}
+
+async function handleStripeE2eTestStatus(env) {
+  if (!env.DB) return json({ error: 'Database unavailable.' }, 503);
+  await ensureAdvertiserPaymentsTable(env.DB);
+  const row = await env.DB.prepare(`SELECT
+      a.id,a.package,a.status,a.created_at,
+      p.campaign_reference,p.amount_pence,p.currency,p.status AS payment_status,p.paid_at
+    FROM advertiser_enquiries a
+    LEFT JOIN advertiser_payments p
+      ON p.id = (
+        SELECT p2.id FROM advertiser_payments p2
+        WHERE p2.advertiser_enquiry_id = a.id
+        ORDER BY p2.updated_at DESC LIMIT 1
+      )
+    WHERE a.business_name = 'SK8 Stripe E2E TEST 2026-09-18'
+    ORDER BY a.id DESC LIMIT 1`).first();
+  if (!row) return json({ found: false });
+  return json({
+    found: true,
+    id: Number(row.id),
+    package: String(row.package || ''),
+    enquiry_status: String(row.status || ''),
+    payment_status: row.payment_status ? String(row.payment_status) : null,
+    amount_pence: row.amount_pence == null ? null : Number(row.amount_pence),
+    currency: row.currency ? String(row.currency) : null,
+    campaign_reference: row.campaign_reference ? String(row.campaign_reference) : null,
+    paid_at: row.paid_at ? String(row.paid_at) : null
+  });
 }
 
 async function handleStripeWebhook(request, env) {
