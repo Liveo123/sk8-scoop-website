@@ -50,6 +50,14 @@ const notifyIndex = wrapper.indexOf('await notifyAdvertiserInbox');
 assert(saveIndex >= 0 && notifyIndex > saveIndex, 'D1-backed site handler completes before email notification');
 assert(!/£35|£110/.test(finderHtml + finderJs + opportunity), 'New growth-engine surfaces contain no legacy public prices');
 assert(!wrapper.includes('TEST DIAGNOSTIC') && !wrapper.includes('SK8 Scoop TEST ONLY'), 'Preview-only advertiser diagnostic response is not shipped');
+assert(wrapper.includes('/api/stripe-webhook'), 'Advertiser wrapper exposes the signed Stripe webhook route');
+assert(wrapper.includes('STRIPE_WEBHOOK_SECRET'), 'Stripe webhook requires its signing secret');
+assert(wrapper.includes('verifyStripeSignature'), 'Stripe webhook verifies signatures before recording payments');
+assert(wrapper.includes('advertiser_payments'), 'Stripe webhook records advertiser payments in D1');
+assert(wrapper.includes("status='paid'"), 'Successful Stripe payment marks the advertiser enquiry paid');
+assert(!wrapper.includes('/api/stripe-e2e-test-status'), 'Temporary Stripe E2E status endpoint is not shipped');
+assert(pay.includes('site-header'), 'Approved payment page uses the standard site header');
+
 
 if (process.exitCode) process.exit(process.exitCode);
 console.log('Advertiser growth-engine static checks passed.');
