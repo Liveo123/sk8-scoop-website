@@ -56,7 +56,7 @@
       filterGrid.classList.add('whats-on-filter-grid');
       const images = {
         weekend: '/assets/images/nue/whats-on-weekend.webp',
-        free: '/assets/images/free-cheap-guide-logo.webp',
+        free: '/assets/images/cheap-free-guide-illustration.svg',
         family: '/assets/images/nue/whats-on-family.webp'
       };
       const labels = { weekend: 'THIS WEEKEND', free: 'FREE IDEAS', family: 'FAMILY' };
