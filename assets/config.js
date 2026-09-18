@@ -47,23 +47,23 @@ window.SK8_CONFIG = {
   publicStats: {
     subscriberCount: "500+",
     subscriberProof: "500+",
-    issuesPublished: 12,
-    checkedDate: "11 September 2026",
-    latestMainSendRecipients: 507,
+    issuesPublished: 13,
+    checkedDate: "18 September 2026",
+    latestMainSendRecipients: 539,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "11 September 2026",
+    latestIssueDate: "18 September 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 12,
-    dateIso: "2026-09-11",
-    dateDisplay: "Friday 11 September 2026",
-    title: "Issue 12 is out",
-    headline: "Black pudding, Gatley Carrs & the secrets of Ladybrook",
-    summary: "Black pudding throwing, dragon boats, Gatley Carrs, a Cheadle Hulme pub, Abney Hall and the Ladybrook corridor.",
-    url: "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619"
+    number: 13,
+    dateIso: "2026-09-18",
+    dateDisplay: "Friday 18 September 2026",
+    title: "Issue 13 is out",
+    headline: "Free Chinatown festival, CoderDojo & Cheadle’s wartime story",
+    summary: "Free CoderDojo, Manchester Mid-Autumn Festival, Heald Green planning, Cheadle War Memorial’s civilian names and a four-mile local-history walk.",
+    url: "https://preview.mailerlite.io/preview/2462354/emails/198942565915953065"
   },
   stripeLinks: {
     local_spotlight: "",

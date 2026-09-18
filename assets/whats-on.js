@@ -146,19 +146,27 @@
   };
 
   const isFree = event => /(^|\b)free(\b|$)/i.test(String(event.cost || ''));
-  const isFamily = event => /family|kids|children|storytime/i.test(`${event.category || ''} ${event.title || ''} ${event.description || ''}`);
-  const isToday = event => String(event.date || '') === localToday();
+  const isFamily = event => /family|kids|children|storytime|under-18|ages 10\+/i.test(`${event.category || ''} ${event.title || ''} ${event.description || ''}`);
+  const eventBounds = event => {
+    const start = parseDate(event.date);
+    const end = parseDate(event.end_date || event.date);
+    return [start, end || start];
+  };
+  const overlaps = (aStart, aEnd, bStart, bEnd) => Boolean(aStart && aEnd && bStart && bEnd && aStart <= bEnd && aEnd >= bStart);
+  const isToday = event => {
+    const today = parseDate(localToday());
+    const [start, end] = eventBounds(event);
+    return overlaps(start, end, today, today);
+  };
   const isWeekend = event => {
-    const date = parseDate(event.date);
-    if (!date) return false;
+    const [eventStart, eventEnd] = eventBounds(event);
     const [start, end] = weekendBounds();
-    return date >= start && date <= end;
+    return overlaps(eventStart, eventEnd, start, end);
   };
   const isNextSevenDays = event => {
-    const date = parseDate(event.date);
-    if (!date) return false;
+    const [eventStart, eventEnd] = eventBounds(event);
     const [start, end] = nextSevenDayBounds();
-    return date >= start && date <= end;
+    return overlaps(eventStart, eventEnd, start, end);
   };
 
   const matchesNeed = event => {
@@ -227,7 +235,7 @@
 
     const facts = document.createElement('div');
     facts.className = 'event-facts';
-    [fact('Time', event.time), fact('Area', event.area), fact('Cost', event.cost)].filter(Boolean).forEach(node => facts.appendChild(node));
+    [fact('Dates', event.date_range), fact('Time', event.time), fact('Area', event.area), fact('Cost', event.cost)].filter(Boolean).forEach(node => facts.appendChild(node));
 
     const venue = document.createElement('p');
     venue.className = 'event-venue';
@@ -325,6 +333,7 @@
           url: source,
           description: String(event.description || '')
         };
+        if (event.end_date) item.endDate = event.end_date;
         if (isFree(event)) item.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: source, availability: 'https://schema.org/InStock' };
         return { '@type': 'ListItem', position: index + 1, item };
       })
@@ -358,7 +367,7 @@
       const today = localToday();
       events = (Array.isArray(data) ? data : [])
         .filter(event => event && event.status !== 'example')
-        .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && event.date >= today)
+        .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
       syncEventSchema();
       render();
