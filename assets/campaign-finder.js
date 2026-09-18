@@ -63,12 +63,13 @@
       value: fieldValue('value'),
       specific: checked('specific'),
       route: checked('route'),
-      freecheap: checked('freecheap')
+      freecheap: checked('freecheap'),
+      none: checked('none')
     };
   }
 
   function requiredComplete(v) {
-    return Boolean(v.goal && v.category && v.area && v.timing && v.value);
+    return Boolean(v.goal && v.category && v.area && v.timing && v.value && (v.specific || v.route || v.freecheap || v.none));
   }
 
   function progress() {
@@ -78,7 +79,7 @@
       Boolean(v.goal),
       Boolean(v.category && v.area),
       Boolean(v.timing && v.value),
-      Boolean(v.specific || v.route || v.freecheap)
+      Boolean(v.specific || v.route || v.freecheap || v.none)
     ];
     steps.forEach((step, index) => step.classList.toggle('is-complete', done[index]));
   }
@@ -292,7 +293,19 @@
       <div class="finder-result-actions">${action}${secondary}</div>`;
   }
 
-  form.addEventListener('change', progress);
+  form.addEventListener('change', event => {
+    const target = event.target;
+    if (target && target.name === 'none' && target.checked) {
+      ['specific', 'route', 'freecheap'].forEach(name => {
+        const field = form.elements[name];
+        if (field) field.checked = false;
+      });
+    } else if (target && ['specific', 'route', 'freecheap'].includes(target.name) && target.checked) {
+      const noneField = form.elements.none;
+      if (noneField) noneField.checked = false;
+    }
+    progress();
+  });
 
   form.addEventListener('reset', () => {
     window.setTimeout(() => {
