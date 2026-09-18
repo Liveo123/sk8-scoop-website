@@ -2,6 +2,9 @@
   const form = document.getElementById('campaign-finder');
   const result = document.querySelector('[data-finder-result]');
   const errorBox = document.querySelector('[data-finder-error]');
+  const contextBox = document.querySelector('[data-finder-context]');
+  const finderParams = new URLSearchParams(window.location.search);
+  const opportunity = finderParams.get('opportunity') || '';
   if (!form || !result) return;
 
   const goalLabels = {
@@ -70,6 +73,18 @@
 
   function requiredComplete(v) {
     return Boolean(v.goal && v.category && v.area && v.timing && v.value && (v.specific || v.route || v.freecheap || v.none));
+  }
+
+  function applyOpportunityPreset() {
+    if (opportunity !== 'christmas-eating-out') return;
+    const goal = form.querySelector('input[name="goal"][value="book"]');
+    const category = form.elements.category;
+    if (goal) goal.checked = true;
+    if (category) category.value = 'hospitality';
+    if (contextBox) {
+      contextBox.hidden = false;
+      contextBox.innerHTML = '<strong>Christmas Eating Out loaded.</strong> “Book” and “Restaurant, pub, café or venue” are preselected. Complete the remaining questions for the recommendation.';
+    }
   }
 
   function progress() {
@@ -264,6 +279,7 @@
     if (rec.package) params.set('finder_package', rec.package);
     if (rec.goal) params.set('finder_goal', rec.goal);
     params.set('finder_source', 'campaign_finder');
+    if (opportunity) params.set('finder_opportunity', opportunity);
     return `/advertise.html?${params.toString()}#campaign-enquiry`;
   }
 
@@ -341,5 +357,6 @@
     }
   });
 
+  applyOpportunityPreset();
   progress();
 })();
