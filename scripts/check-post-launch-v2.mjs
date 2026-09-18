@@ -159,5 +159,7 @@ contains('assets/global-search.css','@media(max-width:820px)');
 contains('assets/global-search.css','width:min(1320px,calc(100% - 24px))');
 contains('assets/global-search.css','.global-search-form:focus-within');
 excludes('assets/global-search.js','query_text');
+contains('assets/search.js','hasEnoughQueryCoverage');
+contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil(terms.length * 0.6)');
 
 console.log('Post-launch NUE v2 preflight passed.');
