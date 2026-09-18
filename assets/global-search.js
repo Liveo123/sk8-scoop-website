@@ -5,6 +5,14 @@
 
   const menu = row.querySelector('.menu-btn');
   const nav = row.querySelector('.nav');
+  if (nav) {
+    nav.querySelectorAll('a:not(.button)').forEach(link => {
+      try {
+        const path = new URL(link.getAttribute('href') || '', location.href).pathname.replace(/\/+$/,'') || '/';
+        if (path === '/join') link.remove();
+      } catch (e) {}
+    });
+  }
   const currentQuery = location.pathname.replace(/\/+$/,'') === '/search'
     ? (new URLSearchParams(location.search).get('q') || '').trim()
     : '';
