@@ -90,11 +90,11 @@
   function genericPromotion(v) {
     return {
       book: 'A specific booking opportunity, such as a class, appointment, table, course place or event. Keep the advert focused on that booking reason, not the whole business.',
-      enquire: 'One specific service or problem that gives local readers a clear reason to enquire.',
+      enquire: 'One specific service or problem you solve that gives local readers a clear reason to enquire.',
       visit: 'One timely reason to visit, such as an event, opening, special menu, launch or genuine offer.',
       register: 'The specific class, course, event or other opportunity readers can register for.',
       buy: 'One specific product, bundle or genuine offer with a clear reason to buy now.',
-      awareness: 'One memorable fact, service or local proposition you want readers to associate with the business.'
+      awareness: 'One memorable fact, service or reason you want local people to associate with the business.'
     }[v.goal] || 'One clear proposition that gives local readers a useful reason to care.';
   }
 
@@ -108,9 +108,13 @@
       badge: 'TEST',
       title: 'Start with TEST £40.',
       price: '£40',
-      doFirst: 'Your answers include a clear proposition and a practical next step for readers. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.',
+      doFirst: v.goal === 'awareness'
+        ? 'You have a specific message worth testing. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.'
+        : 'Your answers include a clear proposition and a practical way for readers to act. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.',
       why: [
-        'TEST gives you one sponsored newsletter placement focused on one clear reader action.',
+        v.goal === 'awareness'
+          ? 'TEST gives you one sponsored newsletter placement focused on one specific message.'
+          : 'TEST gives you one sponsored newsletter placement focused on one clear reader action.',
         'It keeps the first spend small while giving you a defined campaign to learn from.'
       ],
       alternative: '',
@@ -125,7 +129,7 @@
         badge: 'NOT A FIT',
         title: 'SK8 Scoop is unlikely to be the right paid channel for this campaign.',
         price: '',
-        doFirst: 'Use a channel whose audience is concentrated where most of your customers are. If the business has an unusually strong SK8 connection, ask for a manual fit check instead.',
+        doFirst: 'Use a channel whose audience is concentrated where most of your customers are. If the business has an unusually strong SK8 connection, ask SK8 Scoop to review the fit instead.',
         why: ['You said most of your customers are outside SK8 Scoop’s normal reader area.'],
         alternative: '',
         package: '',
@@ -200,7 +204,7 @@
         title: 'Give readers a specific reason to act first.',
         price: '',
         doFirst: 'Choose one bookable service, dated event, genuine offer, launch, menu, course, limited-place opportunity or similarly clear proposition.',
-        why: ['You want a transactional result, but the message is still too general to make a useful £40 test.'],
+        why: ['You want readers to take action, but the message is still too general to make a useful £40 test.'],
         alternative: '',
         package: '',
         cta: ''
@@ -254,7 +258,7 @@
         price: '£90',
         doFirst: 'Before booking, SK8 Scoop will check that the free or low-cost proposition genuinely belongs in the Free & Cheap Guide.',
         why: [
-          'Your campaign has a specific proposition and a practical next step for readers.',
+          'Your campaign has a specific proposition rather than a general awareness message.',
           'The free or low-cost element could add a genuinely useful second context in the Free & Cheap Guide.'
         ],
         alternative: 'If the Guide is not a genuine fit, TEST £40 is the simpler option: one sponsored newsletter placement.',
@@ -288,7 +292,9 @@
     const reasons = rec.why.map(reason => `<li>${reason}</li>`).join('');
     const alternative = rec.alternative ? `<div><dt>Simpler alternative</dt><dd>${rec.alternative}</dd></div>` : '';
     const action = rec.cta ? `<a class="button" href="${buildAdvertiseUrl(rec)}">${rec.cta}</a>` : '';
-    const secondary = `<a class="button secondary" href="/advertise.html">See current advertising options</a>`;
+    const secondary = ['test', 'grow', 'wait', 'review'].includes(rec.state)
+      ? `<a class="button secondary" href="/advertise.html">See current advertising options</a>`
+      : '';
 
     result.innerHTML = `
       <div class="eyebrow">YOUR RESULT</div>
@@ -302,8 +308,8 @@
         <div><dt>Why this recommendation</dt><dd><ul>${reasons}</ul></dd></div>
         ${alternative}
         <div><dt>Timing</dt><dd>You said this matters ${rec.timing}. Publication still depends on suitability, availability and approval.</dd></div>
-        <div><dt>What SK8 Scoop prepares</dt><dd>SK8 Scoop prepares the reader-facing paid placement, clearly labels it as advertising and sends the wording to you for factual approval before publication.</dd></div>
-        <div><dt>How success is measured</dt><dd>SK8 Scoop can measure response to the advert link. Keep that separate from enquiries, bookings or sales that only your business can confirm.</dd></div>
+        <div><dt>What SK8 Scoop prepares</dt><dd>If the campaign goes ahead, SK8 Scoop prepares the reader-facing paid placement, clearly labels it as advertising and sends the wording to you for factual approval before publication.</dd></div>
+        <div><dt>How success is measured</dt><dd>If it runs, SK8 Scoop can measure response to the advert link. Keep that separate from enquiries, bookings or sales that only your business can confirm.</dd></div>
       </dl>
       <p class="fine">Advertising does not guarantee results or favourable editorial treatment.</p>
       <div class="finder-result-actions">${action}${secondary}</div>`;
