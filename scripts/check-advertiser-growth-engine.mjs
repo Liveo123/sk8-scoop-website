@@ -30,7 +30,7 @@ for (const label of ['TEST £40','GROW £90','FIX FIRST','WAIT','NOT A FIT','HUM
   assert(finderJs.includes(label), `Decision logic includes ${label}`);
 }
 assert(finderJs.includes("params.set('finder_source', 'campaign_finder')"), 'Finder hands recommendations to advertiser enquiry');
-assert(advertiseJs.includes("allowedFinderPackages = new Set(['temp_test', 'temp_grow'])"), 'Advertiser page only accepts current Finder package routes');
+assert(advertiseJs.includes("allowedFinderPackages = new Set(['temp_test', 'temp_grow', 'human_review'])"), 'Advertiser page only accepts current Finder package and review routes');
 assert(advertiseJs.includes('/advertise/finder/'), 'Advertiser page links to Campaign Finder');
 assert(advertiseHtml.includes('/advertise/finder/'), 'Main Advertise page visibly links to Campaign Finder');
 assert(advertiseHtml.includes('/advertise/christmas-eating-out/'), 'Main Advertise page visibly links to Christmas Eating Out');

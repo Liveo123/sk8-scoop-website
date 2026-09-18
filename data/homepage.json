@@ -1,48 +1,48 @@
 {
-  "updated": "2026-09-11",
+  "updated": "2026-09-18",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "Abney Hall is on the market for £3.75m+",
-      "meta": "Cheadle · Grade II* listed · offers over £3.75m",
-      "summary": "A piece of one of Cheadle’s best-known buildings is for sale as a multi-let office investment, with eight occupiers and 75 parking spaces.",
-      "href": "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619#abney-hall",
-      "linkLabel": "Read what is actually for sale →",
+      "title": "Heald Green’s Local Plan consultation starts 23 September",
+      "meta": "Heald Green · 23 Sep–8 Nov · policy stage",
+      "summary": "Three proposed housing allocations total 1,672 homes. This is the Local Plan stage, not planning permission, and the distinction matters.",
+      "href": "/planning/heald-green-local-plan-2026/",
+      "linkLabel": "See what is proposed and what happens next →",
       "visualType": "dicm",
       "fit": "cover",
-      "position": "center 46%",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1789129855/sk8-scoop/issue12/abney-hall-cc-benjamin-shaw.jpg",
-      "alt": "Exterior view of Abney Hall in Cheadle"
+      "position": "center",
+      "image": "/assets/images/nue-explore-planning.webp",
+      "alt": "Editorial planning collage with a local map, development markers and consultation imagery"
     },
     {
       "mode": "DO",
       "label": "DO THIS",
-      "title": "Follow the Ladybrook without walking all 15km",
-      "meta": "Bramall Park to Cheadle · green corridor · short-section friendly",
-      "summary": "The Ladybrook route links woodland, water, parkland and the Seven Arches viaduct. You can explore the best local sections without committing to the whole trail.",
-      "href": "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619#ladybrook",
-      "linkLabel": "See the route at a glance →",
+      "title": "Walk 22 pieces of Heald Green history",
+      "meta": "Heald Green · about 4 miles · around 2 hours",
+      "summary": "Heald Green Heritage’s North Walk links the station, old farms, pubs, Cheadle Royal, war memorials and more into one local route.",
+      "href": "/local-history/heald-green-north-history-walk/",
+      "linkLabel": "Open the walk guide →",
       "visualType": "dicm",
       "fit": "contain",
       "position": "center",
-      "image": "https://storage.mlcdn.com/account_image/2462354/ABhRK3WvmF7Ha2gqydzEOo9PEBz8DECWjnI7OHcv.jpg",
-      "alt": "SK8 Scoop Ladybrook Valley route-at-a-glance schematic"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1789740213/issue13-heald-green-history-walk-map-style1plus5-v1.png",
+      "alt": "Schematic Heald Green History Walk highlights map"
     },
     {
       "mode": "DISCOVER",
       "label": "DISCOVER THIS",
-      "title": "The five lives of Gatley Carrs",
-      "meta": "Gatley · working wetland, landfill and nature reserve",
-      "summary": "Willow-working ground, Victorian botanical curiosity, landfill and restoration all sit behind the nature reserve people know today.",
-      "href": "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619#gatley-carrs",
-      "linkLabel": "Read the five lives →",
+      "title": "Why eight civilians are named on Cheadle War Memorial",
+      "meta": "Cheadle · two wartime raids · eight civilian victims",
+      "summary": "The rear plaque records people killed on ordinary Cheadle streets in the Bulkeley Road and Stockport Road raids of 1940–41.",
+      "href": "/local-history/cheadle-war-memorial-air-raid-victims/",
+      "linkLabel": "Read the story and source trail →",
       "visualType": "dicm",
       "fit": "contain",
       "position": "center",
-      "image": "https://storage.mlcdn.com/account_image/2462354/zi7YYuN8AWd9s2fNgj7RqZHYxsadbgJMyzFsasu2.jpg",
-      "alt": "Illustrated Five Lives of Gatley Carrs timeline, from working wetlands to restoration and the present-day nature reserve"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1789643833/issue13-war-memorial-editorial-v3.png",
+      "alt": "Illustrated explainer for the eight civilian air-raid names on Cheadle War Memorial"
     }
   ],
   "explore": [

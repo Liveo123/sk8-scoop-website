@@ -62,8 +62,8 @@ window.SK8_CONFIG = {
     dateDisplay: "Friday 18 September 2026",
     title: "Issue 13 is out",
     headline: "Free Chinatown festival, CoderDojo & Cheadle’s wartime story",
-    summary: "Free CoderDojo, Manchester Mid-Autumn Festival, Heald Green planning, Cheadle War Memorial’s civilian names and a four-mile local-history walk.",
-    url: "https://preview.mailerlite.io/preview/2462354/emails/198942565915953065"
+    summary: "Free CoderDojo, Manchester Mid-Autumn Festival, Heald Green planning, the story behind Cheadle War Memorial’s civilian names and a four-mile local-history walk.",
+    url: "https://connect.mailerlite.com/emails/198942565915953065/preview"
   },
   stripeLinks: {
     local_spotlight: "",

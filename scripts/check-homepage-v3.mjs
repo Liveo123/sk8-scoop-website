@@ -20,7 +20,7 @@ const rejectText = (source, text, label) => {
 requireText(home, 'data-page="home"', 'homepage identity');
 requireText(home, 'What’s good around SK8?', 'homepage headline');
 requireText(config, 'subscriberCount: "500+"', 'public subscriber proof');
-requireText(config, 'number: 12', 'current issue');
+requireText(config, 'currentIssue: {', 'current issue config');
 requireText(home, 'assets/homepage-v4.css', 'homepage V4 stylesheet');
 
 // 1. Homepage desktop header exposes the same full menu as the rest of the site.
