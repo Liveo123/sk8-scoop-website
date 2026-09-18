@@ -512,3 +512,5 @@ Cloudflare preview/production Stripe webhook secret split confirmed by owner on 
 
 
 - Resend rotation completed on 18 September 2026: the two older API keys were revoked, only `SK8 advertiser notifications production` remains, and a fresh advertiser enquiry sent afterwards was confirmed delivered by Resend and present in the SK8 Scoop Gmail inbox. This proves the Cloudflare deployment is using the replacement credential.
+
+- Sandbox webhook re-established on 18 September 2026 as an active Workbench destination pointing to the branch preview URL; Cloudflare build secret `STRIPE_WEBHOOK_SECRET_PREVIEW` was rotated to the new signing secret.
