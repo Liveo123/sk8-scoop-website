@@ -96,6 +96,26 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
   }[String(data.package || '')] || c(data.package, 80) || 'Not supplied';
 
   const isLocalFitCheck = String(data.package || '') === 'human_review';
+  let customerConfirmation = { status: 'not_applicable' };
+
+  if (isLocalFitCheck) {
+    customerConfirmation = await sendResendEmail(env, {
+      to: c(data.email, 200).toLowerCase(),
+      subject: 'SK8 Scoop local-fit check received',
+      text: [
+        `Hi ${c(data.contact_name, 120)},`,
+        '',
+        'Thanks for asking SK8 Scoop to check the local fit.',
+        'We have received your details. There is no payment at this stage.',
+        '',
+        'We will review whether your business is a sensible match for SK8 readers before suggesting any paid option.',
+        '',
+        'SK8 Scoop'
+      ].join('\n'),
+      replyTo: CONTACT_INBOX
+    });
+  }
+
   const notification = await notifyAdvertiserInbox(env, {
     subject: isLocalFitCheck
       ? `[SK8 Scoop LOCAL-FIT CHECK] ${c(data.business_name, 100)}`
@@ -112,9 +132,10 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
       `Requested route: ${packageLabel}`,
       `Preferred timing: ${c(data.preferred_date, 80)}`,
       `Website / booking / social route: ${c(data.website, 500)}`,
+      isLocalFitCheck ? `Customer confirmation email: ${customerConfirmation.status}` : '',
       '',
       c(data.advert_copy, 1000) ? `Goal / useful message:\n${c(data.advert_copy, 1000)}` : 'No additional campaign note.'
-    ].join('\n')
+    ].filter(Boolean).join('\n')
   });
 
   if (notification.status !== 'sent') {
