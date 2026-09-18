@@ -399,6 +399,8 @@ Sandbox validation completed on 18 September 2026:
 - neither created a subscription or renewal;
 - each sandbox Payment Link was restricted to one successful checkout and became inactive after that checkout;
 - Stripe-hosted confirmation worked as expected.
+- full end-to-end campaign test `SK8-E2E-013` then passed: Stripe recorded £40 GBP as paid, the signed webhook updated D1, advertiser enquiry #13 became `paid`, and the D1 payment row stored `payment_status: paid`, `amount_pence: 4000` and the campaign reference.
+- the temporary E2E status probe and workflow assertion used to confirm that result were removed afterwards; the permanent unsigned-webhook 400 check remains.
 
 ### Three-criticism payment loop
 
@@ -445,4 +447,4 @@ Subscribed only to:
 - `checkout.session.async_payment_failed`
 - `checkout.session.expired`
 
-The signing secret must be stored in Cloudflare as `STRIPE_WEBHOOK_SECRET`. Do not put it in GitHub.
+The signing secret is stored in Cloudflare as `STRIPE_WEBHOOK_SECRET` and is included in both preview and production deploy-secret injection. Do not put it in GitHub.
