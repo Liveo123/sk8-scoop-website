@@ -199,10 +199,19 @@ jobs:
           echo "OK live Stripe webhook secret/signature gate: 400"
 
           headers="$(curl -fsSL --max-time 20 -D - -o /dev/null 'https://www.sk8scoop.com/advertise/pay/' | tr -d '\r')"
-          printf '%s\n' "$headers" | grep -iq '^strict-transport-security:'
-          printf '%s\n' "$headers" | grep -iq '^x-content-type-options: nosniff'
-          printf '%s\n' "$headers" | grep -iq '^content-security-policy:'
-          printf '%s\n' "$headers" | grep -iq '^cache-control: no-store'
+          printf '%s\n' "$headers"
+          require_header() {
+            pattern="$1"
+            label="$2"
+            if ! printf '%s\n' "$headers" | grep -iq "$pattern"; then
+              echo "Missing production payment-page header: $label"
+              exit 1
+            fi
+          }
+          require_header '^strict-transport-security:' 'Strict-Transport-Security'
+          require_header '^x-content-type-options: nosniff' 'X-Content-Type-Options: nosniff'
+          require_header '^content-security-policy:' 'Content-Security-Policy'
+          require_header '^cache-control: no-store' 'Cache-Control: no-store'
           echo "OK production payment-page security headers"
 
           contact_code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' 'https://submit-form.com/X3MWnWHXI')"
