@@ -17,7 +17,7 @@ function walk(dir) {
       continue;
     }
     if (rel.toLowerCase().endsWith('.svg')) svgFiles.push(rel);
-    const ext = path.extname(entry.name).toLowerCase();
+    if (rel === 'scripts/check-no-svg.mjs') continue;\n    const ext = path.extname(entry.name).toLowerCase();
     if (!TEXT_EXTS.has(ext)) continue;
     const text = fs.readFileSync(full, 'utf8');
     const lines = text.split(/\r?\n/);
