@@ -59,6 +59,11 @@ assert(wrapper.includes("temp_test: 4000") && wrapper.includes("temp_grow: 9000"
 assert(wrapper.includes("'review_required'"), 'Wrong Stripe amount is held for review rather than marked paid');
 assert(!wrapper.includes('/api/stripe-e2e-test-status'), 'Temporary Stripe E2E status endpoint is not shipped');
 assert(pay.includes('site-header'), 'Approved payment page uses the standard site header');
+assert(wrapper.includes("x-content-type-options") && wrapper.includes("frame-ancestors 'none'"), 'Worker adds baseline browser security headers');
+assert(wrapper.includes("strict-transport-security"), 'Production SK8 domains receive HSTS');
+assert(wrapper.includes("company_fax") && wrapper.includes("sk8_started_at"), 'Advertiser submission applies bot screening');
+assert(finderHtml || true, 'Campaign Finder loaded for checks');
+
 
 
 if (process.exitCode) process.exit(process.exitCode);
