@@ -13,6 +13,11 @@
 
   const actionField = form.querySelector('[name="advert_copy"]');
   const packageInputs = [...form.querySelectorAll('input[name="package"]')];
+  const localFitRoute = form.querySelector('[data-local-fit-route]');
+  const formTitle = form.querySelector('[data-ad-form-title]');
+  const formIntro = form.querySelector('[data-ad-form-intro]');
+  const termsCopy = form.querySelector('[data-ad-terms-copy]');
+  const submitButton = form.querySelector('[data-ad-submit]');
   const goalLinks = [...document.querySelectorAll('[data-ad-goal]')];
   const packageJumps = [...document.querySelectorAll('[data-ad-package]')];
   const issueStat = document.querySelector('[data-stat="issuesPublished"]');
@@ -39,7 +44,7 @@
   const finderPackage = finderParams.get('finder_package');
   const finderGoal = finderParams.get('finder_goal');
   const finderOpportunity = finderParams.get('finder_opportunity');
-  const allowedFinderPackages = new Set(['temp_test', 'temp_grow']);
+  const allowedFinderPackages = new Set(['temp_test', 'temp_grow', 'human_review']);
   const allowedFinderOpportunities = new Map([
     ['christmas-eating-out', 'Christmas Eating Out 2026']
   ]);
@@ -52,10 +57,30 @@
     'Build useful local awareness'
   ]);
 
+  function setReviewMode(enabled) {
+    if (localFitRoute) localFitRoute.hidden = !enabled;
+    if (formTitle) formTitle.textContent = enabled ? 'Request a local-fit check' : 'Advertise with SK8 Scoop';
+    if (formIntro) {
+      formIntro.textContent = enabled
+        ? 'No payment is taken for this check. SK8 Scoop will first decide whether the business is a sensible match for core SK8 readers.'
+        : 'TEST £40 or GROW £90. Payment is normally due only after scope and timing are agreed, and before the campaign starts.';
+    }
+    if (termsCopy) {
+      termsCopy.textContent = enabled
+        ? 'I understand this is a fit check only. Any later paid campaign would still be subject to suitability, availability and separate agreement.'
+        : 'I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not guarantee results or favourable editorial coverage.';
+    }
+    if (submitButton) submitButton.textContent = enabled ? 'Send local-fit check' : 'Send advertising enquiry';
+  }
+
   if (finderSource === 'campaign_finder') {
     if (allowedFinderPackages.has(finderPackage)) {
       const selected = packageInputs.find(input => input.value === finderPackage);
-      if (selected) selected.checked = true;
+      if (selected) {
+        if (finderPackage === 'human_review' && localFitRoute) localFitRoute.hidden = false;
+        selected.checked = true;
+        setReviewMode(finderPackage === 'human_review');
+      }
     }
 
     if (actionField && allowedFinderGoals.has(finderGoal) && !actionField.value.trim()) {
@@ -120,8 +145,11 @@
   });
 
   packageInputs.forEach(input => input.addEventListener('change', () => {
-    if (!input.checked || typeof window.sk8Track !== 'function') return;
-    window.sk8Track('advertiser_route_selected', { route: input.value });
+    if (!input.checked) return;
+    setReviewMode(input.value === 'human_review');
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('advertiser_route_selected', { route: input.value });
+    }
   }));
 
   /* The established backend already accepts the generic `bespoke` route.
