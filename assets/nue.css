@@ -1,17 +1,9 @@
 /* Production NUE design system: homepage, What's On and category pages. */
 
-/* Card-media fit system.
-   Landscape editorial art stays whole; portrait posters get an intentional backdrop;
-   photo/illustration thumbnails fill their frame. Never park a small asset in a large white box. */
-body.reader-home .dicm-visual{height:auto!important;min-height:0!important;aspect-ratio:auto;display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:10px!important;background:linear-gradient(145deg,#f5faf8,#fff8ed)!important;overflow:hidden}
-body.reader-home .dicm-visual .dicm-art{display:block;width:100%;height:auto;object-position:center;border-radius:0}
-body.reader-home .dicm-visual.media-landscape .dicm-art{aspect-ratio:16/9;object-fit:contain}
+/* Global visual QA rule: important artwork is shown whole, never silently cropped. */
+body.reader-home .dicm-visual{height:auto!important;min-height:0!important;aspect-ratio:auto;display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:10px!important;background:#f7faf8!important;overflow:hidden}
+body.reader-home .dicm-visual .dicm-art{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;border-radius:0}
 body.reader-home .dicm-visual .dicm-mode-label{position:static;order:-1;align-self:flex-start;z-index:auto;margin:0}
-body.reader-home .dicm-visual.media-poster{position:relative;min-height:210px!important;display:grid!important;place-items:center;gap:0;padding:0!important;background:#0b4c55!important;isolation:isolate}
-body.reader-home .dicm-visual.media-poster:before{content:"";position:absolute;inset:-18px;z-index:-2;background-image:linear-gradient(rgba(7,63,72,.30),rgba(7,63,72,.58)),var(--card-media-bg);background-size:cover;background-position:center;filter:blur(15px) saturate(.85);transform:scale(1.08);opacity:.8}
-body.reader-home .dicm-visual.media-poster:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,63,72,.34),rgba(255,249,237,.08),rgba(7,63,72,.34));pointer-events:none}
-body.reader-home .dicm-visual.media-poster .dicm-art{position:relative;z-index:1;width:auto!important;height:190px!important;max-width:68%;aspect-ratio:auto!important;object-fit:contain!important;border-radius:7px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
-body.reader-home .dicm-visual.media-poster .dicm-mode-label{position:absolute;z-index:3;left:12px;top:12px;order:0;margin:0;box-shadow:0 5px 14px rgba(0,0,0,.12)}
 
 /* Keep calls to action readable, including older homepage overrides. */
 body.reader-home .button,body.reader-home .nav .button,
@@ -23,8 +15,8 @@ body[data-page="whats-on"] .button,body[data-page="whats-on"] .nav .button{backg
 body.reader-home [data-explore-grid]{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:100%}
 body.reader-home .reader-explore-tile{min-height:232px;padding:0;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;text-align:left;overflow:hidden;text-decoration:none;background:#fff;border-radius:15px}
 body.reader-home .reader-explore-visual{height:118px;flex:0 0 118px;display:grid;place-items:center;background:#fff8ea;border-bottom:1px solid var(--line);overflow:hidden}
-body.reader-home .reader-explore-photo{background-size:cover;background-repeat:no-repeat;background-position:center;background-color:#fff8ea!important}
-body.reader-home .reader-explore-photo.media-cover{background-size:cover!important}
+body.reader-home .reader-explore-photo{background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#fff8ea!important}
+body.reader-home .reader-explore-photo.is-guide-logo{background-color:#fff!important;background-size:contain!important}
 body.reader-home .reader-explore-icon{background:#fff8ea}
 body.reader-home .reader-explore-icon svg{width:38px;height:38px;stroke:var(--teal);fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
 body.reader-home .reader-explore-copy{padding:14px 15px 15px;display:flex;flex-direction:column;gap:6px;min-height:114px}
@@ -81,7 +73,7 @@ body[data-page="whats-on"] .whats-on-hero-caption{position:absolute;z-index:2;le
 body[data-page="whats-on"] .whats-on-hero-caption span{display:inline-block;padding:5px 9px;border-radius:999px;background:rgba(255,250,240,.95);color:var(--teal);font-size:.68rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
 body[data-page="whats-on"] .whats-on-hero-caption strong{display:block;max-width:520px;font:800 1.4rem/1.15 Arial,sans-serif;text-shadow:0 1px 8px rgba(0,0,0,.25)}
 body[data-page="whats-on"] .whats-on-filter-grid .reader-story{overflow:hidden}
-body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:150px;min-height:150px;background-size:cover;background-repeat:no-repeat;background-position:center;background-color:#edf6f4}
+body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image{height:150px;min-height:150px;background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#edf6f4}
 body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.08))}
 body[data-page="whats-on"] .whats-on-filter-grid .reader-story-image span{position:relative;z-index:1}
 body[data-page="whats-on"] [data-events-list] .reader-story-image{height:145px;background-size:contain;background-repeat:no-repeat;background-color:#edf6f4}
