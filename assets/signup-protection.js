@@ -206,6 +206,7 @@
 
         const widgetId = window.turnstile.render(container, {
           sitekey: siteKey,
+          action: 'newsletter_signup',
           theme: 'auto',
           size: 'flexible',
           appearance: getKind(form) === 'guide' ? 'interaction-only' : 'always',
