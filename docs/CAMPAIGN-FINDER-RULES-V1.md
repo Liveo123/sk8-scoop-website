@@ -189,6 +189,18 @@ After all gates pass:
 
 Do not return legacy/future products from the temporary public system.
 
+## Human review handoff
+
+When the finder returns **HUMAN REVIEW** for local-fit reasons:
+
+- use the CTA **Request a local-fit check**;
+- hand off with the route value `human_review` rather than preselecting TEST or GROW;
+- make clear that no payment is taken for the fit check;
+- save the request in the normal advertiser-enquiries queue;
+- send the owner alert through the existing advertiser-enquiry notification path;
+- send the business a confirmation that the request was received;
+- only recommend TEST or GROW after the manual fit check.
+
 ## Business-category modifiers
 
 These modifiers refine the recommendation but do not override the gates.
