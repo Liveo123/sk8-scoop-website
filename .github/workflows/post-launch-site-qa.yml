@@ -191,6 +191,21 @@ jobs:
           expect_validation 'https://www.sk8scoop.com/api/submit-event'
           expect_validation 'https://www.sk8scoop.com/api/advertiser-enquiry'
 
+          stripe_code="$(curl -sS --max-time 20 -o /tmp/stripe-live.json -w '%{http_code}' -X POST 'https://www.sk8scoop.com/api/stripe-webhook' -H 'content-type: application/json' --data '{}')"
+          if [ "$stripe_code" != "400" ]; then
+            echo "Expected unsigned live Stripe webhook to return 400, got $stripe_code"
+            cat /tmp/stripe-live.json || true
+            exit 1
+          fi
+          echo "OK live Stripe webhook secret/signature gate: 400"
+
+          headers="$(curl -fsSL --max-time 20 -D - -o /dev/null 'https://www.sk8scoop.com/advertise/pay/' | tr -d '\r')"
+          printf '%s\n' "$headers" | grep -iq '^strict-transport-security:'
+          printf '%s\n' "$headers" | grep -iq '^x-content-type-options: nosniff'
+          printf '%s\n' "$headers" | grep -iq '^content-security-policy:'
+          printf '%s\n' "$headers" | grep -iq '^cache-control: no-store'
+          echo "OK production payment-page security headers"
+
           contact_code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' 'https://submit-form.com/X3MWnWHXI')"
           case "$contact_code" in
             2*|3*|4*) echo "OK contact endpoint reachable: HTTP $contact_code" ;;
