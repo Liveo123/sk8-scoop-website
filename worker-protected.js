@@ -14,6 +14,12 @@ const ISSUE_12_POLL_ANSWERS = [
   'local_history_mysteries'
 ];
 
+const ISSUE_13_POLL_ANSWERS = [
+  'mainly_sk8',
+  'nearby_stockport_cheshire',
+  'manchester_if_worth_it'
+];
+
 const SEARCH_TABLE_SQL = `CREATE TABLE IF NOT EXISTS search_events (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  query_text TEXT NOT NULL,
@@ -45,6 +51,14 @@ export default {
 
     if (url.pathname === '/api/poll/issue-12' && request.method === 'POST') {
       return handleIssue12PollVote(request, env);
+    }
+
+    if (url.pathname === '/api/poll/issue-13' && request.method === 'GET') {
+      return handleIssue13PollResults(env);
+    }
+
+    if (url.pathname === '/api/poll/issue-13' && request.method === 'POST') {
+      return handleIssue13PollVote(request, env);
     }
 
     if (url.pathname === '/api/search-event' && request.method === 'POST') {
@@ -124,6 +138,10 @@ async function handleNewsletterSignup(request, env) {
 
   if (!verification || verification.success !== true) {
     return json({ error: 'The human check did not complete. Please try again.' }, 403);
+  }
+
+  if (String(verification.action || '') !== 'newsletter_signup') {
+    return json({ error: 'The human check was not valid for this signup. Please try again.' }, 403);
   }
 
   const requestedKind = String(form.get('sk8_form_kind') || 'main');
@@ -232,6 +250,54 @@ async function handleIssue12PollVote(request, env) {
     return json({ success: true, answer, ...results });
   } catch (error) {
     console.error('Issue 12 poll vote error', error);
+    return json({ error: 'The vote could not be saved. Please try again.' }, 503);
+  }
+}
+
+async function getIssue13PollResults(db) {
+  await ensureIssue12PollTable(db);
+  const result = await db.prepare(`SELECT answer, COUNT(*) AS votes FROM newsletter_poll_votes WHERE issue = '13' GROUP BY answer`).all();
+  const counts = Object.fromEntries(ISSUE_13_POLL_ANSWERS.map(answer => [answer, 0]));
+  for (const row of result.results || []) {
+    if (Object.prototype.hasOwnProperty.call(counts, row.answer)) counts[row.answer] = Number(row.votes || 0);
+  }
+  const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
+  return { issue: 13, counts, total };
+}
+
+async function handleIssue13PollResults(env) {
+  try {
+    return json(await getIssue13PollResults(env.DB));
+  } catch (error) {
+    console.error('Issue 13 poll results error', error);
+    return json({ error: 'Poll results are temporarily unavailable.' }, 503);
+  }
+}
+
+async function handleIssue13PollVote(request, env) {
+  let data;
+  try {
+    data = await request.json();
+  } catch {
+    return json({ error: 'The vote could not be read.' }, 400);
+  }
+
+  const answer = String(data.answer || '').trim();
+  const voterToken = String(data.voter_token || '').trim();
+  if (!ISSUE_13_POLL_ANSWERS.includes(answer)) return json({ error: 'Please choose one of the poll options.' }, 400);
+  if (!/^[A-Za-z0-9_-]{12,100}$/.test(voterToken)) return json({ error: 'Please refresh the poll and try again.' }, 400);
+
+  try {
+    await ensureIssue12PollTable(env.DB);
+    await env.DB.prepare(`INSERT INTO newsletter_poll_votes (issue, answer, voter_token, created_at, updated_at)
+      VALUES ('13', ?, ?, datetime('now'), datetime('now'))
+      ON CONFLICT(issue, voter_token) DO UPDATE SET answer = excluded.answer, updated_at = datetime('now')`)
+      .bind(answer, voterToken)
+      .run();
+    const results = await getIssue13PollResults(env.DB);
+    return json({ success: true, answer, ...results });
+  } catch (error) {
+    console.error('Issue 13 poll vote error', error);
     return json({ error: 'The vote could not be saved. Please try again.' }, 503);
   }
 }
