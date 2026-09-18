@@ -16,7 +16,7 @@ export default {
     }
 
     if (url.pathname === '/api/stripe-webhook' && request.method === 'POST') {
-      return secureResponse(await handleStripeWebhook(request, env), url);
+      return secureResponse(await handleStripeWebhook(request, env, ctx), url);
     }
 
     return secureResponse(await siteWorker.fetch(request, env, ctx), url);
@@ -139,14 +139,30 @@ const ADVERTISER_PAYMENTS_SQL = `CREATE TABLE IF NOT EXISTS advertiser_payments 
   paid_at TEXT
 )`;
 
+const ADVERTISER_PAYMENT_NOTIFICATIONS_SQL = `CREATE TABLE IF NOT EXISTS advertiser_payment_notifications (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  stripe_checkout_session_id TEXT NOT NULL,
+  notification_type TEXT NOT NULL,
+  recipient TEXT NOT NULL,
+  status TEXT NOT NULL,
+  resend_message_id TEXT,
+  last_error TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  sent_at TEXT,
+  UNIQUE(stripe_checkout_session_id, notification_type)
+)`;
+
 async function ensureAdvertiserPaymentsTable(db) {
   if (!db) throw new Error('Advertiser payment database unavailable');
   await db.prepare(ADVERTISER_PAYMENTS_SQL).run();
+  await db.prepare(ADVERTISER_PAYMENT_NOTIFICATIONS_SQL).run();
   await db.prepare('CREATE INDEX IF NOT EXISTS idx_advertiser_payments_enquiry ON advertiser_payments(advertiser_enquiry_id)').run();
   await db.prepare('CREATE INDEX IF NOT EXISTS idx_advertiser_payments_status ON advertiser_payments(status)').run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_advertiser_payment_notifications_status ON advertiser_payment_notifications(status)').run();
 }
 
-async function handleStripeWebhook(request, env) {
+async function handleStripeWebhook(request, env, ctx) {
   const webhookSecret = String(env.STRIPE_WEBHOOK_SECRET || '').trim();
   if (!webhookSecret) return json({ error: 'Stripe webhook is not configured.' }, 503);
   if (!env.DB) return json({ error: 'The website database is not connected yet.' }, 503);
@@ -196,7 +212,7 @@ async function handleStripeWebhook(request, env) {
     return json({ received: true, ignored: true });
   }
 
-  const enquiry = await env.DB.prepare('SELECT id,business_name,email,package,status FROM advertiser_enquiries WHERE id = ? LIMIT 1').bind(enquiryId).first();
+  const enquiry = await env.DB.prepare('SELECT id,business_name,contact_name,email,package,status FROM advertiser_enquiries WHERE id = ? LIMIT 1').bind(enquiryId).first();
   if (!enquiry) {
     console.log(`Stripe advertiser payment ignored: enquiry ${enquiryId} not found`);
     return json({ received: true, ignored: true });
@@ -207,8 +223,20 @@ async function handleStripeWebhook(request, env) {
   const amount = Number.isFinite(Number(session.amount_total)) ? Math.max(0, Math.trunc(Number(session.amount_total))) : 0;
   const currency = String(session.currency || 'gbp').toLowerCase().slice(0, 10);
   const expectedAmount = { temp_test: 4000, temp_grow: 9000 }[packageKey];
+  const customerEmail = String((session.customer_details && session.customer_details.email) || session.customer_email || enquiry.email || '').trim().toLowerCase().slice(0, 200);
+  const businessName = String((session.collected_information && session.collected_information.business_name) || enquiry.business_name || '').trim().slice(0, 180);
+  const sessionId = String(session.id || '').slice(0, 120);
+  const paymentIntent = typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent && session.payment_intent.id ? String(session.payment_intent.id) : '';
+  const paymentLink = typeof session.payment_link === 'string' ? session.payment_link : session.payment_link && session.payment_link.id ? String(session.payment_link.id) : '';
+  const eventId = String(event.id || '').slice(0, 120);
+
+  if (!sessionId || !eventId) return json({ received: true, ignored: true });
+
+  const existingPayment = await env.DB.prepare('SELECT status FROM advertiser_payments WHERE stripe_checkout_session_id = ? LIMIT 1').bind(sessionId).first();
   const packageMatches = String(enquiry.package || '') === packageKey;
-  const statusAllowsPayment = ['pending', 'approved', 'payment_sent'].includes(String(enquiry.status || ''));
+  const enquiryStatus = String(enquiry.status || '');
+  const samePaidSession = enquiryStatus === 'paid' && existingPayment && String(existingPayment.status || '') === 'paid';
+  const statusAllowsPayment = ['pending', 'approved', 'payment_sent'].includes(enquiryStatus) || samePaidSession;
   const commercialTermsMatch = currency === 'gbp' && amount === expectedAmount && packageMatches && statusAllowsPayment;
   const isPaid = (
     event.type === 'checkout.session.async_payment_succeeded' ||
@@ -221,14 +249,6 @@ async function handleStripeWebhook(request, env) {
       : event.type === 'checkout.session.expired'
         ? 'expired'
         : String(session.payment_status || 'pending');
-  const customerEmail = String((session.customer_details && session.customer_details.email) || session.customer_email || enquiry.email || '').trim().toLowerCase().slice(0, 200);
-  const businessName = String((session.collected_information && session.collected_information.business_name) || enquiry.business_name || '').trim().slice(0, 180);
-  const sessionId = String(session.id || '').slice(0, 120);
-  const paymentIntent = typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent && session.payment_intent.id ? String(session.payment_intent.id) : '';
-  const paymentLink = typeof session.payment_link === 'string' ? session.payment_link : session.payment_link && session.payment_link.id ? String(session.payment_link.id) : '';
-  const eventId = String(event.id || '').slice(0, 120);
-
-  if (!sessionId || !eventId) return json({ received: true, ignored: true });
 
   await env.DB.prepare(`INSERT INTO advertiser_payments (
       advertiser_enquiry_id,campaign_reference,package,amount_pence,currency,
@@ -262,6 +282,24 @@ async function handleStripeWebhook(request, env) {
 
   if (isPaid && commercialTermsMatch) {
     await env.DB.prepare(`UPDATE advertiser_enquiries SET status='paid' WHERE id=? AND status IN ('pending','approved','payment_sent')`).bind(enquiryId).run();
+
+    if (productionHost) {
+      const notifications = await sendPaymentNotifications(env, {
+        enquiry,
+        sessionId,
+        campaignReference,
+        packageKey,
+        amount,
+        currency,
+        businessName
+      });
+      const retryNeeded = [notifications.owner, notifications.advertiser]
+        .filter(Boolean)
+        .some(result => !['sent', 'already_sent', 'skipped_invalid'].includes(String(result.status || '')));
+      if (retryNeeded) {
+        return json({ error: 'Payment recorded; notification delivery pending.' }, 500);
+      }
+    }
   } else if (isPaid && !commercialTermsMatch) {
     console.error(`Stripe advertiser payment requires review: enquiry ${enquiryId}, package ${packageKey}, amount ${amount} ${currency}`);
   }
@@ -332,11 +370,130 @@ async function handleAdvertiserEnquiries(request, env) {
   }
 }
 
-async function notifyAdvertiserInbox(env, { subject, text }) {
+function packageLabel(packageKey) {
+  return {
+    temp_test: 'TEST £40',
+    temp_grow: 'GROW £90'
+  }[String(packageKey || '')] || String(packageKey || 'Campaign');
+}
+
+function moneyLabel(amount, currency) {
+  const value = Number(amount || 0) / 100;
+  return currency === 'gbp' ? `£${value.toFixed(2)}` : `${value.toFixed(2)} ${String(currency || '').toUpperCase()}`;
+}
+
+async function sendPaymentNotifications(env, {
+  enquiry,
+  sessionId,
+  campaignReference,
+  packageKey,
+  amount,
+  currency,
+  businessName
+}) {
+  const route = packageLabel(packageKey);
+  const money = moneyLabel(amount, currency);
+  const business = String(businessName || enquiry.business_name || 'Advertiser').trim().slice(0, 180);
+  const reference = String(campaignReference || `SK8-AD-${enquiry.id}`).trim().slice(0, 100);
+  const contactName = String(enquiry.contact_name || '').trim().slice(0, 120);
+  const advertiserEmail = String(enquiry.email || '').trim().toLowerCase().slice(0, 200);
+
+  const adminText = [
+    'SK8 Scoop advertiser payment received',
+    '',
+    `Business: ${business}`,
+    `Advertiser enquiry: #${enquiry.id}`,
+    `Campaign: ${reference}`,
+    `Route: ${route}`,
+    `Amount: ${money}`,
+    '',
+    'Status: PAID',
+    'Next action: prepare the campaign creative, confirm facts/links with the advertiser, then complete normal publication approval.'
+  ].join('\n');
+
+  const owner = await sendPaymentNotificationOnce(env, {
+    sessionId,
+    type: 'owner_paid',
+    to: CONTACT_INBOX,
+    subject: `[SK8 Scoop payment received] ${business} - ${route}`,
+    text: adminText
+  });
+
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(advertiserEmail)) {
+    console.error(`Advertiser payment confirmation skipped: invalid enquiry email for #${enquiry.id}`);
+    return { owner, advertiser: { status: 'skipped_invalid' } };
+  }
+
+  const greeting = contactName ? `Hi ${contactName},` : 'Hello,';
+  const advertiserText = [
+    greeting,
+    '',
+    `Thanks, we’ve received your ${money} payment for the SK8 Scoop ${route} campaign.`,
+    '',
+    `Campaign reference: ${reference}`,
+    '',
+    'What happens next:',
+    '1. SK8 Scoop prepares the sponsored creative for the agreed campaign.',
+    '2. We send it to you to check the facts, offer, dates, links and business details.',
+    '3. Publication only happens after the normal SK8 Scoop approval checks are complete.',
+    '',
+    'Advertising remains separate from editorial coverage, recommendations and rankings.',
+    '',
+    'If anything in the campaign details has changed, reply to this email before we prepare the final creative.',
+    '',
+    'Paul',
+    'SK8 Scoop',
+    CONTACT_INBOX
+  ].join('\n');
+
+  const advertiser = await sendPaymentNotificationOnce(env, {
+    sessionId,
+    type: 'advertiser_paid',
+    to: advertiserEmail,
+    subject: `SK8 Scoop payment received - ${route}`,
+    text: advertiserText
+  });
+  return { owner, advertiser };
+}
+
+async function sendPaymentNotificationOnce(env, { sessionId, type, to, subject, text }) {
+  const existing = await env.DB.prepare(`SELECT status FROM advertiser_payment_notifications
+    WHERE stripe_checkout_session_id=? AND notification_type=? LIMIT 1`)
+    .bind(sessionId, type).first();
+  if (existing && String(existing.status || '') === 'sent') return { status: 'already_sent' };
+
+  await env.DB.prepare(`INSERT INTO advertiser_payment_notifications (
+      stripe_checkout_session_id,notification_type,recipient,status,created_at,updated_at
+    ) VALUES (?,?,?,'pending',datetime('now'),datetime('now'))
+    ON CONFLICT(stripe_checkout_session_id,notification_type) DO UPDATE SET
+      recipient=excluded.recipient,
+      status=CASE WHEN advertiser_payment_notifications.status='sent' THEN 'sent' ELSE 'pending' END,
+      updated_at=datetime('now')`)
+    .bind(sessionId, type, to).run();
+
+  const result = await sendResendEmail(env, { to, subject, text, replyTo: CONTACT_INBOX });
+  if (result.status === 'sent') {
+    await env.DB.prepare(`UPDATE advertiser_payment_notifications
+      SET status='sent',resend_message_id=?,last_error=NULL,updated_at=datetime('now'),sent_at=datetime('now')
+      WHERE stripe_checkout_session_id=? AND notification_type=?`)
+      .bind(result.messageId || null, sessionId, type).run();
+  } else {
+    await env.DB.prepare(`UPDATE advertiser_payment_notifications
+      SET status='failed',last_error=?,updated_at=datetime('now')
+      WHERE stripe_checkout_session_id=? AND notification_type=?`)
+      .bind(safeDiagnostic(result.message || result.code || 'Unknown Resend error'), sessionId, type).run();
+  }
+  return result;
+}
+
+async function sendResendEmail(env, { to, subject, text, replyTo = CONTACT_INBOX }) {
   const apiKey = String(env.RESEND_API_KEY || '').trim();
   if (!apiKey) {
-    console.error('Advertiser enquiry notification failed: RESEND_API_KEY is not configured');
     return { status: 'not_configured', code: 'RESEND_API_KEY_MISSING', message: 'RESEND_API_KEY is not configured' };
+  }
+  const recipient = String(to || '').trim().toLowerCase().slice(0, 200);
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(recipient)) {
+    return { status: 'failed', code: 'INVALID_RECIPIENT', message: 'Recipient email is invalid' };
   }
 
   try {
@@ -348,10 +505,10 @@ async function notifyAdvertiserInbox(env, { subject, text }) {
       },
       body: JSON.stringify({
         from: `SK8 Scoop <${RESEND_SENDER}>`,
-        to: [CONTACT_INBOX],
+        to: [recipient],
         subject: safeHeader(subject),
         text: String(text || '').slice(0, 12000),
-        reply_to: CONTACT_INBOX
+        reply_to: replyTo
       })
     });
 
@@ -365,19 +522,30 @@ async function notifyAdvertiserInbox(env, { subject, text }) {
     if (!response.ok) {
       const code = result && result.name ? String(result.name) : `HTTP_${response.status}`;
       const message = result && result.message ? String(result.message) : `Resend returned HTTP ${response.status}`;
-      console.error(`Advertiser enquiry notification failed: ${code}: ${message}`);
       return { status: 'failed', code, message: safeDiagnostic(message) };
     }
 
-    const messageId = result && result.id ? String(result.id) : null;
-    console.log(`Advertiser enquiry notification sent via Resend${messageId ? `: ${messageId}` : ''}`);
-    return { status: 'sent', messageId };
+    return { status: 'sent', messageId: result && result.id ? String(result.id) : null };
   } catch (error) {
     const code = error && error.name ? String(error.name) : 'RESEND_REQUEST_FAILED';
     const message = error && error.message ? String(error.message) : String(error || 'Unknown error');
-    console.error(`Advertiser enquiry notification failed: ${code}: ${message}`);
     return { status: 'failed', code, message: safeDiagnostic(message) };
   }
+}
+
+async function notifyAdvertiserInbox(env, { subject, text }) {
+  const result = await sendResendEmail(env, {
+    to: CONTACT_INBOX,
+    subject,
+    text,
+    replyTo: CONTACT_INBOX
+  });
+  if (result.status === 'sent') {
+    console.log(`Advertiser enquiry notification sent via Resend${result.messageId ? `: ${result.messageId}` : ''}`);
+  } else {
+    console.error(`Advertiser enquiry notification failed: ${result.code || result.status}: ${result.message || 'Unknown error'}`);
+  }
+  return result;
 }
 
 function safeHeader(value) {

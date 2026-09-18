@@ -82,6 +82,8 @@ Initial effort mix, to be replaced by actual measured performance:
 
 Outbound is selective, not mass cold email. Use the most appropriate lawful channel after classification. The first message should normally sell the next useful step, not dump a media kit.
 
+A standing supervised prospect workflow prepares up to five eligible prospects per weekday. It must re-check the current trigger, CRM history, suppression/opt-out status and contact classification before a message becomes send-ready. A smaller batch, including zero, is correct when the quality/compliance gates do not produce five suitable prospects. No prospect email is sent until Paul explicitly approves that batch or named messages.
+
 All channels should feed the same useful hook: a relevant opportunity page, campaign route or short recommendation.
 
 ## 6. Prospect qualification
@@ -181,7 +183,9 @@ Current standard:
 - non-standard terms require human approval
 - no surprise automatic charging for ordinary campaigns
 
-Do not expand payment plumbing until the enquiry -> approval -> campaign workflow is proven and the approved Stripe implementation is ready.
+Successful approved live payments trigger two operational notifications: an internal payment-received email to SK8 Scoop and a concise confirmation email to the advertiser explaining the campaign reference and next steps. These notifications are deduplicated by Stripe Checkout Session so webhook retries do not create repeated payment emails.
+
+Do not expand payment plumbing beyond the approved workflow unless real operating volume proves the need.
 
 ## 12. Creative and pre-flight
 
@@ -516,3 +520,8 @@ Cloudflare preview/production Stripe webhook secret split confirmed by owner on 
 - Sandbox webhook re-established on 18 September 2026 as an active Workbench destination pointing to the branch preview URL; Cloudflare build secret `STRIPE_WEBHOOK_SECRET_PREVIEW` was rotated to the new signing secret.
 
 - Final sandbox Stripe proof on 18 September 2026: a real £40 sandbox Checkout completed through the newly active Workbench webhook, and Stripe recorded `checkout.session.completed` as Delivered with HTTP 200. The Worker returned `{received:true, ignored:true}` because the temporary verification payment intentionally lacked approved advertiser metadata; this confirms signature verification and routing without changing advertiser payment state.
+
+
+## Daily supervised outreach
+
+The detailed operating rules for the weekday prospect batch are in `docs/DAILY-PROSPECT-OUTREACH-RUNBOOK.md`. The main advertising CRM remains the source of truth for duplicate, suppression and contact-history checks.
