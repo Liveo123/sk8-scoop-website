@@ -1,8 +1,8 @@
 # Issue 13 Post-send NUE Website Update
 
 **Source issue:** SK8 Scoop Issue 13 — 18 September 2026  
-**Status:** PREPARED / QA PASSED ON PREVIEW BRANCH  
-**Branch:** `issue13-postsend-nue`  
+**Status:** LIVE / PRODUCTION QA PASSED  
+**Production commit:** `b5f10a0a366414270116c8e15d220c8e2fc007c5`  
 **Trigger:** Issue 13 sent; run the normal post-send Website Harvest + NUE reuse pass.
 
 ## Delivery note
@@ -107,3 +107,21 @@ Fixed expired What’s On entries; kept dates/costs/venues/action links from ver
 ## Measurement note
 
 Do not use Issue 13's early MailerLite results as a clean subject-line experiment. The ProtonMail incident and split recovery send are material confounders. Keep the delivery incident attached to any future Issue 13 analysis.
+
+
+## Production close-out
+
+The Issue 13 NUE release is live. Production smoke checks passed for the homepage and the wider post-launch site suite after deployment through Cloudflare.
+
+Guide routing was tightened after the first release pass:
+- public website visitors continue to the Free & Cheap landing/sign-up page;
+- visitors recognised as SK8 Scoop subscribers can be routed directly to the relevant full-guide section;
+- SK8 Scoop email UTM traffic is used to recognise the subscriber journey;
+- non-JavaScript fallback remains the public guide landing page.
+
+The three Issue 13 NUE experiments are instrumented with `data-experiment` markers and the existing NUE analytics layer:
+- `issue13-home-owned-continuation`
+- `issue13-connected-route`
+- `issue13-harvested-whats-on`
+
+Do not retrospectively treat Issue 13 as a clean email A/B experiment. The delivery incident and recovery campaign remain part of the permanent analysis context.
