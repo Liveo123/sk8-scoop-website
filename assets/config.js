@@ -31,7 +31,6 @@
         ['whats-on','/whats-on/','What’s On'],
         ['guides','/guides/','Guides'],
         ['start','/start/','Where to start'],
-        ['join','/join/','Join'],
         ['submit','/submit/','Submit'],
         ['contact','/contact/','Contact'],
         ['advertise','/advertise.html','Advertise']
