@@ -152,3 +152,639 @@ body[data-page="whats-on"] .whats-on-panel-icon{display:none!important}
   body[data-page="whats-on"] .whats-on-next-panel h2{font-size:1.7rem!important}
   body[data-page="whats-on"] .whats-on-next-panel .button-row{width:100%}
 }
+
+
+/* Approved What’s On redesign, 18 Sep 2026 */
+
+/* Shared section rhythm */
+body[data-page="whats-on"] .whats-on-quick-section{
+  padding:46px 0 42px;
+  background:#fffdf8;
+}
+body[data-page="whats-on"] .whats-on-quick-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:28px;
+  margin:0 0 22px;
+}
+body[data-page="whats-on"] .whats-on-quick-heading-copy{
+  max-width:760px;
+}
+body[data-page="whats-on"] .whats-on-quick-heading-copy .eyebrow{
+  margin:0 0 7px;
+  color:#0f6470;
+  font-size:.7rem;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+body[data-page="whats-on"] .whats-on-quick-heading-copy h2{
+  margin:0;
+  color:#12383d;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(2.35rem,4.7vw,4.2rem);
+  line-height:.96;
+  letter-spacing:-.045em;
+}
+body[data-page="whats-on"] .whats-on-quick-heading-copy p{
+  margin:10px 0 0;
+  max-width:700px;
+  color:#52666a;
+  font-size:1rem;
+  line-height:1.5;
+}
+body[data-page="whats-on"] .whats-on-guide-link{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  flex:0 0 auto;
+  margin-bottom:6px;
+  padding:14px 18px;
+  border-radius:18px;
+  background:#edf5f2;
+  color:#12383d!important;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1rem;
+  font-weight:700;
+  text-decoration:none!important;
+  box-shadow:0 8px 18px rgba(19,45,49,.06);
+  transition:transform .16s ease,background .16s ease;
+}
+body[data-page="whats-on"] .whats-on-guide-link span{
+  color:#0f6470;
+  font-family:Arial,sans-serif;
+  font-size:1.35rem;
+  line-height:1;
+}
+body[data-page="whats-on"] .whats-on-guide-link:hover{
+  background:#e2efeb;
+  transform:translateY(-1px);
+}
+
+/* Quick-route cards: approved editorial card treatment. */
+body[data-page="whats-on"] .whats-on-quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+body[data-page="whats-on"] .whats-on-quick-card{
+  position:relative;
+  display:flex;
+  min-width:0;
+  min-height:100%;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid #d7ded9;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 12px 28px rgba(19,45,49,.075);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+body[data-page="whats-on"] .whats-on-quick-card:hover{
+  transform:translateY(-3px);
+  border-color:#bdd0c9;
+  box-shadow:0 17px 34px rgba(19,45,49,.1);
+}
+body[data-page="whats-on"] .whats-on-quick-media{
+  position:relative;
+  min-height:150px;
+  aspect-ratio:16/7.3;
+  overflow:hidden;
+  background:#f2f4ef;
+}
+body[data-page="whats-on"] .whats-on-quick-media img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+body[data-page="whats-on"] .whats-on-quick-free .whats-on-quick-media img{
+  object-position:center 52%;
+}
+body[data-page="whats-on"] .whats-on-quick-icon{
+  position:absolute;
+  left:24px;
+  bottom:-21px;
+  z-index:2;
+  display:grid;
+  place-items:center;
+  width:66px;
+  height:66px;
+  border:4px solid #fffdf8;
+  border-radius:50%;
+  background:#eaf4f0;
+  box-shadow:0 8px 16px rgba(19,45,49,.08);
+}
+body[data-page="whats-on"] .whats-on-quick-weekend .whats-on-quick-icon{background:#ffe2d8}
+body[data-page="whats-on"] .whats-on-quick-family .whats-on-quick-icon{background:#ffefb7}
+body[data-page="whats-on"] .whats-on-quick-icon svg{
+  width:33px;
+  height:33px;
+  fill:none;
+  stroke:#12383d;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+body[data-page="whats-on"] .whats-on-quick-body{
+  position:relative;
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  padding:34px 24px 24px;
+}
+body[data-page="whats-on"] .whats-on-quick-body:after{
+  content:"";
+  position:absolute;
+  right:8px;
+  bottom:6px;
+  width:92px;
+  height:58px;
+  opacity:.72;
+  pointer-events:none;
+  border-radius:42% 58% 48% 52%;
+  background:
+    linear-gradient(155deg,transparent 0 36%,rgba(15,100,112,.09) 36% 44%,transparent 44% 100%),
+    linear-gradient(25deg,transparent 0 58%,rgba(248,121,27,.08) 58% 66%,transparent 66% 100%);
+  transform:rotate(-6deg);
+}
+body[data-page="whats-on"] .whats-on-quick-body .eyebrow{
+  margin:0 0 8px;
+  color:#0f6470;
+  font-size:.7rem;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+body[data-page="whats-on"] .whats-on-quick-weekend .whats-on-quick-body .eyebrow{color:#d45f4b}
+body[data-page="whats-on"] .whats-on-quick-family .whats-on-quick-body .eyebrow{color:#a96f00}
+body[data-page="whats-on"] .whats-on-quick-body h3{
+  margin:0 0 9px;
+  max-width:18ch;
+  color:#12383d;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(1.55rem,2.2vw,2.02rem);
+  line-height:1.02;
+  letter-spacing:-.03em;
+}
+body[data-page="whats-on"] .whats-on-quick-body p{
+  margin:0 0 19px;
+  max-width:36ch;
+  color:#506267;
+  font-size:.92rem;
+  line-height:1.5;
+}
+body[data-page="whats-on"] .whats-on-quick-action{
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  justify-content:space-between;
+  align-items:center;
+  align-self:flex-start;
+  gap:18px;
+  min-height:46px;
+  margin-top:auto;
+  padding:10px 14px;
+  border:0!important;
+  border-radius:8px;
+  background:#0f6470!important;
+  color:#fff!important;
+  font-size:.82rem;
+  font-weight:900;
+  box-shadow:0 7px 14px rgba(15,100,112,.18);
+}
+body[data-page="whats-on"] .whats-on-quick-action:hover{
+  background:#0a535d!important;
+}
+body[data-page="whats-on"] .whats-on-quick-action span:last-child{
+  font-size:1.2rem;
+  line-height:1;
+}
+
+/* Listings: calmer hierarchy and stronger utility. */
+body[data-page="whats-on"] .whats-on-listings-section{
+  padding:48px 0 56px;
+  background:linear-gradient(180deg,#f8faf8 0%,#f3f7f5 100%);
+}
+body[data-page="whats-on"] .whats-on-listings-head{
+  align-items:flex-end;
+  gap:32px;
+  margin-bottom:18px;
+}
+body[data-page="whats-on"] .whats-on-listings-head h2{
+  margin:3px 0 0;
+  color:#12383d;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(2.45rem,4vw,3.8rem);
+  line-height:.96;
+  letter-spacing:-.045em;
+}
+body[data-page="whats-on"] .whats-on-listings-intro{
+  max-width:470px;
+  margin:0 0 5px;
+  color:#52666a;
+  font-size:.93rem;
+  line-height:1.52;
+}
+body[data-page="whats-on"] .whats-on-freshness{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 10px;
+  margin:0 0 16px;
+  padding:12px 14px;
+  border:1px solid #ccdad5;
+  border-radius:13px;
+  background:#fff;
+  box-shadow:0 7px 18px rgba(19,45,49,.045);
+  color:#506166;
+  font-size:.77rem;
+  font-weight:750;
+}
+body[data-page="whats-on"] .whats-on-freshness strong{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:#12383d;
+  font-size:.82rem;
+}
+body[data-page="whats-on"] .whats-on-freshness strong:before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#0f6470;
+  box-shadow:0 0 0 4px rgba(15,100,112,.1);
+}
+body[data-page="whats-on"] .whats-on-freshness span{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+body[data-page="whats-on"] .whats-on-freshness span:before{
+  content:"";
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#d7ded9;
+}
+body[data-page="whats-on"] .whats-on-filter-toolbar{
+  display:grid;
+  gap:13px;
+  margin:0 0 10px;
+  padding:17px;
+  border:1px solid #cad9d4;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 9px 22px rgba(19,45,49,.055);
+}
+body[data-page="whats-on"] .whats-on-filter-group{
+  display:grid;
+  grid-template-columns:82px minmax(0,1fr);
+  gap:12px;
+  align-items:start;
+}
+body[data-page="whats-on"] .whats-on-filter-group + .whats-on-filter-group{
+  padding-top:13px;
+  border-top:1px solid #e2e8e5;
+}
+body[data-page="whats-on"] .whats-on-filter-label{
+  padding-top:9px;
+  color:#12383d;
+  font-size:.65rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+body[data-page="whats-on"] .whats-on-filter-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+body[data-page="whats-on"] .whats-on-filter-buttons .button{
+  min-height:38px;
+  padding:8px 13px;
+  border-radius:9px;
+  box-shadow:none;
+  font-size:.77rem;
+  font-weight:850;
+}
+body[data-page="whats-on"] .whats-on-filter-buttons .button[aria-pressed="true"]{
+  border-color:#0f6470!important;
+  background:#0f6470!important;
+  color:#fff!important;
+  box-shadow:0 5px 12px rgba(15,100,112,.15);
+}
+body[data-page="whats-on"] .whats-on-filter-buttons .button[aria-pressed="false"]{
+  border:1px solid #bfd1cb!important;
+  background:#fff!important;
+  color:#0f6470!important;
+}
+body[data-page="whats-on"] .whats-on-filter-buttons .button[aria-pressed="false"]:hover{
+  border-color:#0f6470!important;
+  background:#edf6f3!important;
+}
+body[data-page="whats-on"] .whats-on-filter-note{
+  margin:1px 0 3px!important;
+  color:#6a797c!important;
+  font-size:.75rem!important;
+}
+body[data-page="whats-on"] .whats-on-status{
+  margin:0 0 18px!important;
+  color:#35545a!important;
+  font-size:.79rem!important;
+  font-weight:850!important;
+}
+
+body[data-page="whats-on"] [data-events-list]{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+body[data-page="whats-on"] .event-listing-card{
+  position:relative;
+  display:flex;
+  min-width:0;
+  min-height:100%;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid #d6dfda;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 10px 24px rgba(19,45,49,.065);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+body[data-page="whats-on"] .event-listing-card:before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:5px;
+  background:#0f6470;
+  z-index:1;
+}
+body[data-page="whats-on"] .event-listing-card:hover{
+  transform:translateY(-3px);
+  border-color:#b9ccc6;
+  box-shadow:0 16px 32px rgba(19,45,49,.095);
+}
+body[data-page="whats-on"] .event-listing-card[data-category="wellness"]:before{background:#a8bf1b}
+body[data-page="whats-on"] .event-listing-card[data-category="family"]:before{background:#e9a54f}
+body[data-page="whats-on"] .event-listing-card[data-category="local-history"]:before{background:#b97d70}
+body[data-page="whats-on"] .event-listing-card[data-category="community"]:before{background:#d6993e}
+body[data-page="whats-on"] .event-listing-card[data-category="food-and-drink"]:before{background:#0b4c5b}
+body[data-page="whats-on"] .event-listing-card[data-category="music"]:before{background:#c15f8a}
+body[data-page="whats-on"] .event-listing-card[data-category="outdoors"]:before{background:#6f973a}
+body[data-page="whats-on"] .event-listing-card[data-category="market"]:before{background:#4f95af}
+body[data-page="whats-on"] .event-listing-card .reader-story-image{
+  min-height:160px;
+  height:160px;
+  background-position:center;
+  background-size:cover;
+}
+body[data-page="whats-on"] .event-listing-card .reader-story-image span{
+  position:absolute;
+  left:14px;
+  top:14px;
+  display:inline-flex;
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(7,63,72,.92);
+  color:#fff;
+  font-size:.61rem;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  backdrop-filter:blur(4px);
+}
+body[data-page="whats-on"] .event-listing-card .reader-story-body{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  padding:20px 21px 21px 24px;
+}
+body[data-page="whats-on"] .event-card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:14px;
+}
+body[data-page="whats-on"] .event-date-block{
+  display:grid;
+  grid-template-columns:auto auto;
+  grid-template-rows:auto auto;
+  column-gap:6px;
+  align-items:end;
+  min-width:72px;
+  padding:9px 11px 8px;
+  border-radius:12px;
+  background:#12383d;
+  color:#fff;
+  box-shadow:0 8px 16px rgba(18,56,61,.14);
+}
+body[data-page="whats-on"] .event-date-block span{
+  grid-column:1/3;
+  margin-bottom:2px;
+  color:#d6ea00;
+  font-size:.58rem;
+  font-weight:900;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+body[data-page="whats-on"] .event-date-block strong{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.7rem;
+  font-weight:700;
+  line-height:.92;
+  letter-spacing:-.04em;
+}
+body[data-page="whats-on"] .event-date-block small{
+  padding-bottom:2px;
+  color:#fff;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+body[data-page="whats-on"] .event-listing-card .eyebrow{
+  display:inline-flex;
+  align-items:center;
+  align-self:flex-start;
+  gap:6px;
+  margin:1px 0 0;
+  padding:6px 9px;
+  border:1px solid #cfe0db;
+  border-radius:999px;
+  background:#edf6f4;
+  color:#0f6470;
+  box-shadow:none;
+  font-size:.59rem;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+body[data-page="whats-on"] .event-listing-card .eyebrow:before{
+  content:"";
+  width:6px;
+  height:6px;
+  flex:0 0 6px;
+  border-radius:50%;
+  background:currentColor;
+  opacity:.88;
+}
+body[data-page="whats-on"] .event-listing-card h3{
+  margin:0 0 11px;
+  color:#12383d;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.5rem;
+  line-height:1.06;
+  letter-spacing:-.026em;
+}
+body[data-page="whats-on"] .event-facts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:0 0 12px;
+}
+body[data-page="whats-on"] .event-facts span{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  min-height:30px;
+  padding:6px 8px;
+  border:1px solid #e2e9e6;
+  border-radius:8px;
+  background:#f6f9f7;
+  color:#3f5559;
+  font-size:.69rem;
+  line-height:1.2;
+}
+body[data-page="whats-on"] .event-facts b{
+  color:#0f6470;
+  font-size:.57rem;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+body[data-page="whats-on"] .event-venue{
+  position:relative;
+  margin:0 0 11px!important;
+  padding-left:17px;
+  color:#596b6f!important;
+  font-size:.79rem!important;
+  font-weight:760;
+  line-height:1.4;
+}
+body[data-page="whats-on"] .event-venue:before{
+  content:"";
+  position:absolute;
+  left:2px;
+  top:.36em;
+  width:8px;
+  height:8px;
+  border-radius:50% 50% 50% 0;
+  background:#f8791b;
+  transform:rotate(-45deg);
+}
+body[data-page="whats-on"] .event-venue:after{
+  content:"";
+  position:absolute;
+  left:4px;
+  top:.49em;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#fff;
+}
+body[data-page="whats-on"] .event-description{
+  margin:0 0 18px!important;
+  color:#45595d!important;
+  font-size:.89rem!important;
+  line-height:1.52!important;
+}
+body[data-page="whats-on"] .event-check-link{
+  display:inline-flex;
+  align-items:center;
+  align-self:flex-start;
+  min-height:42px;
+  margin-top:auto;
+  padding:9px 12px;
+  border-radius:8px;
+  background:#0f6470;
+  color:#fff!important;
+  font-size:.78rem!important;
+  font-weight:900!important;
+  text-decoration:none!important;
+  box-shadow:0 7px 14px rgba(15,100,112,.16);
+  transition:background .15s ease,transform .15s ease;
+}
+body[data-page="whats-on"] .event-check-link:hover{
+  background:#0a535d;
+  transform:translateX(1px);
+}
+
+@media(max-width:1080px){
+  body[data-page="whats-on"] .whats-on-quick-grid,
+  body[data-page="whats-on"] [data-events-list]{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  body[data-page="whats-on"] .whats-on-quick-card:last-child{
+    grid-column:1/-1;
+    max-width:calc(50% - 9px);
+  }
+}
+@media(max-width:760px){
+  body[data-page="whats-on"] .whats-on-quick-head{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:14px;
+  }
+  body[data-page="whats-on"] .whats-on-guide-link{
+    margin:0;
+  }
+  body[data-page="whats-on"] .whats-on-quick-grid,
+  body[data-page="whats-on"] [data-events-list]{
+    grid-template-columns:1fr;
+  }
+  body[data-page="whats-on"] .whats-on-quick-card:last-child{
+    grid-column:auto;
+    max-width:none;
+  }
+  body[data-page="whats-on"] .whats-on-quick-media{
+    min-height:150px;
+    aspect-ratio:16/7;
+  }
+  body[data-page="whats-on"] .whats-on-listings-head{
+    align-items:flex-start;
+  }
+  body[data-page="whats-on"] .whats-on-filter-group{
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+  body[data-page="whats-on"] .whats-on-filter-label{
+    padding-top:0;
+  }
+}
+@media(max-width:520px){
+  body[data-page="whats-on"] .whats-on-quick-section{
+    padding-top:34px;
+  }
+  body[data-page="whats-on"] .whats-on-quick-heading-copy h2{
+    font-size:2.45rem;
+  }
+  body[data-page="whats-on"] .whats-on-quick-body{
+    padding:33px 19px 20px;
+  }
+  body[data-page="whats-on"] .whats-on-quick-icon{
+    left:19px;
+  }
+  body[data-page="whats-on"] .whats-on-listings-section{
+    padding-top:38px;
+  }
+  body[data-page="whats-on"] .event-listing-card .reader-story-body{
+    padding:18px 18px 19px 21px;
+  }
+  body[data-page="whats-on"] .event-listing-card h3{
+    font-size:1.38rem;
+  }
+}
