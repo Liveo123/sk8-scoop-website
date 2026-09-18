@@ -21,6 +21,49 @@
     issueStat.textContent = String(window.SK8_CONFIG.publicStats.issuesPublished);
   }
 
+  const goalWrap = document.querySelector('.ad-goal-wrap');
+  if (goalWrap && !goalWrap.querySelector('[data-campaign-finder-link]')) {
+    const finderLink = document.createElement('a');
+    finderLink.href = '/advertise/finder/';
+    finderLink.className = 'button secondary';
+    finderLink.dataset.campaignFinderLink = 'true';
+    finderLink.textContent = 'Not sure? Use the 4-step Campaign Finder';
+    finderLink.style.marginTop = '0.8rem';
+    goalWrap.appendChild(finderLink);
+  }
+
+  const finderParams = new URLSearchParams(window.location.search);
+  const finderSource = finderParams.get('finder_source');
+  const finderPackage = finderParams.get('finder_package');
+  const finderGoal = finderParams.get('finder_goal');
+  const allowedFinderPackages = new Set(['temp_test', 'temp_grow']);
+  const allowedFinderGoals = new Set([
+    'Get bookings',
+    'Generate enquiries',
+    'Get more people to visit',
+    'Get registrations',
+    'Generate purchases or offer use',
+    'Build useful local awareness'
+  ]);
+
+  if (finderSource === 'campaign_finder') {
+    if (allowedFinderPackages.has(finderPackage)) {
+      const selected = packageInputs.find(input => input.value === finderPackage);
+      if (selected) selected.checked = true;
+    }
+
+    if (actionField && allowedFinderGoals.has(finderGoal) && !actionField.value.trim()) {
+      actionField.value = `Campaign Finder goal: ${finderGoal}. `;
+    }
+
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('advertiser_campaign_finder_handoff', {
+        route: allowedFinderPackages.has(finderPackage) ? finderPackage : 'review',
+        goal: allowedFinderGoals.has(finderGoal) ? finderGoal : 'unknown'
+      });
+    }
+  }
+
   function scrollToForm(focusTarget) {
     const header = document.querySelector('.site-header');
     const headerHeight = header ? header.getBoundingClientRect().height : 0;

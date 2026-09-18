@@ -1,5 +1,5 @@
 name = "sk8-scoop"
-main = "worker-protected.js"
+main = "worker-business-v2.js"
 compatibility_date = "2026-07-24"
 keep_vars = true
 

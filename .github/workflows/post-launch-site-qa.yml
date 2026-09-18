@@ -21,6 +21,13 @@ jobs:
         run: node scripts/check-current-content.mjs
       - name: Check post-launch NUE contracts
         run: node scripts/check-post-launch-v2.mjs
+      - name: Check advertiser growth-engine JavaScript
+        run: |
+          if [ -f worker-business-v2.js ]; then node --check worker-business-v2.js; fi
+          if [ -f assets/campaign-finder.js ]; then node --check assets/campaign-finder.js; fi
+          if [ -f assets/advertise.js ]; then node --check assets/advertise.js; fi
+      - name: Check advertiser growth-engine contracts
+        run: node scripts/check-advertiser-growth-engine.mjs
 
   preview-smoke:
     if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/post-launch-nue-v2')
@@ -60,6 +67,9 @@ jobs:
           check_page '/submit-event/' 'action="/api/submit-event"'
           check_page '/business-submissions/' 'action="/api/business-submission"'
           check_page '/advertise.html' 'value="temp_test"'
+          check_page '/advertise/finder/' 'id="campaign-finder"'
+          check_page '/advertise/christmas-eating-out/' 'Promote Christmas bookings'
+          check_page '/advertise/pay/' 'Payment follows campaign approval'
           check_page '/around-sk8/' 'data-page="around-sk8"'
           check_page '/food-drink/' 'Food & Drink around SK8'
           check_page '/kids-family/' 'Kids & Family around SK8'
@@ -77,6 +87,18 @@ jobs:
           check_page '/planning/heald-green-east/' 'DC/095134'
           check_page '/planning/cheadle-eco-park/' 'Cheadle Eco Park'
           check_page '/kids-family/secondary-school-applications-2027/' '31 October 2026'
+
+      - name: One-time advertiser D1 and Resend retest
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+        run: |
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/advertiser-enquiry"
+          payload='{"business_name":"SK8 Scoop TEST ONLY 2026-09-18","contact_name":"SK8 Scoop","email":"contact@sk8scoop.com","phone":"","business_type":"Internal system test","area":"Cheadle","website":"https://www.sk8scoop.com/","package":"temp_test","preferred_date":"2026-10","advert_copy":"TEST ONLY - automated preview retest after Cloudflare secret injection change. No advertising booking required.","terms_accepted":"yes"}'
+          response="$(curl -fsSL --max-time 30 -X POST "$url" -H 'content-type: application/json' --data "$payload")"
+          printf '%s\n' "$response"
+          printf '%s' "$response" | grep -F '"notification_status":"sent"'
 
   live-smoke:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -111,6 +133,9 @@ jobs:
           check_page 'https://www.sk8scoop.com/submit-event/' 'action="/api/submit-event"'
           check_page 'https://www.sk8scoop.com/business-submissions/' 'action="/api/business-submission"'
           check_page 'https://www.sk8scoop.com/advertise.html' 'value="temp_test"'
+          check_page 'https://www.sk8scoop.com/advertise/finder/' 'id="campaign-finder"'
+          check_page 'https://www.sk8scoop.com/advertise/christmas-eating-out/' 'Promote Christmas bookings'
+          check_page 'https://www.sk8scoop.com/advertise/pay/' 'Payment follows campaign approval'
           check_page 'https://www.sk8scoop.com/around-sk8/' 'data-page="around-sk8"'
           check_page 'https://www.sk8scoop.com/food-drink/' 'Food & Drink around SK8'
           check_page 'https://www.sk8scoop.com/kids-family/' 'Kids & Family around SK8'
