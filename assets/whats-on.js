@@ -333,7 +333,7 @@
           url: source,
           description: String(event.description || '')
         };
-        if (event.end_date) item.endDate = `${event.end_date}${event.time ? `T${event.time}:00` : ''}`;
+        if (event.end_date) item.endDate = event.end_date;
         if (isFree(event)) item.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: source, availability: 'https://schema.org/InStock' };
         return { '@type': 'ListItem', position: index + 1, item };
       })
