@@ -16,6 +16,8 @@
   const goalLinks = [...document.querySelectorAll('[data-ad-goal]')];
   const packageJumps = [...document.querySelectorAll('[data-ad-package]')];
   const issueStat = document.querySelector('[data-stat="issuesPublished"]');
+  const startedAtField = form.querySelector('[name="sk8_started_at"]');
+  if (startedAtField) startedAtField.value = String(Date.now());
 
   if (issueStat && window.SK8_CONFIG?.publicStats?.issuesPublished) {
     issueStat.textContent = String(window.SK8_CONFIG.publicStats.issuesPublished);
