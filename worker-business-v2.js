@@ -88,16 +88,20 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
   const packageLabel = {
     temp_test: 'TEST £40',
     temp_grow: 'GROW £90',
+    human_review: 'LOCAL-FIT CHECK',
     local_spotlight: 'Legacy Local Spotlight',
     monthly_partner: 'Legacy Monthly Partner',
     category_partner: 'Legacy Category Partner',
     bespoke: 'Legacy Bespoke'
   }[String(data.package || '')] || c(data.package, 80) || 'Not supplied';
 
+  const isLocalFitCheck = String(data.package || '') === 'human_review';
   const notification = await notifyAdvertiserInbox(env, {
-    subject: `[SK8 Scoop advertiser enquiry] ${c(data.business_name, 100)} - ${packageLabel}`,
+    subject: isLocalFitCheck
+      ? `[SK8 Scoop LOCAL-FIT CHECK] ${c(data.business_name, 100)}`
+      : `[SK8 Scoop advertiser enquiry] ${c(data.business_name, 100)} - ${packageLabel}`,
     text: [
-      'New SK8 Scoop advertiser enquiry',
+      isLocalFitCheck ? 'New SK8 Scoop local-fit check' : 'New SK8 Scoop advertiser enquiry',
       '',
       `Business: ${c(data.business_name, 180)}`,
       `Contact: ${c(data.contact_name, 120)}`,
