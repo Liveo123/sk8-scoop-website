@@ -60,6 +60,11 @@ assert(wrapper.includes("'review_required'"), 'Wrong Stripe amount is held for r
 assert(wrapper.includes('Stripe mode mismatch'), 'Stripe webhook rejects live/test environment mismatches');
 assert(wrapper.includes("approval_required") && wrapper.includes("session.mode"), 'Stripe webhook requires approved one-time payment metadata');
 assert(wrapper.includes("packageMatches") && wrapper.includes("statusAllowsPayment"), 'Stripe webhook checks enquiry package and state before marking paid');
+assert(wrapper.includes('samePaidSession'), 'Stripe webhook treats retries for the same paid session idempotently');
+assert(wrapper.includes('advertiser_payment_notifications'), 'Payment email notification state is recorded in D1');
+assert(wrapper.includes('sendPaymentNotifications'), 'Successful live payments trigger owner and advertiser notifications');
+assert(wrapper.includes("'owner_paid'") && wrapper.includes("'advertiser_paid'"), 'Payment notifications are deduplicated by notification type');
+assert(wrapper.includes('Advertising remains separate from editorial coverage'), 'Advertiser payment confirmation preserves editorial/commercial separation');
 assert(!wrapper.includes('/api/stripe-e2e-test-status'), 'Temporary Stripe E2E status endpoint is not shipped');
 assert(pay.includes('site-header'), 'Approved payment page uses the standard site header');
 assert(wrapper.includes("x-content-type-options") && wrapper.includes("frame-ancestors 'none'"), 'Worker adds baseline browser security headers');
