@@ -65,18 +65,6 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
     console.log(`Advertiser enquiry notification status: ${notification.status}${notification.code ? ` (${notification.code})` : ''}`);
   }
 
-  const isLabelledTest = /^SK8 Scoop TEST ONLY/i.test(c(data.business_name, 180));
-  if (isLabelledTest) {
-    const detail = notification.status === 'sent'
-      ? `Email notification sent${notification.messageId ? ` (${notification.messageId})` : ''}.`
-      : `Email notification ${notification.status}${notification.code ? `: ${notification.code}` : ''}${notification.message ? ` - ${notification.message}` : ''}.`;
-    return json({
-      message: `TEST DIAGNOSTIC: enquiry saved to D1. ${detail}`,
-      notification_status: notification.status,
-      notification_code: notification.code || null
-    });
-  }
-
   return response;
 }
 
