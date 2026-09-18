@@ -472,3 +472,37 @@ Important operational notes:
 - The advertiser enquiry endpoint is now materially harder to spam, but Cloudflare rate limiting can still be added later if automated abuse appears.
 - A fresh live Stripe webhook secret should be copied directly from Stripe to Cloudflare and should not be pasted into chat or committed to GitHub.
 - The previously disclosed sandbox webhook secret is test-only. The Resend API credential previously shown during debugging should be rotated before final production launch as good secret-hygiene practice.
+
+
+## 24. Live Stripe account prepared
+
+Live Stripe account preparation completed on 18 September 2026 without creating any public live checkout links.
+
+Live products:
+
+- TEST product `prod_VHYWf1Aaa79P2q`, default price `price_1UGzPUFYD08ziIGA1RAPi5cb`, £40 GBP one-time.
+- GROW product `prod_VHYW7eAN2Mdyy3`, default price `price_1UGzPWFYD08ziIGAbkZIDHZO`, £90 GBP one-time.
+
+Live webhook:
+
+- endpoint `we_1UGzPhFYD08ziIGAkbgSHdrn`
+- URL `https://www.sk8scoop.com/api/stripe-webhook`
+- enabled only for checkout completion/success/failure/expiry events needed by the advertiser flow.
+
+Live payment-link check: zero active live Payment Links exist. This is intentional. A live advertiser payment route should be created only after a specific campaign is approved.
+
+### Secret separation
+
+Preview and production must no longer share one build-time Stripe webhook secret.
+
+Use two Cloudflare build secrets:
+
+- `STRIPE_WEBHOOK_SECRET_PREVIEW` for the rotated sandbox webhook.
+- `STRIPE_WEBHOOK_SECRET_LIVE` for the live webhook.
+
+Map either one to runtime `STRIPE_WEBHOOK_SECRET` only in the relevant deploy command:
+
+- non-production/version upload uses `STRIPE_WEBHOOK_SECRET_PREVIEW`;
+- production deploy uses `STRIPE_WEBHOOK_SECRET_LIVE`.
+
+The previous sandbox webhook `we_1UGyrHJzdvodh5ZEPaFwNDmR` was disabled because its signing secret had been exposed during debugging. A replacement sandbox endpoint `we_1UGzQWJzdvodh5ZENLRbi04D` is active. Retrieve both new signing secrets directly in Stripe and copy them directly into Cloudflare. Do not paste them into chat or GitHub.
