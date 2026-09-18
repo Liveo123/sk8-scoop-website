@@ -343,7 +343,14 @@
     if (errorBox) errorBox.hidden = true;
     const rec = recommendation(v);
     render(rec);
-    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // On desktop the result sits beside the form and is sticky, so forcing
+    // scrollIntoView jumps the page back to the top of the form. On stacked
+    // layouts, the result is below the form and should be brought into view.
+    if (window.matchMedia('(max-width: 850px)').matches) {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    }
 
     if (typeof window.sk8Track === 'function') {
       window.sk8Track('advertiser_campaign_finder_result', {
