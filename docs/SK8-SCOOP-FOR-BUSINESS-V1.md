@@ -386,3 +386,63 @@ Commercial pilot status:
 - Pointing Dog and Station House first contacts were sent on 15 September 2026;
 - Gmail threads had no replies when checked on 18 September;
 - the default follow-up point is about seven days, so no follow-up is due before roughly 22 September and every follow-up remains conditional on a fresh trigger/compliance/CRM check.
+
+
+## 22. Payment system decision — Stripe sandbox validation
+
+Sandbox validation completed on 18 September 2026:
+
+- TEST £40 completed successfully as a one-time GBP payment.
+- GROW £90 completed successfully as a one-time GBP payment.
+- both flows collected business name, payer name and campaign reference;
+- both carried the expected SK8 product metadata and approval-required metadata;
+- neither created a subscription or renewal;
+- each sandbox Payment Link was restricted to one successful checkout and became inactive after that checkout;
+- Stripe-hosted confirmation worked as expected.
+
+### Three-criticism payment loop
+
+**Criticism 1 — one reusable public TEST/GROW link is too loose.**  
+It is efficient, but it weakens the approval gate because a link can be forwarded or reused outside the campaign review process.
+
+**Revision:** one approved campaign gets one single-use payment route.
+
+**Criticism 2 — letting the public website create Stripe payments automatically is technically neat but adds a powerful Stripe secret and more failure modes to the Worker.**  
+At current advertiser volume this would automate a step that is intentionally human-approved.
+
+**Revision:** keep payment creation human-gated. Use the authenticated Stripe connection / Stripe Dashboard to create the single-use route after approval. Do not give the public website authority to create charges.
+
+**Criticism 3 — payment still needs to close the loop back into the operating system.**  
+A Stripe receipt alone leaves the advertiser queue blind and creates manual reconciliation.
+
+**Revision:** use a signed Stripe webhook whose only job is to record payment status against the approved advertiser enquiry in D1. The website receives no Stripe charge-creation key.
+
+### Final payment architecture for v1
+
+1. advertiser submits an enquiry;
+2. D1 stores it and SK8 Scoop is notified;
+3. Paul reviews suitability, timing and package;
+4. only after approval, SK8 Scoop creates a **single-use Stripe payment route** for that campaign;
+5. the Stripe route carries `advertiser_enquiry_id`, `campaign_reference` and `sk8_product` metadata;
+6. advertiser pays on Stripe-hosted Checkout;
+7. Stripe sends a signed event to `/api/stripe-webhook`;
+8. the Worker verifies the Stripe signature, records the payment in `advertiser_payments`, and marks the advertiser enquiry `paid`;
+9. the private advertiser inbox shows payment status/reference/amount;
+10. production work then moves to creative, pre-flight, publication and reporting.
+
+This intentionally keeps **ability to take money** outside the public Worker while allowing **payment status** to return automatically.
+
+### Sandbox webhook
+
+Sandbox endpoint created in Stripe:
+
+`https://sk8-business-growth-engine-v2-sk8-scoop.quiet-term-e047.workers.dev/api/stripe-webhook`
+
+Subscribed only to:
+
+- `checkout.session.completed`
+- `checkout.session.async_payment_succeeded`
+- `checkout.session.async_payment_failed`
+- `checkout.session.expired`
+
+The signing secret must be stored in Cloudflare as `STRIPE_WEBHOOK_SECRET`. Do not put it in GitHub.
