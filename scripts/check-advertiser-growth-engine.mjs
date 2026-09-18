@@ -32,6 +32,10 @@ assert(finderJs.includes("params.set('finder_source', 'campaign_finder')"), 'Fin
 assert(advertiseJs.includes("allowedFinderPackages = new Set(['temp_test', 'temp_grow'])"), 'Advertiser page only accepts current Finder package routes');
 assert(advertiseJs.includes('/advertise/finder/'), 'Advertiser page links to Campaign Finder');
 assert(opportunity.includes('/advertise/finder/?opportunity=christmas-eating-out'), 'Christmas acquisition page feeds Campaign Finder');
+assert(finderJs.includes("opportunity !== 'christmas-eating-out'"), 'Campaign Finder recognises the Christmas opportunity route');
+assert(finderJs.includes("category.value = 'hospitality'"), 'Christmas opportunity preselects hospitality');
+assert(finderJs.includes("finder_opportunity"), 'Campaign Finder carries opportunity context into advertiser handoff');
+assert(advertiseJs.includes('allowedFinderOpportunities'), 'Advertiser enquiry preserves approved opportunity context');
 assert(opportunity.includes('TEST £40'), 'Christmas acquisition page defaults to current TEST route');
 assert(opportunity.includes('GROW £90'), 'Christmas acquisition page explains current GROW route');
 assert(opportunity.includes('noindex,follow'), 'Christmas acquisition page stays noindex during preview');
