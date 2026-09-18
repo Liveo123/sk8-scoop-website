@@ -127,6 +127,12 @@ Earlier screenshots also showed a Cloudflare challenge/Turnstile connection warn
 - GitHub Actions on that exact commit: **Homepage V3 QA — success; Current content freshness — success; Post-launch site QA — success**.
 - This confirms the latest desktop-full-navigation breakpoint code is the version now available on the branch preview.
 
+## Human visual approval — desktop
+
+Latest desktop screenshot reviewed on 18 September 2026 after the redundant plain `Join` link was removed.
+
+**Result: PASS.** The desktop header now shows the approved full navigation, compact Search SK8 field and single `Join free` CTA without clipping or wrapping. Logo proportions and overall hierarchy remain intact.
+
 ## Remaining human check
 
 After the latest preview deploys, recheck:
