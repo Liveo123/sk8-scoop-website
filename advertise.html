@@ -126,8 +126,8 @@
     <form class="form-card premium-form" action="/api/advertiser-enquiry" method="post" data-api-form data-form-kind="advertiser" data-success-event="advertising_enquiry_completed">
       <label class="form-honeypot" aria-hidden="true">Leave this field empty<input name="company_fax" tabindex="-1" autocomplete="off"></label>
       <input type="hidden" name="sk8_started_at" value="">
-      <div class="ad-form-heading"><div><div class="eyebrow">Campaign enquiry</div><h2>Advertise with SK8 Scoop</h2></div><span>ABOUT 2 MINUTES</span></div>
-      <p class="form-intro">TEST £40 or GROW £90. Payment is normally due only after scope and timing are agreed, and before the campaign starts.</p>
+      <div class="ad-form-heading"><div><div class="eyebrow">Campaign enquiry</div><h2 data-ad-form-title>Advertise with SK8 Scoop</h2></div><span>ABOUT 2 MINUTES</span></div>
+      <p class="form-intro" data-ad-form-intro>TEST £40 or GROW £90. Payment is normally due only after scope and timing are agreed, and before the campaign starts.</p>
       <div class="field-grid"><label>Business name<input name="business_name" required></label><label>Your name<input name="contact_name" autocomplete="name" required></label></div>
       <div class="field-grid"><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Phone <small>(optional)</small><input name="phone" autocomplete="tel"></label></div>
       <div class="field-grid"><label>Business type <small>(optional)</small><input name="business_type" placeholder="e.g. café, class, local service"></label><label>Main area <small>(optional)</small><input name="area" placeholder="e.g. Gatley"></label></div>
@@ -135,12 +135,13 @@
       <fieldset><legend>Where should we start?</legend>
         <label class="checkbox-row"><input type="radio" name="package" value="temp_test" checked required><span><strong>TEST · £40</strong><br>One sponsored newsletter placement, one objective, one main action.</span></label>
         <label class="checkbox-row"><input type="radio" name="package" value="temp_grow" required><span><strong>GROW · £90</strong><br>Newsletter + Free & Cheap Guide when the Guide is a genuine fit.</span></label>
+        <label class="checkbox-row" data-local-fit-route hidden><input type="radio" name="package" value="human_review" required><span><strong>LOCAL-FIT CHECK · no payment yet</strong><br>SK8 Scoop checks whether the business is a sensible match for core SK8 readers before recommending a paid route.</span></label>
       </fieldset>
       <label>Preferred month<input type="month" name="preferred_date" required></label>
       <label>What would you like local readers to do?<textarea name="advert_copy" required placeholder="For example: book a table, request a quote, visit this weekend, use an offer or register for an event"></textarea></label>
       <input type="hidden" name="image_link" value=""><input type="hidden" name="invoice_details" value="">
-      <label class="checkbox-row"><input type="checkbox" name="terms_accepted" value="yes" required><span>I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not guarantee results or favourable editorial coverage.</span></label>
-      <button class="button wide-button" type="submit">Send advertising enquiry</button><div class="status-box" data-form-status aria-live="polite"></div><p class="fine">Prefer email? <a href="mailto:contact@sk8scoop.com">contact@sk8scoop.com</a></p>
+      <label class="checkbox-row"><input type="checkbox" name="terms_accepted" value="yes" required><span data-ad-terms-copy>I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not guarantee results or favourable editorial coverage.</span></label>
+      <button class="button wide-button" type="submit" data-ad-submit>Send advertising enquiry</button><div class="status-box" data-form-status aria-live="polite"></div><p class="fine">Prefer email? <a href="mailto:contact@sk8scoop.com">contact@sk8scoop.com</a></p>
     </form>
   </div>
 </section>
