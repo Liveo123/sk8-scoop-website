@@ -47,7 +47,7 @@ export async function onRequestPost({request,env}){
     const resultCount=Math.max(0,Math.min(999,Number.parseInt(data.result_count,10)||0));
     const searchType=cleanLabel(data.search_type,'all');
     const searchArea=cleanLabel(data.search_area,'all');
-    const baseSource=['homepage','search_page','direct'].includes(String(data.source||''))?String(data.source):'search_page';
+    const baseSource=['homepage','search_page','direct','header'].includes(String(data.source||''))?String(data.source):'search_page';
     const host=new URL(request.url).hostname.toLowerCase();
     const source=host.endsWith('.workers.dev')?`preview_${baseSource}`:baseSource;
 

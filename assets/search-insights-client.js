@@ -9,6 +9,8 @@
   const selected=(selector,key)=>document.querySelector(`${selector}[aria-pressed="true"]`)?.dataset[key]||'all';
   const countResults=()=>document.querySelectorAll('.search-result-card').length;
   const initialSource=()=>{
+    const requested=(new URLSearchParams(location.search).get('source')||'').trim().toLowerCase();
+    if(requested==='header') return 'header';
     try{
       const ref=document.referrer?new URL(document.referrer):null;
       if(ref&&ref.origin===location.origin&&(ref.pathname==='/'||ref.pathname==='/index.html')) return 'homepage';

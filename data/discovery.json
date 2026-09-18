@@ -62,6 +62,20 @@
       "checked": "2026-09-09"
     },
     {
+      "id": "secondary-school-applications-2027",
+      "type": "Guides",
+      "category": "Kids & Family",
+      "title": "Secondary-school applications for September 2027",
+      "summary": "Stockport’s Year 7 application window is open for September 2027 entry. The initial deadline is 31 October 2026, with Offer Day on 1 March 2027.",
+      "href": "/kids-family/secondary-school-applications-2027/",
+      "area": "All areas",
+      "areas": ["Cheadle", "Cheadle Hulme", "Gatley", "Heald Green"],
+      "tags": ["secondary school", "school applications", "school admissions", "year 7", "2027", "parents", "31 october", "offer day", "stockport schools", "kids", "family"],
+      "freshness": "dated",
+      "checked": "2026-09-17",
+      "expires": "2026-10-31"
+    },
+    {
       "id": "outdoors",
       "type": "Guides",
       "category": "Outdoors",
@@ -110,6 +124,42 @@
       "checked": "2026-09-17"
     },
     {
+      "id": "gatley-shouter",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "The Gatley Shouter: ghost story, glossary and missing stone",
+      "summary": "The evidence behind Gatley’s oddest folklore story: an 1886 local expression, Fletcher Moss’s Victorian ghost tale, Jim Barrow and a stone nobody can now securely identify.",
+      "href": "/local-history/gatley-shouter/",
+      "area": "Gatley",
+      "tags": ["gatley shouter", "shouter of gatley", "gatley ghost", "ghost", "folklore", "fletcher moss", "jim barrow", "gatley carrs", "carr lane", "cross acres", "northenden", "local history"],
+      "freshness": "evergreen",
+      "checked": "2026-09-17"
+    },
+    {
+      "id": "cheadle-station-cheshire-line-tavern",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Before the Cheshire Line Tavern, it was Cheadle station",
+      "summary": "The old Cheadle North station building survives as the Cheshire Line Tavern: opened in 1866, renamed in 1950 and closed to passengers in 1964.",
+      "href": "/local-history/cheadle-station-cheshire-line-tavern/",
+      "area": "Cheadle",
+      "tags": ["cheadle station", "cheadle north", "railway", "train", "cheshire line tavern", "manchester road", "tiviot dale", "liverpool curve", "local history"],
+      "freshness": "evergreen",
+      "checked": "2026-09-17"
+    },
+    {
+      "id": "heald-green-mercury-frog",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Why Heald Green has a giant frog called Mercury",
+      "summary": "The story linking Heald Green’s 1959 MERcury telephone exchange, the Hg chemical symbol and Mercury Frog on Finney Lane.",
+      "href": "/local-history/heald-green-mercury-frog/",
+      "area": "Heald Green",
+      "tags": ["mercury frog", "giant frog", "heald green", "mercury", "telephone exchange", "phone code", "finney lane", "hg", "local history"],
+      "freshness": "evergreen",
+      "checked": "2026-09-17"
+    },
+    {
       "id": "planning",
       "type": "Useful updates",
       "category": "Planning & Development",
@@ -120,6 +170,30 @@
       "tags": ["planning", "development", "consultation", "roads", "traffic", "deadline", "council"],
       "freshness": "current",
       "checked": "2026-09-11"
+    },
+    {
+      "id": "heald-green-east",
+      "type": "Useful updates",
+      "category": "Planning & Development",
+      "title": "Heald Green East: the 675-home outline application",
+      "summary": "Planning application DC/095134 proposes up to 675 homes north of Stanley Road and west of the A34. The outline application was still shown as pending when checked on 17 September 2026.",
+      "href": "/planning/heald-green-east/",
+      "area": "Heald Green",
+      "tags": ["heald green east", "675 homes", "housing", "planning", "development", "dc 095134", "dc/095134", "stanley road", "a34", "bloor homes", "outline application"],
+      "freshness": "current",
+      "checked": "2026-09-17"
+    },
+    {
+      "id": "cheadle-eco-park",
+      "type": "Useful updates",
+      "category": "Planning & Development",
+      "title": "Cheadle Eco Park: what is being built on Bird Hall Lane?",
+      "summary": "The seven-acre Bird Hall Lane development is becoming six light-industrial units with a timber structural frame; the current completion target is March 2027.",
+      "href": "/planning/cheadle-eco-park/",
+      "area": "Cheadle",
+      "tags": ["cheadle eco park", "bird hall lane", "eco park", "business park", "development", "construction", "six units", "timber frame", "planning", "march 2027"],
+      "freshness": "current",
+      "checked": "2026-09-17"
     },
     {
       "id": "nansen-firs-20mph",
