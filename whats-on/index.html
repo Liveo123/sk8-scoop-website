@@ -45,14 +45,60 @@
 
     <section class="section white whats-on-quick-section">
       <div class="wrap">
-        <div class="section-head reader-section-head whats-on-quick-head">
-          <div><div class="eyebrow">Start with what you need</div><h2>Find something useful quickly</h2></div>
-          <a class="reader-link" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Free &amp; Cheap Guide →</a>
+        <div class="whats-on-quick-head">
+          <div class="whats-on-quick-heading-copy">
+            <div class="eyebrow">Start with what you need</div>
+            <h2>Find something useful quickly</h2>
+            <p>Jump straight to the listings and ideas that fit what you’re looking for.</p>
+          </div>
+          <a class="whats-on-guide-link" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Free &amp; Cheap Guide <span aria-hidden="true">→</span></a>
         </div>
-        <div class="reader-card-grid whats-on-quick-grid">
-          <article class="reader-story whats-on-quick-card"><div class="reader-story-body"><div class="eyebrow">THIS WEEKEND</div><h3>What can I actually do?</h3><p>Show checked listings falling on the coming Saturday or Sunday.</p><button class="button small-button" type="button" data-event-filter="weekend" data-event-jump="results" aria-pressed="false">Show this weekend</button></div></article>
-          <article class="reader-story whats-on-quick-card"><div class="reader-story-body"><div class="eyebrow">FREE</div><h3>Spend nothing if possible</h3><p>Filter to listings where the core event or activity is advertised as free.</p><button class="button small-button" type="button" data-event-filter="free" data-event-jump="results" aria-pressed="false">Show free events</button></div></article>
-          <article class="reader-story whats-on-quick-card"><div class="reader-story-body"><div class="eyebrow">FAMILY</div><h3>Something with children</h3><p>Bring family-friendly listings forward without making readers wade through everything else.</p><button class="button small-button" type="button" data-event-filter="family" data-event-jump="results" aria-pressed="false">Show family ideas</button></div></article>
+
+        <div class="whats-on-quick-grid">
+          <article class="whats-on-quick-card whats-on-quick-weekend">
+            <div class="whats-on-quick-media">
+              <img src="/assets/images/nue/whats-on-weekend.webp" alt="" loading="lazy" decoding="async">
+              <span class="whats-on-quick-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false"><path d="M8 5v4M24 5v4M6 11h20M7 7h18a2 2 0 0 1 2 2v17H5V9a2 2 0 0 1 2-2Z"/><path d="M10 15h4v4h-4zM18 15h4v4h-4zM10 21h4v3h-4z"/></svg>
+              </span>
+            </div>
+            <div class="whats-on-quick-body">
+              <div class="eyebrow">This weekend</div>
+              <h3>What can I actually do?</h3>
+              <p>Show checked listings falling on the coming Saturday or Sunday.</p>
+              <button class="button small-button whats-on-quick-action" type="button" data-event-filter="weekend" data-event-jump="results" aria-pressed="false"><span>Show this weekend</span><span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+
+          <article class="whats-on-quick-card whats-on-quick-free">
+            <div class="whats-on-quick-media">
+              <img src="/assets/images/nue/explore-outdoors.webp" alt="" loading="lazy" decoding="async">
+              <span class="whats-on-quick-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false"><ellipse cx="13" cy="10" rx="7" ry="4"/><path d="M6 10v6c0 2.2 3.1 4 7 4s7-1.8 7-4v-6M6 14c0 2.2 3.1 4 7 4s7-1.8 7-4"/><circle cx="22" cy="21" r="6"/><path d="M22 17.5v7M19.5 20h3.3c1.2 0 2 .6 2 1.5s-.8 1.5-2 1.5h-3.3"/></svg>
+              </span>
+            </div>
+            <div class="whats-on-quick-body">
+              <div class="eyebrow">Free</div>
+              <h3>Spend nothing if possible</h3>
+              <p>Filter to listings where the core event or activity is advertised as free.</p>
+              <button class="button small-button whats-on-quick-action" type="button" data-event-filter="free" data-event-jump="results" aria-pressed="false"><span>Show free events</span><span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+
+          <article class="whats-on-quick-card whats-on-quick-family">
+            <div class="whats-on-quick-media">
+              <img src="/assets/images/nue/whats-on-family.webp" alt="" loading="lazy" decoding="async">
+              <span class="whats-on-quick-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false"><circle cx="16" cy="9" r="4"/><circle cx="8" cy="12" r="3"/><circle cx="24" cy="12" r="3"/><path d="M10 25v-3c0-3.5 2.6-6 6-6s6 2.5 6 6v3M3 25v-2c0-2.8 2-5 5-5 1.2 0 2.3.4 3.2 1M29 25v-2c0-2.8-2-5-5-5-1.2 0-2.3.4-3.2 1"/></svg>
+              </span>
+            </div>
+            <div class="whats-on-quick-body">
+              <div class="eyebrow">Family</div>
+              <h3>Something with children</h3>
+              <p>Bring family-friendly listings forward without making readers wade through everything else.</p>
+              <button class="button small-button whats-on-quick-action" type="button" data-event-filter="family" data-event-jump="results" aria-pressed="false"><span>Show family ideas</span><span aria-hidden="true">→</span></button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
