@@ -135,6 +135,30 @@
     record.title, record.category, record.area, ...(record.areas || []), ...(record.tags || []), record.summary
   ].join(' '));
 
+  const queryStopTerms = new Set([
+    'a', 'an', 'and', 'around', 'at', 'do', 'find', 'for', 'from', 'in', 'is', 'local', 'me', 'my',
+    'near', 'of', 'on', 'or', 'our', 'please', 's', 'show', 'sk8', 'something', 'that', 'the', 'thing',
+    'things', 'this', 'to', 'what', 'whats', 'with'
+  ]);
+
+  const meaningfulQueryTerms = query => normalise(query).split(' ').filter(term => term && !queryStopTerms.has(term));
+
+  const termMatchesRecord = (term, all) => {
+    if (all.includes(term)) return true;
+    const relatedGroup = synonymGroups.find(group => group.some(value => normalise(value).split(' ').includes(term)));
+    if (!relatedGroup) return false;
+    return relatedGroup.some(value => all.includes(normalise(value)));
+  };
+
+  const hasEnoughQueryCoverage = (record, query) => {
+    const terms = meaningfulQueryTerms(query);
+    if (!terms.length) return true;
+    const all = searchable(record);
+    const matched = terms.filter(term => termMatchesRecord(term, all)).length;
+    const minimumMatches = terms.length === 1 ? 1 : Math.ceil(terms.length * 0.6);
+    return matched >= minimumMatches;
+  };
+
   const scoreRecord = (record, query) => {
     const q = normalise(query);
     const terms = expandTerms(query);
@@ -232,6 +256,7 @@
       return eligible.filter(record => record.source === 'discovery').slice(0, 10).map(record => ({ record, score: 0 }));
     }
     return eligible
+      .filter(record => hasEnoughQueryCoverage(record, query))
       .map(record => ({ record, score: scoreRecord(record, query) }))
       .filter(item => item.score > 0)
       .sort((a, b) => b.score - a.score || String(a.record.title).localeCompare(String(b.record.title)))
