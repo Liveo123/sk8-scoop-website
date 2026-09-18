@@ -5,7 +5,7 @@
 .reader-header .nav a,.reader-nav-soon{font-size:.94rem}
 .reader-nav-soon{font-weight:800;opacity:.82;white-space:nowrap}
 .reader-nav-join{background:var(--orange)!important;box-shadow:0 8px 20px rgba(248,121,27,.2)!important}
-.reader-hero-photo{min-height:395px;background-image:url('images/mockup-hero.svg');background-size:cover;background-position:center;border-bottom:1px solid var(--line)}
+.reader-hero-photo{min-height:395px;background-image:url('images/sk8-miniature-hero-background-full.webp');background-size:cover;background-position:center;border-bottom:1px solid var(--line)}
 .reader-hero-shade{background:linear-gradient(90deg,rgba(255,250,240,.99) 0%,rgba(255,250,240,.94) 31%,rgba(255,250,240,.45) 50%,rgba(255,250,240,.02) 73%)}
 .reader-hero-overlay{min-height:395px}
 .reader-hero-copy{max-width:510px;padding:38px 0 34px}
@@ -20,9 +20,9 @@
 .reader-worth{padding-top:25px!important;padding-bottom:31px!important}
 .reader-card-grid{gap:18px}
 .reader-story-image{height:150px;padding:12px;background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#e8f1ed}
-.story-image-one{background-image:url('images/home-story-1-illustration.svg')}
+.story-image-one{background-image:url('images/home-story-1.webp')}
 .story-image-two{background-image:url('images/home-story-2.webp')}
-.story-image-three{background-image:url('images/home-story-3-illustration.svg')}
+.story-image-three{background-image:url('images/home-story-3.webp')}
 .reader-story-image span{padding:5px 9px;font-size:.66rem}
 .reader-story-body{padding:15px 16px 17px}
 .reader-story h3{font-size:1.31rem;line-height:1.12;margin-bottom:7px}
