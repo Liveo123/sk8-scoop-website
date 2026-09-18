@@ -249,16 +249,16 @@ Free/low-cost family/community event may be a GROW candidate only if the paid Gu
 
 Every result must contain the following in this order:
 
-1. **Your goal** — restate the desired customer action.
-2. **Do this first** — only when a prerequisite needs attention; can be “nothing obvious”.
-3. **What I would promote** — the specific offer/service/event/action, not the business in general.
-4. **SK8 recommendation** — TEST / GROW / FIX FIRST / WAIT / NOT A FIT / HUMAN REVIEW.
-5. **Why** — 1–3 concise reasons tied to the inputs.
+1. **SK8 recommendation** — TEST / GROW / FIX FIRST / WAIT / NOT A FIT / HUMAN REVIEW.
+2. **Your goal** — restate the desired customer action.
+3. **Next step** — say clearly what should happen next. If no prerequisite needs fixing, say the answers are ready for a small test pending suitability and availability. Do not use placeholder wording such as “nothing obvious”.
+4. **What to promote** — the specific offer/service/event/action, not the business in general. Write this as a complete sentence beginning with a capital letter.
+5. **Why this recommendation** — 1–3 concise reasons tied to the inputs.
 6. **Simpler alternative** — only where a real alternative exists. GROW can normally show TEST. TEST should not invent a cheaper paid product.
 7. **Timing** — practical campaign window, subject to inventory.
-8. **What SK8 creates** — reader-facing placement and label.
+8. **What SK8 prepares** — use conditional wording for FIX FIRST / WAIT / NOT A FIT so the result never implies a campaign is already going ahead.
 9. **What the advertiser provides/checks** — facts, destination, assets/rights, terms, factual approval.
-10. **Measurement** — SK8 interaction + advertiser-confirmed downstream outcome kept separate.
+10. **Measurement** — SK8 interaction + advertiser-confirmed downstream outcome kept separate. Use conditional wording when the campaign may not run.
 11. **No guarantee** — results are not guaranteed.
 
 ## Example decisions
