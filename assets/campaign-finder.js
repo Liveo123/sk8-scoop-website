@@ -16,23 +16,11 @@
     awareness: 'Build useful local awareness'
   };
 
-  const categoryLabels = {
-    hospitality: 'restaurant, pub, café or venue',
-    class: 'class, course or club',
-    family: 'children or family activity',
-    trade: 'trade, property or home service',
-    professional: 'professional or local service',
-    retail: 'shop or retail business',
-    fitness: 'fitness or wellbeing business',
-    event: 'event or experience',
-    other: 'local business'
-  };
-
   const timingLabels = {
     under7: 'within 7 days',
     weeks: 'within 1–4 weeks',
     months: 'within 1–3 months',
-    ongoing: 'as an ongoing objective'
+    ongoing: 'on an ongoing basis'
   };
 
   const valueLabels = {
@@ -100,16 +88,14 @@
   }
 
   function genericPromotion(v) {
-    const category = categoryLabels[v.category] || 'local business';
-    const action = {
-      book: 'one specific bookable proposition',
-      enquire: 'one specific service or problem you can solve',
-      visit: 'one concrete reason to visit now',
-      register: 'the dated class, course, event or registration opportunity',
-      buy: 'one specific product, bundle or genuine offer',
-      awareness: 'one clear reason local people should remember you'
-    }[v.goal] || 'one clear proposition';
-    return `${action} from your ${category}, rather than the business in general.`;
+    return {
+      book: 'A specific booking opportunity, such as a class, appointment, table, course place or event. Keep the advert focused on that booking reason, not the whole business.',
+      enquire: 'One specific service or problem that gives local readers a clear reason to enquire.',
+      visit: 'One timely reason to visit, such as an event, opening, special menu, launch or genuine offer.',
+      register: 'The specific class, course, event or other opportunity readers can register for.',
+      buy: 'One specific product, bundle or genuine offer with a clear reason to buy now.',
+      awareness: 'One memorable fact, service or local proposition you want readers to associate with the business.'
+    }[v.goal] || 'One clear proposition that gives local readers a useful reason to care.';
   }
 
   function recommendation(v) {
@@ -120,16 +106,16 @@
       value: valueLabels[v.value],
       state: 'test',
       badge: 'TEST',
-      title: 'TEST £40 is the sensible first route.',
+      title: 'Start with TEST £40.',
       price: '£40',
-      doFirst: 'Nothing obvious from these answers. The final suitability and availability check still comes before payment.',
+      doFirst: 'Your answers include a clear proposition and a practical next step for readers. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.',
       why: [
-        'A single newsletter placement can answer one useful question before you spend more.',
-        'Your proposition has a practical next action for readers.'
+        'TEST gives you one sponsored newsletter placement focused on one clear reader action.',
+        'It keeps the first spend small while giving you a defined campaign to learn from.'
       ],
       alternative: '',
       package: 'temp_test',
-      cta: 'Request this TEST route'
+      cta: 'Ask about TEST £40'
     };
 
     if (v.area === 'outside') {
@@ -137,10 +123,10 @@
         ...base,
         state: 'notfit',
         badge: 'NOT A FIT',
-        title: 'SK8 Scoop is probably not the right paid channel for this campaign.',
+        title: 'SK8 Scoop is unlikely to be the right paid channel for this campaign.',
         price: '',
-        doFirst: 'Put the budget where the audience is actually concentrated rather than widening SK8 Scoop’s geography to make the sale.',
-        why: ['Your customers are mainly outside the normal SK8 reader area.'],
+        doFirst: 'Use a channel whose audience is concentrated where most of your customers are. If the business has an unusually strong SK8 connection, ask for a manual fit check instead.',
+        why: ['You said most of your customers are outside SK8 Scoop’s normal reader area.'],
         alternative: '',
         package: '',
         cta: ''
@@ -154,26 +140,40 @@
         badge: 'HUMAN REVIEW',
         title: 'This needs a quick local-fit check first.',
         price: '',
-        doFirst: 'Let SK8 Scoop check whether the proposition is genuinely useful enough to core SK8 readers to justify widening the normal geography.',
-        why: ['The business is immediately nearby rather than squarely inside the core SK8 area.'],
+        doFirst: 'Ask SK8 Scoop to confirm that the offer is genuinely relevant to core SK8 readers before choosing a paid package.',
+        why: ['Your main customer area is nearby rather than inside the core SK8 area.'],
         alternative: '',
         package: '',
         cta: 'Ask SK8 Scoop to check the fit'
       };
     }
 
-    if (v.timing === 'under7') {
+    if (v.none) {
+      if (v.goal === 'awareness') {
+        return {
+          ...base,
+          state: 'fix',
+          badge: 'FIX FIRST',
+          title: 'Decide what you want local people to remember first.',
+          price: '',
+          doFirst: 'Choose one memorable proposition, service, opening, event, difference or local reason to care. Then the campaign can test something more specific than general awareness.',
+          why: ['You selected “None of these yet”, so there is not yet a specific message to test.'],
+          alternative: '',
+          package: '',
+          cta: ''
+        };
+      }
       return {
         ...base,
-        state: 'wait',
-        badge: 'WAIT / CHECK TIMING',
-        title: 'Do not pay until SK8 Scoop confirms there is enough lead time.',
+        state: 'fix',
+        badge: 'FIX FIRST',
+        title: 'Build the offer and the next step before paying for attention.',
         price: '',
-        doFirst: 'Check newsletter availability, creative time and your deadline. A good prospect can still be a bad campaign if it runs too late.',
-        why: ['The result matters within seven days, so timing is now the main constraint.'],
+        doFirst: 'Choose one concrete reason for readers to act, then give them one clear way to complete that action, such as a booking page, enquiry form, registration page, checkout or normal contact route.',
+        why: ['You selected “None of these yet”, so the campaign does not yet have a specific proposition or a working next step.'],
         alternative: '',
         package: '',
-        cta: 'Ask about urgent availability'
+        cta: ''
       };
     }
 
@@ -182,10 +182,10 @@
         ...base,
         state: 'fix',
         badge: 'FIX FIRST',
-        title: 'Make the next step easy before buying attention.',
+        title: 'Make it easy for readers to take the next step first.',
         price: '',
-        doFirst: 'Set up one working booking, enquiry, registration, purchase or normal phone/contact route that can complete the action.',
-        why: ['The campaign asks readers to act, but there is not yet a clear way for them to complete that action.'],
+        doFirst: 'Set up one working booking page, enquiry form, registration page, checkout, phone number or other normal contact route that can complete the action.',
+        why: ['You want readers to act, but your answers do not yet show a clear way for them to complete that action.'],
         alternative: '',
         package: '',
         cta: ''
@@ -197,10 +197,10 @@
         ...base,
         state: 'fix',
         badge: 'FIX FIRST',
-        title: 'Give readers a concrete reason to act before paying for a placement.',
+        title: 'Give readers a specific reason to act first.',
         price: '',
-        doFirst: 'Choose one bookable service, dated event, offer, launch, menu, course, limited-space opportunity or similarly clear proposition.',
-        why: ['A transactional goal with only generic awareness gives the TEST very little to test.'],
+        doFirst: 'Choose one bookable service, dated event, genuine offer, launch, menu, course, limited-place opportunity or similarly clear proposition.',
+        why: ['You want a transactional result, but the message is still too general to make a useful £40 test.'],
         alternative: '',
         package: '',
         cta: ''
@@ -212,37 +212,37 @@
         ...base,
         state: 'fix',
         badge: 'FIX FIRST',
-        title: 'Define what you want local people to remember.',
+        title: 'Decide what you want local people to remember first.',
         price: '',
-        doFirst: 'Turn “more awareness” into one memorable local proposition, service or reason to care. Then TEST can become a defined experiment rather than vague exposure.',
-        why: ['The goal is awareness but there is not yet a specific message to measure or learn from.'],
+        doFirst: 'Choose one memorable proposition, service, opening, event, difference or local reason to care. Then the campaign can test something more specific than general awareness.',
+        why: ['“More awareness” is too broad on its own to tell you what worked.'],
         alternative: '',
         package: '',
         cta: ''
+      };
+    }
+
+    if (v.timing === 'under7') {
+      return {
+        ...base,
+        state: 'wait',
+        badge: 'WAIT / CHECK TIMING',
+        title: 'Check timing before spending anything.',
+        price: '',
+        doFirst: 'Ask SK8 Scoop whether there is a suitable newsletter slot before your deadline. If not, wait for the next useful opportunity rather than running the campaign too late.',
+        why: ['You need the campaign to work within 7 days, so there may not be enough time to prepare, approve and publish it usefully.'],
+        alternative: '',
+        package: '',
+        cta: 'Check urgent availability'
       };
     }
 
     if (v.timing === 'ongoing' && v.goal === 'awareness') {
       base.why = [
-        'SK8 Scoop does not currently sell an automatic recurring-awareness subscription.',
-        'A defined one-off TEST can still answer whether this message earns local attention.'
+        'SK8 Scoop does not currently offer automatic recurring awareness placements.',
+        'A one-off TEST can still show whether one specific message earns useful local attention.'
       ];
-      base.doFirst = 'Treat this as one defined TEST rather than an open-ended advertising commitment.';
-    }
-
-    if (v.value === 'under20' && ['retail', 'hospitality'].includes(v.category) && !v.specific) {
-      return {
-        ...base,
-        state: 'fix',
-        badge: 'FIX FIRST',
-        title: 'Strengthen the economics before buying the advert.',
-        price: '',
-        doFirst: 'Create a useful bundle, event, booking proposition or genuine offer so the likely transaction value is not relying on a low-ticket generic purchase.',
-        why: ['The typical transaction is under £20 and there is no stronger proposition yet.'],
-        alternative: '',
-        package: '',
-        cta: ''
-      };
+      base.doFirst = 'Define one message and one thing you want to learn from a single TEST. Treat it as a one-off experiment rather than an open-ended awareness campaign.';
     }
 
     if (v.freecheap) {
@@ -250,25 +250,25 @@
         ...base,
         state: 'grow',
         badge: 'GROW CANDIDATE',
-        title: 'GROW £90 may be the best fit, subject to a Guide check.',
+        title: 'GROW £90 looks like the right route, subject to a Guide fit check.',
         price: '£90',
-        doFirst: 'SK8 Scoop must confirm that the proposition genuinely belongs in the Free & Cheap Guide. The checkbox alone does not guarantee that fit.',
+        doFirst: 'Before booking, SK8 Scoop will check that the free or low-cost proposition genuinely belongs in the Free & Cheap Guide.',
         why: [
-          'You have a specific action and working next step.',
-          'You have identified a genuinely free or low-cost proposition that may add a useful second reader context.'
+          'Your campaign has a specific proposition and a practical next step for readers.',
+          'The free or low-cost element could add a genuinely useful second context in the Free & Cheap Guide.'
         ],
-        alternative: 'TEST £40 remains the simpler alternative if one newsletter placement can answer the useful question on its own.',
+        alternative: 'If the Guide is not a genuine fit, TEST £40 is the simpler option: one sponsored newsletter placement.',
         package: 'temp_grow',
-        cta: 'Request a GROW fit check'
+        cta: 'Ask about GROW £90'
       };
     }
 
     if (v.value === 'under20') {
-      base.why.push('Because the typical value is under £20, keep the test small and judge it against real business outcomes rather than clicks alone.');
+      base.why.push('Because the typical customer value is under £20, keep the first test small and judge it against real business outcomes, not clicks alone.');
     } else if (v.value === 'unknown') {
-      base.why.push('Customer value is unknown, so keep the first spend small rather than pretending the economics are proven.');
+      base.why.push('Customer value is unknown, so keeping the first spend small reduces risk while you learn whether the campaign produces useful business outcomes.');
     } else {
-      base.why.push(`A typical customer value of ${base.value} makes a small first experiment commercially plausible, without implying guaranteed ROI.`);
+      base.why.push(`A typical customer value of ${base.value} makes a £40 first experiment proportionate, while results still remain uncertain.`);
     }
 
     return base;
@@ -297,13 +297,13 @@
       ${rec.price ? `<div class="finder-price">${rec.price}</div>` : ''}
       <dl>
         <div><dt>Your goal</dt><dd>${rec.goal}</dd></div>
-        <div><dt>Do this first</dt><dd>${rec.doFirst}</dd></div>
-        <div><dt>What I would promote</dt><dd>${rec.promote}</dd></div>
-        <div><dt>Why</dt><dd><ul>${reasons}</ul></dd></div>
+        <div><dt>Next step</dt><dd>${rec.doFirst}</dd></div>
+        <div><dt>What to promote</dt><dd>${rec.promote}</dd></div>
+        <div><dt>Why this recommendation</dt><dd><ul>${reasons}</ul></dd></div>
         ${alternative}
-        <div><dt>Timing</dt><dd>Your stated need is ${rec.timing}. Actual publication remains subject to availability and approval.</dd></div>
-        <div><dt>What SK8 Scoop does</dt><dd>Shapes the reader-facing paid placement, labels it clearly as commercial and sends it for factual approval.</dd></div>
-        <div><dt>What gets measured</dt><dd>SK8-measured response is kept separate from any enquiries, bookings or sales you can confirm afterwards.</dd></div>
+        <div><dt>Timing</dt><dd>You said this matters ${rec.timing}. Publication still depends on suitability, availability and approval.</dd></div>
+        <div><dt>What SK8 Scoop prepares</dt><dd>SK8 Scoop prepares the reader-facing paid placement, clearly labels it as advertising and sends the wording to you for factual approval before publication.</dd></div>
+        <div><dt>How success is measured</dt><dd>SK8 Scoop can measure response to the advert link. Keep that separate from enquiries, bookings or sales that only your business can confirm.</dd></div>
       </dl>
       <p class="fine">Advertising does not guarantee results or favourable editorial treatment.</p>
       <div class="finder-result-actions">${action}${secondary}</div>`;
