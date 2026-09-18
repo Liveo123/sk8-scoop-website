@@ -511,4 +511,4 @@ The previous sandbox webhook `we_1UGyrHJzdvodh5ZEPaFwNDmR` was disabled because 
 Cloudflare preview/production Stripe webhook secret split confirmed by owner on 18 September 2026.
 
 
-- Resend rotation check on 18 September 2026: replacement key `SK8 advertiser notifications production` exists; controlled advertiser notification was delivered successfully after the rotation step. Final proof of cutover still requires revoking the two older keys and repeating the delivery check.
+- Resend rotation completed on 18 September 2026: the two older API keys were revoked, only `SK8 advertiser notifications production` remains, and a fresh advertiser enquiry sent afterwards was confirmed delivered by Resend and present in the SK8 Scoop Gmail inbox. This proves the Cloudflare deployment is using the replacement credential.
