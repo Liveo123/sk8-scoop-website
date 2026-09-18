@@ -116,6 +116,19 @@ The desktop layout now shows the full navigation, search field and `Join free` w
 - Add a defensive removal in `assets/global-search.js` so article/other public headers also keep `Join free` as the single signup action.
 - Keep the full desktop navigation otherwise unchanged.
 
+### Finding 6 — header search relevance test
+
+The functional header-search test used `purple penguin Gatley`. Routing worked, the query reached the Search page and stayed populated, but the search engine returned eight Gatley results simply because one term (`Gatley`) matched. That is too permissive and would make zero-result demand data less trustworthy.
+
+**Fix:**
+
+- Add a multi-term query-coverage gate before ranking.
+- Ignore only a small set of generic search filler words when measuring coverage.
+- A one-word query still needs one meaningful match.
+- Multi-term queries must match at least 60% of meaningful query terms, with synonym groups counting as legitimate matches.
+- This keeps useful searches such as `Gatley walk`, `free kids` and `Heald Green planning` flexible while preventing one area word from rescuing an otherwise unrelated query such as `purple penguin Gatley`.
+- Add a source-contract QA assertion so the relevance gate cannot disappear silently.
+
 ### Preview-only observation
 
 Earlier screenshots also showed a Cloudflare challenge/Turnstile connection warning inside the newsletter signup area. That is separate from global search and should be treated as preview-environment behaviour unless it reproduces on the production domain.
