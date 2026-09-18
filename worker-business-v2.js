@@ -284,7 +284,7 @@ async function handleStripeWebhook(request, env, ctx) {
     await env.DB.prepare(`UPDATE advertiser_enquiries SET status='paid' WHERE id=? AND status IN ('pending','approved','payment_sent')`).bind(enquiryId).run();
 
     if (productionHost) {
-      const notificationJob = sendPaymentNotifications(env, {
+      const notifications = await sendPaymentNotifications(env, {
         enquiry,
         sessionId,
         campaignReference,
@@ -293,8 +293,12 @@ async function handleStripeWebhook(request, env, ctx) {
         currency,
         businessName
       });
-      if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(notificationJob);
-      else await notificationJob;
+      const retryNeeded = [notifications.owner, notifications.advertiser]
+        .filter(Boolean)
+        .some(result => !['sent', 'already_sent', 'skipped_invalid'].includes(String(result.status || '')));
+      if (retryNeeded) {
+        return json({ error: 'Payment recorded; notification delivery pending.' }, 500);
+      }
     }
   } else if (isPaid && !commercialTermsMatch) {
     console.error(`Stripe advertiser payment requires review: enquiry ${enquiryId}, package ${packageKey}, amount ${amount} ${currency}`);
@@ -407,7 +411,7 @@ async function sendPaymentNotifications(env, {
     'Next action: prepare the campaign creative, confirm facts/links with the advertiser, then complete normal publication approval.'
   ].join('\n');
 
-  await sendPaymentNotificationOnce(env, {
+  const owner = await sendPaymentNotificationOnce(env, {
     sessionId,
     type: 'owner_paid',
     to: CONTACT_INBOX,
@@ -417,7 +421,7 @@ async function sendPaymentNotifications(env, {
 
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(advertiserEmail)) {
     console.error(`Advertiser payment confirmation skipped: invalid enquiry email for #${enquiry.id}`);
-    return;
+    return { owner, advertiser: { status: 'skipped_invalid' } };
   }
 
   const greeting = contactName ? `Hi ${contactName},` : 'Hello,';
@@ -442,13 +446,14 @@ async function sendPaymentNotifications(env, {
     CONTACT_INBOX
   ].join('\n');
 
-  await sendPaymentNotificationOnce(env, {
+  const advertiser = await sendPaymentNotificationOnce(env, {
     sessionId,
     type: 'advertiser_paid',
     to: advertiserEmail,
     subject: `SK8 Scoop payment received - ${route}`,
     text: advertiserText
   });
+  return { owner, advertiser };
 }
 
 async function sendPaymentNotificationOnce(env, { sessionId, type, to, subject, text }) {
