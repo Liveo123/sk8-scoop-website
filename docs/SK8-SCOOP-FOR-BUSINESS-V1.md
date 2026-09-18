@@ -352,3 +352,30 @@ Guardrails:
 - unsuitable advertisers rejected
 
 The system succeeds when more suitable businesses enter, purchase with less admin, obtain enough evidence to make a sensible next decision, and a growing share of future revenue comes from repeat/referral/inbound rather than Paul restarting from zero each month.
+
+
+## 21. Runtime validation update — 18 September 2026
+
+Validated on the current post-NUE branch:
+
+- Cloudflare non-production builds now inject `RESEND_API_KEY` into preview Worker versions.
+- A labelled advertiser test completed the real preview POST path. The enquiry saved to D1 first and the wrapper then returned `notification_status: sent`.
+- Resend returned message ID `01a0b3d5-0208-7499-a9e4-1b5b5b688d65`.
+- Gmail confirmed delivery to `contact@sk8scoop.com` immediately afterwards.
+- The private advertiser-enquiries API returns HTTP 401 for an intentionally wrong bearer token. This proves the preview route is live and `ADMIN_TOKEN` is configured rather than missing.
+- Static checks, JavaScript syntax checks and the full branch-preview smoke suite pass after bringing the branch up to date with current main.
+- The one-time Resend smoke was removed after success so later PR updates cannot create repeat test enquiries or emails.
+- The permanent preview test keeps the non-destructive bad-token 401 check.
+
+Still human-gated before production merge:
+
+1. open the private advertiser inbox with the existing valid `ADMIN_TOKEN` and confirm the latest test enquiry renders correctly;
+2. visually review Campaign Finder, Christmas Eating Out acquisition page and the approval-gated payment page on the preview;
+3. final owner approval to merge/deploy;
+4. no additional advertiser outreach is authorised merely by the technical validation.
+
+Commercial pilot status:
+
+- Pointing Dog and Station House first contacts were sent on 15 September 2026;
+- Gmail threads had no replies when checked on 18 September;
+- the default follow-up point is about seven days, so no follow-up is due before roughly 22 September and every follow-up remains conditional on a fresh trigger/compliance/CRM check.
