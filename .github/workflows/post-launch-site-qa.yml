@@ -118,6 +118,19 @@ jobs:
           fi
           echo "OK Stripe webhook secret/signature gate: 400"
 
+      - name: One-time Resend rotation delivery probe
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+        run: |
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/advertiser-enquiry"
+          started="$(( $(date +%s%3N) - 5000 ))"
+          payload="$(printf '{"business_name":"SK8 Resend Rotation TEST 2026-09-18","contact_name":"SK8 Scoop","email":"contact@sk8scoop.com","phone":"","business_type":"Internal system test","area":"Cheadle","website":"https://www.sk8scoop.com/","package":"temp_test","preferred_date":"2026-10","advert_copy":"TEST ONLY - Resend credential rotation validation. No advertising booking required.","terms_accepted":"yes","company_fax":"","sk8_started_at":"%s"}' "$started")"
+          response="$(curl -fsSL --max-time 30 -X POST "$url" -H 'content-type: application/json' --data "$payload")"
+          printf '%s\n' "$response"
+          printf '%s' "$response" | grep -F 'Thank you'
+
 
 
   live-smoke:
