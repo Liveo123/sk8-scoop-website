@@ -3,6 +3,27 @@
   if (!main) return;
 
   const page = document.body.dataset.page || '';
+  const SUBSCRIBER_KEY = 'sk8_subscriber_recognition_v1';
+  const SUBSCRIBER_DAYS = 365;
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('utm_source') === 'sk8scoop' && params.get('utm_medium') === 'email') {
+    try {
+      localStorage.setItem(SUBSCRIBER_KEY, JSON.stringify({
+        version: 1,
+        recognised: true,
+        savedAt: new Date().toISOString(),
+        expiresAt: Date.now() + SUBSCRIBER_DAYS * 24 * 60 * 60 * 1000
+      }));
+    } catch (_) {}
+  }
+  const recognisedSubscriber = (() => {
+    try {
+      const value = JSON.parse(localStorage.getItem(SUBSCRIBER_KEY) || 'null');
+      return Boolean(value && value.version === 1 && value.recognised && value.expiresAt && Date.now() <= value.expiresAt);
+    } catch (_) {
+      return false;
+    }
+  })();
   const journeys = {
     'whats-on': {
       eyebrow: 'Next useful experience',
@@ -136,6 +157,13 @@
       credit: 'Photo: Benjamin Shaw, CC BY-SA 4.0'
     }
   };
+
+  if (recognisedSubscriber) {
+    main.querySelectorAll('a[data-nue-type="guide"]').forEach(link => {
+      const anchor = String(link.dataset.guideAnchor || '').trim();
+      link.href = '/free-cheap-guide/guide/' + (anchor ? `#${anchor}` : '');
+    });
+  }
 
   const photo = photoPanels[page];
   if (photo && !main.querySelector('[data-local-photo-panel]')) {
