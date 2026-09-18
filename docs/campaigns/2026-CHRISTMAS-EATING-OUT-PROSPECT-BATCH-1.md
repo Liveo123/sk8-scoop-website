@@ -1,7 +1,9 @@
 # Christmas Eating Out 2026: supervised prospect batch 1
 
 Date researched: 15 September 2026
-Status: internal research/draft only. **No outreach authorised.**
+Status: first supervised pair was authorised and sent on 15 September 2026. Remaining held prospects are not authorised for outreach.
+
+Gmail check on 18 September 2026: neither first-contact thread has a reply. The default follow-up rule is about seven days, so no follow-up is due before roughly 22 September, and only if the festive hook, CRM/suppression and contact classification still pass.
 
 This batch deliberately includes both eligible and held prospects to prove the system filters for commercial fit *and* contact/compliance confidence instead of turning every venue into a send target.
 
@@ -9,7 +11,7 @@ Canonical CRM duplicate check performed against `SK8 Scoop Advertising CRM v7 - 
 
 ## 1. The Pointing Dog, Cheadle Hulme
 
-**Status:** READY FOR PAUL REVIEW, not send-authorised
+**Status:** SENT 15 SEPTEMBER 2026 · AWAITING RESPONSE
 
 **Commercial fit score:** 95/100
 
@@ -50,11 +52,13 @@ Paul
 SK8 Scoop
 contact@sk8scoop.com
 
-**Before send:** re-open Christmas page, verify offer still live, re-check CRM/suppression, verify corporate contact classification and add the approved opt-out wording.
+**Sent record:** sent to the verified corporate venue inbox on 15 September 2026. The message included the approved opt-out sentence. No reply was present in the Gmail thread on 18 September.
+
+**Before any follow-up:** re-open the Christmas page, verify the offer is still live, re-check CRM/suppression and confirm the contact route remains appropriate.
 
 ## 2. The Station House, Cheadle Hulme
 
-**Status:** READY FOR PAUL REVIEW, not send-authorised
+**Status:** SENT 15 SEPTEMBER 2026 · AWAITING RESPONSE
 
 **Commercial fit score:** 95/100
 
@@ -95,7 +99,9 @@ Paul
 SK8 Scoop
 contact@sk8scoop.com
 
-**Before send:** verify current offer/deadline, identify the best verified corporate marketing/venue inbox, re-check CRM/suppression and add approved opt-out wording.
+**Sent record:** sent to the verified venue inbox on 15 September 2026. The message included the approved opt-out sentence. No reply was present in the Gmail thread on 18 September.
+
+**Before any follow-up:** verify the current offer/deadline, re-check CRM/suppression and confirm the inbox remains an appropriate corporate route.
 
 ## 3. The Hesketh, Cheadle Hulme
 
@@ -137,18 +143,17 @@ contact@sk8scoop.com
 
 # Batch decision
 
-This research leaves **two prospects ready for Paul's supervised review** and three correctly held back. That is preferable to manufacturing a five-business send list.
-
-If Paul approves the first supervised batch, the send candidates are:
+The first supervised pair was sent on 15 September 2026:
 
 1. Pointing Dog
 2. Station House
 
-Before either send, repeat the final four checks on the same day:
+As of the Gmail check on 18 September 2026, both threads still contain only the sent first-contact message. No follow-up should be sent merely because there is no reply yet. The default follow-up point is about seven days after first contact and remains conditional on a same-day re-check of the trigger, CRM/suppression and contact classification.
 
-1. current festive hook still live;
-2. canonical CRM duplicate/suppression check;
-3. recipient/entity classification and selected contact route;
-4. wording + opt-out/compliance check.
+Still held from this batch:
 
-No other prospect in this file is approved for cold electronic outreach at this stage.
+- The Hesketh
+- Cheshire Line Tavern
+- Oddfellows On The Park
+
+No held prospect in this file is approved for cold electronic outreach.
