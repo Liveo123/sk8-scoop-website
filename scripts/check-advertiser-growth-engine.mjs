@@ -22,7 +22,7 @@ assert(finderHtml.includes('noindex,follow'), 'Campaign Finder stays noindex dur
 for (const value of ['book','enquire','visit','register','buy','awareness']) {
   assert(finderHtml.includes(`value="${value}"`), `Campaign Finder includes ${value} goal`);
 }
-for (const name of ['category','area','timing','value','specific','route','freecheap']) {
+for (const name of ['category','area','timing','value','specific','route','freecheap','none']) {
   assert(finderHtml.includes(`name="${name}"`), `Campaign Finder includes ${name} input`);
 }
 for (const label of ['TEST £40','GROW £90','FIX FIRST','WAIT','NOT A FIT','HUMAN REVIEW']) {
