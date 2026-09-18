@@ -88,17 +88,21 @@ jobs:
           check_page '/planning/cheadle-eco-park/' 'Cheadle Eco Park'
           check_page '/kids-family/secondary-school-applications-2027/' '31 October 2026'
 
-      - name: One-time advertiser D1 and Resend retest
+      - name: Verify advertiser admin auth gate
         shell: bash
         env:
           HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
           slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
-          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/advertiser-enquiry"
-          payload='{"business_name":"SK8 Scoop TEST ONLY 2026-09-18","contact_name":"SK8 Scoop","email":"contact@sk8scoop.com","phone":"","business_type":"Internal system test","area":"Cheadle","website":"https://www.sk8scoop.com/","package":"temp_test","preferred_date":"2026-10","advert_copy":"TEST ONLY - automated preview retest after Cloudflare secret injection change. No advertising booking required.","terms_accepted":"yes"}'
-          response="$(curl -fsSL --max-time 30 -X POST "$url" -H 'content-type: application/json' --data "$payload")"
-          printf '%s\n' "$response"
-          printf '%s' "$response" | grep -F '"notification_status":"sent"'
+          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/advertiser-enquiries"
+          code="$(curl -sS --max-time 20 -o /tmp/advertiser-admin.json -w '%{http_code}' "$url" -H 'authorization: Bearer intentionally-wrong-test-token')"
+          if [ "$code" != "401" ]; then
+            echo "Expected advertiser admin auth gate to return 401, got $code"
+            cat /tmp/advertiser-admin.json || true
+            exit 1
+          fi
+          echo "OK advertiser admin auth gate: 401"
+
 
   live-smoke:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
