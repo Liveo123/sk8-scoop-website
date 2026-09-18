@@ -125,3 +125,22 @@ The three Issue 13 NUE experiments are instrumented with `data-experiment` marke
 - `issue13-harvested-whats-on`
 
 Do not retrospectively treat Issue 13 as a clean email A/B experiment. The delivery incident and recovery campaign remain part of the permanent analysis context.
+
+## Website-only harvest additions
+
+The first post-send pass leaned too heavily on material already present in the newsletter or Free & Cheap Guide. A second small Website Harvest pass now deliberately adds useful verified items that did **not** make either surface, so the website has some independent discovery value rather than merely mirroring them.
+
+Added to What’s On:
+- **Avatar: The Last Airbender Day** — Stockroom, 19 September at 11am; free; wider-Stockport family/pop-culture option.
+- **Sisters Islam Essentials** — Cheadle Masjid, starts 21 September, 7pm–8:30pm; free 10-week adult course.
+- **The Unfriend** — Heald Green Theatre, 29 September–3 October, 7:30pm; later-window local theatre option.
+
+Selection logic:
+- all three were verified/current;
+- none appeared in the Free & Cheap Guide;
+- all were omitted from the final Issue 13 newsletter;
+- two are core SK8 and one is a distinctive wider-Stockport option;
+- the additions improve What’s On breadth without padding the guide or manufacturing extra permanent pages.
+
+Do not infer a rule that every rejected newsletter candidate should be published on the website. Website-only additions still need independent utility, freshness, verification and local-fit checks.
+

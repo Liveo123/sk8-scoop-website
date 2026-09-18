@@ -1,19 +1,20 @@
 [
   {
-    "id": "heald-green-storytime-2026-09-19",
-    "title": "Storytime at Heald Green Library",
+    "id": "avatar-last-airbender-day-2026-09-19",
+    "title": "Avatar: The Last Airbender Day",
     "date": "2026-09-19",
     "time": "11:00",
-    "area": "Heald Green",
-    "venue": "Heald Green Library, Finney Lane, SK8 3JB",
+    "area": "Stockport",
+    "venue": "Stockroom, Merseyway Shopping Centre, Stockport, SK1 1PW",
     "cost": "Free",
     "category": "Family",
-    "description": "A free weekly pre-school story and rhyme session at Heald Green Library.",
+    "description": "A free Avatar-themed day with crafts, games, badge-making and a scavenger hunt. Fun for children and grown-up Avatar fans too.",
     "booking_url": "",
-    "source_url": "https://www.stockport.gov.uk/events?Page=28&datefrom=09%2F03%2F2026+00%3A00%3A00",
-    "verification": "OFFICIAL_CROSSCHECKED",
-    "checked": "2026-09-12",
-    "status": "verified"
+    "source_url": "https://www.stockroomsk.co.uk/events?free=true",
+    "verification": "OFFICIAL_FREE_EVENTS_LIST",
+    "checked": "2026-09-18",
+    "status": "verified",
+    "source_note": "Issue 13 verified candidate D045; not selected for the newsletter or Free & Cheap Guide."
   },
   {
     "id": "cheadle-coderdojo-60-2026-09-19",
@@ -32,6 +33,22 @@
     "status": "verified"
   },
   {
+    "id": "heald-green-storytime-2026-09-19",
+    "title": "Storytime at Heald Green Library",
+    "date": "2026-09-19",
+    "time": "11:00",
+    "area": "Heald Green",
+    "venue": "Heald Green Library, Finney Lane, SK8 3JB",
+    "cost": "Free",
+    "category": "Family",
+    "description": "A free weekly pre-school story and rhyme session at Heald Green Library.",
+    "booking_url": "",
+    "source_url": "https://www.stockport.gov.uk/events?Page=28&datefrom=09%2F03%2F2026+00%3A00%3A00",
+    "verification": "OFFICIAL_CROSSCHECKED",
+    "checked": "2026-09-12",
+    "status": "verified"
+  },
+  {
     "id": "visit-my-mosque-cheadle-2026-09-19",
     "title": "Visit My Mosque at Cheadle Masjid",
     "date": "2026-09-19",
@@ -45,22 +62,6 @@
     "source_url": "https://cheadlemasjid.org/events-activities/week/",
     "verification": "ORGANISER_CROSSCHECKED",
     "checked": "2026-09-18",
-    "status": "verified"
-  },
-  {
-    "id": "saturday-snack-down-2026-09-19",
-    "title": "Saturday Snack Down: Jungle Snack Down",
-    "date": "2026-09-19",
-    "time": "12:00",
-    "area": "Stockport",
-    "venue": "Stall 3 Market Hall, Market Place, SK1 1EW",
-    "cost": "Check listing",
-    "category": "Family",
-    "description": "A family-friendly monthly food event at Stockport Market with a jungle-themed edition.",
-    "booking_url": "",
-    "source_url": "https://www.stockport.gov.uk/events?Page=28&datefrom=09%2F03%2F2026+00%3A00%3A00",
-    "verification": "OFFICIAL_DIRECTORY_ONLY",
-    "checked": "2026-09-12",
     "status": "verified"
   },
   {
@@ -82,6 +83,22 @@
     "status": "verified"
   },
   {
+    "id": "saturday-snack-down-2026-09-19",
+    "title": "Saturday Snack Down: Jungle Snack Down",
+    "date": "2026-09-19",
+    "time": "12:00",
+    "area": "Stockport",
+    "venue": "Stall 3 Market Hall, Market Place, SK1 1EW",
+    "cost": "Check listing",
+    "category": "Family",
+    "description": "A family-friendly monthly food event at Stockport Market with a jungle-themed edition.",
+    "booking_url": "",
+    "source_url": "https://www.stockport.gov.uk/events?Page=28&datefrom=09%2F03%2F2026+00%3A00%3A00",
+    "verification": "OFFICIAL_DIRECTORY_ONLY",
+    "checked": "2026-09-12",
+    "status": "verified"
+  },
+  {
     "id": "avro-heritage-open-day-2026-09-20",
     "title": "Avro Heritage Museum free Heritage Open Day",
     "date": "2026-09-20",
@@ -96,6 +113,23 @@
     "verification": "OFFICIAL_EVENT_PAGE",
     "checked": "2026-09-18",
     "status": "verified"
+  },
+  {
+    "id": "sisters-islam-essentials-2026-09-21",
+    "title": "Sisters Islam Essentials",
+    "date": "2026-09-21",
+    "time": "19:00",
+    "area": "Heald Green",
+    "venue": "Cheadle Masjid, 377 Wilmslow Road, Heald Green",
+    "cost": "Free",
+    "category": "Community",
+    "description": "The first session of a free 10-week adult course covering the five pillars of Islam and the fundamental articles of faith, running 7pm to 8:30pm.",
+    "booking_url": "https://cheadlemasjid.org/events-activities/category/sisters-event/",
+    "source_url": "https://cheadlemasjid.org/events-activities/category/sisters-event/",
+    "verification": "ORGANISER_CROSSCHECKED",
+    "checked": "2026-09-18",
+    "status": "verified",
+    "source_note": "Issue 13 verified candidate D025; not selected for the newsletter or Free & Cheap Guide."
   },
   {
     "id": "these-shining-lives-players-theatre-2026-09-21",
@@ -162,5 +196,23 @@
     "verification": "ORGANISER_CROSSCHECKED",
     "checked": "2026-09-18",
     "status": "verified"
+  },
+  {
+    "id": "heald-green-the-unfriend-2026-09-29",
+    "title": "The Unfriend at Heald Green Theatre",
+    "date": "2026-09-29",
+    "end_date": "2026-10-03",
+    "time": "19:30",
+    "area": "Heald Green",
+    "venue": "Heald Green Theatre, Motcombe Grove, Heald Green, SK8 3TW",
+    "cost": "Check booking page",
+    "category": "Culture",
+    "description": "Steven Moffat's dark comedy thriller, staged by Heald Green Theatre from Tuesday 29 September to Saturday 3 October at 7:30pm.",
+    "booking_url": "https://www.hgtheatre.co.uk/upcoming-productions",
+    "source_url": "https://www.hgtheatre.co.uk/upcoming-productions",
+    "verification": "ORGANISER_CROSSCHECKED",
+    "checked": "2026-09-18",
+    "status": "verified",
+    "source_note": "Issue 13 verified candidate D034; not selected for the newsletter or Free & Cheap Guide."
   }
 ]
