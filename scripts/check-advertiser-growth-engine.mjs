@@ -45,6 +45,7 @@ const saveIndex = wrapper.indexOf('await siteWorker.fetch(request, env, ctx)');
 const notifyIndex = wrapper.indexOf('await notifyAdvertiserInbox');
 assert(saveIndex >= 0 && notifyIndex > saveIndex, 'D1-backed site handler completes before email notification');
 assert(!/£35|£110/.test(finderHtml + finderJs + opportunity), 'New growth-engine surfaces contain no legacy public prices');
+assert(!wrapper.includes('TEST DIAGNOSTIC') && !wrapper.includes('SK8 Scoop TEST ONLY'), 'Preview-only advertiser diagnostic response is not shipped');
 
 if (process.exitCode) process.exit(process.exitCode);
 console.log('Advertiser growth-engine static checks passed.');
