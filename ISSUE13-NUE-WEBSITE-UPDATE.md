@@ -107,3 +107,27 @@ Fixed expired What’s On entries; kept dates/costs/venues/action links from ver
 ## Measurement note
 
 Do not use Issue 13's early MailerLite results as a clean subject-line experiment. The ProtonMail incident and split recovery send are material confounders. Keep the delivery incident attached to any future Issue 13 analysis.
+
+
+## Gap-fix addendum — 18 September 2026
+
+A second source-of-truth pass found several material gaps after the first Issue 13 NUE release preparation. These are fixed on the follow-up branch before production approval:
+
+- the actual production Free & Cheap Guide HTML, not only its split source parts, is refreshed to 18 September;
+- expired 13 September material is removed from the production guide;
+- the guide now carries the Heald Green North History Walk and One Stop Away as durable entries plus a refreshed dated layer through early October;
+- Lifesavers availability is corrected to **currently full** in both What’s On data and guide source material, with readers told to check for cancellations or reopened places;
+- One Stop Away now has a durable SK8-owned field-guide page and the Outdoors/Around SK8 routes point into it;
+- site discovery/search data now includes the new Issue 13 Local History, Outdoors and Planning pages;
+- the human and XML sitemaps are aligned with the new owned pages and refreshed guide date;
+- the Heald Green Local Plan page now loads the component stylesheet required by the classes used in its existing approved layout.
+
+### Gap-fix QA
+
+Cycle 1 — structure and value: fixed the mismatch between source fragments and the real production guide, added the missing durable adventure destination, and avoided duplicating the larger #47/#48 post-send release.
+
+Cycle 2 — accuracy and reader experience: corrected the current Lifesavers capacity state; aligned guide, event data, search/discovery and navigation destinations; retained the Local Plan distinction between allocation and permission.
+
+Cycle 3 — final risk: run on the follow-up branch before the release PR. The branch must be based on current main, contain no expired event records before 19 September, have valid JSON, contain no placeholder/insecure links in changed reader-facing text files, and keep all new internal destinations resolvable.
+
+The already-sent email is not modified by these website/guide gap fixes.
