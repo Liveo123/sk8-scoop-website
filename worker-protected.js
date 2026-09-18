@@ -140,6 +140,10 @@ async function handleNewsletterSignup(request, env) {
     return json({ error: 'The human check did not complete. Please try again.' }, 403);
   }
 
+  if (String(verification.action || '') !== 'newsletter_signup') {
+    return json({ error: 'The human check was not valid for this signup. Please try again.' }, 403);
+  }
+
   const requestedKind = String(form.get('sk8_form_kind') || 'main');
   const kind = requestedKind === 'qr' ? 'qr' : requestedKind === 'guide' ? 'guide' : 'main';
 
