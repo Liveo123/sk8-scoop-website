@@ -506,3 +506,6 @@ Map either one to runtime `STRIPE_WEBHOOK_SECRET` only in the relevant deploy co
 - production deploy uses `STRIPE_WEBHOOK_SECRET_LIVE`.
 
 The previous sandbox webhook `we_1UGyrHJzdvodh5ZEPaFwNDmR` was disabled because its signing secret had been exposed during debugging. A replacement sandbox endpoint `we_1UGzQWJzdvodh5ZENLRbi04D` is active. Retrieve both new signing secrets directly in Stripe and copy them directly into Cloudflare. Do not paste them into chat or GitHub.
+
+
+Cloudflare preview/production Stripe webhook secret split confirmed by owner on 18 September 2026.
