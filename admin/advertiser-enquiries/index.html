@@ -49,7 +49,7 @@ const body=document.querySelector('[data-body]');
 const total=document.querySelector('[data-total]');
 const pending=document.querySelector('[data-pending]');
 const fmt=value=>{if(!value)return '';const d=new Date(String(value).replace(' ','T')+'Z');return Number.isNaN(d.getTime())?String(value):d.toLocaleString('en-GB',{dateStyle:'medium',timeStyle:'short'});};
-const packageLabel=value=>({temp_test:'TEST £40',temp_grow:'GROW £90'}[String(value||'')]||String(value||''));
+const packageLabel=value=>({temp_test:'TEST £40',temp_grow:'GROW £90',human_review:'LOCAL-FIT CHECK'}[String(value||'')]||String(value||''));
 const contact=row=>{
   const email=esc(row.email||'');
   const phone=esc(row.phone||'');
