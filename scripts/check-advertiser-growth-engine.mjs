@@ -55,6 +55,8 @@ assert(wrapper.includes('STRIPE_WEBHOOK_SECRET'), 'Stripe webhook requires its s
 assert(wrapper.includes('verifyStripeSignature'), 'Stripe webhook verifies signatures before recording payments');
 assert(wrapper.includes('advertiser_payments'), 'Stripe webhook records advertiser payments in D1');
 assert(wrapper.includes("status='paid'"), 'Successful Stripe payment marks the advertiser enquiry paid');
+assert(wrapper.includes("temp_test: 4000") && wrapper.includes("temp_grow: 9000"), 'Stripe webhook validates current TEST/GROW amounts before marking paid');
+assert(wrapper.includes("'review_required'"), 'Wrong Stripe amount is held for review rather than marked paid');
 assert(!wrapper.includes('/api/stripe-e2e-test-status'), 'Temporary Stripe E2E status endpoint is not shipped');
 assert(pay.includes('site-header'), 'Approved payment page uses the standard site header');
 
