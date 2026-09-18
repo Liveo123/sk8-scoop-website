@@ -152,6 +152,13 @@
     }
   }));
 
+  form.addEventListener('reset', () => {
+    window.setTimeout(() => {
+      setReviewMode(false);
+      if (localFitRoute) localFitRoute.hidden = true;
+    }, 0);
+  });
+
   /* The established backend already accepts the generic `bespoke` route.
      Keep the reader-facing value specific and useful, then map it only at submit time. */
   form.addEventListener('submit', () => {
