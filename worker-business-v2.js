@@ -147,9 +147,17 @@ async function handleStripeWebhook(request, env) {
     event.type === 'checkout.session.async_payment_succeeded' ||
     (event.type === 'checkout.session.completed' && session.payment_status === 'paid')
   );
-  const paymentStatus = isPaid ? 'paid' : event.type === 'checkout.session.async_payment_failed' ? 'failed' : event.type === 'checkout.session.expired' ? 'expired' : String(session.payment_status || 'pending');
+  const paymentStatus = isPaid
+    ? (commercialTermsMatch ? 'paid' : 'review_required')
+    : event.type === 'checkout.session.async_payment_failed'
+      ? 'failed'
+      : event.type === 'checkout.session.expired'
+        ? 'expired'
+        : String(session.payment_status || 'pending');
   const amount = Number.isFinite(Number(session.amount_total)) ? Math.max(0, Math.trunc(Number(session.amount_total))) : 0;
   const currency = String(session.currency || 'gbp').toLowerCase().slice(0, 10);
+  const expectedAmount = { temp_test: 4000, temp_grow: 9000 }[packageKey];
+  const commercialTermsMatch = currency === 'gbp' && amount === expectedAmount;
   const customerEmail = String((session.customer_details && session.customer_details.email) || session.customer_email || enquiry.email || '').trim().toLowerCase().slice(0, 200);
   const businessName = String((session.collected_information && session.collected_information.business_name) || enquiry.business_name || '').trim().slice(0, 180);
   const sessionId = String(session.id || '').slice(0, 120);
@@ -189,8 +197,10 @@ async function handleStripeWebhook(request, env) {
       isPaid ? new Date().toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, '') : null
     ).run();
 
-  if (isPaid) {
+  if (isPaid && commercialTermsMatch) {
     await env.DB.prepare(`UPDATE advertiser_enquiries SET status='paid' WHERE id=? AND status IN ('pending','approved','payment_sent')`).bind(enquiryId).run();
+  } else if (isPaid && !commercialTermsMatch) {
+    console.error(`Stripe advertiser payment requires review: enquiry ${enquiryId}, package ${packageKey}, amount ${amount} ${currency}`);
   }
 
   return json({ received: true });
