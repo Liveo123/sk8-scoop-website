@@ -110,6 +110,13 @@ This addresses the cause of the clipping rather than treating a normal desktop w
 
 Earlier screenshots also showed a Cloudflare challenge/Turnstile connection warning inside the newsletter signup area. That is separate from global search and should be treated as preview-environment behaviour unless it reproduces on the production domain.
 
+## Latest deployment verification
+
+- Exact preview head checked: `571636d0ec484618642c9f71a90d842ce046e8ef`.
+- Cloudflare branch deployment reports **Deployment successful** for that exact commit.
+- GitHub Actions on that exact commit: **Homepage V3 QA — success; Current content freshness — success; Post-launch site QA — success**.
+- This confirms the latest desktop-full-navigation breakpoint code is the version now available on the branch preview.
+
 ## Remaining human check
 
 After the latest preview deploys, recheck:
