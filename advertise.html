@@ -97,6 +97,8 @@
     <div class="ad-enquiry-guide"><div class="eyebrow">Tell us the goal</div><h2>You do not need a media brief.</h2><p>Send the useful message, the action you want local readers to take, and when it matters. SK8 Scoop can recommend TEST or GROW.</p><div class="ad-before-form"><span>BEFORE YOU START</span><ol><li>Know what you want a reader to do.</li><li>Have the useful facts, date or offer to hand.</li><li>Have a website, booking page or social link ready.</li><li>Tell us roughly when the campaign matters.</li></ol></div></div>
 
     <form class="form-card premium-form" action="/api/advertiser-enquiry" method="post" data-api-form data-form-kind="advertiser" data-success-event="advertising_enquiry_completed">
+      <label class="form-honeypot" aria-hidden="true">Leave this field empty<input name="company_fax" tabindex="-1" autocomplete="off"></label>
+      <input type="hidden" name="sk8_started_at" value="">
       <div class="ad-form-heading"><div><div class="eyebrow">Campaign enquiry</div><h2>Advertise with SK8 Scoop</h2></div><span>ABOUT 2 MINUTES</span></div>
       <p class="form-intro">TEST £40 or GROW £90. Payment is normally due only after scope and timing are agreed, and before the campaign starts.</p>
       <div class="field-grid"><label>Business name<input name="business_name" required></label><label>Your name<input name="contact_name" autocomplete="name" required></label></div>
