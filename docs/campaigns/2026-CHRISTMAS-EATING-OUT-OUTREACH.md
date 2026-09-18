@@ -79,3 +79,12 @@ Before turning a template into send-ready copy, record:
 - one reason not to contact, if any
 
 If any required field remains uncertain, keep the item in research rather than turning it into a send-ready message.
+
+
+## Standing weekday batch rule
+
+The active daily supervised outreach workflow may prepare up to five eligible prospects on each weekday. Preparation does not authorise sending.
+
+Before any prospect from this Christmas opportunity is included in a daily approval batch, repeat the trigger verification, CRM duplicate/suppression check and contact classification above. Held prospects remain held until the documented reason is resolved.
+
+Only messages explicitly approved by Paul may be sent. Approval does not carry over to the next day's batch.
