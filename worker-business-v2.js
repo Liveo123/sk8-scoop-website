@@ -8,23 +8,71 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') {
-      return handleAdvertiserEnquiryWithNotification(request, env, ctx);
+      return secureResponse(await handleAdvertiserEnquiryWithNotification(request, env, ctx), url);
     }
 
     if (url.pathname === '/api/advertiser-enquiries' && request.method === 'GET') {
-      return handleAdvertiserEnquiries(request, env);
+      return secureResponse(await handleAdvertiserEnquiries(request, env), url);
     }
 
     if (url.pathname === '/api/stripe-webhook' && request.method === 'POST') {
-      return handleStripeWebhook(request, env);
+      return secureResponse(await handleStripeWebhook(request, env), url);
     }
 
-    return siteWorker.fetch(request, env, ctx);
+    return secureResponse(await siteWorker.fetch(request, env, ctx), url);
   }
 };
 
+function secureResponse(response, url) {
+  const headers = new Headers(response.headers);
+  headers.set('x-content-type-options', 'nosniff');
+  headers.set('referrer-policy', 'strict-origin-when-cross-origin');
+  headers.set('permissions-policy', 'camera=(), microphone=(), geolocation=()');
+  headers.set('x-frame-options', 'DENY');
+  headers.set('content-security-policy', "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests");
+  if (url.hostname === 'www.sk8scoop.com' || url.hostname === 'sk8scoop.com') {
+    headers.set('strict-transport-security', 'max-age=31536000');
+  }
+  if (url.pathname.startsWith('/admin/') || url.pathname.startsWith('/advertise/pay/')) {
+    headers.set('cache-control', 'no-store');
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
 async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
+  const requestUrl = new URL(request.url);
+  const origin = request.headers.get('origin');
+  if (origin) {
+    try {
+      if (new URL(origin).origin !== requestUrl.origin) return json({ error: 'Invalid request origin.' }, 403);
+    } catch {
+      return json({ error: 'Invalid request origin.' }, 403);
+    }
+  }
+
   const notificationCopy = request.clone();
+  let screeningCopy;
+  try {
+    screeningCopy = await request.clone().json();
+  } catch {
+    screeningCopy = null;
+  }
+
+  if (screeningCopy) {
+    if (String(screeningCopy.company_fax || '').trim()) {
+      return json({ message: 'Thank you. Your campaign enquiry has been saved for suitability and availability checks.' });
+    }
+    const startedAt = Number(screeningCopy.sk8_started_at || 0);
+    const ageMs = Date.now() - startedAt;
+    if (!Number.isFinite(startedAt) || startedAt <= 0 || ageMs < 1200 || ageMs > 6 * 60 * 60 * 1000) {
+      return json({ error: 'Please refresh the page and try again.' }, 400);
+    }
+  }
+
   const response = await siteWorker.fetch(request, env, ctx);
   if (!response.ok) return response;
 
