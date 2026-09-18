@@ -366,13 +366,17 @@ Validated on the current post-NUE branch:
 - Static checks, JavaScript syntax checks and the full branch-preview smoke suite pass after bringing the branch up to date with current main.
 - The one-time Resend smoke was removed after success so later PR updates cannot create repeat test enquiries or emails.
 - The permanent preview test keeps the non-destructive bad-token 401 check.
+- `wrangler.toml` now declares the four critical runtime secrets as required, so a deployment should fail clearly rather than silently ship without them.
+- The preview-only diagnostic response used for the successful Resend test has been removed from the Worker before production.
+- Production deploy still needs the build-time `RESEND_API_KEY` injected into `wrangler deploy` (or the same key added as a runtime secret in Cloudflare). Build-time variables are not runtime variables.
 
 Still human-gated before production merge:
 
-1. open the private advertiser inbox with the existing valid `ADMIN_TOKEN` and confirm the latest test enquiry renders correctly;
-2. visually review Campaign Finder, Christmas Eating Out acquisition page and the approval-gated payment page on the preview;
-3. final owner approval to merge/deploy;
-4. no additional advertiser outreach is authorised merely by the technical validation.
+1. update the Cloudflare production deploy command so the build-time `RESEND_API_KEY` is uploaded with `wrangler deploy`, or add the same key as a runtime secret;
+2. open the private advertiser inbox with the existing valid `ADMIN_TOKEN` and confirm the latest test enquiry renders correctly;
+3. visually review Campaign Finder, Christmas Eating Out acquisition page and the approval-gated payment page on the preview;
+4. final owner approval to merge/deploy;
+5. no additional advertiser outreach is authorised merely by the technical validation.
 
 Commercial pilot status:
 
