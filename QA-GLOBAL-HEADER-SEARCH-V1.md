@@ -106,6 +106,16 @@ The next desktop screenshot showed Logo + Search + Menu even though the browser 
 
 This addresses the cause of the clipping rather than treating a normal desktop width as a tablet layout.
 
+### Finding 5 — final desktop screenshot
+
+The desktop layout now shows the full navigation, search field and `Join free` without clipping, which is the intended desktop behaviour. One redundant plain `Join` text link was still visible alongside the stronger `Join free` CTA.
+
+**Fix:**
+
+- Remove the plain Join item from the shared public-navigation rebuild in `assets/config.js`.
+- Add a defensive removal in `assets/global-search.js` so article/other public headers also keep `Join free` as the single signup action.
+- Keep the full desktop navigation otherwise unchanged.
+
 ### Preview-only observation
 
 Earlier screenshots also showed a Cloudflare challenge/Turnstile connection warning inside the newsletter signup area. That is separate from global search and should be treated as preview-environment behaviour unless it reproduces on the production domain.
