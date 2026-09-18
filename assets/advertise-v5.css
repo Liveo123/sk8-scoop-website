@@ -64,3 +64,5 @@ body.advertiser-page .premium-form .wide-button{font-size:.98rem!important;font-
   body.advertiser-page .ad-product-web .ad-price-quote{justify-self:start!important}
   body.advertiser-page .ad-product-web h3{max-width:none!important}
 }
+
+.form-honeypot{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;}

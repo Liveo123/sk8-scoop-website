@@ -16,9 +16,59 @@
   const goalLinks = [...document.querySelectorAll('[data-ad-goal]')];
   const packageJumps = [...document.querySelectorAll('[data-ad-package]')];
   const issueStat = document.querySelector('[data-stat="issuesPublished"]');
+  const startedAtField = form.querySelector('[name="sk8_started_at"]');
+  if (startedAtField) startedAtField.value = String(Date.now());
 
   if (issueStat && window.SK8_CONFIG?.publicStats?.issuesPublished) {
     issueStat.textContent = String(window.SK8_CONFIG.publicStats.issuesPublished);
+  }
+
+  const goalWrap = document.querySelector('.ad-goal-wrap');
+  if (goalWrap && !goalWrap.querySelector('[data-campaign-finder-link]')) {
+    const finderLink = document.createElement('a');
+    finderLink.href = '/advertise/finder/';
+    finderLink.className = 'button secondary';
+    finderLink.dataset.campaignFinderLink = 'true';
+    finderLink.textContent = 'Not sure? Use the 4-step Campaign Finder';
+    finderLink.style.marginTop = '0.8rem';
+    goalWrap.appendChild(finderLink);
+  }
+
+  const finderParams = new URLSearchParams(window.location.search);
+  const finderSource = finderParams.get('finder_source');
+  const finderPackage = finderParams.get('finder_package');
+  const finderGoal = finderParams.get('finder_goal');
+  const finderOpportunity = finderParams.get('finder_opportunity');
+  const allowedFinderPackages = new Set(['temp_test', 'temp_grow']);
+  const allowedFinderOpportunities = new Map([
+    ['christmas-eating-out', 'Christmas Eating Out 2026']
+  ]);
+  const allowedFinderGoals = new Set([
+    'Get bookings',
+    'Generate enquiries',
+    'Get more people to visit',
+    'Get registrations',
+    'Generate purchases or offer use',
+    'Build useful local awareness'
+  ]);
+
+  if (finderSource === 'campaign_finder') {
+    if (allowedFinderPackages.has(finderPackage)) {
+      const selected = packageInputs.find(input => input.value === finderPackage);
+      if (selected) selected.checked = true;
+    }
+
+    if (actionField && allowedFinderGoals.has(finderGoal) && !actionField.value.trim()) {
+      const opportunityLabel = allowedFinderOpportunities.get(finderOpportunity);
+      actionField.value = `Campaign Finder goal: ${finderGoal}.${opportunityLabel ? ` Opportunity: ${opportunityLabel}.` : ''} `;
+    }
+
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('advertiser_campaign_finder_handoff', {
+        route: allowedFinderPackages.has(finderPackage) ? finderPackage : 'review',
+        goal: allowedFinderGoals.has(finderGoal) ? finderGoal : 'unknown'
+      });
+    }
   }
 
   function scrollToForm(focusTarget) {

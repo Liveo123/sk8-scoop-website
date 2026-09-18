@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Advertiser enquiries | SK8 Scoop</title>
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <link rel="icon" href="/favicon.ico">
+</head>
+<body class="v7">
+<main id="main-content">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">Private operating view</div>
+      <h1>Advertiser enquiries</h1>
+      <p>Latest website enquiries saved to D1. This is an inbound queue only. Keep the main advertising CRM as the source of truth for prospecting, sales stages, campaigns and suppression.</p>
+      <div class="admin-tools">
+        <input type="password" data-admin-token placeholder="Cloudflare admin token" autocomplete="current-password" aria-label="Cloudflare admin token">
+        <button class="button" type="button" data-load>Load enquiries</button>
+      </div>
+      <p data-status class="fine" aria-live="polite">Enter the admin token configured in Cloudflare.</p>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap">
+      <div class="dashboard-grid">
+        <div class="metric"><span>Returned</span><strong data-total>0</strong></div>
+        <div class="metric"><span>Pending</span><strong data-pending>0</strong></div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Received</th><th>Business</th><th>Contact</th><th>Area</th><th>Goal / note</th><th>Timing</th><th>Route</th><th>Payment</th><th>Status</th></tr>
+          </thead>
+          <tbody data-body><tr><td colspan="9">Load enquiries to view records.</td></tr></tbody>
+        </table>
+      </div>
+      <p class="fine">Shows the latest 100 inbound records. Website enquiries should be checked against the main CRM before creating or updating a business record, to avoid duplicates.</p>
+    </div>
+  </section>
+</main>
+<script>
+const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const token=document.querySelector('[data-admin-token]');
+const status=document.querySelector('[data-status]');
+const body=document.querySelector('[data-body]');
+const total=document.querySelector('[data-total]');
+const pending=document.querySelector('[data-pending]');
+const fmt=value=>{if(!value)return '';const d=new Date(String(value).replace(' ','T')+'Z');return Number.isNaN(d.getTime())?String(value):d.toLocaleString('en-GB',{dateStyle:'medium',timeStyle:'short'});};
+const packageLabel=value=>({temp_test:'TEST £40',temp_grow:'GROW £90'}[String(value||'')]||String(value||''));
+const contact=row=>{
+  const email=esc(row.email||'');
+  const phone=esc(row.phone||'');
+  return `<strong>${esc(row.contact_name||'')}</strong><br><a href="mailto:${email}">${email}</a>${phone?`<br>${phone}`:''}`;
+};
+const route=row=>{
+  const url=String(row.website||'');
+  const safe=/^https?:\/\//i.test(url)?esc(url):'';
+  return safe?`<a href="${safe}" target="_blank" rel="noopener">Open site</a><br><small>${esc(packageLabel(row.package))}</small>`:esc(packageLabel(row.package));
+};
+const payment=row=>{
+  if(!row.payment_status) return '<span class="fine">Not paid</span>';
+  const amount=Number(row.amount_pence||0);
+  const money=amount>0?`£${(amount/100).toFixed(2)}`:'';
+  const ref=row.campaign_reference?`<br><small>${esc(row.campaign_reference)}</small>`:'';
+  const paid=row.paid_at?`<br><small>${esc(fmt(row.paid_at))}</small>`:'';
+  return `<strong>${esc(String(row.payment_status).toUpperCase())}</strong>${money?` · ${money}`:''}${ref}${paid}`;
+};
+document.querySelector('[data-load]').addEventListener('click',async()=>{
+  const value=token.value.trim();
+  if(!value){status.textContent='Enter the admin token first.';return;}
+  status.textContent='Loading…';
+  try{
+    const res=await fetch('/api/advertiser-enquiries',{headers:{authorization:`Bearer ${value}`}});
+    const data=await res.json();
+    if(!res.ok) throw new Error(data.error||'Could not load enquiries.');
+    total.textContent=String(data.returned||0);
+    pending.textContent=String((data.counts&&data.counts.pending)||0);
+    body.innerHTML=(data.rows||[]).length?(data.rows||[]).map(row=>`<tr><td>${esc(fmt(row.created_at))}</td><td><strong>#${esc(row.id||'')}</strong> · <strong>${esc(row.business_name||'')}</strong><br><small>${esc(row.business_type||'')}</small></td><td>${contact(row)}</td><td>${esc(row.area||'')}</td><td>${esc(row.advert_copy||'').replace(/\n/g,'<br>')}</td><td>${esc(row.preferred_date||'')}</td><td>${route(row)}</td><td>${payment(row)}</td><td>${esc(row.status||'')}</td></tr>`).join(''):'<tr><td colspan="9">No advertiser enquiries found.</td></tr>';
+    status.textContent='Loaded.';
+  }catch(err){status.textContent=err.message||'Could not load enquiries.';}
+});
+</script>
+</body>
+</html>

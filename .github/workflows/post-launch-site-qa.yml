@@ -21,6 +21,13 @@ jobs:
         run: node scripts/check-current-content.mjs
       - name: Check post-launch NUE contracts
         run: node scripts/check-post-launch-v2.mjs
+      - name: Check advertiser growth-engine JavaScript
+        run: |
+          if [ -f worker-business-v2.js ]; then node --check worker-business-v2.js; fi
+          if [ -f assets/campaign-finder.js ]; then node --check assets/campaign-finder.js; fi
+          if [ -f assets/advertise.js ]; then node --check assets/advertise.js; fi
+      - name: Check advertiser growth-engine contracts
+        run: node scripts/check-advertiser-growth-engine.mjs
 
   preview-smoke:
     if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/post-launch-nue-v2')
@@ -60,6 +67,9 @@ jobs:
           check_page '/submit-event/' 'action="/api/submit-event"'
           check_page '/business-submissions/' 'action="/api/business-submission"'
           check_page '/advertise.html' 'value="temp_test"'
+          check_page '/advertise/finder/' 'id="campaign-finder"'
+          check_page '/advertise/christmas-eating-out/' 'Promote Christmas bookings'
+          check_page '/advertise/pay/' 'Payment follows campaign approval'
           check_page '/around-sk8/' 'data-page="around-sk8"'
           check_page '/food-drink/' 'Food & Drink around SK8'
           check_page '/kids-family/' 'Kids & Family around SK8'
@@ -77,6 +87,37 @@ jobs:
           check_page '/planning/heald-green-east/' 'DC/095134'
           check_page '/planning/cheadle-eco-park/' 'Cheadle Eco Park'
           check_page '/kids-family/secondary-school-applications-2027/' '31 October 2026'
+
+      - name: Verify advertiser admin auth gate
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+        run: |
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/advertiser-enquiries"
+          code="$(curl -sS --max-time 20 -o /tmp/advertiser-admin.json -w '%{http_code}' "$url" -H 'authorization: Bearer intentionally-wrong-test-token')"
+          if [ "$code" != "401" ]; then
+            echo "Expected advertiser admin auth gate to return 401, got $code"
+            cat /tmp/advertiser-admin.json || true
+            exit 1
+          fi
+          echo "OK advertiser admin auth gate: 401"
+
+      - name: Verify Stripe webhook secret gate
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+        run: |
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/stripe-webhook"
+          code="$(curl -sS --max-time 20 -o /tmp/stripe-webhook.json -w '%{http_code}' -X POST "$url" -H 'content-type: application/json' --data '{}')"
+          if [ "$code" != "400" ]; then
+            echo "Expected unsigned Stripe webhook to return 400, got $code"
+            cat /tmp/stripe-webhook.json || true
+            exit 1
+          fi
+          echo "OK Stripe webhook secret/signature gate: 400"
+
 
   live-smoke:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -111,6 +152,9 @@ jobs:
           check_page 'https://www.sk8scoop.com/submit-event/' 'action="/api/submit-event"'
           check_page 'https://www.sk8scoop.com/business-submissions/' 'action="/api/business-submission"'
           check_page 'https://www.sk8scoop.com/advertise.html' 'value="temp_test"'
+          check_page 'https://www.sk8scoop.com/advertise/finder/' 'id="campaign-finder"'
+          check_page 'https://www.sk8scoop.com/advertise/christmas-eating-out/' 'Promote Christmas bookings'
+          check_page 'https://www.sk8scoop.com/advertise/pay/' 'Payment follows campaign approval'
           check_page 'https://www.sk8scoop.com/around-sk8/' 'data-page="around-sk8"'
           check_page 'https://www.sk8scoop.com/food-drink/' 'Food & Drink around SK8'
           check_page 'https://www.sk8scoop.com/kids-family/' 'Kids & Family around SK8'
@@ -145,6 +189,21 @@ jobs:
           expect_validation 'https://www.sk8scoop.com/api/reader-submission'
           expect_validation 'https://www.sk8scoop.com/api/submit-event'
           expect_validation 'https://www.sk8scoop.com/api/advertiser-enquiry'
+
+          stripe_code="$(curl -sS --max-time 20 -o /tmp/stripe-live.json -w '%{http_code}' -X POST 'https://www.sk8scoop.com/api/stripe-webhook' -H 'content-type: application/json' --data '{}')"
+          if [ "$stripe_code" != "400" ]; then
+            echo "Expected unsigned live Stripe webhook to return 400, got $stripe_code"
+            cat /tmp/stripe-live.json || true
+            exit 1
+          fi
+          echo "OK live Stripe webhook secret/signature gate: 400"
+
+          headers="$(curl -fsSL --max-time 20 -D - -o /dev/null 'https://www.sk8scoop.com/advertise/pay/' | tr -d '\r')"
+          printf '%s\n' "$headers" | grep -iq '^strict-transport-security:'
+          printf '%s\n' "$headers" | grep -iq '^x-content-type-options: nosniff'
+          printf '%s\n' "$headers" | grep -iq '^content-security-policy:'
+          printf '%s\n' "$headers" | grep -iq '^cache-control: no-store'
+          echo "OK production payment-page security headers"
 
           contact_code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' 'https://submit-form.com/X3MWnWHXI')"
           case "$contact_code" in
