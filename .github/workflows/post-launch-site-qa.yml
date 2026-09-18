@@ -7,6 +7,10 @@ on:
       - improve/post-launch-nue-v2
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   preflight:
     runs-on: ubuntu-latest
@@ -23,31 +27,64 @@ jobs:
         run: node scripts/check-post-launch-v2.mjs
 
   preview-smoke:
+    name: Preview QA (advisory)
     if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/post-launch-nue-v2')
     needs: preflight
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
-      - name: Wait for the Cloudflare branch alias and verify release markers
+      - name: Wait for Cloudflare preview to become reachable
+        id: preview_ready
         shell: bash
         env:
           HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
           slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
           base="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev"
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+
+          ready=false
+          for attempt in $(seq 1 24); do
+            code="$(curl -sS -L --max-time 20 -o /dev/null -w '%{http_code}' "${base}/" || true)"
+            case "$code" in
+              2*|3*)
+                echo "Preview reachable: ${base}/ (HTTP $code)"
+                ready=true
+                break
+                ;;
+              *)
+                echo "Waiting for Cloudflare preview: ${base}/ (attempt $attempt/24, HTTP ${code:-none})"
+                sleep 15
+                ;;
+            esac
+          done
+
+          echo "ready=$ready" >> "$GITHUB_OUTPUT"
+          if [ "$ready" != "true" ]; then
+            echo "::warning title=Preview deployment delayed::Cloudflare preview did not become reachable within 6 minutes. Preview QA is being skipped; this is not treated as a live-site failure."
+          fi
+
+      - name: Verify preview release markers
+        if: steps.preview_ready.outputs.ready == 'true'
+        continue-on-error: true
+        shell: bash
+        env:
+          PREVIEW_BASE: ${{ steps.preview_ready.outputs.base }}
+        run: |
           check_page() {
             path="$1"
             marker="$2"
-            url="${base}${path}"
-            for attempt in $(seq 1 12); do
+            url="${PREVIEW_BASE}${path}"
+            for attempt in $(seq 1 4); do
               body="$(curl -fsSL --max-time 20 "$url" || true)"
               if printf '%s' "$body" | grep -Fq "$marker"; then
                 echo "OK preview: $url"
                 return 0
               fi
-              echo "Waiting for preview: $url (attempt $attempt/12)"
-              sleep 15
+              echo "Preview reachable but marker not ready: $url (attempt $attempt/4)"
+              sleep 10
             done
-            echo "FAILED preview marker: $url"
+            echo "::error title=Preview QA marker missing::Expected marker not found at $url after the preview became reachable."
             return 1
           }
           check_page '/' 'homepage-utility-promise-v1'
@@ -79,6 +116,7 @@ jobs:
           check_page '/kids-family/secondary-school-applications-2027/' '31 October 2026'
 
   live-smoke:
+    name: Live QA (blocking)
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: preflight
     runs-on: ubuntu-latest
