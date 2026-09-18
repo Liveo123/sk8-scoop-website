@@ -62,7 +62,6 @@ assert(pay.includes('site-header'), 'Approved payment page uses the standard sit
 assert(wrapper.includes("x-content-type-options") && wrapper.includes("frame-ancestors 'none'"), 'Worker adds baseline browser security headers');
 assert(wrapper.includes("strict-transport-security"), 'Production SK8 domains receive HSTS');
 assert(wrapper.includes("company_fax") && wrapper.includes("sk8_started_at"), 'Advertiser submission applies bot screening');
-assert(finderHtml || true, 'Campaign Finder loaded for checks');
 
 
 
