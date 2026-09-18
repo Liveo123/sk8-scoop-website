@@ -12,6 +12,7 @@ const assert = (condition, message) => {
 
 const finderHtml = read('advertise/finder/index.html');
 const finderJs = read('assets/campaign-finder.js');
+const advertiseHtml = read('advertise.html');
 const advertiseJs = read('assets/advertise.js');
 const opportunity = read('advertise/christmas-eating-out/index.html');
 const pay = read('advertise/pay/index.html');
@@ -31,6 +32,8 @@ for (const label of ['TEST £40','GROW £90','FIX FIRST','WAIT','NOT A FIT','HUM
 assert(finderJs.includes("params.set('finder_source', 'campaign_finder')"), 'Finder hands recommendations to advertiser enquiry');
 assert(advertiseJs.includes("allowedFinderPackages = new Set(['temp_test', 'temp_grow'])"), 'Advertiser page only accepts current Finder package routes');
 assert(advertiseJs.includes('/advertise/finder/'), 'Advertiser page links to Campaign Finder');
+assert(advertiseHtml.includes('/advertise/finder/'), 'Main Advertise page visibly links to Campaign Finder');
+assert(advertiseHtml.includes('/advertise/christmas-eating-out/'), 'Main Advertise page visibly links to Christmas Eating Out');
 assert(opportunity.includes('/advertise/finder/?opportunity=christmas-eating-out'), 'Christmas acquisition page feeds Campaign Finder');
 assert(finderJs.includes("opportunity !== 'christmas-eating-out'"), 'Campaign Finder recognises the Christmas opportunity route');
 assert(finderJs.includes("category.value = 'hospitality'"), 'Christmas opportunity preselects hospitality');
