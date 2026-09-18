@@ -363,6 +363,7 @@ Validated on the current post-NUE branch:
 - Resend returned message ID `01a0b3d5-0208-7499-a9e4-1b5b5b688d65`.
 - Gmail confirmed delivery to `contact@sk8scoop.com` immediately afterwards.
 - The private advertiser-enquiries API returns HTTP 401 for an intentionally wrong bearer token. This proves the preview route is live and `ADMIN_TOKEN` is configured rather than missing.
+- A one-time preview-only self-test then exercised the same admin handler with the actual runtime `ADMIN_TOKEN` without exposing the token. The authenticated query succeeded and returned 11 advertiser-enquiry records. The temporary self-test route and workflow step were removed immediately afterwards.
 - Static checks, JavaScript syntax checks and the full branch-preview smoke suite pass after bringing the branch up to date with current main.
 - The one-time Resend smoke was removed after success so later PR updates cannot create repeat test enquiries or emails.
 - The permanent preview test keeps the non-destructive bad-token 401 check.
@@ -372,11 +373,13 @@ Validated on the current post-NUE branch:
 
 Still human-gated before production merge:
 
-1. update the Cloudflare production deploy command so the build-time `RESEND_API_KEY` is uploaded with `wrangler deploy`, or add the same key as a runtime secret;
-2. open the private advertiser inbox with the existing valid `ADMIN_TOKEN` and confirm the latest test enquiry renders correctly;
-3. visually review Campaign Finder, Christmas Eating Out acquisition page and the approval-gated payment page on the preview;
-4. final owner approval to merge/deploy;
-5. no additional advertiser outreach is authorised merely by the technical validation.
+1. visually review Campaign Finder, Christmas Eating Out acquisition page and the approval-gated payment page on the preview;
+2. final owner approval to merge/deploy;
+3. no additional advertiser outreach is authorised merely by the technical validation.
+
+Completed gates:
+- Cloudflare production Deploy command updated so the build-time `RESEND_API_KEY` is uploaded with `wrangler deploy`.
+- authenticated advertiser-inbox backend tested successfully with the actual runtime `ADMIN_TOKEN`; no token value was exposed.
 
 Commercial pilot status:
 
