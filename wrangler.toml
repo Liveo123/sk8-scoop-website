@@ -9,7 +9,7 @@ required = [ "ADMIN_TOKEN", "MAILERLITE_API_TOKEN", "TURNSTILE_SECRET_KEY", "RES
 [assets]
 directory = "."
 binding = "ASSETS"
-run_worker_first = [ "/api/*", "/free-cheap-guide/guide*" ]
+run_worker_first = [ "/api/*", "/free-cheap-guide/guide*", "/advertise/pay/*", "/admin/*" ]
 html_handling = "auto-trailing-slash"
 
 # Cloudflare will provision and bind a D1 database for this Worker.
