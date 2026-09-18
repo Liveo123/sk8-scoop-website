@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17",
+  "updated": "2026-09-18",
   "records": [
     {
       "id": "around-sk8",
@@ -9,7 +9,14 @@
       "summary": "A useful starting point for things to know, do and discover around SK8, organised around local changes, things to do and stories worth following.",
       "href": "/around-sk8/",
       "area": "All areas",
-      "tags": ["explore", "know", "do", "discover", "local stories", "things to do"],
+      "tags": [
+        "explore",
+        "know",
+        "do",
+        "discover",
+        "local stories",
+        "things to do"
+      ],
       "freshness": "current",
       "checked": "2026-09-17"
     },
@@ -21,7 +28,15 @@
       "summary": "Checked local events and things to do around Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby, with filters for today, the next seven days, the weekend, free and family ideas.",
       "href": "/whats-on/",
       "area": "All areas",
-      "tags": ["events", "today", "weekend", "family", "kids", "free", "things to do"],
+      "tags": [
+        "events",
+        "today",
+        "weekend",
+        "family",
+        "kids",
+        "free",
+        "things to do"
+      ],
       "freshness": "current",
       "checked": "2026-09-17"
     },
@@ -33,9 +48,18 @@
       "summary": "Local days out, treats and useful ideas around SK8 that cost little or nothing, with practical caveats kept visible.",
       "href": "/free-cheap-guide/",
       "area": "All areas",
-      "tags": ["free", "cheap", "budget", "low cost", "money saving", "family", "kids", "days out"],
+      "tags": [
+        "free",
+        "cheap",
+        "budget",
+        "low cost",
+        "money saving",
+        "family",
+        "kids",
+        "days out"
+      ],
       "freshness": "current",
-      "checked": "2026-09-12"
+      "checked": "2026-09-18"
     },
     {
       "id": "food-drink",
@@ -45,7 +69,16 @@
       "summary": "Useful local food and drink notes, including openings, changes, offers and nearby food events when there is something specific worth knowing.",
       "href": "/food-drink/",
       "area": "All areas",
-      "tags": ["food", "drink", "cafe", "café", "restaurant", "pub", "offers", "openings"],
+      "tags": [
+        "food",
+        "drink",
+        "cafe",
+        "café",
+        "restaurant",
+        "pub",
+        "offers",
+        "openings"
+      ],
       "freshness": "current",
       "checked": "2026-09-17"
     },
@@ -57,7 +90,15 @@
       "summary": "Useful family days out and activities around SK8, with free and lower-cost ideas surfaced first.",
       "href": "/kids-family/",
       "area": "All areas",
-      "tags": ["kids", "children", "family", "days out", "activities", "free", "cheap"],
+      "tags": [
+        "kids",
+        "children",
+        "family",
+        "days out",
+        "activities",
+        "free",
+        "cheap"
+      ],
       "freshness": "current",
       "checked": "2026-09-09"
     },
@@ -69,8 +110,25 @@
       "summary": "Stockport’s Year 7 application window is open for September 2027 entry. The initial deadline is 31 October 2026, with Offer Day on 1 March 2027.",
       "href": "/kids-family/secondary-school-applications-2027/",
       "area": "All areas",
-      "areas": ["Cheadle", "Cheadle Hulme", "Gatley", "Heald Green"],
-      "tags": ["secondary school", "school applications", "school admissions", "year 7", "2027", "parents", "31 october", "offer day", "stockport schools", "kids", "family"],
+      "areas": [
+        "Cheadle",
+        "Cheadle Hulme",
+        "Gatley",
+        "Heald Green"
+      ],
+      "tags": [
+        "secondary school",
+        "school applications",
+        "school admissions",
+        "year 7",
+        "2027",
+        "parents",
+        "31 october",
+        "offer day",
+        "stockport schools",
+        "kids",
+        "family"
+      ],
       "freshness": "dated",
       "checked": "2026-09-17",
       "expires": "2026-10-31"
@@ -83,9 +141,18 @@
       "summary": "Useful local walks, parks and outdoor ideas around SK8, starting with practical routes and easy local wins.",
       "href": "/outdoors/",
       "area": "All areas",
-      "tags": ["walk", "walks", "outdoors", "park", "parks", "fresh air", "route", "nature"],
+      "tags": [
+        "walk",
+        "walks",
+        "outdoors",
+        "park",
+        "parks",
+        "fresh air",
+        "route",
+        "nature"
+      ],
       "freshness": "current",
-      "checked": "2026-09-09"
+      "checked": "2026-09-18"
     },
     {
       "id": "gatley-carrs",
@@ -95,7 +162,19 @@
       "summary": "The local nature reserve, its Brookside Road access and the published 2.9-mile Ramblers circular route, kept separate so you know which start point you are following.",
       "href": "/outdoors/gatley-carrs/",
       "area": "Gatley",
-      "tags": ["gatley carrs", "walk", "walks", "nature reserve", "park", "outdoors", "free", "family", "dog walk", "brookside road", "ramblers"],
+      "tags": [
+        "gatley carrs",
+        "walk",
+        "walks",
+        "nature reserve",
+        "park",
+        "outdoors",
+        "free",
+        "family",
+        "dog walk",
+        "brookside road",
+        "ramblers"
+      ],
       "freshness": "current",
       "checked": "2026-09-09"
     },
@@ -107,9 +186,16 @@
       "summary": "Local history, oddities and the useful context behind places around Cheadle, Cheadle Hulme, Gatley and Heald Green.",
       "href": "/local-history/",
       "area": "All areas",
-      "tags": ["history", "local history", "old photos", "heritage", "discover", "stories"],
+      "tags": [
+        "history",
+        "local history",
+        "old photos",
+        "heritage",
+        "discover",
+        "stories"
+      ],
       "freshness": "evergreen",
-      "checked": "2026-09-17"
+      "checked": "2026-09-18"
     },
     {
       "id": "heald-green-spy-dambuster",
@@ -119,7 +205,16 @@
       "summary": "A local-history case file following two wartime threads around Heald Green Hotel: spy Marthe McKenna and RAF men including Guy Gibson.",
       "href": "/local-history/heald-green-spy-dambuster/",
       "area": "Heald Green",
-      "tags": ["history", "spy", "marthe mckenna", "guy gibson", "dambuster", "raf", "heald green hotel", "war"],
+      "tags": [
+        "history",
+        "spy",
+        "marthe mckenna",
+        "guy gibson",
+        "dambuster",
+        "raf",
+        "heald green hotel",
+        "war"
+      ],
       "freshness": "evergreen",
       "checked": "2026-09-17"
     },
@@ -131,7 +226,20 @@
       "summary": "The evidence behind Gatley’s oddest folklore story: an 1886 local expression, Fletcher Moss’s Victorian ghost tale, Jim Barrow and a stone nobody can now securely identify.",
       "href": "/local-history/gatley-shouter/",
       "area": "Gatley",
-      "tags": ["gatley shouter", "shouter of gatley", "gatley ghost", "ghost", "folklore", "fletcher moss", "jim barrow", "gatley carrs", "carr lane", "cross acres", "northenden", "local history"],
+      "tags": [
+        "gatley shouter",
+        "shouter of gatley",
+        "gatley ghost",
+        "ghost",
+        "folklore",
+        "fletcher moss",
+        "jim barrow",
+        "gatley carrs",
+        "carr lane",
+        "cross acres",
+        "northenden",
+        "local history"
+      ],
       "freshness": "evergreen",
       "checked": "2026-09-17"
     },
@@ -143,7 +251,17 @@
       "summary": "The old Cheadle North station building survives as the Cheshire Line Tavern: opened in 1866, renamed in 1950 and closed to passengers in 1964.",
       "href": "/local-history/cheadle-station-cheshire-line-tavern/",
       "area": "Cheadle",
-      "tags": ["cheadle station", "cheadle north", "railway", "train", "cheshire line tavern", "manchester road", "tiviot dale", "liverpool curve", "local history"],
+      "tags": [
+        "cheadle station",
+        "cheadle north",
+        "railway",
+        "train",
+        "cheshire line tavern",
+        "manchester road",
+        "tiviot dale",
+        "liverpool curve",
+        "local history"
+      ],
       "freshness": "evergreen",
       "checked": "2026-09-17"
     },
@@ -155,7 +273,17 @@
       "summary": "The story linking Heald Green’s 1959 MERcury telephone exchange, the Hg chemical symbol and Mercury Frog on Finney Lane.",
       "href": "/local-history/heald-green-mercury-frog/",
       "area": "Heald Green",
-      "tags": ["mercury frog", "giant frog", "heald green", "mercury", "telephone exchange", "phone code", "finney lane", "hg", "local history"],
+      "tags": [
+        "mercury frog",
+        "giant frog",
+        "heald green",
+        "mercury",
+        "telephone exchange",
+        "phone code",
+        "finney lane",
+        "hg",
+        "local history"
+      ],
       "freshness": "evergreen",
       "checked": "2026-09-17"
     },
@@ -167,9 +295,17 @@
       "summary": "Local planning, development and consultation updates with the place, deadline and practical meaning surfaced first.",
       "href": "/planning/",
       "area": "All areas",
-      "tags": ["planning", "development", "consultation", "roads", "traffic", "deadline", "council"],
+      "tags": [
+        "planning",
+        "development",
+        "consultation",
+        "roads",
+        "traffic",
+        "deadline",
+        "council"
+      ],
       "freshness": "current",
-      "checked": "2026-09-11"
+      "checked": "2026-09-18"
     },
     {
       "id": "heald-green-east",
@@ -179,7 +315,19 @@
       "summary": "Planning application DC/095134 proposes up to 675 homes north of Stanley Road and west of the A34. The outline application was still shown as pending when checked on 17 September 2026.",
       "href": "/planning/heald-green-east/",
       "area": "Heald Green",
-      "tags": ["heald green east", "675 homes", "housing", "planning", "development", "dc 095134", "dc/095134", "stanley road", "a34", "bloor homes", "outline application"],
+      "tags": [
+        "heald green east",
+        "675 homes",
+        "housing",
+        "planning",
+        "development",
+        "dc 095134",
+        "dc/095134",
+        "stanley road",
+        "a34",
+        "bloor homes",
+        "outline application"
+      ],
       "freshness": "current",
       "checked": "2026-09-17"
     },
@@ -191,7 +339,18 @@
       "summary": "The seven-acre Bird Hall Lane development is becoming six light-industrial units with a timber structural frame; the current completion target is March 2027.",
       "href": "/planning/cheadle-eco-park/",
       "area": "Cheadle",
-      "tags": ["cheadle eco park", "bird hall lane", "eco park", "business park", "development", "construction", "six units", "timber frame", "planning", "march 2027"],
+      "tags": [
+        "cheadle eco park",
+        "bird hall lane",
+        "eco park",
+        "business park",
+        "development",
+        "construction",
+        "six units",
+        "timber frame",
+        "planning",
+        "march 2027"
+      ],
       "freshness": "current",
       "checked": "2026-09-17"
     },
@@ -203,7 +362,17 @@
       "summary": "Stockport Council is consulting on a proposed 20mph speed-limit zone across the Nansen / Firs residential estate in Heald Green. The consultation closes on 24 September 2026.",
       "href": "/planning/nansen-firs-20mph/",
       "area": "Heald Green",
-      "tags": ["20mph", "20 mph", "speed limit", "traffic", "roads", "consultation", "planning", "nansen", "firs"],
+      "tags": [
+        "20mph",
+        "20 mph",
+        "speed limit",
+        "traffic",
+        "roads",
+        "consultation",
+        "planning",
+        "nansen",
+        "firs"
+      ],
       "freshness": "dated",
       "checked": "2026-09-11",
       "expires": "2026-09-24"
@@ -216,7 +385,17 @@
       "summary": "A Gatley proposal for No Waiting at Any Time restrictions near the junction after reports of blocked dropped crossings and reduced visibility. The initial consultation closes on 25 September 2026.",
       "href": "/planning/",
       "area": "Gatley",
-      "tags": ["gatley", "parking", "double yellow", "yellow lines", "consultation", "oakwood avenue", "beech avenue", "traffic", "roads"],
+      "tags": [
+        "gatley",
+        "parking",
+        "double yellow",
+        "yellow lines",
+        "consultation",
+        "oakwood avenue",
+        "beech avenue",
+        "traffic",
+        "roads"
+      ],
       "freshness": "dated",
       "checked": "2026-09-11",
       "expires": "2026-09-25"
@@ -229,7 +408,17 @@
       "summary": "Practical local changes around SK8 including roads, parking, travel and other status changes worth knowing about.",
       "href": "/updates/",
       "area": "All areas",
-      "tags": ["updates", "roads", "roadworks", "traffic", "travel", "parking", "bins", "practical", "changes"],
+      "tags": [
+        "updates",
+        "roads",
+        "roadworks",
+        "traffic",
+        "travel",
+        "parking",
+        "bins",
+        "practical",
+        "changes"
+      ],
       "freshness": "current",
       "checked": "2026-09-11"
     },
@@ -241,10 +430,141 @@
       "summary": "Church Road in Gatley, Church Road / Woods Lane in Cheadle Hulme and Finney Lane in Heald Green became charged council car parks from 8 January 2026. Check the live tariff before travelling.",
       "href": "/updates/",
       "area": "All areas",
-      "areas": ["Gatley", "Cheadle Hulme", "Heald Green"],
-      "tags": ["parking", "car park", "charges", "paid parking", "gatley", "cheadle hulme", "heald green", "church road", "woods lane", "finney lane"],
+      "areas": [
+        "Gatley",
+        "Cheadle Hulme",
+        "Heald Green"
+      ],
+      "tags": [
+        "parking",
+        "car park",
+        "charges",
+        "paid parking",
+        "gatley",
+        "cheadle hulme",
+        "heald green",
+        "church road",
+        "woods lane",
+        "finney lane"
+      ],
       "freshness": "current",
       "checked": "2026-09-11"
+    },
+    {
+      "id": "cheadle-war-memorial-air-raid-victims",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "The eight civilian names on Cheadle War Memorial",
+      "summary": "The source trail behind eight civilian air-raid victims on the rear plaque, connecting two fatal wartime raids to ordinary Cheadle streets.",
+      "href": "/local-history/cheadle-war-memorial-air-raid-victims/",
+      "area": "Cheadle",
+      "tags": [
+        "cheadle war memorial",
+        "air raid",
+        "air raid victims",
+        "bulkeley road",
+        "stockport road",
+        "world war two",
+        "ww2",
+        "local history"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-09-18"
+    },
+    {
+      "id": "heald-green-north-history-walk",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "Heald Green North History Walk",
+      "summary": "A roughly four-mile, two-hour walk joining 22 Heald Green history stops, with SK8 Scoop maps, highlights and practical route caveats.",
+      "href": "/local-history/heald-green-north-history-walk/",
+      "area": "Heald Green",
+      "tags": [
+        "heald green walk",
+        "history walk",
+        "walk",
+        "walks",
+        "outdoors",
+        "local history",
+        "22 stops",
+        "free"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-18"
+    },
+    {
+      "id": "one-stop-away",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "One Stop Away: a tiny SK8 adventure",
+      "summary": "Ride one local bus or train stop, walk back and spot three things you normally miss. Usually just the fare, with a 30–60 minute target.",
+      "href": "/outdoors/one-stop-away/",
+      "area": "All areas",
+      "areas": [
+        "Cheadle",
+        "Cheadle Hulme",
+        "Gatley",
+        "Heald Green"
+      ],
+      "tags": [
+        "tiny adventure",
+        "one stop",
+        "bus",
+        "train",
+        "walk",
+        "walking",
+        "outdoors",
+        "cheap",
+        "low cost",
+        "spotter"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-09-18"
+    },
+    {
+      "id": "heald-green-local-plan-2026",
+      "type": "Useful updates",
+      "category": "Planning & Development",
+      "title": "Heald Green in the Regulation 19 Local Plan",
+      "summary": "Three Heald Green housing allocations are listed at 790, 750 and 132 homes. This is a policy stage, not planning permission, with the formal response stage next.",
+      "href": "/planning/heald-green-local-plan-2026/",
+      "area": "Heald Green",
+      "tags": [
+        "local plan",
+        "regulation 19",
+        "housing",
+        "heald green east",
+        "heald green west",
+        "daisy bank",
+        "790 homes",
+        "750 homes",
+        "132 homes",
+        "planning"
+      ],
+      "freshness": "dated",
+      "checked": "2026-09-18",
+      "expires": "2026-11-08"
+    },
+    {
+      "id": "bramhall-park-road-toucan",
+      "type": "Useful updates",
+      "category": "Planning & Development",
+      "title": "Bramhall Park Road Toucan crossing proposal",
+      "summary": "Stockport Council proposes a Toucan crossing on Bramhall Park Road with controlled zig-zag parking markings. Comments close 23 September 2026.",
+      "href": "/planning/",
+      "area": "Nearby",
+      "tags": [
+        "bramhall park road",
+        "toucan crossing",
+        "consultation",
+        "traffic",
+        "walking",
+        "cycling",
+        "planning"
+      ],
+      "freshness": "dated",
+      "checked": "2026-09-18",
+      "expires": "2026-09-23"
     }
   ]
 }
