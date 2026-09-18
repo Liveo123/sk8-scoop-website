@@ -15,6 +15,20 @@ export default {
       return handleAdvertiserEnquiries(request, env);
     }
 
+    if (
+      url.pathname === '/api/advertiser-enquiries-selftest' &&
+      request.method === 'GET' &&
+      url.hostname === 'sk8-business-growth-engine-v2-sk8-scoop.quiet-term-e047.workers.dev'
+    ) {
+      const internalRequest = new Request(new URL('/api/advertiser-enquiries', url), {
+        headers: { authorization: `Bearer ${String(env.ADMIN_TOKEN || '')}` }
+      });
+      const check = await handleAdvertiserEnquiries(internalRequest, env);
+      if (!check.ok) return json({ ok: false, status: check.status }, 500);
+      const data = await check.json();
+      return json({ ok: true, returned: Number(data.returned || 0) });
+    }
+
     return siteWorker.fetch(request, env, ctx);
   }
 };
