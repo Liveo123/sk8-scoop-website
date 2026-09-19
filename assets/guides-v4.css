@@ -1,0 +1,280 @@
+/* Guides V4 — full-bleed card media, 19 Sep 2026.
+   Fixes letterboxed live-guide artwork and upgrades developing-guide visuals. */
+
+body[data-page="guides"] .guide-grid{
+  gap:18px!important;
+}
+
+body[data-page="guides"] .guide-card{
+  overflow:hidden!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 12px 28px rgba(19,45,49,.07)!important;
+}
+
+/* One deliberate landscape media frame for every guide card. */
+body.reader-page[data-page="guides"] .guide-visual{
+  position:relative!important;
+  display:block!important;
+  min-height:0!important;
+  height:210px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border-bottom:1px solid #d9e1dd!important;
+  background:#eaf2ef!important;
+  isolation:isolate!important;
+}
+
+body.reader-page[data-page="guides"] .guide-visual:before,
+body.reader-page[data-page="guides"] .guide-visual:after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Available guides: use real imagery full bleed instead of small logos floating in empty panels. */
+body.reader-page[data-page="guides"] .guide-photo-media .guide-media-photo,
+body.reader-page[data-page="guides"] .guide-art-media .guide-media-photo{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  object-fit:cover!important;
+  transform:none!important;
+}
+
+body.reader-page[data-page="guides"] .guide-free .guide-media-photo{
+  object-position:center 48%!important;
+}
+
+body.reader-page[data-page="guides"] .guide-summer .guide-media-photo{
+  object-position:center 50%!important;
+}
+
+body.reader-page[data-page="guides"] .guide-secrets .guide-media-photo{
+  object-position:center!important;
+}
+
+/* Readable label over photography, kept compact so the image still does the work. */
+body[data-page="guides"] .guide-photo-media:after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:auto 0 0!important;
+  height:58%!important;
+  background:linear-gradient(180deg,rgba(7,63,72,0),rgba(7,63,72,.78))!important;
+  z-index:1!important;
+  pointer-events:none!important;
+}
+
+body[data-page="guides"] .guide-media-caption{
+  position:absolute;
+  left:20px;
+  right:110px;
+  bottom:18px;
+  z-index:2;
+  color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.22);
+}
+
+body[data-page="guides"] .guide-media-caption small{
+  display:block;
+  margin-bottom:5px;
+  color:#d6ea00;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+body[data-page="guides"] .guide-media-caption strong{
+  display:block;
+  color:#fff;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.65rem;
+  line-height:1;
+  letter-spacing:-.025em;
+}
+
+/* Status chips sit cleanly inside the media frame. */
+body.reader-page[data-page="guides"] .guide-status,
+body.reader-page[data-page="guides"] .guide-free .guide-status,
+body.reader-page[data-page="guides"] .guide-summer .guide-status{
+  position:absolute!important;
+  top:16px!important;
+  left:16px!important;
+  right:auto!important;
+  z-index:4!important;
+  padding:7px 10px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#073f48!important;
+  color:#fff!important;
+  box-shadow:0 5px 12px rgba(7,63,72,.16)!important;
+  font-size:.61rem!important;
+  font-weight:900!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+
+body.reader-page[data-page="guides"] .guide-status.orange{
+  background:#7b5a1f!important;
+  color:#fff!important;
+}
+
+/* 50 Secrets uses its existing purpose-built artwork full bleed. */
+body.reader-page[data-page="guides"] .guide-secrets{
+  background:#0b3d45!important;
+}
+
+body[data-page="guides"] .guide-secrets-board,
+body[data-page="guides"] .guide-secrets-chips,
+body[data-page="guides"] .guide-secrets-note{
+  display:none!important;
+}
+
+/* Future transport guide: purpose-built full-frame editorial route graphic, not a small card floating in a card. */
+body.reader-page[data-page="guides"] .guide-transport{
+  background:
+    radial-gradient(circle at 90% 15%,rgba(214,234,0,.16),transparent 30%),
+    linear-gradient(135deg,#073f48 0%,#0f6470 58%,#164f57 100%)!important;
+}
+
+body[data-page="guides"] .guide-transport-scene{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:34px 28px 24px;
+  color:#fff;
+}
+
+body[data-page="guides"] .guide-transport-scene small{
+  display:block;
+  margin-bottom:8px;
+  color:#d6ea00;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.13em;
+}
+
+body[data-page="guides"] .guide-transport-scene>strong{
+  display:block;
+  max-width:14ch;
+  margin:0 0 22px;
+  color:#fff;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.8rem;
+  line-height:1.02;
+  letter-spacing:-.03em;
+}
+
+body[data-page="guides"] .guide-route-line{
+  display:grid;
+  grid-template-columns:16px 1fr 16px 1fr 16px 1fr 16px;
+  align-items:center;
+  width:min(100%,430px);
+}
+
+body[data-page="guides"] .guide-route-line span{
+  display:block;
+  width:16px;
+  height:16px;
+  box-sizing:border-box;
+  border:4px solid #fff;
+  border-radius:50%;
+  background:#f8791b;
+  box-shadow:0 0 0 4px rgba(255,255,255,.08);
+}
+
+body[data-page="guides"] .guide-route-line i{
+  display:block;
+  height:3px;
+  background:rgba(255,255,255,.72);
+}
+
+body[data-page="guides"] .guide-route-places{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  width:min(100%,430px);
+  margin-top:9px;
+}
+
+body[data-page="guides"] .guide-route-places b{
+  color:#e9f3ef;
+  font-size:.58rem;
+  font-weight:800;
+  line-height:1.15;
+}
+
+body[data-page="guides"] .guide-route-places b:nth-child(2),
+body[data-page="guides"] .guide-route-places b:nth-child(3){
+  text-align:center;
+}
+
+body[data-page="guides"] .guide-route-places b:last-child{
+  text-align:right;
+}
+
+body[data-page="guides"] .guide-route-board{
+  display:none!important;
+}
+
+/* Keep the body compact so media and content feel like one card. */
+body[data-page="guides"] .guide-body{
+  padding:21px 22px 22px!important;
+}
+
+@media(max-width:900px){
+  body.reader-page[data-page="guides"] .guide-visual{
+    height:200px!important;
+  }
+}
+
+@media(max-width:700px){
+  body[data-page="guides"] .guide-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  body.reader-page[data-page="guides"] .guide-visual{
+    height:205px!important;
+  }
+
+  body[data-page="guides"] .guide-media-caption{
+    left:18px;
+    right:92px;
+    bottom:16px;
+  }
+
+  body[data-page="guides"] .guide-media-caption strong{
+    font-size:1.5rem;
+  }
+
+  body[data-page="guides"] .guide-transport-scene{
+    padding:32px 20px 22px;
+  }
+}
+
+@media(max-width:430px){
+  body.reader-page[data-page="guides"] .guide-visual{
+    height:190px!important;
+  }
+
+  body[data-page="guides"] .guide-transport-scene>strong{
+    margin-bottom:17px;
+    font-size:1.55rem;
+  }
+
+  body[data-page="guides"] .guide-route-places b{
+    font-size:.53rem;
+  }
+}
