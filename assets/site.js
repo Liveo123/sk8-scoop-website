@@ -73,7 +73,8 @@ const conversionPageLabel=()=>{
     advertise:'Advertise',
     preferences:'Preferences',
     'business-submissions':'Business Submissions',
-    'submit-event':'Submit Event'
+    'submit-event':'Submit Event',
+    '52-adventures':'52 Adventures'
   }[page]||labelOrFallback(location.pathname.replace(/^\/+|\/+$/g,'').split('/').filter(Boolean).pop()||'Homepage','Homepage');
 };
 const searchSourceFromHost=host=>{
@@ -355,7 +356,8 @@ const sk8PageEventName=()=>{
     'submit-event':'event_submission_page_visit',
     'whats-on':'whats_on_page_visit',
     'summer-guide-success':'summer_guide_signup_completed',
-    'signup-success':'signup_completed'
+    'signup-success':'signup_completed',
+    '52-adventures':'52_adventures_visit'
   }[page]||'';
 };
 const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(name);};
@@ -513,7 +515,7 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
       sk8Track('sign_up',{method:'MailerLite',form_position:formPosition,signup_source:signupSource,acquisition_channel:attribution.acquisition_channel,signup_campaign:attribution.signup_campaign||'(none)'});
       form.dispatchEvent(new CustomEvent('sk8:mailerlite-success',{bubbles:true,detail:{result}}));
       status.className='signup-status show success';status.textContent='You’re in. Opening the welcome page…';
-      const success=form.matches('[data-qr-form]')?'/qr-success/':'/signup-success/';
+      const success=form.dataset.successUrl||(form.matches('[data-qr-form]')?'/qr-success/':'/signup-success/');
       window.setTimeout(()=>location.assign(success),350);
     }catch(error){
       sk8Track('form_error',{form_kind:'newsletter_signup',form_position:form.dataset.formPosition||'unknown',error_type:'mailerlite_rejected_or_unreadable'});
