@@ -1,0 +1,87 @@
+name: Publish approved Free and Cheap Guide maintenance 2026-09-19
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-free-cheap-guide-2026-09-19.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish-guide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply approved 19 September maintenance update exactly
+        shell: bash
+        run: |
+          python - <<'PY2'
+          from pathlib import Path
+          import re, hashlib, gzip, base64, subprocess
+
+          path = Path('free-cheap-guide/guide/index.html')
+          text = path.read_text(encoding='utf-8')
+          pattern = re.compile(r'data:image/[^;]+;base64,[A-Za-z0-9+/=]+')
+          images = []
+          def repl(m):
+              i = len(images)
+              images.append(m.group(0))
+              return f'__SK8_IMG_{i}__'
+          normal = pattern.sub(repl, text)
+
+          if len(images) != 10:
+              raise SystemExit(f'Expected 10 embedded images, found {len(images)}')
+
+          expected_before = '75757ebf13d8947cfa6a6010097a9ae0fdb605b240dcda658e55ae89cbcf71b2'
+          actual_before = hashlib.sha256(normal.encode('utf-8')).hexdigest()
+          if actual_before != expected_before:
+              raise SystemExit(f'Current live guide no longer matches approved 12 September base. SHA={actual_before}')
+
+          patch_b64 = """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"""
+          patch = gzip.decompress(base64.b64decode(patch_b64))
+          Path('/tmp/guide-normal.html').write_text(normal, encoding='utf-8')
+          Path('/tmp/guide.patch').write_bytes(patch)
+          subprocess.run(['patch', '/tmp/guide-normal.html', '/tmp/guide.patch'], check=True)
+
+          updated = Path('/tmp/guide-normal.html').read_text(encoding='utf-8')
+          for i, image in enumerate(images):
+              token = f'__SK8_IMG_{i}__'
+              if token not in updated:
+                  raise SystemExit(f'Missing image placeholder {token} after patch')
+              updated = updated.replace(token, image, 1)
+          if '__SK8_IMG_' in updated:
+              raise SystemExit('Unrestored image placeholder remains')
+
+          marker = '<script src="/assets/free-cheap-guide-analytics.js" defer></script>'
+          if updated.count(marker) != 1:
+              raise SystemExit('Analytics marker missing or duplicated')
+
+          final = updated.encode('utf-8')
+          expected_size = 22696744
+          expected_sha = 'f2ef3d71cac5d78a9d54200f4cd1296bc45f4dc7b44c26839255a07372ef73f5'
+          if len(final) != expected_size:
+              raise SystemExit(f'Unexpected final size: {len(final)}')
+          actual_sha = hashlib.sha256(final).hexdigest()
+          if actual_sha != expected_sha:
+              raise SystemExit(f'Unexpected final SHA256: {actual_sha}')
+
+          path.write_bytes(final)
+          print('Approved maintained guide verified:', len(final), actual_sha)
+          PY2
+
+      - name: Commit approved maintained guide
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add free-cheap-guide/guide/index.html
+          if git diff --cached --quiet; then
+            echo "Guide already matches the approved 19 September 2026 maintenance build."
+            exit 0
+          fi
+          git commit -m "Publish Free & Cheap Guide maintenance - 19 September 2026"
+          git push origin HEAD:main
