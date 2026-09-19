@@ -1,5 +1,9 @@
 name: Post-launch site QA
 
+permissions:
+  contents: read
+  checks: read
+
 on:
   pull_request:
   push:
