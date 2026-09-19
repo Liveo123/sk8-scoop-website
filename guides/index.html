@@ -1,6 +1,6 @@
 <!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SK8 Scoop Guides | Useful local guides around SK8</title><meta name="description" content="Browse SK8 Scoop guides for useful local ideas, cheaper days out, local secrets and seasonal plans around Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby SK8."><link rel="canonical" href="https://www.sk8scoop.com/guides/"><link rel="stylesheet" href="../assets/styles.css"><link rel="stylesheet" href="../assets/reader-pages.css"><link rel="stylesheet" href="../assets/secondary-pages.css"><link rel="stylesheet" href="../assets/reader-page-polish.css"><link rel="stylesheet" href="../assets/gateway-pages-v2.css"><link rel="stylesheet" href="../assets/review-fixes-v1.css"><link rel="stylesheet" href="../assets/qa-fixes-v1.css"><link rel="stylesheet" href="../assets/guides-v3.css"><style id="guide-card-media-v5">
 /* Guide card media V5 — inline on purpose so the critical card composition cannot be lost to stylesheet caching/cascade. */
-body.reader-page[data-page="guides"] .guide-card{overflow:hidden!important}
+body.reader-page[data-page="guides"] .guide-card{overflow:hidden!important;padding:0!important}
 body.reader-page[data-page="guides"] .guide-visual.v5-media{
   position:relative!important;display:block!important;width:100%!important;height:232px!important;min-height:232px!important;
   padding:0!important;overflow:hidden!important;border-bottom:1px solid #d9e1dd!important;isolation:isolate!important;background:#0f6470!important
@@ -8,19 +8,26 @@ body.reader-page[data-page="guides"] .guide-visual.v5-media{
 body.reader-page[data-page="guides"] .guide-visual.v5-media:before,
 body.reader-page[data-page="guides"] .guide-visual.v5-media:after{display:none!important;content:none!important}
 body.reader-page[data-page="guides"] .v5-media .guide-status{
-  position:absolute!important;top:16px!important;left:16px!important;right:auto!important;z-index:8!important;
+  position:absolute!important;top:14px!important;left:auto!important;right:14px!important;z-index:8!important;
   margin:0!important;padding:7px 11px!important;border:0!important;border-radius:999px!important;
   background:#073f48!important;color:#fff!important;box-shadow:0 5px 13px rgba(7,63,72,.22)!important;
   font-size:.61rem!important;font-weight:900!important;line-height:1!important;letter-spacing:.08em!important;text-transform:uppercase!important
 }
 body.reader-page[data-page="guides"] .v5-media .guide-status.orange{background:#73531d!important;color:#fff!important}
+body.reader-page[data-page="guides"] .guide-body .guide-status-inline{
+  position:static!important;display:inline-flex!important;align-self:flex-start!important;width:auto!important;
+  margin:0 0 11px!important;padding:6px 9px!important;border:0!important;border-radius:999px!important;
+  background:#073f48!important;color:#fff!important;box-shadow:none!important;
+  font-size:.59rem!important;font-weight:900!important;line-height:1!important;letter-spacing:.08em!important;text-transform:uppercase!important
+}
+body.reader-page[data-page="guides"] .guide-body .guide-status-inline.orange{background:#73531d!important;color:#fff!important}
 
 /* Free & Cheap: deliberately crop into the existing guide artwork so there is no logo-floating-in-space effect. */
 body.reader-page[data-page="guides"] .v5-free{background:#073f48!important}
 body.reader-page[data-page="guides"] .v5-free>img{
-  position:absolute!important;z-index:0!important;left:-18%!important;top:-18%!important;width:136%!important;height:136%!important;
+  position:absolute!important;z-index:0!important;inset:0!important;width:100%!important;height:100%!important;
   max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
-  object-fit:cover!important;object-position:center!important;filter:saturate(.97) contrast(1.03)!important
+  object-fit:cover!important;object-position:50% 50%!important;filter:saturate(.97) contrast(1.03)!important
 }
 body.reader-page[data-page="guides"] .v5-free .v5-shade{
   position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,rgba(7,63,72,.80) 0%,rgba(7,63,72,.32) 48%,rgba(7,63,72,.06) 75%)
@@ -40,13 +47,13 @@ body.reader-page[data-page="guides"] .v5-summer{
   background:linear-gradient(160deg,#f7f4df 0%,#e9f2e9 100%)!important
 }
 body.reader-page[data-page="guides"] .v5-summer .v5-summer-logo{
-  position:absolute!important;z-index:3!important;left:50%!important;top:52%!important;
-  transform:translate(-50%,-50%) scale(2.18)!important;
-  transform-origin:center!important;
-  display:block!important;width:78%!important;height:auto!important;
+  position:absolute!important;z-index:3!important;inset:0!important;
+  transform:none!important;transform-origin:center!important;
+  display:block!important;width:100%!important;height:100%!important;
   max-width:none!important;max-height:none!important;
   margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
-  background:transparent!important;box-shadow:none!important;object-fit:contain!important
+  background:transparent!important;box-shadow:none!important;
+  object-fit:cover!important;object-position:50% 52%!important
 }
 
 /* Secrets: full-frame editorial graphic, no small board floating inside a blank card. */
@@ -69,17 +76,15 @@ body.reader-page[data-page="guides"] .v5-secrets small{
 body.reader-page[data-page="guides"] .v5-secrets strong{
   display:block;max-width:12ch;color:#fff;font-family:Georgia,"Times New Roman",serif;font-size:2.05rem;line-height:.96;letter-spacing:-.035em
 }
-body.reader-page[data-page="guides"] .v5-secret-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-body.reader-page[data-page="guides"] .v5-secret-tags span{
-  padding:6px 8px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.09);
-  color:#fff;font-size:.60rem;font-weight:800;letter-spacing:.02em
-}
-
-/* Getting Around: robust semantic route graphic. No external image dependency, no invented route numbers. */
+/* Getting Around: editorial typography, not a generic route/node diagram. */
 body.reader-page[data-page="guides"] .v5-transport{
   background:
-    radial-gradient(circle at 86% 20%,rgba(214,234,0,.15),transparent 29%),
-    linear-gradient(135deg,#073f48 0%,#0f6470 58%,#0a505a 100%)!important;color:#fff
+    radial-gradient(circle at 88% 18%,rgba(214,234,0,.14),transparent 30%),
+    linear-gradient(135deg,#073f48 0%,#0f6470 60%,#0a505a 100%)!important;color:#fff
+}
+body.reader-page[data-page="guides"] .v5-transport-watermark{
+  position:absolute;z-index:0;right:16px;bottom:-30px;color:rgba(255,255,255,.065);
+  font:900 9.5rem/.85 Arial,sans-serif;letter-spacing:-.08em;pointer-events:none
 }
 body.reader-page[data-page="guides"] .v5-transport .v5-transport-content{
   position:absolute;z-index:2;left:22px;right:22px;top:58px;bottom:20px;display:flex;flex-direction:column;justify-content:flex-end
@@ -88,25 +93,19 @@ body.reader-page[data-page="guides"] .v5-transport small{
   display:block;margin-bottom:7px;color:#d6ea00;font-size:.62rem;font-weight:900;letter-spacing:.13em
 }
 body.reader-page[data-page="guides"] .v5-transport strong{
-  display:block;max-width:13ch;color:#fff;font-family:Georgia,"Times New Roman",serif;font-size:1.92rem;line-height:.98;letter-spacing:-.03em
+  display:block;max-width:13ch;color:#fff;font-family:Georgia,"Times New Roman",serif;font-size:2rem;line-height:.96;letter-spacing:-.035em
 }
-body.reader-page[data-page="guides"] .v5-route{
-  display:grid;grid-template-columns:14px 1fr 14px 1fr 14px 1fr 14px;align-items:center;width:min(100%,410px);margin-top:17px
-}
-body.reader-page[data-page="guides"] .v5-route span{
-  width:14px;height:14px;box-sizing:border-box;border:3px solid #fff;border-radius:50%;background:#f8791b;box-shadow:0 0 0 4px rgba(255,255,255,.07)
-}
-body.reader-page[data-page="guides"] .v5-route i{height:3px;background:rgba(255,255,255,.72)}
-body.reader-page[data-page="guides"] .v5-route-labels{
-  display:flex;justify-content:space-between;gap:8px;width:min(100%,410px);margin-top:9px;color:#e5f0ed;font-size:.57rem;font-weight:800
+body.reader-page[data-page="guides"] .v5-transport .v5-transport-sub{
+  margin-top:13px;max-width:31ch;color:#e5f0ed;font-size:.72rem;font-weight:800;line-height:1.35
 }
 
 @media(max-width:700px){
   body.reader-page[data-page="guides"] .guide-visual.v5-media{height:205px!important;min-height:205px!important}
-  body.reader-page[data-page="guides"] .v5-free>img{left:-23%!important;top:-23%!important;width:146%!important;height:146%!important}
+  body.reader-page[data-page="guides"] .v5-free>img{inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 50%!important}
   body.reader-page[data-page="guides"] .v5-free-copy strong{font-size:1.55rem}
-  body.reader-page[data-page="guides"] .v5-summer .v5-summer-logo{width:82%!important;max-height:none!important;transform:translate(-50%,-50%) scale(2.02)!important}
+  body.reader-page[data-page="guides"] .v5-summer .v5-summer-logo{width:100%!important;height:100%!important;transform:none!important;object-fit:cover!important;object-position:50% 52%!important}
   body.reader-page[data-page="guides"] .v5-secrets strong{font-size:1.72rem}
   body.reader-page[data-page="guides"] .v5-transport strong{font-size:1.65rem}
+  body.reader-page[data-page="guides"] .v5-transport-watermark{font-size:7.2rem;right:10px;bottom:-20px}
 }
-</style><link rel="icon" href="/favicon.ico"></head><body class="reader-page" data-page="guides"><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header reader-header"><div class="wrap header-row"><a class="brand" href="../index.html" aria-label="SK8 Scoop home"><img src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop"></a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button><nav class="nav" id="main-nav" aria-label="Main navigation"><a href="../index.html">Home</a><a href="../whats-on/">What’s On</a><a class="active" aria-current="page" href="../guides/">Guides</a><a href="../start/">Where to start</a><a href="../join/">Join</a><a href="../submit/">Submit</a><a href="../contact/">Contact</a><a href="../advertise.html">Advertise</a><a class="button nav-join reader-nav-join" href="../join/">Join free</a></nav></div></header><main id="main-content"><section class="page-hero"><div class="wrap"><div class="eyebrow">Useful local shortcuts</div><h1>Guides for doing more around SK8 without the endless searching.</h1><p class="hero-lead">Practical local guides for days out, family plans, cheaper ideas, local secrets and seasonal things worth knowing.</p></div></section><section class="reader-content"><div class="wrap"><div class="guide-finder-board" aria-label="Guide finder"><div class="guide-finder-intro"><small>GUIDE FINDER</small><strong>Start with what you need.</strong></div><a class="guide-finder-cell" href="#free-cheap"><b>SAVE</b><span>Free &amp; Cheap</span><small>Available now →</small></a><a class="guide-finder-cell" href="#summer"><b>SEASONAL</b><span>Summer ideas</span><small>Available now →</small></a><a class="guide-finder-cell is-development" href="#secrets"><b>DISCOVER</b><span>50 Secrets</span><small>See what’s developing ↓</small></a><a class="guide-finder-cell is-development" href="#getting-around"><b>GET AROUND</b><span>Practical routes</span><small>See what’s planned ↓</small></a></div><div class="guide-grid"><article class="guide-card" id="free-cheap"><div class="guide-visual v5-media v5-free"><img src="../assets/images/free-cheap-landing-hero.webp" alt="" loading="lazy" decoding="async"><div class="v5-shade" aria-hidden="true"></div><div class="v5-free-copy"><small>EVERGREEN GUIDE</small><strong>Free &amp; Cheap</strong></div><span class="guide-status">Available now</span></div><div class="guide-body"><h3>Free &amp; Cheap Things to Do</h3><p class="reader-meta">Evergreen guide · Fully updated 12 September 2026</p><p>A practical year-round collection of genuinely useful free and low-cost ideas around SK8, Stockport and a few nearby trips worth making.</p><a class="button" href="../free-cheap-guide/">Get the Free &amp; Cheap Guide</a></div></article><article class="guide-card" id="summer"><div class="guide-visual v5-media v5-summer"><img class="v5-summer-logo" src="../assets/summer-guide.png" alt="SK8 Summer Guide" loading="lazy" decoding="async"><span class="guide-status">Available now</span></div><div class="guide-body"><h3>SK8 Summer Guide</h3><p class="reader-meta">Family ideas · Summer 2026</p><p>Free and cheaper activities, rainy-day fallbacks, parks, local events and practical school-holiday ideas.</p><a class="button" href="../summer-guide.html">View the Summer Guide</a></div></article><article class="guide-card" id="secrets"><div class="guide-visual v5-media v5-secrets" role="img" aria-label="50 Secrets of SK8: hidden places, lost stories, local mysteries and folklore"><div class="v5-secret-number" aria-hidden="true">50</div><div class="v5-secret-content"><small>FIELD NOTES · LOCAL ODDITIES</small><strong>50 Secrets of SK8</strong><div class="v5-secret-tags" aria-hidden="true"><span>Hidden places</span><span>Lost stories</span><span>Local mysteries</span><span>Folklore</span></div></div><span class="guide-status orange">In development</span></div><div class="guide-body"><h3>50 Secrets of SK8</h3><p class="reader-meta">Hidden places · Local mysteries · Folklore</p><p>Hidden paths, vanished buildings, strange landmarks, forgotten stories, fairies, witches, ghosts and other mysteries hiding in plain sight around SK8.</p><span class="reader-link" aria-disabled="true">Coming soon</span></div></article><article class="guide-card" id="getting-around"><div class="guide-visual v5-media v5-transport" role="img" aria-label="Getting around SK8: future guide to trains, buses, walking, cycling and useful routes"><div class="v5-transport-content"><small>GETTING AROUND SK8</small><strong>Local routes. Less faff.</strong><div class="v5-route" aria-hidden="true"><span></span><i></i><span></span><i></i><span></span><i></i><span></span></div><div class="v5-route-labels" aria-hidden="true"><span>Train + bus</span><span>Walk + cycle</span><span>Useful routes</span></div></div><span class="guide-status orange">Coming later</span></div><div class="guide-body"><h3>More practical local guides</h3><p class="reader-meta">Transport · Routes · Getting around</p><p>Clear practical guides to trains, buses, walking, cycling, driving and getting around SK8.</p><a class="reader-link" href="../join/">Get new guides by email →</a></div></article></div><div class="guides-principle"><div class="eyebrow">Why guides?</div><h2>Useful enough to bookmark. Short enough to use.</h2><p>SK8 Scoop guides are meant to save time rather than become giant directories. The strongest local options get organised into practical pages with dates, prices and useful details where relevant.</p></div></div></section></main><footer class="site-footer"><div class="wrap footer-grid footer-grid-wide"><div class="footer-brand-block"><img class="footer-logo" src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><p>The useful, the local and the mildly nosy.</p></div><div class="footer-links"><strong>Read</strong><a href="/latest">Latest Scoop</a><a href="/guides/">Guides</a><a href="/archive.html">Archive</a></div><div class="footer-links"><strong>Take part</strong><a href="/submit/">Submit</a><a href="/contact/">Contact</a></div><div class="footer-links"><strong>Trust</strong><a href="/editorial-policy.html">Editorial policy</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div></div></footer><script src="../assets/config.js"></script><script src="../assets/site.js"></script></body></html>
+</style><link rel="icon" href="/favicon.ico"></head><body class="reader-page" data-page="guides"><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header reader-header"><div class="wrap header-row"><a class="brand" href="../index.html" aria-label="SK8 Scoop home"><img src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop"></a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button><nav class="nav" id="main-nav" aria-label="Main navigation"><a href="../index.html">Home</a><a href="../whats-on/">What’s On</a><a class="active" aria-current="page" href="../guides/">Guides</a><a href="../start/">Where to start</a><a href="../join/">Join</a><a href="../submit/">Submit</a><a href="../contact/">Contact</a><a href="../advertise.html">Advertise</a><a class="button nav-join reader-nav-join" href="../join/">Join free</a></nav></div></header><main id="main-content"><section class="page-hero"><div class="wrap"><div class="eyebrow">Useful local shortcuts</div><h1>Guides for doing more around SK8 without the endless searching.</h1><p class="hero-lead">Practical local guides for days out, family plans, cheaper ideas, local secrets and seasonal things worth knowing.</p></div></section><section class="reader-content"><div class="wrap"><div class="guide-finder-board" aria-label="Guide finder"><div class="guide-finder-intro"><small>GUIDE FINDER</small><strong>Start with what you need.</strong></div><a class="guide-finder-cell" href="#free-cheap"><b>SAVE</b><span>Free &amp; Cheap</span><small>Available now →</small></a><a class="guide-finder-cell" href="#summer"><b>SEASONAL</b><span>Summer ideas</span><small>Available now →</small></a><a class="guide-finder-cell is-development" href="#secrets"><b>DISCOVER</b><span>50 Secrets</span><small>See what’s developing ↓</small></a><a class="guide-finder-cell is-development" href="#getting-around"><b>GET AROUND</b><span>Getting around SK8</span><small>See what’s planned ↓</small></a></div><div class="guide-grid"><article class="guide-card" id="free-cheap"><div class="guide-visual v5-media v5-free"><img src="../assets/images/free-cheap-landing-hero.webp" alt="" width="1200" height="900" loading="lazy" decoding="async"><div class="v5-shade" aria-hidden="true"></div><div class="v5-free-copy"><small>EVERGREEN GUIDE</small><strong>Free &amp; Cheap</strong></div></div><div class="guide-body"><span class="guide-status guide-status-inline">Available now</span><h3>Free &amp; Cheap Things to Do</h3><p class="reader-meta">Evergreen guide · Fully updated 12 September 2026</p><p>A practical year-round collection of genuinely useful free and low-cost ideas around SK8, Stockport and a few nearby trips worth making.</p><a class="button" href="../free-cheap-guide/">Get the Free &amp; Cheap Guide</a></div></article><article class="guide-card" id="summer"><div class="guide-visual v5-media v5-summer"><img class="v5-summer-logo" src="../assets/summer-guide.png" alt="SK8 Summer Guide" width="1536" height="1024" loading="lazy" decoding="async"></div><div class="guide-body"><span class="guide-status guide-status-inline">Available now</span><h3>SK8 Summer Guide</h3><p class="reader-meta">Family ideas · Summer 2026</p><p>Free and cheaper activities, rainy-day fallbacks, parks, local events and practical school-holiday ideas.</p><a class="button" href="../summer-guide.html">View the Summer Guide</a></div></article><article class="guide-card" id="secrets"><div class="guide-visual v5-media v5-secrets" role="img" aria-label="50 Secrets of SK8: hidden places, lost stories, local mysteries and folklore"><div class="v5-secret-number" aria-hidden="true">50</div><div class="v5-secret-content"><small>FIELD NOTES · LOCAL ODDITIES</small><strong>50 Secrets of SK8</strong></div></div><div class="guide-body"><span class="guide-status guide-status-inline orange">In development</span><h3>50 Secrets of SK8</h3><p class="reader-meta">Hidden places · Local mysteries · Folklore</p><p>Hidden paths, vanished buildings, strange landmarks, forgotten stories, fairies, witches, ghosts and other mysteries hiding in plain sight around SK8.</p><span class="reader-link" aria-disabled="true">Coming soon</span></div></article><article class="guide-card" id="getting-around"><div class="guide-visual v5-media v5-transport" role="img" aria-label="Getting around SK8: future guide to trains, buses, walking, cycling and useful routes"><div class="v5-transport-watermark" aria-hidden="true">SK8</div><div class="v5-transport-content"><small>PRACTICAL LOCAL GUIDE</small><strong>Getting around SK8</strong><div class="v5-transport-sub">Trains, buses, walking, cycling, driving and useful routes.</div></div></div><div class="guide-body"><span class="guide-status guide-status-inline orange">Coming later</span><h3>Getting around SK8</h3><p class="reader-meta">Transport · Routes · Getting around</p><p>Clear practical guides to trains, buses, walking, cycling, driving and getting around SK8.</p><a class="reader-link" href="../join/">Get new guides by email →</a></div></article></div><div class="guides-principle"><div class="eyebrow">Why guides?</div><h2>Useful enough to bookmark. Short enough to use.</h2><p>SK8 Scoop guides are meant to save time rather than become giant directories. The strongest local options get organised into practical pages with dates, prices and useful details where relevant.</p></div></div></section></main><footer class="site-footer"><div class="wrap footer-grid footer-grid-wide"><div class="footer-brand-block"><img class="footer-logo" src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><p>The useful, the local and the mildly nosy.</p></div><div class="footer-links"><strong>Read</strong><a href="/latest">Latest Scoop</a><a href="/guides/">Guides</a><a href="/archive.html">Archive</a></div><div class="footer-links"><strong>Take part</strong><a href="/submit/">Submit</a><a href="/contact/">Contact</a></div><div class="footer-links"><strong>Trust</strong><a href="/editorial-policy.html">Editorial policy</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div></div></footer><script src="../assets/config.js"></script><script src="../assets/site.js"></script></body></html>
