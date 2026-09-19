@@ -1,4 +1,5 @@
 name: Publish 52 Adventures guide
+# retrigger with fresh signed source 2026-09-19
 on:
   push:
     branches: [main]
@@ -15,7 +16,7 @@ jobs:
           ref: main
       - name: Download exact v1.8 production checkpoint
         env:
-          SOURCE_URL: 'https://sdmntprnortheu.oaiusercontent.com/files/00000000-45a8-81f4-a522-6fe525c1bba0/raw?se=2026-09-19T11%3A53%3A29Z&sp=r&sv=2026-02-06&sr=b&scid=2681b1ea-a5e7-5bd3-896c-e8119d820cd0&skoid=a0b9f82a-c86e-4064-a822-2aa38890bb37&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-19T07%3A31%3A47Z&ske=2026-09-20T07%3A31%3A47Z&sks=b&skv=2026-02-06&sig=vLBXS0OnEMBgPdLrScuxZrDbgJsc8zwAkd%2BCrlYqz90%3D'
+          SOURCE_URL: 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-0e10-8210-9fbd-4b2a20be7b7b/raw?se=2026-09-19T11%3A54%3A49Z&sp=r&sv=2026-02-06&sr=b&scid=e3cdc2ed-fdd2-5db3-b5f9-812073082750&skoid=a0b9f82a-c86e-4064-a822-2aa38890bb37&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-19T06%3A28%3A20Z&ske=2026-09-20T06%3A28%3A20Z&sks=b&skv=2026-02-06&sig=jobjiQoi4auLhqPe%2BI8id/e4XtJWGnkSLmQ29SCL4Nk%3D'
         run: |
           mkdir -p 52-adventures/guide
           curl --fail --location --retry 3 "$SOURCE_URL" -o /tmp/guide.html
