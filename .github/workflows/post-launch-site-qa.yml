@@ -3,6 +3,8 @@ name: Post-launch site QA
 permissions:
   contents: read
   checks: read
+  issues: read
+  pull-requests: read
 
 on:
   pull_request:
@@ -46,13 +48,31 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PREVIEW_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          PR_NUMBER: ${{ github.event_name == 'pull_request' && github.event.pull_request.number || '' }}
         run: |
-          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}/check-runs"
+          checks_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}/check-runs"
+          commit_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}"
+          auth=(-H "authorization: Bearer ${GH_TOKEN}" -H "accept: application/vnd.github+json")
           base=""
+          short_sha="$(printf '%s' "$PREVIEW_SHA" | cut -c1-8)"
+          workflow_only=false
+          commit_payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$commit_api" || true)"
+          non_workflow_files="$(printf '%s' "$commit_payload" | jq '[.files[]? | select((.filename | startswith(".github/workflows/")) | not)] | length' 2>/dev/null || echo 1)"
+          if [ "$non_workflow_files" = "0" ]; then workflow_only=true; fi
           for attempt in $(seq 1 30); do
-            payload="$(curl -fsSL --max-time 20 -H "authorization: Bearer ${GH_TOKEN}" -H "accept: application/vnd.github+json" "$api" || true)"
+            payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$checks_api" || true)"
             summary="$(printf '%s' "$payload" | jq -r '.check_runs[]? | select(.name=="Workers Builds: sk8-scoop" and .conclusion=="success") | .output.summary // empty' | head -n 1)"
             base="$(printf '%s' "$summary" | sed -n 's#.*Preview URL: \(https://[^[:space:]]*\).*#\1#p' | head -n 1)"
+            if [ -z "$base" ] && [ -n "$PR_NUMBER" ]; then
+              comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
+              comments="$(curl -fsSL --max-time 20 "${auth[@]}" "$comments_api" || true)"
+              cf_body="$(printf '%s' "$comments" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // empty' 2>/dev/null || true)"
+              cf_url="$(printf '%s' "$cf_body" | sed -n "s#.*href='\(https://[^']*workers.dev\)'.*#\1#p" | head -n 1)"
+              cf_sha="$(printf '%s' "$cf_body" | sed -n 's#.*| sk8-scoop | \([0-9a-f]\{8\}\) |.*#\1#p' | head -n 1)"
+              if [ -n "$cf_url" ] && { [ "$cf_sha" = "$short_sha" ] || [ "$workflow_only" = true ]; }; then
+                base="$cf_url"
+              fi
+            fi
             if [ -n "$base" ]; then
               echo "CLOUDFLARE_PREVIEW_BASE=$base" >> "$GITHUB_ENV"
               echo "Cloudflare preview: $base"
@@ -62,7 +82,7 @@ jobs:
             sleep 10
           done
           if [ -z "$base" ]; then
-            echo "FAILED: no successful Cloudflare version preview URL found for $PREVIEW_SHA"
+            echo "FAILED: no suitable Cloudflare version preview URL found for $PREVIEW_SHA"
             exit 1
           fi
           check_page() {
