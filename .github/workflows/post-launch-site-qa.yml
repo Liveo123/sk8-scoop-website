@@ -37,13 +37,29 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for the Cloudflare branch alias and verify release markers
+      - name: Wait for the Cloudflare version preview and verify release markers
         shell: bash
         env:
-          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
-          base="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev"
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs"
+          base=""
+          for attempt in $(seq 1 30); do
+            payload="$(curl -fsSL --max-time 20 -H "authorization: Bearer ${GH_TOKEN}" -H "accept: application/vnd.github+json" "$api" || true)"
+            summary="$(printf '%s' "$payload" | jq -r '.check_runs[]? | select(.name=="Workers Builds: sk8-scoop" and .conclusion=="success") | .output.summary // empty' | head -n 1)"
+            base="$(printf '%s' "$summary" | sed -n 's#.*Preview URL: \(https://[^[:space:]]*\).*#\1#p' | head -n 1)"
+            if [ -n "$base" ]; then
+              echo "CLOUDFLARE_PREVIEW_BASE=$base" >> "$GITHUB_ENV"
+              echo "Cloudflare preview: $base"
+              break
+            fi
+            echo "Waiting for Cloudflare version preview URL (attempt $attempt/30)"
+            sleep 10
+          done
+          if [ -z "$base" ]; then
+            echo "FAILED: no successful Cloudflare version preview URL found for $GITHUB_SHA"
+            exit 1
+          fi
           check_page() {
             path="$1"
             marker="$2"
@@ -101,11 +117,8 @@ jobs:
 
       - name: Verify advertiser admin auth gate
         shell: bash
-        env:
-          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
-          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
-          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/advertiser-enquiries"
+          url="${CLOUDFLARE_PREVIEW_BASE}/api/advertiser-enquiries"
           code="$(curl -sS --max-time 20 -o /tmp/advertiser-admin.json -w '%{http_code}' "$url" -H 'authorization: Bearer intentionally-wrong-test-token')"
           if [ "$code" != "401" ]; then
             echo "Expected advertiser admin auth gate to return 401, got $code"
@@ -116,11 +129,8 @@ jobs:
 
       - name: Verify Stripe webhook secret gate
         shell: bash
-        env:
-          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
-          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
-          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/stripe-webhook"
+          url="${CLOUDFLARE_PREVIEW_BASE}/api/stripe-webhook"
           code="$(curl -sS --max-time 20 -o /tmp/stripe-webhook.json -w '%{http_code}' -X POST "$url" -H 'content-type: application/json' --data '{}')"
           if [ "$code" != "400" ]; then
             echo "Expected unsigned Stripe webhook to return 400, got $code"
