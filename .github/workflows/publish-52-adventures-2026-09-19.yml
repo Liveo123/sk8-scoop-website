@@ -1,0 +1,70 @@
+name: Publish 52 Adventures guide
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-52-adventures-2026-09-19.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Download exact v1.8 production checkpoint
+        env:
+          SOURCE_URL: 'https://sdmntprnortheu.oaiusercontent.com/files/00000000-45a8-81f4-a522-6fe525c1bba0/raw?se=2026-09-19T11%3A53%3A29Z&sp=r&sv=2026-02-06&sr=b&scid=2681b1ea-a5e7-5bd3-896c-e8119d820cd0&skoid=a0b9f82a-c86e-4064-a822-2aa38890bb37&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-19T07%3A31%3A47Z&ske=2026-09-20T07%3A31%3A47Z&sks=b&skv=2026-02-06&sig=vLBXS0OnEMBgPdLrScuxZrDbgJsc8zwAkd%2BCrlYqz90%3D'
+        run: |
+          mkdir -p 52-adventures/guide
+          curl --fail --location --retry 3 "$SOURCE_URL" -o /tmp/guide.html
+          echo "e29fd2507dfe3a8ec5e690f9a738d6f0fd33bb230a7b1e49cba6b334d9b33405  /tmp/guide.html" | sha256sum -c -
+      - name: Apply approved browser fixes and logo spacing
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          p=Path('/tmp/guide.html')
+          s=p.read_text(encoding='utf-8')
+          reps=[
+            (
+              '.sitebar-inner{min-height:76px;gap:24px}.brand-mini{width:210px;height:52px;object-fit:contain;object-position:left center}',
+              '.sitebar-inner{min-height:76px;gap:24px}.brand-mini{width:210px;height:60px;object-fit:contain;object-position:left center;box-sizing:border-box;padding:3px 4px 9px;background:#fff}'
+            ),
+            (
+              '.sitebar-inner{min-height:62px}.brand-mini{width:150px;height:42px}',
+              '.sitebar-inner{min-height:66px}.brand-mini{width:150px;height:48px;padding:2px 3px 7px}'
+            ),
+            (
+              "if(!dialog.open)dialog.showModal();if(push)history.pushState({adventure:n},'','#adventure-'+n)",
+              "if(!dialog.open){dialog.showModal();document.getElementById('dialog-close').focus()}if(push)history.pushState({adventure:n},'','#adventure-'+n)"
+            ),
+            (
+              "document.getElementById('dialog-close').onclick=closeToReturnView;dialog.addEventListener('click',e=>{if(e.target===dialog)closeToReturnView()});document.getElementById('menu-toggle').onclick=()=>{const open=document.querySelector('.top-nav').classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(open))};",
+              "document.getElementById('dialog-close').onclick=closeToReturnView;dialog.addEventListener('click',e=>{if(e.target===dialog)closeToReturnView()});dialog.addEventListener('cancel',e=>{e.preventDefault();closeToReturnView()});dialog.addEventListener('keydown',e=>{if(e.key!=='Tab'||!dialog.open)return;const focusable=[...dialog.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex=\"-1\"])')].filter(x=>!x.disabled&&x.offsetParent!==null);if(!focusable.length){e.preventDefault();return}const first=focusable[0],last=focusable[focusable.length-1],active=document.activeElement;if(e.shiftKey&&(active===first||!dialog.contains(active))){e.preventDefault();last.focus()}else if(!e.shiftKey&&active===last){e.preventDefault();first.focus()}});document.getElementById('menu-toggle').onclick=()=>{const open=document.querySelector('.top-nav').classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(open))};"
+            )
+          ]
+          for old,new in reps:
+            if old not in s:
+              raise SystemExit('Expected patch target not found: '+old[:80])
+            s=s.replace(old,new,1)
+          out=Path('52-adventures/guide/index.html')
+          out.write_text(s,encoding='utf-8')
+          digest=hashlib.sha256(out.read_bytes()).hexdigest()
+          expected='4b740777d92de9b735ed67938ef25c7ffa1646f7ffb775bed49aa9794adc1d9d'
+          if digest!=expected:
+            raise SystemExit(f'Unexpected final SHA256: {digest}')
+          print('52 Adventures verified:', out.stat().st_size, digest)
+          PY
+      - name: Commit published guide
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 52-adventures/guide/index.html
+          if git diff --cached --quiet; then
+            echo "Guide already matches the approved published build."
+            exit 0
+          fi
+          git commit -m "Publish 52 Adventures guide"
+          git push origin HEAD:main
