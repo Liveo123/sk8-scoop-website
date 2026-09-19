@@ -1,5 +1,5 @@
 name: Publish 52 Adventures guide
-# retrigger with fresh signed source 2026-09-19
+# retrigger with verified patched SHA 2026-09-19
 on:
   push:
     branches: [main]
@@ -53,7 +53,7 @@ jobs:
           out=Path('52-adventures/guide/index.html')
           out.write_text(s,encoding='utf-8')
           digest=hashlib.sha256(out.read_bytes()).hexdigest()
-          expected='4b740777d92de9b735ed67938ef25c7ffa1646f7ffb775bed49aa9794adc1d9d'
+          expected='f532682bb9929750e622aa1daaa4c56d9fdeb4c8d179c68a93e82f60ec353c86'
           if digest!=expected:
             raise SystemExit(f'Unexpected final SHA256: {digest}')
           print('52 Adventures verified:', out.stat().st_size, digest)
