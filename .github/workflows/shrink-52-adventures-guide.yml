@@ -1,0 +1,61 @@
+name: Shrink 52 Adventures guide for Cloudflare
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/shrink-52-adventures-guide.yml'
+permissions:
+  contents: write
+jobs:
+  shrink:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Replace embedded guide media with controlled Cloudinary delivery
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re, hashlib
+          p=Path('52-adventures/guide/index.html')
+          s=p.read_text(encoding='utf-8')
+          mapping={
+            "brand":"/assets/sk8-scoop-logo.webp",
+            "a1":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-stockport-shelters.jpg",
+            "a2":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a2.jpg",
+            "a10":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a10.jpg",
+            "a11":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a11.jpg",
+            "a12":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-marple-aqueduct.jpg",
+            "a18":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a18.jpg",
+            "a21":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a21.jpg",
+            "a22":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a22.jpg",
+            "a37":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a37.jpg",
+            "a47":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-mam-tor.jpg",
+            "a31":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a31.jpg",
+            "a6":"https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto/52-adventures-a6.jpg"
+          }
+          new_block='<script id="image-data" type="application/json">'+json.dumps(mapping,separators=(',',':'))+'</script>'
+          s2,n=re.subn(r'<script id="image-data" type="application/json">.*?</script>',new_block,s,count=1,flags=re.S)
+          if n!=1:
+            raise SystemExit(f'image-data block replacement count was {n}, expected 1')
+          if 'data:image/' in s2:
+            raise SystemExit('Embedded data-image payload remains')
+          p.write_text(s2,encoding='utf-8')
+          size=p.stat().st_size
+          if size>900000:
+            raise SystemExit(f'Guide still too large for safe static deployment: {size}')
+          print('guide bytes',size)
+          print('sha256',hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Commit reduced guide
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 52-adventures/guide/index.html
+          if git diff --cached --quiet; then
+            echo "Guide already reduced."
+            exit 0
+          fi
+          git commit -m "Fix 52 Adventures Cloudflare asset size"
+          git push origin HEAD:main
