@@ -1,5 +1,11 @@
 name: Post-launch site QA
 
+permissions:
+  contents: read
+  checks: read
+  issues: read
+  pull-requests: read
+
 on:
   pull_request:
   push:
@@ -37,13 +43,48 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for the Cloudflare branch alias and verify release markers
+      - name: Wait for the Cloudflare version preview and verify release markers
         shell: bash
         env:
-          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
+          PREVIEW_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          PR_NUMBER: ${{ github.event_name == 'pull_request' && github.event.pull_request.number || '' }}
         run: |
-          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
-          base="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev"
+          checks_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}/check-runs"
+          commit_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}"
+          auth=(-H "authorization: Bearer ${GH_TOKEN}" -H "accept: application/vnd.github+json")
+          base=""
+          short_sha="$(printf '%s' "$PREVIEW_SHA" | cut -c1-8)"
+          workflow_only=false
+          commit_payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$commit_api" || true)"
+          non_workflow_files="$(printf '%s' "$commit_payload" | jq '[.files[]? | select((.filename | startswith(".github/workflows/")) | not)] | length' 2>/dev/null || echo 1)"
+          if [ "$non_workflow_files" = "0" ]; then workflow_only=true; fi
+          for attempt in $(seq 1 30); do
+            payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$checks_api" || true)"
+            summary="$(printf '%s' "$payload" | jq -r '.check_runs[]? | select(.name=="Workers Builds: sk8-scoop" and .conclusion=="success") | .output.summary // empty' | head -n 1)"
+            base="$(printf '%s' "$summary" | sed -n 's#.*Preview URL: \(https://[^[:space:]]*\).*#\1#p' | head -n 1)"
+            if [ -z "$base" ] && [ -n "$PR_NUMBER" ]; then
+              comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
+              comments="$(curl -fsSL --max-time 20 "${auth[@]}" "$comments_api" || true)"
+              cf_body="$(printf '%s' "$comments" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // empty' 2>/dev/null || true)"
+              cf_url="$(printf '%s' "$cf_body" | sed -n "s#.*href='\(https://[^']*workers.dev\)'.*#\1#p" | head -n 1)"
+              cf_sha="$(printf '%s' "$cf_body" | sed -n 's#.*| sk8-scoop | \([0-9a-f]\{8\}\) |.*#\1#p' | head -n 1)"
+              if [ -n "$cf_url" ] && { [ "$cf_sha" = "$short_sha" ] || [ "$workflow_only" = true ]; }; then
+                base="$cf_url"
+              fi
+            fi
+            if [ -n "$base" ]; then
+              echo "CLOUDFLARE_PREVIEW_BASE=$base" >> "$GITHUB_ENV"
+              echo "Cloudflare preview: $base"
+              break
+            fi
+            echo "Waiting for Cloudflare version preview URL (attempt $attempt/30)"
+            sleep 10
+          done
+          if [ -z "$base" ]; then
+            echo "FAILED: no suitable Cloudflare version preview URL found for $PREVIEW_SHA"
+            exit 1
+          fi
           check_page() {
             path="$1"
             marker="$2"
@@ -80,6 +121,8 @@ jobs:
           check_page '/local-history/' 'Local History around SK8'
           check_page '/planning/' 'Planning & Development around SK8'
           check_page '/free-cheap-guide/' 'Heald Green North History Walk'
+          check_page '/52-adventures/' 'Better ideas for weekends'
+          check_page '/52-adventures/guide/' 'Adventure Passport'
           check_page '/planning/heald-green-local-plan-2026/' '1,672 homes'
           check_page '/local-history/heald-green-north-history-walk/' '22 history stops'
           check_page '/local-history/cheadle-war-memorial-air-raid-victims/' 'eight civilian names'
@@ -99,11 +142,8 @@ jobs:
 
       - name: Verify advertiser admin auth gate
         shell: bash
-        env:
-          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
-          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
-          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/advertiser-enquiries"
+          url="${CLOUDFLARE_PREVIEW_BASE}/api/advertiser-enquiries"
           code="$(curl -sS --max-time 20 -o /tmp/advertiser-admin.json -w '%{http_code}' "$url" -H 'authorization: Bearer intentionally-wrong-test-token')"
           if [ "$code" != "401" ]; then
             echo "Expected advertiser admin auth gate to return 401, got $code"
@@ -114,11 +154,8 @@ jobs:
 
       - name: Verify Stripe webhook secret gate
         shell: bash
-        env:
-          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
-          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
-          url="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev/api/stripe-webhook"
+          url="${CLOUDFLARE_PREVIEW_BASE}/api/stripe-webhook"
           code="$(curl -sS --max-time 20 -o /tmp/stripe-webhook.json -w '%{http_code}' -X POST "$url" -H 'content-type: application/json' --data '{}')"
           if [ "$code" != "400" ]; then
             echo "Expected unsigned Stripe webhook to return 400, got $code"
@@ -171,6 +208,8 @@ jobs:
           check_page 'https://www.sk8scoop.com/local-history/' 'Local History around SK8'
           check_page 'https://www.sk8scoop.com/planning/' 'Planning & Development around SK8'
           check_page 'https://www.sk8scoop.com/free-cheap-guide/' 'Heald Green North History Walk'
+          check_page 'https://www.sk8scoop.com/52-adventures/' 'Better ideas for weekends'
+          check_page 'https://www.sk8scoop.com/52-adventures/guide/' 'Adventure Passport'
           check_page 'https://www.sk8scoop.com/planning/heald-green-local-plan-2026/' '1,672 homes'
           check_page 'https://www.sk8scoop.com/local-history/heald-green-north-history-walk/' '22 history stops'
           check_page 'https://www.sk8scoop.com/local-history/cheadle-war-memorial-air-raid-victims/' 'eight civilian names'
