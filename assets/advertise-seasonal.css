@@ -1,0 +1,323 @@
+/* Seasonal advertiser opportunity: Halloween & Half-Term 2026.
+   Purpose-built CSS illustration, no external or SVG assets. */
+
+body.advertiser-page .halloween-ad-section{
+  position:relative;
+  overflow:hidden;
+  padding:46px 0 52px;
+  background:
+    radial-gradient(circle at 82% 12%,rgba(248,121,27,.17),transparent 27%),
+    radial-gradient(circle at 12% 100%,rgba(15,100,112,.32),transparent 34%),
+    #21162d;
+  color:#fff;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(13,45,49,.18)
+}
+body.advertiser-page .halloween-ad-shell{position:relative}
+body.advertiser-page .halloween-ad-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);
+  gap:32px;
+  align-items:center;
+  margin-bottom:28px
+}
+body.advertiser-page .halloween-ad-section .eyebrow{color:#ffd4ad}
+body.advertiser-page .halloween-ad-copy h2{
+  max-width:13ch;
+  margin:8px 0 14px;
+  color:#fff;
+  font-size:clamp(2rem,4.2vw,3.55rem);
+  line-height:.98;
+  letter-spacing:-.035em
+}
+body.advertiser-page .halloween-ad-copy>p{
+  max-width:68ch;
+  margin:0;
+  color:#f1eaf4;
+  font-size:1.08rem;
+  line-height:1.62
+}
+body.advertiser-page .halloween-audience-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:20px
+}
+body.advertiser-page .halloween-audience-strip span{
+  display:inline-flex;
+  gap:5px;
+  align-items:center;
+  padding:8px 11px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  color:#f7f2f8;
+  font-size:.84rem
+}
+body.advertiser-page .halloween-audience-strip strong{color:#ffd09d}
+
+/* Decorative October-in-SK8 scene. */
+body.advertiser-page .halloween-scene{
+  position:relative;
+  min-height:250px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:26px;
+  background:
+    linear-gradient(180deg,rgba(17,35,54,.05) 0%,rgba(14,38,43,.68) 100%),
+    radial-gradient(circle at 78% 18%,#51335d 0%,#2e2140 35%,#132f38 100%);
+  box-shadow:0 20px 42px rgba(0,0,0,.24)
+}
+body.advertiser-page .halloween-scene:after{
+  content:"";
+  position:absolute;
+  inset:auto -10% -64px -10%;
+  height:145px;
+  border-radius:50% 50% 0 0;
+  background:#0d3339;
+  box-shadow:0 -18px 40px rgba(0,0,0,.18)
+}
+body.advertiser-page .halloween-moon{
+  position:absolute;
+  width:78px;
+  height:78px;
+  right:28px;
+  top:24px;
+  border-radius:50%;
+  background:#ffe7a7;
+  box-shadow:0 0 36px rgba(255,231,167,.24)
+}
+body.advertiser-page .halloween-moon:after{
+  content:"";
+  position:absolute;
+  width:70px;
+  height:70px;
+  left:-17px;
+  top:-8px;
+  border-radius:50%;
+  background:#412a50
+}
+body.advertiser-page .halloween-bat{
+  position:absolute;
+  width:24px;
+  height:9px;
+  border-top:4px solid #0c1e24;
+  border-radius:50%;
+  transform:rotate(-9deg)
+}
+body.advertiser-page .halloween-bat:after{
+  content:"";
+  position:absolute;
+  width:24px;
+  height:9px;
+  left:17px;
+  top:-4px;
+  border-top:4px solid #0c1e24;
+  border-radius:50%;
+  transform:rotate(18deg)
+}
+body.advertiser-page .bat-one{right:104px;top:72px}
+body.advertiser-page .bat-two{right:148px;top:112px;transform:scale(.7) rotate(8deg)}
+body.advertiser-page .halloween-rooftops{position:absolute;inset:auto 0 45px 0;height:98px;z-index:2}
+body.advertiser-page .roof{
+  position:absolute;
+  bottom:0;
+  display:block;
+  width:96px;
+  height:74px;
+  background:#10252c;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)
+}
+body.advertiser-page .roof:before{
+  content:"";
+  position:absolute;
+  left:-12px;
+  top:-36px;
+  width:120px;
+  height:56px;
+  background:#10252c;
+  clip-path:polygon(50% 0,100% 100%,0 100%)
+}
+body.advertiser-page .roof:after{
+  content:"";
+  position:absolute;
+  width:16px;
+  height:22px;
+  left:18px;
+  top:28px;
+  background:#f4a348;
+  box-shadow:42px 8px 0 #f4a348
+}
+body.advertiser-page .roof-one{left:20px;transform:scale(.82)}
+body.advertiser-page .roof-two{left:112px;height:92px;width:118px}
+body.advertiser-page .roof-three{left:226px;transform:scale(.7);transform-origin:bottom left}
+body.advertiser-page .halloween-pumpkin{
+  position:absolute;
+  z-index:4;
+  bottom:20px;
+  width:54px;
+  height:44px;
+  border-radius:45% 45% 48% 48%;
+  background:radial-gradient(ellipse at 50% 50%,#ff9f3f 0 18%,#f8791b 19% 48%,#d85f0c 49% 100%);
+  box-shadow:inset 8px 0 0 rgba(255,255,255,.07),0 8px 20px rgba(0,0,0,.22)
+}
+body.advertiser-page .halloween-pumpkin:before{
+  content:"";
+  position:absolute;
+  width:8px;
+  height:14px;
+  left:23px;
+  top:-10px;
+  border-radius:5px 5px 0 0;
+  background:#577338;
+  transform:rotate(8deg)
+}
+body.advertiser-page .halloween-pumpkin span:before,
+body.advertiser-page .halloween-pumpkin span:after{
+  content:"";
+  position:absolute;
+  top:15px;
+  width:9px;
+  height:7px;
+  background:#301735;
+  clip-path:polygon(50% 0,100% 100%,0 100%)
+}
+body.advertiser-page .halloween-pumpkin span:before{left:12px}
+body.advertiser-page .halloween-pumpkin span:after{right:12px}
+body.advertiser-page .pumpkin-one{right:30px;transform:rotate(3deg)}
+body.advertiser-page .pumpkin-two{right:82px;bottom:14px;transform:scale(.72) rotate(-7deg)}
+body.advertiser-page .halloween-scene-label{
+  position:absolute;
+  z-index:3;
+  left:24px;
+  top:22px;
+  max-width:150px
+}
+body.advertiser-page .halloween-scene-label small{
+  display:block;
+  margin-bottom:7px;
+  color:#ffd09d;
+  font:800 .72rem/1.1 Inter,Arial,sans-serif;
+  letter-spacing:.12em
+}
+body.advertiser-page .halloween-scene-label strong{
+  display:block;
+  color:#fff;
+  font-family:Georgia,serif;
+  font-size:1.5rem;
+  line-height:.95;
+  letter-spacing:-.02em
+}
+
+body.advertiser-page .halloween-price-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px
+}
+body.advertiser-page .halloween-price-card{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  padding:21px;
+  border:1px solid #eadfd0;
+  border-top:6px solid #0f6470;
+  border-radius:18px;
+  background:#fffaf3;
+  color:#213f44;
+  box-shadow:0 12px 28px rgba(0,0,0,.13)
+}
+body.advertiser-page .halloween-price-card:nth-child(2){border-top-color:#f8791b}
+body.advertiser-page .halloween-sponsor-card{border-top-color:#ba7a1d;background:#fff8eb}
+body.advertiser-page .halloween-main-sponsor-card{
+  border-top-color:#ef8c2f;
+  background:linear-gradient(180deg,#fff8eb,#fff);
+  box-shadow:0 16px 36px rgba(0,0,0,.18)
+}
+body.advertiser-page .halloween-price-card .eyebrow{
+  align-self:flex-start;
+  padding:6px 9px;
+  border-radius:999px;
+  background:#173f45;
+  color:#fff;
+  font-size:.72rem
+}
+body.advertiser-page .halloween-price{
+  margin:13px 0 2px;
+  color:#173f45;
+  font-family:Georgia,serif;
+  font-size:2.55rem;
+  font-weight:800;
+  line-height:1
+}
+body.advertiser-page .halloween-price-card h3{
+  margin:7px 0 9px;
+  color:#173f45;
+  font-size:1.28rem;
+  line-height:1.08
+}
+body.advertiser-page .halloween-price-card p{
+  margin:0 0 12px;
+  color:#506265;
+  font-size:.93rem;
+  line-height:1.5
+}
+body.advertiser-page .halloween-price-card ul{
+  margin:0 0 18px;
+  padding-left:18px;
+  color:#334f54;
+  font-size:.88rem;
+  line-height:1.55
+}
+body.advertiser-page .halloween-price-card .button{
+  width:100%;
+  margin-top:auto;
+  background:#0f6470;
+  border-color:#0f6470;
+  color:#fff
+}
+body.advertiser-page .halloween-price-card .button:hover,
+body.advertiser-page .halloween-price-card .button:focus-visible{
+  background:#0a4d56;
+  border-color:#0a4d56;
+  color:#fff
+}
+body.advertiser-page .halloween-ad-note{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:16px;
+  margin-top:16px;
+  padding:16px 18px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:15px;
+  background:rgba(255,255,255,.07)
+}
+body.advertiser-page .halloween-ad-note p{
+  margin:0;
+  color:#ece5ef;
+  font-size:.87rem;
+  line-height:1.5
+}
+body.advertiser-page .halloween-ad-note strong{color:#ffd09d}
+body.advertiser-page .premium-form fieldset .ad-seasonal-form-route:has(input:checked){
+  border-color:#8b5c9d!important;
+  background:#f7eef9!important;
+  box-shadow:inset 0 0 0 1px #8b5c9d!important
+}
+
+@media(max-width:1050px){
+  body.advertiser-page .halloween-price-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:780px){
+  body.advertiser-page .halloween-ad-section{padding:34px 0 40px}
+  body.advertiser-page .halloween-ad-intro{grid-template-columns:1fr;gap:20px}
+  body.advertiser-page .halloween-ad-copy h2{max-width:15ch}
+  body.advertiser-page .halloween-scene{min-height:220px}
+  body.advertiser-page .halloween-ad-note{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  body.advertiser-page .halloween-price-grid{grid-template-columns:1fr}
+  body.advertiser-page .halloween-price-card{padding:19px}
+  body.advertiser-page .halloween-scene{min-height:205px}
+  body.advertiser-page .halloween-rooftops{transform:scale(.86);transform-origin:bottom left}
+  body.advertiser-page .halloween-scene-label strong{font-size:1.3rem}
+}
