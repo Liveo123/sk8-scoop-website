@@ -12,6 +12,7 @@
   if (!form) return;
 
   const actionField = form.querySelector('[name="advert_copy"]');
+  const preferredMonthField = form.querySelector('[name="preferred_date"]');
   const packageInputs = [...form.querySelectorAll('input[name="package"]')];
   const localFitRoute = form.querySelector('[data-local-fit-route]');
   const formTitle = form.querySelector('[data-ad-form-title]');
@@ -71,6 +72,23 @@
         : 'I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not guarantee results or favourable editorial coverage.';
     }
     if (submitButton) submitButton.textContent = enabled ? 'Send local-fit check' : 'Send advertising enquiry';
+  }
+
+  function setSeasonalMode(choice = '') {
+    if (localFitRoute) localFitRoute.hidden = true;
+    if (formTitle) formTitle.textContent = 'Halloween & Half-Term advertising enquiry';
+    if (formIntro) {
+      formIntro.textContent = 'Seasonal guide packages run from £35 to £150. Scope, timing and price are agreed before payment, and before anything is published.';
+    }
+    if (termsCopy) {
+      termsCopy.textContent = 'I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not buy editorial inclusion, ranking, recommendation or guaranteed results.';
+    }
+    if (submitButton) submitButton.textContent = 'Send Halloween advertising enquiry';
+
+    if (choice && actionField && !actionField.value.trim()) {
+      actionField.value = `Halloween & Half-Term 2026 package: ${choice}.\n\nWhat I want local readers to do: `;
+    }
+    if (preferredMonthField && !preferredMonthField.value) preferredMonthField.value = '2026-10';
   }
 
   if (finderSource === 'campaign_finder') {
@@ -136,6 +154,8 @@
         input.checked = true;
         input.dispatchEvent(new Event('change', { bubbles: true }));
       }
+      const seasonalChoice = String(button.dataset.seasonalChoice || '').trim();
+      if (route === 'bespoke' && seasonalChoice) setSeasonalMode(seasonalChoice);
       scrollToForm(input || form.querySelector('input,textarea,select'));
 
       if (typeof window.sk8Track === 'function') {
@@ -146,7 +166,8 @@
 
   packageInputs.forEach(input => input.addEventListener('change', () => {
     if (!input.checked) return;
-    setReviewMode(input.value === 'human_review');
+    if (input.value === 'bespoke') setSeasonalMode();
+    else setReviewMode(input.value === 'human_review');
     if (typeof window.sk8Track === 'function') {
       window.sk8Track('advertiser_route_selected', { route: input.value });
     }
