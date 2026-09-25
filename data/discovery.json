@@ -1007,6 +1007,90 @@
       ],
       "freshness": "current",
       "checked": "2026-09-25"
+    },
+    {
+      "id": "paradise-mill-macclesfield",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Paradise Mill and Silk Museum",
+      "summary": "Macclesfield silk and machinery in one rainy-day visit: free museum entry plus self-led or guided access to Paradise Mill.",
+      "href": "/local-history/paradise-mill-macclesfield/",
+      "area": "Nearby",
+      "tags": [
+        "paradise mill",
+        "silk museum",
+        "macclesfield",
+        "jacquard",
+        "looms",
+        "industrial history",
+        "textiles",
+        "rainy day"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "teggs-nose-country-park",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "Tegg’s Nose Country Park",
+      "summary": "Free walking with quarry geology, viewpoints and longer reservoir routes, plus current Cheshire East parking charges.",
+      "href": "/outdoors/teggs-nose-country-park/",
+      "area": "Nearby",
+      "tags": [
+        "teggs nose",
+        "macclesfield",
+        "country park",
+        "walk",
+        "geology",
+        "quarry",
+        "parking",
+        "outdoors"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "white-nancy-bollington",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "White Nancy, Bollington",
+      "summary": "A free short hill challenge to Bollington’s Grade II landmark, with direct stone steps and a woodland alternative.",
+      "href": "/outdoors/white-nancy-bollington/",
+      "area": "Nearby",
+      "tags": [
+        "white nancy",
+        "bollington",
+        "kerridge hill",
+        "walk",
+        "hill",
+        "landmark",
+        "free",
+        "outdoors"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "shutlingsloe-walk",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "Shutlingsloe walk",
+      "summary": "A challenging 10 km circular from Trentabank to the 506 m Shutlingsloe summit, with barriers, parking and path-closure checks.",
+      "href": "/outdoors/shutlingsloe-walk/",
+      "area": "Nearby",
+      "tags": [
+        "shutlingsloe",
+        "macclesfield forest",
+        "wildboarclough",
+        "walk",
+        "hike",
+        "506m",
+        "matterhorn",
+        "challenging"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
     }
   ]
 }
