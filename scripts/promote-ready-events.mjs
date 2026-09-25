@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
-const queuePath = 'data/event-review-queue.json';
-const eventsPath = 'data/events.json';
+const queuePath = process.env.EVENT_QUEUE_PATH || 'data/event-review-queue.json';
+const eventsPath = process.env.EVENT_DATA_PATH || 'data/events.json';
 const apply = process.argv.includes('--apply');
 
 const queue = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
