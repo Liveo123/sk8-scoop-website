@@ -126,3 +126,74 @@ body.reader-home.homepage-v3 .home-resource-card,body.reader-home.homepage-v3 .h
   body.reader-home.homepage-v3 .home-hero-subroutes{display:grid;grid-template-columns:1fr}
   body.reader-home.homepage-v3 .home-hero-subroutes a{justify-content:center}
 }
+
+
+/* 11. 52 Adventures: make the guide feel like a featured product, not another plain logo tile. */
+body.reader-home .home-resource-adventures{border-color:#c7d9d4;box-shadow:0 14px 32px rgba(15,100,112,.09)}
+body.reader-home .home-resource-adventures .adventures-logo-panel{
+  position:relative;
+  isolation:isolate;
+  min-height:190px!important;
+  height:190px!important;
+  padding:18px!important;
+  background:
+    radial-gradient(circle at 18% 22%,rgba(248,121,27,.16) 0 11%,transparent 12%),
+    radial-gradient(circle at 84% 18%,rgba(15,100,112,.13) 0 13%,transparent 14%),
+    radial-gradient(circle at 77% 78%,rgba(200,232,74,.2) 0 12%,transparent 13%),
+    linear-gradient(145deg,#fff9ed 0%,#eef7f5 58%,#fff 100%)!important;
+  overflow:hidden;
+}
+body.reader-home .home-resource-adventures .adventures-logo-panel:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:250px;
+  height:250px;
+  right:-90px;
+  top:-110px;
+  border:18px solid rgba(248,121,27,.12);
+  border-radius:50%;
+}
+body.reader-home .home-resource-adventures .adventures-logo-panel:after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:260px;
+  height:96px;
+  left:-36px;
+  bottom:-55px;
+  border:4px dashed rgba(196,139,60,.24);
+  border-radius:50%;
+  transform:rotate(-7deg);
+}
+body.reader-home .home-resource-adventures .adventures-logo-panel .adventure-trail{
+  position:absolute;
+  z-index:-1;
+  inset:18px 22px auto auto;
+  width:48px;
+  height:48px;
+  border-radius:50% 50% 50% 0;
+  border:6px solid rgba(15,100,112,.13);
+  transform:rotate(-45deg);
+}
+body.reader-home .home-resource-adventures .adventures-logo-panel img{
+  position:relative;
+  z-index:1;
+  width:min(88%,340px)!important;
+  height:100%!important;
+  max-height:170px;
+  object-fit:contain!important;
+  padding:0!important;
+  background:transparent!important;
+  filter:drop-shadow(0 10px 16px rgba(19,45,49,.12));
+}
+body.reader-home .home-resource-adventures .home-resource-copy{
+  background:linear-gradient(180deg,#fff 0%,#fbfdfc 100%);
+}
+body.reader-home .home-resource-adventures .home-resource-copy .eyebrow{color:#b85d0a}
+body.reader-home .home-resource-adventures .home-resource-copy .button{background:#0f6470!important;color:#fff!important}
+
+@media(max-width:560px){
+  body.reader-home .home-resource-adventures .adventures-logo-panel{height:165px!important;min-height:165px!important;padding:14px!important}
+  body.reader-home .home-resource-adventures .adventures-logo-panel img{max-height:145px}
+}
