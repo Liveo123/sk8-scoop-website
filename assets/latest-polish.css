@@ -1,0 +1,262 @@
+/* Latest page visual polish: richer editorial rhythm without adding filler imagery. */
+body[data-page="latest-issue"]{background:#fff;color:#132d31}
+body[data-page="latest-issue"] .page-hero.latest-v7{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 92% 12%,rgba(248,121,27,.10) 0 9%,transparent 10%),
+    radial-gradient(circle at 84% 74%,rgba(15,100,112,.08) 0 14%,transparent 15%),
+    linear-gradient(135deg,#fff9ed 0%,#fff 62%,#edf6f4 100%);
+  border-bottom:1px solid #e7ece8;
+}
+body[data-page="latest-issue"] .page-hero.latest-v7:before{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  right:-120px;
+  top:70px;
+  border:24px solid rgba(248,121,27,.10);
+  border-radius:50%;
+  pointer-events:none;
+}
+body[data-page="latest-issue"] .latest-hero-grid{position:relative;z-index:1;gap:54px}
+body[data-page="latest-issue"] .latest-hero-grid h1{max-width:8ch}
+body[data-page="latest-issue"] .latest-visual-stack{position:relative}
+body[data-page="latest-issue"] .latest-visual-stack>img{
+  border-radius:20px;
+  box-shadow:0 24px 54px rgba(19,45,49,.14);
+}
+body[data-page="latest-issue"] .latest-join-card{
+  border:1px solid #d7e1dd;
+  border-radius:16px;
+  box-shadow:0 20px 42px rgba(19,45,49,.12);
+}
+body[data-page="latest-issue"] .latest-join-card:before{
+  content:"NEXT FRIDAY";
+  display:inline-flex;
+  margin-bottom:10px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:#eef7f5;
+  color:#0f6470;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+/* Image-led story previews from the current issue. */
+body[data-page="latest-issue"] .latest-inside-section{
+  padding:54px 0 58px;
+  background:#f7faf8;
+  border-top:1px solid #e5ece8;
+  border-bottom:1px solid #e5ece8;
+}
+body[data-page="latest-issue"] .latest-inside-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,.55fr);
+  gap:34px;
+  align-items:end;
+  margin-bottom:24px;
+}
+body[data-page="latest-issue"] .latest-inside-head h2{
+  margin:.18em 0 0;
+  max-width:16ch;
+  color:#102f34;
+  font-family:Arial,sans-serif;
+  font-size:clamp(2rem,4vw,3.3rem);
+  font-weight:800;
+  letter-spacing:-.04em;
+  line-height:.98;
+}
+body[data-page="latest-issue"] .latest-inside-head>p{
+  margin:0;
+  color:#53666a;
+  line-height:1.55;
+}
+body[data-page="latest-issue"] .latest-feature-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+body[data-page="latest-issue"] .latest-feature-card{
+  display:flex;
+  min-width:0;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid #d4dfda;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 10px 26px rgba(19,45,49,.065);
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+}
+body[data-page="latest-issue"] .latest-feature-card:hover{
+  transform:translateY(-3px);
+  border-color:#a9c8c4;
+  box-shadow:0 17px 34px rgba(19,45,49,.10);
+}
+body[data-page="latest-issue"] .latest-feature-image{
+  display:block;
+  height:215px;
+  overflow:hidden;
+  background:#eaf3f0;
+}
+body[data-page="latest-issue"] .latest-feature-image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+body[data-page="latest-issue"] .latest-feature-card:nth-child(2) .latest-feature-image img,
+body[data-page="latest-issue"] .latest-feature-card:nth-child(3) .latest-feature-image img{
+  object-fit:contain;
+  padding:8px;
+  background:#f7faf8;
+}
+body[data-page="latest-issue"] .latest-feature-copy{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  padding:19px 20px 21px;
+}
+body[data-page="latest-issue"] .latest-feature-copy>span{
+  align-self:flex-start;
+  margin-bottom:9px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:#0f6470;
+  color:#fff;
+  font-size:.61rem;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+body[data-page="latest-issue"] .latest-feature-card:nth-child(2) .latest-feature-copy>span{background:#0f6470}
+body[data-page="latest-issue"] .latest-feature-card:nth-child(3) .latest-feature-copy>span{background:#a75b00}
+body[data-page="latest-issue"] .latest-feature-copy h3{
+  margin:0 0 9px;
+  color:#173f45;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.38rem;
+  line-height:1.08;
+}
+body[data-page="latest-issue"] .latest-feature-copy p{
+  margin:0 0 17px;
+  color:#4d6064;
+  font-size:.9rem;
+  line-height:1.5;
+}
+body[data-page="latest-issue"] .latest-feature-link{
+  margin-top:auto;
+  color:#0f6470;
+  font-size:.84rem;
+  font-weight:900;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+
+/* Give the three purpose cards some identity without turning them into decorative icon tiles. */
+body[data-page="latest-issue"] .grid3 .icon-card{
+  position:relative;
+  min-height:190px;
+  padding:27px 25px 24px;
+  overflow:hidden;
+  border:1px solid #d8e0dc;
+  border-radius:15px;
+  box-shadow:0 9px 22px rgba(19,45,49,.055);
+}
+body[data-page="latest-issue"] .grid3 .icon-card:before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:7px;
+  background:#0f6470;
+}
+body[data-page="latest-issue"] .grid3 .icon-card:nth-child(2):before{background:#f8791b}
+body[data-page="latest-issue"] .grid3 .icon-card:nth-child(3):before{background:#9ab82d}
+body[data-page="latest-issue"] .grid3 .icon-card:nth-child(1){background:linear-gradient(180deg,#fff,#f2faf8)}
+body[data-page="latest-issue"] .grid3 .icon-card:nth-child(2){background:linear-gradient(180deg,#fff,#fff7ee)}
+body[data-page="latest-issue"] .grid3 .icon-card:nth-child(3){background:linear-gradient(180deg,#fff,#f7faea)}
+body[data-page="latest-issue"] .grid3 .icon-card .card-number{
+  display:inline-flex;
+  margin-bottom:18px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:#eef7f5;
+  color:#0f6470;
+  font-size:.64rem;
+  letter-spacing:.12em;
+}
+body[data-page="latest-issue"] .grid3 .icon-card:nth-child(2) .card-number{background:#fff0e3;color:#b85d0a}
+body[data-page="latest-issue"] .grid3 .icon-card:nth-child(3) .card-number{background:#f0f6d7;color:#607618}
+body[data-page="latest-issue"] .grid3 .icon-card h3{
+  margin:0 0 10px;
+  font-size:1.45rem;
+  line-height:1.08;
+}
+body[data-page="latest-issue"] .grid3 .icon-card p{margin:0;line-height:1.52}
+
+/* Reader snapshot: stronger editorial block and less spreadsheet-like. */
+body[data-page="latest-issue"] .soft-teal{
+  background:
+    radial-gradient(circle at 8% 18%,rgba(15,100,112,.07) 0 8%,transparent 9%),
+    linear-gradient(180deg,#eaf5f2 0%,#f3f8f6 100%);
+}
+body[data-page="latest-issue"] .issue-proof-split{
+  position:relative;
+  gap:42px;
+  padding:34px;
+  border:1px solid #ccdfda;
+  border-radius:19px;
+  background:rgba(255,255,255,.82);
+  box-shadow:0 14px 34px rgba(19,45,49,.07);
+}
+body[data-page="latest-issue"] .issue-proof-split h2{
+  max-width:13ch;
+  margin:.18em 0 .35em;
+  font-family:Arial,sans-serif;
+  font-size:clamp(2.1rem,4vw,3.3rem);
+  font-weight:800;
+  line-height:1.01;
+  letter-spacing:-.04em;
+}
+body[data-page="latest-issue"] .issue-facts{
+  align-self:center;
+  gap:13px;
+}
+body[data-page="latest-issue"] .issue-facts>div{
+  position:relative;
+  min-height:124px;
+  padding:24px 20px 18px;
+  overflow:hidden;
+  border:1px solid #d7e0dc;
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 8px 18px rgba(19,45,49,.045);
+}
+body[data-page="latest-issue"] .issue-facts>div:before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:6px;
+  background:#0f6470;
+}
+body[data-page="latest-issue"] .issue-facts>div:nth-child(2):before{background:#f8791b}
+body[data-page="latest-issue"] .issue-facts strong{
+  display:block;
+  color:#173f45;
+  font:700 2.15rem/1 Georgia,"Times New Roman",serif;
+}
+body[data-page="latest-issue"] .issue-facts span{display:block;margin-top:8px;color:#596a6d}
+
+@media(max-width:900px){
+  body[data-page="latest-issue"] .latest-inside-head{grid-template-columns:1fr;gap:10px}
+  body[data-page="latest-issue"] .latest-feature-grid{grid-template-columns:1fr 1fr}
+  body[data-page="latest-issue"] .latest-feature-card:last-child{grid-column:1/-1}
+}
+@media(max-width:620px){
+  body[data-page="latest-issue"] .latest-feature-grid{grid-template-columns:1fr}
+  body[data-page="latest-issue"] .latest-feature-card:last-child{grid-column:auto}
+  body[data-page="latest-issue"] .latest-feature-image{height:195px}
+  body[data-page="latest-issue"] .latest-inside-section{padding:40px 0}
+  body[data-page="latest-issue"] .issue-proof-split{padding:23px}
+}
