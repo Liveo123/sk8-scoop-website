@@ -1007,6 +1007,91 @@
       ],
       "freshness": "current",
       "checked": "2026-09-25"
+    },
+    {
+      "id": "paradise-mill-macclesfield",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Paradise Mill and Silk Museum",
+      "summary": "Free Silk Museum galleries plus paid Paradise Mill access and guided loom demonstrations, with current prices and access details.",
+      "href": "/local-history/paradise-mill-macclesfield/",
+      "area": "Nearby",
+      "tags": [
+        "paradise mill",
+        "silk museum",
+        "macclesfield",
+        "looms",
+        "jacquard",
+        "industrial history",
+        "museum",
+        "rainy day"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "teggs-nose-country-park",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "Tegg's Nose Country Park",
+      "summary": "A two-mile geology trail around the old quarry, with current parking charges, visitor-centre details and the no-cycling rule.",
+      "href": "/outdoors/teggs-nose-country-park/",
+      "area": "Nearby",
+      "tags": [
+        "tegg's nose",
+        "teggs nose",
+        "macclesfield",
+        "geology",
+        "quarry",
+        "walk",
+        "walking",
+        "country park",
+        "outdoors"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "bugsworth-basin",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Bugsworth Basin",
+      "summary": "A free canal-heritage walk through the surviving layout of a major inland port, with volunteer museum and transport details.",
+      "href": "/local-history/bugsworth-basin/",
+      "area": "Nearby",
+      "tags": [
+        "bugsworth basin",
+        "buxworth",
+        "canal",
+        "peak forest canal",
+        "industrial history",
+        "museum",
+        "walk",
+        "free"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "anson-engine-museum",
+      "type": "Guides",
+      "category": "Kids & Family",
+      "title": "Anson Engine Museum",
+      "summary": "Running engines, seasonal Friday opening and monthly steam days at Higher Poynton, with current 2026 ticket prices.",
+      "href": "/kids-family/anson-engine-museum/",
+      "area": "Nearby",
+      "tags": [
+        "anson engine museum",
+        "poynton",
+        "engines",
+        "engineering",
+        "steam",
+        "museum",
+        "family",
+        "kids"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
     }
   ]
 }
