@@ -46,23 +46,23 @@ window.SK8_CONFIG = {
   publicStats: {
     subscriberCount: "500+",
     subscriberProof: "500+",
-    issuesPublished: 13,
-    checkedDate: "18 September 2026",
+    issuesPublished: 14,
+    checkedDate: "25 September 2026",
     latestMainSendRecipients: 539,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "18 September 2026",
+    latestIssueDate: "25 September 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 13,
-    dateIso: "2026-09-18",
-    dateDisplay: "Friday 18 September 2026",
-    title: "Issue 13 is out",
-    headline: "Free Chinatown festival, CoderDojo & Cheadle’s wartime story",
-    summary: "Free CoderDojo, Manchester Mid-Autumn Festival, Heald Green planning, the story behind Cheadle War Memorial’s civilian names and a four-mile local-history walk.",
-    url: "https://connect.mailerlite.com/emails/198942565915953065/preview"
+    number: 14,
+    dateIso: "2026-09-25",
+    dateDisplay: "Friday 25 September 2026",
+    title: "Issue 14 · Friday 25 September 2026",
+    headline: "Medieval Manchester, The Unfriend & an 11th-century Cheadle surprise",
+    summary: "A free medieval faire, The Unfriend in Heald Green, an M60 closure, St Mary’s Cheadle, the Local Plan and useful weekend ideas.",
+    url: "https://connect.mailerlite.com/emails/199476219451803347/preview"
   },
   stripeLinks: {
     local_spotlight: "",
