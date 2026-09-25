@@ -79,7 +79,7 @@
           <a class="reader-link home-section-link" href="/around-sk8/">Explore more local stories →</a>
         </div>
         <div class="reader-card-grid">
-          <article class="reader-story" data-home-story>
+          <article class="reader-story" data-home-story data-expire-after="2026-09-28">
             <div class="reader-story-image story-image-one dicm-visual" style="background-image:none;background-color:#f7faf8"><img class="dicm-art" src="https://res.cloudinary.com/gocq00bt/image/upload/v1790008142/issue14-m60-rich-v2.png" alt="SK8 Scoop M60 J17 to J18 weekend closure guide" loading="eager" decoding="async"><span class="dicm-mode-label">KNOW THIS</span></div>
             <div class="reader-story-body"><h3>The M60 closes between J17 and J18 this weekend</h3><p class="reader-meta">26–28 September · both directions · staggered closure times</p><p data-story-summary>Westbound closes at 8pm Saturday and eastbound at 10pm. Both are due to reopen at 6am Monday.</p><a class="reader-link" data-nue-link data-nue-type="updates" href="/updates/">Check the useful travel update →</a></div>
           </article>
@@ -132,8 +132,8 @@
         </div>
         <div class="home-resource-grid">
           <article class="home-resource-card reader-latest-panel">
-            <div class="reader-latest-cover"><img src="assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><span>ISSUE 13</span></div>
-            <div class="reader-latest-copy home-resource-copy"><div class="eyebrow">Latest issue</div><h2>Issue 13</h2><p>Free CoderDojo, Manchester Mid-Autumn Festival, Heald Green planning, the story behind Cheadle War Memorial’s civilian names and a four-mile local-history walk.</p><a class="button" href="https://connect.mailerlite.com/emails/198942565915953065/preview">Read Issue 13 →</a><a class="reader-link reader-block-link" href="archive.html">Browse all issues</a></div>
+            <div class="reader-latest-cover"><img src="assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><span>ISSUE 14</span></div>
+            <div class="reader-latest-copy home-resource-copy"><div class="eyebrow">Latest issue</div><h2>Issue 14</h2><p>A free medieval faire, The Unfriend in Heald Green, an M60 closure, St Mary’s Cheadle, the Local Plan and useful weekend ideas.</p><a class="button" href="https://connect.mailerlite.com/emails/199476219451803347/preview">Read Issue 14 →</a><a class="reader-link reader-block-link" href="archive.html">Browse all issues</a></div>
           </article>
           <article class="home-resource-card home-resource-guide home-resource-free-cheap">
             <div class="home-resource-visual is-contain"><img src="assets/images/free-cheap-guide-logo.webp" alt="SK8 Scoop Free & Cheap Guide logo" loading="lazy"></div>
@@ -172,6 +172,16 @@
 
   <script src="assets/config.js"></script>
   <script src="assets/site.js"></script>
+  <script>
+  (() => {
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone:'Europe/London', year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(new Date());
+    const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+    const today = `${values.year}-${values.month}-${values.day}`;
+    document.querySelectorAll('[data-expire-after]').forEach(node => {
+      if (today > node.dataset.expireAfter) node.remove();
+    });
+  })();
+</script>
   <script src="assets/homepage-nue.js"></script>
 </body>
 </html>
