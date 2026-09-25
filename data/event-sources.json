@@ -895,6 +895,64 @@
         "Gatley workshop event October 2026",
         "Heald Green workshop event October 2026"
       ]
+    },
+    {
+      "id": "chads-theatre",
+      "name": "Chads Theatre Cheadle Hulme",
+      "tier": "A",
+      "area": "Cheadle Hulme",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.chads.co.uk/",
+      "search_queries": [
+        "Chads Theatre Cheadle Hulme what's on 2026",
+        "site:stockport.gov.uk/events Chads Theatre Cheadle Hulme"
+      ]
+    },
+    {
+      "id": "healthy-stockport-events",
+      "name": "Healthy Stockport events",
+      "tier": "B",
+      "area": "Stockport + SK8",
+      "role": "official-discovery+cost-details",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.healthystockport.co.uk/events"
+    },
+    {
+      "id": "pure-innovations-events",
+      "name": "Pure Innovations events and venues",
+      "tier": "B",
+      "area": "Stockport + Cheadle",
+      "role": "primary-community-support",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.pureinnovations.co.uk/events/"
+    },
+    {
+      "id": "stockport-amateur-theatres",
+      "name": "Stockport Amateur Theatres listings",
+      "tier": "B",
+      "area": "Stockport + SK8",
+      "role": "discovery+theatre-network",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockportamateurtheatres.co.uk/"
+    },
+    {
+      "id": "life-leisure",
+      "name": "Life Leisure local sessions and events",
+      "tier": "B",
+      "area": "Stockport + SK8",
+      "role": "primary+community-activities",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.lifeleisure.net/",
+      "search_queries": [
+        "site:stockport.gov.uk/events Life Leisure Cheadle",
+        "site:healthystockport.co.uk/events Life Leisure Cheadle"
+      ]
     }
   ]
 }
