@@ -833,6 +833,94 @@
       ],
       "freshness": "current",
       "checked": "2026-09-25"
+    },
+    {
+      "id": "stockport-plaza-behind-scenes",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Stockport Plaza behind-the-scenes tour",
+      "summary": "A guided look around Stockport’s 1932 Art Deco Plaza, with selected tour dates and an access caveat because the standard route includes stairs.",
+      "href": "/local-history/stockport-plaza-behind-the-scenes/",
+      "area": "Nearby",
+      "tags": [
+        "stockport plaza",
+        "plaza",
+        "art deco",
+        "cinema",
+        "theatre",
+        "behind the scenes",
+        "tour",
+        "stockport",
+        "history"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "quarry-bank-styal",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Quarry Bank, Styal",
+      "summary": "A half-to-full-day industrial and social-history visit linking the working mill, Apprentice House, workers’ stories, gardens and estate.",
+      "href": "/local-history/quarry-bank-styal/",
+      "area": "Nearby",
+      "tags": [
+        "quarry bank",
+        "styal",
+        "national trust",
+        "mill",
+        "industrial history",
+        "apprentice house",
+        "workers",
+        "gardens"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "chadkirk-country-estate",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "Chadkirk Country Estate",
+      "summary": "A free Romiley outing through woodland, meadow and orchard to a Grade II* chapel, with small-car-park and rail-access details.",
+      "href": "/outdoors/chadkirk-country-estate/",
+      "area": "Nearby",
+      "tags": [
+        "chadkirk",
+        "romiley",
+        "chapel",
+        "walk",
+        "woodland",
+        "meadow",
+        "orchard",
+        "free",
+        "history",
+        "outdoors"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
+    },
+    {
+      "id": "new-mills-torrs-millennium-walkway",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "New Mills Torrs and Millennium Walkway",
+      "summary": "A free gorge walk below New Mills with the Millennium Walkway, industrial heritage and several access routes with very different steepness.",
+      "href": "/outdoors/new-mills-torrs-millennium-walkway/",
+      "area": "Nearby",
+      "tags": [
+        "new mills",
+        "torrs",
+        "millennium walkway",
+        "gorge",
+        "walk",
+        "industrial history",
+        "free",
+        "outdoors",
+        "high peak"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
     }
   ]
 }
