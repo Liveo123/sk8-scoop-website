@@ -28,6 +28,19 @@ Tiers:
 
 Discovery is not verification. Eventbrite, TicketSource, Skiddle, Meetup, Facebook, Instagram, search results and community posts can identify candidates, but public SK8 Scoop facts should be checked against an organiser, venue, council or equivalent primary source wherever practical.
 
+## Review queue
+
+Use `data/event-review-queue.json` as the staging area between discovery and publication.
+
+Statuses:
+- **ready** — verified and suitable to stage for publication;
+- **needs_check** — potentially useful, but one or more material facts still need verification;
+- **rejected** — do not publish; retain the rejection reason briefly so the same weak candidate is not repeatedly rediscovered.
+
+Every queue item records at least an ID, title, area, source URL, discovery date, status and reason. `needs_check` items must state exactly which facts are missing. `ready` items must carry the full publishable event fields before they can move into `data/events.json`.
+
+The queue is an editorial control, not a public page.
+
 ## Harvest sequence
 
 1. Load current `data/events.json`.
@@ -38,14 +51,16 @@ Discovery is not verification. Eventbrite, TicketSource, Skiddle, Meetup, Facebo
 6. Run Tier D discovery queries for gaps, overlooked hyperlocal items and unusual events.
 7. Ingest future-event candidates already verified during Newsletter Factory or Guide Factory research.
 8. Review first-party `/submit-event/` submissions.
-9. Normalise candidates into the event schema.
-10. Deduplicate.
-11. Verify date, start time, end date/range, venue, area, price/free claim, booking route and source.
-12. Prefer the organiser/venue URL as `source_url`; keep booking URL separately when useful.
-13. Add only events that materially improve reader choice.
-14. Stage changes on preview.
-15. Run structural, link, freshness and mobile QA.
-16. Production remains human approval-gated.
+9. Add discovered candidates to `data/event-review-queue.json` and mark them `needs_check`, `ready` or `rejected`.
+10. Normalise candidates into the event schema.
+11. Deduplicate against both the queue and current `data/events.json`.
+12. Verify date, start time, end date/range, venue, area, price/free claim, booking route and source.
+13. Prefer the organiser/venue URL as `source_url`; keep booking URL separately when useful.
+14. Promote only `ready` items that materially improve reader choice into `data/events.json`.
+15. Retain `needs_check` and recent `rejected` records in the queue with clear reasons.
+16. Stage changes on preview.
+17. Run review-queue QA, event-data QA, link/freshness checks and relevant mobile QA.
+18. Production remains human approval-gated.
 
 ## Dedupe rules
 
@@ -98,7 +113,8 @@ The browser already hides expired entries. The supply pipeline must therefore ke
 Every harvest should report:
 - total current live listings after expiry;
 - number of new candidates found;
-- number verified and staged;
+- queue counts for ready / needs_check / rejected;
+- number promoted into the public event data;
 - number rejected and why;
 - earliest and latest event dates;
 - core-SK8 vs wider count;
