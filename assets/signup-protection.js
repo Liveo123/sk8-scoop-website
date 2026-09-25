@@ -97,9 +97,11 @@
 
   const getKind = form => {
     const explicit = String(form.dataset.signupKind || '').trim().toLowerCase();
-    if (explicit === 'guide') return 'guide';
+    if (['guide','free_cheap_guide','52_adventures'].includes(explicit)) return explicit;
     return form.matches('[data-qr-form]') ? 'qr' : 'main';
   };
+
+  const isGuideKind = kind => ['guide','free_cheap_guide','52_adventures'].includes(kind);
 
   const getStatus = form => {
     let status = form.nextElementSibling && form.nextElementSibling.classList.contains('signup-status')
@@ -157,7 +159,7 @@
     container.dataset.sk8TurnstileFor = position;
     container.style.marginTop = '10px';
     container.style.maxWidth = '360px';
-    container.style.minHeight = getKind(form) === 'guide' ? '0' : '65px';
+    container.style.minHeight = isGuideKind(getKind(form)) ? '0' : '65px';
     form.insertAdjacentElement('afterend', container);
     return container;
   };
@@ -209,7 +211,7 @@
           action: 'newsletter_signup',
           theme: 'auto',
           size: 'flexible',
-          appearance: getKind(form) === 'guide' ? 'interaction-only' : 'always',
+          appearance: isGuideKind(getKind(form)) ? 'interaction-only' : 'always',
           'response-field': false,
           callback: token => {
             tokenField.value = String(token || '');
@@ -251,7 +253,7 @@
     const original = button ? button.textContent : '';
     if (button) {
       button.disabled = true;
-      button.textContent = kind === 'guide' ? 'Sending…' : 'Joining…';
+      button.textContent = isGuideKind(kind) ? 'Sending…' : 'Joining…';
     }
 
     try {
@@ -263,7 +265,7 @@
       }
 
       status.className = 'signup-status show';
-      status.textContent = kind === 'guide' ? 'Getting your guide ready…' : 'Adding you to SK8 Scoop…';
+      status.textContent = isGuideKind(kind) ? 'Getting your guide ready…' : 'Adding you to SK8 Scoop…';
 
       const response = await fetch('/api/newsletter-signup', {
         method: 'POST',
@@ -276,7 +278,13 @@
       }
 
       const formPosition = form.dataset.formPosition || 'unknown';
-      const signupSource = kind === 'qr' ? 'local_qr' : kind === 'guide' ? 'free_cheap_guide' : 'website';
+      const signupSource = kind === 'qr'
+        ? 'local_qr'
+        : kind === '52_adventures'
+        ? '52_adventures'
+        : isGuideKind(kind)
+        ? 'free_cheap_guide'
+        : 'website';
       if (typeof window.sk8Track === 'function') {
         window.sk8Track('sign_up', {
           method: 'MailerLite + Turnstile',
@@ -287,8 +295,14 @@
 
       form.dispatchEvent(new CustomEvent('sk8:mailerlite-success', { bubbles: true, detail: { result } }));
       status.className = 'signup-status show success';
-      status.textContent = kind === 'guide' ? 'Done. Opening your guide…' : 'You’re in. Opening the welcome page…';
-      const success = kind === 'qr' ? '/qr-success/' : kind === 'guide' ? '/free-cheap-guide/success/' : '/signup-success/';
+      status.textContent = isGuideKind(kind) ? 'Done. Opening your guide…' : 'You’re in. Opening the welcome page…';
+      const success = kind === 'qr'
+        ? '/qr-success/'
+        : kind === '52_adventures'
+        ? '/52-adventures/success/'
+        : isGuideKind(kind)
+        ? '/free-cheap-guide/success/'
+        : '/signup-success/';
       window.setTimeout(() => location.assign(success), 350);
     } catch (error) {
       if (typeof window.sk8Track === 'function') {
