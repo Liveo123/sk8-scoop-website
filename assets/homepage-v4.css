@@ -179,7 +179,7 @@ body.reader-home .home-resource-adventures .adventures-logo-panel .adventure-tra
 body.reader-home .home-resource-adventures .adventures-logo-panel img{
   position:relative;
   z-index:1;
-  width:min(88%,300px)!important;
+  width:min(88%,240px)!important;
   height:100%!important;
   max-height:170px;
   object-fit:contain!important;
