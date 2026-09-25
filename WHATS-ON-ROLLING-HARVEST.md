@@ -41,6 +41,12 @@ Every queue item records at least an ID, title, area, source URL, discovery date
 
 The queue is an editorial control, not a public page.
 
+### Promotion helper
+
+Use `node scripts/promote-ready-events.mjs` first in dry-run mode. It reports the exact `ready` items eligible to move into `data/events.json` and makes no changes.
+
+After verification and editorial review on a preview/staging branch only, `node scripts/promote-ready-events.mjs --apply` may promote those `ready` items, remove them from the review queue and keep `needs_check` / `rejected` items in place. Production merge remains separately owner-approved.
+
 ## Harvest sequence
 
 1. Load current `data/events.json`.
