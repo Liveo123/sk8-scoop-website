@@ -792,6 +792,27 @@
       ],
       "freshness": "current",
       "checked": "2026-09-25"
+    },
+    {
+      "id": "heald-green-north-history-walk",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Heald Green North History Walk",
+      "summary": "A roughly four-mile, two-hour local-history walk linking 22 Heald Green stops, with route-source and diversion caveats kept visible.",
+      "href": "/local-history/heald-green-north-history-walk/",
+      "area": "Heald Green",
+      "tags": [
+        "heald green",
+        "history walk",
+        "walking",
+        "22 stops",
+        "local history",
+        "free",
+        "outdoors",
+        "free and cheap"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-25"
     }
   ]
 }
