@@ -28,8 +28,11 @@
       const active = pageIdentity[path] || '';
       const links = [
         ['whats-on','/whats-on/','What’s On'],
+        ['around-sk8','/around-sk8/','Around SK8'],
         ['guides','/guides/','Guides'],
-        ['around-sk8','/around-sk8/','Around SK8']
+        ['latest-issue','/latest','Latest'],
+        ['submit','/submit/','Submit'],
+        ['advertise','/advertise.html','Advertise']
       ];
       nav.innerHTML = links.map(([key,href,label]) => `<a${active===key?' class="active" aria-current="page"':''} href="${href}">${label}</a>`).join('') + `<a class="button nav-join reader-nav-join${active==='join'?' active':''}" href="/join/">Join free</a>`;
     }
