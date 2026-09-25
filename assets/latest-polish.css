@@ -33,16 +33,13 @@ body[data-page="latest-issue"] .latest-join-card{
   box-shadow:0 20px 42px rgba(19,45,49,.12);
 }
 body[data-page="latest-issue"] .latest-join-card:before{
-  content:"NEXT FRIDAY";
-  display:inline-flex;
-  margin-bottom:10px;
-  padding:6px 9px;
+  content:"";
+  display:block;
+  width:58px;
+  height:6px;
+  margin-bottom:14px;
   border-radius:999px;
-  background:#eef7f5;
-  color:#0f6470;
-  font-size:.62rem;
-  font-weight:900;
-  letter-spacing:.12em;
+  background:#f8791b;
 }
 
 /* Image-led story previews from the current issue. */
