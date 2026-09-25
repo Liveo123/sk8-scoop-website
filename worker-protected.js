@@ -31,6 +31,29 @@ const SEARCH_TABLE_SQL = `CREATE TABLE IF NOT EXISTS search_events (
  created_at TEXT NOT NULL
 )`;
 
+const GUIDE_ACCESS_SQL = `CREATE TABLE IF NOT EXISTS guide_access_tokens (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ token_hash TEXT NOT NULL UNIQUE,
+ guide_key TEXT NOT NULL,
+ created_at TEXT NOT NULL,
+ expires_at TEXT NOT NULL
+)`;
+
+const GUIDE_ACCESS = {
+  '52-adventures': {
+    cookie: 'sk8_guide_52',
+    cookiePath: '/52-adventures/',
+    landing: '/52-adventures/#get-guide',
+    route: '/52-adventures/guide'
+  },
+  'free-cheap': {
+    cookie: 'sk8_guide_fc',
+    cookiePath: '/free-cheap-guide/',
+    landing: '/free-cheap-guide/#get-guide',
+    route: '/free-cheap-guide/guide'
+  }
+};
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -69,17 +92,9 @@ export default {
       return handleSearchStats(request, env);
     }
 
-    if ((url.pathname === '/free-cheap-guide/guide' || url.pathname === '/free-cheap-guide/guide/') && request.method === 'GET') {
-      const response = await existingWorker.fetch(request, env, ctx);
-      const contentType = response.headers.get('content-type') || '';
-      if (!contentType.includes('text/html')) return response;
-      return new HTMLRewriter()
-        .on('body', {
-          element(element) {
-            element.append('<script src="/assets/free-cheap-guide-analytics.js" defer></script>', { html: true });
-          }
-        })
-        .transform(response);
+    const protectedGuide = getProtectedGuide(url.pathname);
+    if (protectedGuide && (request.method === 'GET' || request.method === 'HEAD')) {
+      return handleProtectedGuideRequest(request, env, ctx, protectedGuide);
     }
 
     return existingWorker.fetch(request, env, ctx);
@@ -146,6 +161,18 @@ async function handleNewsletterSignup(request, env) {
 
   const requestedKind = String(form.get('sk8_form_kind') || 'main');
   const kind = requestedKind === 'qr' ? 'qr' : requestedKind === 'guide' ? 'guide' : 'main';
+  const guideKey = kind === 'guide' ? String(form.get('sk8_guide_key') || '').trim().toLowerCase() : '';
+  if (kind === 'guide' && !GUIDE_ACCESS[guideKey]) {
+    return json({ error: 'Please refresh the guide page and try again.' }, 400);
+  }
+  if (kind === 'guide') {
+    try {
+      await ensureGuideAccessTable(env.DB);
+    } catch (error) {
+      console.error('Guide access storage unavailable', error);
+      return json({ error: 'Guide access is temporarily unavailable. Please try again shortly.' }, 503);
+    }
+  }
 
   const fields = {};
   for (const [key, value] of form.entries()) {
@@ -189,7 +216,133 @@ async function handleNewsletterSignup(request, env) {
     return json({ error: 'The newsletter service could not be reached. Please try again.' }, 502);
   }
 
-  return json({ success: true, kind });
+  const signupResponse = json({ success: true, kind, guideKey: guideKey || undefined });
+  if (kind === 'guide') {
+    try {
+      const cookie = await issueGuideAccessToken(env.DB, guideKey);
+      signupResponse.headers.append('set-cookie', cookie);
+    } catch (error) {
+      console.error('Guide access token issue failed', error);
+      return json({ error: 'Your signup was saved, but the guide could not be unlocked. Please try again.' }, 503);
+    }
+  }
+  return signupResponse;
+}
+
+function getProtectedGuide(pathname) {
+  for (const [key, config] of Object.entries(GUIDE_ACCESS)) {
+    if (pathname === config.route || pathname.startsWith(`${config.route}/`)) {
+      return { key, ...config };
+    }
+  }
+  return null;
+}
+
+async function handleProtectedGuideRequest(request, env, ctx, guide) {
+  let allowed = false;
+  try {
+    allowed = await hasGuideAccess(request, env.DB, guide.key);
+  } catch (error) {
+    console.error('Guide access check failed', error);
+  }
+
+  if (!allowed) {
+    const target = new URL(guide.landing, request.url).toString();
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: target,
+        'cache-control': 'no-store',
+        'x-robots-tag': 'noindex, follow'
+      }
+    });
+  }
+
+  let response = await existingWorker.fetch(request, env, ctx);
+  const contentType = response.headers.get('content-type') || '';
+  if (
+    guide.key === 'free-cheap' &&
+    request.method === 'GET' &&
+    contentType.includes('text/html')
+  ) {
+    response = new HTMLRewriter()
+      .on('body', {
+        element(element) {
+          element.append('<script src="/assets/free-cheap-guide-analytics.js" defer></script>', { html: true });
+        }
+      })
+      .transform(response);
+  }
+
+  const headers = new Headers(response.headers);
+  headers.set('x-robots-tag', 'noindex, follow');
+  headers.set('cache-control', 'private, no-store');
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
+async function ensureGuideAccessTable(db) {
+  if (!db) throw new Error('Guide access database unavailable');
+  await db.prepare(GUIDE_ACCESS_SQL).run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_guide_access_tokens_key_expiry ON guide_access_tokens(guide_key, expires_at)').run();
+}
+
+function readCookie(request, name) {
+  const header = request.headers.get('cookie') || '';
+  const parts = header.split(';');
+  for (const part of parts) {
+    const index = part.indexOf('=');
+    if (index < 0) continue;
+    const key = part.slice(0, index).trim();
+    if (key !== name) continue;
+    return part.slice(index + 1).trim();
+  }
+  return '';
+}
+
+function randomAccessToken() {
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  let binary = '';
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+}
+
+async function hashAccessToken(token) {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));
+  return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+async function issueGuideAccessToken(db, guideKey) {
+  const config = GUIDE_ACCESS[guideKey];
+  if (!config) throw new Error('Unknown guide key');
+  await ensureGuideAccessTable(db);
+  const token = randomAccessToken();
+  const tokenHash = await hashAccessToken(token);
+  await db.prepare(`INSERT INTO guide_access_tokens (token_hash, guide_key, created_at, expires_at)
+    VALUES (?, ?, datetime('now'), datetime('now', '+365 days'))`)
+    .bind(tokenHash, guideKey)
+    .run();
+  await db.prepare(`DELETE FROM guide_access_tokens WHERE expires_at <= datetime('now')`).run();
+  return `${config.cookie}=${token}; Path=${config.cookiePath}; Max-Age=31536000; HttpOnly; Secure; SameSite=Lax`;
+}
+
+async function hasGuideAccess(request, db, guideKey) {
+  const config = GUIDE_ACCESS[guideKey];
+  if (!config || !db) return false;
+  const token = readCookie(request, config.cookie);
+  if (!token || !/^[A-Za-z0-9_-]{40,60}$/.test(token)) return false;
+  await ensureGuideAccessTable(db);
+  const tokenHash = await hashAccessToken(token);
+  const row = await db.prepare(`SELECT id FROM guide_access_tokens
+    WHERE token_hash = ? AND guide_key = ? AND expires_at > datetime('now')
+    LIMIT 1`)
+    .bind(tokenHash, guideKey)
+    .first();
+  return Boolean(row && row.id);
 }
 
 async function ensureIssue12PollTable(db) {
