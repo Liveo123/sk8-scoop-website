@@ -1,0 +1,27 @@
+name: Ready event promotion QA
+
+on:
+  pull_request:
+    paths:
+      - 'data/event-review-queue.json'
+      - 'data/events.json'
+      - 'scripts/promote-ready-events.mjs'
+      - '.github/workflows/ready-event-promotion-qa.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/event-review-queue.json'
+      - 'data/events.json'
+      - 'scripts/promote-ready-events.mjs'
+      - '.github/workflows/ready-event-promotion-qa.yml'
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/promote-ready-events.mjs
