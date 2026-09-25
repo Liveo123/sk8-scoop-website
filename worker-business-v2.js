@@ -29,6 +29,9 @@ function secureResponse(response, url) {
   headers.set('referrer-policy', 'strict-origin-when-cross-origin');
   headers.set('permissions-policy', 'camera=(), microphone=(), geolocation=()');
   headers.set('x-frame-options', 'DENY');
+  if (url.pathname.startsWith('/52-adventures/guide') || url.pathname.startsWith('/free-cheap-guide/guide')) {
+    headers.set('x-robots-tag', 'noindex, follow');
+  }
   headers.set('content-security-policy', "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests");
   if (url.hostname === 'www.sk8scoop.com' || url.hostname === 'sk8scoop.com') {
     headers.set('strict-transport-security', 'max-age=31536000');
