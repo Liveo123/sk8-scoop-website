@@ -1,0 +1,27 @@
+name: Event source registry QA
+
+on:
+  pull_request:
+    paths:
+      - 'data/event-sources.json'
+      - 'scripts/check-event-source-registry.mjs'
+      - 'WHATS-ON-ROLLING-HARVEST.md'
+      - '.github/workflows/event-source-registry-qa.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/event-sources.json'
+      - 'scripts/check-event-source-registry.mjs'
+      - 'WHATS-ON-ROLLING-HARVEST.md'
+      - '.github/workflows/event-source-registry-qa.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/check-event-source-registry.mjs
