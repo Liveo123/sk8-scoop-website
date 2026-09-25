@@ -1,0 +1,958 @@
+{
+  "version": 1,
+  "updated": "2026-09-25",
+  "purpose": "Rolling discovery registry for SK8 Scoop What's On. Discovery is not verification: publishable event facts should be checked against an organiser, venue, council or other primary source wherever practical.",
+  "policy": {
+    "core_areas": [
+      "Cheadle",
+      "Cheadle Hulme",
+      "Gatley",
+      "Heald Green",
+      "nearby SK8"
+    ],
+    "wider_rule": "Use wider Stockport, nearby Cheshire and Greater Manchester only when the event is especially useful, distinctive or worth the trip for SK8 readers.",
+    "target_forward_window_days": 42,
+    "target_live_listings": "20-35 useful future listings, quality first",
+    "default_harvest_days": [
+      "Monday",
+      "Thursday"
+    ],
+    "primary_source_required_for_publication": true
+  },
+  "sources": [
+    {
+      "id": "stockport-council-whats-on",
+      "name": "Stockport Council What's On",
+      "tier": "A",
+      "area": "Stockport",
+      "role": "discovery+verification",
+      "cadence_days": 2,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/events"
+    },
+    {
+      "id": "stockport-council-libraries",
+      "name": "Stockport Council Libraries events",
+      "tier": "A",
+      "area": "Stockport",
+      "role": "discovery+verification",
+      "cadence_days": 2,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/events?Category=Libraries"
+    },
+    {
+      "id": "stockport-council-museums",
+      "name": "Stockport Council museums & attractions events",
+      "tier": "A",
+      "area": "Stockport",
+      "role": "discovery+verification",
+      "cadence_days": 3,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/events?Category=museums-and-attractions"
+    },
+    {
+      "id": "stockport-council-parks",
+      "name": "Stockport Council parks & outdoors events",
+      "tier": "A",
+      "area": "Stockport",
+      "role": "discovery+verification",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/events?Category=parks-and-outdoors"
+    },
+    {
+      "id": "stockroom",
+      "name": "Stockroom",
+      "tier": "A",
+      "area": "Stockport town centre",
+      "role": "primary",
+      "cadence_days": 2,
+      "mode": "fetch",
+      "url": "https://www.stockroomsk.co.uk/events"
+    },
+    {
+      "id": "one-stockport",
+      "name": "One Stockport events calendar",
+      "tier": "A",
+      "area": "Stockport",
+      "role": "discovery",
+      "cadence_days": 3,
+      "mode": "fetch",
+      "url": "https://www.onestockport.co.uk/events-calendar/"
+    },
+    {
+      "id": "totally-stockport",
+      "name": "Totally Stockport What's On",
+      "tier": "A",
+      "area": "Stockport town centre",
+      "role": "discovery+organiser-links",
+      "cadence_days": 3,
+      "mode": "fetch",
+      "url": "https://totallystockport.co.uk/events/"
+    },
+    {
+      "id": "merseyway",
+      "name": "Merseyway events",
+      "tier": "A",
+      "area": "Stockport town centre",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://merseyway.com/whats-on/events/"
+    },
+    {
+      "id": "stockport-plaza",
+      "name": "Stockport Plaza What's On",
+      "tier": "A",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://stockportplaza.co.uk/whats-on/"
+    },
+    {
+      "id": "players-theatre",
+      "name": "Players Theatre Cheadle Hulme",
+      "tier": "A",
+      "area": "Cheadle Hulme",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.playersdramatic.co.uk/"
+    },
+    {
+      "id": "heald-green-theatre",
+      "name": "Heald Green Theatre",
+      "tier": "A",
+      "area": "Heald Green",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.hgtheatre.co.uk/upcoming-productions"
+    },
+    {
+      "id": "avro",
+      "name": "Avro Heritage Museum events",
+      "tier": "A",
+      "area": "Woodford / near SK8",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.avroheritagemuseum.co.uk/events"
+    },
+    {
+      "id": "cheadle-masjid",
+      "name": "Cheadle Masjid events",
+      "tier": "A",
+      "area": "Heald Green",
+      "role": "primary",
+      "cadence_days": 2,
+      "mode": "fetch",
+      "url": "https://cheadlemasjid.org/events-activities/list/"
+    },
+    {
+      "id": "st-marys-cheadle",
+      "name": "St Mary's Church Cheadle calendar",
+      "tier": "A",
+      "area": "Cheadle",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://cheadle.org.uk/"
+    },
+    {
+      "id": "together-trust",
+      "name": "Together Trust events",
+      "tier": "A",
+      "area": "Cheadle",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.togethertrust.org.uk/events"
+    },
+    {
+      "id": "heald-green-village-hall",
+      "name": "Heald Green Village Hall",
+      "tier": "A",
+      "area": "Heald Green",
+      "role": "primary+regular-activities",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.healdgreenvillagehall.co.uk/community-hall-regular-users"
+    },
+    {
+      "id": "cheadle-civic-society",
+      "name": "Cheadle Civic Society",
+      "tier": "A",
+      "area": "Cheadle",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.cheadlecivicsociety.uk/community-projects"
+    },
+    {
+      "id": "arc-centre",
+      "name": "Arc Centre exhibitions & events",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://arc-centre.org/exhibitions-and-events/"
+    },
+    {
+      "id": "stockport-garrick",
+      "name": "Stockport Garrick Theatre",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.stockportgarrick.co.uk/about-us/2026-2027-season"
+    },
+    {
+      "id": "bramhall-village-square",
+      "name": "Bramhall Village Square What's On",
+      "tier": "B",
+      "area": "Bramhall / near SK8",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://bramhallvillagesquare.co.uk/whats-on/"
+    },
+    {
+      "id": "stockport-museums",
+      "name": "Stockport museums & attractions hub",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/landing/museums-attractions"
+    },
+    {
+      "id": "hat-works",
+      "name": "Hat Works",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/landing/hat-works-museum"
+    },
+    {
+      "id": "air-raid-shelters",
+      "name": "Stockport Air Raid Shelters",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/landing/air-raid-shelters"
+    },
+    {
+      "id": "staircase-house",
+      "name": "Staircase House",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/landing/staircase-house"
+    },
+    {
+      "id": "national-trust-quarry-bank",
+      "name": "Quarry Bank events",
+      "tier": "B",
+      "area": "Styal / worth-trip",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events"
+    },
+    {
+      "id": "national-trust-lyme",
+      "name": "Lyme events",
+      "tier": "B",
+      "area": "Disley / worth-trip",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/lyme/events"
+    },
+    {
+      "id": "national-trust-dunham",
+      "name": "Dunham Massey events",
+      "tier": "B",
+      "area": "Altrincham / worth-trip",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/dunham-massey/events"
+    },
+    {
+      "id": "runway-visitor-park",
+      "name": "Manchester Airport Runway Visitor Park",
+      "tier": "B",
+      "area": "Manchester Airport / near SK8",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.runwayvisitorpark.co.uk/"
+    },
+    {
+      "id": "jodrell-bank",
+      "name": "Jodrell Bank What's On",
+      "tier": "B",
+      "area": "Cheshire / worth-trip",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.jodrellbank.net/visit/whats-on/"
+    },
+    {
+      "id": "tatton-park",
+      "name": "Tatton Park events",
+      "tier": "B",
+      "area": "Knutsford / worth-trip",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.tattonpark.org.uk/Events_at_Tatton_Park/Events_at_Tatton_Park.aspx"
+    },
+    {
+      "id": "rhs-bridgewater",
+      "name": "RHS Garden Bridgewater What's On",
+      "tier": "C",
+      "area": "Salford / selective worth-trip",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.rhs.org.uk/gardens/bridgewater"
+    },
+    {
+      "id": "manchester-museum",
+      "name": "Manchester Museum events",
+      "tier": "C",
+      "area": "Manchester / selective worth-trip",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.museum.manchester.ac.uk/events"
+    },
+    {
+      "id": "treacle-market",
+      "name": "Treacle Market",
+      "tier": "C",
+      "area": "Macclesfield / selective worth-trip",
+      "role": "primary",
+      "cadence_days": 30,
+      "mode": "fetch",
+      "url": "https://www.treaclemarket.co.uk/"
+    },
+    {
+      "id": "visit-macclesfield",
+      "name": "Visit Macclesfield events",
+      "tier": "C",
+      "area": "Macclesfield / selective worth-trip",
+      "role": "discovery",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://visitmacclesfield.co.uk/"
+    },
+    {
+      "id": "heritage-open-days",
+      "name": "Heritage Open Days",
+      "tier": "C",
+      "area": "SK8 + Stockport + nearby",
+      "role": "discovery+primary-event-pages",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.heritageopendays.org.uk/"
+    },
+    {
+      "id": "visit-manchester-stockport",
+      "name": "Visit Manchester Stockport event round-ups",
+      "tier": "C",
+      "area": "Stockport + Greater Manchester",
+      "role": "discovery",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.visitmanchester.com/"
+    },
+    {
+      "id": "eventbrite",
+      "name": "Eventbrite local searches",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery",
+      "cadence_days": 2,
+      "mode": "search",
+      "url": "https://www.eventbrite.co.uk/",
+      "search_queries": [
+        "site:eventbrite.co.uk Cheadle SK8 event",
+        "site:eventbrite.co.uk Cheadle Hulme event",
+        "site:eventbrite.co.uk Gatley event",
+        "site:eventbrite.co.uk Heald Green event",
+        "site:eventbrite.co.uk Stockport event"
+      ]
+    },
+    {
+      "id": "ticketsource",
+      "name": "TicketSource local searches",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.ticketsource.co.uk/",
+      "search_queries": [
+        "site:ticketsource.co.uk Cheadle event",
+        "site:ticketsource.co.uk Stockport event"
+      ]
+    },
+    {
+      "id": "skiddle",
+      "name": "Skiddle Stockport/local searches",
+      "tier": "D",
+      "area": "Stockport + nearby",
+      "role": "discovery",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.skiddle.com/",
+      "search_queries": [
+        "site:skiddle.com Stockport event",
+        "site:skiddle.com Cheadle event"
+      ]
+    },
+    {
+      "id": "meetup",
+      "name": "Meetup local groups/events",
+      "tier": "D",
+      "area": "Stockport + nearby",
+      "role": "discovery",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.meetup.com/",
+      "search_queries": [
+        "site:meetup.com Stockport event",
+        "site:meetup.com Cheadle event"
+      ]
+    },
+    {
+      "id": "facebook-events",
+      "name": "Facebook Events and public organiser pages",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 2,
+      "mode": "manual-social",
+      "url": "https://www.facebook.com/events/",
+      "search_queries": [
+        "Cheadle SK8 events",
+        "Cheadle Hulme events",
+        "Gatley events",
+        "Heald Green events",
+        "Stockport events"
+      ]
+    },
+    {
+      "id": "instagram-public",
+      "name": "Instagram public organiser posts and location/hashtag searches",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 3,
+      "mode": "manual-social",
+      "url": "https://www.instagram.com/",
+      "search_queries": [
+        "Cheadle event",
+        "Cheadle Hulme event",
+        "Gatley event",
+        "Heald Green event",
+        "Stockport event"
+      ]
+    },
+    {
+      "id": "google-local-search",
+      "name": "Targeted web search by place/date/category",
+      "tier": "D",
+      "area": "SK8 + nearby",
+      "role": "discovery",
+      "cadence_days": 2,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle events this weekend",
+        "Cheadle Hulme events this weekend",
+        "Gatley events this weekend",
+        "Heald Green events this weekend",
+        "SK8 family events",
+        "SK8 free events",
+        "Stockport events next 6 weeks",
+        "Stockport family events next 6 weeks",
+        "Stockport free events next 6 weeks",
+        "Stockport markets workshops talks theatre next 6 weeks"
+      ]
+    },
+    {
+      "id": "local-schools",
+      "name": "Local school and PTA public event pages",
+      "tier": "D",
+      "area": "SK8",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle school fair open day community event",
+        "Cheadle Hulme school fair open day community event",
+        "Gatley school fair community event",
+        "Heald Green school fair community event"
+      ]
+    },
+    {
+      "id": "local-community-venues",
+      "name": "Community halls, churches, clubs and societies not already in registry",
+      "tier": "D",
+      "area": "SK8",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle community hall events",
+        "Cheadle Hulme community events",
+        "Gatley community hall events",
+        "Heald Green community events"
+      ]
+    },
+    {
+      "id": "sk8-submit-event",
+      "name": "SK8 Scoop Submit an Event queue",
+      "tier": "A",
+      "area": "SK8 + nearby",
+      "role": "first-party-discovery",
+      "cadence_days": 1,
+      "mode": "internal",
+      "url": "https://www.sk8scoop.com/submit-event/"
+    },
+    {
+      "id": "cheadle-hulme-web",
+      "name": "Cheadle Hulme Web events",
+      "tier": "B",
+      "area": "Cheadle Hulme + SK8",
+      "role": "discovery",
+      "cadence_days": 3,
+      "mode": "fetch",
+      "url": "https://www.cheadlehulmeweb.co.uk/cheadle-hulme-events/"
+    },
+    {
+      "id": "cheadle-hulme-con-club",
+      "name": "Cheadle Hulme Conservative Club events diary",
+      "tier": "A",
+      "area": "Cheadle Hulme",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html"
+    },
+    {
+      "id": "john-lewis-cheadle",
+      "name": "John Lewis Cheadle What's On",
+      "tier": "A",
+      "area": "Cheadle",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.johnlewis.com/our-shops/cheadle/whats-on"
+    },
+    {
+      "id": "seashell-trust",
+      "name": "Seashell events calendar",
+      "tier": "A",
+      "area": "Cheadle Hulme + Stockport",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.seashelltrust.org.uk/event/list/"
+    },
+    {
+      "id": "cheadle-hulme-methodist",
+      "name": "Cheadle Hulme Methodist Church calendar",
+      "tier": "A",
+      "area": "Cheadle Hulme",
+      "role": "primary+regular-activities",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.chmc.org.uk/calendar"
+    },
+    {
+      "id": "gatley-urc",
+      "name": "Gatley United Reformed Church",
+      "tier": "A",
+      "area": "Gatley",
+      "role": "primary+community-groups",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.gatleyurc.com/"
+    },
+    {
+      "id": "cheadle-village-hall",
+      "name": "Cheadle Village Hall groups and activities",
+      "tier": "A",
+      "area": "Cheadle",
+      "role": "primary+regular-activities",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://cheadlevillagehall.co.uk/"
+    },
+    {
+      "id": "stockport-market-place",
+      "name": "Stockport Market Place recurring events",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/market-place-events"
+    },
+    {
+      "id": "makers-market-stockport",
+      "name": "The Makers Market - Stockport",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.themakersmarket.co.uk/venue/stockport/"
+    },
+    {
+      "id": "foodie-friday",
+      "name": "Foodie Friday Stockport",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://skfoodiefriday.co.uk/"
+    },
+    {
+      "id": "stockport-symphony",
+      "name": "Stockport Symphony Orchestra",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.stockportsymphony.co.uk/"
+    },
+    {
+      "id": "bramall-hall",
+      "name": "Bramall Hall events",
+      "tier": "B",
+      "area": "Bramhall / near SK8",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/landing/bramall-hall"
+    },
+    {
+      "id": "woodford-community-centre",
+      "name": "Woodford Community Centre What's On",
+      "tier": "B",
+      "area": "Woodford / near SK8",
+      "role": "primary+community-groups",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://woodfordcom.com/"
+    },
+    {
+      "id": "east-cheshire-nt-association",
+      "name": "East Cheshire National Trust Association",
+      "tier": "B",
+      "area": "Stockport + east Cheshire",
+      "role": "primary+member-events",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/supporter-groups-in-cheshire-and-greater-manchester",
+      "search_queries": [
+        "East Cheshire National Trust Association next meeting 2026",
+        "East Cheshire National Trust Association talk walk 2026"
+      ]
+    },
+    {
+      "id": "visit-cheshire",
+      "name": "Visit Cheshire events",
+      "tier": "C",
+      "area": "Cheshire / selective worth-trip",
+      "role": "discovery",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.visitcheshire.com/whats-on"
+    },
+    {
+      "id": "cheshire-east-events",
+      "name": "Cheshire East events",
+      "tier": "C",
+      "area": "east Cheshire / selective worth-trip",
+      "role": "discovery+official",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.cheshireeast.gov.uk/leisure,_culture_and_tourism/whats_on/whats_on.aspx"
+    },
+    {
+      "id": "manchester-city-events",
+      "name": "Manchester City Council events",
+      "tier": "C",
+      "area": "Manchester / selective worth-trip",
+      "role": "discovery+official",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.manchester.gov.uk/events"
+    },
+    {
+      "id": "creative-tourist",
+      "name": "Creative Tourist Manchester/Stockport listings",
+      "tier": "D",
+      "area": "Greater Manchester",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.creativetourist.com/",
+      "search_queries": [
+        "site:creativetourist.com Stockport event",
+        "site:creativetourist.com Cheadle event"
+      ]
+    },
+    {
+      "id": "manchester-wire",
+      "name": "Manchester Wire listings",
+      "tier": "D",
+      "area": "Greater Manchester",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://manchesterwire.co.uk/",
+      "search_queries": [
+        "site:manchesterwire.co.uk Stockport events",
+        "site:manchesterwire.co.uk family events October 2026"
+      ]
+    },
+    {
+      "id": "families-online",
+      "name": "Families Online Manchester/Stockport",
+      "tier": "D",
+      "area": "SK8 + Stockport + nearby",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.familiesonline.co.uk/",
+      "search_queries": [
+        "site:familiesonline.co.uk Stockport events",
+        "site:familiesonline.co.uk Cheadle events"
+      ]
+    },
+    {
+      "id": "days-out-with-kids",
+      "name": "Day Out With The Kids event/activity discovery",
+      "tier": "D",
+      "area": "Stockport + nearby",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.dayoutwiththekids.co.uk/",
+      "search_queries": [
+        "site:dayoutwiththekids.co.uk Stockport events",
+        "site:dayoutwiththekids.co.uk Cheshire Halloween 2026"
+      ]
+    },
+    {
+      "id": "allevents",
+      "name": "AllEvents local discovery",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://allevents.in/",
+      "search_queries": [
+        "site:allevents.in Cheadle Stockport",
+        "site:allevents.in Stockport October 2026"
+      ]
+    },
+    {
+      "id": "fever",
+      "name": "Fever Manchester discovery",
+      "tier": "D",
+      "area": "Manchester / selective worth-trip",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://feverup.com/en/manchester",
+      "search_queries": [
+        "site:feverup.com Manchester family October 2026"
+      ]
+    },
+    {
+      "id": "designmynight",
+      "name": "DesignMyNight Manchester discovery",
+      "tier": "D",
+      "area": "Greater Manchester",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.designmynight.com/manchester",
+      "search_queries": [
+        "site:designmynight.com/manchester Stockport events",
+        "site:designmynight.com/manchester family events"
+      ]
+    },
+    {
+      "id": "local-sports-clubs",
+      "name": "Local sports clubs, fixtures and open days",
+      "tier": "D",
+      "area": "SK8 + near SK8",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle Town FC fixtures 2026",
+        "Cheadle Hulme cricket club events 2026",
+        "Cheadle Hulme lacrosse events 2026",
+        "Gatley cricket club events 2026",
+        "SK8 sports open day event"
+      ]
+    },
+    {
+      "id": "local-pubs-entertainment",
+      "name": "Local pubs, social clubs and live entertainment",
+      "tier": "D",
+      "area": "SK8",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle pub live music quiz event",
+        "Cheadle Hulme pub live music event",
+        "Gatley pub quiz live music event",
+        "Heald Green pub event live music"
+      ]
+    },
+    {
+      "id": "local-charities-community",
+      "name": "Local charities, support groups and community organisations",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle charity community event",
+        "Cheadle Hulme charity event",
+        "Gatley community charity event",
+        "Heald Green community charity event"
+      ]
+    },
+    {
+      "id": "local-arts-music-groups",
+      "name": "Local choirs, orchestras, art groups and amateur performance",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle choir concert 2026",
+        "Cheadle Hulme music concert 2026",
+        "Stockport amateur theatre October 2026",
+        "Stockport art exhibition October 2026"
+      ]
+    },
+    {
+      "id": "local-parent-family-groups",
+      "name": "Parent, toddler, SEND and family community groups",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle family event toddler 2026",
+        "Cheadle Hulme family event SEND 2026",
+        "Gatley children event 2026",
+        "Heald Green kids event 2026"
+      ]
+    },
+    {
+      "id": "local-business-events",
+      "name": "Independent local businesses running workshops, tastings and open days",
+      "tier": "D",
+      "area": "SK8",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle workshop event October 2026",
+        "Cheadle Hulme workshop event October 2026",
+        "Gatley workshop event October 2026",
+        "Heald Green workshop event October 2026"
+      ]
+    },
+    {
+      "id": "chads-theatre",
+      "name": "Chads Theatre Cheadle Hulme",
+      "tier": "A",
+      "area": "Cheadle Hulme",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.chads.co.uk/",
+      "search_queries": [
+        "Chads Theatre Cheadle Hulme what's on 2026",
+        "site:stockport.gov.uk/events Chads Theatre Cheadle Hulme"
+      ]
+    },
+    {
+      "id": "healthy-stockport-events",
+      "name": "Healthy Stockport events",
+      "tier": "B",
+      "area": "Stockport + SK8",
+      "role": "official-discovery+cost-details",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.healthystockport.co.uk/events"
+    },
+    {
+      "id": "pure-innovations-events",
+      "name": "Pure Innovations events and venues",
+      "tier": "B",
+      "area": "Stockport + Cheadle",
+      "role": "primary-community-support",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.pureinnovations.co.uk/events/"
+    },
+    {
+      "id": "stockport-amateur-theatres",
+      "name": "Stockport Amateur Theatres listings",
+      "tier": "B",
+      "area": "Stockport + SK8",
+      "role": "discovery+theatre-network",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockportamateurtheatres.co.uk/"
+    },
+    {
+      "id": "life-leisure",
+      "name": "Life Leisure local sessions and events",
+      "tier": "B",
+      "area": "Stockport + SK8",
+      "role": "primary+community-activities",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.lifeleisure.net/",
+      "search_queries": [
+        "site:stockport.gov.uk/events Life Leisure Cheadle",
+        "site:healthystockport.co.uk/events Life Leisure Cheadle"
+      ]
+    }
+  ]
+}

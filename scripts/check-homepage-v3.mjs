@@ -67,7 +67,9 @@ rejectText(js, 'reader-explore-icon', 'generic Explore icon fallback class');
 requireText(home, 'home-resource-grid', 'resource shelf');
 requireText(home, 'Three useful next stops', 'resource shelf heading');
 requireText(home, 'Free &amp; Cheap Guide', 'Free & Cheap resource');
-requireText(home, 'Summer Guide', 'Summer Guide resource');
+requireText(home, '52 Adventures', '52 Adventures resource');
+requireText(home, 'href="/52-adventures/"', '52 Adventures landing-page route');
+rejectText(home, '<h3>Summer Guide</h3>', 'retired Summer Guide homepage resource');
 requireText(v4, '.home-resource-grid', 'resource grid styling');
 requireText(v5, '.home-resource-visual.is-contain img', 'resource artwork breathing room');
 

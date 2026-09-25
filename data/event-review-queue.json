@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "updated": "2026-09-25",
+  "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
+  "statuses": {
+    "ready": "Verified and suitable to stage for publication.",
+    "needs_check": "Potentially useful but one or more material facts still need verification.",
+    "rejected": "Do not publish; retain briefly with a reason to avoid rediscovery."
+  },
+  "items": []
+}

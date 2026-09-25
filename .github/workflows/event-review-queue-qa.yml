@@ -1,0 +1,27 @@
+name: Event review queue QA
+
+on:
+  pull_request:
+    paths:
+      - 'data/event-review-queue.json'
+      - 'data/events.json'
+      - 'scripts/check-event-review-queue.mjs'
+      - '.github/workflows/event-review-queue-qa.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/event-review-queue.json'
+      - 'data/events.json'
+      - 'scripts/check-event-review-queue.mjs'
+      - '.github/workflows/event-review-queue-qa.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/check-event-review-queue.mjs

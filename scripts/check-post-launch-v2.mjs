@@ -52,6 +52,26 @@ contains('assets/whats-on.js','event_detail_click');
 contains('index.html','data-experiment="homepage-utility-promise-v1"');
 contains('index.html','Things to do, useful local updates and money-saving ideas');
 
+// Current visual-refresh contracts.
+contains('index.html','home-resource-adventures');
+contains('index.html','52 Adventures Guide logo');
+expect(fs.existsSync(path.join(root,'assets/images/52-adventures-guide-logo.webp')), '52 Adventures logo asset is missing');
+for (const file of ['index.html','guides/index.html','52-adventures/index.html']) {
+  contains(file,'/assets/images/52-adventures-guide-logo.webp');
+  excludes(file,'data:image/webp;base64');
+}
+contains('latest/index.html','/assets/latest-polish.css');
+contains('latest/index.html','latest-issue-mosaic');
+contains('latest/index.html','latest-feature-card');
+contains('latest/index.html','/planning/heald-green-local-plan-2026/');
+contains('latest/index.html','/local-history/heald-green-north-history-walk/');
+contains('latest/index.html','/local-history/cheadle-war-memorial-air-raid-victims/');
+excludes('assets/latest-polish.css','NEXT FRIDAY');
+const latestHtml = read('latest/index.html');
+expect((latestHtml.match(/<section\b/g) || []).length === (latestHtml.match(/<\/section>/g) || []).length, 'latest/index.html has unbalanced section tags');
+contains('advertise.html','ad-product-grid ad-route-grid');
+contains('assets/advertise-v5.css','#advertiser-tools .ad-route-grid');
+
 // Current advertiser offer and backend contract.
 // Temporary operating mode: TEST £40 and GROW £90 are the only standard public products.
 contains('advertise.html','TEST · £40');

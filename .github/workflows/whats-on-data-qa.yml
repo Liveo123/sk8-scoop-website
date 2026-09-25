@@ -1,0 +1,29 @@
+name: What's On data QA
+
+on:
+  pull_request:
+    paths:
+      - 'data/events.json'
+      - 'scripts/check-events-data.mjs'
+      - 'assets/whats-on.js'
+      - 'whats-on/index.html'
+      - '.github/workflows/whats-on-data-qa.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/events.json'
+      - 'scripts/check-events-data.mjs'
+      - 'assets/whats-on.js'
+      - 'whats-on/index.html'
+      - '.github/workflows/whats-on-data-qa.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/check-events-data.mjs

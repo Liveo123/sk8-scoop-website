@@ -126,3 +126,63 @@ body.reader-home.homepage-v3 .home-resource-card,body.reader-home.homepage-v3 .h
   body.reader-home.homepage-v3 .home-hero-subroutes{display:grid;grid-template-columns:1fr}
   body.reader-home.homepage-v3 .home-hero-subroutes a{justify-content:center}
 }
+
+
+/* 11. Guide resource cards: let the logos fill the media area cleanly. */
+body.reader-home .home-resource-guide .home-resource-visual{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  height:190px!important;
+  min-height:190px!important;
+  padding:18px 20px!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+body.reader-home .home-resource-guide .home-resource-visual img{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  margin:auto!important;
+  padding:0!important;
+  object-fit:contain!important;
+  background:transparent!important;
+  filter:none!important;
+}
+body.reader-home .home-resource-free-cheap .home-resource-visual img{
+  max-width:78%!important;
+  max-height:148px!important;
+}
+body.reader-home .home-resource-adventures{
+  border-color:#d4dfda;
+  box-shadow:0 9px 23px rgba(19,45,49,.06);
+}
+body.reader-home .home-resource-adventures .home-resource-visual{
+  background:#fff!important;
+}
+body.reader-home .home-resource-adventures .home-resource-visual:before,
+body.reader-home .home-resource-adventures .home-resource-visual:after,
+body.reader-home .home-resource-adventures .adventure-trail{
+  content:none!important;
+  display:none!important;
+}
+body.reader-home .home-resource-adventures .home-resource-visual img{
+  max-width:92%!important;
+  max-height:158px!important;
+}
+body.reader-home .home-resource-adventures .home-resource-copy{
+  background:#fff;
+}
+body.reader-home .home-resource-adventures .home-resource-copy .eyebrow{color:#b85d0a}
+body.reader-home .home-resource-adventures .home-resource-copy .button{background:#0f6470!important;color:#fff!important}
+
+@media(max-width:560px){
+  body.reader-home .home-resource-guide .home-resource-visual{
+    height:160px!important;
+    min-height:160px!important;
+    padding:14px 16px!important;
+  }
+  body.reader-home .home-resource-free-cheap .home-resource-visual img{max-height:124px!important}
+  body.reader-home .home-resource-adventures .home-resource-visual img{max-height:132px!important}
+}
+
