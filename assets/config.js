@@ -48,23 +48,23 @@ window.SK8_CONFIG = {
   publicStats: {
     subscriberCount: "500+",
     subscriberProof: "500+",
-    issuesPublished: 12,
-    checkedDate: "11 September 2026",
-    latestMainSendRecipients: 507,
+    issuesPublished: 14,
+    checkedDate: "25 September 2026",
+    latestMainSendRecipients: 570,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "11 September 2026",
+    latestIssueDate: "25 September 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 12,
-    dateIso: "2026-09-11",
-    dateDisplay: "Friday 11 September 2026",
-    title: "Issue 12 is out",
-    headline: "Black pudding, Gatley Carrs & the secrets of Ladybrook",
-    summary: "Black pudding throwing, dragon boats, Gatley Carrs, a Cheadle Hulme pub, Abney Hall and the Ladybrook corridor.",
-    url: "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619"
+    number: 14,
+    dateIso: "2026-09-25",
+    dateDisplay: "Friday 25 September 2026",
+    title: "Issue 14 is out",
+    headline: "Medieval Manchester, The Unfriend & an 11th-century Cheadle surprise",
+    summary: "A free medieval faire, The Unfriend in Heald Green, an M60 closure, St Mary’s Cheadle, the Local Plan and useful weekend ideas.",
+    url: "https://connect.mailerlite.com/emails/199476219451803347/preview"
   },
   stripeLinks: {
     local_spotlight: "",
