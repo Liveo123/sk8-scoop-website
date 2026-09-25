@@ -1,48 +1,50 @@
 {
-  "updated": "2026-09-18",
+  "updated": "2026-09-25",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "Heald Green’s Local Plan consultation starts 23 September",
-      "meta": "Heald Green · 23 Sep–8 Nov · policy stage",
-      "summary": "Three proposed housing allocations total 1,672 homes. This is the Local Plan stage, not planning permission, and the distinction matters.",
-      "href": "/planning/heald-green-local-plan-2026/",
-      "linkLabel": "See what is proposed and what happens next →",
+      "title": "The M60 closes between J17 and J18 this weekend",
+      "meta": "26–28 September · both directions · staggered closure times",
+      "summary": "Westbound closes at 8pm Saturday and eastbound at 10pm. Both are due to reopen at 6am Monday.",
+      "href": "/updates/",
+      "linkLabel": "Check the useful travel update →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
-      "image": "/assets/images/nue-explore-planning.webp",
-      "alt": "Editorial planning collage with a local map, development markers and consultation imagery"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790008142/issue14-m60-rich-v2.png",
+      "alt": "SK8 Scoop M60 J17 to J18 weekend closure guide",
+      "expiresAfter": "2026-09-28"
     },
     {
       "mode": "DO",
       "label": "DO THIS",
-      "title": "Walk 22 pieces of Heald Green history",
-      "meta": "Heald Green · about 4 miles · around 2 hours",
-      "summary": "Heald Green Heritage’s North Walk links the station, old farms, pubs, Cheadle Royal, war memorials and more into one local route.",
-      "href": "/local-history/heald-green-north-history-walk/",
-      "linkLabel": "Open the walk guide →",
+      "title": "A free medieval faire takes over Chetham's on Saturday",
+      "meta": "Manchester · Saturday 26 September · 11am–4pm · free",
+      "summary": "Living history, birds of prey, music, demonstrations and family activities, with optional library tours available separately.",
+      "href": "/whats-on/",
+      "linkLabel": "Find it in What’s On →",
       "visualType": "dicm",
-      "fit": "contain",
+      "fit": "cover",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1789740213/issue13-heald-green-history-walk-map-style1plus5-v1.png",
-      "alt": "Schematic Heald Green History Walk highlights map"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790009204/issue14-medieval-faire-editorial-rich-v4.png",
+      "alt": "Illustrated guide to Chetham's Medieval Faire with re-enactors, birds of prey and family activities",
+      "expiresAfter": "2026-09-26"
     },
     {
       "mode": "DISCOVER",
       "label": "DISCOVER THIS",
-      "title": "Why eight civilians are named on Cheadle War Memorial",
-      "meta": "Cheadle · two wartime raids · eight civilian victims",
-      "summary": "The rear plaque records people killed on ordinary Cheadle streets in the Bulkeley Road and Stockport Road raids of 1940–41.",
-      "href": "/local-history/cheadle-war-memorial-air-raid-victims/",
-      "linkLabel": "Read the story and source trail →",
+      "title": "An 11th-century surprise inside St Mary’s Cheadle",
+      "meta": "Cheadle · Grade I listed · history hiding in plain sight",
+      "summary": "The church contains an 11th-century cross, later medieval monuments and Tudor woodwork, while the medieval cross shaft outside became a sundial.",
+      "href": "/local-history/",
+      "linkLabel": "Explore the local-history trail →",
       "visualType": "dicm",
       "fit": "contain",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1789643833/issue13-war-memorial-editorial-v3.png",
-      "alt": "Illustrated explainer for the eight civilian air-raid names on Cheadle War Memorial"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790008119/issue14-st-marys-rich-v6.png",
+      "alt": "St Mary's Cheadle field guide showing historic details including the 11th-century cross and medieval cross-shaft sundial"
     }
   ],
   "explore": [
