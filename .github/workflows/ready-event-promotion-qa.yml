@@ -25,3 +25,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/promote-ready-events.mjs
+      - run: node tests/promote-ready-events.mjs
