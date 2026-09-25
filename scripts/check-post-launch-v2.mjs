@@ -55,6 +55,11 @@ contains('index.html','Things to do, useful local updates and money-saving ideas
 // Current visual-refresh contracts.
 contains('index.html','home-resource-adventures');
 contains('index.html','52 Adventures Guide logo');
+expect(fs.existsSync(path.join(root,'assets/images/52-adventures-guide-logo.webp')), '52 Adventures logo asset is missing');
+for (const file of ['index.html','guides/index.html','52-adventures/index.html']) {
+  contains(file,'/assets/images/52-adventures-guide-logo.webp');
+  excludes(file,'data:image/webp;base64');
+}
 contains('latest/index.html','/assets/latest-polish.css');
 contains('latest/index.html','latest-issue-mosaic');
 contains('latest/index.html','latest-feature-card');
