@@ -40,6 +40,11 @@ for (const key of expectedGuides) {
         html.includes('/52-adventures/#get-guide') || html.includes('/free-cheap-guide/#get-guide'),
         `${key} public sample must contain a signup CTA to a full guide: ${route}`
       );
+      const guideForms = [...html.matchAll(/<form[^>]*data-signup-kind=["']guide["'][^>]*>/gi)].map(match => match[0]);
+      for (const form of guideForms) {
+        assert(/data-guide-key=["'](?:52-adventures|free-cheap)["']/i.test(form), `Inline guide signup is missing data-guide-key: ${route}`);
+        assert(/data-success-url=["']\/(?:52-adventures|free-cheap-guide)\/success\/["']/i.test(form), `Inline guide signup is missing an explicit guide success URL: ${route}`);
+      }
       const section = normaliseRoute(route).split('/')[0];
       const sectionIndex = `${section}/index.html`;
       assert(fs.existsSync(sectionIndex), `Missing section index for public sample: ${route}`);
