@@ -164,6 +164,22 @@
     "status": "verified"
   },
   {
+    "id": "heald-green-business-advice-2026-10-02",
+    "title": "Free Business Advice at Heald Green Library",
+    "date": "2026-10-02",
+    "time": "10:30",
+    "area": "Heald Green",
+    "venue": "Heald Green Library, Finney Lane, Heald Green, Cheadle SK8 3JB",
+    "cost": "Free",
+    "category": "Business",
+    "description": "One Stockport Business Support Hub brings free advice to Heald Green Library for people developing a business idea or trying to grow an existing business.",
+    "booking_url": "",
+    "source_url": "https://www.stockport.gov.uk/events",
+    "verification": "OFFICIAL_COUNCIL_LISTING",
+    "checked": "2026-09-25",
+    "status": "verified"
+  },
+  {
     "id": "stockroom-soundsystem-2026-10-03",
     "title": "Stockroom Soundsystem: Fittings, Drivers and Amplifiers",
     "date": "2026-10-03",
