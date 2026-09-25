@@ -60,6 +60,18 @@ for (const file of ['index.html','guides/index.html','52-adventures/index.html']
   contains(file,'/assets/images/52-adventures-guide-logo.webp');
   excludes(file,'data:image/webp;base64');
 }
+// Guide funnel and SEO contracts.
+contains('52-adventures/index.html','data-signup-kind="52_adventures"');
+contains('free-cheap-guide/index.html','data-signup-kind="free_cheap_guide"');
+contains('assets/signup-protection.js',"'52_adventures'");
+contains('assets/signup-protection.js',"'/52-adventures/success/'");
+contains('worker-protected.js',"'199227746568635453'");
+contains('worker-protected.js',"'197763144685192678'");
+contains('sitemap.xml','https://www.sk8scoop.com/52-adventures/');
+contains('52-adventures/guide/index.html','name="robots" content="noindex,follow"');
+contains('privacy.html','rel="canonical" href="https://www.sk8scoop.com/privacy"');
+contains('terms.html','rel="canonical" href="https://www.sk8scoop.com/terms"');
+
 contains('latest/index.html','/assets/latest-polish.css');
 contains('latest/index.html','latest-issue-mosaic');
 contains('latest/index.html','latest-feature-card');
