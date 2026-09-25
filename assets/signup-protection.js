@@ -101,6 +101,14 @@
     return form.matches('[data-qr-form]') ? 'qr' : 'main';
   };
 
+  const getGuideKey = form => {
+    const explicit = String(form.dataset.guideKey || '').trim().toLowerCase();
+    if (explicit === '52-adventures' || explicit === 'free-cheap') return explicit;
+    if (location.pathname.startsWith('/52-adventures')) return '52-adventures';
+    if (location.pathname.startsWith('/free-cheap-guide')) return 'free-cheap';
+    return '';
+  };
+
   const getStatus = form => {
     let status = form.nextElementSibling && form.nextElementSibling.classList.contains('signup-status')
       ? form.nextElementSibling
@@ -166,6 +174,7 @@
     addHoneypot(form);
     ensureHidden(form, 'sk8_started_at', startedAt);
     ensureHidden(form, 'sk8_form_kind', getKind(form));
+    if (getKind(form) === 'guide') ensureHidden(form, 'sk8_guide_key', getGuideKey(form));
     ensureHidden(form, 'cf-turnstile-response', '');
     addTurnstileContainer(form);
   });
@@ -257,6 +266,8 @@
     try {
       if (!turnstileReady) await initialise();
       ensureHidden(form, 'sk8_form_kind', kind);
+      const guideKey = kind === 'guide' ? getGuideKey(form) : '';
+      if (kind === 'guide') ensureHidden(form, 'sk8_guide_key', guideKey);
       const tokenField = form.querySelector('input[name="cf-turnstile-response"]');
       if (!tokenField || !String(tokenField.value || '').trim()) {
         throw new Error('Please complete the quick human check, then try again.');
@@ -276,7 +287,11 @@
       }
 
       const formPosition = form.dataset.formPosition || 'unknown';
-      const signupSource = kind === 'qr' ? 'local_qr' : kind === 'guide' ? 'free_cheap_guide' : 'website';
+      const signupSource = kind === 'qr'
+        ? 'local_qr'
+        : kind === 'guide'
+          ? (guideKey === '52-adventures' ? '52_adventures_guide' : 'free_cheap_guide')
+          : 'website';
       if (typeof window.sk8Track === 'function') {
         window.sk8Track('sign_up', {
           method: 'MailerLite + Turnstile',
@@ -288,7 +303,13 @@
       form.dispatchEvent(new CustomEvent('sk8:mailerlite-success', { bubbles: true, detail: { result } }));
       status.className = 'signup-status show success';
       status.textContent = kind === 'guide' ? 'Done. Opening your guide…' : 'You’re in. Opening the welcome page…';
-      const success = kind === 'qr' ? '/qr-success/' : kind === 'guide' ? '/free-cheap-guide/success/' : '/signup-success/';
+      const configuredSuccess = String(form.dataset.successUrl || '').trim();
+      const fallbackSuccess = kind === 'qr'
+        ? '/qr-success/'
+        : kind === 'guide'
+          ? (guideKey === '52-adventures' ? '/52-adventures/success/' : '/free-cheap-guide/success/')
+          : '/signup-success/';
+      const success = configuredSuccess.startsWith('/') ? configuredSuccess : fallbackSuccess;
       window.setTimeout(() => location.assign(success), 350);
     } catch (error) {
       if (typeof window.sk8Track === 'function') {
