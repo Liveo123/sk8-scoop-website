@@ -536,3 +536,77 @@ body[data-page="latest-issue"] .latest-inline-signup small{
     border-radius:8px!important;
   }
 }
+
+
+/* Issue 14 artwork protection: no labels or gradients may cover text inside poster artwork. */
+body[data-page="latest-issue"] .latest-visual-meta-v2{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 6px 10px;
+  color:#0f6470;
+}
+body[data-page="latest-issue"] .latest-visual-meta-v2 strong{
+  font-size:.76rem;
+  letter-spacing:.12em;
+}
+body[data-page="latest-issue"] .latest-visual-meta-v2 span{
+  color:#a75b00;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.09em;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 a{
+  display:grid;
+  grid-template-rows:minmax(0,1fr) auto;
+  overflow:hidden;
+  text-decoration:none;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 a:after{
+  display:none!important;
+  content:none!important;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 a>span{
+  position:static!important;
+  display:block;
+  padding:9px 11px 10px;
+  background:#fff;
+  color:#173f45!important;
+  border-top:1px solid #dce6e2;
+  font-size:.7rem!important;
+  letter-spacing:.02em!important;
+  line-height:1.25!important;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 a>span b,
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 a>span small{
+  display:block;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 a>span small{
+  margin-top:3px;
+  color:#647579;
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:0;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 .latest-mosaic-badge{
+  display:none!important;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic-v2{
+  grid-template-rows:320px 205px;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 .latest-mosaic-main img,
+body[data-page="latest-issue"] .latest-issue-mosaic-v2 .latest-mosaic-small img{
+  padding:4px 6px!important;
+}
+@media(max-width:620px){
+  body[data-page="latest-issue"] .latest-visual-meta-v2{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:2px;
+    margin-left:2px;
+  }
+  body[data-page="latest-issue"] .latest-issue-mosaic-v2{
+    grid-template-rows:245px 170px;
+  }
+}
