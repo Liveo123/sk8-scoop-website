@@ -148,6 +148,22 @@
     "status": "verified"
   },
   {
+    "id": "heald-green-free-business-advice-2026-10-02",
+    "title": "Free Business Advice at Heald Green Library",
+    "date": "2026-10-02",
+    "time": "10:30",
+    "area": "Heald Green",
+    "venue": "Heald Green Library, Finney Lane, Heald Green, Cheadle SK8 3JB",
+    "cost": "Free",
+    "category": "Business",
+    "description": "One Stockport Business Support Hub brings free local business advice to Heald Green Library for people starting or growing a business.",
+    "booking_url": "",
+    "source_url": "https://www.stockport.gov.uk/events",
+    "verification": "OFFICIAL_COUNCIL_LISTING",
+    "checked": "2026-09-25",
+    "status": "verified"
+  },
+  {
     "id": "stockroom-soundsystem-2026-10-03",
     "title": "Stockroom Soundsystem: Fittings, Drivers and Amplifiers",
     "date": "2026-10-03",
@@ -260,6 +276,22 @@
     "status": "verified"
   },
   {
+    "id": "cheadle-library-digital-support-2026-10-09",
+    "title": "Digital support drop-in at Cheadle Library",
+    "date": "2026-10-09",
+    "time": "10:30",
+    "area": "Cheadle",
+    "venue": "Cheadle Library, 23 Ashfield Road, Cheadle SK8 1BB",
+    "cost": "Free",
+    "category": "Digital Skills",
+    "description": "A free one-hour drop-in for beginners who want help with devices or getting things done online. No booking is required.",
+    "booking_url": "",
+    "source_url": "https://www.stockport.gov.uk/events/digital-support-drop-in-at-cheadle-library-sept-to-dec?date=2026-10-23",
+    "verification": "OFFICIAL_COUNCIL_SERIES_PAGE",
+    "checked": "2026-09-25",
+    "status": "verified"
+  },
+  {
     "id": "makers-market-stockport-2026-10-10",
     "title": "Stockport Makers Market",
     "date": "2026-10-10",
@@ -368,6 +400,24 @@
     "booking_url": "",
     "source_url": "https://www.stockport.gov.uk/events/saturday-snack-down-halloween-spooktacular?date=2026-10-17",
     "verification": "OFFICIAL_COUNCIL_EVENT_PAGE",
+    "checked": "2026-09-25",
+    "status": "verified"
+  },
+  {
+    "id": "girl-on-the-train-chads-2026-10-17",
+    "title": "The Girl on the Train at Chads Theatre",
+    "date": "2026-10-17",
+    "end_date": "2026-10-24",
+    "date_range": "17–24 Oct",
+    "time": "19:45",
+    "area": "Cheadle Hulme",
+    "venue": "Chads Theatre, Mellor Road, Cheadle Hulme SK8 5AU",
+    "cost": "£14 including programme",
+    "category": "Culture",
+    "description": "Chads Theatre stages the psychological thriller adapted from Paula Hawkins' novel and the DreamWorks film. There is also a 2.30pm matinee on Saturday 24 October.",
+    "booking_url": "https://www.stockport.gov.uk/events/the-girl-on-the-train-by-paula-hawkins?date=2026-10-17",
+    "source_url": "https://www.stockport.gov.uk/events/the-girl-on-the-train-by-paula-hawkins?date=2026-10-17",
+    "verification": "THEATRE_SUBMITTED_COUNCIL_EVENT_PAGE",
     "checked": "2026-09-25",
     "status": "verified"
   },
