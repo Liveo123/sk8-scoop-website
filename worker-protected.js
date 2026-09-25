@@ -3,7 +3,9 @@ import existingWorker from './worker.js';
 const MAILERLITE_GROUPS = {
   main: ['190964754190174086'],
   qr: ['190964754190174086', '193441557512193685'],
-  guide: ['190964754190174086', '197763144685192678']
+  guide: ['190964754190174086', '197763144685192678'],
+  free_cheap_guide: ['190964754190174086', '197763144685192678'],
+  '52_adventures': ['190964754190174086', '199227746568635453']
 };
 
 const ISSUE_12_POLL_ANSWERS = [
@@ -145,7 +147,9 @@ async function handleNewsletterSignup(request, env) {
   }
 
   const requestedKind = String(form.get('sk8_form_kind') || 'main');
-  const kind = requestedKind === 'qr' ? 'qr' : requestedKind === 'guide' ? 'guide' : 'main';
+  const kind = ['qr','guide','free_cheap_guide','52_adventures'].includes(requestedKind)
+    ? requestedKind
+    : 'main';
 
   const fields = {};
   for (const [key, value] of form.entries()) {
