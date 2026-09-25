@@ -1,16 +1,16 @@
 (() => {
   const path = window.location.pathname.replace(/\/+$/,'') || '/';
   const publicPaths = new Set([
-    '/','/latest','/about.html','/archive.html','/summer-guide.html','/guides','/advertise.html',
+    '/','/latest','/about','/about.html','/archive','/archive.html','/summer-guide','/summer-guide.html','/guides','/advertise','/advertise.html',
     '/join','/start','/submit','/contact','/business-submissions','/submit-event','/whats-on',
-    '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html'
+    '/preferences','/privacy','/privacy.html','/terms','/terms.html','/editorial-policy','/editorial-policy.html','/sitemap.html'
   ]);
   const pageIdentity = {
-    '/':'home','/latest':'latest-issue','/about.html':'about','/archive.html':'archive',
-    '/summer-guide.html':'summer-guide','/guides':'guides','/advertise.html':'advertise','/join':'join',
+    '/':'home','/latest':'latest-issue','/about':'about','/about.html':'about','/archive':'archive','/archive.html':'archive',
+    '/summer-guide':'summer-guide','/summer-guide.html':'summer-guide','/guides':'guides','/advertise':'advertise','/advertise.html':'advertise','/join':'join',
     '/start':'start','/submit':'submit','/contact':'contact','/business-submissions':'business-submissions',
-    '/submit-event':'submit-event','/whats-on':'whats-on','/preferences':'preferences','/privacy.html':'privacy',
-    '/terms.html':'terms','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap'
+    '/submit-event':'submit-event','/whats-on':'whats-on','/preferences':'preferences','/privacy':'privacy','/privacy.html':'privacy',
+    '/terms':'terms','/terms.html':'terms','/editorial-policy':'editorial-policy','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap'
   };
   if (publicPaths.has(path)) {
     if (!document.body.dataset.page && pageIdentity[path]) document.body.dataset.page = pageIdentity[path];
@@ -33,7 +33,7 @@
         ['start','/start/','Where to start'],
         ['submit','/submit/','Submit'],
         ['contact','/contact/','Contact'],
-        ['advertise','/advertise.html','Advertise']
+        ['advertise','/advertise','Advertise']
       ];
       nav.innerHTML = links.map(([key,href,label]) => `<a${active===key?' class="active" aria-current="page"':''} href="${href}">${label}</a>`).join('') + `<a class="button nav-join reader-nav-join${active==='join'?' active':''}" href="/join/">Join free</a>`;
     }
