@@ -533,6 +533,368 @@
       "cadence_days": 1,
       "mode": "internal",
       "url": "https://www.sk8scoop.com/submit-event/"
+    },
+    {
+      "id": "cheadle-hulme-web",
+      "name": "Cheadle Hulme Web events",
+      "tier": "B",
+      "area": "Cheadle Hulme + SK8",
+      "role": "discovery",
+      "cadence_days": 3,
+      "mode": "fetch",
+      "url": "https://www.cheadlehulmeweb.co.uk/cheadle-hulme-events/"
+    },
+    {
+      "id": "cheadle-hulme-con-club",
+      "name": "Cheadle Hulme Conservative Club events diary",
+      "tier": "A",
+      "area": "Cheadle Hulme",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html"
+    },
+    {
+      "id": "john-lewis-cheadle",
+      "name": "John Lewis Cheadle What's On",
+      "tier": "A",
+      "area": "Cheadle",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.johnlewis.com/our-shops/cheadle/whats-on"
+    },
+    {
+      "id": "seashell-trust",
+      "name": "Seashell events calendar",
+      "tier": "A",
+      "area": "Cheadle Hulme + Stockport",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.seashelltrust.org.uk/event/list/"
+    },
+    {
+      "id": "cheadle-hulme-methodist",
+      "name": "Cheadle Hulme Methodist Church calendar",
+      "tier": "A",
+      "area": "Cheadle Hulme",
+      "role": "primary+regular-activities",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.chmc.org.uk/calendar"
+    },
+    {
+      "id": "gatley-urc",
+      "name": "Gatley United Reformed Church",
+      "tier": "A",
+      "area": "Gatley",
+      "role": "primary+community-groups",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.gatleyurc.com/"
+    },
+    {
+      "id": "cheadle-village-hall",
+      "name": "Cheadle Village Hall groups and activities",
+      "tier": "A",
+      "area": "Cheadle",
+      "role": "primary+regular-activities",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://cheadlevillagehall.co.uk/"
+    },
+    {
+      "id": "stockport-market-place",
+      "name": "Stockport Market Place recurring events",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/market-place-events"
+    },
+    {
+      "id": "makers-market-stockport",
+      "name": "The Makers Market - Stockport",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.themakersmarket.co.uk/venue/stockport/"
+    },
+    {
+      "id": "foodie-friday",
+      "name": "Foodie Friday Stockport",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://skfoodiefriday.co.uk/"
+    },
+    {
+      "id": "stockport-symphony",
+      "name": "Stockport Symphony Orchestra",
+      "tier": "B",
+      "area": "Stockport",
+      "role": "primary",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.stockportsymphony.co.uk/"
+    },
+    {
+      "id": "bramall-hall",
+      "name": "Bramall Hall events",
+      "tier": "B",
+      "area": "Bramhall / near SK8",
+      "role": "primary",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.stockport.gov.uk/landing/bramall-hall"
+    },
+    {
+      "id": "woodford-community-centre",
+      "name": "Woodford Community Centre What's On",
+      "tier": "B",
+      "area": "Woodford / near SK8",
+      "role": "primary+community-groups",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://woodfordcom.com/"
+    },
+    {
+      "id": "east-cheshire-nt-association",
+      "name": "East Cheshire National Trust Association",
+      "tier": "B",
+      "area": "Stockport + east Cheshire",
+      "role": "primary+member-events",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/supporter-groups-in-cheshire-and-greater-manchester",
+      "search_queries": [
+        "East Cheshire National Trust Association next meeting 2026",
+        "East Cheshire National Trust Association talk walk 2026"
+      ]
+    },
+    {
+      "id": "visit-cheshire",
+      "name": "Visit Cheshire events",
+      "tier": "C",
+      "area": "Cheshire / selective worth-trip",
+      "role": "discovery",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.visitcheshire.com/whats-on"
+    },
+    {
+      "id": "cheshire-east-events",
+      "name": "Cheshire East events",
+      "tier": "C",
+      "area": "east Cheshire / selective worth-trip",
+      "role": "discovery+official",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.cheshireeast.gov.uk/leisure,_culture_and_tourism/whats_on/whats_on.aspx"
+    },
+    {
+      "id": "manchester-city-events",
+      "name": "Manchester City Council events",
+      "tier": "C",
+      "area": "Manchester / selective worth-trip",
+      "role": "discovery+official",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.manchester.gov.uk/events"
+    },
+    {
+      "id": "creative-tourist",
+      "name": "Creative Tourist Manchester/Stockport listings",
+      "tier": "D",
+      "area": "Greater Manchester",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.creativetourist.com/",
+      "search_queries": [
+        "site:creativetourist.com Stockport event",
+        "site:creativetourist.com Cheadle event"
+      ]
+    },
+    {
+      "id": "manchester-wire",
+      "name": "Manchester Wire listings",
+      "tier": "D",
+      "area": "Greater Manchester",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://manchesterwire.co.uk/",
+      "search_queries": [
+        "site:manchesterwire.co.uk Stockport events",
+        "site:manchesterwire.co.uk family events October 2026"
+      ]
+    },
+    {
+      "id": "families-online",
+      "name": "Families Online Manchester/Stockport",
+      "tier": "D",
+      "area": "SK8 + Stockport + nearby",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://www.familiesonline.co.uk/",
+      "search_queries": [
+        "site:familiesonline.co.uk Stockport events",
+        "site:familiesonline.co.uk Cheadle events"
+      ]
+    },
+    {
+      "id": "days-out-with-kids",
+      "name": "Day Out With The Kids event/activity discovery",
+      "tier": "D",
+      "area": "Stockport + nearby",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.dayoutwiththekids.co.uk/",
+      "search_queries": [
+        "site:dayoutwiththekids.co.uk Stockport events",
+        "site:dayoutwiththekids.co.uk Cheshire Halloween 2026"
+      ]
+    },
+    {
+      "id": "allevents",
+      "name": "AllEvents local discovery",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "url": "https://allevents.in/",
+      "search_queries": [
+        "site:allevents.in Cheadle Stockport",
+        "site:allevents.in Stockport October 2026"
+      ]
+    },
+    {
+      "id": "fever",
+      "name": "Fever Manchester discovery",
+      "tier": "D",
+      "area": "Manchester / selective worth-trip",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://feverup.com/en/manchester",
+      "search_queries": [
+        "site:feverup.com Manchester family October 2026"
+      ]
+    },
+    {
+      "id": "designmynight",
+      "name": "DesignMyNight Manchester discovery",
+      "tier": "D",
+      "area": "Greater Manchester",
+      "role": "discovery-only",
+      "cadence_days": 14,
+      "mode": "search",
+      "url": "https://www.designmynight.com/manchester",
+      "search_queries": [
+        "site:designmynight.com/manchester Stockport events",
+        "site:designmynight.com/manchester family events"
+      ]
+    },
+    {
+      "id": "local-sports-clubs",
+      "name": "Local sports clubs, fixtures and open days",
+      "tier": "D",
+      "area": "SK8 + near SK8",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle Town FC fixtures 2026",
+        "Cheadle Hulme cricket club events 2026",
+        "Cheadle Hulme lacrosse events 2026",
+        "Gatley cricket club events 2026",
+        "SK8 sports open day event"
+      ]
+    },
+    {
+      "id": "local-pubs-entertainment",
+      "name": "Local pubs, social clubs and live entertainment",
+      "tier": "D",
+      "area": "SK8",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle pub live music quiz event",
+        "Cheadle Hulme pub live music event",
+        "Gatley pub quiz live music event",
+        "Heald Green pub event live music"
+      ]
+    },
+    {
+      "id": "local-charities-community",
+      "name": "Local charities, support groups and community organisations",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle charity community event",
+        "Cheadle Hulme charity event",
+        "Gatley community charity event",
+        "Heald Green community charity event"
+      ]
+    },
+    {
+      "id": "local-arts-music-groups",
+      "name": "Local choirs, orchestras, art groups and amateur performance",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle choir concert 2026",
+        "Cheadle Hulme music concert 2026",
+        "Stockport amateur theatre October 2026",
+        "Stockport art exhibition October 2026"
+      ]
+    },
+    {
+      "id": "local-parent-family-groups",
+      "name": "Parent, toddler, SEND and family community groups",
+      "tier": "D",
+      "area": "SK8 + Stockport",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle family event toddler 2026",
+        "Cheadle Hulme family event SEND 2026",
+        "Gatley children event 2026",
+        "Heald Green kids event 2026"
+      ]
+    },
+    {
+      "id": "local-business-events",
+      "name": "Independent local businesses running workshops, tastings and open days",
+      "tier": "D",
+      "area": "SK8",
+      "role": "discovery-only",
+      "cadence_days": 7,
+      "mode": "search",
+      "search_queries": [
+        "Cheadle workshop event October 2026",
+        "Cheadle Hulme workshop event October 2026",
+        "Gatley workshop event October 2026",
+        "Heald Green workshop event October 2026"
+      ]
     }
   ]
 }
