@@ -33,6 +33,12 @@ function secureResponse(response, url) {
   if (url.hostname === 'www.sk8scoop.com' || url.hostname === 'sk8scoop.com') {
     headers.set('strict-transport-security', 'max-age=31536000');
   }
+  const contentType = headers.get('content-type') || '';
+  if (contentType.includes('text/html')) {
+    headers.set('cache-control', 'no-store, no-cache, must-revalidate, max-age=0');
+    headers.set('cdn-cache-control', 'no-store');
+    headers.set('cloudflare-cdn-cache-control', 'no-store');
+  }
   if (url.pathname.startsWith('/admin/') || url.pathname.startsWith('/advertise/pay/')) {
     headers.set('cache-control', 'no-store');
   }
