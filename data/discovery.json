@@ -667,50 +667,6 @@
       "checked": "2026-09-25"
     },
     {
-      "id": "reddish-vale-country-park",
-      "type": "Guides",
-      "category": "Outdoors",
-      "title": "Reddish Vale Country Park",
-      "summary": "A free walk through the River Tame green corridor with wetlands, wildlife and the Grade II-listed viaduct as a landmark.",
-      "href": "/outdoors/reddish-vale-country-park/",
-      "area": "Nearby",
-      "tags": [
-        "reddish vale",
-        "reddish",
-        "country park",
-        "viaduct",
-        "walk",
-        "nature",
-        "wildlife",
-        "free",
-        "bird flu"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
-      "id": "middlewood-way",
-      "type": "Guides",
-      "category": "Outdoors",
-      "title": "Middlewood Way",
-      "summary": "A 16 km traffic-free greenway from Macclesfield to Marple for walkers, cyclists and horse riders, with shorter outing ideas. Cheshire East currently labels the mileage inconsistently.",
-      "href": "/outdoors/middlewood-way/",
-      "area": "Nearby",
-      "tags": [
-        "middlewood way",
-        "marple",
-        "macclesfield",
-        "bollington",
-        "cycling",
-        "cycle",
-        "walk",
-        "traffic free",
-        "greenway"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
       "id": "stockport-air-raid-shelters",
       "type": "Stories",
       "category": "Local History",
@@ -773,26 +729,6 @@
       "checked": "2026-09-25"
     },
     {
-      "id": "staircase-house",
-      "type": "Stories",
-      "category": "Local History",
-      "title": "Staircase House",
-      "summary": "A historic Stockport townhouse where the building is the exhibit, with current admission and opening pattern.",
-      "href": "/local-history/staircase-house/",
-      "area": "Nearby",
-      "tags": [
-        "staircase house",
-        "stockport",
-        "market place",
-        "history",
-        "heritage",
-        "museum",
-        "rainy day"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
       "id": "bramall-hall",
       "type": "Stories",
       "category": "Local History",
@@ -808,28 +744,6 @@
         "heritage",
         "park",
         "guided tour"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
-      "id": "foodie-friday-stockport",
-      "type": "Stories",
-      "category": "Food & Drink",
-      "title": "Foodie Friday, Stockport",
-      "summary": "The recurring Stockport Market Place street-food evening, usually on the last Friday of the month from 6pm to 9pm, with free entry.",
-      "href": "/food-drink/foodie-friday-stockport/",
-      "area": "Nearby",
-      "tags": [
-        "foodie friday",
-        "stockport",
-        "market place",
-        "street food",
-        "food",
-        "drink",
-        "live music",
-        "free entry",
-        "monthly"
       ],
       "freshness": "current",
       "checked": "2026-09-25"
@@ -857,27 +771,6 @@
       "checked": "2026-09-25"
     },
     {
-      "id": "quarry-bank-styal",
-      "type": "Stories",
-      "category": "Local History",
-      "title": "Quarry Bank, Styal",
-      "summary": "A half-to-full-day industrial and social-history visit linking the working mill, Apprentice House, workers’ stories, gardens and estate.",
-      "href": "/local-history/quarry-bank-styal/",
-      "area": "Nearby",
-      "tags": [
-        "quarry bank",
-        "styal",
-        "national trust",
-        "mill",
-        "industrial history",
-        "apprentice house",
-        "workers",
-        "gardens"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
       "id": "chadkirk-country-estate",
       "type": "Guides",
       "category": "Outdoors",
@@ -896,114 +789,6 @@
         "free",
         "history",
         "outdoors"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
-      "id": "new-mills-torrs-millennium-walkway",
-      "type": "Guides",
-      "category": "Outdoors",
-      "title": "New Mills Torrs and Millennium Walkway",
-      "summary": "A free gorge walk below New Mills with the Millennium Walkway, industrial heritage and several access routes with very different steepness.",
-      "href": "/outdoors/new-mills-torrs-millennium-walkway/",
-      "area": "Nearby",
-      "tags": [
-        "new mills",
-        "torrs",
-        "millennium walkway",
-        "gorge",
-        "walk",
-        "industrial history",
-        "free",
-        "outdoors",
-        "high peak"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
-      "id": "alderley-edge",
-      "type": "Guides",
-      "category": "Outdoors",
-      "title": "Alderley Edge",
-      "summary": "Free walking with mining history, geology and folklore, plus current National Trust parking and terrain caveats.",
-      "href": "/outdoors/alderley-edge/",
-      "area": "Nearby",
-      "tags": [
-        "alderley edge",
-        "walk",
-        "walking",
-        "geology",
-        "mining",
-        "folklore",
-        "wizard",
-        "national trust",
-        "free",
-        "outdoors"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
-      "id": "lyme-house-park-cage",
-      "type": "Stories",
-      "category": "Local History",
-      "title": "Lyme: house, park and The Cage",
-      "summary": "A 3–5 hour heritage day combining Lyme’s house, parkland and The Cage, with current admission, car-free savings and route caveats.",
-      "href": "/local-history/lyme-house-park-cage/",
-      "area": "Nearby",
-      "tags": [
-        "lyme",
-        "lyme park",
-        "disley",
-        "the cage",
-        "deer park",
-        "national trust",
-        "history",
-        "walk",
-        "heritage"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
-      "id": "little-moreton-hall",
-      "type": "Stories",
-      "category": "Local History",
-      "title": "Little Moreton Hall",
-      "summary": "The wonky Tudor hall near Congleton, with current National Trust admission and practical accessibility caveats.",
-      "href": "/local-history/little-moreton-hall/",
-      "area": "Nearby",
-      "tags": [
-        "little moreton hall",
-        "tudor",
-        "congleton",
-        "national trust",
-        "history",
-        "architecture",
-        "family"
-      ],
-      "freshness": "current",
-      "checked": "2026-09-25"
-    },
-    {
-      "id": "jodrell-bank",
-      "type": "Guides",
-      "category": "Kids & Family",
-      "title": "Jodrell Bank",
-      "summary": "Lovell Telescope, First Light Pavilion and current annual-ticket pricing, with parking included and optional Space Dome extras.",
-      "href": "/kids-family/jodrell-bank/",
-      "area": "Nearby",
-      "tags": [
-        "jodrell bank",
-        "lovell telescope",
-        "space",
-        "science",
-        "engineering",
-        "family",
-        "annual ticket",
-        "radio astronomy"
       ],
       "freshness": "current",
       "checked": "2026-09-25"
