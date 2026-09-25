@@ -128,72 +128,61 @@ body.reader-home.homepage-v3 .home-resource-card,body.reader-home.homepage-v3 .h
 }
 
 
-/* 11. 52 Adventures: make the guide feel like a featured product, not another plain logo tile. */
-body.reader-home .home-resource-adventures{border-color:#c7d9d4;box-shadow:0 14px 32px rgba(15,100,112,.09)}
-body.reader-home .home-resource-adventures .adventures-logo-panel{
-  position:relative;
-  isolation:isolate;
-  min-height:190px!important;
+/* 11. Guide resource cards: let the logos fill the media area cleanly. */
+body.reader-home .home-resource-guide .home-resource-visual{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
   height:190px!important;
-  padding:18px!important;
-  background:
-    radial-gradient(circle at 18% 22%,rgba(248,121,27,.16) 0 11%,transparent 12%),
-    radial-gradient(circle at 84% 18%,rgba(15,100,112,.13) 0 13%,transparent 14%),
-    radial-gradient(circle at 77% 78%,rgba(200,232,74,.2) 0 12%,transparent 13%),
-    linear-gradient(145deg,#fff9ed 0%,#eef7f5 58%,#fff 100%)!important;
-  overflow:hidden;
+  min-height:190px!important;
+  padding:18px 20px!important;
+  overflow:hidden!important;
+  background:#fff!important;
 }
-body.reader-home .home-resource-adventures .adventures-logo-panel:before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  width:250px;
-  height:250px;
-  right:-90px;
-  top:-110px;
-  border:18px solid rgba(248,121,27,.12);
-  border-radius:50%;
-}
-body.reader-home .home-resource-adventures .adventures-logo-panel:after{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  width:260px;
-  height:96px;
-  left:-36px;
-  bottom:-55px;
-  border:4px dashed rgba(196,139,60,.24);
-  border-radius:50%;
-  transform:rotate(-7deg);
-}
-body.reader-home .home-resource-adventures .adventures-logo-panel .adventure-trail{
-  position:absolute;
-  z-index:-1;
-  inset:18px 22px auto auto;
-  width:48px;
-  height:48px;
-  border-radius:50% 50% 50% 0;
-  border:6px solid rgba(15,100,112,.13);
-  transform:rotate(-45deg);
-}
-body.reader-home .home-resource-adventures .adventures-logo-panel img{
-  position:relative;
-  z-index:1;
-  width:min(88%,240px)!important;
-  height:100%!important;
-  max-height:170px;
-  object-fit:contain!important;
+body.reader-home .home-resource-guide .home-resource-visual img{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  margin:auto!important;
   padding:0!important;
+  object-fit:contain!important;
   background:transparent!important;
-  filter:drop-shadow(0 10px 16px rgba(19,45,49,.12));
+  filter:none!important;
+}
+body.reader-home .home-resource-free-cheap .home-resource-visual img{
+  max-width:78%!important;
+  max-height:148px!important;
+}
+body.reader-home .home-resource-adventures{
+  border-color:#d4dfda;
+  box-shadow:0 9px 23px rgba(19,45,49,.06);
+}
+body.reader-home .home-resource-adventures .home-resource-visual{
+  background:#fff!important;
+}
+body.reader-home .home-resource-adventures .home-resource-visual:before,
+body.reader-home .home-resource-adventures .home-resource-visual:after,
+body.reader-home .home-resource-adventures .adventure-trail{
+  content:none!important;
+  display:none!important;
+}
+body.reader-home .home-resource-adventures .home-resource-visual img{
+  max-width:92%!important;
+  max-height:158px!important;
 }
 body.reader-home .home-resource-adventures .home-resource-copy{
-  background:linear-gradient(180deg,#fff 0%,#fbfdfc 100%);
+  background:#fff;
 }
 body.reader-home .home-resource-adventures .home-resource-copy .eyebrow{color:#b85d0a}
 body.reader-home .home-resource-adventures .home-resource-copy .button{background:#0f6470!important;color:#fff!important}
 
 @media(max-width:560px){
-  body.reader-home .home-resource-adventures .adventures-logo-panel{height:165px!important;min-height:165px!important;padding:14px!important}
-  body.reader-home .home-resource-adventures .adventures-logo-panel img{max-height:145px}
+  body.reader-home .home-resource-guide .home-resource-visual{
+    height:160px!important;
+    min-height:160px!important;
+    padding:14px 16px!important;
+  }
+  body.reader-home .home-resource-free-cheap .home-resource-visual img{max-height:124px!important}
+  body.reader-home .home-resource-adventures .home-resource-visual img{max-height:132px!important}
 }
+
