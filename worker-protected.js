@@ -3,7 +3,8 @@ import existingWorker from './worker.js';
 const MAILERLITE_GROUPS = {
   main: ['190964754190174086'],
   qr: ['190964754190174086', '193441557512193685'],
-  guide: ['190964754190174086', '197763144685192678']
+  'guide:free-cheap': ['190964754190174086', '197763144685192678'],
+  'guide:52-adventures': ['190964754190174086', '199227746568635453']
 };
 
 const ISSUE_12_POLL_ANSWERS = [
@@ -182,10 +183,14 @@ async function handleNewsletterSignup(request, env) {
     fields[match[1]] = value;
   }
 
+  const groupKey = kind === 'guide' ? `guide:${guideKey}` : kind;
+  const groups = MAILERLITE_GROUPS[groupKey];
+  if (!groups) return json({ error: 'Signup audience is not configured.' }, 503);
+
   const payload = {
     email,
     fields,
-    groups: MAILERLITE_GROUPS[kind],
+    groups,
     status: 'active'
   };
   if (remoteIp) payload.ip_address = remoteIp;
