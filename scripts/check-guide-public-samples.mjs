@@ -36,6 +36,16 @@ for (const key of expectedGuides) {
     if (fs.existsSync(file)) {
       const html = read(file);
       assert(!/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(html), `${key} public sample must remain indexable: ${route}`);
+      assert(
+        html.includes('/52-adventures/#get-guide') || html.includes('/free-cheap-guide/#get-guide'),
+        `${key} public sample must contain a signup CTA to a full guide: ${route}`
+      );
+      const section = normaliseRoute(route).split('/')[0];
+      const sectionIndex = `${section}/index.html`;
+      assert(fs.existsSync(sectionIndex), `Missing section index for public sample: ${route}`);
+      if (fs.existsSync(sectionIndex)) {
+        assert(read(sectionIndex).includes(route), `${key} public sample must be linked from its section page: ${route}`);
+      }
     }
     assert(discoveryHrefs.has(route), `${key} public sample is missing from site search discovery: ${route}`);
     assert(sitemapXml.includes(xmlUrl(route)), `${key} public sample is missing from sitemap.xml: ${route}`);
