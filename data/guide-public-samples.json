@@ -1,0 +1,36 @@
+{
+  "updated": "2026-09-25",
+  "policy": "Keep around 10 substantive public website articles per guide. The remaining guide content stays in the subscriber guide. Shared articles count once on the website and may serve both guides.",
+  "guides": {
+    "52-adventures": {
+      "target_public_samples": 10,
+      "samples": [
+        "/local-history/stockport-air-raid-shelters/",
+        "/kids-family/hat-works/",
+        "/local-history/stockport-underbanks/",
+        "/local-history/bramall-hall/",
+        "/local-history/stockport-plaza-behind-the-scenes/",
+        "/kids-family/avro-heritage-museum/",
+        "/kids-family/runway-visitor-park-concorde/",
+        "/outdoors/marple-locks-aqueduct/",
+        "/outdoors/etherow-country-park/",
+        "/outdoors/chadkirk-country-estate/"
+      ]
+    },
+    "free-cheap": {
+      "target_public_samples": 10,
+      "samples": [
+        "/kids-family/abney-hall-park/",
+        "/kids-family/bruntwood-park/",
+        "/kids-family/hat-works/",
+        "/outdoors/gatley-carrs/",
+        "/kids-family/oak-meadow-cheadle-hulme/",
+        "/outdoors/east-avenue-park-heald-green/",
+        "/local-history/stockport-museum/",
+        "/local-history/stockport-underbanks/",
+        "/local-history/heald-green-north-history-walk/",
+        "/local-history/stockport-air-raid-shelters/"
+      ]
+    }
+  }
+}
