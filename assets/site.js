@@ -1,5 +1,77 @@
-const menu=document.querySelector('.menu-btn');
-const nav=document.querySelector('.nav');
+const sk8Header=document.querySelector('.site-header');
+const sk8HeaderRow=sk8Header&&sk8Header.querySelector('.header-row');
+let nav=sk8HeaderRow&&sk8HeaderRow.querySelector('.nav');
+let menu=sk8HeaderRow&&sk8HeaderRow.querySelector('.menu-btn');
+
+const sk8NormalisePath=value=>{
+  const path=String(value||'/').split('?')[0].split('#')[0].replace(/\\/g,'/').replace(/\/+/g,'/');
+  const withoutIndex=path.replace(/\/index\.html$/i,'/');
+  return withoutIndex.replace(/\/+$/,'')||'/';
+};
+
+if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
+  if(!menu){
+    menu=document.createElement('button');
+    menu.className='menu-btn';
+    menu.type='button';
+    menu.setAttribute('aria-expanded','false');
+    menu.setAttribute('aria-controls','main-nav');
+    const icon=document.createElement('span');
+    icon.className='menu-icon';
+    icon.setAttribute('aria-hidden','true');
+    const label=document.createElement('span');
+    label.textContent='Menu';
+    menu.append(icon,label);
+    sk8HeaderRow.insertBefore(menu,nav);
+  }
+
+  nav.id='main-nav';
+  nav.setAttribute('aria-label','Main navigation');
+  menu.setAttribute('aria-controls','main-nav');
+
+  const currentPath=sk8NormalisePath(location.pathname);
+  const activeHref=(()=>{
+    if(currentPath==='/') return '/';
+    if(currentPath.startsWith('/whats-on')) return '/whats-on/';
+    if(currentPath.startsWith('/guides')||currentPath.startsWith('/free-cheap-guide')||currentPath.startsWith('/52-adventures')) return '/guides/';
+    if(currentPath.startsWith('/start')) return '/start/';
+    if(currentPath.startsWith('/join')) return '/join/';
+    if(currentPath.startsWith('/submit')||currentPath.startsWith('/business-submissions')) return '/submit/';
+    if(currentPath.startsWith('/contact')) return '/contact/';
+    if(currentPath.startsWith('/advertise')) return '/advertise.html';
+    return '';
+  })();
+
+  const items=[
+    ['Home','/'],
+    ['What’s On','/whats-on/'],
+    ['Guides','/guides/'],
+    ['Where to start','/start/'],
+    ['Join','/join/'],
+    ['Submit','/submit/'],
+    ['Contact','/contact/'],
+    ['Advertise','/advertise.html']
+  ];
+
+  nav.replaceChildren();
+  items.forEach(([label,href])=>{
+    const link=document.createElement('a');
+    link.href=href;
+    link.textContent=label;
+    if(activeHref===href){
+      link.classList.add('active');
+      link.setAttribute('aria-current','page');
+    }
+    nav.appendChild(link);
+  });
+
+  const joinButton=document.createElement('a');
+  joinButton.className='button nav-join reader-nav-join';
+  joinButton.href='/join/';
+  joinButton.textContent='Join free';
+  nav.appendChild(joinButton);
+}
+
 const setMenuLabel=(open)=>{if(!menu)return;menu.setAttribute('aria-expanded',String(open));const label=menu.querySelector('span:last-child');if(label)label.textContent=open?'Close':'Menu';else menu.textContent=open?'Close':'Menu';};
 if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');setMenuLabel(open);});}
 document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
