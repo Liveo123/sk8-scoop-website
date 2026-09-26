@@ -3,14 +3,19 @@
   const publicPaths = new Set([
     '/','/latest','/about.html','/archive.html','/summer-guide.html','/guides','/advertise.html',
     '/join','/start','/submit','/contact','/business-submissions','/submit-event','/whats-on',
-    '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html'
+    '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html',
+    '/around-sk8','/food-drink','/kids-family','/outdoors','/local-history','/planning','/updates',
+    '/cheadle','/cheadle-hulme','/gatley','/heald-green'
   ]);
   const pageIdentity = {
     '/':'home','/latest':'latest-issue','/about.html':'about','/archive.html':'archive',
     '/summer-guide.html':'summer-guide','/guides':'guides','/advertise.html':'advertise','/join':'join',
     '/start':'start','/submit':'submit','/contact':'contact','/business-submissions':'business-submissions',
     '/submit-event':'submit-event','/whats-on':'whats-on','/preferences':'preferences','/privacy.html':'privacy',
-    '/terms.html':'terms','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap'
+    '/terms.html':'terms','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap',
+    '/around-sk8':'around-sk8','/food-drink':'around-sk8','/kids-family':'around-sk8','/outdoors':'around-sk8',
+    '/local-history':'around-sk8','/planning':'around-sk8','/updates':'around-sk8',
+    '/cheadle':'around-sk8','/cheadle-hulme':'around-sk8','/gatley':'around-sk8','/heald-green':'around-sk8'
   };
   if (publicPaths.has(path)) {
     if (!document.body.dataset.page && pageIdentity[path]) document.body.dataset.page = pageIdentity[path];
@@ -27,13 +32,11 @@
     if (nav) {
       const active = pageIdentity[path] || '';
       const links = [
-        ['home','/','Home'],
         ['whats-on','/whats-on/','What’s On'],
+        ['around-sk8','/around-sk8/','Around SK8'],
         ['guides','/guides/','Guides'],
-        ['start','/start/','Where to start'],
-        ['join','/join/','Join'],
+        ['latest-issue','/latest','Latest'],
         ['submit','/submit/','Submit'],
-        ['contact','/contact/','Contact'],
         ['advertise','/advertise.html','Advertise']
       ];
       nav.innerHTML = links.map(([key,href,label]) => `<a${active===key?' class="active" aria-current="page"':''} href="${href}">${label}</a>`).join('') + `<a class="button nav-join reader-nav-join${active==='join'?' active':''}" href="/join/">Join free</a>`;
