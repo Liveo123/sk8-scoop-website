@@ -3,7 +3,10 @@
   const list = document.querySelector('[data-events-list]');
   const empty = document.querySelector('[data-events-empty]');
   const status = document.querySelector('[data-events-status]');
+  const count = document.querySelector('[data-events-count]');
+  const checked = document.querySelector('[data-events-checked]');
   const filters = [...document.querySelectorAll('[data-event-filter]')];
+  const areaFilters = [...document.querySelectorAll('[data-event-area]')];
   if (!list) return;
 
   const safeUrl = value => {
@@ -57,22 +60,22 @@
         family: '/assets/images/nue/whats-on-family.webp'
       };
       const labels = { weekend: 'THIS WEEKEND', free: 'FREE IDEAS', family: 'FAMILY' };
-      ['weekend','free','family'].forEach(key => {
+      ['weekend', 'free', 'family'].forEach(key => {
         const button = filterGrid.querySelector(`[data-event-filter="${key}"]`);
         const card = button && button.closest('.reader-story');
         if (!card || card.querySelector('.reader-story-image')) return;
-        const image = document.createElement('div');
-        image.className = 'reader-story-image';
-        image.style.backgroundImage = `url("${images[key]}")`;
+        const visual = document.createElement('div');
+        visual.className = 'reader-story-image';
+        visual.style.backgroundImage = `url("${images[key]}")`;
         if (key === 'free') {
-          image.style.backgroundSize = 'contain';
-          image.style.backgroundRepeat = 'no-repeat';
-          image.style.backgroundColor = '#fff';
+          visual.style.backgroundSize = 'contain';
+          visual.style.backgroundRepeat = 'no-repeat';
+          visual.style.backgroundColor = '#fff';
         }
         const label = document.createElement('span');
         label.textContent = labels[key];
-        image.appendChild(label);
-        card.prepend(image);
+        visual.appendChild(label);
+        card.prepend(visual);
       });
     }
 
@@ -81,36 +84,33 @@
       copy.className = 'whats-on-empty-copy';
       [...empty.childNodes].forEach(node => copy.appendChild(node));
       const art = document.createElement('div');
-      art.className = 'whats-on-empty-art whats-on-empty-illustration';
+      art.className = 'whats-on-empty-art';
       art.setAttribute('aria-hidden', 'true');
       empty.classList.add('whats-on-empty');
       empty.append(art, copy);
     }
-
-    const panels = [...document.querySelectorAll('.reader-panel')];
-    panels.forEach(panel => {
-      const heading = panel.querySelector('h2');
-      if (!heading || panel.querySelector('.whats-on-panel-icon')) return;
-      const text = heading.textContent.trim();
-      let marker = '';
-      if (text.startsWith('Curated first')) marker = 'curated';
-      if (text.startsWith('Send in a local event')) marker = 'submit';
-      if (text.startsWith('Still looking')) {
-        marker = 'next';
-        panel.classList.add('whats-on-next-panel');
-      }
-      if (!marker) return;
-      const markerWrap = document.createElement('div');
-      markerWrap.className = `whats-on-panel-icon whats-on-marker-${marker}`;
-      markerWrap.setAttribute('aria-hidden', 'true');
-      panel.prepend(markerWrap);
-    });
   };
 
   addPageVisuals();
 
   let events = [];
   let activeFilter = 'all';
+  let activeArea = 'all';
+
+  const requestedArea = new URLSearchParams(window.location.search).get('area');
+  if (requestedArea) {
+    const matchedArea = areaFilters
+      .map(button => button.dataset.eventArea || '')
+      .find(area => area.toLowerCase() === requestedArea.toLowerCase());
+    if (matchedArea) activeArea = matchedArea;
+  }
+
+  const syncAreaParam = () => {
+    const url = new URL(window.location.href);
+    if (activeArea === 'all') url.searchParams.delete('area');
+    else url.searchParams.set('area', activeArea);
+    window.history.replaceState({}, '', url);
+  };
 
   const localToday = () => {
     const parts = new Intl.DateTimeFormat('en-GB', {
@@ -126,12 +126,19 @@
     return new Date(Date.UTC(year, month - 1, day));
   };
 
-  const prettyDate = value => {
+  const dateParts = value => {
+    const date = parseDate(value);
+    if (!date) return { weekday: '', day: '', month: '' };
+    const weekday = new Intl.DateTimeFormat('en-GB', { weekday: 'short', timeZone: 'UTC' }).format(date).toUpperCase();
+    const day = new Intl.DateTimeFormat('en-GB', { day: 'numeric', timeZone: 'UTC' }).format(date);
+    const month = new Intl.DateTimeFormat('en-GB', { month: 'short', timeZone: 'UTC' }).format(date).toUpperCase();
+    return { weekday, day, month };
+  };
+
+  const prettyCheckedDate = value => {
     const date = parseDate(value);
     if (!date) return '';
-    return new Intl.DateTimeFormat('en-GB', {
-      weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC'
-    }).format(date);
+    return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(date);
   };
 
   const weekendBounds = () => {
@@ -146,20 +153,57 @@
     return [saturday, sunday];
   };
 
-  const isFree = event => /(^|\b)free(\b|$)/i.test(String(event.cost || ''));
-  const isFamily = event => /family|kids|children|storytime/i.test(`${event.category || ''} ${event.title || ''} ${event.description || ''}`);
-  const isWeekend = event => {
-    const date = parseDate(event.date);
-    if (!date) return false;
-    const [start, end] = weekendBounds();
-    return date >= start && date <= end;
+  const nextSevenDayBounds = () => {
+    const start = parseDate(localToday());
+    const end = new Date(start);
+    end.setUTCDate(start.getUTCDate() + 6);
+    return [start, end];
   };
 
-  const matches = event => {
+  const isFree = event => /(^|\b)free(\b|$)/i.test(String(event.cost || ''));
+  const isFamily = event => /family|kids|children|storytime|under-18|ages 10\+/i.test(`${event.category || ''} ${event.title || ''} ${event.description || ''}`);
+  const eventBounds = event => {
+    const start = parseDate(event.date);
+    const end = parseDate(event.end_date || event.date);
+    return [start, end || start];
+  };
+  const overlaps = (aStart, aEnd, bStart, bEnd) => Boolean(aStart && aEnd && bStart && bEnd && aStart <= bEnd && aEnd >= bStart);
+  const isToday = event => {
+    const today = parseDate(localToday());
+    const [start, end] = eventBounds(event);
+    return overlaps(start, end, today, today);
+  };
+  const isWeekend = event => {
+    const [eventStart, eventEnd] = eventBounds(event);
+    const [start, end] = weekendBounds();
+    return overlaps(eventStart, eventEnd, start, end);
+  };
+  const isNextSevenDays = event => {
+    const [eventStart, eventEnd] = eventBounds(event);
+    const [start, end] = nextSevenDayBounds();
+    return overlaps(eventStart, eventEnd, start, end);
+  };
+
+  const matchesNeed = event => {
     if (activeFilter === 'free') return isFree(event);
     if (activeFilter === 'family') return isFamily(event);
     if (activeFilter === 'weekend') return isWeekend(event);
+    if (activeFilter === 'today') return isToday(event);
+    if (activeFilter === 'week') return isNextSevenDays(event);
     return true;
+  };
+
+  const matchesArea = event => activeArea === 'all' || String(event.area || '').trim().toLowerCase() === activeArea.toLowerCase();
+  const matches = event => matchesNeed(event) && matchesArea(event);
+
+  const fact = (label, value) => {
+    const clean = String(value || '').trim();
+    if (!clean) return null;
+    const node = document.createElement('span');
+    const key = document.createElement('b');
+    key.textContent = label;
+    node.append(key, document.createTextNode(clean));
+    return node;
   };
 
   const eventCard = event => {
@@ -182,37 +226,81 @@
 
     const body = document.createElement('div');
     body.className = 'reader-story-body';
+
+    const top = document.createElement('div');
+    top.className = 'event-card-top';
+    const parts = dateParts(event.date);
+    const dateBlock = document.createElement('div');
+    dateBlock.className = 'event-date-block';
+    const weekday = document.createElement('span');
+    weekday.textContent = isToday(event) ? 'TODAY' : parts.weekday;
+    const day = document.createElement('strong');
+    day.textContent = parts.day;
+    const month = document.createElement('small');
+    month.textContent = parts.month;
+    dateBlock.append(weekday, day, month);
+
     const eyebrow = document.createElement('div');
     eyebrow.className = 'eyebrow';
     eyebrow.textContent = category;
+    top.append(dateBlock, eyebrow);
+
     const heading = document.createElement('h3');
     heading.textContent = String(event.title || '');
-    const when = [prettyDate(event.date), String(event.time || '').trim()].filter(Boolean).join(' · ');
-    const metaText = [when, String(event.area || '').trim(), String(event.cost || '').trim()].filter(Boolean).join(' · ');
-    const meta = document.createElement('p');
-    meta.className = 'reader-meta';
-    meta.textContent = metaText;
+
+    const facts = document.createElement('div');
+    facts.className = 'event-facts';
+    [fact('Dates', event.date_range), fact('Time', event.time), fact('Area', event.area), fact('Cost', event.cost)].filter(Boolean).forEach(node => facts.appendChild(node));
+
     const venue = document.createElement('p');
     venue.className = 'event-venue';
     venue.textContent = String(event.venue || '').trim();
+
     const description = document.createElement('p');
+    description.className = 'event-description';
     description.textContent = String(event.description || '');
-    body.append(eyebrow, heading, meta);
+
+    body.append(top, heading);
+    if (facts.childElementCount) body.appendChild(facts);
     if (venue.textContent) body.appendChild(venue);
     body.appendChild(description);
 
     const source = safeUrl(event.booking_url || event.source_url);
     if (source) {
       const link = document.createElement('a');
-      link.className = 'reader-link';
+      link.className = 'reader-link event-check-link';
       link.href = source;
       link.rel = 'noopener';
       link.textContent = 'Check current details →';
+      link.addEventListener('click', () => {
+        if (typeof window.sk8Track === 'function') {
+          window.sk8Track('event_detail_click', {
+            event_id: String(event.id || '').slice(0, 120),
+            event_area: String(event.area || '').slice(0, 80),
+            event_category: category.slice(0, 80)
+          });
+        }
+      });
       body.appendChild(link);
     }
 
     article.appendChild(body);
     return article;
+  };
+
+  const filterLabel = () => {
+    const labels = { all: 'all', today: 'today', week: 'next 7 days', weekend: 'weekend', free: 'free', family: 'family' };
+    const need = labels[activeFilter] || activeFilter;
+    if (activeArea === 'all') return need === 'all' ? '' : ` · ${need}`;
+    return ` · ${activeArea}${need === 'all' ? '' : ` · ${need}`}`;
+  };
+
+  const updateFreshness = visible => {
+    if (count) count.textContent = `${visible.length} current checked ${visible.length === 1 ? 'listing' : 'listings'}`;
+    if (checked) {
+      const latestChecked = events.map(event => String(event.checked || '')).filter(value => /^\d{4}-\d{2}-\d{2}$/.test(value)).sort().pop();
+      checked.textContent = latestChecked ? `Sources checked through ${prettyCheckedDate(latestChecked)}` : 'Source dates checked before publication';
+    }
   };
 
   const render = () => {
@@ -221,16 +309,68 @@
     visible.forEach(event => list.appendChild(eventCard(event)));
     if (empty) empty.hidden = visible.length > 0;
     if (status) status.textContent = visible.length
-      ? `${visible.length} checked ${visible.length === 1 ? 'listing' : 'listings'} shown`
-      : 'No checked listings match this view yet.';
+      ? `${visible.length} ${visible.length === 1 ? 'result' : 'results'} shown${filterLabel()}`
+      : `No checked listings match this view${filterLabel()}.`;
+    updateFreshness(visible);
     filters.forEach(button => {
       const selected = button.dataset.eventFilter === activeFilter;
       button.setAttribute('aria-pressed', String(selected));
     });
+    areaFilters.forEach(button => {
+      const selected = button.dataset.eventArea === activeArea;
+      button.setAttribute('aria-pressed', String(selected));
+    });
+  };
+
+  const syncEventSchema = () => {
+    document.getElementById('sk8-event-list-schema')?.remove();
+    const schema = document.createElement('script');
+    schema.type = 'application/ld+json';
+    schema.id = 'sk8-event-list-schema';
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Current checked events around SK8',
+      itemListElement: events.map((event, index) => {
+        const source = safeUrl(event.booking_url || event.source_url) || 'https://www.sk8scoop.com/whats-on/';
+        const startDate = `${event.date}${event.time ? `T${event.time}:00` : ''}`;
+        const item = {
+          '@type': 'Event',
+          name: String(event.title || ''),
+          startDate,
+          eventStatus: 'https://schema.org/EventScheduled',
+          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+          location: {
+            '@type': 'Place',
+            name: String(event.venue || event.area || 'SK8'),
+            address: String(event.area || '')
+          },
+          url: source,
+          description: String(event.description || '')
+        };
+        if (event.end_date) item.endDate = event.end_date;
+        if (isFree(event)) item.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: source, availability: 'https://schema.org/InStock' };
+        return { '@type': 'ListItem', position: index + 1, item };
+      })
+    });
+    document.head.appendChild(schema);
+  };
+
+  const jumpToResults = () => {
+    const target = document.getElementById('current-listings');
+    if (!target) return;
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   };
 
   filters.forEach(button => button.addEventListener('click', () => {
     activeFilter = button.dataset.eventFilter || 'all';
+    render();
+    if (button.dataset.eventJump === 'results') window.requestAnimationFrame(jumpToResults);
+  }));
+  areaFilters.forEach(button => button.addEventListener('click', () => {
+    activeArea = button.dataset.eventArea || 'all';
+    syncAreaParam();
     render();
   }));
 
@@ -243,13 +383,16 @@
       const today = localToday();
       events = (Array.isArray(data) ? data : [])
         .filter(event => event && event.status !== 'example')
-        .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && event.date >= today)
+        .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
+      syncEventSchema();
       render();
     })
     .catch(error => {
       console.error('SK8 What’s On data failed to load', error);
       if (status) status.textContent = 'Current listings could not be loaded.';
+      if (count) count.textContent = 'Listings unavailable';
+      if (checked) checked.textContent = 'Please try again shortly';
       if (empty) empty.hidden = false;
     });
 })();
