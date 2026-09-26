@@ -1,0 +1,46 @@
+.locality-page{background:#f7faf8}
+.locality-hero{padding:clamp(44px,7vw,86px) 0;background:linear-gradient(135deg,#eef7f5 0%,#fff8ea 100%);border-bottom:1px solid rgba(7,63,72,.12)}
+.locality-hero-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);gap:clamp(28px,5vw,64px);align-items:center}
+.locality-hero h1{max-width:760px;margin:.35rem 0 1rem;font-size:clamp(2.45rem,6vw,5.2rem);line-height:.94;letter-spacing:-.045em}
+.locality-hero .hero-lead{max-width:720px}
+.locality-board{position:relative;overflow:hidden;min-height:320px;padding:30px;border:2px solid #073f48;border-radius:28px;background:#fff;box-shadow:10px 10px 0 rgba(7,63,72,.09)}
+.locality-board:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49%,rgba(15,100,112,.06) 50%,transparent 51%),linear-gradient(transparent 49%,rgba(15,100,112,.06) 50%,transparent 51%);background-size:56px 56px;pointer-events:none}
+.locality-board>*{position:relative}
+.locality-board-kicker{display:inline-block;padding:6px 9px;border-radius:999px;background:#d6ea00;color:#073f48;font-size:.73rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.locality-board-place{display:block;margin:28px 0 8px;font-size:clamp(2.2rem,4vw,4rem);line-height:.95;color:#073f48}
+.locality-board-copy{max-width:390px;color:#334}
+.locality-board-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.locality-board-links a{display:block;padding:12px 14px;border:1px solid rgba(7,63,72,.18);border-radius:14px;background:#f7faf8;color:#073f48;font-weight:800;text-decoration:none}
+.locality-board-links a:hover{text-decoration:underline}
+.locality-section-intro{max-width:760px}
+.locality-content-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:28px}
+.locality-card{display:flex;flex-direction:column;min-height:250px;padding:26px;border:1px solid rgba(7,63,72,.15);border-radius:22px;background:#fff;box-shadow:0 12px 34px rgba(7,63,72,.06)}
+.locality-card .locality-card-type{display:inline-block;align-self:flex-start;margin-bottom:16px;padding:6px 9px;border-radius:999px;background:#eef7f5;color:#0f6470;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.locality-card h3{margin:0 0 10px;font-size:1.45rem;line-height:1.08}
+.locality-card p{margin:0 0 18px;color:#4a5558}
+.locality-card .reader-link{margin-top:auto}
+.locality-routes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+.locality-route{padding:22px;border-radius:18px;background:#073f48;color:#fff}
+.locality-route:nth-child(2){background:#0f6470}
+.locality-route:nth-child(3){background:#fff8ea;color:#073f48;border:1px solid rgba(7,63,72,.15)}
+.locality-route:nth-child(4){background:#eef7f5;color:#073f48;border:1px solid rgba(7,63,72,.12)}
+.locality-route strong{display:block;margin-bottom:8px;font-size:1.05rem}
+.locality-route p{margin:0 0 14px;font-size:.94rem;line-height:1.45;color:inherit}
+.locality-route a{color:inherit;font-weight:900}
+.locality-place-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.locality-place-strip a{padding:16px 18px;border:1px solid rgba(7,63,72,.15);border-radius:16px;background:#fff;color:#073f48;font-weight:900;text-decoration:none;text-align:center}
+.locality-place-strip a[aria-current="page"]{background:#073f48;color:#fff}
+.locality-note{margin-top:18px;padding:16px 18px;border-left:4px solid #f8791b;background:#fff8ea}
+.locality-final{background:#073f48;color:#fff}
+.locality-final .eyebrow,.locality-final p{color:#fff}
+.locality-final .final-cta-inner{display:grid;grid-template-columns:1fr minmax(320px,.65fr);gap:28px;align-items:center}
+@media(max-width:900px){
+  .locality-hero-grid,.locality-final .final-cta-inner{grid-template-columns:1fr}
+  .locality-routes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .locality-place-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  .locality-content-grid,.locality-routes,.locality-place-strip,.locality-board-links{grid-template-columns:1fr}
+  .locality-board{min-height:0;padding:22px;border-radius:20px}
+  .locality-card{min-height:0;padding:22px}
+}
