@@ -73,9 +73,10 @@ contains('sitemap.xml','https://www.sk8scoop.com/free-cheap-guide/</loc><lastmod
 contains('latest/index.html','/assets/latest-polish.css');
 contains('latest/index.html','latest-issue-mosaic');
 contains('latest/index.html','latest-feature-card');
-contains('latest/index.html','/planning/heald-green-local-plan-2026/');
-contains('latest/index.html','/local-history/heald-green-north-history-walk/');
-contains('latest/index.html','/local-history/cheadle-war-memorial-air-raid-victims/');
+contains('latest/index.html','Issue 14');
+contains('latest/index.html','/updates/');
+contains('latest/index.html','/whats-on/');
+contains('latest/index.html','/local-history/');
 excludes('assets/latest-polish.css','NEXT FRIDAY');
 const latestHtml = read('latest/index.html');
 expect((latestHtml.match(/<section\b/g) || []).length === (latestHtml.match(/<\/section>/g) || []).length, 'latest/index.html has unbalanced section tags');
