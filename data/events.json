@@ -148,24 +148,6 @@
     "status": "verified"
   },
   {
-    "id": "the-unfriend-heald-green-2026-09-29",
-    "title": "The Unfriend",
-    "date": "2026-09-29",
-    "end_date": "2026-10-03",
-    "date_range": "29 Sep–3 Oct",
-    "time": "19:30",
-    "area": "Heald Green",
-    "venue": "Heald Green Theatre, Motcombe Grove, SK8 3TW",
-    "cost": "See booking page",
-    "category": "Theatre",
-    "description": "Heald Green Theatre's volunteer-run production of Steven Moffat's dark comedy runs 29 September to 3 October at 7.30pm.",
-    "booking_url": "https://www.hgtheatre.co.uk/upcoming-productions",
-    "source_url": "https://www.hgtheatre.co.uk/upcoming-productions",
-    "verification": "OFFICIAL_CROSSCHECKED",
-    "checked": "2026-09-25",
-    "status": "verified"
-  },
-  {
     "id": "stockroom-poetry-national-poetry-day-2026-10-01",
     "title": "Poetry at Stockroom: National Poetry Day",
     "date": "2026-10-01",
