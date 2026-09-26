@@ -1,0 +1,78 @@
+/* What’s On empty-state layout fix: keep the no-results message compact, readable and contained. */
+body[data-page="whats-on"] [data-events-empty].whats-on-empty{
+  display:grid;
+  grid-template-columns:118px minmax(0,1fr);
+  gap:22px;
+  align-items:center;
+  margin-top:18px;
+  padding:22px 24px;
+  border:1px solid #d4dfda;
+  border-radius:16px;
+  background:linear-gradient(135deg,#fff 0%,#f7faf8 100%);
+  box-shadow:0 9px 22px rgba(19,45,49,.05);
+  overflow:hidden;
+}
+body[data-page="whats-on"] [data-events-empty].whats-on-empty .whats-on-empty-art{
+  width:118px;
+  min-height:106px;
+  margin:0;
+  padding:14px 10px 30px;
+  border-radius:12px;
+  box-sizing:border-box;
+}
+body[data-page="whats-on"] [data-events-empty].whats-on-empty .whats-on-empty-copy{
+  min-width:0;
+  max-width:760px;
+}
+body[data-page="whats-on"] [data-events-empty].whats-on-empty .eyebrow{
+  margin:0 0 6px;
+  font-size:.64rem;
+  letter-spacing:.11em;
+}
+body[data-page="whats-on"] [data-events-empty].whats-on-empty h2{
+  max-width:22ch;
+  margin:0 0 8px;
+  font-size:clamp(1.85rem,3.2vw,2.65rem);
+  line-height:.98;
+  letter-spacing:-.04em;
+}
+body[data-page="whats-on"] [data-events-empty].whats-on-empty p{
+  max-width:700px;
+  margin:0;
+  color:#465d61;
+  font-size:.92rem;
+  line-height:1.5;
+}
+body[data-page="whats-on"] [data-events-empty].whats-on-empty .button-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:15px;
+}
+body[data-page="whats-on"] [data-events-empty].whats-on-empty .button{
+  min-height:0;
+  padding:10px 13px;
+  font-size:.8rem;
+}
+@media(max-width:680px){
+  body[data-page="whats-on"] [data-events-empty].whats-on-empty{
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:18px;
+  }
+  body[data-page="whats-on"] [data-events-empty].whats-on-empty .whats-on-empty-art{
+    width:100%;
+    min-height:84px;
+  }
+  body[data-page="whats-on"] [data-events-empty].whats-on-empty h2{
+    font-size:1.9rem;
+  }
+  body[data-page="whats-on"] [data-events-empty].whats-on-empty .button-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  body[data-page="whats-on"] [data-events-empty].whats-on-empty .button{
+    width:100%;
+    justify-content:center;
+  }
+}
