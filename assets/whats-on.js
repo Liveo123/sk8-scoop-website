@@ -97,6 +97,21 @@
   let activeFilter = 'all';
   let activeArea = 'all';
 
+  const requestedArea = new URLSearchParams(window.location.search).get('area');
+  if (requestedArea) {
+    const matchedArea = areaFilters
+      .map(button => button.dataset.eventArea || '')
+      .find(area => area.toLowerCase() === requestedArea.toLowerCase());
+    if (matchedArea) activeArea = matchedArea;
+  }
+
+  const syncAreaParam = () => {
+    const url = new URL(window.location.href);
+    if (activeArea === 'all') url.searchParams.delete('area');
+    else url.searchParams.set('area', activeArea);
+    window.history.replaceState({}, '', url);
+  };
+
   const localToday = () => {
     const parts = new Intl.DateTimeFormat('en-GB', {
       timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit'
@@ -355,6 +370,7 @@
   }));
   areaFilters.forEach(button => button.addEventListener('click', () => {
     activeArea = button.dataset.eventArea || 'all';
+    syncAreaParam();
     render();
   }));
 
