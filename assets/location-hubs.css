@@ -44,3 +44,13 @@
   .locality-board{min-height:0;padding:22px;border-radius:20px}
   .locality-card{min-height:0;padding:22px}
 }
+
+.locality-event-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+.locality-event-card{display:flex;flex-direction:column;padding:22px;border:1px solid rgba(7,63,72,.15);border-radius:18px;background:#fff}
+.locality-event-meta{margin-bottom:10px;color:#0f6470;font-size:.8rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.locality-event-card h3{margin:0 0 8px;font-size:1.25rem;line-height:1.1}
+.locality-event-card p{margin:.25rem 0 .75rem}
+.locality-event-card .reader-link{margin-top:auto}
+.locality-event-venue{font-weight:800;color:#3a484b}
+.locality-events-empty{grid-column:1/-1}
+@media(max-width:800px){.locality-event-grid{grid-template-columns:1fr}}
