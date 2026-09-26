@@ -7,7 +7,6 @@
   <meta name="description" content="Useful practical updates around SK8 including roads, parking, travel and other local changes worth knowing about.">
   <link rel="canonical" href="https://www.sk8scoop.com/updates/">
   <meta name="theme-color" content="#0f6470">
-  <meta name="robots" content="noindex,follow">
   <link rel="stylesheet" href="../assets/styles.css">
   <link rel="stylesheet" href="../assets/reader-pages.css">
   <link rel="stylesheet" href="../assets/reader-page-polish.css">
@@ -21,6 +20,21 @@
 
   <main id="main-content">
     <section class="page-hero"><div class="wrap category-hero-grid"><div><div class="eyebrow">Explore SK8</div><h1>Useful local changes, minus the hunting around.</h1><p class="hero-lead">Roads, parking, travel and practical changes collected in one place when they genuinely affect what you do next.</p><div class="button-row"><a class="button" href="#update-picks">See current updates</a><a class="button secondary" href="/planning/">Current consultations</a></div></div><figure class="category-hero-visual"><img src="/assets/images/nue-explore-useful-updates.webp" alt="Editorial local-updates collage with transport, recycling, roadwork and map elements"><figcaption class="category-hero-caption"><span>Useful Updates</span><strong>Practical changes, clear status and the next thing you need to know.</strong></figcaption></figure></div></section>
+
+    <section class="section white" id="weekend-travel" data-expire-after="2026-09-28">
+      <div class="wrap">
+        <div class="section-head reader-section-head">
+          <div><div class="eyebrow">Checked 25 September 2026 · weekend travel</div><h2>M60 J17–18 closes in both directions this weekend</h2></div>
+          <a class="reader-link" href="https://nationalhighways.co.uk/roads-and-travel/road-projects/m60-simister-island-closures-diversions-and-speed-restrictions/" rel="noopener">National Highways update →</a>
+        </div>
+        <div class="reader-panel">
+          <h3>Westbound closes first</h3>
+          <p><strong>Anticlockwise / westbound:</strong> 8pm Saturday 26 September to 6am Monday 28 September.<br><strong>Clockwise / eastbound:</strong> 10pm Saturday to 6am Monday.</p>
+          <p>Diversion routes will be in place. If your weekend journey uses north Manchester, the M62/M66 connections or this stretch of the M60, check the live position before leaving.</p>
+          <div class="button-row"><a class="button" href="https://nationalhighways.co.uk/roads-and-travel/road-projects/m60-simister-island-closures-diversions-and-speed-restrictions/" rel="noopener">Check closure &amp; diversions</a><a class="button secondary" href="/whats-on/">What’s On this weekend</a></div>
+        </div>
+      </div>
+    </section>
 
     <section class="section white" id="update-picks"><div class="wrap"><div class="section-head reader-section-head"><div><div class="eyebrow">Checked 11 September 2026</div><h2>Three SK8 car parks that are no longer free</h2></div><a class="reader-link" href="https://www.stockport.gov.uk/free-car-parks-that-are-becoming-charged-in-2026" rel="noopener">Official council update →</a></div>
 
@@ -40,5 +54,15 @@
 
   <footer class="site-footer"><div class="wrap footer-grid footer-grid-wide"><div class="footer-brand-block"><img class="footer-logo" src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><p>The useful, the local and the mildly nosy.</p></div><div class="footer-links"><strong>Read</strong><a href="/latest">Latest Scoop</a><a href="/guides/">Guides</a><a href="/archive.html">Archive</a></div><div class="footer-links"><strong>Take part</strong><a href="/submit/">Submit</a><a href="/contact/">Contact</a></div><div class="footer-links"><strong>Trust</strong><a href="/editorial-policy.html">Editorial policy</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div></div></footer>
   <script src="../assets/config.js"></script><script src="../assets/site.js"></script>
+  <script>
+  (() => {
+    const alert = document.querySelector('[data-expire-after]');
+    if (!alert) return;
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone:'Europe/London', year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(new Date());
+    const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+    const today = `${values.year}-${values.month}-${values.day}`;
+    if (today > alert.dataset.expireAfter) alert.remove();
+  })();
+</script>
 </body>
 </html>
