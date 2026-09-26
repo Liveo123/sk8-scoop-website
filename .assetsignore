@@ -6,3 +6,4 @@ schema.sql
 _header.html
 qr-codes.csv
 .assetsignore
+.git/
