@@ -49,20 +49,20 @@ window.SK8_CONFIG = {
     subscriberCount: "500+",
     subscriberProof: "500+",
     issuesPublished: 14,
-    checkedDate: "12 September 2026",
-    latestMainSendRecipients: 507,
+    checkedDate: "25 September 2026",
+    latestMainSendRecipients: 539,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "11 September 2026",
+    latestIssueDate: "25 September 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
     number: 14,
     dateIso: "2026-09-25",
     dateDisplay: "Friday 25 September 2026",
-    title: "Issue 14 is out",
-    headline: "Medieval faire, M60 closure & an 11th-century Cheadle surprise",
+    title: "Issue 14 · Friday 25 September 2026",
+    headline: "Medieval Manchester, The Unfriend & an 11th-century Cheadle surprise",
     summary: "A free medieval faire, The Unfriend in Heald Green, an M60 closure, St Mary’s Cheadle, the Local Plan and useful weekend ideas.",
     url: "https://connect.mailerlite.com/emails/199476219451803347/preview"
   },
@@ -103,6 +103,7 @@ window.SK8_CONFIG = {
   const page = document.body.dataset.page || '';
 
   document.querySelectorAll('[data-stat="subscriberCount"]').forEach(el => { el.textContent = stats.subscriberCount; });
+  document.querySelectorAll('[data-stat="issuesPublished"]').forEach(el => { el.textContent = stats.issuesPublished; });
   document.querySelectorAll('[data-current-issue-number]').forEach(el => { el.textContent = issue.number; });
   document.querySelectorAll('[data-current-issue-date]').forEach(el => { el.textContent = issue.dateDisplay; });
   document.querySelectorAll('[data-current-issue-title]').forEach(el => { el.textContent = issue.title; });
