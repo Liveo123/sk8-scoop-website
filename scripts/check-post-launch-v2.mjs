@@ -60,6 +60,16 @@ for (const file of ['index.html','guides/index.html','52-adventures/index.html']
   contains(file,'/assets/images/52-adventures-guide-logo.webp');
   excludes(file,'data:image/webp;base64');
 }
+// SEO hygiene contracts.
+contains('52-adventures/index.html','property="og:title" content="52 Adventures | SK8 Scoop"');
+contains('52-adventures/index.html','"@type":"WebPage"');
+contains('free-cheap-guide/index.html','property="og:title" content="Free &amp; Cheap Guide | SK8 Scoop"');
+contains('free-cheap-guide/index.html','"@type":"WebPage"');
+contains('privacy.html','rel="canonical" href="https://www.sk8scoop.com/privacy"');
+contains('terms.html','rel="canonical" href="https://www.sk8scoop.com/terms"');
+contains('sitemap.xml','https://www.sk8scoop.com/52-adventures/</loc><lastmod>2026-09-26</lastmod>');
+contains('sitemap.xml','https://www.sk8scoop.com/free-cheap-guide/</loc><lastmod>2026-09-26</lastmod>');
+
 contains('latest/index.html','/assets/latest-polish.css');
 contains('latest/index.html','latest-issue-mosaic');
 contains('latest/index.html','latest-feature-card');
