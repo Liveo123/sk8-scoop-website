@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "records": [
     {
       "id": "around-sk8",
@@ -813,6 +813,82 @@
       ],
       "freshness": "current",
       "checked": "2026-09-25"
+    },
+    {
+      "id": "place-cheadle",
+      "type": "Guides",
+      "category": "Local area",
+      "title": "Cheadle",
+      "summary": "Cheadle events, local history, Abney Hall Park, planning updates and useful routes into SK8 Scoop.",
+      "href": "/cheadle/",
+      "area": "Cheadle",
+      "tags": [
+        "Cheadle",
+        "events",
+        "history",
+        "Abney Hall",
+        "planning",
+        "things to do"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-26"
+    },
+    {
+      "id": "place-cheadle-hulme",
+      "type": "Guides",
+      "category": "Local area",
+      "title": "Cheadle Hulme",
+      "summary": "Cheadle Hulme events, family ideas, food and drink, Oak Meadow and useful local routes.",
+      "href": "/cheadle-hulme/",
+      "area": "Cheadle Hulme",
+      "tags": [
+        "Cheadle Hulme",
+        "events",
+        "family",
+        "food",
+        "Oak Meadow",
+        "things to do"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-26"
+    },
+    {
+      "id": "place-gatley",
+      "type": "Guides",
+      "category": "Local area",
+      "title": "Gatley",
+      "summary": "Gatley events, Gatley Carrs, the Gatley Shouter, local history and cheaper things to do.",
+      "href": "/gatley/",
+      "area": "Gatley",
+      "tags": [
+        "Gatley",
+        "events",
+        "Gatley Carrs",
+        "Gatley Shouter",
+        "walks",
+        "history"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-26"
+    },
+    {
+      "id": "place-heald-green",
+      "type": "Guides",
+      "category": "Local area",
+      "title": "Heald Green",
+      "summary": "Heald Green events, Local Plan updates, the North History Walk, Mercury, local history and free outdoor ideas.",
+      "href": "/heald-green/",
+      "area": "Heald Green",
+      "tags": [
+        "Heald Green",
+        "events",
+        "planning",
+        "history walk",
+        "Mercury",
+        "local history"
+      ],
+      "freshness": "current",
+      "checked": "2026-09-26"
     }
   ]
 }
