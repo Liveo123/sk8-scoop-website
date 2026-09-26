@@ -48,7 +48,7 @@ window.SK8_CONFIG = {
   publicStats: {
     subscriberCount: "500+",
     subscriberProof: "500+",
-    issuesPublished: 12,
+    issuesPublished: 14,
     checkedDate: "12 September 2026",
     latestMainSendRecipients: 507,
     latestMainOpenRate: null,
@@ -58,35 +58,35 @@ window.SK8_CONFIG = {
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 12,
-    dateIso: "2026-09-11",
-    dateDisplay: "Friday 11 September 2026",
-    title: "Issue 12 is out",
-    headline: "Black pudding, Gatley Carrs & the secrets of Ladybrook",
-    summary: "Black pudding throwing, dragon boats, Gatley Carrs, a Cheadle Hulme pub, Abney Hall and the Ladybrook corridor.",
-    url: "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619"
+    number: 14,
+    dateIso: "2026-09-25",
+    dateDisplay: "Friday 25 September 2026",
+    title: "Issue 14 is out",
+    headline: "Medieval faire, M60 closure & an 11th-century Cheadle surprise",
+    summary: "A free medieval faire, The Unfriend in Heald Green, an M60 closure, St Mary’s Cheadle, the Local Plan and useful weekend ideas.",
+    url: "https://connect.mailerlite.com/emails/199476219451803347/preview"
   },
   homeStories: [
     {
       label: "KNOW THIS",
-      title: "A 20mph proposal for the Nansen/Firs estate",
-      meta: "Heald Green · Consultation closes 24 Sep",
-      summary: "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
-      image: "/assets/images/dicm/home-planning-v2.svg"
+      title: "The M60 closes between J17 and J18 this weekend",
+      meta: "26–28 September · both directions · staggered closure times",
+      summary: "Westbound closes at 8pm Saturday and eastbound at 10pm. Both are due to reopen at 6am Monday.",
+      image: "https://res.cloudinary.com/gocq00bt/image/upload/v1790008142/issue14-m60-rich-v2.png"
     },
     {
       label: "DO THIS",
-      title: "Bramhall Wellness Day is free this Saturday",
-      meta: "Bramhall Village Square · Sat 12 Sep · from 10am",
-      summary: "A free village-centre day with fitness tasters, wellbeing advice, activities, screenings, children’s crafts and a market.",
-      image: "/assets/images/nue/whats-on-weekend.webp"
+      title: "A free medieval faire takes over Chetham's on Saturday",
+      meta: "Manchester · Saturday 26 September · 11am–4pm · free",
+      summary: "Living history, birds of prey, music, demonstrations and family activities, with optional library tours available separately.",
+      image: "https://res.cloudinary.com/gocq00bt/image/upload/v1790009204/issue14-medieval-faire-editorial-rich-v4.png"
     },
     {
       label: "DISCOVER THIS",
-      title: "The five lives of Gatley Carrs",
-      meta: "Gatley · Working wetland, landfill and nature reserve",
-      summary: "Gatley Carrs has been willow-working ground, a Victorian botanical curiosity, landfill and, after restoration, today’s local nature reserve.",
-      image: "https://storage.mlcdn.com/account_image/2462354/zi7YYuN8AWd9s2fNgj7RqZHYxsadbgJMyzFsasu2.jpg"
+      title: "An 11th-century surprise inside St Mary’s Cheadle",
+      meta: "Cheadle · Grade I listed · history hiding in plain sight",
+      summary: "The church contains an 11th-century cross, later medieval monuments and Tudor woodwork, while the medieval cross shaft outside became a sundial.",
+      image: "https://res.cloudinary.com/gocq00bt/image/upload/v1790008119/issue14-st-marys-rich-v6.png"
     }
   ],
   stripeLinks: {
