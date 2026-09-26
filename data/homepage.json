@@ -1,45 +1,45 @@
 {
-  "updated": "2026-09-17",
+  "updated": "2026-09-25",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "A 20mph proposal for the Nansen/Firs estate",
-      "meta": "Heald Green · Consultation closes 24 Sep",
-      "summary": "Stockport Council is consulting on a proposed 20mph zone across the estate, with responses open until 24 September.",
-      "href": "/planning/nansen-firs-20mph/",
-      "linkLabel": "See the proposal and deadline →",
+      "title": "The M60 closes between J17 and J18 this weekend",
+      "meta": "26–28 September · both directions · staggered closure times",
+      "summary": "Westbound closes at 8pm Saturday and eastbound at 10pm. Both are due to reopen at 6am Monday.",
+      "href": "/updates/",
+      "linkLabel": "Check the useful travel update →",
       "visualType": "dicm",
       "fit": "contain",
-      "image": "/assets/images/dicm/home-planning-v2.svg",
-      "alt": "Editorial map explainer of the Nansen and Firs estate 20mph consultation"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790008142/issue14-m60-rich-v2.png",
+      "alt": "SK8 Scoop M60 J17 to J18 weekend closure guide"
     },
     {
       "mode": "DO",
       "label": "DO THIS",
-      "title": "Manchester Camerata is playing Stockroom for free this Saturday",
-      "meta": "Stockroom, Stockport · Sat 19 Sep · 1.30pm & 3.30pm",
-      "summary": "A free string-quintet performance with an adventure-inspired programme. Manchester Camerata currently lists two performances and says no tickets are required.",
+      "title": "A free medieval faire takes over Chetham's on Saturday",
+      "meta": "Manchester · Saturday 26 September · 11am–4pm · free",
+      "summary": "Living history, birds of prey, music, demonstrations and family activities, with optional library tours available separately.",
       "href": "/whats-on/",
-      "linkLabel": "See this weekend’s checked listings →",
+      "linkLabel": "Find it in What’s On →",
       "visualType": "dicm",
       "fit": "contain",
-      "image": "/assets/images/nue/whats-on-weekend.webp",
-      "alt": "SK8 Scoop editorial artwork for this weekend’s local events"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790009204/issue14-medieval-faire-editorial-rich-v4.png",
+      "alt": "Illustrated guide to Chetham's Medieval Faire with re-enactors, birds of prey and family activities"
     },
     {
       "mode": "DISCOVER",
       "label": "DISCOVER THIS",
-      "title": "The five lives of Gatley Carrs",
-      "meta": "Gatley · Working wetland, landfill and nature reserve",
-      "summary": "Gatley Carrs has been willow-working ground, a Victorian botanical curiosity, landfill and, after restoration, today’s local nature reserve.",
-      "href": "https://preview.mailerlite.io/preview/2462354/emails/198102169520440619#gatley-carrs",
-      "linkLabel": "Read the Issue 12 feature →",
+      "title": "An 11th-century surprise inside St Mary’s Cheadle",
+      "meta": "Cheadle · Grade I listed · history hiding in plain sight",
+      "summary": "The church contains an 11th-century cross, later medieval monuments and Tudor woodwork, while the medieval cross shaft outside became a sundial.",
+      "href": "/local-history/",
+      "linkLabel": "Explore the local-history trail →",
       "visualType": "dicm",
       "fit": "contain",
-      "image": "https://storage.mlcdn.com/account_image/2462354/zi7YYuN8AWd9s2fNgj7RqZHYxsadbgJMyzFsasu2.jpg",
-      "alt": "Illustrated Five Lives of Gatley Carrs timeline, from working wetlands to restoration and the present-day nature reserve"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790008119/issue14-st-marys-rich-v6.png",
+      "alt": "St Mary's Cheadle field guide showing historic details including the 11th-century cross and medieval cross-shaft sundial"
     }
   ],
   "explore": [
