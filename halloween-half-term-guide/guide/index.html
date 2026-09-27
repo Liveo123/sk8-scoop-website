@@ -1,5 +1,4 @@
 <!doctype html>
-<!-- SK8 Scoop public guide release: 2026-09-26 -->
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
@@ -54,7 +53,21 @@
 .section:has(.cards:empty){display:none}
 @media(min-width:760px){.filter-row{flex-wrap:wrap;overflow:visible}.results{margin-left:auto}}
 @media(max-width:900px){.hero-grid{min-height:auto}.hero-art{height:auto;min-height:0}.calendar-grid{align-items:stretch}.filters{position:relative}.card{scroll-margin-top:24px}}
-@media(max-width:520px){body{font-size:15.5px}.hero-copy p{font-size:1.03rem}.quick-nav,.filter-row{overscroll-behavior-inline:contain;scroll-snap-type:x proximity}.quick-nav a,.filter{scroll-snap-align:start}.results{position:sticky;right:0;background:var(--cream);padding:9px 4px 9px 10px}.day{padding:16px}.card h3{font-size:1.48rem}.caption,.checked{font-size:.8rem}}
+@media(max-width:700px){
+  body{font-size:15.5px}
+  .hero-copy p{font-size:1.03rem}
+  .quick-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible;padding:16px 0}
+  .quick-nav a{display:grid;place-items:center;min-height:52px;padding:10px 8px;white-space:normal;text-align:center;line-height:1.2}
+  .quick-nav a:last-child{grid-column:1/-1}
+  .filters{position:relative}
+  .filter-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible;padding:14px 0}
+  .filter{min-height:48px;padding:9px 8px;white-space:normal;text-align:center;line-height:1.2}
+  .filter:last-of-type{grid-column:1/-1}
+  .results{grid-column:1/-1;position:static;margin:0;padding:2px 2px 0;text-align:right}
+  .day{padding:16px}
+  .card h3{font-size:1.48rem}
+  .caption,.checked{font-size:.8rem}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 @media(prefers-contrast:more){.card,.day,.notice{border:2px solid var(--ink)}.badge{border-color:currentColor!important}.caption,.checked,.section-head>p{color:var(--ink)}}
 </style>
@@ -79,7 +92,6 @@
 </figure>
 </div>
 </section>
-<div class="status">STAGING GUIDE · 40 selected activities · Visuals approved · Official links rechecked 26 September 2026 · Not approved for publication</div>
 <section class="intro">
 <div class="wrap">
 <div class="intro-grid">
@@ -350,7 +362,6 @@
 <div>
 <h2>Check once more before you go.</h2>
 <p>Dates, capacity, dynamic prices, weather arrangements and optional extras can change. Use the direct official link on every card.</p>
-<small>SK8 Scoop · Staging draft · 40 selected activities · publication approval still required</small>
 </div>
 <a class="button" href="https://www.sk8scoop.com/">More from SK8 Scoop</a>
 </div>
