@@ -7,5 +7,16 @@
     "needs_check": "Potentially useful but one or more material facts still need verification.",
     "rejected": "Do not publish; retain briefly with a reason to avoid rediscovery."
   },
-  "items": []
+  "items": [
+    {
+      "id": "john-lewis-cheadle-iphone-ipad-2026-10-12",
+      "title": "Getting Started with your iPhone or iPad",
+      "status": "rejected",
+      "area": "Cheadle",
+      "source_url": "https://www.johnlewis.com/our-shops/cheadle/whats-on",
+      "discovered": "2026-09-28",
+      "reason": "Primary retailer listing shows the 12 October event as sold out; retain briefly to prevent rediscovery.",
+      "date": "2026-10-12"
+    }
+  ]
 }
