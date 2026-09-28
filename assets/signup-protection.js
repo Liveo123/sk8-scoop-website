@@ -218,7 +218,7 @@
           action: 'newsletter_signup',
           theme: 'auto',
           size: 'flexible',
-          appearance: getKind(form) === 'guide' ? 'interaction-only' : 'always',
+          appearance: form.dataset.turnstileAppearance === 'interaction-only' || getKind(form) === 'guide' ? 'interaction-only' : 'always',
           'response-field': false,
           callback: token => {
             tokenField.value = String(token || '');
