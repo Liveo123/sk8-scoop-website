@@ -17,6 +17,26 @@
       "discovered": "2026-09-28",
       "reason": "Primary retailer listing shows the 12 October event as sold out; retain briefly to prevent rediscovery.",
       "date": "2026-10-12"
+    },
+    {
+      "id": "quarry-bank-scarecrow-festival-half-term-2026-10-24",
+      "title": "Quarry Bank Scarecrow Festival: October Half Term",
+      "status": "ready",
+      "area": "Styal",
+      "source_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/72e9fa48-1878-4108-910e-5a751f8e7f1b",
+      "discovered": "2026-09-28",
+      "reason": "Guide handoff rechecked against the National Trust primary event page; dates, times, venue, admission status and no-booking route are explicit.",
+      "date": "2026-10-24",
+      "end_date": "2026-11-01",
+      "date_range": "24 Oct–1 Nov",
+      "time": "10:30",
+      "venue": "Quarry Bank, Styal, Wilmslow, Cheshire",
+      "cost": "Event free with normal admission · optional £2.50 trail sheet",
+      "category": "Family",
+      "description": "October half-term programme with a scarecrow trail, themed house tours, indoor play and daily drop-in activities. No event booking is needed; normal admission applies.",
+      "booking_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/72e9fa48-1878-4108-910e-5a751f8e7f1b",
+      "verification": "ORGANISER_PRIMARY_SOURCE",
+      "checked": "2026-09-28"
     }
   ]
 }
