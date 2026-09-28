@@ -37,6 +37,24 @@
       "booking_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/72e9fa48-1878-4108-910e-5a751f8e7f1b",
       "verification": "ORGANISER_PRIMARY_SOURCE",
       "checked": "2026-09-28"
+    },
+    {
+      "id": "arc-saturday-art-club-2026-10-31",
+      "title": "Arc Saturday Art Club",
+      "status": "ready",
+      "area": "Stockport",
+      "source_url": "https://arc-centre.org/saturday-art-clubs/",
+      "discovered": "2026-09-28",
+      "reason": "Arc's primary page and current Healthy Stockport listing confirm 31 October, 11am–3pm, Hat Works venue, drop-in format and suggested donation.",
+      "date": "2026-10-31",
+      "time": "11:00",
+      "venue": "Arc at Hat Works, Wellington Road South, Stockport SK3 0EU",
+      "cost": "£3 suggested donation per artist",
+      "category": "Arts & Crafts",
+      "description": "A drop-in creative session at Arc above Hat Works, with hands-on art activities. No booking is needed and the suggested contribution supports the venue's community work.",
+      "booking_url": "https://arc-centre.org/saturday-art-clubs/",
+      "verification": "ORGANISER_PRIMARY_SOURCE_AND_OFFICIAL_LOCAL_LISTING",
+      "checked": "2026-09-28"
     }
   ]
 }
