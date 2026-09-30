@@ -244,7 +244,7 @@ function getProtectedGuide(pathname) {
 }
 
 function guideRequiresAccess(guideKey) {
-  return guideKey !== 'free-cheap';
+  return !['free-cheap', '52-adventures'].includes(guideKey);
 }
 
 async function handleProtectedGuideRequest(request, env, ctx, guide) {
