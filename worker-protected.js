@@ -166,7 +166,7 @@ async function handleNewsletterSignup(request, env) {
   if (kind === 'guide' && !GUIDE_ACCESS[guideKey]) {
     return json({ error: 'Please refresh the guide page and try again.' }, 400);
   }
-  if (kind === 'guide') {
+  if (kind === 'guide' && guideRequiresAccess(guideKey)) {
     try {
       await ensureGuideAccessTable(env.DB);
     } catch (error) {
@@ -222,7 +222,7 @@ async function handleNewsletterSignup(request, env) {
   }
 
   const signupResponse = json({ success: true, kind, guideKey: guideKey || undefined });
-  if (kind === 'guide') {
+  if (kind === 'guide' && guideRequiresAccess(guideKey)) {
     try {
       const cookie = await issueGuideAccessToken(env.DB, guideKey);
       signupResponse.headers.append('set-cookie', cookie);
@@ -243,24 +243,30 @@ function getProtectedGuide(pathname) {
   return null;
 }
 
-async function handleProtectedGuideRequest(request, env, ctx, guide) {
-  let allowed = false;
-  try {
-    allowed = await hasGuideAccess(request, env.DB, guide.key);
-  } catch (error) {
-    console.error('Guide access check failed', error);
-  }
+function guideRequiresAccess(guideKey) {
+  return guideKey !== 'free-cheap';
+}
 
-  if (!allowed) {
-    const target = new URL(guide.landing, request.url).toString();
-    return new Response(null, {
-      status: 302,
-      headers: {
-        location: target,
-        'cache-control': 'no-store',
-        'x-robots-tag': 'noindex, follow'
-      }
-    });
+async function handleProtectedGuideRequest(request, env, ctx, guide) {
+  if (guideRequiresAccess(guide.key)) {
+    let allowed = false;
+    try {
+      allowed = await hasGuideAccess(request, env.DB, guide.key);
+    } catch (error) {
+      console.error('Guide access check failed', error);
+    }
+
+    if (!allowed) {
+      const target = new URL(guide.landing, request.url).toString();
+      return new Response(null, {
+        status: 302,
+        headers: {
+          location: target,
+          'cache-control': 'no-store',
+          'x-robots-tag': 'noindex, follow'
+        }
+      });
+    }
   }
 
   let response = await existingWorker.fetch(request, env, ctx);
