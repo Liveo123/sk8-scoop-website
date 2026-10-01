@@ -124,27 +124,26 @@ jobs:
           check_page '/planning/' 'Planning & Development around SK8'
           check_page '/free-cheap-guide/' 'Heald Green North History Walk'
           check_page '/52-adventures/' 'data-page="52-adventures"'
-          check_redirect() {
+          check_page '/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
+          check_noindex_guide() {
             path="$1"
-            expected="$2"
             url="${base}${path}"
             for attempt in $(seq 1 12); do
               headers="$(curl -sS --max-time 20 -D - -o /dev/null "$url" | tr -d '\r' || true)"
               code="$(printf '%s\n' "$headers" | awk 'NR==1 {print $2}')"
-              location="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^location:/ {sub(/^location:[[:space:]]*/, ""); print; exit}')"
               robots="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^x-robots-tag:/ {sub(/^x-robots-tag:[[:space:]]*/, ""); print; exit}')"
-              if [ "$code" = "302" ] && printf '%s' "$location" | grep -Fq "$expected" && printf '%s' "$robots" | grep -Fqi 'noindex'; then
-                echo "OK protected guide redirect: $url -> $location"
+              if [ "$code" = "200" ] && printf '%s' "$robots" | grep -Fqi 'noindex'; then
+                echo "OK public guide with noindex: $url"
                 return 0
               fi
-              echo "Waiting for protected guide redirect: $url (attempt $attempt/12; code=$code; location=$location)"
+              echo "Waiting for public noindex guide: $url (attempt $attempt/12; code=$code; robots=$robots)"
               sleep 15
             done
-            echo "FAILED protected guide redirect: $url"
+            echo "FAILED public noindex guide: $url"
             return 1
           }
-          check_redirect '/52-adventures/guide/' '/52-adventures/#get-guide'
-          check_redirect '/free-cheap-guide/guide/' '/free-cheap-guide/#get-guide'
+          check_noindex_guide '/52-adventures/guide/'
+          check_noindex_guide '/free-cheap-guide/guide/'
           check_page '/planning/heald-green-local-plan-2026/' '1,672 homes'
           check_page '/local-history/heald-green-north-history-walk/' '22 history stops'
           check_page '/local-history/cheadle-war-memorial-air-raid-victims/' 'eight civilian names'
@@ -231,26 +230,25 @@ jobs:
           check_page 'https://www.sk8scoop.com/planning/' 'Planning & Development around SK8'
           check_page 'https://www.sk8scoop.com/free-cheap-guide/' 'Heald Green North History Walk'
           check_page 'https://www.sk8scoop.com/52-adventures/' 'data-page="52-adventures"'
-          check_redirect() {
+          check_page 'https://www.sk8scoop.com/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
+          check_noindex_guide() {
             url="$1"
-            expected="$2"
             for attempt in $(seq 1 10); do
               headers="$(curl -sS --max-time 20 -D - -o /dev/null "$url" | tr -d '\r' || true)"
               code="$(printf '%s\n' "$headers" | awk 'NR==1 {print $2}')"
-              location="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^location:/ {sub(/^location:[[:space:]]*/, ""); print; exit}')"
               robots="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^x-robots-tag:/ {sub(/^x-robots-tag:[[:space:]]*/, ""); print; exit}')"
-              if [ "$code" = "302" ] && printf '%s' "$location" | grep -Fq "$expected" && printf '%s' "$robots" | grep -Fqi 'noindex'; then
-                echo "OK protected guide redirect: $url -> $location"
+              if [ "$code" = "200" ] && printf '%s' "$robots" | grep -Fqi 'noindex'; then
+                echo "OK public guide with noindex: $url"
                 return 0
               fi
-              echo "Waiting for protected guide redirect: $url (attempt $attempt/10; code=$code; location=$location)"
+              echo "Waiting for public noindex guide: $url (attempt $attempt/10; code=$code; robots=$robots)"
               sleep 15
             done
-            echo "FAILED protected guide redirect: $url"
+            echo "FAILED public noindex guide: $url"
             return 1
           }
-          check_redirect 'https://www.sk8scoop.com/52-adventures/guide/' '/52-adventures/#get-guide'
-          check_redirect 'https://www.sk8scoop.com/free-cheap-guide/guide/' '/free-cheap-guide/#get-guide'
+          check_noindex_guide 'https://www.sk8scoop.com/52-adventures/guide/'
+          check_noindex_guide 'https://www.sk8scoop.com/free-cheap-guide/guide/'
           check_page 'https://www.sk8scoop.com/planning/heald-green-local-plan-2026/' '1,672 homes'
           check_page 'https://www.sk8scoop.com/local-history/heald-green-north-history-walk/' '22 history stops'
           check_page 'https://www.sk8scoop.com/local-history/cheadle-war-memorial-air-raid-victims/' 'eight civilian names'
