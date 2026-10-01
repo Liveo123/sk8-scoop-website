@@ -76,6 +76,9 @@ contains('halloween-half-term-guide/index.html','property="og:title"');
 contains('halloween-half-term-guide/guide/index.html','name="robots" content="noindex,follow"');
 contains('sitemap.xml','https://www.sk8scoop.com/halloween-half-term-guide/</loc><lastmod>2026-09-29</lastmod>');
 contains('sitemap.html','href="halloween-half-term-guide/"');
+contains('guides/index.html','id="halloween"');
+contains('guides/index.html','Halloween &amp; Half-Term Family Guide 2026');
+contains('guides/index.html','href="../halloween-half-term-guide/"'); // Halloween guide appears on Guides hub
 
 contains('latest/index.html','/assets/latest-polish.css');
 contains('latest/index.html','latest-issue-mosaic');
