@@ -29,6 +29,34 @@
       "discovered": "2026-10-01",
       "checked": "2026-10-01",
       "reason": "Rejected because Stockport Plaza's current primary What's On page explicitly marks the 4 Nov performance cancelled."
+    },
+    {
+      "id": "john-lewis-laura-mercier-mint-velvet-2026-10-28",
+      "title": "Laura Mercier & Mint Velvet: Beauty and Fashion styling for A/W",
+      "status": "needs_check",
+      "date": "2026-10-28",
+      "area": "Cheadle",
+      "source_url": "https://www.johnlewis.com/our-shops/cheadle/whats-on",
+      "discovered": "2026-10-01",
+      "checked": "2026-10-01",
+      "reason": "Current John Lewis Cheadle primary page confirms 28 Oct 2026 and £10, but the accessible listing does not expose the session start time. Keep for verification rather than publish with an assumed time.",
+      "missing": [
+        "exact start time"
+      ]
+    },
+    {
+      "id": "john-lewis-winter-capsule-wardrobe-cheadle-2026",
+      "title": "How To Build The Perfect Winter Capsule Wardrobe",
+      "status": "needs_check",
+      "area": "Cheadle",
+      "source_url": "https://www.johnlewis.com/our-shops/cheadle/whats-on",
+      "discovered": "2026-10-01",
+      "checked": "2026-10-01",
+      "reason": "Current John Lewis Cheadle primary page confirms a £10 event series with multiple dates through 20 Nov, but does not expose the individual Cheadle dates/times in the accessible listing. A third-party listing suggests dates beginning 5 Nov, which is not strong enough evidence to publish.",
+      "missing": [
+        "exact individual dates within the 42-day window",
+        "exact start times"
+      ]
     }
   ]
 }
