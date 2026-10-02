@@ -4,6 +4,11 @@
   const area = String(document.body.dataset.location || '').trim();
   if (!root || !area) return;
 
+  document.querySelectorAll('main a[href^="/"]').forEach(link => {
+    link.dataset.nueLink = '';
+    if (!link.dataset.nueType) link.dataset.nueType = 'locality-continuation';
+  });
+
   const localToday = () => {
     const parts = new Intl.DateTimeFormat('en-GB', {
       timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit'
