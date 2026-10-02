@@ -54,10 +54,13 @@ const archiveComparable = comparable(archiveText);
 const latestComparable = comparable(latestText);
 
 assert(!configText.includes('homeStories:'), 'assets/config.js must not contain the obsolete homeStories dataset.');
-assert(homepage.updated === issue.dateIso, `data/homepage.json updated date (${homepage.updated}) must match current issue date (${issue.dateIso}).`);
+assert(/^\d{4}-\d{2}-\d{2}$/.test(String(homepage.updated || '')), 'data/homepage.json updated must be an ISO date.');
+assert(homepage.updated >= issue.dateIso, `data/homepage.json updated date (${homepage.updated}) must not be older than current issue date (${issue.dateIso}).`);
 assert(Array.isArray(homepage.stories) && homepage.stories.length === 3, 'Homepage must contain exactly three current attention stories.');
 
+const londonToday = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 for (const story of homepage.stories || []) {
+  if (story.expires) assert(story.expires >= londonToday, `Homepage story is expired (${story.expires}): ${story.title}`);
   assert(indexComparable.includes(story.title), `index.html fallback is missing homepage story title: ${story.title}`);
   assert(indexComparable.includes(story.summary), `index.html fallback is missing homepage story summary: ${story.title}`);
   assert(indexComparable.includes(story.href), `index.html fallback is missing homepage story link: ${story.href}`);

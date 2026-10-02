@@ -115,4 +115,13 @@ if (failures.length) {
   process.exit(1);
 }
 
+
+// Place-first homepage navigation.
+for (const [slug,label] of [['cheadle','Cheadle'],['cheadle-hulme','Cheadle Hulme'],['gatley','Gatley'],['heald-green','Heald Green']]) {
+  contains('index.html',`href="/${slug}/"`);
+  contains('index.html',`>${label}</span>`);
+}
+contains('index.html','id="your-area"');
+contains('index.html','homepage_location_click');
+contains('index.html','homepage-place-first-v1');
 console.log('Homepage V5 preflight passed.');

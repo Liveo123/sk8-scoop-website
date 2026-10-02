@@ -186,3 +186,16 @@ body.reader-home .home-resource-adventures .home-resource-copy .button{backgroun
   body.reader-home .home-resource-adventures .home-resource-visual img{max-height:132px!important}
 }
 
+
+
+/* 12. Place-first homepage navigation: make the four core areas impossible to miss. */
+body.reader-home.homepage-v3 .home-locality-strip{display:grid;grid-template-columns:minmax(240px,.72fr) minmax(0,1.28fr);gap:20px;align-items:center;margin:0 0 16px;padding:18px 20px;border:1px solid #c9dad5;border-radius:16px;background:linear-gradient(135deg,#fff 0%,#eef7f5 100%);box-shadow:0 7px 18px rgba(19,45,49,.045)}
+body.reader-home.homepage-v3 .home-locality-copy{display:grid;gap:4px}
+body.reader-home.homepage-v3 .home-locality-copy strong{color:#12383d;font-size:1.05rem;line-height:1.22}
+body.reader-home.homepage-v3 .home-locality-copy span{color:#52666a;font-size:.8rem;line-height:1.42}
+body.reader-home.homepage-v3 .home-locality-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+body.reader-home.homepage-v3 .home-locality-links a{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:52px;padding:12px 13px;border:1px solid rgba(15,100,112,.2);border-radius:12px;background:#fff;color:#073f48;text-decoration:none;font-size:.84rem;font-weight:900;box-shadow:0 4px 11px rgba(19,45,49,.035);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+body.reader-home.homepage-v3 .home-locality-links a:hover{transform:translateY(-1px);border-color:#0f6470;box-shadow:0 7px 14px rgba(19,45,49,.07)}
+body.reader-home.homepage-v3 .home-locality-links b{color:#0f6470;font-size:1rem}
+@media(max-width:900px){body.reader-home.homepage-v3 .home-locality-strip{grid-template-columns:1fr}body.reader-home.homepage-v3 .home-locality-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){body.reader-home.homepage-v3 .home-locality-strip{padding:15px}body.reader-home.homepage-v3 .home-locality-links{grid-template-columns:1fr}}

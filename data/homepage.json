@@ -1,34 +1,36 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-10-02",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "The M60 closes between J17 and J18 this weekend",
-      "meta": "26–28 September · both directions · staggered closure times",
-      "summary": "Westbound closes at 8pm Saturday and eastbound at 10pm. Both are due to reopen at 6am Monday.",
-      "href": "/updates/",
-      "linkLabel": "Check the useful travel update →",
+      "title": "Heald Green Local Plan consultation is open until 8 November",
+      "meta": "Heald Green · Regulation 19 · closes 8 November",
+      "summary": "Three proposed Heald Green allocations total 1,672 homes. This is a policy consultation, not planning permission.",
+      "href": "/planning/heald-green-local-plan-2026/",
+      "linkLabel": "Read the Local Plan explainer →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790008142/issue14-m60-rich-v2.png",
-      "alt": "SK8 Scoop M60 J17 to J18 weekend closure guide"
+      "image": "/assets/images/nue-explore-planning.webp",
+      "alt": "Editorial planning collage with a local map, development markers, blueprints and consultation imagery",
+      "expires": "2026-11-08"
     },
     {
       "mode": "DO",
       "label": "DO THIS",
-      "title": "A free medieval faire takes over Chetham's on Saturday",
-      "meta": "Manchester · Saturday 26 September · 11am–4pm · free",
-      "summary": "Living history, birds of prey, music, demonstrations and family activities, with optional library tours available separately.",
-      "href": "/whats-on/",
-      "linkLabel": "Find it in What’s On →",
+      "title": "40 Halloween & half-term ideas are now live",
+      "meta": "10 October–1 November · 40 family activities · local options first",
+      "summary": "Dates, prices, age guidance and rainy-day backups, with SK8 and Stockport leading the list.",
+      "href": "/halloween-half-term-guide/",
+      "linkLabel": "Open the Halloween & Half-Term Guide →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790009204/issue14-medieval-faire-editorial-rich-v4.png",
-      "alt": "Illustrated guide to Chetham's Medieval Faire with re-enactors, birds of prey and family activities"
+      "image": "/halloween-half-term-guide/guide/assets/image-02-8afb5ab3af.webp",
+      "alt": "Families in autumn coats walking through a lantern-lit local town scene",
+      "expires": "2026-11-01"
     },
     {
       "mode": "DISCOVER",
