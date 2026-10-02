@@ -16,9 +16,3 @@ html_handling = "auto-trailing-slash"
 [[d1_databases]]
 binding = "DB"
 
-# Preview-only custom domain for branch and deployment previews.
-[[routes]]
-pattern = "previews.sk8scoop.com"
-custom_domain = true
-previews_enabled = true
-enabled = false
