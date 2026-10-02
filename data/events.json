@@ -144,7 +144,7 @@
     "booking_url": "https://www.hgtheatre.co.uk/upcoming-productions",
     "source_url": "https://www.hgtheatre.co.uk/upcoming-productions",
     "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-09-25",
+    "checked": "2026-10-02",
     "status": "verified"
   },
   {
@@ -192,7 +192,7 @@
     "booking_url": "",
     "source_url": "https://www.stockport.gov.uk/events",
     "verification": "OFFICIAL_COUNCIL_LISTING",
-    "checked": "2026-09-25",
+    "checked": "2026-10-02",
     "status": "verified"
   },
   {
@@ -224,7 +224,7 @@
     "booking_url": "",
     "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
     "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-09-25",
+    "checked": "2026-10-02",
     "status": "verified"
   },
   {
@@ -298,14 +298,14 @@
     "time": "10:30",
     "area": "Cheadle",
     "venue": "John Lewis Cheadle, Wilmslow Road, Cheadle SK8 3BZ",
-    "cost": "£5",
+    "cost": "Sold out",
     "category": "Family",
-    "description": "A one-hour session with John Lewis nursery specialists and Dr Dewan, author of The Weaning GP, covering starting solids, allergies, gagging, choking and food refusal. Ticket value is redeemable on Nursery products that day.",
+    "description": "A one-hour session with John Lewis nursery specialists and Dr Dewan, author of The Weaning GP, covering starting solids, allergies, gagging, choking and food refusal. John Lewis currently marks this 8 October session sold out.",
     "booking_url": "https://www.eventbrite.co.uk/e/all-things-baby-beyond-ft-dr-dewan-author-of-the-weaning-gp-tickets-1997565187248",
     "source_url": "https://www.johnlewis.com/our-shops/cheadle/whats-on",
     "verification": "RETAILER_AND_ORGANISER_BOOKING_PAGE",
-    "checked": "2026-09-25",
-    "status": "verified"
+    "checked": "2026-10-02",
+    "status": "sold_out"
   },
   {
     "id": "cheadle-library-digital-support-2026-10-09",
@@ -320,7 +320,7 @@
     "booking_url": "",
     "source_url": "https://www.stockport.gov.uk/events/digital-support-drop-in-at-cheadle-library-sept-to-dec?date=2026-10-23",
     "verification": "OFFICIAL_COUNCIL_SERIES_PAGE",
-    "checked": "2026-09-25",
+    "checked": "2026-10-02",
     "status": "verified"
   },
   {
@@ -384,7 +384,7 @@
     "booking_url": "",
     "source_url": "https://www.stockport.gov.uk/events",
     "verification": "OFFICIAL_COUNCIL_LISTING",
-    "checked": "2026-09-25",
+    "checked": "2026-10-02",
     "status": "verified"
   },
   {
@@ -450,7 +450,7 @@
     "booking_url": "https://www.stockport.gov.uk/events/the-girl-on-the-train-by-paula-hawkins?date=2026-10-17",
     "source_url": "https://www.stockport.gov.uk/events/the-girl-on-the-train-by-paula-hawkins?date=2026-10-17",
     "verification": "THEATRE_SUBMITTED_COUNCIL_EVENT_PAGE",
-    "checked": "2026-09-25",
+    "checked": "2026-10-02",
     "status": "verified"
   },
   {
@@ -502,7 +502,7 @@
     "booking_url": "",
     "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
     "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-09-25",
+    "checked": "2026-10-02",
     "status": "verified"
   },
   {
@@ -552,7 +552,7 @@
     "booking_url": "",
     "source_url": "https://www.stockport.gov.uk/events?category=seasonal&page=1&pageSize=60",
     "verification": "OFFICIAL_COUNCIL_LISTING",
-    "checked": "2026-09-25",
+    "checked": "2026-10-02",
     "status": "verified"
   }
 ]

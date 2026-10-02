@@ -60,7 +60,7 @@
     .then(data => {
       const today = localToday();
       const events = (Array.isArray(data) ? data : [])
-        .filter(event => event && event.status !== 'example')
+        .filter(event => event && !['example', 'sold_out', 'cancelled'].includes(event.status))
         .filter(event => String(event.area || '').trim().toLowerCase() === area.toLowerCase())
         .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`))
@@ -73,7 +73,7 @@
       if (!events.length) {
         const fallback = document.createElement('div');
         fallback.className = 'reader-panel locality-events-empty';
-        fallback.innerHTML = `<h3>No padding with stale events.</h3><p>Use the full What’s On page for nearby listings, or come back when a new ${area} event has been checked.</p><a class="button small-button" href="/whats-on/?area=${encodeURIComponent(area)}">Open What’s On</a>`;
+        fallback.innerHTML = `<h3>Nothing current in ${area} right now.</h3><p>We’d rather show nothing than an expired listing. Check the full What’s On page for nearby SK8 events, or come back when a new ${area} event has been checked.</p><a class="button small-button" href="/whats-on/?area=${encodeURIComponent(area)}">Open What’s On</a>`;
         root.appendChild(fallback);
       }
     })
