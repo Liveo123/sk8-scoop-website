@@ -62,6 +62,11 @@ contains('assets/nue-analytics.js',"'cheadle-hulme': 'locality_hub_visit'");
 contains('assets/nue-analytics.js',"gatley: 'locality_hub_visit'");
 contains('assets/nue-analytics.js',"'heald-green': 'locality_hub_visit'");
 contains('assets/location-hubs.js',"locality-continuation");
+contains('assets/location-hubs.css','.locality-final .final-signup');
+contains('assets/location-hubs.css','grid-template-columns:minmax(0,1fr) 142px');
+for (const [slug] of locationHubs) {
+  excludes(`${slug}/index.html`,'/assets/images/nue/');
+}
 
 // What’s On usefulness and search structure.
 contains('whats-on/index.html','data-event-area="Cheadle"');

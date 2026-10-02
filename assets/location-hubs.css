@@ -117,3 +117,106 @@
 
 .locality-card-media{position:relative}
 .locality-media-credit{position:absolute;left:8px;right:8px;bottom:8px;padding:5px 7px;border-radius:7px;background:rgba(7,63,72,.88);color:#fff;font-size:.62rem;line-height:1.25}
+
+
+/* Locality visual QA fixes — 2 Oct 2026 */
+.locality-hero-grid{
+  grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr);
+  gap:clamp(32px,4.5vw,58px);
+}
+.locality-hero h1{
+  max-width:690px;
+  font-size:clamp(2.7rem,4.8vw,4.55rem);
+  line-height:.98;
+  letter-spacing:-.04em;
+}
+.locality-content-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.locality-content-grid .locality-card,
+.locality-content-grid .locality-card:first-child,
+.locality-content-grid .locality-card:nth-child(2){
+  grid-column:auto;
+}
+.locality-card{
+  min-height:260px;
+}
+.locality-card-text{
+  background:linear-gradient(145deg,#ffffff 0%,#f6faf8 100%);
+  border-top:5px solid rgba(15,100,112,.22);
+}
+.locality-card-text>.locality-card-type{
+  margin-top:22px;
+}
+.locality-card-media{
+  height:190px;
+}
+.locality-content-grid .locality-card:first-child .locality-card-media{
+  height:190px;
+}
+.locality-event-grid{
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+}
+.locality-route{
+  min-height:158px;
+}
+.locality-route a{
+  display:inline-block;
+  line-height:1.25;
+}
+.locality-final .final-cta-inner{
+  grid-template-columns:minmax(0,1fr) minmax(430px,.82fr);
+  gap:34px;
+}
+.locality-final .final-signup{
+  width:100%;
+  max-width:560px;
+  justify-self:end;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 142px;
+  margin:0;
+}
+.locality-final .final-signup input{
+  width:100%;
+  min-width:0;
+  padding:16px 18px;
+}
+.locality-final .final-signup button{
+  min-width:142px;
+  padding-left:16px;
+  padding-right:16px;
+}
+@media(max-width:900px){
+  .locality-hero-grid,
+  .locality-final .final-cta-inner{
+    grid-template-columns:1fr;
+  }
+  .locality-final .final-signup{
+    justify-self:start;
+    max-width:620px;
+  }
+}
+@media(max-width:640px){
+  .locality-hero h1{
+    font-size:clamp(2.55rem,12.5vw,3.7rem);
+    line-height:.96;
+  }
+  .locality-content-grid{
+    grid-template-columns:1fr;
+  }
+  .locality-card{
+    min-height:0;
+  }
+  .locality-final .final-signup{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .locality-final .final-signup input,
+  .locality-final .final-signup button{
+    width:100%;
+    min-width:0;
+    border:1px solid rgba(255,255,255,.72);
+    border-radius:8px;
+  }
+}
