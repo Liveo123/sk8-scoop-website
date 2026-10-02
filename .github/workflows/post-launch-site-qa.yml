@@ -61,8 +61,16 @@ jobs:
           workflow_only=false
           commit_payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$commit_api" || true)"
           non_workflow_files="$(printf '%s' "$commit_payload" | jq '[.files[]? | select((.filename | startswith(".github/workflows/")) | not)] | length' 2>/dev/null || echo 1)"
-          if [ "$non_workflow_files" = "0" ]; then workflow_only=true; fi
+          if [ "$non_workflow_files" = "0" ]; then
+            workflow_only=true
+            slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+            base="https://${slug}.previews.sk8scoop.com"
+          fi
           for attempt in $(seq 1 30); do
+            if [ "$workflow_only" = true ] && [ -n "$base" ]; then
+              echo "Using existing branch Preview for workflow-only change: $base"
+              break
+            fi
             payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$checks_api" || true)"
             summary="$(printf '%s' "$payload" | jq -r '.check_runs[]? | select(.name=="Workers Builds: sk8-scoop" and .conclusion=="success") | .output.summary // empty' | head -n 1)"
             base="$(printf '%s' "$summary" | sed -n 's#.*Preview URL: \(https://[^[:space:]]*\).*#\1#p' | head -n 1)"
