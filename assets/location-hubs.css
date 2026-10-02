@@ -114,3 +114,6 @@
   .locality-content-grid .locality-card{grid-column:auto!important}
   .locality-card-media,.locality-content-grid .locality-card:first-child .locality-card-media{height:170px}
 }
+
+.locality-card-media{position:relative}
+.locality-media-credit{position:absolute;left:8px;right:8px;bottom:8px;padding:5px 7px;border-radius:7px;background:rgba(7,63,72,.88);color:#fff;font-size:.62rem;line-height:1.25}
