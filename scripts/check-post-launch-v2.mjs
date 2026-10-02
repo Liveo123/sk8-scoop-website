@@ -36,6 +36,28 @@ for (const route of ['/whats-on/','/food-drink/','/kids-family/','/outdoors/','/
   contains('sitemap.html',`href="${route.replace(/^\//,'')}"`);
 }
 
+// Core location-hub contract: four useful, indexable place pages only.
+const locationHubs = [
+  ['cheadle','Cheadle'],
+  ['cheadle-hulme','Cheadle Hulme'],
+  ['gatley','Gatley'],
+  ['heald-green','Heald Green']
+];
+expect(fs.existsSync(path.join(root,'assets/location-hubs.css')), 'assets/location-hubs.css is missing');
+expect(fs.existsSync(path.join(root,'assets/location-hubs.js')), 'assets/location-hubs.js is missing');
+for (const [slug,area] of locationHubs) {
+  const file = `${slug}/index.html`;
+  expect(fs.existsSync(path.join(root,file)), `${file} is missing`);
+  excludes(file,'noindex');
+  contains(file,`data-location="${area}"`);
+  contains(file,`/whats-on/?area=${encodeURIComponent(area)}`);
+  contains('sitemap.xml',`https://www.sk8scoop.com/${slug}/`);
+  contains('sitemap.html',`href="${slug}/"`);
+  contains('around-sk8/index.html',`href="/${slug}/"`);
+}
+contains('assets/whats-on.js','const requestedArea = new URLSearchParams');
+contains('assets/whats-on.js','syncAreaParam');
+
 // What’s On usefulness and search structure.
 contains('whats-on/index.html','data-event-area="Cheadle"');
 contains('whats-on/index.html','data-event-area="Cheadle Hulme"');
@@ -149,6 +171,12 @@ for (const record of discovery.records) {
   else if (route.endsWith('/')) rel = `${route.replace(/^\//,'')}index.html`;
   else rel = route.replace(/^\//,'');
   expect(fs.existsSync(path.join(root,rel)), `Discovery record ${record.id || record.title} points to missing route: ${record.href}`);
+}
+for (const [slug,area] of locationHubs) {
+  const record = discovery.records.find(item => item.id === `place-${slug}`);
+  expect(record, `Missing location-hub discovery record: place-${slug}`);
+  expect(record.href === `/${slug}/`, `Location hub ${slug} has unexpected discovery href: ${record.href}`);
+  expect(record.area === area, `Location hub ${slug} has unexpected discovery area: ${record.area}`);
 }
 
 // Newsletter archive extraction: selected articles only, never wholesale archive indexing.
