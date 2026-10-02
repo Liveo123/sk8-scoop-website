@@ -51,6 +51,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PREVIEW_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
           PR_NUMBER: ${{ github.event_name == 'pull_request' && github.event.pull_request.number || '' }}
+          HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
           checks_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}/check-runs"
           commit_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}"
@@ -65,6 +66,12 @@ jobs:
             payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$checks_api" || true)"
             summary="$(printf '%s' "$payload" | jq -r '.check_runs[]? | select(.name=="Workers Builds: sk8-scoop" and .conclusion=="success") | .output.summary // empty' | head -n 1)"
             base="$(printf '%s' "$summary" | sed -n 's#.*Preview URL: \(https://[^[:space:]]*\).*#\1#p' | head -n 1)"
+            if [ -z "$base" ]; then
+              cf_preview="$(printf '%s' "$payload" | jq -r '.check_runs[]? | select(.name=="Workers Builds: sk8-scoop" and .conclusion=="success") | .details_url // empty' | sed -n 's#.*\/previews\/\([^/]*\)\/builds\/.*#\1#p' | head -n 1)"
+              if [ -n "$cf_preview" ]; then
+                base="https://${cf_preview}.previews.sk8scoop.com"
+              fi
+            fi
             if [ -z "$base" ] && [ -n "$PR_NUMBER" ]; then
               comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
               comments="$(curl -fsSL --max-time 20 "${auth[@]}" "$comments_api" || true)"
@@ -162,29 +169,29 @@ jobs:
           check_page '/planning/cheadle-eco-park/' 'Cheadle Eco Park'
           check_page '/kids-family/secondary-school-applications-2027/' '31 October 2026'
 
-      - name: Verify advertiser admin auth gate
+      - name: Verify Preview has no production admin secret
         shell: bash
         run: |
           url="${CLOUDFLARE_PREVIEW_BASE}/api/advertiser-enquiries"
           code="$(curl -sS --max-time 20 -o /tmp/advertiser-admin.json -w '%{http_code}' "$url" -H 'authorization: Bearer intentionally-wrong-test-token')"
-          if [ "$code" != "401" ]; then
-            echo "Expected advertiser admin auth gate to return 401, got $code"
+          if [ "$code" != "503" ]; then
+            echo "Expected isolated Preview admin route to return 503 without ADMIN_TOKEN, got $code"
             cat /tmp/advertiser-admin.json || true
             exit 1
           fi
-          echo "OK advertiser admin auth gate: 401"
+          echo "OK Preview isolation: ADMIN_TOKEN is not present"
 
-      - name: Verify Stripe webhook secret gate
+      - name: Verify Preview has no production Stripe secret
         shell: bash
         run: |
           url="${CLOUDFLARE_PREVIEW_BASE}/api/stripe-webhook"
           code="$(curl -sS --max-time 20 -o /tmp/stripe-webhook.json -w '%{http_code}' -X POST "$url" -H 'content-type: application/json' --data '{}')"
-          if [ "$code" != "400" ]; then
-            echo "Expected unsigned Stripe webhook to return 400, got $code"
+          if [ "$code" != "503" ]; then
+            echo "Expected isolated Preview Stripe route to return 503 without STRIPE_WEBHOOK_SECRET, got $code"
             cat /tmp/stripe-webhook.json || true
             exit 1
           fi
-          echo "OK Stripe webhook secret/signature gate: 400"
+          echo "OK Preview isolation: STRIPE_WEBHOOK_SECRET is not present"
 
 
   live-smoke:
