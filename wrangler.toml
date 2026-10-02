@@ -15,3 +15,10 @@ html_handling = "auto-trailing-slash"
 # Cloudflare will provision and bind a D1 database for this Worker.
 [[d1_databases]]
 binding = "DB"
+
+# Preview-only custom domain for branch and deployment previews.
+[[routes]]
+pattern = "previews.sk8scoop.com"
+custom_domain = true
+previews_enabled = true
+enabled = false
