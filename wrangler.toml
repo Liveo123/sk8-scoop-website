@@ -3,6 +3,9 @@ main = "worker-business-v2.js"
 compatibility_date = "2026-07-24"
 keep_vars = true
 
+# Worker Previews base. Preview deployments do not inherit production secrets or D1.
+previews = { }
+
 [secrets]
 required = [ "ADMIN_TOKEN", "MAILERLITE_API_TOKEN", "TURNSTILE_SECRET_KEY", "RESEND_API_KEY", "STRIPE_WEBHOOK_SECRET" ]
 
@@ -16,6 +19,13 @@ html_handling = "auto-trailing-slash"
 [[routes]]
 pattern = "www.sk8scoop.com"
 custom_domain = true
+
+# Preview-only custom domain. Cloudflare provisions wildcard DNS/TLS for branch Previews.
+[[routes]]
+pattern = "previews.sk8scoop.com"
+custom_domain = true
+previews_enabled = true
+enabled = false
 
 # Cloudflare will provision and bind a D1 database for this Worker.
 [[d1_databases]]
