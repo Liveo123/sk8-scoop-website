@@ -69,9 +69,17 @@ jobs:
               comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
               comments="$(curl -fsSL --max-time 20 "${auth[@]}" "$comments_api" || true)"
               cf_body="$(printf '%s' "$comments" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // empty' 2>/dev/null || true)"
-              cf_url="$(printf '%s' "$cf_body" | sed -n "s#.*href='\(https://[^']*workers.dev\)'.*#\1#p" | head -n 1)"
-              cf_sha="$(printf '%s' "$cf_body" | sed -n 's#.*| sk8-scoop | \([0-9a-f]\{8\}\) |.*#\1#p' | head -n 1)"
-              if [ -n "$cf_url" ] && { [ "$cf_sha" = "$short_sha" ] || [ "$workflow_only" = true ]; }; then
+              cf_url="$(printf '%s\n' "$cf_body" | sed -n 's#^### Preview URL: \(https://[^ ]*\) (commit [0-9a-f]\{7,40\})$#\1#p' | head -n 1)"
+              cf_sha="$(printf '%s\n' "$cf_body" | sed -n 's#^### Preview URL: https://[^ ]* (commit \([0-9a-f]\{7,40\})$#\1#p' | head -n 1)"
+              if [ -z "$cf_url" ]; then
+                cf_url="$(printf '%s' "$cf_body" | grep -Eo "https://[^' <]*(workers\.dev|previews\.sk8scoop\.com)" | head -n 1 || true)"
+              fi
+              if [ -z "$cf_sha" ]; then
+                cf_sha="$(printf '%s' "$cf_body" | sed -n 's#.*| sk8-scoop | \([0-9a-f]\{7,40\}\) |.*#\1#p' | head -n 1)"
+              fi
+              sha_matches=false
+              if [ -n "$cf_sha" ] && [[ "$PREVIEW_SHA" == "$cf_sha"* ]]; then sha_matches=true; fi
+              if [ -n "$cf_url" ] && { [ "$sha_matches" = true ] || [ "$workflow_only" = true ]; }; then
                 base="$cf_url"
               fi
             fi
@@ -162,29 +170,29 @@ jobs:
           check_page '/planning/cheadle-eco-park/' 'Cheadle Eco Park'
           check_page '/kids-family/secondary-school-applications-2027/' '31 October 2026'
 
-      - name: Verify advertiser admin auth gate
+      - name: Verify advertiser admin preview isolation
         shell: bash
         run: |
           url="${CLOUDFLARE_PREVIEW_BASE}/api/advertiser-enquiries"
           code="$(curl -sS --max-time 20 -o /tmp/advertiser-admin.json -w '%{http_code}' "$url" -H 'authorization: Bearer intentionally-wrong-test-token')"
-          if [ "$code" != "401" ]; then
-            echo "Expected advertiser admin auth gate to return 401, got $code"
+          if [ "$code" != "503" ] || ! grep -Fq 'admin token has not been configured' /tmp/advertiser-admin.json; then
+            echo "Expected isolated Preview to withhold ADMIN_TOKEN and return 503, got $code"
             cat /tmp/advertiser-admin.json || true
             exit 1
           fi
-          echo "OK advertiser admin auth gate: 401"
+          echo "OK Preview isolation: ADMIN_TOKEN is not inherited"
 
-      - name: Verify Stripe webhook secret gate
+      - name: Verify Stripe webhook preview isolation
         shell: bash
         run: |
           url="${CLOUDFLARE_PREVIEW_BASE}/api/stripe-webhook"
           code="$(curl -sS --max-time 20 -o /tmp/stripe-webhook.json -w '%{http_code}' -X POST "$url" -H 'content-type: application/json' --data '{}')"
-          if [ "$code" != "400" ]; then
-            echo "Expected unsigned Stripe webhook to return 400, got $code"
+          if [ "$code" != "503" ] || ! grep -Fq 'Stripe webhook is not configured' /tmp/stripe-webhook.json; then
+            echo "Expected isolated Preview to withhold STRIPE_WEBHOOK_SECRET and return 503, got $code"
             cat /tmp/stripe-webhook.json || true
             exit 1
           fi
-          echo "OK Stripe webhook secret/signature gate: 400"
+          echo "OK Preview isolation: STRIPE_WEBHOOK_SECRET is not inherited"
 
 
   live-smoke:
