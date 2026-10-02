@@ -57,6 +57,11 @@ for (const [slug,area] of locationHubs) {
 }
 contains('assets/whats-on.js','const requestedArea = new URLSearchParams');
 contains('assets/whats-on.js','syncAreaParam');
+contains('assets/nue-analytics.js',"cheadle: 'locality_hub_visit'");
+contains('assets/nue-analytics.js',"'cheadle-hulme': 'locality_hub_visit'");
+contains('assets/nue-analytics.js',"gatley: 'locality_hub_visit'");
+contains('assets/nue-analytics.js',"'heald-green': 'locality_hub_visit'");
+contains('assets/location-hubs.js',"locality-continuation");
 
 // What’s On usefulness and search structure.
 contains('whats-on/index.html','data-event-area="Cheadle"');
