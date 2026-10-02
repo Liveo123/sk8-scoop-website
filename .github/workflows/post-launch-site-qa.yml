@@ -69,14 +69,16 @@ jobs:
               comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
               comments="$(curl -fsSL --max-time 20 "${auth[@]}" "$comments_api" || true)"
               cf_body="$(printf '%s' "$comments" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // empty' 2>/dev/null || true)"
-              cf_url="$(printf '%s\n' "$cf_body" | sed -n 's#^### Preview URL: \(https://[^ ]*\) (commit [0-9a-f]\{7,40\})$#\1#p' | head -n 1)"
-              cf_sha="$(printf '%s\n' "$cf_body" | sed -n 's#^### Preview URL: https://[^ ]* (commit \([0-9a-f]\{7,40\})$#\1#p' | head -n 1)"
+              cf_line="$(printf '%s\n' "$cf_body" | grep -F '### Preview URL:' | head -n 1 || true)"
+              cf_url="$(printf '%s\n' "$cf_line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
+              cf_sha="$(printf '%s\n' "$cf_line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
               if [ -z "$cf_url" ]; then
                 cf_url="$(printf '%s' "$cf_body" | grep -Eo "https://[^' <]*(workers\.dev|previews\.sk8scoop\.com)" | head -n 1 || true)"
               fi
               if [ -z "$cf_sha" ]; then
-                cf_sha="$(printf '%s' "$cf_body" | sed -n 's#.*| sk8-scoop | \([0-9a-f]\{7,40\}\) |.*#\1#p' | head -n 1)"
+                cf_sha="$(printf '%s' "$cf_body" | grep -Eo '<td>[0-9a-f]{7,40}</td>' | sed -n '1s#<td>\(.*\)</td>#\1#p' || true)"
               fi
+              echo "Cloudflare PR preview candidate: url=$cf_url sha=$cf_sha expected=$short_sha"
               sha_matches=false
               if [ -n "$cf_sha" ] && [[ "$PREVIEW_SHA" == "$cf_sha"* ]]; then sha_matches=true; fi
               if [ -n "$cf_url" ] && { [ "$sha_matches" = true ] || [ "$workflow_only" = true ]; }; then
