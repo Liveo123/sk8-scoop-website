@@ -55,9 +55,10 @@ contains('index.html','Things to do, useful local updates and money-saving ideas
 // Current visual-refresh contracts.
 contains('index.html','home-resource-adventures');
 contains('index.html','52 Adventures Guide logo');
-expect(fs.existsSync(path.join(root,'assets/images/52-adventures-guide-logo.webp')), '52 Adventures logo asset is missing');
-for (const file of ['index.html','guides/index.html','52-adventures/index.html']) {
-  contains(file,'/assets/images/52-adventures-guide-logo.webp');
+expect(fs.existsSync(path.join(root,'assets/images/52-adventures-guide-logo.webp')), '52 Adventures fallback logo asset is missing');
+const adventureLogo = 'https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto,w_900/v1790422941/sk8-scoop/52-adventures/52-adventures-guide-logo-official.png';
+for (const file of ['index.html','guides/index.html','52-adventures/index.html','52-adventures/guide/index.html','52-adventures/success/index.html']) {
+  contains(file,adventureLogo);
   excludes(file,'data:image/webp;base64');
 }
 // SEO hygiene contracts.
