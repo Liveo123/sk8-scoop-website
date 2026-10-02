@@ -21,6 +21,12 @@ const ISSUE_13_POLL_ANSWERS = [
   'manchester_if_worth_it'
 ];
 
+const ISSUE_15_POLL_ANSWERS = [
+  'quick_oddity',
+  'proper_story',
+  'full_rabbit_hole'
+];
+
 const SEARCH_TABLE_SQL = `CREATE TABLE IF NOT EXISTS search_events (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  query_text TEXT NOT NULL,
@@ -83,6 +89,14 @@ export default {
 
     if (url.pathname === '/api/poll/issue-13' && request.method === 'POST') {
       return handleIssue13PollVote(request, env);
+    }
+
+    if (url.pathname === '/api/poll/issue-15' && request.method === 'GET') {
+      return handleIssue15PollResults(env);
+    }
+
+    if (url.pathname === '/api/poll/issue-15' && request.method === 'POST') {
+      return handleIssue15PollVote(request, env);
     }
 
     if (url.pathname === '/api/search-event' && request.method === 'POST') {
@@ -462,6 +476,79 @@ async function handleIssue13PollVote(request, env) {
     return json({ success: true, answer, ...results });
   } catch (error) {
     console.error('Issue 13 poll vote error', error);
+    return json({ error: 'The vote could not be saved. Please try again.' }, 503);
+  }
+}
+
+async function ensureIssue15PollCommentsTable(db) {
+  if (!db) throw new Error('Poll database unavailable');
+  await db.prepare(`CREATE TABLE IF NOT EXISTS newsletter_poll_comments (
+    issue TEXT NOT NULL,
+    voter_token TEXT NOT NULL,
+    comment_text TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (issue, voter_token)
+  )`).run();
+}
+
+async function getIssue15PollResults(db) {
+  await ensureIssue12PollTable(db);
+  const result = await db.prepare(`SELECT answer, COUNT(*) AS votes FROM newsletter_poll_votes WHERE issue = '15' GROUP BY answer`).all();
+  const counts = Object.fromEntries(ISSUE_15_POLL_ANSWERS.map(answer => [answer, 0]));
+  for (const row of result.results || []) {
+    if (Object.prototype.hasOwnProperty.call(counts, row.answer)) counts[row.answer] = Number(row.votes || 0);
+  }
+  const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
+  return { issue: 15, counts, total };
+}
+
+async function handleIssue15PollResults(env) {
+  try {
+    return json(await getIssue15PollResults(env.DB));
+  } catch (error) {
+    console.error('Issue 15 poll results error', error);
+    return json({ error: 'Poll results are temporarily unavailable.' }, 503);
+  }
+}
+
+async function handleIssue15PollVote(request, env) {
+  let data;
+  try {
+    data = await request.json();
+  } catch {
+    return json({ error: 'The vote could not be read.' }, 400);
+  }
+
+  const answer = String(data.answer || '').trim();
+  const voterToken = String(data.voter_token || '').trim();
+  const comment = String(data.comment || '').trim().replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').slice(0, 1200);
+  if (!ISSUE_15_POLL_ANSWERS.includes(answer)) return json({ error: 'Please choose one of the poll options.' }, 400);
+  if (!/^[A-Za-z0-9_-]{12,100}$/.test(voterToken)) return json({ error: 'Please refresh the poll and try again.' }, 400);
+
+  try {
+    await ensureIssue12PollTable(env.DB);
+    await ensureIssue15PollCommentsTable(env.DB);
+    await env.DB.prepare(`INSERT INTO newsletter_poll_votes (issue, answer, voter_token, created_at, updated_at)
+      VALUES ('15', ?, ?, datetime('now'), datetime('now'))
+      ON CONFLICT(issue, voter_token) DO UPDATE SET answer = excluded.answer, updated_at = datetime('now')`)
+      .bind(answer, voterToken)
+      .run();
+
+    await env.DB.prepare(`DELETE FROM newsletter_poll_comments WHERE issue = '15' AND voter_token = ?`)
+      .bind(voterToken)
+      .run();
+    if (comment) {
+      await env.DB.prepare(`INSERT INTO newsletter_poll_comments (issue, voter_token, comment_text, created_at, updated_at)
+        VALUES ('15', ?, ?, datetime('now'), datetime('now'))`)
+        .bind(voterToken, comment)
+        .run();
+    }
+
+    const results = await getIssue15PollResults(env.DB);
+    return json({ success: true, answer, comment_saved: Boolean(comment), ...results });
+  } catch (error) {
+    console.error('Issue 15 poll vote error', error);
     return json({ error: 'The vote could not be saved. Please try again.' }, 503);
   }
 }
