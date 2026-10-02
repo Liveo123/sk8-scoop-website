@@ -67,11 +67,19 @@
         if (ctx.listing_name) {
           let destinationHost = '';
           try { destinationHost = new URL(link.href, location.href).hostname; } catch (_) {}
-          track('guide_listing_click', {
+          const clickParams = {
             ...ctx,
             link_label: link.textContent.trim().slice(0, 100),
             destination_host: destinationHost
-          });
+          };
+          track('guide_listing_click', clickParams);
+          const commercial = link.closest('[data-advertiser],[data-commercial]') || link.matches('[data-advertiser],[data-commercial]');
+          if (commercial) {
+            track('guide_advertiser_click', {
+              ...clickParams,
+              advertiser: link.dataset.advertiser || commercial.dataset.advertiser || ctx.listing_name
+            });
+          }
         }
       }
 
@@ -115,7 +123,7 @@
         });
       }, { threshold: 0.35 });
 
-      document.querySelectorAll('[data-guide-section], main section[id], .section[id]').forEach(section => observer.observe(section));
+      document.querySelectorAll('[data-guide-section], main > section, section.section, .calendar, .intro, .visuals').forEach(section => observer.observe(section));
     }
   };
 
