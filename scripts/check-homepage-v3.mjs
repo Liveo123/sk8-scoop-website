@@ -109,19 +109,19 @@ rejectText(css, 'body.reader-home .reader-explore-tile{min-height:232px', 'old e
 rejectText(js, "art.loading = 'eager'", 'old eager dynamic story loading');
 rejectText(home, 'COMING LATER', 'unavailable guide card');
 
+// Place-first homepage navigation.
+for (const [slug,label] of [['cheadle','Cheadle'],['cheadle-hulme','Cheadle Hulme'],['gatley','Gatley'],['heald-green','Heald Green']]) {
+  requireText(home, `href="/${slug}/"`, `${label} locality link`);
+  requireText(home, `>${label}</span>`, `${label} locality label`);
+}
+requireText(home, 'id="your-area"', 'homepage locality anchor');
+requireText(home, 'homepage_location_click', 'homepage locality click tracking');
+requireText(home, 'homepage-place-first-v1', 'homepage locality experiment');
+
 if (failures.length) {
   console.error('Homepage V5 preflight failed:');
   failures.forEach(item => console.error(`- ${item}`));
   process.exit(1);
 }
 
-
-// Place-first homepage navigation.
-for (const [slug,label] of [['cheadle','Cheadle'],['cheadle-hulme','Cheadle Hulme'],['gatley','Gatley'],['heald-green','Heald Green']]) {
-  contains('index.html',`href="/${slug}/"`);
-  contains('index.html',`>${label}</span>`);
-}
-contains('index.html','id="your-area"');
-contains('index.html','homepage_location_click');
-contains('index.html','homepage-place-first-v1');
 console.log('Homepage V5 preflight passed.');
