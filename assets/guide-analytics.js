@@ -12,14 +12,21 @@
   })();
 
   const track = (name, params = {}) => {
-    if (typeof window.sk8Track !== 'function') return false;
-    window.sk8Track(name, {
+    const payload = {
       guide_name: guideKey,
       guide_path: location.pathname,
       measurement_version: 'guide_v1',
       ...params
-    });
-    return true;
+    };
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track(name, payload);
+      return true;
+    }
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, payload);
+      return true;
+    }
+    return false;
   };
 
   const once = new Set();
@@ -29,9 +36,9 @@
   };
 
   const listingContext = node => {
-    const card = node && node.closest ? node.closest('.card, [data-guide-listing]') : null;
+    const card = node && node.closest ? node.closest('.card, [data-guide-listing], .guide-entry, .story-card, .saved-card, .recent-card') : null;
     if (!card) return {};
-    const heading = card.querySelector('h2,h3,[data-listing-title]');
+    const heading = card.querySelector('h2,h3,h4,[data-listing-title]');
     const section = card.closest('[data-section], section[id]');
     return {
       listing_name: heading ? heading.textContent.trim().slice(0, 120) : 'unknown',
@@ -46,14 +53,14 @@
     });
 
     document.addEventListener('click', event => {
-      const filter = event.target.closest('[data-filter]');
+      const filter = event.target.closest('[data-filter], [data-preset], [data-preset-global], [data-budget]');
       if (filter) {
         track('guide_filter_use', {
-          filter_value: filter.dataset.filter || filter.textContent.trim().slice(0, 80)
+          filter_value: filter.dataset.filter || filter.dataset.preset || filter.dataset.presetGlobal || filter.dataset.budget || filter.textContent.trim().slice(0, 80)
         });
       }
 
-      const category = event.target.closest('[data-guide-category], .quick-nav a, .calendar-grid a[href^="#event-"]');
+      const category = event.target.closest('[data-guide-category], .quick-nav a, .calendar-grid a[href^="#event-"], .intent-nav a, [data-view]');
       if (category) {
         track('guide_category_click', {
           category: category.dataset.guideCategory || category.textContent.trim().slice(0, 100),
@@ -88,8 +95,21 @@
         track('guide_share', { share_method: share.dataset.guideShare || 'unknown' });
       }
 
-      const copy = event.target.closest('[data-guide-copy-link]');
+      const copy = event.target.closest('[data-guide-copy-link], [data-copy-link]');
       if (copy) track('guide_copy_link');
+
+      const open = event.target.closest('[data-open]');
+      if (open) track('guide_listing_open', { listing_id: open.dataset.open || '' });
+
+      const save = event.target.closest('[data-save], [data-dialog-save]');
+      if (save) track('guide_save', { listing_id: save.dataset.save || '' });
+
+      const complete = event.target.closest('[data-complete], [data-dialog-done]');
+      if (complete) track('guide_complete_toggle', { listing_id: complete.dataset.complete || '' });
+
+      if (event.target.closest('[data-surprise], [data-undone], [data-pick-saved]')) {
+        track('guide_surprise_use');
+      }
     }, true);
 
     const thresholds = [25, 50, 75, 90];
@@ -129,7 +149,7 @@
 
   let attempts = 0;
   const wait = () => {
-    if (typeof window.sk8Track === 'function') return attach();
+    if (typeof window.sk8Track === 'function' || typeof window.gtag === 'function') return attach();
     attempts += 1;
     if (attempts < 30) setTimeout(wait, 100);
   };
