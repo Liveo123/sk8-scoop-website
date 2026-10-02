@@ -21,10 +21,18 @@ on:
       - 'scripts/check-homepage-v3.mjs'
       - '.github/workflows/homepage-v3-qa.yml'
 
+# Avoid failure emails from obsolete runs while this draft PR is receiving rapid updates.
+concurrency:
+  group: homepage-v3-qa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   preflight:
     runs-on: ubuntu-latest
     steps:
+      - name: Let rapid PR updates settle
+        if: github.event_name == 'pull_request'
+        run: sleep 60
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Set up Node
