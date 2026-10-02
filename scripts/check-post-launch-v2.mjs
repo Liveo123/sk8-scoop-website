@@ -61,6 +61,8 @@ for (const file of ['index.html','guides/index.html','52-adventures/index.html',
   contains(file,adventureLogo);
   excludes(file,'data:image/webp;base64');
 }
+contains('52-adventures/index.html','id="a52-legibility-v1"');
+contains('52-adventures/guide/index.html','id="a52-legibility-v1"');
 // SEO hygiene contracts.
 contains('52-adventures/index.html','property="og:title" content="52 Adventures | SK8 Scoop"');
 contains('52-adventures/index.html','"@type":"WebPage"');
