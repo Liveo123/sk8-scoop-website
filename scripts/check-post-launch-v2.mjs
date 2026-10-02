@@ -69,6 +69,8 @@ contains('privacy.html','rel="canonical" href="https://www.sk8scoop.com/privacy"
 contains('terms.html','rel="canonical" href="https://www.sk8scoop.com/terms"');
 contains('sitemap.xml','https://www.sk8scoop.com/52-adventures/</loc><lastmod>2026-09-26</lastmod>');
 contains('sitemap.xml','https://www.sk8scoop.com/free-cheap-guide/</loc><lastmod>2026-09-30</lastmod>');
+contains('sitemap.xml','https://www.sk8scoop.com/guides/</loc><lastmod>2026-10-01</lastmod>');
+contains('archive.html','Browse all 14 published SK8 Scoop issues');
 
 // Halloween indexing contracts.
 contains('halloween-half-term-guide/index.html','rel="canonical" href="https://www.sk8scoop.com/halloween-half-term-guide/"');
