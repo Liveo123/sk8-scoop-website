@@ -3,7 +3,7 @@ main = "worker-business-v2.js"
 compatibility_date = "2026-07-24"
 keep_vars = true
 
-# Worker Previews base: static visual previews use no production secrets or data bindings.
+# Worker Previews base: visual branch previews do not inherit production secrets or D1.
 previews = { }
 
 [secrets]
@@ -15,13 +15,18 @@ binding = "ASSETS"
 run_worker_first = [ "/api/*", "/free-cheap-guide/guide*", "/52-adventures/guide*", "/advertise/pay/*", "/admin/*" ]
 html_handling = "auto-trailing-slash"
 
-# Cloudflare will provision and bind a D1 database for this Worker.
-[[d1_databases]]
-binding = "DB"
+# Production custom domain.
+[[routes]]
+pattern = "www.sk8scoop.com"
+custom_domain = true
 
-# Preview-only custom domain for branch and deployment previews.
+# Preview-only custom domain.
 [[routes]]
 pattern = "previews.sk8scoop.com"
 custom_domain = true
 previews_enabled = true
 enabled = false
+
+# Cloudflare will provision and bind a D1 database for production.
+[[d1_databases]]
+binding = "DB"
