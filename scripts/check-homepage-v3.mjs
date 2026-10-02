@@ -40,13 +40,13 @@ requireText(css, '.home-hero-eyebrow', 'hero eyebrow styling');
 requireText(js, 'No spam. Unsubscribe any time.', 'signup reassurance');
 requireText(home, 'home-hero-subroutes', 'hero utility routes');
 requireText(home, 'What’s On now →', 'hero What’s On route');
-requireText(home, 'Around SK8 →', 'hero Around SK8 route');
+requireText(home, 'Your area →', 'hero locality route');
 requireText(v5, '.home-signup-note{margin:5px 0 7px!important', 'tight signup reassurance spacing');
 requireText(v5, '.reader-proof{margin-top:0!important', 'tight proof spacing');
 
 // 3. Weekly picks have a proper editorial introduction.
 requireText(home, 'Know · Do · Discover', 'weekly-picks editorial framing');
-requireText(home, 'Three different reasons to click', 'weekly-picks explanation');
+requireText(home, 'One useful change, one timely thing to do and one local detail worth knowing about.', 'current-picks explanation');
 requireText(v4, '.home-worth-head', 'weekly-picks heading layout');
 
 // 4. Story cards are visually consistent and CTA-aligned.
