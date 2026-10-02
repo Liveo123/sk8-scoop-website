@@ -153,6 +153,20 @@ jobs:
           }
           check_noindex_guide '/52-adventures/guide/'
           check_noindex_guide '/free-cheap-guide/guide/'
+          check_image_asset() {
+            url="$1"
+            label="$2"
+            file_path="/tmp/sk8-critical-image"
+            code="$(curl -sS -L --max-time 20 -o "$file_path" -w '%{http_code}' "$url" || true)"
+            bytes="$(wc -c < "$file_path" 2>/dev/null || echo 0)"
+            kind="$(file -b "$file_path" 2>/dev/null || true)"
+            if [ "$code" != "200" ] || [ "$bytes" -lt 50000 ] || ! printf '%s' "$kind" | grep -Eqi 'PNG image|Web/P image|JPEG image'; then
+              echo "FAILED critical image: $label (HTTP $code; bytes=$bytes; type=$kind)"
+              return 1
+            fi
+            echo "OK critical image: $label (bytes=$bytes; type=$kind)"
+          }
+          check_image_asset 'https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto,w_900/v1790422941/sk8-scoop/52-adventures/52-adventures-guide-logo-official.png' '52 Adventures official guide logo'
           check_page '/planning/heald-green-local-plan-2026/' '1,672 homes'
           check_page '/local-history/heald-green-north-history-walk/' '22 history stops'
           check_page '/local-history/cheadle-war-memorial-air-raid-victims/' 'eight civilian names'
