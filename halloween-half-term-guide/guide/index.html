@@ -73,7 +73,7 @@
 @media(prefers-contrast:more){.card,.day,.notice{border:2px solid var(--ink)}.badge{border-color:currentColor!important}.caption,.checked,.section-head>p{color:var(--ink)}}
 </style>
 </head>
-<body>
+<body data-page="halloween-half-term-guide-guide" data-guide-key="halloween-half-term">
 <a class="skip-link" href="#guide-content">Skip to guide content</a>
 
 <main id="guide-content">
@@ -489,5 +489,8 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
   requestAnimationFrame(()=>requestAnimationFrame(()=>document.getElementById(targetId)?.closest('.card')?.focus({preventScroll:true})));
 }));
 </script>
+<script src="/assets/config.js"></script>
+<script src="/assets/site.js"></script>
+<script src="/assets/guide-analytics.js"></script>
 </body>
 </html>
