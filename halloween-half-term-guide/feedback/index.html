@@ -37,9 +37,9 @@ a{color:var(--teal);font-weight:700}
 <p class="kicker">SK8 Scoop tester group</p>
 <h1>Help us improve the Halloween & Half-Term Guide</h1>
 <p class="lede">You are one of 100 regular SK8 Scoop readers seeing this before we push the guide more widely. These four questions should take about a minute.</p>
-<p><a href="/halloween-half-term-guide/guide/">Open the guide again</a></p>
+<p><a href="/halloween-half-term-guide/guide/" target="_blank" rel="noopener">Open the guide again in a new tab</a></p>
 
-<div class="reward"><strong>Thank-you:</strong> complete the feedback and we’ll add you to the Secret Trails tester programme, so you get the next three SK8 treasure hunts free as they are released.</div>
+<div class="reward"><strong>Thank-you:</strong> complete the feedback and we’ll add you to the full Secret Trails tester programme, so you get the next three SK8 treasure hunts free as they are released.</div>
 
 <form id="feedback" class="card">
 <fieldset>
@@ -115,7 +115,7 @@ form.addEventListener('submit',async e=>{
     });
     const body=await res.json().catch(()=>({}));
     if(!res.ok) throw new Error(body.error||'The feedback could not be sent.');
-    form.innerHTML='<h2>Thank you.</h2><p>Your feedback is in. We’ll use this to improve the guide before the wider push.</p><p><strong>Your reward is recorded:</strong> you’ll be added to the Secret Trails tester programme for the next three SK8 treasure hunts.</p><p><a href="/halloween-half-term-guide/guide/">Back to the Halloween & Half-Term Guide</a></p>';
+    form.innerHTML='<h2>Thank you.</h2><p>Your feedback is in. We’ll use this to improve the guide before the wider push.</p><p><strong>Your reward is recorded:</strong> you’ll be added to the full Secret Trails tester programme for the next three SK8 treasure hunts.</p><p><a href="/halloween-half-term-guide/guide/">Back to the Halloween & Half-Term Guide</a></p>';
   }catch(err){
     status.textContent=err.message||'Something went wrong. Please try again.';
     button.disabled=false;
