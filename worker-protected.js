@@ -27,6 +27,13 @@ const ISSUE_15_POLL_ANSWERS = [
   'full_rabbit_hole'
 ];
 
+const SECRET_TRAIL_DOWNLOADS = {
+  cheadle: {
+    source: 'https://res.cloudinary.com/gocq00bt/raw/upload/v1790955853/secret-trails-cheadle-public-beta.pdf',
+    filename: 'SK8-Secret-Trails-The-Cheadle-Case.pdf'
+  }
+};
+
 const SECRET_TRAIL_FEEDBACK_SQL = `CREATE TABLE IF NOT EXISTS secret_trail_feedback (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  trail_key TEXT NOT NULL DEFAULT 'cheadle',
@@ -125,6 +132,10 @@ export default {
       return handleSecretTrailFeedbackStats(request, env);
     }
 
+    if (url.pathname === '/api/secret-trail-download' && (request.method === 'GET' || request.method === 'HEAD')) {
+      return handleSecretTrailDownload(request);
+    }
+
     if (url.pathname === '/api/search-event' && request.method === 'POST') {
       return handleSearchEvent(request, env);
     }
@@ -141,6 +152,61 @@ export default {
     return existingWorker.fetch(request, env, ctx);
   }
 };
+
+async function handleSecretTrailDownload(request) {
+  const url = new URL(request.url);
+  const trailKey = String(url.searchParams.get('trail') || '').trim().toLowerCase();
+  const file = SECRET_TRAIL_DOWNLOADS[trailKey];
+  if (!file) {
+    return new Response('That Secret Trail case file was not found.', {
+      status: 404,
+      headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' }
+    });
+  }
+
+  const upstreamHeaders = new Headers();
+  const range = request.headers.get('range');
+  const ifRange = request.headers.get('if-range');
+  if (range) upstreamHeaders.set('range', range);
+  if (ifRange) upstreamHeaders.set('if-range', ifRange);
+
+  let upstream;
+  try {
+    upstream = await fetch(file.source, {
+      method: request.method,
+      headers: upstreamHeaders
+    });
+  } catch (error) {
+    console.error('Secret Trail PDF fetch failed', error);
+    return new Response('The case file is temporarily unavailable. Please try again shortly.', {
+      status: 502,
+      headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' }
+    });
+  }
+
+  if (!upstream.ok && upstream.status !== 206) {
+    console.error('Secret Trail PDF upstream error', upstream.status);
+    return new Response('The case file is temporarily unavailable. Please try again shortly.', {
+      status: 502,
+      headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' }
+    });
+  }
+
+  const headers = new Headers();
+  headers.set('content-type', 'application/pdf');
+  headers.set('content-disposition', `attachment; filename="${file.filename}"`);
+  headers.set('cache-control', 'public, max-age=3600');
+  for (const name of ['content-length', 'content-range', 'accept-ranges', 'etag', 'last-modified']) {
+    const value = upstream.headers.get(name);
+    if (value) headers.set(name, value);
+  }
+
+  return new Response(request.method === 'HEAD' ? null : upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers
+  });
+}
 
 async function handleNewsletterSignup(request, env) {
   const turnstileSecret = String(env.TURNSTILE_SECRET_KEY || '').trim();
