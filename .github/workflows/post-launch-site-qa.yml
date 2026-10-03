@@ -141,12 +141,19 @@ jobs:
           check_page '/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
           check_page '/halloween-half-term-guide/feedback/' 'Halloween Guide Tester Feedback'
           feedback_code="$(curl -sS --max-time 20 -o /tmp/halloween-feedback-api.json -w '%{http_code}' -X POST "${base}/api/contact-message" -H 'content-type: application/json' --data '{}')"
-          if [ "$feedback_code" != "400" ]; then
-            echo "FAILED Halloween feedback API readiness: expected 400 validation response, got $feedback_code"
+          if [ "$feedback_code" != "503" ]; then
+            echo "FAILED Preview feedback isolation: expected 503 without the contact_messages preview table, got $feedback_code"
             cat /tmp/halloween-feedback-api.json || true
             exit 1
           fi
-          echo "OK Halloween feedback API readiness: 400 validation response"
+          echo "OK Preview feedback isolation: contact_messages is not inherited"
+          live_feedback_code="$(curl -sS --max-time 20 -o /tmp/halloween-feedback-api-live-ready.json -w '%{http_code}' -X POST 'https://www.sk8scoop.com/api/contact-message' -H 'content-type: application/json' --data '{}')"
+          if [ "$live_feedback_code" != "400" ]; then
+            echo "FAILED production Halloween feedback API readiness: expected 400 validation response, got $live_feedback_code"
+            cat /tmp/halloween-feedback-api-live-ready.json || true
+            exit 1
+          fi
+          echo "OK production Halloween feedback API readiness: 400 validation response"
           check_page '/secret-trails/cheadle/' 'data-secret-trail-feedback-link'
           check_page '/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
           check_page '/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
