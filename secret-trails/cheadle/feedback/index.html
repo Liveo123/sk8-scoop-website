@@ -179,6 +179,27 @@
     if(field)field.value=value;
   });
   form.elements.started_at.value=String(Date.now());
+  const ageBoxes=[...form.querySelectorAll('input[name="age_bands"]')];
+  const notApplicable=ageBoxes.find(box=>box.value==='not_applicable');
+  const validateAges=()=>{
+    const chosen=ageBoxes.filter(box=>box.checked);
+    if(notApplicable&&notApplicable.checked){
+      ageBoxes.forEach(box=>{if(box!==notApplicable)box.checked=false;});
+    }else if(chosen.some(box=>box!==notApplicable)&&notApplicable){
+      notApplicable.checked=false;
+    }
+    const first=ageBoxes[0];
+    if(first)first.setCustomValidity(ageBoxes.some(box=>box.checked)?'':'Please choose at least one age group.');
+  };
+  ageBoxes.forEach(box=>box.addEventListener('change',validateAges));
+  form.addEventListener('submit',event=>{
+    validateAges();
+    if(!ageBoxes.some(box=>box.checked)){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      form.reportValidity();
+    }
+  });
 })();
 </script>
 <script src="/assets/config.js"></script>
