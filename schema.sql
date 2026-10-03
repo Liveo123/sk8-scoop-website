@@ -125,3 +125,24 @@ CREATE TABLE IF NOT EXISTS search_events (
 CREATE INDEX IF NOT EXISTS idx_search_events_query ON search_events(query_normalised);
 CREATE INDEX IF NOT EXISTS idx_search_events_created ON search_events(created_at);
 CREATE INDEX IF NOT EXISTS idx_search_events_results ON search_events(result_count);
+
+
+CREATE TABLE IF NOT EXISTS secret_trail_feedback (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ trail_key TEXT NOT NULL DEFAULT 'cheadle',
+ completion_status TEXT NOT NULL,
+ age_bands TEXT NOT NULL,
+ duration_band TEXT NOT NULL,
+ hardest_part TEXT NOT NULL,
+ issue_type TEXT NOT NULL,
+ problem_text TEXT,
+ would_do_another TEXT NOT NULL,
+ best_bit TEXT,
+ source TEXT,
+ medium TEXT,
+ campaign TEXT,
+ content TEXT,
+ created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_secret_trail_feedback_created ON secret_trail_feedback(created_at);
+CREATE INDEX IF NOT EXISTS idx_secret_trail_feedback_campaign ON secret_trail_feedback(campaign);
