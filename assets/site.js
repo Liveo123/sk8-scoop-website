@@ -33,7 +33,7 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   const activeHref=(()=>{
     if(currentPath==='/') return '/';
     if(currentPath.startsWith('/whats-on')) return '/whats-on/';
-    if(currentPath.startsWith('/guides')||currentPath.startsWith('/free-cheap-guide')||currentPath.startsWith('/52-adventures')||currentPath.startsWith('/halloween-half-term-guide')) return '/guides/';
+    if(currentPath.startsWith('/guides')||currentPath.startsWith('/free-cheap-guide')||currentPath.startsWith('/52-adventures')||currentPath.startsWith('/halloween-half-term-guide')||currentPath.startsWith('/secret-trails')) return '/guides/';
     if(currentPath.startsWith('/start')) return '/start/';
     if(currentPath.startsWith('/join')) return '/join/';
     if(currentPath.startsWith('/submit')||currentPath.startsWith('/business-submissions')) return '/submit/';
@@ -148,7 +148,8 @@ const conversionPageLabel=()=>{
     'submit-event':'Submit Event',
     '52-adventures':'52 Adventures',
     'halloween-half-term-guide':'Halloween Half-Term Guide',
-    'halloween-guide-success':'Halloween Half-Term Guide Success'
+    'halloween-guide-success':'Halloween Half-Term Guide Success',
+    'secret-trails-cheadle':'Cheadle Secret Trail'
   }[page]||labelOrFallback(location.pathname.replace(/^\/+|\/+$/g,'').split('/').filter(Boolean).pop()||'Homepage','Homepage');
 };
 const searchSourceFromHost=host=>{
@@ -433,7 +434,8 @@ const sk8PageEventName=()=>{
     'signup-success':'signup_completed',
     '52-adventures':'52_adventures_visit',
     'halloween-half-term-guide':'halloween_guide_visit',
-    'halloween-guide-success':'halloween_guide_signup_completed'
+    'halloween-guide-success':'halloween_guide_signup_completed',
+    'secret-trails-cheadle':'secret_trail_visit'
   }[page]||'';
 };
 const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(name);};
