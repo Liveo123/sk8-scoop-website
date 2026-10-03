@@ -34,6 +34,9 @@ jobs:
       - name: Check advertiser growth-engine JavaScript
         run: |
           if [ -f worker-business-v2.js ]; then node --check worker-business-v2.js; fi
+          if [ -f worker-protected.js ]; then node --check worker-protected.js; fi
+          if [ -f assets/site.js ]; then node --check assets/site.js; fi
+          if [ -f assets/secret-trail-feedback-admin.js ]; then node --check assets/secret-trail-feedback-admin.js; fi
           if [ -f assets/campaign-finder.js ]; then node --check assets/campaign-finder.js; fi
           if [ -f assets/advertise.js ]; then node --check assets/advertise.js; fi
           if [ -f assets/nue-links.js ]; then node --check assets/nue-links.js; fi
@@ -136,8 +139,10 @@ jobs:
           check_page '/free-cheap-guide/' 'Heald Green North History Walk'
           check_page '/52-adventures/' 'data-page="52-adventures"'
           check_page '/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
-          check_page '/secret-trails/cheadle/' 'data-track-event="secret_trail_pdf_click"'
-          check_page '/assets/site.js' "'secret-trails-cheadle':'secret_trail_visit'"
+          check_page '/secret-trails/cheadle/' 'data-secret-trail-feedback-link'
+          check_page '/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
+          check_page '/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
+          check_page '/admin/secret-trail-feedback/' 'data-secret-trail-feedback-admin'
           check_noindex_guide() {
             path="$1"
             url="${base}${path}"
@@ -259,8 +264,10 @@ jobs:
           check_page 'https://www.sk8scoop.com/free-cheap-guide/' 'Heald Green North History Walk'
           check_page 'https://www.sk8scoop.com/52-adventures/' 'data-page="52-adventures"'
           check_page 'https://www.sk8scoop.com/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
-          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' 'data-track-event="secret_trail_pdf_click"'
-          check_page 'https://www.sk8scoop.com/assets/site.js' "'secret-trails-cheadle':'secret_trail_visit'"
+          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' 'data-secret-trail-feedback-link'
+          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
+          check_page 'https://www.sk8scoop.com/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
+          check_page 'https://www.sk8scoop.com/admin/secret-trail-feedback/' 'data-secret-trail-feedback-admin'
           check_noindex_guide() {
             url="$1"
             for attempt in $(seq 1 10); do
@@ -312,6 +319,15 @@ jobs:
           expect_validation 'https://www.sk8scoop.com/api/reader-submission'
           expect_validation 'https://www.sk8scoop.com/api/submit-event'
           expect_validation 'https://www.sk8scoop.com/api/advertiser-enquiry'
+          expect_validation 'https://www.sk8scoop.com/api/secret-trail-feedback'
+
+          feedback_stats_code="$(curl -sS --max-time 20 -o /tmp/secret-trail-feedback-stats.json -w '%{http_code}' 'https://www.sk8scoop.com/api/secret-trail-feedback-stats' -H 'authorization: Bearer intentionally-wrong-test-token')"
+          if [ "$feedback_stats_code" != "401" ]; then
+            echo "Expected Secret Trail feedback stats to reject a wrong admin token with 401, got $feedback_stats_code"
+            cat /tmp/secret-trail-feedback-stats.json || true
+            exit 1
+          fi
+          echo "OK Secret Trail feedback stats admin gate: 401"
 
           stripe_code="$(curl -sS --max-time 20 -o /tmp/stripe-live.json -w '%{http_code}' -X POST 'https://www.sk8scoop.com/api/stripe-webhook' -H 'content-type: application/json' --data '{}')"
           if [ "$stripe_code" != "400" ]; then
