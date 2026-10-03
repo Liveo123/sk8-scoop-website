@@ -139,9 +139,9 @@ jobs:
           check_page '/free-cheap-guide/' 'Heald Green North History Walk'
           check_page '/52-adventures/' 'data-page="52-adventures"'
           check_page '/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
-          check_page '/secret-trails/cheadle/' 'href="/api/secret-trail-download?trail=cheadle"'
+          check_page '/secret-trails/cheadle/' 'fl_attachment:SK8-Secret-Trails-The-Cheadle-Case'
           check_pdf_download() {
-            url="${base}/api/secret-trail-download?trail=cheadle"
+            url="https://res.cloudinary.com/gocq00bt/raw/upload/fl_attachment:SK8-Secret-Trails-The-Cheadle-Case/v1790955853/secret-trails-cheadle-public-beta.pdf"
             headers="/tmp/secret-trail-preview-headers"
             body="/tmp/secret-trail-preview.pdf"
             code="$(curl -sS --max-time 30 -D "$headers" -o "$body" -w '%{http_code}' "$url" || true)"
@@ -279,10 +279,10 @@ jobs:
           check_page 'https://www.sk8scoop.com/free-cheap-guide/' 'Heald Green North History Walk'
           check_page 'https://www.sk8scoop.com/52-adventures/' 'data-page="52-adventures"'
           check_page 'https://www.sk8scoop.com/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
-          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' 'href="/api/secret-trail-download?trail=cheadle"'
+          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' 'fl_attachment:SK8-Secret-Trails-The-Cheadle-Case'
           pdf_headers="/tmp/secret-trail-live-headers"
           pdf_body="/tmp/secret-trail-live.pdf"
-          pdf_code="$(curl -sS --max-time 30 -D "$pdf_headers" -o "$pdf_body" -w '%{http_code}' 'https://www.sk8scoop.com/api/secret-trail-download?trail=cheadle' || true)"
+          pdf_code="$(curl -sS --max-time 30 -D "$pdf_headers" -o "$pdf_body" -w '%{http_code}' 'https://res.cloudinary.com/gocq00bt/raw/upload/fl_attachment:SK8-Secret-Trails-The-Cheadle-Case/v1790955853/secret-trails-cheadle-public-beta.pdf' || true)"
           pdf_bytes="$(wc -c < "$pdf_body" 2>/dev/null || echo 0)"
           pdf_kind="$(file -b "$pdf_body" 2>/dev/null || true)"
           pdf_disposition="$(tr -d '\r' < "$pdf_headers" | awk 'BEGIN{IGNORECASE=1} /^content-disposition:/ {print; exit}')"
