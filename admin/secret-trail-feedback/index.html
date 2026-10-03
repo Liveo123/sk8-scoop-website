@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Secret Trail feedback | SK8 Scoop</title>
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <link rel="icon" href="/favicon.ico">
+</head>
+<body>
+<main data-secret-trail-feedback-admin>
+  <section class="hero-compact">
+    <div class="wrap">
+      <div class="eyebrow">Private operating view</div>
+      <h1>Cheadle Secret Trail beta feedback.</h1>
+      <p>Privacy-light structured responses from the public beta. The form does not ask for names, email addresses or child names.</p>
+      <div class="admin-tools">
+        <input type="password" data-admin-token placeholder="Cloudflare admin token" autocomplete="current-password">
+        <select data-feedback-range aria-label="Time range">
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="90">Last 90 days</option>
+          <option value="365">Last 12 months</option>
+        </select>
+        <input type="text" data-feedback-campaign value="secret_trail_beta_2026_10_06" aria-label="Campaign filter" placeholder="Campaign or blank for all">
+        <button class="button" type="button" data-load-secret-trail-feedback>Load feedback</button>
+      </div>
+      <p data-secret-trail-feedback-status class="fine">Enter the admin token configured in Cloudflare.</p>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap">
+      <div class="section-kicker-row">
+        <div><div class="eyebrow">Beta snapshot</div><h2>Did families actually use it?</h2></div>
+        <p>Use submitted feedback as product evidence alongside MailerLite clicks and consented GA4 behaviour. A small beta group is directional, not representative.</p>
+      </div>
+      <div class="dashboard-grid">
+        <div class="metric"><span>Feedback responses</span><strong data-feedback-total>0</strong></div>
+        <div class="metric"><span>Completed whole trail</span><strong data-feedback-completed>0</strong></div>
+        <div class="metric"><span>Would do another: yes</span><strong data-feedback-another-yes>0</strong></div>
+        <div class="metric featured-metric"><span>Reported a real-world problem</span><strong data-feedback-problems>0</strong></div>
+      </div>
+
+      <div class="section-kicker-row dashboard-section-heading">
+        <div><div class="eyebrow">Where it snagged</div><h2>Hardest parts.</h2></div>
+        <p>Look for repeated friction before changing the trail. One family struggling is useful evidence; several families struggling with the same thing is a stronger signal.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Part</th><th>Responses</th></tr></thead>
+          <tbody data-hardest-body></tbody>
+        </table>
+      </div>
+
+      <div class="section-kicker-row dashboard-section-heading">
+        <div><div class="eyebrow">Real-world issues</div><h2>What went wrong.</h2></div>
+        <p>Safety, route and changed-location reports deserve review even when the count is small.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Issue</th><th>Responses</th></tr></thead>
+          <tbody data-issue-body></tbody>
+        </table>
+      </div>
+
+      <div class="section-kicker-row dashboard-section-heading">
+        <div><div class="eyebrow">Timing</div><h2>How long families took.</h2></div>
+        <p>This tests the current “allow about an hour” promise.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Time</th><th>Responses</th></tr></thead>
+          <tbody data-duration-body></tbody>
+        </table>
+      </div>
+
+      <div class="section-kicker-row dashboard-section-heading">
+        <div><div class="eyebrow">Comments</div><h2>Latest written feedback.</h2></div>
+        <p>Free text is shown only in this private view. Treat it as qualitative evidence and do not infer more than the sample supports.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>When</th><th>Completed?</th><th>Age</th><th>Problem</th><th>What happened</th><th>Best bit</th><th>Another?</th></tr></thead>
+          <tbody data-feedback-recent></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="../../assets/secret-trail-feedback-admin.js"></script>
+</body>
+</html>

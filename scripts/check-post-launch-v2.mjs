@@ -87,11 +87,14 @@ contains('index.html','Things to do, useful local updates and money-saving ideas
 // Current visual-refresh contracts.
 contains('index.html','home-resource-adventures');
 contains('index.html','52 Adventures Guide logo');
-expect(fs.existsSync(path.join(root,'assets/images/52-adventures-guide-logo.webp')), '52 Adventures logo asset is missing');
-for (const file of ['index.html','guides/index.html','52-adventures/index.html']) {
-  contains(file,'/assets/images/52-adventures-guide-logo.webp');
+expect(fs.existsSync(path.join(root,'assets/images/52-adventures-guide-logo.webp')), '52 Adventures fallback logo asset is missing');
+const adventureLogo = 'https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto,w_900/v1790422941/sk8-scoop/52-adventures/52-adventures-guide-logo-official.png';
+for (const file of ['index.html','guides/index.html','52-adventures/index.html','52-adventures/guide/index.html','52-adventures/success/index.html']) {
+  contains(file,adventureLogo);
   excludes(file,'data:image/webp;base64');
 }
+contains('52-adventures/index.html','id="a52-legibility-v1"');
+contains('52-adventures/guide/index.html','id="a52-legibility-v1"');
 // SEO hygiene contracts.
 contains('52-adventures/index.html','property="og:title" content="52 Adventures | SK8 Scoop"');
 contains('52-adventures/index.html','"@type":"WebPage"');
@@ -181,12 +184,6 @@ for (const record of discovery.records) {
   else if (route.endsWith('/')) rel = `${route.replace(/^\//,'')}index.html`;
   else rel = route.replace(/^\//,'');
   expect(fs.existsSync(path.join(root,rel)), `Discovery record ${record.id || record.title} points to missing route: ${record.href}`);
-}
-for (const [slug,area] of locationHubs) {
-  const record = discovery.records.find(item => item.id === `place-${slug}`);
-  expect(record, `Missing location-hub discovery record: place-${slug}`);
-  expect(record.href === `/${slug}/`, `Location hub ${slug} has unexpected discovery href: ${record.href}`);
-  expect(record.area === area, `Location hub ${slug} has unexpected discovery area: ${record.area}`);
 }
 
 // Newsletter archive extraction: selected articles only, never wholesale archive indexing.

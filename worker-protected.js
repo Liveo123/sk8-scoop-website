@@ -21,6 +21,30 @@ const ISSUE_13_POLL_ANSWERS = [
   'manchester_if_worth_it'
 ];
 
+const ISSUE_15_POLL_ANSWERS = [
+  'quick_oddity',
+  'proper_story',
+  'full_rabbit_hole'
+];
+
+const SECRET_TRAIL_FEEDBACK_SQL = `CREATE TABLE IF NOT EXISTS secret_trail_feedback (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ trail_key TEXT NOT NULL DEFAULT 'cheadle',
+ completion_status TEXT NOT NULL,
+ age_bands TEXT NOT NULL,
+ duration_band TEXT NOT NULL,
+ hardest_part TEXT NOT NULL,
+ issue_type TEXT NOT NULL,
+ problem_text TEXT,
+ would_do_another TEXT NOT NULL,
+ best_bit TEXT,
+ source TEXT,
+ medium TEXT,
+ campaign TEXT,
+ content TEXT,
+ created_at TEXT NOT NULL
+)`;
+
 const SEARCH_TABLE_SQL = `CREATE TABLE IF NOT EXISTS search_events (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  query_text TEXT NOT NULL,
@@ -83,6 +107,22 @@ export default {
 
     if (url.pathname === '/api/poll/issue-13' && request.method === 'POST') {
       return handleIssue13PollVote(request, env);
+    }
+
+    if (url.pathname === '/api/poll/issue-15' && request.method === 'GET') {
+      return handleIssue15PollResults(env);
+    }
+
+    if (url.pathname === '/api/poll/issue-15' && request.method === 'POST') {
+      return handleIssue15PollVote(request, env);
+    }
+
+    if (url.pathname === '/api/secret-trail-feedback' && request.method === 'POST') {
+      return handleSecretTrailFeedback(request, env);
+    }
+
+    if (url.pathname === '/api/secret-trail-feedback-stats' && request.method === 'GET') {
+      return handleSecretTrailFeedbackStats(request, env);
     }
 
     if (url.pathname === '/api/search-event' && request.method === 'POST') {
@@ -463,6 +503,231 @@ async function handleIssue13PollVote(request, env) {
   } catch (error) {
     console.error('Issue 13 poll vote error', error);
     return json({ error: 'The vote could not be saved. Please try again.' }, 503);
+  }
+}
+
+async function ensureIssue15PollCommentsTable(db) {
+  if (!db) throw new Error('Poll database unavailable');
+  await db.prepare(`CREATE TABLE IF NOT EXISTS newsletter_poll_comments (
+    issue TEXT NOT NULL,
+    voter_token TEXT NOT NULL,
+    comment_text TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (issue, voter_token)
+  )`).run();
+}
+
+async function getIssue15PollResults(db) {
+  await ensureIssue12PollTable(db);
+  const result = await db.prepare(`SELECT answer, COUNT(*) AS votes FROM newsletter_poll_votes WHERE issue = '15' GROUP BY answer`).all();
+  const counts = Object.fromEntries(ISSUE_15_POLL_ANSWERS.map(answer => [answer, 0]));
+  for (const row of result.results || []) {
+    if (Object.prototype.hasOwnProperty.call(counts, row.answer)) counts[row.answer] = Number(row.votes || 0);
+  }
+  const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
+  return { issue: 15, counts, total };
+}
+
+async function handleIssue15PollResults(env) {
+  try {
+    return json(await getIssue15PollResults(env.DB));
+  } catch (error) {
+    console.error('Issue 15 poll results error', error);
+    return json({ error: 'Poll results are temporarily unavailable.' }, 503);
+  }
+}
+
+async function handleIssue15PollVote(request, env) {
+  let data;
+  try {
+    data = await request.json();
+  } catch {
+    return json({ error: 'The vote could not be read.' }, 400);
+  }
+
+  const answer = String(data.answer || '').trim();
+  const voterToken = String(data.voter_token || '').trim();
+  const comment = String(data.comment || '').trim().replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').slice(0, 1200);
+  if (!ISSUE_15_POLL_ANSWERS.includes(answer)) return json({ error: 'Please choose one of the poll options.' }, 400);
+  if (!/^[A-Za-z0-9_-]{12,100}$/.test(voterToken)) return json({ error: 'Please refresh the poll and try again.' }, 400);
+
+  try {
+    await ensureIssue12PollTable(env.DB);
+    await ensureIssue15PollCommentsTable(env.DB);
+    await env.DB.prepare(`INSERT INTO newsletter_poll_votes (issue, answer, voter_token, created_at, updated_at)
+      VALUES ('15', ?, ?, datetime('now'), datetime('now'))
+      ON CONFLICT(issue, voter_token) DO UPDATE SET answer = excluded.answer, updated_at = datetime('now')`)
+      .bind(answer, voterToken)
+      .run();
+
+    await env.DB.prepare(`DELETE FROM newsletter_poll_comments WHERE issue = '15' AND voter_token = ?`)
+      .bind(voterToken)
+      .run();
+    if (comment) {
+      await env.DB.prepare(`INSERT INTO newsletter_poll_comments (issue, voter_token, comment_text, created_at, updated_at)
+        VALUES ('15', ?, ?, datetime('now'), datetime('now'))`)
+        .bind(voterToken, comment)
+        .run();
+    }
+
+    const results = await getIssue15PollResults(env.DB);
+    return json({ success: true, answer, comment_saved: Boolean(comment), ...results });
+  } catch (error) {
+    console.error('Issue 15 poll vote error', error);
+    return json({ error: 'The vote could not be saved. Please try again.' }, 503);
+  }
+}
+
+async function ensureSecretTrailFeedbackTable(db) {
+  if (!db) throw new Error('Secret Trail feedback database unavailable');
+  await db.prepare(SECRET_TRAIL_FEEDBACK_SQL).run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_secret_trail_feedback_created ON secret_trail_feedback(created_at)').run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_secret_trail_feedback_campaign ON secret_trail_feedback(campaign)').run();
+}
+
+function cleanFeedbackTag(value, maxLength = 80) {
+  return String(value || '').trim().toLowerCase().replace(/[^a-z0-9._-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, maxLength);
+}
+
+function cleanFeedbackText(value, maxLength = 1200) {
+  return String(value || '')
+    .trim()
+    .replace(/[\u0000-\u001f\u007f]/g, ' ')
+    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, '[email removed]')
+    .replace(/(?:\+?\d[\d\s().-]{7,}\d)/g, '[phone removed]')
+    .replace(/\s+/g, ' ')
+    .slice(0, maxLength);
+}
+
+async function handleSecretTrailFeedback(request, env) {
+  let data;
+  try {
+    data = await request.json();
+  } catch {
+    return json({ error: 'The feedback could not be read.' }, 400);
+  }
+
+  if (String(data.website || '').trim()) {
+    return json({ message: 'Thank you. Your feedback has been saved.' });
+  }
+
+  const startedAt = Number(data.started_at || 0);
+  const ageMs = Date.now() - startedAt;
+  if (!Number.isFinite(startedAt) || startedAt <= 0 || ageMs < 800 || ageMs > 8 * 60 * 60 * 1000) {
+    return json({ error: 'Please refresh the feedback page and try again.' }, 400);
+  }
+
+  const completionAllowed = ['completed', 'partly', 'looked_only'];
+  const durationAllowed = ['under_45', '45_60', '61_75', 'over_75', 'did_not_finish', 'not_applicable'];
+  const hardestAllowed = ['none', 'main_1', 'main_2', 'main_3', 'main_4', 'main_5', 'side_cases', 'final_deduction', 'route', 'instructions', 'other', 'not_applicable'];
+  const issueAllowed = ['none', 'hard_to_see', 'instructions_unclear', 'route_problem', 'safety_concern', 'changed_outdated', 'child_bored', 'other'];
+  const anotherAllowed = ['yes', 'maybe', 'no', 'not_applicable'];
+  const ageAllowed = new Set(['under_7', '7_9', '10_12', '13_14', '15_plus', 'not_applicable']);
+
+  const completion = String(data.completion_status || '').trim();
+  const duration = String(data.duration_band || '').trim();
+  const hardest = String(data.hardest_part || '').trim();
+  const issueType = String(data.issue_type || '').trim();
+  const another = String(data.would_do_another || '').trim();
+  const rawAgeBands = Array.isArray(data.age_bands) ? data.age_bands : data.age_bands ? [data.age_bands] : [];
+  const ageBands = [...new Set(rawAgeBands.map(value => String(value || '').trim()).filter(value => ageAllowed.has(value)))];
+
+  if (!completionAllowed.includes(completion)) return json({ error: 'Please tell us how much of the trail you tried.' }, 400);
+  if (!durationAllowed.includes(duration)) return json({ error: 'Please choose the closest time taken.' }, 400);
+  if (!hardestAllowed.includes(hardest)) return json({ error: 'Please choose the part that caused most trouble.' }, 400);
+  if (!issueAllowed.includes(issueType)) return json({ error: 'Please choose the closest problem type.' }, 400);
+  if (!anotherAllowed.includes(another)) return json({ error: 'Please tell us whether your child would do another trail.' }, 400);
+  if (!ageBands.length) return json({ error: 'Please choose the age group or “not tried with children yet”.' }, 400);
+
+  const problemText = cleanFeedbackText(data.problem_text, 1200);
+  const bestBit = cleanFeedbackText(data.best_bit, 800);
+  const source = cleanFeedbackTag(data.utm_source, 80);
+  const medium = cleanFeedbackTag(data.utm_medium, 80);
+  const campaign = cleanFeedbackTag(data.utm_campaign, 120);
+  const content = cleanFeedbackTag(data.utm_content, 120);
+
+  try {
+    await ensureSecretTrailFeedbackTable(env.DB);
+    await env.DB.prepare(`INSERT INTO secret_trail_feedback
+      (trail_key,completion_status,age_bands,duration_band,hardest_part,issue_type,problem_text,would_do_another,best_bit,source,medium,campaign,content,created_at)
+      VALUES ('cheadle',?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))`)
+      .bind(completion, ageBands.join(','), duration, hardest, issueType, problemText, another, bestBit, source, medium, campaign, content)
+      .run();
+    await env.DB.prepare(`DELETE FROM secret_trail_feedback WHERE created_at < datetime('now','-365 days')`).run();
+    return json({ message: 'Thank you. That has been saved and will be used to improve the Cheadle trail.' });
+  } catch (error) {
+    console.error('Secret Trail feedback storage error', error);
+    return json({ error: 'The feedback could not be saved. Please try again.' }, 503);
+  }
+}
+
+function addCount(target, key) {
+  const value = String(key || 'unknown');
+  target[value] = (target[value] || 0) + 1;
+}
+
+async function handleSecretTrailFeedbackStats(request, env) {
+  const auth = request.headers.get('authorization') || '';
+  if (!env.ADMIN_TOKEN) return json({ error: 'The admin token has not been configured.' }, 503);
+  if (auth !== `Bearer ${env.ADMIN_TOKEN}`) return json({ error: 'Unauthorised.' }, 401);
+
+  try {
+    await ensureSecretTrailFeedbackTable(env.DB);
+    const url = new URL(request.url);
+    const requested = Number.parseInt(url.searchParams.get('days'), 10) || 30;
+    const days = [7, 30, 90, 365].includes(requested) ? requested : 30;
+    const campaign = cleanFeedbackTag(url.searchParams.get('campaign'), 120);
+    const modifier = `-${days} days`;
+    const clause = campaign ? ' AND campaign = ?' : '';
+    const statement = env.DB.prepare(`SELECT completion_status,age_bands,duration_band,hardest_part,issue_type,problem_text,would_do_another,best_bit,source,medium,campaign,content,created_at
+      FROM secret_trail_feedback
+      WHERE trail_key = 'cheadle' AND created_at >= datetime('now',?)${clause}
+      ORDER BY created_at DESC LIMIT 500`);
+    const result = campaign ? await statement.bind(modifier, campaign).all() : await statement.bind(modifier).all();
+    const rows = result.results || [];
+
+    const summary = {
+      total: rows.length,
+      completion: {},
+      age_bands: {},
+      duration: {},
+      hardest: {},
+      issue_type: {},
+      would_do_another: {}
+    };
+    for (const row of rows) {
+      addCount(summary.completion, row.completion_status);
+      addCount(summary.duration, row.duration_band);
+      addCount(summary.hardest, row.hardest_part);
+      addCount(summary.issue_type, row.issue_type);
+      addCount(summary.would_do_another, row.would_do_another);
+      String(row.age_bands || '').split(',').filter(Boolean).forEach(value => addCount(summary.age_bands, value));
+    }
+
+    return json({
+      days,
+      campaign: campaign || 'all',
+      summary,
+      recent: rows.slice(0, 50).map(row => ({
+        completion_status: row.completion_status,
+        age_bands: row.age_bands,
+        duration_band: row.duration_band,
+        hardest_part: row.hardest_part,
+        issue_type: row.issue_type,
+        problem_text: row.problem_text,
+        would_do_another: row.would_do_another,
+        best_bit: row.best_bit,
+        source: row.source,
+        medium: row.medium,
+        campaign: row.campaign,
+        content: row.content,
+        created_at: row.created_at
+      }))
+    });
+  } catch (error) {
+    console.error('Secret Trail feedback stats error', error);
+    return json({ error: 'Could not load Secret Trail feedback.' }, 500);
   }
 }
 
