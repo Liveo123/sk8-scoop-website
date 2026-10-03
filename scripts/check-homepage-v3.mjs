@@ -19,7 +19,7 @@ const rejectText = (source, text, label) => {
 // Baseline: homepage and current issue remain intact.
 requireText(home, 'data-page="home"', 'homepage identity');
 requireText(home, 'What’s good around SK8?', 'homepage headline');
-requireText(config, 'subscriberCount: "500+"', 'public subscriber proof');
+requireText(config, 'subscriberCount: "600+"', 'public subscriber proof');
 requireText(config, 'currentIssue: {', 'current issue config');
 requireText(home, 'assets/homepage-v4.css', 'homepage V4 stylesheet');
 
