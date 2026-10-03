@@ -101,13 +101,14 @@ form.addEventListener('submit',async e=>{
     'Comment: '+(data.get('comments')||'(none)')
   ].join('\n');
   try{
-    const res=await fetch('/api/contact-message',{
+    const res=await fetch('/api/reader-submission',{
       method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({
+        submission_type:'other',
+        reference:'Halloween Guide Beta 100',
         name:'Halloween guide tester',
         email:data.get('email'),
-        category:'other',
         message,
         website:data.get('website')||'',
         privacy_confirmed:data.get('privacy')==='yes'?'yes':'no'
