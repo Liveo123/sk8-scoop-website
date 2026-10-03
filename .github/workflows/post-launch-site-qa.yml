@@ -139,20 +139,20 @@ jobs:
           check_page '/free-cheap-guide/' 'Heald Green North History Walk'
           check_page '/52-adventures/' 'data-page="52-adventures"'
           check_page '/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
-          check_page '/secret-trails/cheadle/' 'fl_attachment:SK8-Secret-Trails-The-Cheadle-Case'
+          check_page '/secret-trails/cheadle/' '/secret-trails/cheadle/SK8-Secret-Trails-The-Cheadle-Case.pdf'
           check_pdf_download() {
-            url="https://res.cloudinary.com/gocq00bt/raw/upload/fl_attachment:SK8-Secret-Trails-The-Cheadle-Case/v1790955853/secret-trails-cheadle-public-beta.pdf"
+            url="${base}/secret-trails/cheadle/SK8-Secret-Trails-The-Cheadle-Case.pdf"
             headers="/tmp/secret-trail-preview-headers"
             body="/tmp/secret-trail-preview.pdf"
             code="$(curl -sS --max-time 30 -D "$headers" -o "$body" -w '%{http_code}' "$url" || true)"
             bytes="$(wc -c < "$body" 2>/dev/null || echo 0)"
             kind="$(file -b "$body" 2>/dev/null || true)"
-            disposition="$(tr -d '\r' < "$headers" | awk 'BEGIN{IGNORECASE=1} /^content-disposition:/ {print; exit}')"
-            if [ "$code" != "200" ] || [ "$bytes" -lt 1000000 ] || ! printf '%s' "$kind" | grep -Fqi 'PDF document' || ! printf '%s' "$disposition" | grep -Fqi 'attachment'; then
-              echo "FAILED Secret Trail PDF preview download (HTTP $code; bytes=$bytes; type=$kind; disposition=$disposition)"
+            content_type="$(tr -d '\r' < "$headers" | awk 'BEGIN{IGNORECASE=1} /^content-type:/ {print; exit}')"
+            if [ "$code" != "200" ] || [ "$bytes" -lt 1000000 ] || ! printf '%s' "$kind" | grep -Fqi 'PDF document' || ! printf '%s' "$content_type" | grep -Fqi 'application/pdf'; then
+              echo "FAILED Secret Trail PDF preview access (HTTP $code; bytes=$bytes; type=$kind; content_type=$content_type)"
               return 1
             fi
-            echo "OK Secret Trail PDF preview download (bytes=$bytes; type=$kind)"
+            echo "OK Secret Trail PDF preview access (bytes=$bytes; type=$kind)"
           }
           check_pdf_download
           check_page '/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
@@ -279,18 +279,18 @@ jobs:
           check_page 'https://www.sk8scoop.com/free-cheap-guide/' 'Heald Green North History Walk'
           check_page 'https://www.sk8scoop.com/52-adventures/' 'data-page="52-adventures"'
           check_page 'https://www.sk8scoop.com/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
-          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' 'fl_attachment:SK8-Secret-Trails-The-Cheadle-Case'
+          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' '/secret-trails/cheadle/SK8-Secret-Trails-The-Cheadle-Case.pdf'
           pdf_headers="/tmp/secret-trail-live-headers"
           pdf_body="/tmp/secret-trail-live.pdf"
-          pdf_code="$(curl -sS --max-time 30 -D "$pdf_headers" -o "$pdf_body" -w '%{http_code}' 'https://res.cloudinary.com/gocq00bt/raw/upload/fl_attachment:SK8-Secret-Trails-The-Cheadle-Case/v1790955853/secret-trails-cheadle-public-beta.pdf' || true)"
+          pdf_code="$(curl -sS --max-time 30 -D "$pdf_headers" -o "$pdf_body" -w '%{http_code}' 'https://www.sk8scoop.com/secret-trails/cheadle/SK8-Secret-Trails-The-Cheadle-Case.pdf' || true)"
           pdf_bytes="$(wc -c < "$pdf_body" 2>/dev/null || echo 0)"
           pdf_kind="$(file -b "$pdf_body" 2>/dev/null || true)"
-          pdf_disposition="$(tr -d '\r' < "$pdf_headers" | awk 'BEGIN{IGNORECASE=1} /^content-disposition:/ {print; exit}')"
-          if [ "$pdf_code" != "200" ] || [ "$pdf_bytes" -lt 1000000 ] || ! printf '%s' "$pdf_kind" | grep -Fqi 'PDF document' || ! printf '%s' "$pdf_disposition" | grep -Fqi 'attachment'; then
-            echo "FAILED Secret Trail PDF live download (HTTP $pdf_code; bytes=$pdf_bytes; type=$pdf_kind; disposition=$pdf_disposition)"
+          pdf_content_type="$(tr -d '\r' < "$pdf_headers" | awk 'BEGIN{IGNORECASE=1} /^content-type:/ {print; exit}')"
+          if [ "$pdf_code" != "200" ] || [ "$pdf_bytes" -lt 1000000 ] || ! printf '%s' "$pdf_kind" | grep -Fqi 'PDF document' || ! printf '%s' "$pdf_content_type" | grep -Fqi 'application/pdf'; then
+            echo "FAILED Secret Trail PDF live access (HTTP $pdf_code; bytes=$pdf_bytes; type=$pdf_kind; content_type=$pdf_content_type)"
             exit 1
           fi
-          echo "OK Secret Trail PDF live download (bytes=$pdf_bytes; type=$pdf_kind)"
+          echo "OK Secret Trail PDF live access (bytes=$pdf_bytes; type=$pdf_kind)"
           check_page 'https://www.sk8scoop.com/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
           check_page 'https://www.sk8scoop.com/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
           check_page 'https://www.sk8scoop.com/admin/secret-trail-feedback/' 'data-secret-trail-feedback-admin'
