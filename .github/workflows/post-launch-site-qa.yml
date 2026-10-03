@@ -139,6 +139,7 @@ jobs:
           check_page '/free-cheap-guide/' 'Heald Green North History Walk'
           check_page '/52-adventures/' 'data-page="52-adventures"'
           check_page '/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
+          check_page '/halloween-half-term-guide/feedback/' 'Halloween Guide Tester Feedback'
           check_page '/secret-trails/cheadle/' 'data-secret-trail-feedback-link'
           check_page '/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
           check_page '/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
@@ -264,6 +265,7 @@ jobs:
           check_page 'https://www.sk8scoop.com/free-cheap-guide/' 'Heald Green North History Walk'
           check_page 'https://www.sk8scoop.com/52-adventures/' 'data-page="52-adventures"'
           check_page 'https://www.sk8scoop.com/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
+      check_page 'https://www.sk8scoop.com/halloween-half-term-guide/feedback/' 'Halloween Guide Tester Feedback'
           check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' 'data-secret-trail-feedback-link'
           check_page 'https://www.sk8scoop.com/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
           check_page 'https://www.sk8scoop.com/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
