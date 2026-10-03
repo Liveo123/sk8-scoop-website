@@ -136,6 +136,7 @@ jobs:
           check_page '/free-cheap-guide/' 'Heald Green North History Walk'
           check_page '/52-adventures/' 'data-page="52-adventures"'
           check_page '/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
+          check_page '/secret-trails/cheadle/' 'data-page="secret-trails-cheadle"'
           check_noindex_guide() {
             path="$1"
             url="${base}${path}"
@@ -257,6 +258,7 @@ jobs:
           check_page 'https://www.sk8scoop.com/free-cheap-guide/' 'Heald Green North History Walk'
           check_page 'https://www.sk8scoop.com/52-adventures/' 'data-page="52-adventures"'
           check_page 'https://www.sk8scoop.com/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
+          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' 'data-page="secret-trails-cheadle"'
           check_noindex_guide() {
             url="$1"
             for attempt in $(seq 1 10); do
