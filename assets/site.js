@@ -149,7 +149,8 @@ const conversionPageLabel=()=>{
     '52-adventures':'52 Adventures',
     'halloween-half-term-guide':'Halloween Half-Term Guide',
     'halloween-guide-success':'Halloween Half-Term Guide Success',
-    'secret-trails-cheadle':'Cheadle Secret Trail'
+    'secret-trails-cheadle':'Cheadle Secret Trail',
+    'secret-trail-feedback':'Cheadle Secret Trail Feedback'
   }[page]||labelOrFallback(location.pathname.replace(/^\/+|\/+$/g,'').split('/').filter(Boolean).pop()||'Homepage','Homepage');
 };
 const searchSourceFromHost=host=>{
@@ -435,7 +436,8 @@ const sk8PageEventName=()=>{
     '52-adventures':'52_adventures_visit',
     'halloween-half-term-guide':'halloween_guide_visit',
     'halloween-guide-success':'halloween_guide_signup_completed',
-    'secret-trails-cheadle':'secret_trail_visit'
+    'secret-trails-cheadle':'secret_trail_visit',
+    'secret-trail-feedback':'secret_trail_feedback_visit'
   }[page]||'';
 };
 const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(name);};
