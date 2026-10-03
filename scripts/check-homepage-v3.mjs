@@ -19,7 +19,7 @@ const rejectText = (source, text, label) => {
 // Baseline: homepage and current issue remain intact.
 requireText(home, 'data-page="home"', 'homepage identity');
 requireText(home, 'What’s good around SK8?', 'homepage headline');
-requireText(config, 'subscriberCount: "500+"', 'public subscriber proof');
+requireText(config, 'subscriberCount: "600+"', 'public subscriber proof');
 requireText(config, 'currentIssue: {', 'current issue config');
 requireText(home, 'assets/homepage-v4.css', 'homepage V4 stylesheet');
 
@@ -40,13 +40,13 @@ requireText(css, '.home-hero-eyebrow', 'hero eyebrow styling');
 requireText(js, 'No spam. Unsubscribe any time.', 'signup reassurance');
 requireText(home, 'home-hero-subroutes', 'hero utility routes');
 requireText(home, 'What’s On now →', 'hero What’s On route');
-requireText(home, 'Around SK8 →', 'hero Around SK8 route');
+requireText(home, 'Your area →', 'hero locality route');
 requireText(v5, '.home-signup-note{margin:5px 0 7px!important', 'tight signup reassurance spacing');
 requireText(v5, '.reader-proof{margin-top:0!important', 'tight proof spacing');
 
 // 3. Weekly picks have a proper editorial introduction.
 requireText(home, 'Know · Do · Discover', 'weekly-picks editorial framing');
-requireText(home, 'Three different reasons to click', 'weekly-picks explanation');
+requireText(home, 'One useful change, one timely thing to do and one local detail worth knowing about.', 'current-picks explanation');
 requireText(v4, '.home-worth-head', 'weekly-picks heading layout');
 
 // 4. Story cards are visually consistent and CTA-aligned.
@@ -108,6 +108,15 @@ requireText(js, "'@type': 'Organization'", 'organisation JSON-LD');
 rejectText(css, 'body.reader-home .reader-explore-tile{min-height:232px', 'old explore height');
 rejectText(js, "art.loading = 'eager'", 'old eager dynamic story loading');
 rejectText(home, 'COMING LATER', 'unavailable guide card');
+
+// Place-first homepage navigation.
+for (const [slug,label] of [['cheadle','Cheadle'],['cheadle-hulme','Cheadle Hulme'],['gatley','Gatley'],['heald-green','Heald Green']]) {
+  requireText(home, `href="/${slug}/"`, `${label} locality link`);
+  requireText(home, `>${label}</span>`, `${label} locality label`);
+}
+requireText(home, 'id="your-area"', 'homepage locality anchor');
+requireText(home, 'homepage_location_click', 'homepage locality click tracking');
+requireText(home, 'homepage-place-first-v1', 'homepage locality experiment');
 
 if (failures.length) {
   console.error('Homepage V5 preflight failed:');

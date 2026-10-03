@@ -12,7 +12,11 @@
     'local-history': 'local_history_page_visit',
     planning: 'planning_page_visit',
     updates: 'useful_updates_page_visit',
-    'around-sk8': 'around_sk8_page_visit'
+    'around-sk8': 'around_sk8_page_visit',
+    cheadle: 'locality_hub_visit',
+    'cheadle-hulme': 'locality_hub_visit',
+    gatley: 'locality_hub_visit',
+    'heald-green': 'locality_hub_visit'
   };
 
   const track = (name, params = {}) => {

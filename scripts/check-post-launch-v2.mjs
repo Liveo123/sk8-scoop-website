@@ -36,6 +36,38 @@ for (const route of ['/whats-on/','/food-drink/','/kids-family/','/outdoors/','/
   contains('sitemap.html',`href="${route.replace(/^\//,'')}"`);
 }
 
+// Core location-hub contract: four useful, indexable place pages only.
+const locationHubs = [
+  ['cheadle','Cheadle'],
+  ['cheadle-hulme','Cheadle Hulme'],
+  ['gatley','Gatley'],
+  ['heald-green','Heald Green']
+];
+expect(fs.existsSync(path.join(root,'assets/location-hubs.css')), 'assets/location-hubs.css is missing');
+expect(fs.existsSync(path.join(root,'assets/location-hubs.js')), 'assets/location-hubs.js is missing');
+for (const [slug,area] of locationHubs) {
+  const file = `${slug}/index.html`;
+  expect(fs.existsSync(path.join(root,file)), `${file} is missing`);
+  excludes(file,'noindex');
+  contains(file,`data-location="${area}"`);
+  contains(file,`/whats-on/?area=${encodeURIComponent(area)}`);
+  contains('sitemap.xml',`https://www.sk8scoop.com/${slug}/`);
+  contains('sitemap.html',`href="${slug}/"`);
+  contains('around-sk8/index.html',`href="/${slug}/"`);
+}
+contains('assets/whats-on.js','const requestedArea = new URLSearchParams');
+contains('assets/whats-on.js','syncAreaParam');
+contains('assets/nue-analytics.js',"cheadle: 'locality_hub_visit'");
+contains('assets/nue-analytics.js',"'cheadle-hulme': 'locality_hub_visit'");
+contains('assets/nue-analytics.js',"gatley: 'locality_hub_visit'");
+contains('assets/nue-analytics.js',"'heald-green': 'locality_hub_visit'");
+contains('assets/location-hubs.js',"locality-continuation");
+contains('assets/location-hubs.css','.locality-final .final-signup');
+contains('assets/location-hubs.css','grid-template-columns:minmax(0,1fr) 142px');
+for (const [slug] of locationHubs) {
+  excludes(`${slug}/index.html`,'/assets/images/nue/');
+}
+
 // What’s On usefulness and search structure.
 contains('whats-on/index.html','data-event-area="Cheadle"');
 contains('whats-on/index.html','data-event-area="Cheadle Hulme"');
