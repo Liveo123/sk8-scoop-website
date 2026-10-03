@@ -17,6 +17,7 @@
     changed_outdated:'Changed / out of date',child_bored:'Children lost interest',yes:'Yes',maybe:'Maybe',no:'No'
   };
   const label=value=>labels[value]||String(value||'—').replace(/_/g,' ');
+  const ageLabel=value=>String(value||'').split(',').filter(Boolean).map(label).join(', ')||'—';
   const formatDate=value=>{
     if(!value)return '—';
     const d=new Date(String(value).replace(' ','T')+'Z');
@@ -34,7 +35,7 @@
     const body=document.querySelector('[data-feedback-recent]');body.replaceChildren();
     rows.forEach(row=>{
       const tr=document.createElement('tr');
-      addCells(tr,[formatDate(row.created_at),label(row.completion_status),label(row.age_bands),label(row.issue_type),row.problem_text||'—',row.best_bit||'—',label(row.would_do_another)]);
+      addCells(tr,[formatDate(row.created_at),label(row.completion_status),ageLabel(row.age_bands),label(row.issue_type),row.problem_text||'—',row.best_bit||'—',label(row.would_do_another)]);
       body.appendChild(tr);
     });
     if(!body.children.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=7;td.textContent='No written feedback in this range.';tr.appendChild(td);body.appendChild(tr);}
