@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Halloween Guide Tester Feedback | SK8 Scoop</title>
+<style>
+:root{--teal:#0f5d5b;--orange:#f47c20;--cream:#f7f1e7;--ink:#17211f;--muted:#5e6b68;--line:#d7ddd9;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:17px/1.55 Arial,sans-serif}
+main{max-width:760px;margin:auto;padding:32px 18px 64px}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
+h1{font-size:clamp(2rem,7vw,3.6rem);line-height:1;margin:.25em 0 .35em;color:var(--teal)}
+.lede{font-size:1.08rem;max-width:650px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px;box-shadow:0 10px 28px rgba(0,0,0,.05)}
+fieldset{border:0;padding:0;margin:0 0 26px}
+legend{font-weight:800;font-size:1.08rem;margin-bottom:10px}
+.option{display:block;padding:10px 0}
+.option input{margin-right:9px;transform:scale(1.15)}
+label[for=email],label[for=comments]{display:block;font-weight:800;margin:0 0 8px}
+input[type=email],textarea{width:100%;font:inherit;padding:12px 13px;border:1px solid #aeb9b5;border-radius:10px;background:#fff}
+textarea{min-height:120px;resize:vertical}
+.note{font-size:.92rem;color:var(--muted)}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:20px 0}.consent input{margin-top:5px}
+button{border:0;border-radius:999px;background:var(--teal);color:white;font:800 1rem Arial,sans-serif;padding:13px 19px;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+.status{margin-top:14px;font-weight:700}
+.reward{border-left:5px solid var(--orange);background:#fff7ef;padding:14px 16px;margin:20px 0;border-radius:8px}
+a{color:var(--teal);font-weight:700}
+.honey{position:absolute;left:-9999px}
+@media(max-width:560px){body{font-size:16px}.card{padding:20px 16px}main{padding-top:24px}}
+</style>
+</head>
+<body>
+<main>
+<p class="kicker">SK8 Scoop tester group</p>
+<h1>Help us improve the Halloween & Half-Term Guide</h1>
+<p class="lede">You are one of 100 regular SK8 Scoop readers seeing this before we push the guide more widely. These four questions should take about a minute.</p>
+<p><a href="/halloween-half-term-guide/guide/">Open the guide again</a></p>
+
+<div class="reward"><strong>Thank-you:</strong> complete the feedback and we’ll add you to the Secret Trails tester programme, so you get the next three SK8 treasure hunts free as they are released.</div>
+
+<form id="feedback" class="card">
+<fieldset>
+<legend>1. How useful is the guide for planning Halloween or half-term?</legend>
+<label class="option"><input required type="radio" name="useful" value="Very useful">Very useful</label>
+<label class="option"><input type="radio" name="useful" value="Quite useful">Quite useful</label>
+<label class="option"><input type="radio" name="useful" value="A little useful">A little useful</label>
+<label class="option"><input type="radio" name="useful" value="Not useful">Not useful</label>
+</fieldset>
+
+<fieldset>
+<legend>2. How easy was it to find something you would actually consider doing?</legend>
+<label class="option"><input required type="radio" name="easy" value="Very easy">Very easy</label>
+<label class="option"><input type="radio" name="easy" value="Fairly easy">Fairly easy</label>
+<label class="option"><input type="radio" name="easy" value="A bit difficult">A bit difficult</label>
+<label class="option"><input type="radio" name="easy" value="I couldn't find anything">I couldn’t find anything</label>
+</fieldset>
+
+<fieldset>
+<legend>3. Which part was most useful?</legend>
+<label class="option"><input required type="radio" name="section" value="What's happening when">What’s happening when?</label>
+<label class="option"><input type="radio" name="section" value="SK8 & Stockport">SK8 & Stockport</label>
+<label class="option"><input type="radio" name="section" value="Manchester, Trafford & nearby">Manchester, Trafford & nearby</label>
+<label class="option"><input type="radio" name="section" value="Worth the trip">Worth the trip</label>
+</fieldset>
+
+<div>
+<label for="comments">4. What did we miss or get wrong?</label>
+<textarea id="comments" name="comments" placeholder="Anything missing, confusing, broken, or one thing you would change?"></textarea>
+</div>
+
+<div style="margin-top:22px">
+<label for="email">Email address</label>
+<input required id="email" name="email" type="email" autocomplete="email">
+<p class="note">This lets us match your feedback to the tester group and send your Secret Trails reward.</p>
+</div>
+
+<label class="honey">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+
+<label class="consent"><input required type="checkbox" name="privacy" value="yes"><span>Yes, SK8 Scoop may use my email and answers to process this feedback and deliver the three Secret Trails reward.</span></label>
+
+<button type="submit">Send my feedback</button>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+</form>
+</main>
+<script>
+const form=document.getElementById('feedback');
+const status=document.getElementById('status');
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const button=form.querySelector('button[type=submit]');
+  button.disabled=true;status.textContent='Sending…';
+  const data=new FormData(form);
+  const message=[
+    'HALLOWEEN GUIDE BETA 100',
+    'Useful: '+data.get('useful'),
+    'Easy to find something: '+data.get('easy'),
+    'Most useful section: '+data.get('section'),
+    'Comment: '+(data.get('comments')||'(none)')
+  ].join('\n');
+  try{
+    const res=await fetch('/api/contact-message',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({
+        name:'Halloween guide tester',
+        email:data.get('email'),
+        category:'other',
+        message,
+        website:data.get('website')||'',
+        privacy_confirmed:data.get('privacy')==='yes'?'yes':'no'
+      })
+    });
+    const body=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(body.error||'The feedback could not be sent.');
+    form.innerHTML='<h2>Thank you.</h2><p>Your feedback is in. We’ll use this to improve the guide before the wider push.</p><p><strong>Your reward is recorded:</strong> you’ll be added to the Secret Trails tester programme for the next three SK8 treasure hunts.</p><p><a href="/halloween-half-term-guide/guide/">Back to the Halloween & Half-Term Guide</a></p>';
+  }catch(err){
+    status.textContent=err.message||'Something went wrong. Please try again.';
+    button.disabled=false;
+  }
+});
+</script>
+</body>
+</html>
