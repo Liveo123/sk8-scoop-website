@@ -36,9 +36,10 @@ for (const key of expectedGuides) {
     if (fs.existsSync(file)) {
       const html = read(file);
       assert(!/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(html), `${key} public sample must remain indexable: ${route}`);
+      const expectedSignup = key === '52-adventures' ? '/52-adventures/#get-guide' : '/free-cheap-guide/#get-guide';
       assert(
-        html.includes('/52-adventures/#get-guide') || html.includes('/free-cheap-guide/#get-guide'),
-        `${key} public sample must contain a signup CTA to a full guide: ${route}`
+        html.includes(expectedSignup),
+        `${key} public sample must contain its own guide signup CTA: ${route}`
       );
       const guideForms = [...html.matchAll(/<form[^>]*data-signup-kind=["']guide["'][^>]*>/gi)].map(match => match[0]);
       for (const form of guideForms) {
