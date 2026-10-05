@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-10-05",
   "records": [
     {
       "id": "around-sk8",
@@ -813,6 +813,29 @@
       ],
       "freshness": "current",
       "checked": "2026-09-25"
+    },
+    {
+      "id": "gatley-recreation-ground",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "Gatley Recreation Ground: free tennis + skatepark",
+      "summary": "A practical Gatley guide to the recreation ground: one currently free-to-use park tennis court, the concrete skatepark, what to bring and how to combine it with Gatley Carrs.",
+      "href": "/outdoors/gatley-recreation-ground/",
+      "area": "Gatley",
+      "tags": [
+        "gatley recreation ground",
+        "gatley park",
+        "tennis",
+        "skatepark",
+        "skate park",
+        "free",
+        "outdoors",
+        "teens",
+        "older children",
+        "gatley"
+      ],
+      "freshness": "current",
+      "checked": "2026-10-03"
     }
   ]
 }
