@@ -45,7 +45,7 @@
   const finderPackage = finderParams.get('finder_package');
   const finderGoal = finderParams.get('finder_goal');
   const finderOpportunity = finderParams.get('finder_opportunity');
-  const allowedFinderPackages = new Set(['temp_test', 'temp_grow', 'human_review']);
+  const allowedFinderPackages = new Set(['starter_newsletter', 'human_review']);
   const allowedFinderOpportunities = new Map([
     ['christmas-eating-out', 'Christmas Eating Out 2026']
   ]);
@@ -64,7 +64,7 @@
     if (formIntro) {
       formIntro.textContent = enabled
         ? 'No payment is taken for this check. SK8 Scoop will first decide whether the business is a sensible match for core SK8 readers.'
-        : 'TEST £40 or GROW £90. Payment is normally due only after scope and timing are agreed, and before the campaign starts.';
+        : 'Newsletter starter £20. Halloween Guide advertising starts at £15. Payment is normally due only after scope and timing are agreed, and before the campaign starts.';
     }
     if (termsCopy) {
       termsCopy.textContent = enabled
@@ -78,7 +78,7 @@
     if (localFitRoute) localFitRoute.hidden = true;
     if (formTitle) formTitle.textContent = 'Halloween & Half-Term advertising enquiry';
     if (formIntro) {
-      formIntro.textContent = 'Seasonal guide packages run from £35 to £150. Scope, timing and price are agreed before payment, and before anything is published.';
+      formIntro.textContent = 'Seasonal first-campaign rates start at £15 for the Guide and £30 for Guide + newsletter. Sponsorship is only suggested when it genuinely fits.';
     }
     if (termsCopy) {
       termsCopy.textContent = 'I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not buy editorial inclusion, ranking, recommendation or guaranteed results.';
