@@ -90,7 +90,7 @@
           <h3>A simple sponsored guide card.</h3>
           <p>One clearly labelled advert in a relevant guide section. Good for an event, offer, class, venue or local service.</p>
           <ul><li>Image or logo</li><li>Short useful copy</li><li>One booking, website or enquiry link</li></ul>
-          <button class="button halloween-package-jump" type="button" data-ad-package="bespoke" data-seasonal-choice="Sponsored guide advert · £15">Choose £15 guide advert</button>
+          <button class="button halloween-package-jump" type="button" data-ad-package="halloween_guide" data-seasonal-choice="Sponsored guide advert · £15">Choose £15 guide advert</button>
         </article>
 
         <article class="halloween-price-card">
@@ -99,7 +99,7 @@
           <h3>Show up in the guide and the weekly email.</h3>
           <p>The same useful message adapted for two places, with one sponsored guide advert and one sponsored newsletter placement.</p>
           <ul><li>Guide advert</li><li>One newsletter placement</li><li>SK8 Scoop prepares both versions</li></ul>
-          <button class="button halloween-package-jump" type="button" data-ad-package="bespoke" data-seasonal-choice="Guide + newsletter · £30">Choose £30 bundle</button>
+          <button class="button halloween-package-jump" type="button" data-ad-package="halloween_combo" data-seasonal-choice="Guide + newsletter · £30">Choose £30 bundle</button>
         </article>
 
         <article class="halloween-price-card halloween-sponsor-card">
@@ -108,7 +108,7 @@
           <h3>Sponsor a relevant section for the guide period.</h3>
           <p>Prominent, clearly labelled sponsor credit on one suitable guide section, plus a larger sponsored panel and one newsletter placement.</p>
           <ul><li>One sponsor per section</li><li>Prominent guide presence</li><li>One newsletter placement</li></ul>
-          <button class="button halloween-package-jump" type="button" data-ad-package="bespoke" data-seasonal-choice="Section sponsor · £90">Choose £90 section sponsor</button>
+          <button class="button halloween-package-jump" type="button" data-ad-package="halloween_section" data-seasonal-choice="Section sponsor · £90">Choose £90 section sponsor</button>
         </article>
 
         <article class="halloween-price-card halloween-main-sponsor-card">
@@ -117,7 +117,7 @@
           <h3>Be the single main guide sponsor.</h3>
           <p>Prominent labelled sponsor credit near the top of the guide, a main sponsored panel and one sponsored newsletter placement.</p>
           <ul><li>One main sponsor only</li><li>Top-of-guide sponsor credit</li><li>One newsletter placement</li></ul>
-          <button class="button halloween-package-jump" type="button" data-ad-package="bespoke" data-seasonal-choice="Main guide sponsor · £125">Choose £125 main sponsor</button>
+          <button class="button halloween-package-jump" type="button" data-ad-package="halloween_main" data-seasonal-choice="Main guide sponsor · £125">Choose £125 main sponsor</button>
         </article>
       </div>
 
@@ -211,6 +211,10 @@
       <label>Website, booking page or social profile<input type="url" name="website" placeholder="https://" required></label>
       <fieldset><legend>Where should we start?</legend>
         <label class="checkbox-row"><input type="radio" name="package" value="starter_newsletter" checked required><span><strong>NEWSLETTER STARTER · £20</strong><br>One sponsored newsletter placement, one objective, one main action. Introductory first-campaign rate.</span></label>
+        <label hidden><input type="radio" name="package" value="halloween_guide" required></label>
+        <label hidden><input type="radio" name="package" value="halloween_combo" required></label>
+        <label hidden><input type="radio" name="package" value="halloween_section" required></label>
+        <label hidden><input type="radio" name="package" value="halloween_main" required></label>
         <label class="checkbox-row" data-local-fit-route hidden><input type="radio" name="package" value="human_review" required><span><strong>LOCAL-FIT CHECK · no payment yet</strong><br>SK8 Scoop checks whether the business is a sensible match for core SK8 readers before recommending a paid route.</span></label>
       </fieldset>
       <label>Preferred month<input type="month" name="preferred_date" required></label>
