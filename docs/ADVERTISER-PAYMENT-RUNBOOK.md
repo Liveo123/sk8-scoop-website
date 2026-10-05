@@ -136,3 +136,17 @@ Refund handling is intentionally manual in v1. A future version can add refund w
 - Preview and production use separate webhook signing secrets.
 - The public Worker has no Stripe credential that can create charges.
 - The private advertiser inbox is operational data, not a payment terminal.
+
+## Starter advertiser pricing override — 5 October 2026
+
+For NEW first paid campaigns, use the following approved Stripe metadata/product amounts:
+
+- `starter_newsletter`: £20 GBP one-time
+- `halloween_guide`: £15 GBP one-time
+- `halloween_combo`: £30 GBP one-time
+- `halloween_section`: £90 GBP one-time, only when specifically suitable or requested
+- `halloween_main`: £125 GBP one-time, only when specifically suitable or requested
+
+Historical `temp_test` £40 and `temp_grow` £90 payment routes remain accepted only to honour earlier commitments. Do not use them for new first-campaign pricing during the starter experiment unless Paul explicitly directs it.
+
+The payment-link workflow remains approval-gated. Confirm the advertiser enquiry, agreed package, campaign reference, amount and timing before creating or sending a live payment route.
