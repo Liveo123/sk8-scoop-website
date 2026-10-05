@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-10-05",
   "policy": "Keep around 10 substantive public website articles per guide. The remaining guide content stays in the subscriber guide. Shared articles count once on the website and may serve both guides.",
   "guides": {
     "52-adventures": {
@@ -29,7 +29,7 @@
         "/local-history/stockport-museum/",
         "/local-history/stockport-underbanks/",
         "/local-history/heald-green-north-history-walk/",
-        "/local-history/stockport-air-raid-shelters/"
+        "/outdoors/gatley-recreation-ground/"
       ]
     }
   }
