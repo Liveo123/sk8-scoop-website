@@ -155,7 +155,7 @@
         input.dispatchEvent(new Event('change', { bubbles: true }));
       }
       const seasonalChoice = String(button.dataset.seasonalChoice || '').trim();
-      if (route === 'bespoke' && seasonalChoice) setSeasonalMode(seasonalChoice);
+      if (route.startsWith('halloween_') && seasonalChoice) setSeasonalMode(seasonalChoice);
       scrollToForm(input || form.querySelector('input,textarea,select'));
 
       if (typeof window.sk8Track === 'function') {
@@ -166,7 +166,7 @@
 
   packageInputs.forEach(input => input.addEventListener('change', () => {
     if (!input.checked) return;
-    if (input.value === 'bespoke') setSeasonalMode();
+    if (input.value.startsWith('halloween_')) setSeasonalMode();
     else setReviewMode(input.value === 'human_review');
     if (typeof window.sk8Track === 'function') {
       window.sk8Track('advertiser_route_selected', { route: input.value });
