@@ -154,7 +154,22 @@ jobs:
             exit 1
           fi
           echo "OK production Halloween feedback API readiness: 400 validation response"
-          check_page '/secret-trails/cheadle/' 'data-secret-trail-feedback-link'
+          check_page '/secret-trails/cheadle/' '/secret-trails/cheadle/SK8-Secret-Trails-The-Cheadle-Case.pdf'
+          check_pdf_download() {
+            url="${base}/secret-trails/cheadle/SK8-Secret-Trails-The-Cheadle-Case.pdf"
+            headers="/tmp/secret-trail-preview-headers"
+            body="/tmp/secret-trail-preview.pdf"
+            code="$(curl -sS --max-time 30 -D "$headers" -o "$body" -w '%{http_code}' "$url" || true)"
+            bytes="$(wc -c < "$body" 2>/dev/null || echo 0)"
+            kind="$(file -b "$body" 2>/dev/null || true)"
+            content_type="$(tr -d '\r' < "$headers" | awk 'BEGIN{IGNORECASE=1} /^content-type:/ {print; exit}')"
+            if [ "$code" != "200" ] || [ "$bytes" -lt 1000000 ] || ! printf '%s' "$kind" | grep -Fqi 'PDF document' || ! printf '%s' "$content_type" | grep -Fqi 'application/pdf'; then
+              echo "FAILED Secret Trail PDF preview access (HTTP $code; bytes=$bytes; type=$kind; content_type=$content_type)"
+              return 1
+            fi
+            echo "OK Secret Trail PDF preview access (bytes=$bytes; type=$kind)"
+          }
+          check_pdf_download
           check_page '/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
           check_page '/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
           check_page '/admin/secret-trail-feedback/' 'data-secret-trail-feedback-admin'
@@ -287,7 +302,18 @@ jobs:
             exit 1
           fi
           echo "OK live Halloween feedback API readiness: 400 validation response"
-          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' 'data-secret-trail-feedback-link'
+          check_page 'https://www.sk8scoop.com/secret-trails/cheadle/' '/secret-trails/cheadle/SK8-Secret-Trails-The-Cheadle-Case.pdf'
+          pdf_headers="/tmp/secret-trail-live-headers"
+          pdf_body="/tmp/secret-trail-live.pdf"
+          pdf_code="$(curl -sS --max-time 30 -D "$pdf_headers" -o "$pdf_body" -w '%{http_code}' 'https://www.sk8scoop.com/secret-trails/cheadle/SK8-Secret-Trails-The-Cheadle-Case.pdf' || true)"
+          pdf_bytes="$(wc -c < "$pdf_body" 2>/dev/null || echo 0)"
+          pdf_kind="$(file -b "$pdf_body" 2>/dev/null || true)"
+          pdf_content_type="$(tr -d '\r' < "$pdf_headers" | awk 'BEGIN{IGNORECASE=1} /^content-type:/ {print; exit}')"
+          if [ "$pdf_code" != "200" ] || [ "$pdf_bytes" -lt 1000000 ] || ! printf '%s' "$pdf_kind" | grep -Fqi 'PDF document' || ! printf '%s' "$pdf_content_type" | grep -Fqi 'application/pdf'; then
+            echo "FAILED Secret Trail PDF live access (HTTP $pdf_code; bytes=$pdf_bytes; type=$pdf_kind; content_type=$pdf_content_type)"
+            exit 1
+          fi
+          echo "OK Secret Trail PDF live access (bytes=$pdf_bytes; type=$pdf_kind)"
           check_page 'https://www.sk8scoop.com/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
           check_page 'https://www.sk8scoop.com/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
           check_page 'https://www.sk8scoop.com/admin/secret-trail-feedback/' 'data-secret-trail-feedback-admin'
