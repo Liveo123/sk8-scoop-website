@@ -95,13 +95,8 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
 
   const c = (value, length = 1000) => String(value || '').trim().slice(0, length);
   const packageLabel = {
-    starter_newsletter: 'NEWSLETTER STARTER £20',
-    halloween_guide: 'HALLOWEEN GUIDE £15',
-    halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £30',
-    halloween_section: 'HALLOWEEN SECTION SPONSOR £90',
-    halloween_main: 'HALLOWEEN MAIN SPONSOR £125',
-    temp_test: 'HISTORICAL TEST £40',
-    temp_grow: 'HISTORICAL GROW £90',
+    temp_test: 'TEST £40',
+    temp_grow: 'GROW £90',
     human_review: 'LOCAL-FIT CHECK',
     local_spotlight: 'Legacy Local Spotlight',
     monthly_partner: 'Legacy Monthly Partner',
@@ -243,7 +238,7 @@ async function handleStripeWebhook(request, env, ctx) {
   if (
     !Number.isInteger(enquiryId) ||
     enquiryId <= 0 ||
-    !['starter_newsletter', 'halloween_guide', 'halloween_combo', 'halloween_section', 'halloween_main', 'temp_test', 'temp_grow'].includes(packageKey) ||
+    !['temp_test', 'temp_grow'].includes(packageKey) ||
     String(metadata.approval_required || '') !== 'true' ||
     String(session.mode || '') !== 'payment'
   ) {
@@ -261,7 +256,7 @@ async function handleStripeWebhook(request, env, ctx) {
 
   const amount = Number.isFinite(Number(session.amount_total)) ? Math.max(0, Math.trunc(Number(session.amount_total))) : 0;
   const currency = String(session.currency || 'gbp').toLowerCase().slice(0, 10);
-  const expectedAmount = { starter_newsletter: 2000, halloween_guide: 1500, halloween_combo: 3000, halloween_section: 9000, halloween_main: 12500, temp_test: 4000, temp_grow: 9000 }[packageKey];
+  const expectedAmount = { temp_test: 4000, temp_grow: 9000 }[packageKey];
   const customerEmail = String((session.customer_details && session.customer_details.email) || session.customer_email || enquiry.email || '').trim().toLowerCase().slice(0, 200);
   const businessName = String((session.collected_information && session.collected_information.business_name) || enquiry.business_name || '').trim().slice(0, 180);
   const sessionId = String(session.id || '').slice(0, 120);
@@ -411,13 +406,8 @@ async function handleAdvertiserEnquiries(request, env) {
 
 function packageLabel(packageKey) {
   return {
-    starter_newsletter: 'NEWSLETTER STARTER £20',
-    halloween_guide: 'HALLOWEEN GUIDE £15',
-    halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £30',
-    halloween_section: 'HALLOWEEN SECTION SPONSOR £90',
-    halloween_main: 'HALLOWEEN MAIN SPONSOR £125',
-    temp_test: 'HISTORICAL TEST £40',
-    temp_grow: 'HISTORICAL GROW £90'
+    temp_test: 'TEST £40',
+    temp_grow: 'GROW £90'
   }[String(packageKey || '')] || String(packageKey || 'Campaign');
 }
 
