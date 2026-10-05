@@ -24,8 +24,8 @@
   };
 
   const valueLabels = {
-    under20: 'under £40',
-    '20to100': '£40–£100',
+    under20: 'under £20',
+    '20to100': '£20–£100',
     '100to500': '£100–£500',
     '500plus': '£500+',
     unknown: 'unknown'
@@ -254,7 +254,7 @@
     }
 
     if (v.value === 'under20') {
-      base.why.push('Because the typical customer value is under £40, keep the first test small and judge it against real business outcomes, not clicks alone.');
+      base.why.push('Because the typical customer value is under £20, keep the first test small and judge it against real business outcomes, not clicks alone.');
     } else if (v.value === 'unknown') {
       base.why.push('Customer value is unknown, so keeping the first spend small reduces risk while you learn whether the campaign produces useful business outcomes.');
     } else {
