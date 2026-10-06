@@ -2,7 +2,46 @@
   const STORAGE_KEY = 'sk8_saved_items_v1';
   const REMINDER_KEY = 'sk8_reminders_v1';
   const MAX_SHARE_ITEMS = 20;
-  const state = { events: [], byId: new Map() };
+  const PAGE_CATALOG = [
+    {
+      id: 'page:local-history/gatley-shouter',
+      kind: 'page',
+      title: 'The Gatley Shouter',
+      url: '/local-history/gatley-shouter/',
+      area: 'Gatley',
+      category: 'Local history',
+      description: 'The evidence behind one of Gatley’s oddest local legends: the Shouter, Fletcher Moss and the missing stone.'
+    },
+    {
+      id: 'page:planning/heald-green-east',
+      kind: 'page',
+      title: 'Heald Green East: what the 675-home application actually proposes',
+      url: '/planning/heald-green-east/',
+      area: 'Heald Green',
+      category: 'Planning',
+      description: 'A plain-English guide to planning application DC/095134 and its current status.'
+    },
+    {
+      id: 'page:kids-family/secondary-school-applications-2027',
+      kind: 'page',
+      title: 'Secondary-school applications for September 2027',
+      url: '/kids-family/secondary-school-applications-2027/',
+      area: 'SK8',
+      category: 'Kids & family',
+      description: 'The useful Stockport secondary-school application dates and checklist for SK8 parents.'
+    },
+    {
+      id: 'page:outdoors/marple-locks-aqueduct',
+      kind: 'page',
+      title: 'Climb 16 locks, then find the aqueduct',
+      url: '/outdoors/marple-locks-aqueduct/',
+      area: 'Marple',
+      category: 'Outdoors',
+      description: 'A practical walk guide to Marple’s lock flight and aqueduct.'
+    }
+  ];
+  const pageByPath = new Map(PAGE_CATALOG.map(item => [item.url.replace(/\/+$/, ''), item]));
+  const state = { events: [], byId: new Map(PAGE_CATALOG.map(item => [item.id, item])) };
   let weekendPlanTracked = false;
 
   const track = (name, params = {}) => {
@@ -50,8 +89,20 @@
     window.dispatchEvent(new CustomEvent('sk8:saved-items-changed', { detail: { count: items.length } }));
   };
 
+  const normalisePage = page => ({
+    id: String(page.id || '').trim(),
+    kind: 'page',
+    title: String(page.title || '').trim(),
+    url: String(page.url || '').trim(),
+    area: String(page.area || '').trim(),
+    category: String(page.category || 'Saved page').trim(),
+    description: String(page.description || '').trim(),
+    saved_at: new Date().toISOString()
+  });
+
   const normaliseEvent = event => ({
     id: String(event.id || '').trim(),
+    kind: 'event',
     title: String(event.title || '').trim(),
     date: String(event.date || '').trim(),
     end_date: String(event.end_date || event.date || '').trim(),
@@ -68,6 +119,19 @@
     saved_at: new Date().toISOString()
   });
 
+  const savePage = (page, source = 'article_page') => {
+    const item = normalisePage(page);
+    if (!item.id || !item.url) return false;
+    const saved = readSaved();
+    const existing = saved.findIndex(entry => entry.id === item.id);
+    const isNew = existing < 0;
+    if (existing >= 0) saved[existing] = { ...saved[existing], ...item, saved_at: saved[existing].saved_at || item.saved_at };
+    else saved.unshift(item);
+    writeSaved(saved);
+    if (isNew) track('my_sk8_save', { item_id: item.id, item_kind: 'page', item_area: item.area, save_source: source });
+    return true;
+  };
+
   const saveEvent = (event, source = 'website') => {
     const item = normaliseEvent(event);
     if (!item.id) return false;
@@ -77,7 +141,7 @@
     if (existing >= 0) saved[existing] = { ...saved[existing], ...item, saved_at: saved[existing].saved_at || item.saved_at };
     else saved.unshift(item);
     writeSaved(saved);
-    if (isNew) track('my_sk8_save', { event_id: item.id, event_area: item.area, save_source: source });
+    if (isNew) track('my_sk8_save', { item_id: item.id, item_kind: 'event', event_id: item.id, event_area: item.area, save_source: source });
     return true;
   };
 
@@ -113,7 +177,7 @@
   };
 
   const eventEnd = event => String(event.end_date || event.date || '');
-  const expired = event => eventEnd(event) && eventEnd(event) < localToday();
+  const expired = event => event.kind === 'page' ? false : Boolean(eventEnd(event) && eventEnd(event) < localToday());
 
   const prettyDate = value => {
     const date = parseDate(value);
@@ -285,7 +349,8 @@
     if (!id) return;
     const event = state.byId.get(id);
     if (!event) return;
-    saveEvent(event, 'newsletter_link');
+    if (event.kind === 'page') savePage(event, 'newsletter_link');
+    else saveEvent(event, 'newsletter_link');
     showToast('Saved to My SK8');
     updateSavedBadges();
     params.delete('save');
@@ -294,8 +359,11 @@
   };
 
   const syncEvents = events => {
-    state.events = Array.isArray(events) ? events : [];
-    state.byId = new Map(state.events.map(event => [String(event.id || ''), event]));
+    state.events = (Array.isArray(events) ? events : []).map(event => ({ ...event, kind: 'event' }));
+    state.byId = new Map([
+      ...PAGE_CATALOG.map(item => [item.id, item]),
+      ...state.events.map(event => [String(event.id || ''), event])
+    ]);
     renderEventActions();
     processSaveParam();
     if (document.body.dataset.page === 'my-sk8') renderMySk8();
@@ -319,8 +387,26 @@
     return [iso(saturday), iso(sunday)];
   };
 
+  const pageCardHtml = page => {
+    const live = state.byId.get(page.id) || page;
+    return `
+      <article class="my-sk8-saved-card my-sk8-page-card" data-saved-id="${escapeHtml(live.id)}">
+        <div class="my-sk8-saved-date my-sk8-page-type"><strong>SAVED</strong><span>${escapeHtml(live.category || 'Page')}</span></div>
+        <div class="my-sk8-saved-copy">
+          <div class="eyebrow">${escapeHtml(live.area || live.category || 'Saved page')}</div>
+          <h3>${escapeHtml(live.title)}</h3>
+          <p class="my-sk8-meta">${escapeHtml(live.description || '')}</p>
+          <div class="my-sk8-inline-actions">
+            <a href="${escapeHtml(live.url)}" data-my-sk8-open-page="${escapeHtml(live.id)}">Open page</a>
+            <button type="button" data-my-sk8-remove="${escapeHtml(live.id)}">Remove</button>
+          </div>
+        </div>
+      </article>`;
+  };
+
   const eventCardHtml = (event, extra = '') => {
     const live = state.byId.get(event.id) || event;
+    if (live.kind === 'page') return pageCardHtml(live);
     const source = live.booking_url || live.source_url || '';
     const cal = calendarHref(live);
     const directions = directionsHref(live);
@@ -334,7 +420,7 @@
           <p class="my-sk8-meta">${escapeHtml(live.venue)}${live.cost ? ' · ' + escapeHtml(live.cost) : ''}</p>
           ${extra}
           <div class="my-sk8-inline-actions">
-            ${source ? '<a href="' + escapeHtml(source) + '" target="_blank" rel="noopener">Check details</a>' : ''}
+            ${source ? '<a href="' + escapeHtml(source) + '" target="_blank" rel="noopener" data-my-sk8-details="' + escapeHtml(live.id) + '">Check details</a>' : ''}
             ${directions ? '<a href="' + escapeHtml(directions) + '" target="_blank" rel="noopener" data-my-sk8-directions="' + escapeHtml(live.id) + '">Directions</a>' : ''}
             ${cal ? '<a href="' + cal + '" download="sk8-scoop-' + escapeHtml(live.id) + '.ics" data-my-sk8-calendar="' + escapeHtml(live.id) + '">Calendar</a>' : ''}
             ${isPast ? '' : '<button type="button" data-my-sk8-reminder="' + escapeHtml(live.id) + '">' + (hasReminder(live.id) ? 'Reminder set ✓' : 'Remind me here') + '</button>'}
@@ -371,6 +457,14 @@
       renderMySk8();
       showToast('Removed from My SK8');
     }));
+    document.querySelectorAll('[data-my-sk8-open-page]').forEach(el => el.addEventListener('click', () => {
+      const page = state.byId.get(el.dataset.mySk8OpenPage);
+      if (page) track('my_sk8_open_saved_page', { item_id: page.id, item_kind: 'page', item_area: page.area });
+    }));
+    document.querySelectorAll('[data-my-sk8-details]').forEach(el => el.addEventListener('click', () => {
+      const event = state.byId.get(el.dataset.mySk8Details) || readSaved().find(item => item.id === el.dataset.mySk8Details);
+      if (event) track('my_sk8_check_details', { event_id: event.id, event_area: event.area });
+    }));
     document.querySelectorAll('[data-my-sk8-calendar]').forEach(el => el.addEventListener('click', () => {
       const event = state.byId.get(el.dataset.mySk8Calendar) || readSaved().find(item => item.id === el.dataset.mySk8Calendar);
       if (event) track('my_sk8_calendar', { event_id: event.id, event_area: event.area });
@@ -403,30 +497,39 @@
     section.querySelector('[data-shared-items]').innerHTML = items.map(event => eventCardHtml(event)).join('');
     const saveAll = section.querySelector('[data-save-shared]');
     saveAll.onclick = () => {
-      items.forEach(event => saveEvent(event, 'shared_shortlist'));
+      items.forEach(item => item.kind === 'page' ? savePage(item, 'shared_shortlist') : saveEvent(item, 'shared_shortlist'));
+      track('my_sk8_shared_save_all', { shared_items: items.length });
       renderMySk8();
       showToast('Shortlist saved to My SK8');
     };
+    track('my_sk8_shared_list_view', { shared_items: items.length });
   };
 
   const renderMySk8 = () => {
     if (document.body.dataset.page !== 'my-sk8') return;
     const saved = readSaved().map(item => state.byId.get(item.id) ? { ...item, ...state.byId.get(item.id) } : item);
-    const active = saved.filter(item => !expired(item)).sort((a, b) => (a.date + ' ' + a.time).localeCompare(b.date + ' ' + b.time));
-    const past = saved.filter(expired).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    const savedPages = saved.filter(item => item.kind === 'page');
+    const active = saved.filter(item => item.kind !== 'page' && !expired(item)).sort((a, b) => ((a.date || '') + ' ' + (a.time || '')).localeCompare((b.date || '') + ' ' + (b.time || '')));
+    const past = saved.filter(item => item.kind !== 'page' && expired(item)).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     const activeIds = new Set(active.map(item => item.id));
     const reminderIds = readReminders();
     const validReminderIds = reminderIds.filter(id => activeIds.has(id));
     if (validReminderIds.length !== reminderIds.length) writeReminders(validReminderIds);
 
     const activeHost = document.querySelector('[data-my-sk8-active]');
+    const pageHost = document.querySelector('[data-my-sk8-pages]');
     const pastHost = document.querySelector('[data-my-sk8-past]');
     const empty = document.querySelector('[data-my-sk8-empty]');
     const total = document.querySelector('[data-my-sk8-total]');
-    if (total) total.textContent = String(active.length);
-    if (empty) empty.hidden = active.length > 0 || sharedIds().length > 0;
+    if (total) total.textContent = String(active.length + savedPages.length);
+    if (empty) empty.hidden = active.length > 0 || savedPages.length > 0 || sharedIds().length > 0;
 
     if (activeHost) activeHost.innerHTML = active.map(event => eventCardHtml(event, nearbyHtml(event))).join('');
+    if (pageHost) {
+      pageHost.innerHTML = savedPages.map(page => pageCardHtml(page)).join('');
+      const wrapper = pageHost.closest('[data-my-sk8-pages-section]');
+      if (wrapper) wrapper.hidden = savedPages.length === 0;
+    }
     if (pastHost) {
       pastHost.innerHTML = past.map(event => eventCardHtml(event)).join('');
       const wrapper = pastHost.closest('[data-my-sk8-past-section]');
@@ -476,7 +579,7 @@
     if (share) {
       share.disabled = active.length === 0;
       share.onclick = async () => {
-        const ids = active.slice(0, MAX_SHARE_ITEMS).map(event => event.id);
+        const ids = [...active, ...savedPages].slice(0, MAX_SHARE_ITEMS).map(item => item.id);
         const url = new URL('/my-sk8/', location.origin);
         url.searchParams.set('list', ids.join(','));
         const shareData = { title: 'My SK8 shortlist', text: 'A few local ideas saved from SK8 Scoop', url: url.href };
@@ -498,7 +601,54 @@
     updateSavedBadges();
   };
 
-  window.SK8MySaved = { readSaved, saveEvent, unsaveEvent, renderMySk8 };
+  const renderPageSaveBar = () => {
+    const page = pageByPath.get(location.pathname.replace(/\/+$/, ''));
+    if (!page || document.querySelector('[data-my-sk8-page-save-bar]')) return;
+    const hero = document.querySelector('.page-hero');
+    if (!hero) return;
+
+    const section = document.createElement('section');
+    section.className = 'my-sk8-page-save-section';
+    section.dataset.mySk8PageSaveBar = '';
+    const wrap = document.createElement('div');
+    wrap.className = 'wrap my-sk8-page-save-bar';
+
+    const copy = document.createElement('div');
+    const eyebrow = document.createElement('div');
+    eyebrow.className = 'eyebrow';
+    eyebrow.textContent = 'Save for later';
+    const strong = document.createElement('strong');
+    strong.textContent = 'Keep this in My SK8';
+    const note = document.createElement('span');
+    note.textContent = 'Stored in this browser for the experiment.';
+    copy.append(eyebrow, strong, note);
+
+    const actions = document.createElement('div');
+    actions.className = 'my-sk8-page-save-actions';
+    const save = button(isSaved(page.id) ? 'Saved ✓' : '♡ Save this page', 'button secondary', () => {
+      if (isSaved(page.id)) {
+        unsaveEvent(page.id);
+        save.textContent = '♡ Save this page';
+        showToast('Removed from My SK8');
+      } else {
+        savePage(page, 'article_page');
+        save.textContent = 'Saved ✓';
+        showToast('Saved to My SK8');
+      }
+      updateSavedBadges();
+    });
+    const open = document.createElement('a');
+    open.className = 'reader-link';
+    open.href = '/my-sk8/';
+    open.textContent = 'Open My SK8 →';
+    actions.append(save, open);
+    wrap.append(copy, actions);
+    section.appendChild(wrap);
+    hero.insertAdjacentElement('afterend', section);
+    track('my_sk8_page_save_view', { item_id: page.id, item_kind: 'page', item_area: page.area });
+  };
+
+  window.SK8MySaved = { readSaved, saveEvent, savePage, unsaveEvent, renderMySk8 };
 
   window.addEventListener('sk8:events-loaded', event => syncEvents(event.detail && event.detail.events));
   window.addEventListener('sk8:saved-items-changed', () => {
@@ -508,6 +658,7 @@
   });
 
   if (Array.isArray(window.SK8_EVENT_DATA)) syncEvents(window.SK8_EVENT_DATA);
+  renderPageSaveBar();
 
   if (document.body.dataset.page === 'my-sk8') {
     fetch('/data/events.json', { cache: 'no-store' })
