@@ -33,6 +33,10 @@ requireText(v5, 'a[href="/start/"]', 'desktop Where to start visibility');
 requireText(v5, 'a[href="/submit/"]', 'desktop Submit visibility');
 requireText(v5, 'a[href="/contact/"]', 'desktop Contact visibility');
 requireText(v5, 'display:inline-flex!important', 'desktop full-nav visibility override');
+requireText(js, "navLatest.className = 'button reader-nav-latest'", 'recognised subscriber latest nav action');
+requireText(js, "navJoin.textContent = 'Join free'", 'Join free remains intact for recognised subscribers');
+rejectText(js, "navJoin.textContent = 'See what’s new'", 'subscriber-state Join CTA replacement');
+requireText(v5, '.reader-nav-latest', 'latest nav action styling');
 
 // 2. Hero hierarchy and trust cluster.
 requireText(js, 'Free Friday newsletter · SK8', 'hero eyebrow');
