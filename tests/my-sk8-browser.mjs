@@ -182,17 +182,17 @@ try {
   await screenshot('my-sk8-desktop.png');
   await fullScreenshot('my-sk8-desktop-full.png');
 
+  await setViewport(1280, 900, false);
+  await navigate('/whats-on/');
+  record('Desktop header has no horizontal overflow at 1280px', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
+  record('Desktop nav does not overlap logo at 1280px', Boolean(await evaluate(`(() => { const brand=document.querySelector('.brand')?.getBoundingClientRect(); const nav=document.querySelector('#main-nav')?.getBoundingClientRect(); if(!brand||!nav) return false; return brand.right <= nav.left + 0.5 && nav.right <= innerWidth + 1; })()`)));
+
   await setViewport(1120, 900, false);
   await navigate('/whats-on/');
-  record('Desktop header has no horizontal overflow at 1120px', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
-  record('Desktop nav does not overlap logo at 1120px', Boolean(await evaluate(`(() => { const brand=document.querySelector('.brand')?.getBoundingClientRect(); const nav=document.querySelector('#main-nav')?.getBoundingClientRect(); if(!brand||!nav) return false; return brand.right <= nav.left + 0.5 && nav.right <= innerWidth + 1; })()`)));
-
-  await setViewport(1024, 900, false);
-  await navigate('/whats-on/');
-  record('Tablet-width header switches to menu before overlap', Boolean(await evaluate(`(() => { const menu=document.querySelector('.menu-btn'); const nav=document.querySelector('#main-nav'); if(!menu||!nav) return false; return getComputedStyle(menu).display !== 'none' && getComputedStyle(nav).display === 'none'; })()`)));
-  record('Tablet-width menu opens with My SK8 near the top', await click('.menu-btn'));
+  record('Narrow desktop header switches to menu before overlap', Boolean(await evaluate(`(() => { const menu=document.querySelector('.menu-btn'); const nav=document.querySelector('#main-nav'); if(!menu||!nav) return false; return getComputedStyle(menu).display !== 'none' && getComputedStyle(nav).display === 'none'; })()`)));
+  record('Narrow desktop menu opens with My SK8 near the top', await click('.menu-btn'));
   await sleep(120);
-  record('My SK8 remains discoverable in tablet-width menu', Boolean(await evaluate(`(() => { const nav=document.querySelector('#main-nav'); const hrefs=[...nav.querySelectorAll(':scope>a')].map(a=>a.getAttribute('href')); return getComputedStyle(nav).display !== 'none' && hrefs.indexOf('/my-sk8/') === hrefs.indexOf('/whats-on/') + 1; })()`)));
+  record('My SK8 remains discoverable in narrow desktop menu', Boolean(await evaluate(`(() => { const nav=document.querySelector('#main-nav'); const hrefs=[...nav.querySelectorAll(':scope>a')].map(a=>a.getAttribute('href')); return getComputedStyle(nav).display !== 'none' && hrefs.indexOf('/my-sk8/') === hrefs.indexOf('/whats-on/') + 1; })()`)));
 
   await setViewport(390, 844, true);
   await navigate('/my-sk8/');
