@@ -47,6 +47,7 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     ['What’s On','/whats-on/'],
     ['My SK8','/my-sk8/'],
     ['Guides','/guides/'],
+    ['Where to start','/start/'],
     ['Submit','/submit/'],
     ['Advertise','/advertise.html']
   ];
