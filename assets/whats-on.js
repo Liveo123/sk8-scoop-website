@@ -395,9 +395,6 @@
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
       syncEventSchema();
       render();
-      if (window.location.hash === '#current-listings') {
-        window.requestAnimationFrame(jumpToResults);
-      }
     })
     .catch(error => {
       console.error('SK8 What’s On data failed to load', error);
