@@ -273,6 +273,11 @@
     body.appendChild(description);
 
     const source = safeUrl(event.booking_url || event.source_url);
+    const actionHolder = document.createElement('div');
+    actionHolder.className = 'my-sk8-card-actions';
+    actionHolder.dataset.sk8EventActions = String(event.id || '');
+    body.appendChild(actionHolder);
+
     if (source) {
       const link = document.createElement('a');
       link.className = 'reader-link event-check-link';
@@ -393,6 +398,8 @@
         .filter(event => event && !['example', 'cancelled', 'sold_out'].includes(String(event.status || '').toLowerCase()))
         .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
+      window.SK8_EVENT_DATA = events;
+      window.dispatchEvent(new CustomEvent('sk8:events-loaded',{detail:{events}}));
       syncEventSchema();
       render();
     })
