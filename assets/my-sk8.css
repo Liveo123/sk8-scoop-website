@@ -51,3 +51,19 @@
 .my-sk8-reminder-alert strong{color:#132d31}
 .my-sk8-reminder-alert span{color:#7a5a3b;font-weight:800;font-size:.85rem}
 @media(max-width:560px){.my-sk8-reminder-alert{display:grid;gap:4px}}
+
+.my-sk8-page-save-section{padding:0 0 18px;background:transparent}
+.my-sk8-page-save-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 18px;box-shadow:0 8px 20px rgba(19,45,49,.05)}
+.my-sk8-page-save-bar>div:first-child{display:grid;gap:2px}
+.my-sk8-page-save-bar strong{font:800 1.08rem/1.25 Inter,Arial,sans-serif;color:var(--ink)}
+.my-sk8-page-save-bar span{color:#53666a;font-size:.84rem}
+.my-sk8-page-save-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.my-sk8-page-save-actions .button{padding:10px 14px;box-shadow:none}
+.my-sk8-page-type{background:#fff3e5}
+.my-sk8-page-type strong{color:#8b4e20}
+.my-sk8-page-card .my-sk8-meta{max-width:760px}
+@media(max-width:680px){
+  .my-sk8-page-save-bar{align-items:flex-start;flex-direction:column}
+  .my-sk8-page-save-actions{width:100%}
+  .my-sk8-page-save-actions .button{flex:1}
+}
