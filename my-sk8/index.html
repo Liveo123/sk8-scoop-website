@@ -50,31 +50,31 @@
 
     <section class="section white" data-subscriber-shelf>
       <div class="wrap">
-        <div class="my-sk8-section-head">
-          <div><div class="eyebrow">Subscriber extras</div><h2>Your SK8 subscriber shelf</h2></div>
-          <p>Current guides live here now; this is also the natural home for future subscriber maps, downloads, offers and extra My SK8 tools.</p>
-        </div>
-
-        <div class="subscriber-access-locked" data-subscriber-shelf-locked>
-          <div class="eyebrow">Free with the Friday email</div>
-          <h2>Unlock the subscriber shelf</h2>
-          <p>Enter your email once. If it is already subscribed, this simply recognises this browser. If it is new, it joins the free Friday SK8 Scoop email.</p>
-          <div class="subscriber-access-perks"><span>Current guides</span><span>Personal maps later</span><span>Better weekend planning</span><span>Downloads &amp; extras</span></div>
+        <div class="subscriber-access-locked subscriber-shelf-compact" data-subscriber-shelf-locked>
+          <div class="eyebrow">Subscriber guides</div>
+          <h2>Get all 3 current guides free</h2>
+          <p>Already get SK8 Scoop? Enter the same email. New here? This also joins the free Friday email.</p>
           <form class="subscriber-access-form" method="post" data-signup-form data-form-position="my-sk8-subscriber-shelf" data-success-url="/my-sk8/?subscriber=unlocked">
             <label class="sr-only" for="my-sk8-subscriber-email">Email address</label>
             <input id="my-sk8-subscriber-email" name="fields[email]" type="email" autocomplete="email" placeholder="Your email address" required>
-            <button class="button" type="submit">Unlock subscriber extras</button>
+            <button class="button" type="submit">Unlock guides</button>
           </form>
-          <p class="subscriber-access-note">Treasure Hunts and future Pub Trails are not included here; those remain referral rewards or paid options.</p>
+          <div class="subscriber-access-summary" aria-label="Included subscriber guides">
+            <span>Free &amp; Cheap</span><span>52 Adventures</span><span>Halloween &amp; Half-Term</span>
+          </div>
+          <p class="subscriber-access-note">Treasure Hunts and Pub Trails stay separate as referral rewards or paid options.</p>
         </div>
 
         <div class="subscriber-access-unlocked" data-subscriber-shelf-unlocked hidden>
-          <div class="subscriber-access-grid">
-            <article class="subscriber-guide-card"><small>Evergreen guide</small><h3>Free &amp; Cheap</h3><p>Low-cost local ideas with the practical details that change the real spend.</p><a class="button secondary" href="/free-cheap-guide/guide/" data-subscriber-guide-open="free-cheap">Open guide</a></article>
-            <article class="subscriber-guide-card"><small>52 ideas</small><h3>52 Adventures</h3><p>Local outings, walks and short trips with filters and useful planning detail.</p><a class="button secondary" href="/52-adventures/guide/" data-subscriber-guide-open="52-adventures">Open guide</a></article>
-            <article class="subscriber-guide-card"><small>October 2026</small><h3>Halloween &amp; Half-Term</h3><p>Forty family activities with dates, prices, age guidance and rainy-day backups.</p><a class="button secondary" href="/halloween-half-term-guide/guide/" data-subscriber-guide-open="halloween">Open guide</a></article>
+          <div class="my-sk8-section-head">
+            <div><div class="eyebrow">Subscriber guides</div><h2>Your guides</h2></div>
+            <p>Three current guides, ready to open.</p>
           </div>
-          <p class="subscriber-access-note">Subscriber extras can grow here later: personal maps, stronger weekend planning, subscriber offers, extra local-history material, downloads and more powerful My SK8 tools.</p>
+          <div class="subscriber-access-grid">
+            <article class="subscriber-guide-card"><small>Evergreen</small><h3>Free &amp; Cheap</h3><p>Low-cost local ideas and practical costs.</p><a class="button secondary" href="/free-cheap-guide/guide/" data-subscriber-guide-open="free-cheap">Open guide</a></article>
+            <article class="subscriber-guide-card"><small>52 ideas</small><h3>52 Adventures</h3><p>Outings, walks and short trips.</p><a class="button secondary" href="/52-adventures/guide/" data-subscriber-guide-open="52-adventures">Open guide</a></article>
+            <article class="subscriber-guide-card"><small>October</small><h3>Halloween &amp; Half-Term</h3><p>Family activities, prices and rainy-day backups.</p><a class="button secondary" href="/halloween-half-term-guide/guide/" data-subscriber-guide-open="halloween">Open guide</a></article>
+          </div>
         </div>
       </div>
     </section>
