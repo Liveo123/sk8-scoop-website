@@ -102,6 +102,9 @@
   const requestedFilter = String(params.get('filter') || '').toLowerCase();
   if (allowedFilters.has(requestedFilter)) activeFilter = requestedFilter;
 
+  const requestedEvent = String(params.get('event') || '').trim();
+  let requestedEventJumped = false;
+
   const requestedArea = params.get('area');
   if (requestedArea) {
     const matchedArea = areaFilters
@@ -216,6 +219,8 @@
   const eventCard = event => {
     const article = document.createElement('article');
     article.className = 'reader-story event-listing-card';
+    article.dataset.eventId = String(event.id || '');
+    if (event.id) article.id = 'event-' + String(event.id);
 
     const category = String(event.category || 'LOCAL EVENT').trim() || 'LOCAL EVENT';
     article.dataset.category = slugifyCategory(category);
@@ -315,6 +320,21 @@
     }
   };
 
+  const jumpToRequestedEvent = () => {
+    if (!requestedEvent || requestedEventJumped) return;
+    const target = [...list.querySelectorAll('[data-event-id]')].find(card => card.dataset.eventId === requestedEvent);
+    if (!target) return;
+    requestedEventJumped = true;
+    target.style.scrollMarginTop = '22px';
+    target.style.boxShadow = '0 0 0 4px rgba(229,99,35,.28)';
+    target.style.borderRadius = '18px';
+    window.requestAnimationFrame(() => {
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      target.focus?.({ preventScroll: true });
+    });
+  };
+
   const render = () => {
     list.replaceChildren();
     const visible = events.filter(matches);
@@ -324,6 +344,7 @@
       ? `${visible.length} ${visible.length === 1 ? 'result' : 'results'} shown${filterLabel()}`
       : `No checked listings match this view${filterLabel()}.`;
     updateFreshness(visible);
+    jumpToRequestedEvent();
     filters.forEach(button => {
       const selected = button.dataset.eventFilter === activeFilter;
       button.setAttribute('aria-pressed', String(selected));
