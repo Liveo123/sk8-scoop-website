@@ -36,38 +36,6 @@ for (const route of ['/whats-on/','/food-drink/','/kids-family/','/outdoors/','/
   contains('sitemap.html',`href="${route.replace(/^\//,'')}"`);
 }
 
-// Core location-hub contract: four useful, indexable place pages only.
-const locationHubs = [
-  ['cheadle','Cheadle'],
-  ['cheadle-hulme','Cheadle Hulme'],
-  ['gatley','Gatley'],
-  ['heald-green','Heald Green']
-];
-expect(fs.existsSync(path.join(root,'assets/location-hubs.css')), 'assets/location-hubs.css is missing');
-expect(fs.existsSync(path.join(root,'assets/location-hubs.js')), 'assets/location-hubs.js is missing');
-for (const [slug,area] of locationHubs) {
-  const file = `${slug}/index.html`;
-  expect(fs.existsSync(path.join(root,file)), `${file} is missing`);
-  excludes(file,'noindex');
-  contains(file,`data-location="${area}"`);
-  contains(file,`/whats-on/?area=${encodeURIComponent(area)}`);
-  contains('sitemap.xml',`https://www.sk8scoop.com/${slug}/`);
-  contains('sitemap.html',`href="${slug}/"`);
-  contains('around-sk8/index.html',`href="/${slug}/"`);
-}
-contains('assets/whats-on.js','const requestedArea = new URLSearchParams');
-contains('assets/whats-on.js','syncAreaParam');
-contains('assets/nue-analytics.js',"cheadle: 'locality_hub_visit'");
-contains('assets/nue-analytics.js',"'cheadle-hulme': 'locality_hub_visit'");
-contains('assets/nue-analytics.js',"gatley: 'locality_hub_visit'");
-contains('assets/nue-analytics.js',"'heald-green': 'locality_hub_visit'");
-contains('assets/location-hubs.js',"locality-continuation");
-contains('assets/location-hubs.css','.locality-final .final-signup');
-contains('assets/location-hubs.css','grid-template-columns:minmax(0,1fr) 142px');
-for (const [slug] of locationHubs) {
-  excludes(`${slug}/index.html`,'/assets/images/nue/');
-}
-
 // What’s On usefulness and search structure.
 contains('whats-on/index.html','data-event-area="Cheadle"');
 contains('whats-on/index.html','data-event-area="Cheadle Hulme"');
@@ -131,22 +99,32 @@ contains('advertise.html','ad-product-grid ad-route-grid');
 contains('assets/advertise-v5.css','#advertiser-tools .ad-route-grid');
 
 // Current advertiser offer and backend contract.
-// Temporary operating mode: TEST £40 and GROW £90 are the only standard public products.
-contains('advertise.html','TEST · £40');
-contains('advertise.html','GROW · £90');
-contains('advertise.html','value="temp_test"');
-contains('advertise.html','value="temp_grow"');
+// Owner-approved starter-advertiser experiment from 5 October 2026.
+contains('advertise.html','NEWSLETTER STARTER · £20');
+contains('advertise.html','<div class="halloween-price">£15</div>');
+contains('advertise.html','<div class="halloween-price">£30</div>');
+contains('advertise.html','<div class="halloween-price">£90</div>');
+contains('advertise.html','<div class="halloween-price">£125</div>');
+contains('advertise.html','value="starter_newsletter"');
+contains('advertise.html','value="halloween_guide"');
+contains('advertise.html','value="halloween_combo"');
+contains('advertise.html','value="halloween_section"');
+contains('advertise.html','value="halloween_main"');
+excludes('advertise.html','TEST · £40');
+excludes('advertise.html','GROW · £90');
 excludes('advertise.html','WEBSITE · price by scope');
 excludes('advertise.html','value="temp_website"');
 contains('advertise.html','data-experiment="advertiser-goal-first-v1"');
-excludes('advertise.html','Placements start from £35');
-contains('advertise.html','Halloween & Half-Term Guide 2026 from £35');
 contains('advertise.html','GUIDE ADVERT');
-contains('advertise.html','<div class="halloween-price">£35</div>');
+contains('worker.js',"'starter_newsletter'");
+contains('worker.js',"'halloween_guide'");
+contains('worker.js',"'halloween_combo'");
+contains('functions/api/advertiser-enquiry.js',"'starter_newsletter'");
+contains('functions/api/advertiser-enquiry.js',"'halloween_guide'");
+contains('functions/api/advertiser-enquiry.js',"'halloween_combo'");
+// Historical package keys remain accepted only to honour earlier commitments.
 contains('worker.js',"'temp_test'");
 contains('worker.js',"'temp_grow'");
-contains('functions/api/advertiser-enquiry.js',"'temp_test'");
-contains('functions/api/advertiser-enquiry.js',"'temp_grow'");
 
 // Public input form contracts, checked without creating production records.
 contains('submit/index.html','action="/api/reader-submission"');

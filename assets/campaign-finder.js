@@ -104,22 +104,22 @@
       promote: genericPromotion(v),
       timing: timingLabels[v.timing],
       value: valueLabels[v.value],
-      state: 'test',
-      badge: 'TEST',
-      title: 'Start with TEST.',
+      state: 'starter',
+      badge: 'STARTER',
+      title: 'Start with the newsletter TEST.',
       price: '£40',
       doFirst: v.goal === 'awareness'
         ? 'You have a specific message worth testing. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.'
         : 'Your answers include a clear proposition and a practical way for readers to act. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.',
       why: [
         v.goal === 'awareness'
-          ? 'TEST gives you one sponsored newsletter placement focused on one specific message.'
-          : 'TEST gives you one sponsored newsletter placement focused on one clear reader action.',
+          ? 'The newsletter TEST gives you one sponsored newsletter placement focused on one specific message.'
+          : 'The newsletter TEST gives you one sponsored newsletter placement focused on one clear reader action.',
         'It keeps the first spend small while giving you a defined campaign to learn from.'
       ],
       alternative: '',
-      package: 'temp_test',
-      cta: 'Ask about TEST £40'
+      package: 'starter_newsletter',
+      cta: 'Ask about the £40 TEST'
     };
 
     if (v.area === 'outside') {
@@ -204,7 +204,7 @@
         title: 'Give readers a specific reason to act first.',
         price: '',
         doFirst: 'Choose one bookable service, dated event, genuine offer, launch, menu, course, limited-place opportunity or similarly clear proposition.',
-        why: ['You want readers to take action, but the message is still too general to make a useful £40 test.'],
+        why: ['You want readers to take action, but the message is still too general to make a useful £40 TEST.'],
         alternative: '',
         package: '',
         cta: ''
@@ -244,27 +244,13 @@
     if (v.timing === 'ongoing' && v.goal === 'awareness') {
       base.why = [
         'SK8 Scoop does not currently offer automatic recurring awareness placements.',
-        'A one-off TEST can still show whether one specific message earns useful local attention.'
+        'A one-off newsletter TEST can still show whether one specific message earns useful local attention.'
       ];
-      base.doFirst = 'Define one message and one thing you want to learn from a single TEST. Treat it as a one-off experiment rather than an open-ended awareness campaign.';
+      base.doFirst = 'Define one message and one thing you want to learn from a single newsletter TEST. Treat it as a one-off experiment rather than an open-ended awareness campaign.';
     }
 
     if (v.freecheap) {
-      return {
-        ...base,
-        state: 'grow',
-        badge: 'GROW CANDIDATE',
-        title: 'GROW looks like the right route, subject to a Guide fit check.',
-        price: '£90',
-        doFirst: 'Before booking, SK8 Scoop will check that the free or low-cost proposition genuinely belongs in the Free & Cheap Guide.',
-        why: [
-          'Your campaign has a specific proposition rather than a general awareness message.',
-          'The free or low-cost element could add a genuinely useful second context in the Free & Cheap Guide.'
-        ],
-        alternative: 'If the Guide is not a genuine fit, TEST £40 is the simpler option: one sponsored newsletter placement.',
-        package: 'temp_grow',
-        cta: 'Ask about GROW £90'
-      };
+      base.why.push('A relevant Guide may be useful later, but the current general first-campaign route is still the £40 newsletter TEST unless a named seasonal Guide offer applies.');
     }
 
     if (v.value === 'under20') {
@@ -292,7 +278,7 @@
     const reasons = rec.why.map(reason => `<li>${reason}</li>`).join('');
     const alternative = rec.alternative ? `<div><dt>Simpler alternative</dt><dd>${rec.alternative}</dd></div>` : '';
     const action = rec.cta ? `<a class="button" href="${buildAdvertiseUrl(rec)}">${rec.cta}</a>` : '';
-    const secondary = ['test', 'grow', 'wait', 'review'].includes(rec.state)
+    const secondary = ['starter', 'wait', 'review'].includes(rec.state)
       ? `<a class="button secondary" href="/advertise.html">See current advertising options</a>`
       : '';
 
