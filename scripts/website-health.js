@@ -127,6 +127,35 @@ if (discovery && Array.isArray(discovery.records)) {
   out('PASS', 'discovery', `${discovery.records.length} discovery records parsed`);
 }
 
+const walkHtml = dir => {
+  const found = [];
+  fs.readdirSync(dir, { withFileTypes: true }).forEach(entry => {
+    const full = path.join(dir, entry.name);
+    const rel = path.relative(root, full).replace(/\\/g, '/');
+    if (entry.isDirectory()) {
+      if (['.git', 'node_modules'].includes(entry.name)) return;
+      walkHtml(full).forEach(item => found.push(item));
+    } else if (entry.isFile() && entry.name.endsWith('.html')) {
+      found.push({ full, rel });
+    }
+  });
+  return found;
+};
+
+let expiredHtmlBlocks = 0;
+walkHtml(root).forEach(({ full, rel }) => {
+  const html = fs.readFileSync(full, 'utf8');
+  const re = /data-expire-after=["'](\d{4}-\d{2}-\d{2})["']/g;
+  let match;
+  while ((match = re.exec(html))) {
+    if (match[1] < today) {
+      expiredHtmlBlocks += 1;
+      out('WARNING', 'html-expiry', `${rel}: data-expire-after ${match[1]} has passed`);
+    }
+  }
+});
+if (!expiredHtmlBlocks) out('PASS', 'html-expiry', 'no expired data-expire-after markers found');
+
 try {
   const config = readText('assets/config.js');
   const issueDate = config.match(/dateIso:\s*["'](\d{4}-\d{2}-\d{2})["']/);
