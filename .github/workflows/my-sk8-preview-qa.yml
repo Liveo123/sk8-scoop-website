@@ -58,8 +58,9 @@ jobs:
             line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
             url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
             sha="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
+            immutable="$(printf '%s\n' "$body" | grep -Eo 'https://[0-9a-f]{8}\.previews\.sk8scoop\.com' | head -n 1 || true)"
             if [ -n "$url" ] && [ "$sha" = "$short_sha" ]; then
-              base="$url"
+              base="${immutable:-$url}"
               break
             fi
             echo "Waiting for exact Cloudflare preview (attempt $attempt/30; found $url at $sha; expected $short_sha)"
@@ -76,15 +77,21 @@ jobs:
         shell: bash
         run: |
           set -eu
-          for attempt in $(seq 1 20); do
-            if curl -fsSL --max-time 20 "$PREVIEW_URL/my-sk8/" | grep -Fq 'data-page="my-sk8"' &&
-               curl -fsSL --max-time 20 "$PREVIEW_URL/assets/my-sk8.js" | grep -Fq 'sk8_saved_items_v1'; then
+          for attempt in $(seq 1 10); do
+            page_code="$(curl -sS -L --max-time 20 -o /tmp/my-sk8.html -w '%{http_code}' "$PREVIEW_URL/my-sk8/" || true)"
+            js_code="$(curl -sS -L --max-time 20 -o /tmp/my-sk8.js -w '%{http_code}' "$PREVIEW_URL/assets/my-sk8.js" || true)"
+            if [ "$page_code" = "200" ] && [ "$js_code" = "200" ] &&
+               grep -Fq 'data-page="my-sk8"' /tmp/my-sk8.html &&
+               grep -Fq 'sk8_saved_items_v1' /tmp/my-sk8.js; then
               echo "My SK8 preview is current."
               exit 0
             fi
-            echo "Waiting for My SK8 preview (attempt $attempt/20)"
-            sleep 10
+            echo "Waiting for My SK8 preview (attempt $attempt/10; page=$page_code; js=$js_code)"
+            head -c 180 /tmp/my-sk8.html 2>/dev/null || true
+            echo
+            sleep 8
           done
+          echo "My SK8 preview files did not become available."
           exit 1
 
       - name: Run real browser functional and mobile QA
