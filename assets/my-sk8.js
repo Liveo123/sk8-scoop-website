@@ -148,6 +148,7 @@
 
   const unsaveEvent = id => {
     const saved = readSaved();
+    const removed = saved.find(item => item.id === id);
     const next = saved.filter(item => item.id !== id);
     if (next.length === saved.length) return false;
     if (hasReminder(id)) {
@@ -155,7 +156,11 @@
       track('my_sk8_reminder_removed', { event_id: id, removal_source: 'unsave' });
     }
     writeSaved(next);
-    track('my_sk8_unsave', { event_id: id });
+    track('my_sk8_unsave', {
+      item_id: id,
+      item_kind: removed && removed.kind || 'event',
+      ...(removed && removed.kind !== 'page' ? { event_id: id } : {})
+    });
     return true;
   };
 
@@ -525,8 +530,14 @@
     const pastHost = document.querySelector('[data-my-sk8-past]');
     const empty = document.querySelector('[data-my-sk8-empty]');
     const total = document.querySelector('[data-my-sk8-total]');
+    const activeSection = document.querySelector('[data-my-sk8-active-section]');
+    const remindersSection = document.querySelector('[data-my-sk8-reminders-section]');
+    const weekendSection = document.querySelector('[data-weekend-plan-section]');
     if (total) total.textContent = String(active.length + savedPages.length);
     if (empty) empty.hidden = active.length > 0 || savedPages.length > 0 || sharedIds().length > 0;
+    if (activeSection) activeSection.hidden = active.length === 0 && savedPages.length > 0;
+    if (remindersSection) remindersSection.hidden = active.length === 0;
+    if (weekendSection) weekendSection.hidden = active.length === 0;
 
     if (activeHost) activeHost.innerHTML = active.map(event => eventCardHtml(event, nearbyHtml(event))).join('');
     if (pageHost) {
