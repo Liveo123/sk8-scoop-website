@@ -16,6 +16,11 @@ on:
       - 'assets/site.js'
       - 'whats-on/index.html'
       - 'my-sk8/index.html'
+      - 'privacy.html'
+      - 'local-history/gatley-shouter/index.html'
+      - 'planning/heald-green-east/index.html'
+      - 'kids-family/secondary-school-applications-2027/index.html'
+      - 'outdoors/marple-locks-aqueduct/index.html'
       - 'tests/my-sk8-browser.mjs'
       - '.github/workflows/my-sk8-preview-qa.yml'
 
