@@ -245,6 +245,7 @@ try {
   record('52 Adventures landing has protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"52-adventures\"]')")));
   record('52 Adventures signup copy is concise', Boolean(await evaluate("document.body.textContent.includes('Already subscribed? Use the same address.')")));
   record('52 Adventures uses the approved automation hero', Boolean(await evaluate("document.querySelector('.hero-visual img')?.src.includes('52-adventures-email-hero-v5-no-people')")));
+  record('52 Adventures landing no longer promotes the aqueduct image', !(await evaluate("[...document.images].some(img => img.src.includes('52-adventures-marple-aqueduct'))")));
   await navigate('/halloween-half-term-guide/');
   record('Halloween landing uses unified protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"halloween\"]')")));
   record('Halloween signup copy is concise', Boolean(await evaluate("document.body.textContent.includes('Already subscribed? Use the same address.')")));
