@@ -197,6 +197,7 @@ try {
   await sleep(150);
   record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('cheadle-brew-and-biscuit-2026-10-06')")));
 
+  await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   await navigate('/local-history/gatley-shouter/');
   record('Article page shows My SK8 save bar', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
   record('Article save button works', await click('[data-my-sk8-page-save-bar] button'));
@@ -206,8 +207,12 @@ try {
   await fullScreenshot('gatley-shouter-save-mobile-full.png');
 
   await navigate('/my-sk8/');
+  record('Article-only My SK8 count is one', (await text('[data-my-sk8-total]')) === '1', await text('[data-my-sk8-total]'));
   record('Saved articles section becomes visible', !(await evaluate("document.querySelector('[data-my-sk8-pages-section]')?.hidden")));
   record('Saved Gatley Shouter appears in My SK8', Boolean(await evaluate("document.querySelector('[data-my-sk8-pages]')?.textContent.includes('The Gatley Shouter')")));
+  record('Article-only state hides empty Coming up section', Boolean(await evaluate("document.querySelector('[data-my-sk8-active-section]')?.hidden")));
+  record('Article-only state hides reminders', Boolean(await evaluate("document.querySelector('[data-my-sk8-reminders-section]')?.hidden")));
+  record('Article-only state hides weekend plan', Boolean(await evaluate("document.querySelector('[data-weekend-plan-section]')?.hidden")));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   await navigate('/whats-on/?save=john-lewis-cheadle-baby-beyond-2026-10-08&utm_source=newsletter&utm_medium=email');
