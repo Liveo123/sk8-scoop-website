@@ -122,12 +122,12 @@
     "venue": "Merseyway Workshop, 6 Deanery Way, Stockport SK1 1PP",
     "cost": "£17.50",
     "category": "Family",
-    "description": "Children aged 8+ turn a half-made mug into a Halloween monster using clay techniques. All materials are supplied; accompanying adults stay but do not need a ticket.",
+    "description": "Children aged 8+ turn a half-made mug into a Halloween monster using clay techniques. All materials are supplied; accompanying adults stay but do not need a ticket. Current ticket availability is sold out; check the organiser for returns or extra releases.",
     "booking_url": "https://www.merseywayworkshop.com/whatson",
     "source_url": "https://www.stockport.gov.uk/events/monster-mugs-kids-clay-workshop?date=2026-10-10",
     "verification": "ORGANISER_AND_COUNCIL_SOURCE",
-    "checked": "2026-09-25",
-    "status": "verified"
+    "checked": "2026-10-06",
+    "status": "sold_out"
   },
   {
     "id": "ben-nuttall-footy-factory-2026-10-10",
@@ -160,6 +160,22 @@
     "verification": "OFFICIAL_COUNCIL_LISTING",
     "checked": "2026-10-06",
     "status": "verified"
+  },
+  {
+    "id": "staircase-beaded-spiders-2026-10-10",
+    "title": "Create at Staircase: Beaded spiders",
+    "status": "verified",
+    "date": "2026-10-10",
+    "time": "13:30",
+    "area": "Stockport",
+    "venue": "Staircase House, 30/31 Market Place, Stockport SK1 1ES",
+    "cost": "£20 + booking fee",
+    "category": "Halloween / Crafts",
+    "description": "An adults-only Halloween craft session led by artist Caroline Coates, making beaded spiders with simple jewellery techniques. All materials are provided. Ages 16+.",
+    "booking_url": "https://www.stockport.gov.uk/landing/staircase-house",
+    "source_url": "https://www.stockport.gov.uk/events/create-at-staircase-beaded-spiders?date=2026-10-10",
+    "verification": "OFFICIAL_COUNCIL_EVENT_PAGE",
+    "checked": "2026-10-06"
   },
   {
     "id": "dementia-disco-cheadle-hulme-2026-10-10",
