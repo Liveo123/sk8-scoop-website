@@ -110,6 +110,27 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   nav.appendChild(joinButton);
 }
 
+const sk8MySk8SaveEligible=()=>{
+  const path=sk8NormalisePath(location.pathname);
+  return /^\/(outdoors|planning|local-history|kids-family)\/[^/]+$/.test(path);
+};
+const ensureMySk8PageSaveAssets=()=>{
+  if(!sk8MySk8SaveEligible()) return;
+  if(!document.querySelector('link[href$="/assets/my-sk8.css"],link[href$="assets/my-sk8.css"]')){
+    const css=document.createElement('link');
+    css.rel='stylesheet';
+    css.href='/assets/my-sk8.css';
+    document.head.appendChild(css);
+  }
+  if(!document.querySelector('script[src$="/assets/my-sk8.js"],script[src$="assets/my-sk8.js"]')){
+    const script=document.createElement('script');
+    script.src='/assets/my-sk8.js';
+    script.defer=true;
+    document.body.appendChild(script);
+  }
+};
+ensureMySk8PageSaveAssets();
+
 const setMenuLabel=(open)=>{if(!menu)return;menu.setAttribute('aria-expanded',String(open));const label=menu.querySelector('span:last-child');if(label)label.textContent=open?'Close':'Menu';else menu.textContent=open?'Close':'Menu';};
 if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');setMenuLabel(open);});}
 document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
