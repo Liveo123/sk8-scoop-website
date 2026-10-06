@@ -21,6 +21,12 @@ on:
       - 'planning/heald-green-east/index.html'
       - 'kids-family/secondary-school-applications-2027/index.html'
       - 'outdoors/marple-locks-aqueduct/index.html'
+      - 'outdoors/gatley-carrs/index.html'
+      - 'outdoors/east-avenue-park-heald-green/index.html'
+      - 'kids-family/bruntwood-park/index.html'
+      - 'kids-family/abney-hall-park/index.html'
+      - 'planning/cheadle-eco-park/index.html'
+      - 'local-history/heald-green-north-history-walk/index.html'
       - 'tests/my-sk8-browser.mjs'
       - '.github/workflows/my-sk8-preview-qa.yml'
 
