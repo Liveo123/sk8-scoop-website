@@ -38,6 +38,60 @@
       area: 'Marple',
       category: 'Outdoors',
       description: 'A practical walk guide to Marple’s lock flight and aqueduct.'
+    },
+    {
+      id: 'page:outdoors/gatley-carrs',
+      kind: 'page',
+      title: 'Gatley Carrs',
+      url: '/outdoors/gatley-carrs/',
+      area: 'Gatley',
+      category: 'Outdoors',
+      description: 'A practical guide to the local reserve, its access points and the published circular walk.'
+    },
+    {
+      id: 'page:outdoors/east-avenue-park-heald-green',
+      kind: 'page',
+      title: 'East Avenue Park outdoor gym',
+      url: '/outdoors/east-avenue-park-heald-green/',
+      area: 'Heald Green',
+      category: 'Outdoors',
+      description: 'Free outdoor gym equipment and ball-sport space in Heald Green, with practical access details.'
+    },
+    {
+      id: 'page:kids-family/bruntwood-park',
+      kind: 'page',
+      title: 'Bruntwood Park',
+      url: '/kids-family/bruntwood-park/',
+      area: 'Cheadle',
+      category: 'Kids & family',
+      description: 'The useful local guide to Bruntwood Park, including play, BMX and parking notes.'
+    },
+    {
+      id: 'page:kids-family/abney-hall-park',
+      kind: 'page',
+      title: 'Abney Hall Park',
+      url: '/kids-family/abney-hall-park/',
+      area: 'Cheadle',
+      category: 'Kids & family',
+      description: 'The practical Free & Cheap Guide entry for Abney Hall Park, including cost, parking and who it suits.'
+    },
+    {
+      id: 'page:planning/cheadle-eco-park',
+      kind: 'page',
+      title: 'What is going up at Cheadle Eco Park?',
+      url: '/planning/cheadle-eco-park/',
+      area: 'Cheadle',
+      category: 'Planning',
+      description: 'A plain-English guide to the six-unit development on Bird Hall Lane and its current build status.'
+    },
+    {
+      id: 'page:local-history/heald-green-north-history-walk',
+      kind: 'page',
+      title: 'A four-mile history walk hiding in plain sight',
+      url: '/local-history/heald-green-north-history-walk/',
+      area: 'Heald Green',
+      category: 'Local history',
+      description: 'Heald Green Heritage’s North History Walk, with 22 stops over about four miles.'
     }
   ];
   const pageByPath = new Map(PAGE_CATALOG.map(item => [item.url.replace(/\/+$/, ''), item]));
@@ -256,20 +310,35 @@
     showToast.timer = setTimeout(() => toast.classList.remove('show'), 2600);
   };
 
-  const button = (label, className, handler) => {
+  const setActionContent = (el, label, icon = '', tone = '') => {
+    el.replaceChildren();
+    if (icon) {
+      const iconEl = document.createElement('span');
+      iconEl.className = 'my-sk8-action-icon' + (tone ? ' tone-' + tone : '');
+      iconEl.setAttribute('aria-hidden', 'true');
+      iconEl.textContent = icon;
+      el.appendChild(iconEl);
+    }
+    const textEl = document.createElement('span');
+    textEl.className = 'my-sk8-action-label';
+    textEl.textContent = label;
+    el.appendChild(textEl);
+  };
+
+  const button = (label, className, handler, icon = '', tone = '') => {
     const el = document.createElement('button');
     el.type = 'button';
     el.className = className;
-    el.textContent = label;
+    setActionContent(el, label, icon, tone);
     el.addEventListener('click', handler);
     return el;
   };
 
-  const linkButton = (label, href, className, eventName, event) => {
+  const linkButton = (label, href, className, eventName, event, icon = '', tone = '') => {
     const el = document.createElement('a');
     el.className = className;
     el.href = href;
-    el.textContent = label;
+    setActionContent(el, label, icon, tone);
     if (href.startsWith('data:text/calendar')) el.download = 'sk8-scoop-' + String(event.id || 'event') + '.ics';
     el.addEventListener('click', () => track(eventName, { event_id: event.id, event_area: event.area }));
     return el;
@@ -297,34 +366,34 @@
       if (!event) return;
       holder.replaceChildren();
 
-      const save = button(isSaved(id) ? 'Saved ✓' : '♡ Save', 'my-sk8-action my-sk8-save', () => {
+      const save = button(isSaved(id) ? 'Saved' : 'Save', 'my-sk8-action my-sk8-save', () => {
         if (isSaved(id)) {
           unsaveEvent(id);
-          save.textContent = '♡ Save';
+          setActionContent(save, 'Save', '♥', 'save');
           showToast('Removed from My SK8');
         } else {
           saveEvent(event, 'whats_on_card');
-          save.textContent = 'Saved ✓';
+          setActionContent(save, 'Saved', '♥', 'save');
           showToast('Saved to My SK8');
         }
         updateSavedBadges();
-      });
+      }, '♥', 'save');
       holder.appendChild(save);
 
-      const reminder = button(hasReminder(id) ? 'Reminder set ✓' : 'Remind me here', 'my-sk8-action', () => {
+      const reminder = button(hasReminder(id) ? 'Reminder set' : 'Remind me here', 'my-sk8-action', () => {
         const enabled = toggleReminder(event);
-        reminder.textContent = enabled ? 'Reminder set ✓' : 'Remind me here';
+        setActionContent(reminder, enabled ? 'Reminder set' : 'Remind me here', '◷', 'reminder');
         showToast(enabled ? 'Reminder set for your next SK8 visit' : 'Reminder removed');
         if (document.body.dataset.page === 'my-sk8') renderMySk8();
-      });
+      }, '◷', 'reminder');
       holder.appendChild(reminder);
 
       const cal = calendarHref(event);
-      if (cal) holder.appendChild(linkButton('Add to calendar', cal, 'my-sk8-action', 'my_sk8_calendar', event));
+      if (cal) holder.appendChild(linkButton('Add to calendar', cal, 'my-sk8-action', 'my_sk8_calendar', event, '▦', 'calendar'));
 
       const directions = directionsHref(event);
       if (directions) {
-        const link = linkButton('Directions', directions, 'my-sk8-action', 'my_sk8_directions', event);
+        const link = linkButton('Directions', directions, 'my-sk8-action', 'my_sk8_directions', event, '⌖', 'directions');
         link.target = '_blank';
         link.rel = 'noopener';
         holder.appendChild(link);
@@ -333,7 +402,7 @@
       const nearby = document.createElement('a');
       nearby.className = 'my-sk8-action';
       nearby.href = '/whats-on/?area=' + encodeURIComponent(event.area || 'all');
-      nearby.textContent = event.area ? 'More in ' + event.area : 'More nearby';
+      setActionContent(nearby, event.area ? 'More in ' + event.area : 'More nearby', '✦', 'nearby');
       nearby.addEventListener('click', () => track('my_sk8_nearby', { event_id: event.id, event_area: event.area }));
       holder.appendChild(nearby);
 
@@ -454,7 +523,7 @@
       const event = state.byId.get(id) || readSaved().find(item => item.id === id);
       if (!event) return;
       const enabled = toggleReminder(event);
-      el.textContent = enabled ? 'Reminder set ✓' : 'Remind me here';
+      setActionContent(el, enabled ? 'Reminder set' : 'Remind me here', '◷', 'reminder');
       showToast(enabled ? 'Reminder set for your next SK8 visit' : 'Reminder removed');
       renderMySk8();
     }));
@@ -654,18 +723,18 @@
 
     const actions = document.createElement('div');
     actions.className = 'my-sk8-page-save-actions';
-    const save = button(isSaved(page.id) ? 'Saved ✓' : '♡ Save this page', 'button secondary', () => {
+    const save = button(isSaved(page.id) ? 'Saved to My SK8' : 'Save to My SK8', 'button secondary my-sk8-page-save-button', () => {
       if (isSaved(page.id)) {
         unsaveEvent(page.id);
-        save.textContent = '♡ Save this page';
+        setActionContent(save, 'Save to My SK8', '♥', 'save');
         showToast('Removed from My SK8');
       } else {
         savePage(page, 'article_page');
-        save.textContent = 'Saved ✓';
+        setActionContent(save, 'Saved to My SK8', '♥', 'save');
         showToast('Saved to My SK8');
       }
       updateSavedBadges();
-    });
+    }, '♥', 'save');
     const open = document.createElement('a');
     open.className = 'reader-link';
     open.href = '/my-sk8/';
