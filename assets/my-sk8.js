@@ -1,5 +1,6 @@
 (() => {
   const STORAGE_KEY = 'sk8_saved_items_v1';
+  const REMINDER_KEY = 'sk8_reminders_v1';
   const MAX_SHARE_ITEMS = 20;
   const state = { events: [], byId: new Map() };
 
@@ -14,6 +15,30 @@
     } catch (_) {
       return [];
     }
+  };
+
+  const readReminders = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem(REMINDER_KEY) || '[]');
+      return Array.isArray(value) ? value.filter(Boolean) : [];
+    } catch (_) {
+      return [];
+    }
+  };
+
+  const writeReminders = ids => {
+    try { localStorage.setItem(REMINDER_KEY, JSON.stringify([...new Set(ids)])); } catch (_) {}
+  };
+
+  const hasReminder = id => readReminders().includes(id);
+
+  const toggleReminder = event => {
+    const ids = readReminders();
+    const on = ids.includes(event.id);
+    const next = on ? ids.filter(id => id !== event.id) : [...ids, event.id];
+    writeReminders(next);
+    track(on ? 'my_sk8_reminder_removed' : 'my_sk8_reminder_set', { event_id: event.id, event_area: event.area });
+    return !on;
   };
 
   const writeSaved = items => {
@@ -187,6 +212,14 @@
       });
       holder.appendChild(save);
 
+      const reminder = button(hasReminder(id) ? 'Reminder set ✓' : 'Remind me', 'my-sk8-action', () => {
+        const enabled = toggleReminder(event);
+        reminder.textContent = enabled ? 'Reminder set ✓' : 'Remind me';
+        showToast(enabled ? 'Reminder set for your next SK8 visit' : 'Reminder removed');
+        if (document.body.dataset.page === 'my-sk8') renderMySk8();
+      });
+      holder.appendChild(reminder);
+
       const cal = calendarHref(event);
       if (cal) holder.appendChild(linkButton('Add to calendar', cal, 'my-sk8-action', 'my_sk8_calendar', event));
 
@@ -272,6 +305,7 @@
             ${source ? '<a href="' + escapeHtml(source) + '" target="_blank" rel="noopener">Check details</a>' : ''}
             ${directions ? '<a href="' + escapeHtml(directions) + '" target="_blank" rel="noopener" data-my-sk8-directions="' + escapeHtml(live.id) + '">Directions</a>' : ''}
             ${cal ? '<a href="' + cal + '" download="sk8-scoop-' + escapeHtml(live.id) + '.ics" data-my-sk8-calendar="' + escapeHtml(live.id) + '">Calendar</a>' : ''}
+            <button type="button" data-my-sk8-reminder="${escapeHtml(live.id)}">${hasReminder(live.id) ? 'Reminder set ✓' : 'Remind me'}</button>
             <button type="button" data-my-sk8-remove="${escapeHtml(live.id)}">Remove</button>
           </div>
         </div>
@@ -291,6 +325,15 @@
   };
 
   const bindMySk8PageActions = () => {
+    document.querySelectorAll('[data-my-sk8-reminder]').forEach(el => el.addEventListener('click', () => {
+      const id = el.dataset.mySk8Reminder;
+      const event = state.byId.get(id) || readSaved().find(item => item.id === id);
+      if (!event) return;
+      const enabled = toggleReminder(event);
+      el.textContent = enabled ? 'Reminder set ✓' : 'Remind me';
+      showToast(enabled ? 'Reminder set for your next SK8 visit' : 'Reminder removed');
+      renderMySk8();
+    }));
     document.querySelectorAll('[data-my-sk8-remove]').forEach(el => el.addEventListener('click', () => {
       unsaveEvent(el.dataset.mySk8Remove);
       renderMySk8();
@@ -354,6 +397,20 @@
       if (wrapper) wrapper.hidden = past.length === 0;
     }
 
+    const reminderHost = document.querySelector('[data-my-sk8-reminders]');
+    if (reminderHost) {
+      const tomorrow = parseDate(localToday());
+      tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+      const tomorrowIso = tomorrow.toISOString().slice(0, 10);
+      const reminderItems = active.filter(event => hasReminder(event.id));
+      const dueSoon = reminderItems.filter(event => event.date <= tomorrowIso);
+      reminderHost.innerHTML = reminderItems.length
+        ? (dueSoon.length
+          ? dueSoon.map(event => '<div class="my-sk8-reminder-alert"><strong>' + escapeHtml(event.title) + '</strong><span>' + escapeHtml(prettyDate(event.date)) + (event.time ? ' · ' + escapeHtml(event.time) : '') + '</span></div>').join('')
+          : '<p class="my-sk8-empty-copy">You have ' + reminderItems.length + ' reminder' + (reminderItems.length === 1 ? '' : 's') + ' set. We will flag them here when they get close.</p>')
+        : '<p class="my-sk8-empty-copy">No reminders set yet.</p>';
+    }
+
     const [sat, sun] = currentWeekend();
     const weekend = active.filter(event => {
       const start = event.date;
@@ -397,8 +454,8 @@
       };
     }
 
-    bindMySk8PageActions();
     renderSharedList();
+    bindMySk8PageActions();
     updateSavedBadges();
   };
 
