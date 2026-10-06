@@ -97,7 +97,12 @@
   let activeFilter = 'all';
   let activeArea = 'all';
 
-  const requestedArea = new URLSearchParams(window.location.search).get('area');
+  const allowedFilters = new Set(['all', 'today', 'week', 'weekend', 'free', 'family']);
+  const params = new URLSearchParams(window.location.search);
+  const requestedFilter = String(params.get('filter') || '').toLowerCase();
+  if (allowedFilters.has(requestedFilter)) activeFilter = requestedFilter;
+
+  const requestedArea = params.get('area');
   if (requestedArea) {
     const matchedArea = areaFilters
       .map(button => button.dataset.eventArea || '')
@@ -105,8 +110,10 @@
     if (matchedArea) activeArea = matchedArea;
   }
 
-  const syncAreaParam = () => {
+  const syncViewParams = () => {
     const url = new URL(window.location.href);
+    if (activeFilter === 'all') url.searchParams.delete('filter');
+    else url.searchParams.set('filter', activeFilter);
     if (activeArea === 'all') url.searchParams.delete('area');
     else url.searchParams.set('area', activeArea);
     window.history.replaceState({}, '', url);
@@ -365,12 +372,13 @@
 
   filters.forEach(button => button.addEventListener('click', () => {
     activeFilter = button.dataset.eventFilter || 'all';
+    syncViewParams();
     render();
     if (button.dataset.eventJump === 'results') window.requestAnimationFrame(jumpToResults);
   }));
   areaFilters.forEach(button => button.addEventListener('click', () => {
     activeArea = button.dataset.eventArea || 'all';
-    syncAreaParam();
+    syncViewParams();
     render();
   }));
 
