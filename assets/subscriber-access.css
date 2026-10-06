@@ -18,3 +18,31 @@
 .subscriber-recognised{background:#edf8f4;border:1px solid #bcded0;border-radius:14px;padding:15px 16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .subscriber-recognised strong{color:#0b5964}
 @media(max-width:760px){.subscriber-access-grid{grid-template-columns:1fr}.subscriber-access-form{grid-template-columns:1fr}.subscriber-access-form button{width:100%}}
+/* Hidden subscriber states must stay hidden even when component display rules are present. */
+[data-subscriber-unlocked][hidden],
+[data-subscriber-locked][hidden],
+[data-subscriber-shelf-locked][hidden],
+[data-subscriber-shelf-unlocked][hidden],
+.subscriber-recognised[hidden]{display:none!important}
+
+/* Simplified subscriber access treatment. */
+.subscriber-shelf-compact{padding:16px 18px}
+.subscriber-shelf-compact h2{font-size:clamp(1.45rem,2.5vw,2rem);margin:.1rem 0 .35rem}
+.subscriber-shelf-compact p{margin:.2rem 0 .75rem;max-width:62ch}
+.subscriber-shelf-compact .subscriber-access-form{max-width:690px}
+.subscriber-shelf-compact .subscriber-access-note{margin:.65rem 0 0}
+.subscriber-access-summary{display:flex;flex-wrap:wrap;gap:7px;margin:.6rem 0 0}
+.subscriber-access-summary span{font-size:.74rem;font-weight:850;padding:5px 8px;border-radius:999px;background:#fff;border:1px solid #d9dfda}
+.subscriber-access-card.compact,
+.signup-card .subscriber-access-locked.compact{padding:0;background:transparent;border:0;box-shadow:none}
+.subscriber-access-copy-compact{margin-bottom:9px}
+.subscriber-access-copy-compact h2{margin:.05rem 0 .25rem}
+.subscriber-access-copy-compact p{margin:0;color:inherit}
+.subscriber-access-inline-note{margin:.55rem 0 0!important;font-size:.74rem!important;line-height:1.35!important;opacity:.9}
+.subscriber-recognised{padding:12px 14px;gap:9px}
+.subscriber-recognised strong{font-size:.9rem}
+.subscriber-recognised .button{min-height:44px;padding:0 14px}
+@media(max-width:760px){
+  .subscriber-shelf-compact{padding:15px}
+  .subscriber-access-summary{display:none}
+}
