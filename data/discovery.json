@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05",
+  "updated": "2026-10-06",
   "records": [
     {
       "id": "around-sk8",
@@ -353,52 +353,6 @@
       ],
       "freshness": "current",
       "checked": "2026-09-17"
-    },
-    {
-      "id": "nansen-firs-20mph",
-      "type": "Useful updates",
-      "category": "Planning & Development",
-      "title": "Nansen / Firs estate proposed 20mph zone",
-      "summary": "Stockport Council is consulting on a proposed 20mph speed-limit zone across the Nansen / Firs residential estate in Heald Green. The consultation closes on 24 September 2026.",
-      "href": "/planning/nansen-firs-20mph/",
-      "area": "Heald Green",
-      "tags": [
-        "20mph",
-        "20 mph",
-        "speed limit",
-        "traffic",
-        "roads",
-        "consultation",
-        "planning",
-        "nansen",
-        "firs"
-      ],
-      "freshness": "dated",
-      "checked": "2026-09-11",
-      "expires": "2026-09-24"
-    },
-    {
-      "id": "oakwood-beech-gatley",
-      "type": "Useful updates",
-      "category": "Planning & Development",
-      "title": "Oakwood Avenue / Beech Avenue parking proposal",
-      "summary": "A Gatley proposal for No Waiting at Any Time restrictions near the junction after reports of blocked dropped crossings and reduced visibility. The initial consultation closes on 25 September 2026.",
-      "href": "/planning/",
-      "area": "Gatley",
-      "tags": [
-        "gatley",
-        "parking",
-        "double yellow",
-        "yellow lines",
-        "consultation",
-        "oakwood avenue",
-        "beech avenue",
-        "traffic",
-        "roads"
-      ],
-      "freshness": "dated",
-      "checked": "2026-09-11",
-      "expires": "2026-09-25"
     },
     {
       "id": "useful-updates",
