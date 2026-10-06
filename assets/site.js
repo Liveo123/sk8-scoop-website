@@ -109,6 +109,51 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     joinButton.setAttribute('aria-current','page');
   }
   nav.appendChild(joinButton);
+
+  const subscriberKey='sk8_subscriber_recognition_v1';
+  const readRecognisedSubscriber=()=>{
+    try{
+      const value=JSON.parse(localStorage.getItem(subscriberKey)||'null');
+      if(!value||value.version!==1||!value.expiresAt||Date.now()>value.expiresAt){
+        localStorage.removeItem(subscriberKey);
+        return null;
+      }
+      return value;
+    }catch(e){return null;}
+  };
+  const markRecognisedSubscriber=()=>{
+    try{
+      localStorage.setItem(subscriberKey,JSON.stringify({
+        version:1,
+        recognised:true,
+        savedAt:new Date().toISOString(),
+        expiresAt:Date.now()+365*24*60*60*1000
+      }));
+    }catch(e){}
+  };
+  const applySubscriberNavState=()=>{
+    const recognised=Boolean(readRecognisedSubscriber());
+    document.body.dataset.recognisedSubscriber=recognised?'true':'false';
+    let latest=nav.querySelector('.reader-nav-latest');
+    if(recognised){
+      if(!latest){
+        latest=document.createElement('a');
+        latest.className='button reader-nav-latest';
+        latest.href='/latest';
+        latest.textContent='See what’s new';
+        nav.insertBefore(latest,joinButton);
+      }
+    }else if(latest){
+      latest.remove();
+    }
+    joinButton.href='/join/';
+    joinButton.textContent='Join free';
+  };
+  applySubscriberNavState();
+  document.addEventListener('sk8:mailerlite-success',()=>{
+    markRecognisedSubscriber();
+    applySubscriberNavState();
+  });
 }
 
 const sk8MySk8SaveEligible=()=>{
