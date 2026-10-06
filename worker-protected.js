@@ -4,7 +4,8 @@ const MAILERLITE_GROUPS = {
   main: ['190964754190174086'],
   qr: ['190964754190174086', '193441557512193685'],
   'guide:free-cheap': ['190964754190174086', '197763144685192678'],
-  'guide:52-adventures': ['190964754190174086', '199227746568635453']
+  'guide:52-adventures': ['190964754190174086', '199227746568635453'],
+  'guide:halloween': ['190964754190174086', '199874076600174503']
 };
 
 const ISSUE_12_POLL_ANSWERS = [
@@ -64,6 +65,12 @@ const GUIDE_ACCESS_SQL = `CREATE TABLE IF NOT EXISTS guide_access_tokens (
  expires_at TEXT NOT NULL
 )`;
 
+const SUBSCRIBER_ACCESS = {
+  cookie: 'sk8_subscriber_access',
+  cookiePath: '/',
+  tokenKey: 'subscriber'
+};
+
 const GUIDE_ACCESS = {
   '52-adventures': {
     cookie: 'sk8_guide_52',
@@ -76,6 +83,12 @@ const GUIDE_ACCESS = {
     cookiePath: '/free-cheap-guide/',
     landing: '/free-cheap-guide/#get-guide',
     route: '/free-cheap-guide/guide'
+  },
+  halloween: {
+    cookie: 'sk8_guide_halloween',
+    cookiePath: '/halloween-half-term-guide/',
+    landing: '/halloween-half-term-guide/#get-guide',
+    route: '/halloween-half-term-guide/guide'
   }
 };
 
@@ -91,6 +104,16 @@ export default {
 
     if (url.pathname === '/api/newsletter-signup' && request.method === 'POST') {
       return handleNewsletterSignup(request, env);
+    }
+
+    if (url.pathname === '/api/subscriber-access-status' && request.method === 'GET') {
+      let active = false;
+      try {
+        active = await hasSubscriberAccess(request, env.DB);
+      } catch (error) {
+        console.error('Subscriber access status check failed', error);
+      }
+      return json({ active });
     }
 
     if (url.pathname === '/api/poll/issue-12' && request.method === 'GET') {
@@ -206,13 +229,11 @@ async function handleNewsletterSignup(request, env) {
   if (kind === 'guide' && !GUIDE_ACCESS[guideKey]) {
     return json({ error: 'Please refresh the guide page and try again.' }, 400);
   }
-  if (kind === 'guide' && guideRequiresAccess(guideKey)) {
-    try {
-      await ensureGuideAccessTable(env.DB);
-    } catch (error) {
-      console.error('Guide access storage unavailable', error);
-      return json({ error: 'Guide access is temporarily unavailable. Please try again shortly.' }, 503);
-    }
+  try {
+    await ensureGuideAccessTable(env.DB);
+  } catch (error) {
+    console.error('Subscriber access storage unavailable', error);
+    return json({ error: 'Subscriber access is temporarily unavailable. Please try again shortly.' }, 503);
   }
 
   const fields = {};
@@ -261,15 +282,13 @@ async function handleNewsletterSignup(request, env) {
     return json({ error: 'The newsletter service could not be reached. Please try again.' }, 502);
   }
 
-  const signupResponse = json({ success: true, kind, guideKey: guideKey || undefined });
-  if (kind === 'guide' && guideRequiresAccess(guideKey)) {
-    try {
-      const cookie = await issueGuideAccessToken(env.DB, guideKey);
-      signupResponse.headers.append('set-cookie', cookie);
-    } catch (error) {
-      console.error('Guide access token issue failed', error);
-      return json({ error: 'Your signup was saved, but the guide could not be unlocked. Please try again.' }, 503);
-    }
+  const signupResponse = json({ success: true, kind, guideKey: guideKey || undefined, subscriberAccess: true });
+  try {
+    const cookie = await issueSubscriberAccessToken(env.DB);
+    signupResponse.headers.append('set-cookie', cookie);
+  } catch (error) {
+    console.error('Subscriber access token issue failed', error);
+    return json({ error: 'Your signup was saved, but subscriber access could not be unlocked. Please try again.' }, 503);
   }
   return signupResponse;
 }
@@ -288,25 +307,23 @@ function guideRequiresAccess(guideKey) {
 }
 
 async function handleProtectedGuideRequest(request, env, ctx, guide) {
-  if (guideRequiresAccess(guide.key)) {
-    let allowed = false;
-    try {
-      allowed = await hasGuideAccess(request, env.DB, guide.key);
-    } catch (error) {
-      console.error('Guide access check failed', error);
-    }
+  let allowed = false;
+  try {
+    allowed = await hasSubscriberAccess(request, env.DB);
+  } catch (error) {
+    console.error('Subscriber guide access check failed', error);
+  }
 
-    if (!allowed) {
-      const target = new URL(guide.landing, request.url).toString();
-      return new Response(null, {
-        status: 302,
-        headers: {
-          location: target,
-          'cache-control': 'no-store',
-          'x-robots-tag': 'noindex, follow'
-        }
-      });
-    }
+  if (!allowed) {
+    const target = new URL(guide.landing, request.url).toString();
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: target,
+        'cache-control': 'no-store',
+        'x-robots-tag': 'noindex, follow'
+      }
+    });
   }
 
   let response = await existingWorker.fetch(request, env, ctx);
@@ -365,6 +382,32 @@ function randomAccessToken() {
 async function hashAccessToken(token) {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));
   return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+async function issueSubscriberAccessToken(db) {
+  await ensureGuideAccessTable(db);
+  const token = randomAccessToken();
+  const tokenHash = await hashAccessToken(token);
+  await db.prepare(`INSERT INTO guide_access_tokens (token_hash, guide_key, created_at, expires_at)
+    VALUES (?, ?, datetime('now'), datetime('now', '+10 years'))`)
+    .bind(tokenHash, SUBSCRIBER_ACCESS.tokenKey)
+    .run();
+  await db.prepare(`DELETE FROM guide_access_tokens WHERE expires_at <= datetime('now')`).run();
+  return `${SUBSCRIBER_ACCESS.cookie}=${token}; Path=${SUBSCRIBER_ACCESS.cookiePath}; Max-Age=315360000; HttpOnly; Secure; SameSite=Lax`;
+}
+
+async function hasSubscriberAccess(request, db) {
+  if (!db) return false;
+  const token = readCookie(request, SUBSCRIBER_ACCESS.cookie);
+  if (!token || !/^[A-Za-z0-9_-]{40,60}$/.test(token)) return false;
+  await ensureGuideAccessTable(db);
+  const tokenHash = await hashAccessToken(token);
+  const row = await db.prepare(`SELECT id FROM guide_access_tokens
+    WHERE token_hash = ? AND guide_key = ? AND expires_at > datetime('now')
+    LIMIT 1`)
+    .bind(tokenHash, SUBSCRIBER_ACCESS.tokenKey)
+    .first();
+  return Boolean(row && row.id);
 }
 
 async function issueGuideAccessToken(db, guideKey) {
