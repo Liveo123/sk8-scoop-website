@@ -220,3 +220,14 @@
     border-radius:8px;
   }
 }
+
+
+/* Locality card visual balance — 6 Oct 2026 */
+.locality-card-current{
+  background:linear-gradient(145deg,#eaf6f4 0%,#fff9ec 100%);
+  border-top:5px solid #d6ea00;
+}
+.locality-card-current>.locality-card-type{
+  background:#d6ea00;
+  color:#073f48;
+}
