@@ -43,6 +43,7 @@
   const pageByPath = new Map(PAGE_CATALOG.map(item => [item.url.replace(/\/+$/, ''), item]));
   const state = { events: [], byId: new Map(PAGE_CATALOG.map(item => [item.id, item])) };
   let weekendPlanTracked = false;
+  let sharedListTracked = false;
 
   const track = (name, params = {}) => {
     if (typeof window.sk8Track === 'function') window.sk8Track(name, params);
@@ -502,7 +503,10 @@
       renderMySk8();
       showToast('Shortlist saved to My SK8');
     };
-    track('my_sk8_shared_list_view', { shared_items: items.length });
+    if (!sharedListTracked) {
+      sharedListTracked = true;
+      track('my_sk8_shared_list_view', { shared_items: items.length });
+    }
   };
 
   const renderMySk8 = () => {
