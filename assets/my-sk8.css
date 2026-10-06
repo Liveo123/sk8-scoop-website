@@ -1,8 +1,8 @@
 
 /* My SK8 MVP experiment: local-only saved planning layer. */
 .my-sk8-card-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
-.my-sk8-action{appearance:none;border:1px solid #cbd8d5;background:#fff;color:#0f6470;border-radius:999px;padding:8px 11px;font:800 .78rem/1 Inter,Arial,sans-serif;text-decoration:none;cursor:pointer}
-.my-sk8-action:hover,.my-sk8-action:focus-visible{background:#eef7f5;border-color:#9bc5c0;outline:none}
+.my-sk8-action{appearance:none;display:inline-flex;align-items:center;gap:7px;border:1px solid #cbd8d5;background:#fff;color:#0f6470;border-radius:999px;padding:6px 10px 6px 7px;min-height:36px;font:800 .78rem/1 Inter,Arial,sans-serif;text-decoration:none;cursor:pointer;transition:background .16s ease,border-color .16s ease,transform .16s ease}
+.my-sk8-action:hover,.my-sk8-action:focus-visible{background:#eef7f5;border-color:#9bc5c0;outline:none;transform:translateY(-1px)}
 .my-sk8-save{background:#fff8ea;border-color:#eed8b4}
 .my-sk8-toast{position:fixed;left:50%;bottom:24px;z-index:80;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#073f48;color:#fff;padding:11px 15px;border-radius:999px;font-weight:800;box-shadow:0 10px 28px rgba(0,0,0,.18);transition:.18s ease}
 .my-sk8-toast.show{opacity:1;transform:translate(-50%,0)}
@@ -56,7 +56,7 @@
 .my-sk8-page-save-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 18px;box-shadow:0 8px 20px rgba(19,45,49,.05)}
 .my-sk8-page-save-bar>div:first-child{display:grid;gap:2px}
 .my-sk8-page-save-bar strong{font:800 1.08rem/1.25 Inter,Arial,sans-serif;color:var(--ink)}
-.my-sk8-page-save-bar span{color:#53666a;font-size:.84rem}
+.my-sk8-page-save-bar>div:first-child>span{color:#53666a;font-size:.84rem}
 .my-sk8-page-save-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .my-sk8-page-save-actions .button{padding:10px 14px;box-shadow:none}
 .my-sk8-page-type{background:#fff3e5}
@@ -66,4 +66,20 @@
   .my-sk8-page-save-bar{align-items:flex-start;flex-direction:column}
   .my-sk8-page-save-actions{width:100%}
   .my-sk8-page-save-actions .button{flex:1}
+}
+
+/* Small colourful action markers: live UI, not decorative illustration. */
+.my-sk8-action-icon{display:inline-grid;place-items:center;flex:0 0 auto;width:24px;height:24px;border-radius:999px;font:900 .9rem/1 Inter,Arial,sans-serif}
+.my-sk8-action-label{display:inline-block;white-space:nowrap}
+.my-sk8-action-icon.tone-save{background:#fff0e5;color:#d15d31}
+.my-sk8-action-icon.tone-reminder{background:#f1ebff;color:#6d4bb6}
+.my-sk8-action-icon.tone-calendar{background:#ffe9ef;color:#b34262}
+.my-sk8-action-icon.tone-directions{background:#e8f3ff;color:#2768a2}
+.my-sk8-action-icon.tone-nearby{background:#e8f7ef;color:#267451}
+.my-sk8-page-save-button{display:inline-flex!important;align-items:center;gap:8px}
+.my-sk8-page-save-button .my-sk8-action-icon{background:#fff;color:#d15d31;width:25px;height:25px}
+@media(max-width:520px){
+  .my-sk8-card-actions{gap:7px}
+  .my-sk8-action{min-height:38px;padding:6px 10px 6px 7px;font-size:.79rem}
+  .my-sk8-action-icon{width:25px;height:25px}
 }
