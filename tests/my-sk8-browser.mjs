@@ -182,6 +182,11 @@ try {
   await screenshot('my-sk8-desktop.png');
   await fullScreenshot('my-sk8-desktop-full.png');
 
+  await setViewport(900, 900, false);
+  await navigate('/whats-on/');
+  record('Compact desktop header has no horizontal overflow', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
+  record('Compact desktop nav does not overlap logo', Boolean(await evaluate(`(() => { const brand=document.querySelector('.brand')?.getBoundingClientRect(); const nav=document.querySelector('#main-nav')?.getBoundingClientRect(); if(!brand||!nav) return false; return brand.right + 6 <= nav.left && nav.right <= innerWidth + 1; })()`)));
+
   await setViewport(390, 844, true);
   await navigate('/my-sk8/');
   record('Mobile My SK8 page has no horizontal overflow', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
