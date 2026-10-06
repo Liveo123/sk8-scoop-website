@@ -523,7 +523,7 @@
       const event = state.byId.get(id) || readSaved().find(item => item.id === id);
       if (!event) return;
       const enabled = toggleReminder(event);
-      setActionContent(el, enabled ? 'Reminder set' : 'Remind me here', '◷', 'reminder');
+      el.textContent = enabled ? 'Reminder set' : 'Remind me here';
       showToast(enabled ? 'Reminder set for your next SK8 visit' : 'Reminder removed');
       renderMySk8();
     }));
@@ -716,9 +716,9 @@
     eyebrow.className = 'eyebrow';
     eyebrow.textContent = 'Save for later';
     const strong = document.createElement('strong');
-    strong.textContent = 'Keep this in My SK8';
+    strong.textContent = 'Save this for later in My SK8';
     const note = document.createElement('span');
-    note.textContent = 'Stored in this browser for the experiment.';
+    note.textContent = 'Keep it with saved events and useful local stuff. Stored in this browser for this test.';
     copy.append(eyebrow, strong, note);
 
     const actions = document.createElement('div');
