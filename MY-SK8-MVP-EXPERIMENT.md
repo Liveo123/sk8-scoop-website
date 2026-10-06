@@ -152,6 +152,10 @@ Useful measurements:
 
 The main acquisition question is whether making useful guides visibly free to subscribers increases newsletter signups without creating enough friction to reduce guide usage.
 
+## Preview subscriber-access testing
+
+Cloudflare preview deployments intentionally do not inherit production MailerLite or Turnstile secrets. On `*.previews.sk8scoop.com`, subscriber forms therefore use a preview-only access cookie so the complete locked/unlocked UI and guide journey can be tested without adding or changing a MailerLite subscriber. Production does not use this bypass.
+
 ## Production gate
 
 Before any live experiment:
