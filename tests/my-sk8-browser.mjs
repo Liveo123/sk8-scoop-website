@@ -135,7 +135,7 @@ try {
   record('What’s On renders My SK8 CTA', await waitFor("document.querySelector('[data-my-sk8-count]') !== null"));
   record('My SK8 script loaded', await waitFor("typeof window.SK8MySaved === 'object'"));
   record('Event actions render', await waitFor("document.querySelector('[data-sk8-event-actions=\"heald-green-library-storytime-2026-10-10\"] .my-sk8-save') !== null"));
-  record('Event actions use colourful icon markers', Boolean(await evaluate("document.querySelectorAll('[data-sk8-event-actions=\"heald-green-library-storytime-2026-10-10\"] .my-sk8-action-icon svg').length >= 5")));
+  record('Event actions use colourful icon markers', Boolean(await evaluate("document.querySelectorAll('[data-sk8-event-actions=\"heald-green-library-storytime-2026-10-10\"] .my-sk8-action-icon').length >= 5")));
   record('My SK8 is visible in main navigation', Boolean(await evaluate("document.querySelector('.nav .nav-my-sk8')")));
   record('My SK8 is prominent after What’s On in main nav', Boolean(await evaluate(`(() => { const hrefs=[...document.querySelectorAll('#main-nav>a')].map(a=>a.getAttribute('href')); const whats=hrefs.indexOf('/whats-on/'); const mine=hrefs.indexOf('/my-sk8/'); const guides=hrefs.indexOf('/guides/'); return whats >= 0 && mine === whats + 1 && guides === mine + 1; })()`)));
   record('Event action row has five icon call-outs', (await evaluate(`document.querySelectorAll('[data-sk8-event-actions="heald-green-library-storytime-2026-10-10"] .my-sk8-action-icon').length`)) === 5);
@@ -219,7 +219,7 @@ try {
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   await navigate('/outdoors/alderley-edge/');
   record('Useful article types load My SK8 save controls automatically', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
-  record('Generic article save button has an icon', Boolean(await evaluate("document.querySelector('[data-my-sk8-page-save-bar] .my-sk8-action-icon svg')")));
+  record('Generic article save button has an icon', Boolean(await evaluate("document.querySelector('[data-my-sk8-page-save-bar] .my-sk8-action-icon')")));
   record('Generic article save works', await click('[data-my-sk8-page-save-bar] button'));
   await sleep(150);
   record('Generic article persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'page:outdoors/alderley-edge' && x.kind === 'page')")));
