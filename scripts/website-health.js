@@ -120,8 +120,12 @@ if (discovery && Array.isArray(discovery.records)) {
     if (validDate(record.expires) && record.expires < today) out('WARNING', 'discovery', `${label}: expired on ${record.expires}`);
     if (/^\/admin(?:\/|$)/.test(String(record.href || ''))) out('WARNING', 'discovery', `${label}: points at an admin route`);
     if (record.href) {
-      if (hrefs.has(record.href)) out('WARNING', 'discovery', `${label}: duplicate destination ${record.href} also used by ${hrefs.get(record.href)}`);
-      else hrefs.set(record.href, label);
+      if (hrefs.has(record.href)) {
+        const prior = hrefs.get(record.href);
+        if (similarity(label, prior) >= 0.6) {
+          out('WARNING', 'discovery', `${label}: probable duplicate destination/title ${record.href} also used by ${prior}`);
+        }
+      } else hrefs.set(record.href, label);
     }
   });
   out('PASS', 'discovery', `${discovery.records.length} discovery records parsed`);
