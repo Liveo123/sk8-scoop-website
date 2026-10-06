@@ -81,8 +81,17 @@
 
     const navJoin = document.querySelector('.reader-nav-join');
     if (navJoin) {
-      navJoin.href = '/latest';
-      navJoin.textContent = 'See what’s new';
+      let navLatest = document.querySelector('.reader-nav-latest');
+      if (!navLatest) {
+        navLatest = document.createElement('a');
+        navLatest.className = 'button reader-nav-latest';
+        navLatest.href = '/latest';
+        navLatest.textContent = 'See what’s new';
+        navJoin.parentElement?.insertBefore(navLatest, navJoin);
+      }
+      // Keep the acquisition CTA intact even on recognised-subscriber browsers.
+      navJoin.href = '/join/';
+      navJoin.textContent = 'Join free';
     }
 
     const footerSignup = document.querySelector('.reader-footer-signup');
