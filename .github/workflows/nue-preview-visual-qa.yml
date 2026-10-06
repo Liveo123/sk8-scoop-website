@@ -58,9 +58,8 @@ jobs:
           set -eu
           mkdir -p visual-qa
           "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=1440,1800 --virtual-time-budget=5000             --screenshot=visual-qa/home-desktop.png "$PREVIEW_URL/"
-          "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=390,3200 --force-device-scale-factor=1 --virtual-time-budget=5000             --screenshot=visual-qa/home-mobile.png "$PREVIEW_URL/"
-          "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=390,1600 --force-device-scale-factor=1 --virtual-time-budget=5000             --screenshot=visual-qa/home-mobile-explore.png "$PREVIEW_URL/#explore-sk8"
-          "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=390,1600 --force-device-scale-factor=1 --virtual-time-budget=5000             --screenshot=visual-qa/whats-on-mobile-weekend.png "$PREVIEW_URL/whats-on/?filter=weekend#current-listings"
+          "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=390,5000 --force-device-scale-factor=1 --virtual-time-budget=5000             --screenshot=visual-qa/home-mobile.png "$PREVIEW_URL/"
+          "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=390,1600 --force-device-scale-factor=1 --virtual-time-budget=5000             --screenshot=visual-qa/whats-on-mobile-weekend.png "$PREVIEW_URL/whats-on/?filter=weekend"
 
       - name: Dump rendered DOM for route checks
         shell: bash
