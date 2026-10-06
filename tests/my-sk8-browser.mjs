@@ -164,7 +164,7 @@ try {
   record('Subscriber shelf starts locked without access cookie', !(await evaluate("document.querySelector('[data-subscriber-shelf-locked]')?.hidden")));
   record('Subscriber shelf unlock form is available', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf-locked] [data-signup-form]')")));
   record('Unlocked subscriber shelf is genuinely hidden before access', Boolean(await evaluate("getComputedStyle(document.querySelector('[data-subscriber-shelf-unlocked]')).display === 'none'")));
-  record('Subscriber shelf uses compact copy', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('Get all 3 current guides free') && !document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('Personal maps later')")));
+  record('Subscriber shelf uses compact professional copy', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('Unlock the full SK8 Scoop experience') && document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('website extras') && !document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('Personal maps later')")));
 
   record('Two current saves shown', (await text('[data-my-sk8-total]')) === '2', await text('[data-my-sk8-total]'));
   record('Saved weekend event appears', Boolean(await evaluate('document.body.textContent.includes("Storytime at Heald Green Library")')));
@@ -244,9 +244,12 @@ try {
   await navigate('/52-adventures/');
   record('52 Adventures landing has protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"52-adventures\"]')")));
   record('52 Adventures signup copy is concise', Boolean(await evaluate("document.body.textContent.includes('Already subscribed? Use the same address.')")));
+  record('52 Adventures uses the approved automation hero', Boolean(await evaluate("document.querySelector('.hero-visual img')?.src.includes('52-adventures-email-hero-v5-no-people')")));
   await navigate('/halloween-half-term-guide/');
   record('Halloween landing uses unified protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"halloween\"]')")));
   record('Halloween signup copy is concise', Boolean(await evaluate("document.body.textContent.includes('Already subscribed? Use the same address.')")));
+  record('Halloween benefit cards use visual thumbnails', (await evaluate("document.querySelectorAll('.benefit-mark img').length")) === 3);
+  record('Halloween hero has useful content filling the lower-right space', Boolean(await evaluate("document.querySelector('.hero-quick-links')?.textContent.includes('Find the right plan quickly')")));
   await navigate('/free-cheap-guide/guide/');
   record('Guide route redirects visitors without subscriber pass', Boolean(await evaluate("location.pathname === '/free-cheap-guide/'")));
 
