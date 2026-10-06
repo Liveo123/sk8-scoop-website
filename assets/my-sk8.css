@@ -45,3 +45,9 @@
   .my-sk8-section-head{display:block}
   .my-sk8-section-head p{margin-top:6px}
 }
+
+.my-sk8-reminder-alert{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:12px 14px;border-radius:12px;background:#fff8ea;border:1px solid #eed8b4}
+.my-sk8-reminder-alert+ .my-sk8-reminder-alert{margin-top:8px}
+.my-sk8-reminder-alert strong{color:#132d31}
+.my-sk8-reminder-alert span{color:#7a5a3b;font-weight:800;font-size:.85rem}
+@media(max-width:560px){.my-sk8-reminder-alert{display:grid;gap:4px}}
