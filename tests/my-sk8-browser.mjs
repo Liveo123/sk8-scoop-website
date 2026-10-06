@@ -160,6 +160,10 @@ try {
 
   await navigate('/my-sk8/');
   record('My SK8 page title visible', (await text('h1')) === 'My SK8', await text('h1'));
+  record('Subscriber shelf is shown on My SK8', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf]')")));
+  record('Subscriber shelf starts locked without access cookie', !(await evaluate("document.querySelector('[data-subscriber-shelf-locked]')?.hidden")));
+  record('Subscriber shelf unlock form is available', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf-locked] [data-signup-form]')")));
+
   record('Two current saves shown', (await text('[data-my-sk8-total]')) === '2', await text('[data-my-sk8-total]'));
   record('Saved weekend event appears', Boolean(await evaluate('document.body.textContent.includes("Storytime at Heald Green Library")')));
   record('Weekend plan includes Saturday event', Boolean(await evaluate('document.querySelector("[data-weekend-plan]")?.textContent.includes("Storytime at Heald Green Library")')));
@@ -227,6 +231,16 @@ try {
   record('Generic saved article can be shared', !(await evaluate("document.querySelector('[data-shared-shortlist]')?.hidden")));
   record('Generic shared article has a readable fallback title', Boolean(await evaluate("document.querySelector('[data-shared-items]')?.textContent.includes('Chadkirk Country Estate')")));
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); true");
+
+  await navigate('/free-cheap-guide/');
+  record('Free & Cheap landing explains all-guide unlock', Boolean(await evaluate("document.body.textContent.includes('unlock all subscriber guides') || document.body.textContent.includes('current subscriber guide shelf')")));
+  record('Free & Cheap landing has protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"free-cheap\"]')")));
+  await navigate('/52-adventures/');
+  record('52 Adventures landing has protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"52-adventures\"]')")));
+  await navigate('/halloween-half-term-guide/');
+  record('Halloween landing uses unified protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"halloween\"]')")));
+  await navigate('/free-cheap-guide/guide/');
+  record('Guide route redirects visitors without subscriber pass', Boolean(await evaluate("location.pathname === '/free-cheap-guide/'")));
 
   await navigate('/local-history/gatley-shouter/');
   record('Article page shows My SK8 save bar', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
