@@ -265,15 +265,17 @@ jobs:
           check_page() {
             url="$1"
             marker="$2"
+            body_file="$(mktemp)"
             for attempt in $(seq 1 10); do
-              body="$(curl -fsSL --max-time 20 "$url" || true)"
-              if printf '%s' "$body" | grep -Fq "$marker"; then
+              if curl -fsSL --max-time 20 "$url" -o "$body_file" && grep -Fq "$marker" "$body_file"; then
+                rm -f "$body_file"
                 echo "OK: $url"
                 return 0
               fi
               echo "Waiting for deployment: $url (attempt $attempt/10)"
               sleep 15
             done
+            rm -f "$body_file"
             echo "FAILED: expected marker not found at $url"
             return 1
           }
