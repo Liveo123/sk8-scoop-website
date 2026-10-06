@@ -99,19 +99,22 @@ contains('advertise.html','ad-product-grid ad-route-grid');
 contains('assets/advertise-v5.css','#advertiser-tools .ad-route-grid');
 
 // Current advertiser offer and backend contract.
-// Owner-approved starter-advertiser experiment from 5 October 2026.
-contains('advertise.html','NEWSLETTER STARTER · £20');
-contains('advertise.html','<div class="halloween-price">£15</div>');
-contains('advertise.html','<div class="halloween-price">£30</div>');
-contains('advertise.html','<div class="halloween-price">£90</div>');
-contains('advertise.html','<div class="halloween-price">£125</div>');
+// Owner-approved reversion to the established prices on 5 October 2026.
+contains('advertise.html','Newsletter TEST · £40');
+contains('advertise.html','<div class="halloween-price">£35</div>');
+contains('advertise.html','<div class="halloween-price">£75</div>');
+contains('advertise.html','<div class="halloween-price">£110</div>');
+contains('advertise.html','<div class="halloween-price">£150</div>');
 contains('advertise.html','value="starter_newsletter"');
 contains('advertise.html','value="halloween_guide"');
 contains('advertise.html','value="halloween_combo"');
 contains('advertise.html','value="halloween_section"');
 contains('advertise.html','value="halloween_main"');
-excludes('advertise.html','TEST · £40');
-excludes('advertise.html','GROW · £90');
+excludes('advertise.html','NEWSLETTER STARTER · £20');
+excludes('advertise.html','<div class="halloween-price">£15</div>');
+excludes('advertise.html','<div class="halloween-price">£30</div>');
+excludes('advertise.html','<div class="halloween-price">£90</div>');
+excludes('advertise.html','<div class="halloween-price">£125</div>');
 excludes('advertise.html','WEBSITE · price by scope');
 excludes('advertise.html','value="temp_website"');
 contains('advertise.html','data-experiment="advertiser-goal-first-v1"');
