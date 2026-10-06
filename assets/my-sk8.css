@@ -84,8 +84,6 @@
   .my-sk8-action-icon{width:25px;height:25px}
 }
 
-.my-sk8-action-icon svg{width:15px;height:15px;display:block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.my-sk8-icon-save svg,.my-sk8-action-icon.tone-save svg{fill:currentColor;stroke-width:1.2}
 .my-sk8-action-icon.tone-save{background:#fff0e5;color:#cf5f34}
 .my-sk8-action-icon.tone-reminder{background:#f1ebff;color:#6b4fb3}
 .my-sk8-action-icon.tone-calendar{background:#ffe8ef;color:#b14463}
