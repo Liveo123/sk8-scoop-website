@@ -1,0 +1,79 @@
+name: NUE Preview Visual QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'preview/**'
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'assets/homepage-search.css'
+      - 'assets/whats-on.js'
+      - '.github/workflows/nue-preview-visual-qa.yml'
+
+jobs:
+  visual-qa:
+    runs-on: ubuntu-latest
+    env:
+      PREVIEW_URL: https://preview-nue-quick-answers-freshness-v1-rebased.previews.sk8scoop.com
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Wait for exact Cloudflare preview
+        shell: bash
+        run: |
+          set -eu
+          for i in $(seq 1 18); do
+            code=$(curl -sS -o /tmp/home.html -w '%{http_code}' "$PREVIEW_URL/" || true)
+            if [ "$code" = "200" ] && grep -q 'home-quick-answers' /tmp/home.html; then
+              echo "Preview is current and contains Quick Answers."
+              exit 0
+            fi
+            echo "Attempt $i: preview not current yet (HTTP $code)"
+            sleep 10
+          done
+          echo "Preview did not become current in time."
+          exit 1
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "No Chrome/Chromium available on runner"
+            exit 1
+          fi
+
+      - name: Capture desktop and mobile screenshots
+        shell: bash
+        run: |
+          set -eu
+          mkdir -p visual-qa
+          "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=1440,1800 --virtual-time-budget=5000             --screenshot=visual-qa/home-desktop.png "$PREVIEW_URL/"
+          "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=390,5000 --force-device-scale-factor=1 --virtual-time-budget=5000             --screenshot=visual-qa/home-mobile.png "$PREVIEW_URL/"
+          "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars             --window-size=390,1600 --force-device-scale-factor=1 --virtual-time-budget=5000             --screenshot=visual-qa/whats-on-mobile-weekend.png "$PREVIEW_URL/whats-on/?filter=weekend"
+
+      - name: Dump rendered DOM for route checks
+        shell: bash
+        run: |
+          set -eu
+          "$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=5000             --dump-dom "$PREVIEW_URL/" > visual-qa/home-rendered.html
+          "$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=5000             --dump-dom "$PREVIEW_URL/whats-on/?filter=weekend#current-listings" > visual-qa/whats-on-weekend-rendered.html
+          grep -q 'home-quick-answers' visual-qa/home-rendered.html
+          grep -q 'aria-pressed="true">Weekend' visual-qa/whats-on-weekend-rendered.html
+
+      - name: Upload visual QA artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nue-preview-visual-qa
+          path: visual-qa/
+          retention-days: 7

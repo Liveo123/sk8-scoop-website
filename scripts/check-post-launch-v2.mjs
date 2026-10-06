@@ -73,7 +73,7 @@ contains('terms.html','rel="canonical" href="https://www.sk8scoop.com/terms"');
 contains('sitemap.xml','https://www.sk8scoop.com/52-adventures/</loc><lastmod>2026-09-26</lastmod>');
 contains('sitemap.xml','https://www.sk8scoop.com/free-cheap-guide/</loc><lastmod>2026-09-30</lastmod>');
 contains('sitemap.xml','https://www.sk8scoop.com/guides/</loc><lastmod>2026-10-01</lastmod>');
-contains('archive.html','Browse all 14 published SK8 Scoop issues');
+contains('archive.html','Browse all 15 published SK8 Scoop issues');
 
 // Halloween indexing contracts.
 contains('halloween-half-term-guide/index.html','rel="canonical" href="https://www.sk8scoop.com/halloween-half-term-guide/"');
@@ -88,9 +88,8 @@ contains('guides/index.html','href="../halloween-half-term-guide/"'); // Hallowe
 contains('latest/index.html','/assets/latest-polish.css');
 contains('latest/index.html','latest-issue-mosaic');
 contains('latest/index.html','latest-feature-card');
-contains('latest/index.html','Issue 14');
-contains('latest/index.html','/updates/');
-contains('latest/index.html','/whats-on/');
+contains('latest/index.html','Issue 15');
+contains('latest/index.html','/planning/');
 contains('latest/index.html','/local-history/');
 excludes('assets/latest-polish.css','NEXT FRIDAY');
 const latestHtml = read('latest/index.html');
