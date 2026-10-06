@@ -217,15 +217,15 @@ try {
   record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('cheadle-brew-and-biscuit-2026-10-06')")));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
-  await navigate('/outdoors/alderley-edge/');
+  await navigate('/outdoors/chadkirk-country-estate/');
   record('Useful article types load My SK8 save controls automatically', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
   record('Generic article save button has an icon', Boolean(await evaluate("document.querySelector('[data-my-sk8-page-save-bar] .my-sk8-action-icon')")));
   record('Generic article save works', await click('[data-my-sk8-page-save-bar] button'));
   await sleep(150);
-  record('Generic article persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'page:outdoors/alderley-edge' && x.kind === 'page')")));
+  record('Generic article persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'page:outdoors/chadkirk-country-estate' && x.kind === 'page')")));
   await navigate('/my-sk8/?list=page%3Aoutdoors%2Falderley-edge');
   record('Generic saved article can be shared', !(await evaluate("document.querySelector('[data-shared-shortlist]')?.hidden")));
-  record('Generic shared article has a readable fallback title', Boolean(await evaluate("document.querySelector('[data-shared-items]')?.textContent.includes('Alderley Edge')")));
+  record('Generic shared article has a readable fallback title', Boolean(await evaluate("document.querySelector('[data-shared-items]')?.textContent.includes('Chadkirk Country Estate')")));
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); true");
 
   await navigate('/local-history/gatley-shouter/');
