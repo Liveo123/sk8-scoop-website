@@ -166,7 +166,8 @@
     const target = event.target;
     if (target && (target.matches('input,textarea,select,button,a') || target.isContentEditable)) return;
     event.preventDefault();
-    if (window.matchMedia('(min-width: 821px)').matches) {
+    const desktopVisible = window.getComputedStyle(desktopForm).display !== 'none';
+    if (desktopVisible) {
       desktopInput.focus();
       desktopInput.select();
     } else {
@@ -179,7 +180,7 @@
     closePanel();
   });
 
-  const inlineSearchQuery = window.matchMedia('(min-width: 821px)');
+  const inlineSearchQuery = window.matchMedia('(min-width: 1450px), (min-width: 821px) and (max-width: 1199px)');
   const handleInlineSearchChange = event => { if (event.matches) closePanel(); };
   if (typeof inlineSearchQuery.addEventListener === 'function') inlineSearchQuery.addEventListener('change', handleInlineSearchChange);
   else if (typeof inlineSearchQuery.addListener === 'function') inlineSearchQuery.addListener(handleInlineSearchChange);
