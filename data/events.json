@@ -34,6 +34,22 @@
     "status": "verified"
   },
   {
+    "id": "cheadle-work-skills-navigator-2026-10-06",
+    "title": "Work & Skills Navigator at Cheadle Library",
+    "status": "verified",
+    "date": "2026-10-06",
+    "time": "10:00",
+    "area": "Cheadle",
+    "venue": "Cheadle Library, 23 Ashfield Road, Cheadle, Stockport SK8 1BB",
+    "cost": "Check council listing",
+    "category": "Community",
+    "description": "A local Work & Skills Navigator drop-in listed by Stockport Council. Check the council event listing before travelling for the latest session details.",
+    "booking_url": "",
+    "source_url": "https://www.stockport.gov.uk/events",
+    "verification": "OFFICIAL_COUNCIL_LISTING_RECHECKED_FOR_ISSUE_15",
+    "checked": "2026-10-02"
+  },
+  {
     "id": "air-raid-explorer-tour-2026-10-06",
     "title": "Air Raid Shelters Explorer Tour: Going Underground",
     "date": "2026-10-06",
@@ -48,6 +64,38 @@
     "verification": "COUNCIL_AND_MUSEUM_BOOKING_SOURCE",
     "checked": "2026-09-25",
     "status": "verified"
+  },
+  {
+    "id": "the-light-cafe-cheadle-2026-10-07",
+    "title": "The Light Café",
+    "status": "verified",
+    "date": "2026-10-07",
+    "time": "09:00",
+    "area": "Cheadle",
+    "venue": "All Hallows Church, Councillor Lane, Cheadle, Stockport SK8 2JG",
+    "cost": "Food and drink priced separately",
+    "category": "Community / Food & Drink",
+    "description": "A local café serving breakfast and lunch, with company and conversation. Stockport Council lists the session for Wednesday morning.",
+    "booking_url": "",
+    "source_url": "https://www.stockport.gov.uk/events?Page=1&category=Seasonal&pageSize=60",
+    "verification": "OFFICIAL_COUNCIL_LISTING",
+    "checked": "2026-10-06"
+  },
+  {
+    "id": "lum-head-open-day-2026-10-07",
+    "title": "Lum Head Primary nursery and reception open day",
+    "status": "verified",
+    "date": "2026-10-07",
+    "time": "09:30",
+    "area": "Gatley",
+    "venue": "Lum Head Primary School, Troutbeck Road, Gatley, Cheadle SK8 4RR",
+    "cost": "Free",
+    "category": "Family / Schools",
+    "description": "An open morning for families considering nursery or reception places for September 2027, with a chance to see the school and meet staff. Booking a tour is requested.",
+    "booking_url": "https://www.lumhead.stockport.sch.uk/?page_id=63",
+    "source_url": "https://www.stockport.gov.uk/events/nursery-and-reception-open-day-oct?date=2026-10-07",
+    "verification": "COUNCIL_AND_SCHOOL_PRIMARY_SOURCE",
+    "checked": "2026-10-06"
   },
   {
     "id": "john-lewis-cheadle-baby-beyond-2026-10-08",
@@ -192,6 +240,22 @@
     "verification": "OFFICIAL_COUNCIL_LISTING",
     "checked": "2026-09-25",
     "status": "verified"
+  },
+  {
+    "id": "stockport-plaza-wrestling-2026-10-10",
+    "title": "Professional wrestling at Stockport Plaza",
+    "status": "verified",
+    "date": "2026-10-10",
+    "time": "18:30",
+    "area": "Stockport",
+    "venue": "The Plaza, Mersey Square, Stockport SK1 1SP",
+    "cost": "Adults £15.40 · Children £13.20 · Family package £50.60",
+    "category": "Family / Entertainment",
+    "description": "Professional wrestling returns to The Plaza for a family-oriented evening of British wrestling talent. The advertised card is subject to change.",
+    "booking_url": "https://stockportplaza.co.uk/",
+    "source_url": "https://prod-windows-webplatform-origin.smbcdigital.net/events/wrestling?date=2026-10-10",
+    "verification": "OFFICIAL_COUNCIL_EVENT_PAGE_SUBMITTED_BY_STOCKPORT_PLAZA",
+    "checked": "2026-10-06"
   },
   {
     "id": "stockport-symphony-italian-one-2026-10-10",
