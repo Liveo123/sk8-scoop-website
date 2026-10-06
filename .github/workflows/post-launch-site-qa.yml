@@ -154,6 +154,9 @@ jobs:
           check_page '/52-adventures/' 'data-page="52-adventures"'
           check_page '/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
           check_page '/halloween-half-term-guide/feedback/' 'Halloween Guide Tester Feedback'
+          check_page '/halloween/boo/' 'BOO! You found Easter egg #5'
+          check_page '/poll/issue-16/' 'What would you most like more of in next year’s Halloween coverage?'
+          check_page '/local-history/heyhead-village-disappeared/' 'Heyhead: the village that disappeared beside the airport'
           feedback_code="$(curl -sS --max-time 20 -o /tmp/halloween-feedback-api.json -w '%{http_code}' -X POST "${base}/api/reader-submission" -H 'content-type: application/json' --data '{}')"
           if [ "$feedback_code" != "503" ]; then
             echo "FAILED Preview feedback isolation: expected 503 without the reader_submissions preview table, got $feedback_code"
@@ -318,6 +321,9 @@ jobs:
           check_page 'https://www.sk8scoop.com/52-adventures/' 'data-page="52-adventures"'
           check_page 'https://www.sk8scoop.com/halloween-half-term-guide/' 'Free Halloween &amp; Half-Term Family Guide 2026'
           check_page 'https://www.sk8scoop.com/halloween-half-term-guide/feedback/' 'Halloween Guide Tester Feedback'
+          check_page 'https://www.sk8scoop.com/halloween/boo/' 'BOO! You found Easter egg #5'
+          check_page 'https://www.sk8scoop.com/poll/issue-16/' 'What would you most like more of in next year’s Halloween coverage?'
+          check_page 'https://www.sk8scoop.com/local-history/heyhead-village-disappeared/' 'Heyhead: the village that disappeared beside the airport'
           feedback_code="$(curl -sS --max-time 20 -o /tmp/halloween-feedback-api-live.json -w '%{http_code}' -X POST 'https://www.sk8scoop.com/api/reader-submission' -H 'content-type: application/json' --data '{}')"
           if [ "$feedback_code" != "400" ]; then
             echo "FAILED live Halloween feedback API readiness: expected 400 validation response, got $feedback_code"
