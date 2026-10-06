@@ -1,0 +1,103 @@
+
+/* My SK8 MVP experiment: local-only saved planning layer. */
+.my-sk8-card-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.my-sk8-action{appearance:none;display:inline-flex;align-items:center;gap:7px;border:1px solid #cbd8d5;background:#fff;color:#0f6470;border-radius:999px;padding:6px 10px 6px 7px;min-height:36px;font:800 .78rem/1 Inter,Arial,sans-serif;text-decoration:none;cursor:pointer;transition:background .16s ease,border-color .16s ease,transform .16s ease}
+.my-sk8-action:hover,.my-sk8-action:focus-visible{background:#eef7f5;border-color:#9bc5c0;outline:none;transform:translateY(-1px)}
+.my-sk8-save{background:#fff8ea;border-color:#eed8b4}
+.my-sk8-toast{position:fixed;left:50%;bottom:24px;z-index:80;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#073f48;color:#fff;padding:11px 15px;border-radius:999px;font-weight:800;box-shadow:0 10px 28px rgba(0,0,0,.18);transition:.18s ease}
+.my-sk8-toast.show{opacity:1;transform:translate(-50%,0)}
+.my-sk8-hero{padding:48px 0 38px}
+.my-sk8-summary{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:26px;align-items:start}
+.my-sk8-counter{display:flex;align-items:baseline;gap:9px;margin:15px 0}
+.my-sk8-counter strong{font:900 3.2rem/1 Arial,sans-serif;color:#0f6470}
+.my-sk8-counter span{font-weight:800;color:#53666a}
+.my-sk8-toolbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.my-sk8-toolbox h2{margin:.2rem 0 .6rem}
+.my-sk8-toolbox p{margin:.2rem 0 1rem;color:#53666a}
+.my-sk8-toolbar{display:flex;flex-wrap:wrap;gap:10px}
+.my-sk8-toolbar button:disabled{opacity:.45;cursor:not-allowed}
+.my-sk8-section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:17px}
+.my-sk8-section-head p{margin:0;color:#53666a;max-width:560px}
+.my-sk8-saved-list{display:grid;gap:12px}
+.my-sk8-saved-card{display:grid;grid-template-columns:86px minmax(0,1fr);gap:16px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:0 8px 20px rgba(19,45,49,.05)}
+.my-sk8-saved-date{border-radius:12px;background:#edf6f4;padding:12px 9px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.my-sk8-saved-date strong{font-size:.9rem;color:#0f6470}
+.my-sk8-saved-date span{font-size:.8rem;font-weight:800;color:#53666a;margin-top:3px}
+.my-sk8-saved-copy h3{font-family:Georgia,serif;font-size:1.35rem;line-height:1.13;margin:.25rem 0 .45rem}
+.my-sk8-meta{color:#53666a;font-size:.9rem;margin:.1rem 0 .65rem}
+.my-sk8-inline-actions{display:flex;flex-wrap:wrap;gap:11px;align-items:center}
+.my-sk8-inline-actions a,.my-sk8-inline-actions button{border:0;background:none;padding:0;color:#0f6470;font:800 .82rem/1.2 Inter,Arial,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.my-sk8-inline-actions button{color:#7b4a34}
+.my-sk8-nearby{margin:11px 0 7px;padding:11px 12px;background:#fff8ea;border:1px solid #efdfc5;border-radius:11px;display:grid;gap:4px}
+.my-sk8-nearby strong{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:#7f4b25}
+.my-sk8-nearby a{font-weight:800;color:#0f6470;text-decoration:none}
+.my-sk8-nearby small{color:#6a7475}
+.my-sk8-empty-panel{text-align:center;padding:34px}
+.my-sk8-empty-panel h2{margin:.35rem 0}
+.my-sk8-empty-copy{color:#53666a}
+.my-sk8-shared{border:2px solid #cde3df;background:#f5fbf9}
+.my-sk8-disclaimer{font-size:.85rem;color:#53666a}
+.my-sk8-count-badge{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#f8791b;color:#fff;font-size:.72rem;margin-left:4px;vertical-align:middle}
+@media(max-width:760px){
+  .my-sk8-summary{grid-template-columns:1fr}
+  .my-sk8-saved-card{grid-template-columns:1fr}
+  .my-sk8-saved-date{display:flex;flex-direction:row;justify-content:flex-start;gap:7px;text-align:left;padding:9px 11px}
+  .my-sk8-section-head{display:block}
+  .my-sk8-section-head p{margin-top:6px}
+}
+
+.my-sk8-reminder-alert{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:12px 14px;border-radius:12px;background:#fff8ea;border:1px solid #eed8b4}
+.my-sk8-reminder-alert+ .my-sk8-reminder-alert{margin-top:8px}
+.my-sk8-reminder-alert strong{color:#132d31}
+.my-sk8-reminder-alert span{color:#7a5a3b;font-weight:800;font-size:.85rem}
+@media(max-width:560px){.my-sk8-reminder-alert{display:grid;gap:4px}}
+
+.my-sk8-page-save-section{padding:0 0 18px;background:transparent}
+.my-sk8-page-save-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 18px;box-shadow:0 8px 20px rgba(19,45,49,.05)}
+.my-sk8-page-save-bar>div:first-child{display:grid;gap:2px}
+.my-sk8-page-save-bar strong{font:800 1.08rem/1.25 Inter,Arial,sans-serif;color:var(--ink)}
+.my-sk8-page-save-bar>div:first-child>span{color:#53666a;font-size:.84rem}
+.my-sk8-page-save-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.my-sk8-page-save-actions .button{padding:10px 14px;box-shadow:none}
+.my-sk8-page-type{background:#fff3e5}
+.my-sk8-page-type strong{color:#8b4e20}
+.my-sk8-page-card .my-sk8-meta{max-width:760px}
+@media(max-width:680px){
+  .my-sk8-page-save-bar{align-items:flex-start;flex-direction:column}
+  .my-sk8-page-save-actions{width:100%}
+  .my-sk8-page-save-actions .button{flex:1}
+}
+
+/* Small colourful action markers: live UI, not decorative illustration. */
+.my-sk8-action-icon{display:inline-grid;place-items:center;flex:0 0 auto;width:24px;height:24px;border-radius:999px;font:900 .9rem/1 Inter,Arial,sans-serif}
+.my-sk8-action-label{display:inline-block;white-space:nowrap}
+.my-sk8-action-icon.tone-save{background:#fff0e5;color:#d15d31}
+.my-sk8-action-icon.tone-reminder{background:#f1ebff;color:#6d4bb6}
+.my-sk8-action-icon.tone-calendar{background:#ffe9ef;color:#b34262}
+.my-sk8-action-icon.tone-directions{background:#e8f3ff;color:#2768a2}
+.my-sk8-action-icon.tone-nearby{background:#e8f7ef;color:#267451}
+.my-sk8-page-save-button{display:inline-flex!important;align-items:center;gap:8px}
+.my-sk8-page-save-button .my-sk8-action-icon{background:#fff;color:#d15d31;width:25px;height:25px}
+@media(max-width:520px){
+  .my-sk8-card-actions{gap:7px}
+  .my-sk8-action{min-height:38px;padding:6px 10px 6px 7px;font-size:.79rem}
+  .my-sk8-action-icon{width:25px;height:25px}
+}
+
+.my-sk8-action-icon.tone-save{background:#fff0e5;color:#cf5f34}
+.my-sk8-action-icon.tone-reminder{background:#f1ebff;color:#6b4fb3}
+.my-sk8-action-icon.tone-calendar{background:#ffe8ef;color:#b14463}
+.my-sk8-action-icon.tone-directions{background:#e8f3ff;color:#2d6fa7}
+.my-sk8-action-icon.tone-nearby{background:#e7f7ee;color:#277753}
+.my-sk8-page-save-button .my-sk8-action-icon{background:#fff6ec!important;color:#cf5f34!important}
+
+/* Prevent component display rules from defeating the HTML hidden state. */
+[data-my-sk8-toolbox][hidden],
+[data-map-saved][hidden],
+[data-shared-shortlist][hidden],
+[data-my-sk8-pages-section][hidden],
+[data-my-sk8-past-section][hidden],
+[data-my-sk8-active-section][hidden],
+[data-my-sk8-reminders-section][hidden],
+[data-weekend-plan-section][hidden],
+[data-my-sk8-empty][hidden]{display:none!important}

@@ -36,6 +36,8 @@ jobs:
           if [ -f worker-business-v2.js ]; then node --check worker-business-v2.js; fi
           if [ -f worker-protected.js ]; then node --check worker-protected.js; fi
           if [ -f assets/site.js ]; then node --check assets/site.js; fi
+          if [ -f assets/my-sk8.js ]; then node --check assets/my-sk8.js; fi
+          if [ -f tests/my-sk8-browser.mjs ]; then node --check tests/my-sk8-browser.mjs; fi
           if [ -f assets/secret-trail-feedback-admin.js ]; then node --check assets/secret-trail-feedback-admin.js; fi
           if [ -f assets/campaign-finder.js ]; then node --check assets/campaign-finder.js; fi
           if [ -f assets/advertise.js ]; then node --check assets/advertise.js; fi

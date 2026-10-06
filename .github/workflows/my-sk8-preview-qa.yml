@@ -1,0 +1,120 @@
+name: My SK8 Preview QA
+
+permissions:
+  contents: read
+  checks: read
+  issues: read
+  pull-requests: read
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'assets/my-sk8.js'
+      - 'assets/my-sk8.css'
+      - 'assets/whats-on.js'
+      - 'assets/site.js'
+      - 'whats-on/index.html'
+      - 'my-sk8/index.html'
+      - 'privacy.html'
+      - 'local-history/gatley-shouter/index.html'
+      - 'planning/heald-green-east/index.html'
+      - 'kids-family/secondary-school-applications-2027/index.html'
+      - 'outdoors/marple-locks-aqueduct/index.html'
+      - 'outdoors/gatley-carrs/index.html'
+      - 'outdoors/east-avenue-park-heald-green/index.html'
+      - 'kids-family/bruntwood-park/index.html'
+      - 'kids-family/abney-hall-park/index.html'
+      - 'planning/cheadle-eco-park/index.html'
+      - 'local-history/heald-green-north-history-walk/index.html'
+      - 'tests/my-sk8-browser.mjs'
+      - '.github/workflows/my-sk8-preview-qa.yml'
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "No Chrome/Chromium available"
+            exit 1
+          fi
+
+      - name: Resolve exact Cloudflare preview URL
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -eu
+          auth=(-H "authorization: Bearer ${GH_TOKEN}" -H "accept: application/vnd.github+json")
+          short_sha="$(printf '%s' "$PREVIEW_SHA" | cut -c1-7)"
+          base=""
+          for attempt in $(seq 1 30); do
+            comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
+            comments="$(curl -fsSL --max-time 20 "${auth[@]}" "$comments_api" || true)"
+            body="$(printf '%s' "$comments" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // empty' 2>/dev/null || true)"
+            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
+            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
+            sha="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
+            immutable="$(printf '%s\n' "$body" | grep -Eo 'https://[0-9a-f]{8}\.previews\.sk8scoop\.com' | head -n 1 || true)"
+            if [ -n "$url" ] && [ "$sha" = "$short_sha" ]; then
+              base="${immutable:-$url}"
+              break
+            fi
+            echo "Waiting for exact Cloudflare preview (attempt $attempt/30; found $url at $sha; expected $short_sha)"
+            sleep 10
+          done
+          if [ -z "$base" ]; then
+            echo "No exact preview URL found"
+            exit 1
+          fi
+          echo "PREVIEW_URL=$base" >> "$GITHUB_ENV"
+          echo "Using $base"
+
+      - name: Wait for My SK8 preview files
+        shell: bash
+        run: |
+          set -eu
+          for attempt in $(seq 1 10); do
+            page_code="$(curl -sS -L --max-time 20 -o /tmp/my-sk8.html -w '%{http_code}' "$PREVIEW_URL/my-sk8/" || true)"
+            js_code="$(curl -sS -L --max-time 20 -o /tmp/my-sk8.js -w '%{http_code}' "$PREVIEW_URL/assets/my-sk8.js" || true)"
+            if [ "$page_code" = "200" ] && [ "$js_code" = "200" ] &&
+               grep -Fq 'data-page="my-sk8"' /tmp/my-sk8.html &&
+               grep -Fq 'sk8_saved_items_v1' /tmp/my-sk8.js; then
+              echo "My SK8 preview is current."
+              exit 0
+            fi
+            echo "Waiting for My SK8 preview (attempt $attempt/10; page=$page_code; js=$js_code)"
+            head -c 180 /tmp/my-sk8.html 2>/dev/null || true
+            echo
+            sleep 8
+          done
+          echo "My SK8 preview files did not become available."
+          exit 1
+
+      - name: Run real browser functional and mobile QA
+        env:
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
+          CHROME: ${{ env.CHROME }}
+        run: node tests/my-sk8-browser.mjs
+
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-sk8-preview-qa
+          path: visual-qa/my-sk8/
+          retention-days: 14

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My SK8 | Save local things to do | SK8 Scoop</title>
+  <meta name="description" content="Save local SK8 events and ideas, build a weekend shortlist, add dates to your calendar and get directions.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://www.sk8scoop.com/my-sk8/">
+  <meta name="theme-color" content="#0f6470">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/reader-pages.css">
+  <link rel="stylesheet" href="../assets/reader-page-polish.css">
+  <link rel="stylesheet" href="../assets/nue.css">
+  <link rel="stylesheet" href="../assets/my-sk8.css">
+  <link rel="stylesheet" href="../assets/subscriber-access.css">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+</head>
+<body class="reader-page" data-page="my-sk8">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header reader-header">
+    <div class="wrap header-row">
+      <a class="brand" href="/" aria-label="SK8 Scoop home"><img src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop - the useful, the local and the mildly nosy"></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+      <nav class="nav" id="main-nav" aria-label="Main navigation"></nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero my-sk8-hero">
+      <div class="wrap my-sk8-summary">
+        <div>
+          <div class="eyebrow">Experimental reader tool</div>
+          <h1>My SK8</h1>
+          <p class="hero-lead">Save things you might actually do, then keep the dates, directions and useful next steps in one place.</p>
+          <div class="my-sk8-counter"><strong data-my-sk8-total>0</strong><span>saved in this browser</span></div>
+          <p class="my-sk8-disclaimer">For this first test, your saved list stays only in this browser. No account or sign-in is needed.</p>
+        </div>
+        <aside class="my-sk8-toolbox" data-my-sk8-toolbox hidden>
+          <div class="eyebrow">Try the useful bits</div>
+          <h2>Plan from what you saved</h2>
+          <p>Open all saved places as a route, or share your shortlist with somebody else.</p>
+          <div class="my-sk8-toolbar">
+            <a class="button secondary" data-map-saved hidden target="_blank" rel="noopener">Map saved places</a>
+            <button class="button" type="button" data-share-saved disabled>Share shortlist</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section white" data-subscriber-shelf>
+      <div class="wrap">
+        <div class="subscriber-access-locked subscriber-shelf-compact" data-subscriber-shelf-locked>
+          <div class="eyebrow">Subscriber guides</div>
+          <h2>Unlock the full SK8 Scoop experience</h2>
+          <p>Use your email to unlock subscriber guides now, with more website extras added here over time. Already subscribed? Use the same address.</p>
+          <form class="subscriber-access-form" method="post" data-signup-form data-form-position="my-sk8-subscriber-shelf" data-success-url="/my-sk8/?subscriber=unlocked">
+            <label class="sr-only" for="my-sk8-subscriber-email">Email address</label>
+            <input id="my-sk8-subscriber-email" name="fields[email]" type="email" autocomplete="email" placeholder="Your email address" required>
+            <button class="button" type="submit">Unlock subscriber access</button>
+          </form>
+          <div class="subscriber-access-summary" aria-label="Included subscriber guides">
+            <span>Free &amp; Cheap</span><span>52 Adventures</span><span>Halloween &amp; Half-Term</span>
+          </div>
+          <p class="subscriber-access-note">Treasure Hunts and Pub Trails stay separate as referral rewards or paid options.</p>
+        </div>
+
+        <div class="subscriber-access-unlocked" data-subscriber-shelf-unlocked hidden>
+          <div class="my-sk8-section-head">
+            <div><div class="eyebrow">Subscriber guides</div><h2>Your guides</h2></div>
+            <p>Three current guides, ready to open.</p>
+          </div>
+          <div class="subscriber-access-grid">
+            <article class="subscriber-guide-card"><small>Evergreen</small><h3>Free &amp; Cheap</h3><p>Low-cost local ideas and practical costs.</p><a class="button secondary" href="/free-cheap-guide/guide/" data-subscriber-guide-open="free-cheap">Open guide</a></article>
+            <article class="subscriber-guide-card"><small>52 ideas</small><h3>52 Adventures</h3><p>Outings, walks and short trips.</p><a class="button secondary" href="/52-adventures/guide/" data-subscriber-guide-open="52-adventures">Open guide</a></article>
+            <article class="subscriber-guide-card"><small>October</small><h3>Halloween &amp; Half-Term</h3><p>Family activities, prices and rainy-day backups.</p><a class="button secondary" href="/halloween-half-term-guide/guide/" data-subscriber-guide-open="halloween">Open guide</a></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-shared-shortlist hidden>
+      <div class="wrap">
+        <div class="reader-panel my-sk8-shared">
+          <div class="my-sk8-section-head">
+            <div>
+              <div class="eyebrow">Shared with you</div>
+              <h2><span data-shared-count>0</span> local ideas</h2>
+            </div>
+            <button class="button" type="button" data-save-shared>Save all to My SK8</button>
+          </div>
+          <div class="my-sk8-saved-list" data-shared-items></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" data-my-sk8-active-section>
+      <div class="wrap">
+        <div class="my-sk8-section-head">
+          <div><div class="eyebrow">Your saved list</div><h2>Coming up</h2></div>
+          <p>Each item keeps the practical bits close: current details, directions, calendar and nearby ideas.</p>
+        </div>
+        <div class="my-sk8-saved-list" data-my-sk8-active></div>
+
+        <div class="reader-panel my-sk8-empty-panel" data-my-sk8-empty>
+          <div class="eyebrow">Nothing saved yet</div>
+          <h2>Build a small local shortlist</h2>
+          <p>Open What’s On and tap <strong>♡ Save</strong> on anything you might want to remember.</p>
+          <a class="button" href="/whats-on/">Browse What’s On</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-my-sk8-pages-section hidden>
+      <div class="wrap">
+        <div class="my-sk8-section-head">
+          <div><div class="eyebrow">Saved for later</div><h2>Articles &amp; useful pages</h2></div>
+          <p>Keep useful explainers, walks and practical pages alongside dated events without pretending everything belongs in a calendar.</p>
+        </div>
+        <div class="my-sk8-saved-list" data-my-sk8-pages></div>
+      </div>
+    </section>
+
+    <section class="section" data-my-sk8-reminders-section>
+      <div class="wrap">
+        <div class="my-sk8-section-head">
+          <div><div class="eyebrow">Reminders</div><h2>Things you asked us not to forget</h2></div>
+          <p>This MVP only flags reminders when you come back to SK8 Scoop. It does not send push notifications or emails yet. That lets us test whether people actually want reminders before building the machinery.</p>
+        </div>
+        <div class="reader-panel" data-my-sk8-reminders></div>
+      </div>
+    </section>
+
+    <section class="section white" data-weekend-plan-section>
+      <div class="wrap">
+        <div class="my-sk8-section-head">
+          <div><div class="eyebrow">This weekend</div><h2>Your weekend plan</h2></div>
+          <p>This first version simply groups saved items that fall on Saturday or Sunday. No over-engineered robot itinerary yet.</p>
+        </div>
+        <div class="my-sk8-saved-list" data-weekend-plan></div>
+      </div>
+    </section>
+
+    <section class="section white" data-my-sk8-past-section hidden>
+      <div class="wrap">
+        <div class="my-sk8-section-head">
+          <div><div class="eyebrow">Automatically tidied</div><h2>Past saves</h2></div>
+          <p>Expired events move out of your active plan rather than hanging around pretending October lasts forever.</p>
+        </div>
+        <div class="my-sk8-saved-list" data-my-sk8-past></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="reader-panel nue-next-panel">
+          <div class="eyebrow">Next useful experience</div>
+          <h2>Need something else?</h2>
+          <p>Browse current events or switch to evergreen free and cheap ideas.</p>
+          <div class="button-row"><a class="button" href="/whats-on/">What’s On</a><a class="button secondary" href="/free-cheap-guide/">Free &amp; Cheap</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid footer-grid-wide">
+      <div class="footer-brand-block"><img class="footer-logo" src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><p>The useful, the local and the mildly nosy.</p><p class="footer-small">A free Friday newsletter for Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby SK8.</p></div>
+      <div class="footer-links"><strong>Read</strong><a href="/latest">Latest Scoop</a><a href="../archive.html">Archive</a><a href="../guides/">Guides</a></div>
+      <div class="footer-links"><strong>Take part</strong><a href="../start/">Where to start</a><a href="../submit/">Submit</a><a href="../contact/">Contact</a></div>
+      <div class="footer-links"><strong>Trust</strong><a href="../editorial-policy.html">Editorial policy</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><span>© <span data-year></span> SK8 Scoop</span></div>
+    </div>
+  </footer>
+  <script src="../assets/config.js"></script>
+  <script src="../assets/site.js"></script>
+  <script src="../assets/signup-protection.js"></script>
+  <script src="../assets/subscriber-access.js"></script>
+  <script src="../assets/my-sk8.js"></script>
+</body>
+</html>

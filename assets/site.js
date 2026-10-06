@@ -34,6 +34,7 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     if(currentPath==='/') return '/';
     if(currentPath.startsWith('/whats-on')) return '/whats-on/';
     if(currentPath.startsWith('/guides')||currentPath.startsWith('/free-cheap-guide')||currentPath.startsWith('/52-adventures')||currentPath.startsWith('/halloween-half-term-guide')||currentPath.startsWith('/secret-trails')) return '/guides/';
+    if(currentPath.startsWith('/my-sk8')) return '/my-sk8/';
     if(currentPath.startsWith('/start')) return '/start/';
     if(currentPath.startsWith('/join')) return '/join/';
     if(currentPath.startsWith('/submit')||currentPath.startsWith('/business-submissions')) return '/submit/';
@@ -43,34 +44,92 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   })();
 
   const items=[
-    ['Home','/'],
     ['What’s On','/whats-on/'],
+    ['My SK8','/my-sk8/'],
     ['Guides','/guides/'],
-    ['Where to start','/start/'],
-    ['Join','/join/'],
     ['Submit','/submit/'],
-    ['Contact','/contact/'],
     ['Advertise','/advertise.html']
   ];
 
   nav.replaceChildren();
+  const sk8SavedActiveCount=()=>{
+    try{
+      const saved=JSON.parse(localStorage.getItem('sk8_saved_items_v1')||'[]');
+      if(!Array.isArray(saved)) return 0;
+      const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+      const values=Object.fromEntries(parts.map(part=>[part.type,part.value]));
+      const today=`${values.year}-${values.month}-${values.day}`;
+      return saved.filter(item=>{
+        if(!item||!item.id) return false;
+        if(item.kind==='page') return true;
+        const end=String(item.end_date||item.date||'');
+        return !end||end>=today;
+      }).length;
+    }catch(e){return 0;}
+  };
+  const updateMySk8NavCount=()=>{
+    const count=sk8SavedActiveCount();
+    document.querySelectorAll('[data-nav-my-sk8-count]').forEach(badge=>{
+      badge.textContent=String(count);
+      badge.hidden=count===0;
+      badge.setAttribute('aria-label',count===1?'1 saved item':`${count} saved items`);
+    });
+  };
+
   items.forEach(([label,href])=>{
     const link=document.createElement('a');
     link.href=href;
-    link.textContent=label;
+    const labelSpan=document.createElement('span');
+    labelSpan.textContent=label;
+    link.appendChild(labelSpan);
+    if(href==='/my-sk8/'){
+      link.classList.add('nav-my-sk8');
+      const badge=document.createElement('span');
+      badge.className='nav-save-count';
+      badge.dataset.navMySk8Count='';
+      badge.hidden=true;
+      badge.setAttribute('aria-hidden','true');
+      link.appendChild(badge);
+    }
     if(activeHref===href){
       link.classList.add('active');
       link.setAttribute('aria-current','page');
     }
     nav.appendChild(link);
   });
+  updateMySk8NavCount();
+  window.addEventListener('sk8:saved-items-changed',updateMySk8NavCount);
 
   const joinButton=document.createElement('a');
   joinButton.className='button nav-join reader-nav-join';
   joinButton.href='/join/';
   joinButton.textContent='Join free';
+  if(activeHref==='/join/'){
+    joinButton.setAttribute('aria-current','page');
+  }
   nav.appendChild(joinButton);
 }
+
+const sk8MySk8SaveEligible=()=>{
+  const path=sk8NormalisePath(location.pathname);
+  return /^\/(outdoors|planning|local-history|kids-family)\/[^/]+$/.test(path);
+};
+const ensureMySk8PageSaveAssets=()=>{
+  if(!sk8MySk8SaveEligible()) return;
+  if(!document.querySelector('link[href$="/assets/my-sk8.css"],link[href$="assets/my-sk8.css"]')){
+    const css=document.createElement('link');
+    css.rel='stylesheet';
+    css.href='/assets/my-sk8.css';
+    document.head.appendChild(css);
+  }
+  if(!document.querySelector('script[src$="/assets/my-sk8.js"],script[src$="assets/my-sk8.js"]')){
+    const script=document.createElement('script');
+    script.src='/assets/my-sk8.js';
+    script.defer=true;
+    document.body.appendChild(script);
+  }
+};
+ensureMySk8PageSaveAssets();
 
 const setMenuLabel=(open)=>{if(!menu)return;menu.setAttribute('aria-expanded',String(open));const label=menu.querySelector('span:last-child');if(label)label.textContent=open?'Close':'Menu';else menu.textContent=open?'Close':'Menu';};
 if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');setMenuLabel(open);});}
@@ -431,6 +490,7 @@ const sk8PageEventName=()=>{
     archive:'archive_page_visit',
     'submit-event':'event_submission_page_visit',
     'whats-on':'whats_on_page_visit',
+    'my-sk8':'my_sk8_page_visit',
     'summer-guide-success':'summer_guide_signup_completed',
     'signup-success':'signup_completed',
     '52-adventures':'52_adventures_visit',

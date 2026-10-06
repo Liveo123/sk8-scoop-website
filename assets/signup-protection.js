@@ -90,6 +90,7 @@
   const forms = [...document.querySelectorAll('[data-signup-form]')];
   if (!forms.length) return;
 
+  const isPreview = /(^|\.)previews\.sk8scoop\.com$/i.test(location.hostname);
   const startedAt = Date.now();
   let turnstileReady = false;
   let siteKey = '';
@@ -103,9 +104,10 @@
 
   const getGuideKey = form => {
     const explicit = String(form.dataset.guideKey || '').trim().toLowerCase();
-    if (explicit === '52-adventures' || explicit === 'free-cheap') return explicit;
+    if (explicit === '52-adventures' || explicit === 'free-cheap' || explicit === 'halloween') return explicit;
     if (location.pathname.startsWith('/52-adventures')) return '52-adventures';
     if (location.pathname.startsWith('/free-cheap-guide')) return 'free-cheap';
+    if (location.pathname.startsWith('/halloween-half-term-guide')) return 'halloween';
     return '';
   };
 
@@ -241,9 +243,11 @@
     return initPromise;
   };
 
-  initialise().catch(error => {
-    console.error('SK8 signup protection failed to initialise', error);
-  });
+  if (!isPreview) {
+    initialise().catch(error => {
+      console.error('SK8 signup protection failed to initialise', error);
+    });
+  }
 
   document.addEventListener('submit', async event => {
     const form = event.target.closest && event.target.closest('[data-signup-form]');
@@ -264,6 +268,26 @@
     }
 
     try {
+      if (isPreview) {
+        status.className = 'signup-status show';
+        status.textContent = 'Preview demo: unlocking subscriber access…';
+        const previewResponse = await fetch('/api/subscriber-preview-unlock', {
+          method: 'POST',
+          headers: { accept: 'application/json' },
+          credentials: 'same-origin'
+        });
+        const previewResult = await previewResponse.json().catch(() => ({}));
+        if (!previewResponse.ok || previewResult.success !== true) {
+          throw new Error(previewResult.error || 'The preview unlock could not complete.');
+        }
+        form.dispatchEvent(new CustomEvent('sk8:subscriber-preview-unlocked', { bubbles: true }));
+        window.dispatchEvent(new CustomEvent('sk8:subscriber-preview-unlocked'));
+        status.className = 'signup-status show success';
+        status.textContent = 'Preview unlocked. No email was added to MailerLite.';
+        if (button) button.textContent = 'Unlocked ✓';
+        return;
+      }
+
       if (!turnstileReady) await initialise();
       ensureHidden(form, 'sk8_form_kind', kind);
       const guideKey = kind === 'guide' ? getGuideKey(form) : '';
@@ -307,7 +331,11 @@
       const fallbackSuccess = kind === 'qr'
         ? '/qr-success/'
         : kind === 'guide'
-          ? (guideKey === '52-adventures' ? '/52-adventures/success/' : '/free-cheap-guide/success/')
+          ? (guideKey === '52-adventures'
+              ? '/52-adventures/success/'
+              : guideKey === 'halloween'
+                ? '/halloween-half-term-guide/success/'
+                : '/free-cheap-guide/success/')
           : '/signup-success/';
       const success = configuredSuccess.startsWith('/') ? configuredSuccess : fallbackSuccess;
       window.setTimeout(() => location.assign(success), 350);
