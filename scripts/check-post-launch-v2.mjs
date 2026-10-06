@@ -140,6 +140,15 @@ contains('worker.js',"url.pathname === '/api/submit-event'");
 contains('advertise.html','action="/api/advertiser-enquiry"');
 contains('worker.js',"url.pathname === '/api/advertiser-enquiry'");
 
+// Subscriber-aware header actions must stay consistent across the whole site.
+contains('assets/site.js',"const subscriberKey='sk8_subscriber_recognition_v1'");
+contains('assets/site.js',"latest.className='button reader-nav-latest'");
+contains('assets/site.js',"latest.textContent='See what’s new'");
+contains('assets/site.js',"joinButton.textContent='Join free'");
+contains('assets/styles.css','.nav .reader-nav-latest{');
+contains('assets/styles.css','.nav .reader-nav-join{');
+contains('assets/styles.css','background:#f8791b!important');
+
 // Global navigation contract: adding My SK8 must not silently remove established reader routes.
 for (const navEntry of [
   "['What’s On','/whats-on/']",
