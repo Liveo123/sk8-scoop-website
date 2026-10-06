@@ -147,7 +147,7 @@ contains('assets/site.js',"latest.textContent='See what’s new'");
 contains('assets/site.js',"joinButton.textContent='Join free'");
 contains('assets/styles.css','.nav .reader-nav-latest{');
 contains('assets/styles.css','.nav .reader-nav-join{');
-contains('assets/styles.css','@media(max-width:1420px){');
+contains('assets/styles.css','@media(max-width:1199px){');
 contains('assets/styles.css','background:#f8791b!important');
 
 // Global navigation contract: adding My SK8 must not silently remove established reader routes.
@@ -234,8 +234,9 @@ contains('assets/global-search.js','header_search_open');
 contains('assets/global-search.js','header_search_submit');
 contains('assets/global-search.js','query_length: queryLength');
 contains('assets/global-search.js',"event.key !== '/'");
-contains('assets/global-search.js',"window.matchMedia('(min-width: 821px)')");
+contains('assets/global-search.js',"window.matchMedia('(min-width: 1450px), (min-width: 821px) and (max-width: 1199px)')");
 contains('assets/global-search.css','@media(min-width:1200px)');
+contains('assets/global-search.css','@media(min-width:1450px)');
 contains('assets/global-search.css','@media(min-width:821px) and (max-width:1199px)');
 contains('assets/global-search.css','@media(max-width:820px)');
 contains('assets/global-search.css','width:min(1320px,calc(100% - 24px))');
