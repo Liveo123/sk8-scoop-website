@@ -351,3 +351,16 @@ html,body{overflow-x:clip}@media(max-width:560px){.v75-doodle-bike{display:none}
   .fact-row{grid-template-columns:1fr!important}
   .fact-row>div:last-child{grid-column:auto}
 }
+
+
+/* My SK8 navigation discovery */
+.nav .nav-my-sk8{gap:7px}
+.nav .nav-my-sk8>span:first-child{display:inline-flex;align-items:center;gap:5px}
+.nav .nav-my-sk8>span:first-child:before{content:"♥";display:inline-grid;place-items:center;width:19px;height:19px;border-radius:999px;background:#fff0e5;color:#d15d31;font-size:.72rem;line-height:1}
+.nav-save-count{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#0f6470;color:#fff;font:850 .7rem/1 Inter,Arial,sans-serif}
+.nav-save-count[hidden]{display:none!important}
+.nav .nav-my-sk8.active .nav-save-count{background:#f8791b}
+@media(max-width:820px){
+  .nav .nav-my-sk8{justify-content:flex-start!important}
+  .nav-save-count{margin-left:auto}
+}
