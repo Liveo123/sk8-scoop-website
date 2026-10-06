@@ -43,12 +43,17 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     return '';
   })();
 
+  // Global reader navigation contract. Do not remove established routes to solve header crowding;
+  // use responsive layout/collapse rules instead.
   const items=[
+    ['Home','/'],
     ['What’s On','/whats-on/'],
     ['My SK8','/my-sk8/'],
     ['Guides','/guides/'],
     ['Where to start','/start/'],
+    ['Join','/join/'],
     ['Submit','/submit/'],
+    ['Contact','/contact/'],
     ['Advertise','/advertise.html']
   ];
 
