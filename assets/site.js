@@ -46,8 +46,8 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   const items=[
     ['Home','/'],
     ['What’s On','/whats-on/'],
-    ['Guides','/guides/'],
     ['My SK8','/my-sk8/'],
+    ['Guides','/guides/'],
     ['Where to start','/start/'],
     ['Join','/join/'],
     ['Submit','/submit/'],
@@ -56,16 +56,53 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   ];
 
   nav.replaceChildren();
+  const sk8SavedActiveCount=()=>{
+    try{
+      const saved=JSON.parse(localStorage.getItem('sk8_saved_items_v1')||'[]');
+      if(!Array.isArray(saved)) return 0;
+      const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+      const values=Object.fromEntries(parts.map(part=>[part.type,part.value]));
+      const today=`${values.year}-${values.month}-${values.day}`;
+      return saved.filter(item=>{
+        if(!item||!item.id) return false;
+        if(item.kind==='page') return true;
+        const end=String(item.end_date||item.date||'');
+        return !end||end>=today;
+      }).length;
+    }catch(e){return 0;}
+  };
+  const updateMySk8NavCount=()=>{
+    const count=sk8SavedActiveCount();
+    document.querySelectorAll('[data-nav-my-sk8-count]').forEach(badge=>{
+      badge.textContent=String(count);
+      badge.hidden=count===0;
+      badge.setAttribute('aria-label',count===1?'1 saved item':`${count} saved items`);
+    });
+  };
+
   items.forEach(([label,href])=>{
     const link=document.createElement('a');
     link.href=href;
-    link.textContent=label;
+    const labelSpan=document.createElement('span');
+    labelSpan.textContent=label;
+    link.appendChild(labelSpan);
+    if(href==='/my-sk8/'){
+      link.classList.add('nav-my-sk8');
+      const badge=document.createElement('span');
+      badge.className='nav-save-count';
+      badge.dataset.navMySk8Count='';
+      badge.hidden=true;
+      badge.setAttribute('aria-hidden','true');
+      link.appendChild(badge);
+    }
     if(activeHref===href){
       link.classList.add('active');
       link.setAttribute('aria-current','page');
     }
     nav.appendChild(link);
   });
+  updateMySk8NavCount();
+  window.addEventListener('sk8:saved-items-changed',updateMySk8NavCount);
 
   const joinButton=document.createElement('a');
   joinButton.className='button nav-join reader-nav-join';
