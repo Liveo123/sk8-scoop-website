@@ -96,6 +96,58 @@
   ];
   const pageByPath = new Map(PAGE_CATALOG.map(item => [item.url.replace(/\/+$/, ''), item]));
   const state = { events: [], byId: new Map(PAGE_CATALOG.map(item => [item.id, item])) };
+
+  const titleCaseSlug = value => String(value || '')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, char => char.toUpperCase());
+
+  const categoryLabel = path => {
+    if (path.startsWith('/outdoors/')) return 'Outdoors';
+    if (path.startsWith('/planning/')) return 'Planning';
+    if (path.startsWith('/local-history/')) return 'Local history';
+    if (path.startsWith('/kids-family/')) return 'Kids & family';
+    return 'Saved page';
+  };
+
+  const genericPageFromId = id => {
+    const raw = String(id || '');
+    if (!raw.startsWith('page:')) return null;
+    const pathBits = raw.slice(5).replace(/^\/+|\/+$/g, '');
+    if (!pathBits || !pathBits.includes('/')) return null;
+    const url = '/' + pathBits + '/';
+    const slug = pathBits.split('/').filter(Boolean).pop() || 'saved-page';
+    return {
+      id: raw,
+      kind: 'page',
+      title: titleCaseSlug(slug),
+      url,
+      area: '',
+      category: categoryLabel(url),
+      description: 'Saved from SK8 Scoop.'
+    };
+  };
+
+  const currentSavablePage = () => {
+    const path = location.pathname.replace(/\/+$/, '') || '/';
+    const known = pageByPath.get(path);
+    if (known) return known;
+    if (!/^\/(outdoors|planning|local-history|kids-family)\/[^/]+$/.test(path)) return null;
+    const canonical = document.querySelector('link[rel="canonical"]')?.href || location.href;
+    const url = new URL(canonical, location.href).pathname.replace(/\/+$/, '') + '/';
+    const meta = document.querySelector('meta[name="description"]')?.content || '';
+    const title = (document.querySelector('h1')?.textContent || document.title.split('|')[0] || 'Saved page').trim();
+    const areaText = document.querySelector('.eyebrow,.outdoor-article-kicker,.planning-article-kicker,.family-article-kicker,.history-article-kicker')?.textContent || '';
+    const area = areaText.split('·').pop()?.trim() || '';
+    return {
+      id: 'page:' + path.replace(/^\/+/, ''),
+      kind: 'page',
+      title,
+      url,
+      area,
+      category: categoryLabel(path),
+      description: meta.trim()
+    };
+  };
   let weekendPlanTracked = false;
   let sharedListTracked = false;
 
@@ -293,6 +345,30 @@
     const waypoints = venues.slice(0, -1);
     return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(destination) +
       '&waypoints=' + encodeURIComponent(waypoints.join('|'));
+  };
+
+
+  const actionIconSvg = name => {
+    const paths = {
+      save: '<path d="M12 20.3 10.6 19C5.4 14.3 2 11.2 2 7.4 2 4.4 4.4 2 7.4 2c1.7 0 3.3.8 4.6 2.1C13.3 2.8 14.9 2 16.6 2 19.6 2 22 4.4 22 7.4c0 3.8-3.4 6.9-8.6 11.6L12 20.3Z"/></svg>',
+      remind: '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>',
+      calendar: '<path d="M3 5h18v16H3z"/><path d="M7 2v6M17 2v6M3 10h18"/></svg>',
+      directions: '<path d="M12 2 22 12 12 22 2 12 12 2Z"/><path d="M8 12h7"/><path d="m13 9 3 3-3 3"/></svg>',
+      nearby: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><path d="m4.9 4.9 2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg>',
+      page: '<path d="M6 2h9l3 3v17H6z"/><path d="M14 2v5h5"/><path d="M9 12h6M9 16h6"/></svg>'
+    };
+    const body = paths[name] || paths.page;
+    const span = document.createElement('span');
+    span.className = 'my-sk8-action-icon my-sk8-icon-' + name;
+    span.setAttribute('aria-hidden','true');
+    span.innerHTML = '<svg viewBox="0 0 24 24" focusable="false">' + body;
+    return span;
+  };
+
+  const addActionIcon = (el, name) => {
+    if (!el || el.querySelector('.my-sk8-action-icon')) return el;
+    el.prepend(actionIconSvg(name));
+    return el;
   };
 
   const showToast = message => {
@@ -562,7 +638,7 @@
       if (section) section.hidden = true;
       return;
     }
-    const items = ids.map(id => state.byId.get(id)).filter(Boolean);
+    const items = ids.map(id => state.byId.get(id) || genericPageFromId(id)).filter(Boolean);
     if (!items.length) {
       section.hidden = true;
       return;
@@ -700,7 +776,7 @@
   };
 
   const renderPageSaveBar = () => {
-    const page = pageByPath.get(location.pathname.replace(/\/+$/, ''));
+    const page = currentSavablePage();
     if (!page || document.querySelector('[data-my-sk8-page-save-bar]')) return;
     const hero = document.querySelector('.page-hero');
     if (!hero) return;
