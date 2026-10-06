@@ -394,3 +394,39 @@ html,body{overflow-x:clip}@media(max-width:560px){.v75-doodle-bike{display:none}
   .nav .nav-my-sk8{order:-4;border-radius:11px}
   .nav .nav-my-sk8>span:first-child:before{display:inline-grid}
 }
+
+/* Global subscriber-aware header actions.
+   Keep Join free orange everywhere; recognised subscribers gain a separate teal latest shortcut. */
+.nav .reader-nav-latest{
+  margin-left:8px!important;
+  background:#0f6470!important;
+  color:#fff!important;
+  border:0!important;
+  border-radius:10px!important;
+  padding:12px 18px!important;
+  box-shadow:0 7px 16px rgba(15,100,112,.18)!important;
+  font-family:Inter,Arial,sans-serif!important;
+  font-size:.95rem!important;
+  font-weight:850!important
+}
+.nav .reader-nav-latest:hover,.nav .reader-nav-latest:focus-visible{
+  background:#0b525b!important;
+  color:#fff!important;
+  transform:translateY(-1px)!important
+}
+.nav .reader-nav-join{
+  background:#f8791b!important;
+  color:#fff!important;
+  border:0!important;
+  box-shadow:0 7px 16px rgba(248,121,27,.22)!important
+}
+.nav .reader-nav-join:hover,.nav .reader-nav-join:focus-visible{
+  background:#db6513!important;
+  color:#fff!important
+}
+@media(max-width:1200px){
+  .nav .reader-nav-latest,.nav .reader-nav-join{
+    margin:6px 0 0!important;
+    justify-content:center!important
+  }
+}
