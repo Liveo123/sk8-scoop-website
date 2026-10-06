@@ -261,7 +261,7 @@ contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil
       const event = events.find(record => record.id === item.event_id);
       expect(event, `Website Harvest event missing from data/events.json: ${item.id}`);
       if (item.disposition === 'whats_on_sold_out') {
-        expect(String(event.status || '').toLowerCase() === 'sold_out', `${item.id} must be marked sold_out`);
+        expect(String(event.availability || '').toLowerCase() === 'sold_out', `${item.id} must have availability=sold_out`);
       }
     }
     if (['expired_no_web_add','do_not_publish','no_web_add'].includes(item.disposition)) {
