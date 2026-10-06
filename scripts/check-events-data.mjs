@@ -51,4 +51,21 @@ const coreAreas = new Set(['Cheadle','Cheadle Hulme','Gatley','Heald Green']);
 const core = events.filter(event => coreAreas.has(event.area)).length;
 const dates = events.map(event => event.end_date || event.date).filter(Boolean).sort();
 const starts = events.map(event => event.date).filter(Boolean).sort();
-console.log(`What's On event-data QA passed: ${events.length} verified listings; ${core} core-SK8; window ${starts[0] || 'n/a'} to ${dates.at(-1) || 'n/a'}.`);
+
+const londonToday = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit'
+}).format(new Date());
+const active = events.filter(event => String(event.end_date || event.date) >= londonToday);
+const activeCore = active.filter(event => coreAreas.has(event.area));
+const latestChecked = events.map(event => event.checked).filter(value => iso.test(String(value || ''))).sort().at(-1);
+
+if (active.length === 0) {
+  console.error(`What's On event-data QA failed: no current listings remain on ${londonToday}.`);
+  process.exit(1);
+}
+if (activeCore.length === 0) {
+  console.error(`What's On event-data QA failed: current listings exist, but none are in core SK8 on ${londonToday}.`);
+  process.exit(1);
+}
+
+console.log(`What's On event-data QA passed: ${events.length} verified listings; ${active.length} current; ${activeCore.length} current core-SK8; latest source check ${latestChecked || 'n/a'}; window ${starts[0] || 'n/a'} to ${dates.at(-1) || 'n/a'}.`);
