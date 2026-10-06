@@ -13,10 +13,22 @@ on:
       - improve/post-launch-nue-v2
       - main
 
+# Direct-to-main maintenance often lands as several small commits within a minute.
+# Keep only the newest QA run for a branch/PR so superseded intermediate states
+# do not generate a burst of failure notifications.
+concurrency:
+  group: post-launch-site-qa-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   preflight:
     runs-on: ubuntu-latest
     steps:
+      - name: Debounce rapid main pushes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "Waiting briefly so a batch of maintenance commits can settle..."
+          sleep 120
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Set up Node
