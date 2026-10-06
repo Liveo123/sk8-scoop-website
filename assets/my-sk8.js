@@ -535,7 +535,7 @@
     const weekendSection = document.querySelector('[data-weekend-plan-section]');
     if (total) total.textContent = String(active.length + savedPages.length);
     if (empty) empty.hidden = active.length > 0 || savedPages.length > 0 || sharedIds().length > 0;
-    if (activeSection) activeSection.hidden = active.length === 0 && savedPages.length > 0;
+    if (activeSection) activeSection.hidden = active.length === 0 && (savedPages.length > 0 || sharedIds().length > 0);
     if (remindersSection) remindersSection.hidden = active.length === 0;
     if (weekendSection) weekendSection.hidden = active.length === 0;
 
@@ -576,9 +576,23 @@
       weekendHost.innerHTML = weekend.length
         ? weekend.map(event => eventCardHtml(event)).join('')
         : '<p class="my-sk8-empty-copy">None of your saved items fall this weekend yet.</p>';
-      if (!weekendPlanTracked) {
-        weekendPlanTracked = true;
-        track('my_sk8_weekend_plan_view', { saved_weekend_items: weekend.length });
+      if (!weekendPlanTracked && active.length > 0 && weekendSection) {
+        const trackWeekendView = () => {
+          if (weekendPlanTracked) return;
+          weekendPlanTracked = true;
+          track('my_sk8_weekend_plan_view', { saved_weekend_items: weekend.length });
+        };
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver(entries => {
+            if (entries.some(entry => entry.isIntersecting)) {
+              observer.disconnect();
+              trackWeekendView();
+            }
+          }, { threshold: 0.35 });
+          observer.observe(weekendSection);
+        } else {
+          trackWeekendView();
+        }
       }
     }
 
@@ -592,7 +606,7 @@
 
     const share = document.querySelector('[data-share-saved]');
     if (share) {
-      share.disabled = active.length === 0;
+      share.disabled = active.length + savedPages.length === 0;
       share.onclick = async () => {
         const ids = [...active, ...savedPages].slice(0, MAX_SHARE_ITEMS).map(item => item.id);
         const url = new URL('/my-sk8/', location.origin);
@@ -660,7 +674,18 @@
     wrap.append(copy, actions);
     section.appendChild(wrap);
     hero.insertAdjacentElement('afterend', section);
-    track('my_sk8_page_save_view', { item_id: page.id, item_kind: 'page', item_area: page.area });
+    const trackPageSaveView = () => track('my_sk8_page_save_view', { item_id: page.id, item_kind: 'page', item_area: page.area });
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) {
+          observer.disconnect();
+          trackPageSaveView();
+        }
+      }, { threshold: 0.5 });
+      observer.observe(section);
+    } else {
+      trackPageSaveView();
+    }
   };
 
   window.SK8MySaved = { readSaved, saveEvent, savePage, unsaveEvent, renderMySk8 };
