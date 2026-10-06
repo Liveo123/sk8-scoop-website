@@ -28,6 +28,14 @@ const ISSUE_15_POLL_ANSWERS = [
   'full_rabbit_hole'
 ];
 
+const ISSUE_16_POLL_ANSWERS = [
+  'free_cheap',
+  'proper_scares',
+  'younger_kids',
+  'local_history',
+  'less_halloween'
+];
+
 const SECRET_TRAIL_FEEDBACK_SQL = `CREATE TABLE IF NOT EXISTS secret_trail_feedback (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  trail_key TEXT NOT NULL DEFAULT 'cheadle',
@@ -145,6 +153,14 @@ export default {
 
     if (url.pathname === '/api/poll/issue-15' && request.method === 'POST') {
       return handleIssue15PollVote(request, env);
+    }
+
+    if (url.pathname === '/api/poll/issue-16' && request.method === 'GET') {
+      return handleIssue16PollResults(env);
+    }
+
+    if (url.pathname === '/api/poll/issue-16' && request.method === 'POST') {
+      return handleIssue16PollVote(request, env);
     }
 
     if (url.pathname === '/api/secret-trail-feedback' && request.method === 'POST') {
@@ -790,6 +806,68 @@ async function handleSecretTrailFeedbackStats(request, env) {
   } catch (error) {
     console.error('Secret Trail feedback stats error', error);
     return json({ error: 'Could not load Secret Trail feedback.' }, 500);
+  }
+}
+
+
+async function getIssue16PollResults(db) {
+  await ensureIssue12PollTable(db);
+  const result = await db.prepare(`SELECT answer, COUNT(*) AS votes FROM newsletter_poll_votes WHERE issue = '16' GROUP BY answer`).all();
+  const counts = Object.fromEntries(ISSUE_16_POLL_ANSWERS.map(answer => [answer, 0]));
+  for (const row of result.results || []) {
+    if (Object.prototype.hasOwnProperty.call(counts, row.answer)) counts[row.answer] = Number(row.votes || 0);
+  }
+  const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
+  return { issue: 16, counts, total };
+}
+
+async function handleIssue16PollResults(env) {
+  try {
+    return json(await getIssue16PollResults(env.DB));
+  } catch (error) {
+    console.error('Issue 16 poll results error', error);
+    return json({ error: 'Poll results are temporarily unavailable.' }, 503);
+  }
+}
+
+async function handleIssue16PollVote(request, env) {
+  let data;
+  try {
+    data = await request.json();
+  } catch {
+    return json({ error: 'The vote could not be read.' }, 400);
+  }
+
+  const answer = String(data.answer || '').trim();
+  const voterToken = String(data.voter_token || '').trim();
+  const comment = String(data.comment || '').trim().replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').slice(0, 1200);
+  if (!ISSUE_16_POLL_ANSWERS.includes(answer)) return json({ error: 'Please choose one of the poll options.' }, 400);
+  if (!/^[A-Za-z0-9_-]{12,100}$/.test(voterToken)) return json({ error: 'Please refresh the poll and try again.' }, 400);
+
+  try {
+    await ensureIssue12PollTable(env.DB);
+    await ensureIssue15PollCommentsTable(env.DB);
+    await env.DB.prepare(`INSERT INTO newsletter_poll_votes (issue, answer, voter_token, created_at, updated_at)
+      VALUES ('16', ?, ?, datetime('now'), datetime('now'))
+      ON CONFLICT(issue, voter_token) DO UPDATE SET answer = excluded.answer, updated_at = datetime('now')`)
+      .bind(answer, voterToken)
+      .run();
+
+    await env.DB.prepare(`DELETE FROM newsletter_poll_comments WHERE issue = '16' AND voter_token = ?`)
+      .bind(voterToken)
+      .run();
+    if (comment) {
+      await env.DB.prepare(`INSERT INTO newsletter_poll_comments (issue, voter_token, comment_text, created_at, updated_at)
+        VALUES ('16', ?, ?, datetime('now'), datetime('now'))`)
+        .bind(voterToken, comment)
+        .run();
+    }
+
+    const results = await getIssue16PollResults(env.DB);
+    return json({ success: true, answer, comment_saved: Boolean(comment), ...results });
+  } catch (error) {
+    console.error('Issue 16 poll vote error', error);
+    return json({ error: 'The vote could not be saved. Please try again.' }, 503);
   }
 }
 
