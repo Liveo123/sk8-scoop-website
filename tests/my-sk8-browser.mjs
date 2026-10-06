@@ -30,7 +30,7 @@ chrome.stdout.on('data', chunk => process.stdout.write(chunk));
 chrome.stderr.on('data', chunk => process.stderr.write(chunk));
 
 let version;
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 120; i++) {
   try {
     const response = await fetch('http://127.0.0.1:9222/json/version');
     if (response.ok) {
