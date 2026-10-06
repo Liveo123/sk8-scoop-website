@@ -48,8 +48,6 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     ['What’s On','/whats-on/'],
     ['My SK8','/my-sk8/'],
     ['Guides','/guides/'],
-    ['Where to start','/start/'],
-    ['Join','/join/'],
     ['Submit','/submit/'],
     ['Contact','/contact/'],
     ['Advertise','/advertise.html']
@@ -108,6 +106,9 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   joinButton.className='button nav-join reader-nav-join';
   joinButton.href='/join/';
   joinButton.textContent='Join free';
+  if(activeHref==='/join/'){
+    joinButton.setAttribute('aria-current','page');
+  }
   nav.appendChild(joinButton);
 }
 
