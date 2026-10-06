@@ -3,6 +3,7 @@
   const REMINDER_KEY = 'sk8_reminders_v1';
   const MAX_SHARE_ITEMS = 20;
   const state = { events: [], byId: new Map() };
+  let weekendPlanTracked = false;
 
   const track = (name, params = {}) => {
     if (typeof window.sk8Track === 'function') window.sk8Track(name, params);
@@ -37,6 +38,7 @@
     const on = ids.includes(event.id);
     const next = on ? ids.filter(id => id !== event.id) : [...ids, event.id];
     writeReminders(next);
+    if (!on && !isSaved(event.id)) saveEvent(event, 'reminder');
     track(on ? 'my_sk8_reminder_removed' : 'my_sk8_reminder_set', { event_id: event.id, event_area: event.area });
     return !on;
   };
@@ -71,10 +73,11 @@
     if (!item.id) return false;
     const saved = readSaved();
     const existing = saved.findIndex(entry => entry.id === item.id);
+    const isNew = existing < 0;
     if (existing >= 0) saved[existing] = { ...saved[existing], ...item, saved_at: saved[existing].saved_at || item.saved_at };
     else saved.unshift(item);
     writeSaved(saved);
-    track('my_sk8_save', { event_id: item.id, event_area: item.area, save_source: source });
+    if (isNew) track('my_sk8_save', { event_id: item.id, event_area: item.area, save_source: source });
     return true;
   };
 
@@ -82,6 +85,10 @@
     const saved = readSaved();
     const next = saved.filter(item => item.id !== id);
     if (next.length === saved.length) return false;
+    if (hasReminder(id)) {
+      writeReminders(readReminders().filter(reminderId => reminderId !== id));
+      track('my_sk8_reminder_removed', { event_id: id, removal_source: 'unsave' });
+    }
     writeSaved(next);
     track('my_sk8_unsave', { event_id: id });
     return true;
@@ -293,6 +300,7 @@
     const source = live.booking_url || live.source_url || '';
     const cal = calendarHref(live);
     const directions = directionsHref(live);
+    const isPast = expired(live);
     return `
       <article class="my-sk8-saved-card" data-saved-id="${escapeHtml(live.id)}">
         <div class="my-sk8-saved-date"><strong>${escapeHtml(prettyDate(live.date))}</strong>${live.time ? '<span>' + escapeHtml(live.time) + '</span>' : ''}</div>
@@ -305,7 +313,7 @@
             ${source ? '<a href="' + escapeHtml(source) + '" target="_blank" rel="noopener">Check details</a>' : ''}
             ${directions ? '<a href="' + escapeHtml(directions) + '" target="_blank" rel="noopener" data-my-sk8-directions="' + escapeHtml(live.id) + '">Directions</a>' : ''}
             ${cal ? '<a href="' + cal + '" download="sk8-scoop-' + escapeHtml(live.id) + '.ics" data-my-sk8-calendar="' + escapeHtml(live.id) + '">Calendar</a>' : ''}
-            <button type="button" data-my-sk8-reminder="${escapeHtml(live.id)}">${hasReminder(live.id) ? 'Reminder set ✓' : 'Remind me'}</button>
+            ${isPast ? '' : '<button type="button" data-my-sk8-reminder="' + escapeHtml(live.id) + '">' + (hasReminder(live.id) ? 'Reminder set ✓' : 'Remind me') + '</button>'}
             <button type="button" data-my-sk8-remove="${escapeHtml(live.id)}">Remove</button>
           </div>
         </div>
@@ -316,7 +324,7 @@
     if (!event.area) return '';
     const candidates = state.events
       .filter(candidate => candidate.id !== event.id && candidate.area === event.area && !expired(candidate))
-      .filter(candidate => candidate.date >= localToday())
+      .filter(candidate => candidate.date >= localToday() && !isSaved(candidate.id))
       .slice(0, 2);
     if (!candidates.length) return '';
     return '<div class="my-sk8-nearby"><strong>Also in ' + escapeHtml(event.area) + '</strong>' +
@@ -382,6 +390,10 @@
     const saved = readSaved().map(item => state.byId.get(item.id) ? { ...item, ...state.byId.get(item.id) } : item);
     const active = saved.filter(item => !expired(item)).sort((a, b) => (a.date + ' ' + a.time).localeCompare(b.date + ' ' + b.time));
     const past = saved.filter(expired).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    const activeIds = new Set(active.map(item => item.id));
+    const reminderIds = readReminders();
+    const validReminderIds = reminderIds.filter(id => activeIds.has(id));
+    if (validReminderIds.length !== reminderIds.length) writeReminders(validReminderIds);
 
     const activeHost = document.querySelector('[data-my-sk8-active]');
     const pastHost = document.querySelector('[data-my-sk8-past]');
@@ -422,7 +434,10 @@
       weekendHost.innerHTML = weekend.length
         ? weekend.map(event => eventCardHtml(event)).join('')
         : '<p class="my-sk8-empty-copy">None of your saved items fall this weekend yet.</p>';
-      track('my_sk8_weekend_plan_view', { saved_weekend_items: weekend.length });
+      if (!weekendPlanTracked) {
+        weekendPlanTracked = true;
+        track('my_sk8_weekend_plan_view', { saved_weekend_items: weekend.length });
+      }
     }
 
     const route = routeHref(active);
