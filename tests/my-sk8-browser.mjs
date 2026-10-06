@@ -173,7 +173,7 @@ try {
   await navigate('/my-sk8/');
   record('Expired item excluded from active list', !(await evaluate("document.querySelector('[data-my-sk8-active]')?.textContent.includes('Expired test event')")));
   record('Expired item moved to Past saves', Boolean(await evaluate("document.querySelector('[data-my-sk8-past]')?.textContent.includes('Expired test event')")));
-  record('Expired item does not offer a reminder', !(await evaluate("document.querySelector('[data-saved-id="expired-test"] [data-my-sk8-reminder]')")));
+  record('Expired item does not offer a reminder', !(await evaluate("document.querySelector('[data-saved-id=\\\"expired-test\\\"] [data-my-sk8-reminder]')")));
 
   await screenshot('my-sk8-desktop.png');
   await fullScreenshot('my-sk8-desktop-full.png');
