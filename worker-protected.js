@@ -116,6 +116,13 @@ export default {
       return json({ active });
     }
 
+    if (url.pathname === '/api/subscriber-preview-unlock' && request.method === 'POST') {
+      if (!isPreviewRequest(request)) return json({ error: 'Not found.' }, 404);
+      const response = json({ success: true, preview: true });
+      response.headers.append('set-cookie', 'sk8_subscriber_preview=1; Path=/; Max-Age=86400; Secure; SameSite=Lax');
+      return response;
+    }
+
     if (url.pathname === '/api/poll/issue-12' && request.method === 'GET') {
       return handleIssue12PollResults(env);
     }
@@ -361,6 +368,14 @@ async function ensureGuideAccessTable(db) {
   await db.prepare('CREATE INDEX IF NOT EXISTS idx_guide_access_tokens_key_expiry ON guide_access_tokens(guide_key, expires_at)').run();
 }
 
+function isPreviewRequest(request) {
+  try {
+    return /(^|\.)previews\.sk8scoop\.com$/i.test(new URL(request.url).hostname);
+  } catch {
+    return false;
+  }
+}
+
 function readCookie(request, name) {
   const header = request.headers.get('cookie') || '';
   const parts = header.split(';');
@@ -400,6 +415,7 @@ async function issueSubscriberAccessToken(db) {
 }
 
 async function hasSubscriberAccess(request, db) {
+  if (isPreviewRequest(request) && readCookie(request, 'sk8_subscriber_preview') === '1') return true;
   if (!db) return false;
   const token = readCookie(request, SUBSCRIBER_ACCESS.cookie);
   if (!token || !/^[A-Za-z0-9_-]{40,60}$/.test(token)) return false;
