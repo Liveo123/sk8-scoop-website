@@ -239,7 +239,7 @@ contains('assets/global-search.css','@media(min-width:1200px)');
 contains('assets/global-search.css','@media(min-width:1450px)');
 contains('assets/global-search.css','@media(min-width:821px) and (max-width:1199px)');
 contains('assets/global-search.css','@media(max-width:820px)');
-contains('assets/global-search.css','width:min(1320px,calc(100% - 24px))');
+contains('assets/global-search.css','width:min(1340px,calc(100% - 16px))');
 contains('assets/global-search.css','.global-search-form:focus-within');
 excludes('assets/global-search.js','query_text');
 contains('assets/search.js','hasEnoughQueryCoverage');
