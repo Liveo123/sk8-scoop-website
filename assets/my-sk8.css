@@ -90,3 +90,14 @@
 .my-sk8-action-icon.tone-directions{background:#e8f3ff;color:#2d6fa7}
 .my-sk8-action-icon.tone-nearby{background:#e7f7ee;color:#277753}
 .my-sk8-page-save-button .my-sk8-action-icon{background:#fff6ec!important;color:#cf5f34!important}
+
+/* Prevent component display rules from defeating the HTML hidden state. */
+[data-my-sk8-toolbox][hidden],
+[data-map-saved][hidden],
+[data-shared-shortlist][hidden],
+[data-my-sk8-pages-section][hidden],
+[data-my-sk8-past-section][hidden],
+[data-my-sk8-active-section][hidden],
+[data-my-sk8-reminders-section][hidden],
+[data-weekend-plan-section][hidden],
+[data-my-sk8-empty][hidden]{display:none!important}
