@@ -180,7 +180,7 @@
     closePanel();
   });
 
-  const inlineSearchQuery = window.matchMedia('(min-width: 1450px), (min-width: 821px) and (max-width: 1199px)');
+  const inlineSearchQuery = window.matchMedia('(min-width: 821px)');
   const handleInlineSearchChange = event => { if (event.matches) closePanel(); };
   if (typeof inlineSearchQuery.addEventListener === 'function') inlineSearchQuery.addEventListener('change', handleInlineSearchChange);
   else if (typeof inlineSearchQuery.addListener === 'function') inlineSearchQuery.addListener(handleInlineSearchChange);
