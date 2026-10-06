@@ -384,3 +384,13 @@ html,body{overflow-x:clip}@media(max-width:560px){.v75-doodle-bike{display:none}
   .nav a{padding:9px 8px!important;font-size:.86rem!important}
   .nav .button,.nav .nav-join{padding:10px 13px!important;margin-left:4px!important;font-size:.88rem!important}
 }
+
+/* My SK8 should read as a first-class reader destination, not a buried utility. */
+.nav .nav-my-sk8{background:#fff4e8;border:1px solid #f2d2b5;color:#0b5964!important}
+.nav .nav-my-sk8:hover,.nav .nav-my-sk8:focus-visible{background:#ffead7!important;border-color:#e9b98d;color:#0b5964!important}
+.nav .nav-my-sk8.active{background:#ffe8d2!important;border-color:#e8b17d}
+.nav .nav-my-sk8>span:first-child:before{background:#fff;color:#cf5f34;box-shadow:0 0 0 1px rgba(207,95,52,.12)}
+@media(max-width:820px){
+  .nav .nav-my-sk8{order:-4;border-radius:11px}
+  .nav .nav-my-sk8>span:first-child:before{display:inline-grid}
+}
