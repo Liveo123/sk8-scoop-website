@@ -129,6 +129,29 @@ Do not build accounts, AI recommendations, public profiles, reviews or social-fe
 - The reminder MVP does not send email or push alerts. “Remind me here” means SK8 will flag the item when the reader returns.
 - “Nearby” is same-area logic in this test, not precise-distance ranking.
 
+## Subscriber-access extension
+
+The My SK8 preview also tests a lightweight subscriber shelf.
+
+Current behaviour:
+
+- a successful website/newsletter signup issues a long-lived first-party subscriber-access token;
+- an existing subscriber can enter the same email again if the browser token has disappeared;
+- a new email joins the normal SK8 Scoop subscriber audience and receives the existing welcome flow;
+- one recognised browser can open the current Free & Cheap, 52 Adventures and Halloween & Half-Term guides;
+- Treasure Hunts and future Pub Trails are explicitly excluded because they remain referral rewards or paid products;
+- My SK8 is the subscriber home for current guides and future extras such as personal maps, stronger weekend planning, offers, extra local-history material, downloads and more powerful saved-item tools;
+- this is a lightweight gate, not a password account or high-security entitlement system.
+
+Useful measurements:
+
+- `sign_up` by `form_position` for subscriber-shelf and guide landing conversions;
+- `subscriber_shelf_view` split by locked/unlocked state;
+- `subscriber_guide_open` for guide use after recognition;
+- guide landing-page conversion into successful signup/unlock.
+
+The main acquisition question is whether making useful guides visibly free to subscribers increases newsletter signups without creating enough friction to reduce guide usage.
+
 ## Production gate
 
 Before any live experiment:
