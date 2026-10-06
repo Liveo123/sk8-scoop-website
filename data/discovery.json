@@ -878,6 +878,67 @@
       ],
       "freshness": "current",
       "checked": "2026-10-03"
+    },
+    {
+      "id": "heald-green-lost-place-names",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Heald Green's lost place names",
+      "summary": "Long Lane, Hurlbote and Near Long Flatt reveal fragments of an older Heald Green landscape still surviving in names and records.",
+      "href": "/local-history/heald-green-lost-place-names/",
+      "area": "Heald Green",
+      "tags": [
+        "heald green",
+        "long lane",
+        "hurlbote",
+        "near long flatt",
+        "place names",
+        "local history",
+        "finney lane"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-10-06"
+    },
+    {
+      "id": "217-finney-lane-the-brew",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "217 Finney Lane: from cafe and Sunday school to The Brew",
+      "summary": "The changing story of a Heald Green address used for a cafe, Methodist meetings, later shops and now The Brew HG.",
+      "href": "/local-history/217-finney-lane-the-brew/",
+      "area": "Heald Green",
+      "tags": [
+        "heald green",
+        "finney lane",
+        "the brew",
+        "sunday school",
+        "methodist",
+        "cafe",
+        "local history"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-10-06"
+    },
+    {
+      "id": "cheadle-hulme-density-study",
+      "type": "Stories",
+      "category": "Planning & Development",
+      "title": "Cheadle Hulme density study: what 4, 6 and 8 storeys mean",
+      "summary": "A plain-English guide to the council urban-design study, including where higher building guidance applies and why it is not planning permission.",
+      "href": "/planning/cheadle-hulme-density-study/",
+      "area": "Cheadle Hulme",
+      "tags": [
+        "cheadle hulme",
+        "planning",
+        "density",
+        "urban design",
+        "scud",
+        "8 storeys",
+        "6 storeys",
+        "4 storeys"
+      ],
+      "freshness": "current",
+      "checked": "2026-10-06"
     }
   ]
 }

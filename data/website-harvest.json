@@ -1,0 +1,131 @@
+{
+  "issue": 15,
+  "issue_date": "2026-10-02",
+  "final_issue_checked": true,
+  "checked_date": "2026-10-06",
+  "source": "Final Issue 15 editorial/build record, not the early research shortlist",
+  "items": [
+    {
+      "id": "phoenix-nights",
+      "classification": "NEWSLETTER",
+      "disposition": "expired_no_web_add",
+      "reason": "3 October event had expired before catch-up review"
+    },
+    {
+      "id": "hive-cheadle-hulme",
+      "classification": "NEWSLETTER",
+      "disposition": "expired_no_web_add",
+      "reason": "3 October event had expired before catch-up review"
+    },
+    {
+      "id": "nansen-firs-20mph",
+      "classification": "AWAITING VERIFICATION",
+      "disposition": "do_not_publish",
+      "reason": "Final Issue 15 freshness check found conflicting live consultation status"
+    },
+    {
+      "id": "heald-green-lost-place-names",
+      "classification": "MULTI-USE",
+      "disposition": "standalone_page",
+      "route": "/local-history/heald-green-lost-place-names/"
+    },
+    {
+      "id": "217-finney-lane-the-brew",
+      "classification": "MULTI-USE",
+      "disposition": "standalone_page",
+      "route": "/local-history/217-finney-lane-the-brew/"
+    },
+    {
+      "id": "cheadle-hulme-density-study",
+      "classification": "MULTI-USE",
+      "disposition": "standalone_page",
+      "route": "/planning/cheadle-hulme-density-study/"
+    },
+    {
+      "id": "stockport-local-plan-reg19",
+      "classification": "MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/planning/",
+      "reason": "Planning hub already carries the live Regulation 19 consultation"
+    },
+    {
+      "id": "cheadle-brew-and-biscuit",
+      "classification": "WEBSITE",
+      "disposition": "whats_on",
+      "event_id": "cheadle-brew-and-biscuit-2026-10-06"
+    },
+    {
+      "id": "gatley-welcome-cafe",
+      "classification": "WEBSITE",
+      "disposition": "expired_no_web_add",
+      "reason": "5 October event expired before catch-up review"
+    },
+    {
+      "id": "monster-mugs-kids",
+      "classification": "GUIDE / MULTI-USE",
+      "disposition": "whats_on_sold_out",
+      "event_id": "monster-mugs-kids-2026-10-10"
+    },
+    {
+      "id": "staircase-beaded-spiders",
+      "classification": "GUIDE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "staircase-beaded-spiders-2026-10-10"
+    },
+    {
+      "id": "cheadle-hulme-dementia-disco",
+      "classification": "WEBSITE",
+      "disposition": "whats_on",
+      "event_id": "dementia-disco-cheadle-hulme-2026-10-10"
+    },
+    {
+      "id": "heald-green-library-storytime",
+      "classification": "WEBSITE",
+      "disposition": "whats_on",
+      "event_id": "heald-green-library-storytime-2026-10-10"
+    },
+    {
+      "id": "guides",
+      "classification": "SK8-OWNED",
+      "disposition": "existing_surface",
+      "route": "/guides/",
+      "reason": "52 Adventures and Free & Cheap already have maintained owned surfaces"
+    },
+    {
+      "id": "house-ad-poll-letters",
+      "classification": "NOT WEBSITE",
+      "disposition": "no_web_add",
+      "reason": "Newsletter interaction/commercial modules are not editorial website harvest items"
+    },
+    {
+      "id": "cheadle-work-skills-navigator",
+      "classification": "WEBSITE",
+      "disposition": "whats_on",
+      "event_id": "cheadle-work-skills-navigator-2026-10-06"
+    },
+    {
+      "id": "the-light-cafe-cheadle",
+      "classification": "WEBSITE",
+      "disposition": "whats_on",
+      "event_id": "the-light-cafe-cheadle-2026-10-07"
+    },
+    {
+      "id": "lum-head-open-day",
+      "classification": "WEBSITE",
+      "disposition": "whats_on",
+      "event_id": "lum-head-open-day-2026-10-07"
+    },
+    {
+      "id": "stockport-plaza-wrestling",
+      "classification": "WEBSITE",
+      "disposition": "whats_on",
+      "event_id": "stockport-plaza-wrestling-2026-10-10"
+    },
+    {
+      "id": "upper-room-cafe-drop-in",
+      "classification": "WEBSITE",
+      "disposition": "expired_no_web_add",
+      "reason": "5 October session had expired before catch-up review"
+    }
+  ]
+}
