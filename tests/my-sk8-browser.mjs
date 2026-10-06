@@ -197,14 +197,27 @@ try {
   await sleep(150);
   record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('cheadle-brew-and-biscuit-2026-10-06')")));
 
+  await navigate('/local-history/gatley-shouter/');
+  record('Article page shows My SK8 save bar', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
+  record('Article save button works', await click('[data-my-sk8-page-save-bar] button'));
+  await sleep(180);
+  record('Article persisted as a page item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'page:local-history/gatley-shouter' && x.kind === 'page')")));
+  record('Article page has no horizontal overflow on mobile', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
+  await fullScreenshot('gatley-shouter-save-mobile-full.png');
+
+  await navigate('/my-sk8/');
+  record('Saved articles section becomes visible', !(await evaluate("document.querySelector('[data-my-sk8-pages-section]')?.hidden")));
+  record('Saved Gatley Shouter appears in My SK8', Boolean(await evaluate("document.querySelector('[data-my-sk8-pages]')?.textContent.includes('The Gatley Shouter')")));
+
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   await navigate('/whats-on/?save=john-lewis-cheadle-baby-beyond-2026-10-08&utm_source=newsletter&utm_medium=email');
   record('Newsletter-style save URL persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'john-lewis-cheadle-baby-beyond-2026-10-08')")));
   record('Save parameter removed after processing', !(await evaluate("location.search.includes('save=')")), await evaluate('location.search'));
 
-  await navigate('/my-sk8/?list=heald-green-library-storytime-2026-10-10,john-lewis-cheadle-baby-beyond-2026-10-08');
+  await navigate('/my-sk8/?list=heald-green-library-storytime-2026-10-10,john-lewis-cheadle-baby-beyond-2026-10-08,page%3Alocal-history%2Fgatley-shouter');
   record('Shared shortlist renders', !(await evaluate("document.querySelector('[data-shared-shortlist]')?.hidden")));
-  record('Shared shortlist has two items', (await text('[data-shared-count]')) === '2', await text('[data-shared-count]'));
+  record('Shared shortlist has three items', (await text('[data-shared-count]')) === '3', await text('[data-shared-count]'));
+  record('Shared shortlist can contain a saved article', Boolean(await evaluate("document.querySelector('[data-shared-items]')?.textContent.includes('The Gatley Shouter')")));
 
   const noindex = await attr('meta[name="robots"]', 'content');
   record('My SK8 experiment is noindex', /noindex/i.test(noindex), noindex);
