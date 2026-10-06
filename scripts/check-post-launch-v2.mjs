@@ -140,6 +140,18 @@ contains('worker.js',"url.pathname === '/api/submit-event'");
 contains('advertise.html','action="/api/advertiser-enquiry"');
 contains('worker.js',"url.pathname === '/api/advertiser-enquiry'");
 
+// Global navigation contract: adding My SK8 must not silently remove established reader routes.
+for (const navEntry of [
+  "['What’s On','/whats-on/']",
+  "['My SK8','/my-sk8/']",
+  "['Guides','/guides/']",
+  "['Where to start','/start/']",
+  "['Submit','/submit/']",
+  "['Advertise','/advertise.html']"
+]) {
+  contains('assets/site.js',navEntry);
+}
+
 // Connected experience measurement.
 for (const eventName of ['join_page_visit','where_to_start_page_visit','reader_submission_page_visit','contact_page_visit','food_drink_page_visit','kids_family_page_visit','outdoors_page_visit','local_history_page_visit','planning_page_visit','useful_updates_page_visit','around_sk8_page_visit','nue_continuation']) {
   contains('assets/nue-analytics.js',eventName);
