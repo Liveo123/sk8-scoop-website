@@ -222,4 +222,52 @@ excludes('assets/global-search.js','query_text');
 contains('assets/search.js','hasEnoughQueryCoverage');
 contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil(terms.length * 0.6)');
 
+// Website Harvest release gate.
+// The public currentIssue cannot advance without a disposition for the final published issue.
+// This deliberately checks the FINAL issue record, so late-added stories cannot bypass the website handoff.
+{
+  const harvestPath = 'data/website-harvest.json';
+  expect(fs.existsSync(path.join(root,harvestPath)), `${harvestPath} is missing`);
+  const harvest = JSON.parse(read(harvestPath));
+  const configText = read('assets/config.js');
+  const currentIssueMatch = configText.match(/currentIssue:\s*\{[\s\S]*?number:\s*(\d+)/);
+  expect(currentIssueMatch, 'assets/config.js currentIssue number could not be read');
+  const currentIssueNumber = Number(currentIssueMatch[1]);
+  expect(harvest.final_issue_checked === true, 'Website Harvest must be rebuilt from the final published issue');
+  expect(Number(harvest.issue) === currentIssueNumber, `Website Harvest issue ${harvest.issue} does not match public current issue ${currentIssueNumber}`);
+  expect(Array.isArray(harvest.items) && harvest.items.length > 0, 'Website Harvest has no item dispositions');
+
+  const allowedDispositions = new Set([
+    'standalone_page','existing_surface','whats_on','whats_on_sold_out',
+    'expired_no_web_add','do_not_publish','no_web_add'
+  ]);
+  const events = JSON.parse(read('data/events.json'));
+  const discoveryRecords = JSON.parse(read('data/discovery.json')).records || [];
+  for (const item of harvest.items) {
+    expect(item.id && item.disposition, 'Every Website Harvest item needs id + disposition');
+    expect(allowedDispositions.has(item.disposition), `Unknown Website Harvest disposition for ${item.id}: ${item.disposition}`);
+    if (item.disposition === 'standalone_page') {
+      expect(String(item.route || '').startsWith('/'), `${item.id} standalone_page missing route`);
+      const route = item.route;
+      const rel = route.endsWith('/') ? `${route.replace(/^\//,'')}index.html` : route.replace(/^\//,'');
+      expect(fs.existsSync(path.join(root,rel)), `Website Harvest route missing from repo: ${route}`);
+      expect(discoveryRecords.some(record => record.href === route), `Website Harvest route missing from search/discovery: ${route}`);
+      contains('sitemap.xml',`https://www.sk8scoop.com${route}`);
+    }
+    if (item.disposition === 'existing_surface') {
+      expect(String(item.route || '').startsWith('/'), `${item.id} existing_surface missing route`);
+    }
+    if (item.disposition === 'whats_on' || item.disposition === 'whats_on_sold_out') {
+      const event = events.find(record => record.id === item.event_id);
+      expect(event, `Website Harvest event missing from data/events.json: ${item.id}`);
+      if (item.disposition === 'whats_on_sold_out') {
+        expect(String(event.status || '').toLowerCase() === 'sold_out', `${item.id} must be marked sold_out`);
+      }
+    }
+    if (['expired_no_web_add','do_not_publish','no_web_add'].includes(item.disposition)) {
+      expect(Boolean(item.reason), `${item.id} needs a reason for ${item.disposition}`);
+    }
+  }
+}
+
 console.log('Post-launch NUE v2 preflight passed.');
