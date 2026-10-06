@@ -223,6 +223,9 @@ try {
   record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('cheadle-brew-and-biscuit-2026-10-06')")));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
+  await navigate('/my-sk8/');
+  record('Empty My SK8 hides the planning toolbox', Boolean(await evaluate("document.querySelector('[data-my-sk8-toolbox]')?.hidden && getComputedStyle(document.querySelector('[data-my-sk8-toolbox]')).display === 'none'")));
+  record('Empty My SK8 does not show the route button', Boolean(await evaluate("document.querySelector('[data-map-saved]')?.hidden && getComputedStyle(document.querySelector('[data-map-saved]')).display === 'none'")));
   await navigate('/outdoors/chadkirk-country-estate/');
   record('Useful article types load My SK8 save controls automatically', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
   record('Generic article save button has an icon', Boolean(await evaluate("document.querySelector('[data-my-sk8-page-save-bar] .my-sk8-action-icon')")));
