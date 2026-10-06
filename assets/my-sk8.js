@@ -348,19 +348,19 @@
   };
 
 
-  const actionIconSvg = (name, tone = '') => {
-    const paths = {
-      save: '<path d="M12 20.3 10.6 19C5.4 14.3 2 11.2 2 7.4 2 4.4 4.4 2 7.4 2c1.7 0 3.3.8 4.6 2.1C13.3 2.8 14.9 2 16.6 2 19.6 2 22 4.4 22 7.4c0 3.8-3.4 6.9-8.6 11.6L12 20.3Z"/>',
-      remind: '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
-      calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18"/>',
-      directions: '<path d="M12 2 22 12 12 22 2 12 12 2Z"/><path d="M8 12h7"/><path d="m13 9 3 3-3 3"/>',
-      nearby: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><path d="m4.9 4.9 2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/>',
-      page: '<path d="M6 2h9l3 3v17H6z"/><path d="M14 2v5h5"/><path d="M9 12h6M9 16h6"/>'
+  const actionIconMark = (name, tone = '') => {
+    const marks = {
+      save: '♥',
+      remind: '◷',
+      calendar: '▦',
+      directions: '➜',
+      nearby: '✦',
+      page: '▤'
     };
     const span = document.createElement('span');
     span.className = 'my-sk8-action-icon' + (tone ? ' tone-' + tone : '');
     span.setAttribute('aria-hidden','true');
-    span.innerHTML = '<svg viewBox="0 0 24 24" focusable="false">' + (paths[name] || paths.page) + '</svg>';
+    span.textContent = marks[name] || marks.page;
     return span;
   };
 
@@ -381,7 +381,7 @@
 
   const setActionContent = (el, label, icon = '', tone = '') => {
     el.replaceChildren();
-    if (icon) el.appendChild(actionIconSvg(icon, tone));
+    if (icon) el.appendChild(actionIconMark(icon, tone));
     const textEl = document.createElement('span');
     textEl.className = 'my-sk8-action-label';
     textEl.textContent = label;
