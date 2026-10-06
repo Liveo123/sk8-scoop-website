@@ -143,6 +143,9 @@ export default {
       if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') {
         return handleAdvertiserEnquiry(request, env);
       }
+      if (url.pathname === '/api/advertiser-enquiries' && request.method === 'GET') {
+        return handleAdvertiserEnquiriesList(request, env);
+      }
       if (url.pathname === '/api/business-submission' && request.method === 'POST') {
         return handleBusinessSubmission(request, env);
       }
@@ -241,10 +244,50 @@ async function handleAdvertiserEnquiry(request, env) {
   const c = (value, length = 1000) => String(value || '').trim().slice(0, length);
   await env.DB.prepare(`INSERT INTO advertiser_enquiries (business_name,contact_name,email,phone,business_type,area,website,package,preferred_date,advert_copy,image_link,invoice_details,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?, 'pending',datetime('now'))`)
     .bind(c(d.business_name, 180), c(d.contact_name, 120), c(d.email, 200), c(d.phone, 80), c(d.business_type, 120), c(d.area, 100), c(d.website, 500), c(d.package, 80), c(d.preferred_date, 30), c(d.advert_copy, 1000), c(d.image_link, 500), c(d.invoice_details, 500)).run();
+  const notification = await notifyInbox(env, {
+    subject: `[SK8 Scoop advertiser enquiry] ${c(d.business_name, 80)}`,
+    text: [
+      'New SK8 Scoop advertiser enquiry',
+      '',
+      `Business: ${c(d.business_name, 180)}`,
+      `Contact: ${c(d.contact_name, 120)}`,
+      `Email: ${c(d.email, 200)}`,
+      `Phone: ${c(d.phone, 80) || 'Not supplied'}`,
+      `Business type: ${c(d.business_type, 120) || 'Not supplied'}`,
+      `Area: ${c(d.area, 100) || 'Not supplied'}`,
+      `Website: ${c(d.website, 500)}`,
+      `Route: ${c(d.package, 80)}`,
+      `Preferred month: ${c(d.preferred_date, 30)}`,
+      '',
+      'Goal / note:',
+      c(d.advert_copy, 1000) || 'Not supplied',
+      '',
+      'The enquiry is also saved in the website D1 inbound queue. Reconcile it against the main advertising CRM before creating a new business record.'
+    ].join('\n')
+  });
+  if (notification !== 'sent') {
+    console.error('SK8 Scoop advertiser notification state', notification);
+  }
+
   const message = String(d.package) === 'human_review'
     ? 'Thanks. Your local-fit check has been sent to SK8 Scoop. We will review whether your business is a sensible match for SK8 readers before suggesting any paid option.'
     : 'Thank you. Your campaign enquiry has been saved for suitability and availability checks.';
   return json({ message });
+}
+
+async function handleAdvertiserEnquiriesList(request, env) {
+  const auth = request.headers.get('authorization') || '';
+  if (!env.ADMIN_TOKEN) return json({ error: 'The admin token has not been configured.' }, 503);
+  if (auth !== `Bearer ${env.ADMIN_TOKEN}`) return json({ error: 'Unauthorised.' }, 401);
+
+  const rows = (await env.DB.prepare(`SELECT * FROM advertiser_enquiries ORDER BY created_at DESC LIMIT 100`).all()).results || [];
+  const counts = rows.reduce((acc, row) => {
+    const status = String(row.status || 'pending');
+    acc[status] = Number(acc[status] || 0) + 1;
+    return acc;
+  }, {});
+
+  return json({ rows, returned: rows.length, counts });
 }
 
 async function handleBusinessSubmission(request, env) {
