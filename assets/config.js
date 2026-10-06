@@ -48,7 +48,7 @@ window.SK8_CONFIG = {
   publicStats: {
     subscriberCount: "600+",
     subscriberProof: "600+",
-    issuesPublished: 14,
+    issuesPublished: 15,
     checkedDate: "25 September 2026",
     latestMainSendRecipients: 539,
     latestMainOpenRate: null,
@@ -58,13 +58,13 @@ window.SK8_CONFIG = {
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 14,
-    dateIso: "2026-09-25",
-    dateDisplay: "Friday 25 September 2026",
-    title: "Issue 14 · Friday 25 September 2026",
-    headline: "Medieval Manchester, The Unfriend & an 11th-century Cheadle surprise",
-    summary: "A free medieval faire, The Unfriend in Heald Green, an M60 closure, St Mary’s Cheadle, the Local Plan and useful weekend ideas.",
-    url: "https://connect.mailerlite.com/emails/199476219451803347/preview"
+    number: 15,
+    dateIso: "2026-10-02",
+    dateDisplay: "Friday 2 October 2026",
+    title: "Issue 15 · Friday 2 October 2026",
+    headline: "Phoenix Nights, lost road names and what eight storeys actually means",
+    summary: "Phoenix Nights at The Plaza, free Hive in Cheadle Hulme, Heald Green place-name history, The Brew’s Sunday-school past, planning and Halloween picks.",
+    url: "https://preview.mailerlite.io/preview/2462354/emails/200243291356136553"
   },
   stripeLinks: {
     local_spotlight: "",
