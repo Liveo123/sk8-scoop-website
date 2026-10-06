@@ -65,9 +65,10 @@ jobs:
           "$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=5000             --dump-dom "$PREVIEW_URL/" > visual-qa/home-rendered.html
           "$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=5000             --dump-dom "$PREVIEW_URL/whats-on/?filter=weekend#current-listings" > visual-qa/whats-on-weekend-rendered.html
           grep -q 'home-quick-answers' visual-qa/home-rendered.html
-          grep -q 'aria-pressed="true">This weekend' visual-qa/whats-on-weekend-rendered.html
+          grep -q 'aria-pressed="true">Weekend' visual-qa/whats-on-weekend-rendered.html
 
       - name: Upload visual QA artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: nue-preview-visual-qa
