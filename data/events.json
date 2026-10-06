@@ -175,7 +175,8 @@
     "source_url": "https://www.stockport.gov.uk/events/monster-mugs-kids-clay-workshop?date=2026-10-10",
     "verification": "ORGANISER_AND_COUNCIL_SOURCE",
     "checked": "2026-10-06",
-    "status": "sold_out"
+    "status": "verified",
+    "availability": "sold_out"
   },
   {
     "id": "ben-nuttall-footy-factory-2026-10-10",
