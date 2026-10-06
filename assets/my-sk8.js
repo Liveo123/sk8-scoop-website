@@ -665,8 +665,10 @@
     const activeSection = document.querySelector('[data-my-sk8-active-section]');
     const remindersSection = document.querySelector('[data-my-sk8-reminders-section]');
     const weekendSection = document.querySelector('[data-weekend-plan-section]');
+    const toolbox = document.querySelector('[data-my-sk8-toolbox]');
     if (total) total.textContent = String(active.length + savedPages.length);
     if (empty) empty.hidden = active.length > 0 || savedPages.length > 0 || sharedIds().length > 0;
+    if (toolbox) toolbox.hidden = active.length + savedPages.length === 0;
     if (activeSection) activeSection.hidden = active.length === 0 && (savedPages.length > 0 || sharedIds().length > 0);
     if (remindersSection) remindersSection.hidden = active.length === 0;
     if (weekendSection) weekendSection.hidden = active.length === 0;
