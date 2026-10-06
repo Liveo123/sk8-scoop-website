@@ -375,3 +375,12 @@ html,body{overflow-x:clip}@media(max-width:560px){.v75-doodle-bike{display:none}
   .nav a{justify-content:flex-start!important;width:100%;padding:12px 13px!important;font-size:.96rem!important}
   .nav .button,.nav .nav-join{margin:6px 0 0!important;justify-content:center!important}
 }
+
+
+/* Keep the full desktop nav readable just above the menu breakpoint. */
+@media(min-width:1081px) and (max-width:1200px){
+  .site-header .brand{width:250px!important}
+  .header-row{gap:16px!important}
+  .nav a{padding:9px 8px!important;font-size:.86rem!important}
+  .nav .button,.nav .nav-join{padding:10px 13px!important;margin-left:4px!important;font-size:.88rem!important}
+}
