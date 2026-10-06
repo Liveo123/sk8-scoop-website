@@ -49,12 +49,12 @@ window.SK8_CONFIG = {
     subscriberCount: "600+",
     subscriberProof: "600+",
     issuesPublished: 15,
-    checkedDate: "25 September 2026",
-    latestMainSendRecipients: 539,
+    checkedDate: "6 October 2026",
+    latestMainSendRecipients: 639,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "25 September 2026",
+    latestIssueDate: "2 October 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
@@ -63,7 +63,7 @@ window.SK8_CONFIG = {
     dateDisplay: "Friday 2 October 2026",
     title: "Issue 15 · Friday 2 October 2026",
     headline: "Phoenix Nights, lost road names and what eight storeys actually means",
-    summary: "Phoenix Nights at The Plaza, free Hive in Cheadle Hulme, Heald Green place-name history, The Brew’s Sunday-school past, planning and Halloween picks.",
+    summary: "Heald Green’s old place names, The Brew’s Sunday-school past, Cheadle Hulme’s density study, the Local Plan and Halloween picks.",
     url: "https://preview.mailerlite.io/preview/2462354/emails/200243291356136553"
   },
   stripeLinks: {
