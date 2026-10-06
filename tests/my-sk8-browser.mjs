@@ -107,6 +107,18 @@ const screenshot = async name => {
   await writeFile('visual-qa/my-sk8/' + name, Buffer.from(image.data, 'base64'));
 };
 
+const fullScreenshot = async name => {
+  const metrics = await command('Page.getLayoutMetrics');
+  const size = metrics.cssContentSize || metrics.contentSize;
+  const image = await command('Page.captureScreenshot', {
+    format: 'png',
+    fromSurface: true,
+    captureBeyondViewport: true,
+    clip: { x: 0, y: 0, width: size.width, height: Math.min(size.height, 12000), scale: 1 }
+  });
+  await writeFile('visual-qa/my-sk8/' + name, Buffer.from(image.data, 'base64'));
+};
+
 const click = async selector => evaluate("(() => { const el = document.querySelector(" + JSON.stringify(selector) + "); if (!el) return false; el.click(); return true; })()");
 const text = async selector => evaluate("document.querySelector(" + JSON.stringify(selector) + ")?.textContent?.trim() || ''");
 const attr = async (selector, name) => evaluate("document.querySelector(" + JSON.stringify(selector) + ")?.getAttribute(" + JSON.stringify(name) + ") || ''");
@@ -115,6 +127,11 @@ try {
   await setViewport(1440, 1200, false);
 
   await navigate('/whats-on/');
+  if (await evaluate("Boolean(document.querySelector('[data-consent-none]')) && !document.querySelector('.privacy-choices')?.hidden")) {
+    await click('[data-consent-none]');
+    await sleep(250);
+  }
+  await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   record('What’s On renders My SK8 CTA', await waitFor("document.querySelector('[data-my-sk8-count]') !== null"));
   record('My SK8 script loaded', await waitFor("typeof window.SK8MySaved === 'object'"));
   record('Event actions render', await waitFor("document.querySelector('[data-sk8-event-actions=\"heald-green-library-storytime-2026-10-10\"] .my-sk8-save') !== null"));
@@ -129,11 +146,10 @@ try {
   await sleep(250);
   record('Saved weekend event persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'heald-green-library-storytime-2026-10-10')")));
 
-  record('Save second event', await click('[data-sk8-event-actions="cheadle-brew-and-biscuit-2026-10-06"] .my-sk8-save'));
-  await sleep(150);
-  record('Set reminder intent', await click('[data-sk8-event-actions="cheadle-brew-and-biscuit-2026-10-06"] button:not(.my-sk8-save)'));
-  await sleep(200);
+  record('Set reminder intent without saving first', await click('[data-sk8-event-actions="cheadle-brew-and-biscuit-2026-10-06"] button:not(.my-sk8-save)'));
+  await sleep(250);
   record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('cheadle-brew-and-biscuit-2026-10-06')")));
+  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'cheadle-brew-and-biscuit-2026-10-06')")));
 
   await navigate('/my-sk8/');
   record('My SK8 page title visible', (await text('h1')) === 'My SK8', await text('h1'));
@@ -157,20 +173,29 @@ try {
   await navigate('/my-sk8/');
   record('Expired item excluded from active list', !(await evaluate("document.querySelector('[data-my-sk8-active]')?.textContent.includes('Expired test event')")));
   record('Expired item moved to Past saves', Boolean(await evaluate("document.querySelector('[data-my-sk8-past]')?.textContent.includes('Expired test event')")));
+  record('Expired item does not offer a reminder', !(await evaluate("document.querySelector('[data-saved-id="expired-test"] [data-my-sk8-reminder]')")));
 
   await screenshot('my-sk8-desktop.png');
+  await fullScreenshot('my-sk8-desktop-full.png');
 
   await setViewport(390, 844, true);
   await navigate('/my-sk8/');
   record('Mobile My SK8 page has no horizontal overflow', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
   record('Mobile saved cards visible', Boolean(await evaluate("document.querySelectorAll('.my-sk8-saved-card').length >= 2")));
   await screenshot('my-sk8-mobile.png');
+  await fullScreenshot('my-sk8-mobile-full.png');
 
   await setViewport(390, 844, true);
   await navigate('/whats-on/');
   record('Mobile What’s On has no horizontal overflow', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
   record('Mobile event save action visible', Boolean(await evaluate("document.querySelector('[data-sk8-event-actions] .my-sk8-save')")));
   await screenshot('whats-on-my-sk8-mobile.png');
+  await fullScreenshot('whats-on-my-sk8-mobile-full.png');
+
+  await navigate('/my-sk8/');
+  await evaluate("window.SK8MySaved.unsaveEvent('cheadle-brew-and-biscuit-2026-10-06')");
+  await sleep(150);
+  record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('cheadle-brew-and-biscuit-2026-10-06')")));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   await navigate('/whats-on/?save=john-lewis-cheadle-baby-beyond-2026-10-08&utm_source=newsletter&utm_medium=email');
