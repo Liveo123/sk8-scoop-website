@@ -1,0 +1,239 @@
+/* Advertise V6: visual polish requested 6 Oct 2026.
+   Focus: richer fake advert example, stronger process treatment, and reduced dead space. */
+
+body.advertiser-page .ad-placement-demo-v6{
+  position:relative!important;
+  margin:0!important;
+  padding:18px!important;
+  border:1px solid #d8dfdb!important;
+  border-radius:22px!important;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(248,121,27,.12),transparent 28%),
+    linear-gradient(160deg,#f5fbf9 0%,#fffaf1 100%)!important;
+  box-shadow:0 16px 36px rgba(19,45,49,.08)!important;
+}
+body.advertiser-page .ad-placement-demo-v6 figcaption{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:0 0 12px!important;
+  padding:10px 12px!important;
+  border-radius:12px!important;
+  background:#173f45!important;
+  color:#fff!important;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif!important;
+}
+body.advertiser-page .ad-placement-demo-v6 figcaption strong{
+  color:#fff!important;
+  font-size:.8rem!important;
+  letter-spacing:.08em!important;
+}
+body.advertiser-page .ad-placement-demo-v6 figcaption span{
+  color:#dce9e7!important;
+  font-size:.7rem!important;
+  font-weight:800!important;
+  text-align:right!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-paper{
+  overflow:hidden!important;
+  border:1px solid #d8dfdb!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 10px 26px rgba(19,45,49,.08)!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-topline{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  padding:10px 14px!important;
+  background:#fffdf8!important;
+  border-bottom:1px solid #e2e8e5!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-topline b{
+  color:#173f45!important;
+  font-size:.78rem!important;
+  letter-spacing:.08em!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-topline span{
+  padding:5px 8px!important;
+  border-radius:999px!important;
+  background:#f8791b!important;
+  color:#fff!important;
+  font-size:.68rem!important;
+  font-weight:900!important;
+  letter-spacing:.06em!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo{
+  position:relative!important;
+  min-height:245px!important;
+  overflow:hidden!important;
+  background:#e9f2ef!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:245px!important;
+  object-fit:cover!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo:after{
+  content:""!important;
+  position:absolute!important;
+  inset:auto 0 0!important;
+  height:38%!important;
+  background:linear-gradient(180deg,transparent,rgba(13,47,55,.48))!important;
+}
+body.advertiser-page .ad-demo-fake-stamp{
+  position:absolute!important;
+  z-index:2!important;
+  left:14px!important;
+  top:14px!important;
+  display:inline-flex!important;
+  padding:7px 10px!important;
+  border:2px solid #fff!important;
+  border-radius:999px!important;
+  background:#c63f30!important;
+  color:#fff!important;
+  font-size:.74rem!important;
+  font-weight:950!important;
+  letter-spacing:.08em!important;
+  box-shadow:0 5px 12px rgba(0,0,0,.18)!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-copy{
+  padding:20px!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-copy small{
+  display:block!important;
+  margin-bottom:8px!important;
+  color:#0f6470!important;
+  font-size:.72rem!important;
+  font-weight:900!important;
+  letter-spacing:.07em!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-copy h3{
+  margin:0 0 8px!important;
+  color:#173f45!important;
+  font-size:1.55rem!important;
+  line-height:1.05!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-copy p{
+  margin:0 0 14px!important;
+  color:#4e6266!important;
+  line-height:1.48!important;
+}
+body.advertiser-page .ad-demo-meta{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+  margin:0 0 16px!important;
+}
+body.advertiser-page .ad-demo-meta span{
+  padding:7px 9px!important;
+  border-radius:999px!important;
+  background:#f0f6f4!important;
+  color:#294a50!important;
+  font-size:.74rem!important;
+  font-weight:800!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-button{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:46px!important;
+  padding:10px 14px!important;
+  border-radius:10px!important;
+  background:#0f6470!important;
+  color:#fff!important;
+  font-size:.86rem!important;
+  font-weight:900!important;
+}
+body.advertiser-page .ad-placement-demo-v6>p{
+  margin:12px 2px 0!important;
+  color:#5c6d70!important;
+  font-size:.78rem!important;
+  line-height:1.45!important;
+}
+
+body.advertiser-page .ad-process-grid-v6{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:16px!important;
+}
+body.advertiser-page .ad-process-grid-v6:before{
+  content:""!important;
+  position:absolute!important;
+  left:8%!important;
+  right:8%!important;
+  top:54px!important;
+  height:3px!important;
+  background:linear-gradient(90deg,#0f6470,#f8791b,#b9cd35,#173f45)!important;
+  border-radius:999px!important;
+  opacity:.38!important;
+}
+body.advertiser-page .ad-process-grid-v6 article{
+  position:relative!important;
+  z-index:1!important;
+  min-height:238px!important;
+  padding:22px 20px 20px!important;
+  border:1px solid #cfe0dc!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 10px 22px rgba(19,45,49,.06)!important;
+}
+body.advertiser-page .ad-process-grid-v6 article:nth-child(1){background:linear-gradient(180deg,#f0faf8,#fff)!important}
+body.advertiser-page .ad-process-grid-v6 article:nth-child(2){background:linear-gradient(180deg,#fff4e9,#fff)!important}
+body.advertiser-page .ad-process-grid-v6 article:nth-child(3){background:linear-gradient(180deg,#f7fadf,#fff)!important}
+body.advertiser-page .ad-process-grid-v6 article:nth-child(4){background:linear-gradient(180deg,#f1f5f5,#fff)!important}
+body.advertiser-page .ad-step-tag{
+  display:inline-flex!important;
+  margin-bottom:16px!important;
+  padding:5px 8px!important;
+  border-radius:999px!important;
+  background:#173f45!important;
+  color:#fff!important;
+  font-size:.67rem!important;
+  font-weight:900!important;
+  letter-spacing:.08em!important;
+}
+body.advertiser-page .ad-step-icon{
+  display:grid!important;
+  width:50px!important;
+  height:50px!important;
+  place-items:center!important;
+  margin-bottom:17px!important;
+  border-radius:16px!important;
+  background:#0f6470!important;
+  color:#fff!important;
+  font-size:1.45rem!important;
+  font-weight:900!important;
+  box-shadow:0 8px 16px rgba(15,100,112,.16)!important;
+}
+body.advertiser-page .ad-process-grid-v6 article:nth-child(2) .ad-step-icon{background:#f8791b!important}
+body.advertiser-page .ad-process-grid-v6 article:nth-child(3) .ad-step-icon{background:#91aa23!important}
+body.advertiser-page .ad-process-grid-v6 article:nth-child(4) .ad-step-icon{background:#173f45!important}
+body.advertiser-page .ad-process-grid-v6 h3{
+  margin:0 0 8px!important;
+  color:#173f45!important;
+  font-size:1.28rem!important;
+  line-height:1.08!important;
+}
+body.advertiser-page .ad-process-grid-v6 p{
+  margin:0!important;
+  color:#52666a!important;
+  line-height:1.48!important;
+}
+
+@media(max-width:900px){
+  body.advertiser-page .ad-process-grid-v6{grid-template-columns:1fr 1fr!important}
+  body.advertiser-page .ad-process-grid-v6:before{display:none!important}
+}
+@media(max-width:620px){
+  body.advertiser-page .ad-placement-demo-v6{padding:14px!important}
+  body.advertiser-page .ad-placement-demo-v6 figcaption{align-items:flex-start!important;flex-direction:column!important}
+  body.advertiser-page .ad-placement-demo-v6 figcaption span{text-align:left!important}
+  body.advertiser-page .ad-process-grid-v6{grid-template-columns:1fr!important}
+  body.advertiser-page .ad-process-grid-v6 article{min-height:0!important}
+}
