@@ -147,6 +147,7 @@ contains('assets/site.js',"latest.textContent='See what’s new'");
 contains('assets/site.js',"joinButton.textContent='Join free'");
 contains('assets/styles.css','.nav .reader-nav-latest{');
 contains('assets/styles.css','.nav .reader-nav-join{');
+contains('assets/styles.css','@media(max-width:1420px){');
 contains('assets/styles.css','background:#f8791b!important');
 
 // Global navigation contract: adding My SK8 must not silently remove established reader routes.
