@@ -152,11 +152,14 @@ contains('assets/styles.css','background:#f8791b!important');
 
 // Global navigation contract: adding My SK8 must not silently remove established reader routes.
 for (const navEntry of [
+  "['Home','/']",
   "['What’s On','/whats-on/']",
   "['My SK8','/my-sk8/']",
   "['Guides','/guides/']",
   "['Where to start','/start/']",
+  "['Join','/join/']",
   "['Submit','/submit/']",
+  "['Contact','/contact/']",
   "['Advertise','/advertise.html']"
 ]) {
   contains('assets/site.js',navEntry);
