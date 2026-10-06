@@ -294,6 +294,9 @@ async function handleNewsletterSignup(request, env) {
 }
 
 function getProtectedGuide(pathname) {
+  // Landing pages reuse some guide artwork. Keep static assets public in this
+  // lightweight gate, while subscriber HTML and guide fragments stay gated.
+  if (/\.(?:avif|gif|ico|jpe?g|png|svg|webp|css|js|woff2?|ttf)$/i.test(pathname)) return null;
   for (const [key, config] of Object.entries(GUIDE_ACCESS)) {
     if (pathname === config.route || pathname.startsWith(`${config.route}/`)) {
       return { key, ...config };
