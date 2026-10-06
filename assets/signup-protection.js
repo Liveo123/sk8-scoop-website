@@ -103,9 +103,10 @@
 
   const getGuideKey = form => {
     const explicit = String(form.dataset.guideKey || '').trim().toLowerCase();
-    if (explicit === '52-adventures' || explicit === 'free-cheap') return explicit;
+    if (explicit === '52-adventures' || explicit === 'free-cheap' || explicit === 'halloween') return explicit;
     if (location.pathname.startsWith('/52-adventures')) return '52-adventures';
     if (location.pathname.startsWith('/free-cheap-guide')) return 'free-cheap';
+    if (location.pathname.startsWith('/halloween-half-term-guide')) return 'halloween';
     return '';
   };
 
@@ -307,7 +308,11 @@
       const fallbackSuccess = kind === 'qr'
         ? '/qr-success/'
         : kind === 'guide'
-          ? (guideKey === '52-adventures' ? '/52-adventures/success/' : '/free-cheap-guide/success/')
+          ? (guideKey === '52-adventures'
+              ? '/52-adventures/success/'
+              : guideKey === 'halloween'
+                ? '/halloween-half-term-guide/success/'
+                : '/free-cheap-guide/success/')
           : '/signup-success/';
       const success = configuredSuccess.startsWith('/') ? configuredSuccess : fallbackSuccess;
       window.setTimeout(() => location.assign(success), 350);
