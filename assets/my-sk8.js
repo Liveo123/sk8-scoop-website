@@ -125,8 +125,14 @@
     const title = String(event.title || 'SK8 Scoop event');
     const venue = String(event.venue || '');
     const description = String(event.description || '');
+    const source = String(event.booking_url || event.source_url || '');
     const date = String(event.date || '');
     const time = String(event.time || '');
+    const icsEscape = value => String(value || '')
+      .replace(/\\/g, '\\\\')
+      .replace(/\r?\n/g, '\\n')
+      .replace(/,/g, '\\,')
+      .replace(/;/g, '\\;');
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return '';
 
     const stamp = value => value.replace(/[-:]/g, '');
@@ -140,9 +146,10 @@
       'UID:' + String(event.id || 'event') + '@sk8scoop.com',
       'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z'),
       (/^\d{2}:\d{2}$/.test(time) ? 'DTSTART;TZID=Europe/London:' : 'DTSTART;VALUE=DATE:') + dtstart,
-      'SUMMARY:' + title.replace(/\n/g, ' '),
-      'LOCATION:' + venue.replace(/\n/g, ' '),
-      'DESCRIPTION:' + description.replace(/\n/g, ' '),
+      'SUMMARY:' + icsEscape(title),
+      'LOCATION:' + icsEscape(venue),
+      'DESCRIPTION:' + icsEscape(description),
+      ...(source ? ['URL:' + source] : []),
       'END:VEVENT',
       'END:VCALENDAR'
     ];
@@ -198,6 +205,21 @@
     return el;
   };
 
+  const seenActionRows = new WeakSet();
+  const actionObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting || seenActionRows.has(entry.target)) return;
+      seenActionRows.add(entry.target);
+      const id = entry.target.dataset.sk8EventActions || '';
+      const event = state.byId.get(id);
+      track('my_sk8_action_view', {
+        event_id: id.slice(0, 120),
+        event_area: String(event && event.area || '').slice(0, 80)
+      });
+      actionObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 }) : null;
+
   const renderEventActions = () => {
     document.querySelectorAll('[data-sk8-event-actions]').forEach(holder => {
       const id = holder.dataset.sk8EventActions;
@@ -219,9 +241,9 @@
       });
       holder.appendChild(save);
 
-      const reminder = button(hasReminder(id) ? 'Reminder set ✓' : 'Remind me', 'my-sk8-action', () => {
+      const reminder = button(hasReminder(id) ? 'Reminder set ✓' : 'Remind me here', 'my-sk8-action', () => {
         const enabled = toggleReminder(event);
-        reminder.textContent = enabled ? 'Reminder set ✓' : 'Remind me';
+        reminder.textContent = enabled ? 'Reminder set ✓' : 'Remind me here';
         showToast(enabled ? 'Reminder set for your next SK8 visit' : 'Reminder removed');
         if (document.body.dataset.page === 'my-sk8') renderMySk8();
       });
@@ -244,6 +266,8 @@
       nearby.textContent = event.area ? 'More in ' + event.area : 'More nearby';
       nearby.addEventListener('click', () => track('my_sk8_nearby', { event_id: event.id, event_area: event.area }));
       holder.appendChild(nearby);
+
+      if (actionObserver && !seenActionRows.has(holder)) actionObserver.observe(holder);
     });
   };
 
@@ -313,7 +337,7 @@
             ${source ? '<a href="' + escapeHtml(source) + '" target="_blank" rel="noopener">Check details</a>' : ''}
             ${directions ? '<a href="' + escapeHtml(directions) + '" target="_blank" rel="noopener" data-my-sk8-directions="' + escapeHtml(live.id) + '">Directions</a>' : ''}
             ${cal ? '<a href="' + cal + '" download="sk8-scoop-' + escapeHtml(live.id) + '.ics" data-my-sk8-calendar="' + escapeHtml(live.id) + '">Calendar</a>' : ''}
-            ${isPast ? '' : '<button type="button" data-my-sk8-reminder="' + escapeHtml(live.id) + '">' + (hasReminder(live.id) ? 'Reminder set ✓' : 'Remind me') + '</button>'}
+            ${isPast ? '' : '<button type="button" data-my-sk8-reminder="' + escapeHtml(live.id) + '">' + (hasReminder(live.id) ? 'Reminder set ✓' : 'Remind me here') + '</button>'}
             <button type="button" data-my-sk8-remove="${escapeHtml(live.id)}">Remove</button>
           </div>
         </div>
@@ -338,7 +362,7 @@
       const event = state.byId.get(id) || readSaved().find(item => item.id === id);
       if (!event) return;
       const enabled = toggleReminder(event);
-      el.textContent = enabled ? 'Reminder set ✓' : 'Remind me';
+      el.textContent = enabled ? 'Reminder set ✓' : 'Remind me here';
       showToast(enabled ? 'Reminder set for your next SK8 visit' : 'Reminder removed');
       renderMySk8();
     }));
