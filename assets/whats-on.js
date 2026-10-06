@@ -390,7 +390,7 @@
     .then(data => {
       const today = localToday();
       events = (Array.isArray(data) ? data : [])
-        .filter(event => event && event.status !== 'example')
+        .filter(event => event && !['example', 'cancelled', 'sold_out'].includes(String(event.status || '').toLowerCase()))
         .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
       syncEventSchema();
