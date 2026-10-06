@@ -34,6 +34,7 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     if(currentPath==='/') return '/';
     if(currentPath.startsWith('/whats-on')) return '/whats-on/';
     if(currentPath.startsWith('/guides')||currentPath.startsWith('/free-cheap-guide')||currentPath.startsWith('/52-adventures')||currentPath.startsWith('/halloween-half-term-guide')||currentPath.startsWith('/secret-trails')) return '/guides/';
+    if(currentPath.startsWith('/my-sk8')) return '/my-sk8/';
     if(currentPath.startsWith('/start')) return '/start/';
     if(currentPath.startsWith('/join')) return '/join/';
     if(currentPath.startsWith('/submit')||currentPath.startsWith('/business-submissions')) return '/submit/';
@@ -46,6 +47,7 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     ['Home','/'],
     ['What’s On','/whats-on/'],
     ['Guides','/guides/'],
+    ['My SK8','/my-sk8/'],
     ['Where to start','/start/'],
     ['Join','/join/'],
     ['Submit','/submit/'],
@@ -431,6 +433,7 @@ const sk8PageEventName=()=>{
     archive:'archive_page_visit',
     'submit-event':'event_submission_page_visit',
     'whats-on':'whats_on_page_visit',
+    'my-sk8':'my_sk8_page_visit',
     'summer-guide-success':'summer_guide_signup_completed',
     'signup-success':'signup_completed',
     '52-adventures':'52_adventures_visit',
