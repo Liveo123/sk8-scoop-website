@@ -210,6 +210,8 @@ try {
   record('Article-only My SK8 count is one', (await text('[data-my-sk8-total]')) === '1', await text('[data-my-sk8-total]'));
   record('Saved articles section becomes visible', !(await evaluate("document.querySelector('[data-my-sk8-pages-section]')?.hidden")));
   record('Saved Gatley Shouter appears in My SK8', Boolean(await evaluate("document.querySelector('[data-my-sk8-pages]')?.textContent.includes('The Gatley Shouter')")));
+  record('Article-only shortlist can still be shared', !(await evaluate("document.querySelector('[data-share-saved]')?.disabled")));
+  record('Article-only state keeps route map hidden', Boolean(await evaluate("document.querySelector('[data-map-saved]')?.hidden")));
   record('Article-only state hides empty Coming up section', Boolean(await evaluate("document.querySelector('[data-my-sk8-active-section]')?.hidden")));
   record('Article-only state hides reminders', Boolean(await evaluate("document.querySelector('[data-my-sk8-reminders-section]')?.hidden")));
   record('Article-only state hides weekend plan', Boolean(await evaluate("document.querySelector('[data-weekend-plan-section]')?.hidden")));
