@@ -223,7 +223,7 @@ try {
   record('Generic article save works', await click('[data-my-sk8-page-save-bar] button'));
   await sleep(150);
   record('Generic article persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'page:outdoors/chadkirk-country-estate' && x.kind === 'page')")));
-  await navigate('/my-sk8/?list=page%3Aoutdoors%2Falderley-edge');
+  await navigate('/my-sk8/?list=page%3Aoutdoors%2Fchadkirk-country-estate');
   record('Generic saved article can be shared', !(await evaluate("document.querySelector('[data-shared-shortlist]')?.hidden")));
   record('Generic shared article has a readable fallback title', Boolean(await evaluate("document.querySelector('[data-shared-items]')?.textContent.includes('Chadkirk Country Estate')")));
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); true");
