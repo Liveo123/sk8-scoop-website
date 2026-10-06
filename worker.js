@@ -118,6 +118,7 @@ let schemaReady = false;
 const LIVE_POSTER_COUNT = 17;
 const CONTACT_INBOX = 'contact@sk8scoop.com';
 const WEBSITE_SENDER = 'website@sk8scoop.com';
+const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
 
 export default {
   async fetch(request, env) {
@@ -354,22 +355,52 @@ async function handleContactMessage(request, env) {
 }
 
 async function notifyInbox(env, { subject, text }) {
-  if (!env.CONTACT_EMAIL || typeof env.CONTACT_EMAIL.send !== 'function') {
-    return 'not_configured';
+  const resendApiKey = String(env.RESEND_API_KEY || '').trim();
+  if (resendApiKey) {
+    try {
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          authorization: `Bearer ${resendApiKey}`,
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: `SK8 Scoop <${RESEND_SENDER}>`,
+          to: [CONTACT_INBOX],
+          subject: safeHeader(subject),
+          text: String(text || '').slice(0, 12000),
+          reply_to: CONTACT_INBOX
+        })
+      });
+      if (response.ok) return 'sent';
+
+      let diagnostic = `HTTP ${response.status}`;
+      try {
+        const payload = await response.json();
+        if (payload && payload.message) diagnostic = String(payload.message);
+      } catch {}
+      console.error(`SK8 Scoop contact notification failed via Resend: ${diagnostic}`);
+    } catch (error) {
+      console.error('SK8 Scoop contact notification failed via Resend', error);
+    }
   }
 
-  try {
-    await env.CONTACT_EMAIL.send({
-      to: CONTACT_INBOX,
-      from: WEBSITE_SENDER,
-      subject: safeHeader(subject),
-      text: String(text || '').slice(0, 12000)
-    });
-    return 'sent';
-  } catch (error) {
-    console.error('SK8 Scoop contact notification failed', error);
-    return 'failed';
+  if (env.CONTACT_EMAIL && typeof env.CONTACT_EMAIL.send === 'function') {
+    try {
+      await env.CONTACT_EMAIL.send({
+        to: CONTACT_INBOX,
+        from: WEBSITE_SENDER,
+        subject: safeHeader(subject),
+        text: String(text || '').slice(0, 12000)
+      });
+      return 'sent';
+    } catch (error) {
+      console.error('SK8 Scoop contact notification fallback failed', error);
+      return 'failed';
+    }
   }
+
+  return 'not_configured';
 }
 
 async function updateNotificationStatus(db, tableName, rowId, notificationStatus) {
