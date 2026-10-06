@@ -24,6 +24,9 @@
     if (shelf) track('subscriber_shelf_view', { access_state: active ? 'unlocked' : 'locked' });
   };
 
+  window.addEventListener('sk8:subscriber-preview-unlocked', () => setState(true));
+  document.addEventListener('sk8:subscriber-preview-unlocked', () => setState(true));
+
   document.addEventListener('click', event => {
     const link = event.target.closest && event.target.closest('[data-subscriber-guide], [data-subscriber-guide-open]');
     if (!link) return;
