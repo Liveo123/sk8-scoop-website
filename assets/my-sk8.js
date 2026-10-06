@@ -312,8 +312,15 @@
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return '';
 
     const stamp = value => value.replace(/[-:]/g, '');
+    const timed = /^\d{2}:\d{2}$/.test(time);
     let dtstart = stamp(date);
-    if (/^\d{2}:\d{2}$/.test(time)) dtstart += 'T' + stamp(time) + '00';
+    if (timed) dtstart += 'T' + stamp(time) + '00';
+    const inclusiveEnd = /^\d{4}-\d{2}-\d{2}$/.test(String(event.end_date || '')) ? String(event.end_date) : date;
+    const dayAfter = value => {
+      const d = new Date(value + 'T00:00:00Z');
+      d.setUTCDate(d.getUTCDate() + 1);
+      return d.toISOString().slice(0, 10);
+    };
     const lines = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
@@ -321,11 +328,17 @@
       'BEGIN:VEVENT',
       'UID:' + String(event.id || 'event') + '@sk8scoop.com',
       'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z'),
-      (/^\d{2}:\d{2}$/.test(time) ? 'DTSTART;TZID=Europe/London:' : 'DTSTART;VALUE=DATE:') + dtstart,
+      (timed ? 'DTSTART;TZID=Europe/London:' : 'DTSTART;VALUE=DATE:') + dtstart,
+      ...(!timed ? ['DTEND;VALUE=DATE:' + stamp(dayAfter(inclusiveEnd))] : []),
       'SUMMARY:' + icsEscape(title),
       'LOCATION:' + icsEscape(venue),
       'DESCRIPTION:' + icsEscape(description),
       ...(source ? ['URL:' + source] : []),
+      'BEGIN:VALARM',
+      'ACTION:DISPLAY',
+      'DESCRIPTION:' + icsEscape('Reminder: ' + title),
+      'TRIGGER:' + (timed ? '-PT2H' : '-P1D'),
+      'END:VALARM',
       'END:VEVENT',
       'END:VCALENDAR'
     ];
