@@ -9,6 +9,7 @@ on:
       - 'assets/config.js'
       - 'scripts/check-homepage-v3.mjs'
       - '.github/workflows/homepage-v3-qa.yml'
+      - 'wrangler.toml'
   push:
     branches:
       - improve/homepage-v3
@@ -20,6 +21,12 @@ on:
       - 'assets/config.js'
       - 'scripts/check-homepage-v3.mjs'
       - '.github/workflows/homepage-v3-qa.yml'
+      - 'wrangler.toml'
+
+# Avoid failure emails from obsolete runs while this draft PR is receiving rapid updates.
+concurrency:
+  group: homepage-v3-qa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   preflight:
@@ -47,7 +54,7 @@ jobs:
           HEAD_REF: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         run: |
           slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
-          base="https://${slug}-sk8-scoop.quiet-term-e047.workers.dev"
+          base="https://${slug}.previews.sk8scoop.com"
           check_marker() {
             url="$1"
             marker="$2"

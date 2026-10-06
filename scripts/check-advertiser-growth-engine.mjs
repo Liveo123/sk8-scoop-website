@@ -26,7 +26,7 @@ for (const value of ['book','enquire','visit','register','buy','awareness']) {
 for (const name of ['category','area','timing','value','specific','route','freecheap','none']) {
   assert(finderHtml.includes(`name="${name}"`), `Campaign Finder includes ${name} input`);
 }
-for (const label of ['STARTER','£20','FIX FIRST','WAIT','NOT A FIT','HUMAN REVIEW']) {
+for (const label of ['TEST','£40','FIX FIRST','WAIT','NOT A FIT','HUMAN REVIEW']) {
   assert(finderJs.includes(label), `Decision logic includes ${label}`);
 }
 assert(finderJs.includes("params.set('finder_source', 'campaign_finder')"), 'Finder hands recommendations to advertiser enquiry');
@@ -39,11 +39,11 @@ assert(finderJs.includes("opportunity !== 'christmas-eating-out'"), 'Campaign Fi
 assert(finderJs.includes("category.value = 'hospitality'"), 'Christmas opportunity preselects hospitality');
 assert(finderJs.includes("finder_opportunity"), 'Campaign Finder carries opportunity context into advertiser handoff');
 assert(advertiseJs.includes('allowedFinderOpportunities'), 'Advertiser enquiry preserves approved opportunity context');
-assert(opportunity.includes('£20'), 'Christmas acquisition page defaults to current newsletter starter rate');
+assert(opportunity.includes('£40'), 'Christmas acquisition page defaults to the restored newsletter TEST rate');
 assert(!opportunity.includes('GROW £90'), 'Christmas acquisition page no longer promotes historical GROW pricing');
 assert(opportunity.includes('noindex,follow'), 'Christmas acquisition page stays noindex during preview');
 assert(pay.includes('Payment follows campaign approval'), 'Payment page remains approval-gated');
-assert(!/£35|£110|buy\.stripe\.com/i.test(pay), 'Payment page exposes no stale price or public Stripe checkout');
+assert(!/£35|£40|£75|£110|£150|buy\.stripe\.com/i.test(pay), 'Payment page exposes no public campaign price or public Stripe checkout');
 assert(wrapper.includes("import siteWorker from './worker-protected.js'"), 'Advertiser wrapper composes with current NUE worker');
 assert(wrapper.includes('RESEND_API_KEY'), 'Advertiser wrapper reads Resend runtime secret');
 assert(wrapper.includes('/api/advertiser-enquiries'), 'Advertiser wrapper provides private enquiry API');
@@ -51,14 +51,14 @@ assert(wrapper.includes('ADMIN_TOKEN'), 'Private enquiry API remains token prote
 const saveIndex = wrapper.indexOf('await siteWorker.fetch(request, env, ctx)');
 const notifyIndex = wrapper.indexOf('await notifyAdvertiserInbox');
 assert(saveIndex >= 0 && notifyIndex > saveIndex, 'D1-backed site handler completes before email notification');
-assert(!/£35|£40|£75|£110|£150/.test(finderHtml + finderJs + opportunity), 'New growth-engine surfaces contain no legacy public first-campaign prices');
+assert(!finderJs.includes("price: '£20'") && !opportunity.includes('NEWSLETTER STARTER £20'), 'Growth-engine surfaces do not restore the abandoned £20 starter experiment');
 assert(!wrapper.includes('TEST DIAGNOSTIC') && !wrapper.includes('SK8 Scoop TEST ONLY'), 'Preview-only advertiser diagnostic response is not shipped');
 assert(wrapper.includes('/api/stripe-webhook'), 'Advertiser wrapper exposes the signed Stripe webhook route');
 assert(wrapper.includes('STRIPE_WEBHOOK_SECRET'), 'Stripe webhook requires its signing secret');
 assert(wrapper.includes('verifyStripeSignature'), 'Stripe webhook verifies signatures before recording payments');
 assert(wrapper.includes('advertiser_payments'), 'Stripe webhook records advertiser payments in D1');
 assert(wrapper.includes("status='paid'"), 'Successful Stripe payment marks the advertiser enquiry paid');
-assert(wrapper.includes('starter_newsletter: 2000') && wrapper.includes('halloween_guide: 1500') && wrapper.includes('halloween_combo: 3000'), 'Stripe webhook validates current starter and Halloween amounts before marking paid');
+assert(wrapper.includes('starter_newsletter: 4000') && wrapper.includes('halloween_guide: 3500') && wrapper.includes('halloween_combo: 7500') && wrapper.includes('halloween_section: 11000') && wrapper.includes('halloween_main: 15000'), 'Stripe webhook validates restored newsletter and Halloween amounts before marking paid');
 assert(wrapper.includes("'review_required'"), 'Wrong Stripe amount is held for review rather than marked paid');
 assert(wrapper.includes('Stripe mode mismatch'), 'Stripe webhook rejects live/test environment mismatches');
 assert(wrapper.includes("approval_required") && wrapper.includes("session.mode"), 'Stripe webhook requires approved one-time payment metadata');

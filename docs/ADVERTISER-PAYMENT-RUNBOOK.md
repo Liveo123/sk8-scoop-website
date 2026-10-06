@@ -16,16 +16,22 @@ The order is:
 6. Stripe payment updates D1 through the signed webhook;
 7. only a matching paid record moves the campaign into production preparation.
 
-## Current live products
+## Current approved package amounts
 
-- TEST: £40 GBP one-time
-  - product: `prod_VHYWf1Aaa79P2q`
-  - price: `price_1UGzPUFYD08ziIGA1RAPi5cb`
-  - metadata product key: `temp_test`
-- GROW: £90 GBP one-time
-  - product: `prod_VHYW7eAN2Mdyy3`
-  - price: `price_1UGzPWFYD08ziIGAbkZIDHZO`
-  - metadata product key: `temp_grow`
+For new campaigns, use the owner-restored prices approved on 5 October 2026:
+
+- `starter_newsletter`: £40 GBP one-time
+- `halloween_guide`: £35 GBP one-time
+- `halloween_combo`: £75 GBP one-time
+- `halloween_section`: £110 GBP one-time, only when specifically suitable or requested
+- `halloween_main`: £150 GBP one-time, only when specifically suitable or requested
+
+## Historical Stripe products
+
+The older TEST/GROW Stripe products remain identifiers for earlier commitments only:
+
+- historical TEST £40: product `prod_VHYWf1Aaa79P2q`, price `price_1UGzPUFYD08ziIGA1RAPi5cb`, key `temp_test`
+- historical GROW £90: product `prod_VHYW7eAN2Mdyy3`, price `price_1UGzPWFYD08ziIGAbkZIDHZO`, key `temp_grow`
 
 Product and price IDs are identifiers, not credentials.
 
@@ -45,7 +51,7 @@ For every approved campaign:
 
 - Stripe-hosted Payment Link;
 - one-time payment only;
-- correct live TEST or GROW price;
+- correct approved package amount;
 - card payment;
 - no subscription;
 - no automatic renewal;
@@ -61,7 +67,7 @@ Required metadata on both the Payment Link / Checkout Session and PaymentIntent 
 
 - `advertiser_enquiry_id=<D1 enquiry id>`
 - `campaign_reference=SK8-AD-<id>`
-- `sk8_product=temp_test` or `temp_grow`
+- `sk8_product=<approved package key>`; use `starter_newsletter`, `halloween_guide`, `halloween_combo`, `halloween_section` or `halloween_main` for new campaigns. Historical `temp_test` / `temp_grow` are only for earlier commitments.
 - `approval_required=true`
 
 ## Live webhook
@@ -84,7 +90,7 @@ The Worker must verify the Stripe signature and will only mark an enquiry paid w
 - session mode is one-time payment;
 - advertiser enquiry ID exists;
 - Stripe product route matches the enquiry package;
-- TEST equals £40 GBP or GROW equals £90 GBP;
+- amount matches the approved package: newsletter £40; Halloween Guide £35; Guide + newsletter £75; section sponsor £110; main sponsor £150 (or the exact historical amount for an earlier `temp_test` / `temp_grow` commitment);
 - enquiry is in an allowed pre-payment state.
 
 Mismatches are not marked paid and require manual review.
@@ -93,7 +99,7 @@ Mismatches are not marked paid and require manual review.
 
 A normal approval instruction can be:
 
-> Approve advertiser enquiry #127 for TEST £40 and prepare its single-use live Stripe payment route.
+> Approve advertiser enquiry #127 for Newsletter TEST £40 and prepare its single-use live Stripe payment route.
 
 Before any live Stripe write, re-read the enquiry and confirm the requested package and approval decision. Creating the payment route is not the same as charging the customer. The customer is charged only if they open the route and complete Stripe Checkout.
 
@@ -102,7 +108,7 @@ Before any live Stripe write, re-read the enquiry and confirm the requested pack
 If ChatGPT/Stripe connection is unavailable:
 
 1. Open Stripe live account.
-2. Create a Payment Link using the existing TEST or GROW price.
+2. Create a Payment Link using the agreed approved package amount.
 3. Apply the required metadata above.
 4. Restrict completed sessions to one.
 5. Keep the route private.
@@ -137,16 +143,16 @@ Refund handling is intentionally manual in v1. A future version can add refund w
 - The public Worker has no Stripe credential that can create charges.
 - The private advertiser inbox is operational data, not a payment terminal.
 
-## Starter advertiser pricing override — 5 October 2026
+## Pricing reversion — 5 October 2026
 
-For NEW first paid campaigns, use the following approved Stripe metadata/product amounts:
+The temporary lower-price starter experiment was cancelled after an advertiser enquiry arrived. New campaigns returned to the established public prices:
 
-- `starter_newsletter`: £20 GBP one-time
-- `halloween_guide`: £15 GBP one-time
-- `halloween_combo`: £30 GBP one-time
-- `halloween_section`: £90 GBP one-time, only when specifically suitable or requested
-- `halloween_main`: £125 GBP one-time, only when specifically suitable or requested
+- `starter_newsletter`: £40 GBP one-time
+- `halloween_guide`: £35 GBP one-time
+- `halloween_combo`: £75 GBP one-time
+- `halloween_section`: £110 GBP one-time, only when specifically suitable or requested
+- `halloween_main`: £150 GBP one-time, only when specifically suitable or requested
 
-Historical `temp_test` £40 and `temp_grow` £90 payment routes remain accepted only to honour earlier commitments. Do not use them for new first-campaign pricing during the starter experiment unless Paul explicitly directs it.
+Historical `temp_test` £40 and `temp_grow` £90 routes remain accepted only to honour earlier commitments. They are not the default product keys for new enquiries.
 
 The payment-link workflow remains approval-gated. Confirm the advertiser enquiry, agreed package, campaign reference, amount and timing before creating or sending a live payment route.

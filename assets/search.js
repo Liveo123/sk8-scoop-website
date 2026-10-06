@@ -101,7 +101,7 @@
     const today = localToday();
     return (Array.isArray(data) ? data : [])
       .filter(event => event && event.status !== 'example')
-      .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.date) >= today)
+      .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
       .map(event => ({
         id: `event-${event.id || event.title}`,
         type: 'Events',

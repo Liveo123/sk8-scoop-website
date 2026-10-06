@@ -346,16 +346,15 @@ After enough completed campaigns, review recommendation rules using SK8-specific
 
 Only promote an observed pattern into the rules when the sample is large and consistent enough to be useful. Until then, keep it labelled as a hypothesis rather than “what works”.
 
-## Starter advertiser override — 5 October 2026
+## Pricing reversion — 5 October 2026
 
-The owner-approved starter-advertiser experiment supersedes TEST £40 / GROW £90 as the default recommendation logic for new first paid campaigns.
+The temporary lower-price starter experiment was cancelled. The Finder and advertiser journey returned to the established first-campaign prices.
 
 Current general Finder default:
-- **NEWSLETTER STARTER £20** for one suitable first newsletter placement.
-- No general GROW recommendation during the experiment.
-- Named seasonal offers are handled separately. For Halloween & October Half-Term 2026: Guide £15 or Guide + newsletter £30 where contextually appropriate.
-- Review after five completed paying advertisers, using roughly 20 suitable prospects as the first directional sample where practical.
+- **NEWSLETTER TEST £40** for one suitable first newsletter placement.
+- Do not invent a general GROW recommendation merely to increase spend.
+- Named seasonal offers are handled separately. For Halloween & October Half-Term 2026: Guide £35 or Guide + newsletter £75 where contextually appropriate; section sponsor £110 and main sponsor £150 only where genuinely suitable or specifically requested.
 - Do not create new free pilots by default.
-- Human approval is required before outbound outreach while this material pricing change is being validated.
+- Human suitability and availability approval still applies before a campaign is sold.
 
-Older TEST/GROW examples below remain historical decision-logic evidence only and must not be treated as current customer-facing prices.
+Older TEST/GROW examples remain useful decision-logic evidence, but current customer-facing prices and package keys must follow the live advertiser page and payment runbook.

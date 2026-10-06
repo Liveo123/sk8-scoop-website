@@ -3,14 +3,16 @@
   const publicPaths = new Set([
     '/','/latest','/about.html','/archive.html','/summer-guide.html','/guides','/advertise.html',
     '/join','/start','/submit','/contact','/business-submissions','/submit-event','/whats-on',
-    '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html','/around-sk8'
+    '/preferences','/privacy.html','/terms.html','/editorial-policy.html','/sitemap.html','/around-sk8',
+    '/cheadle','/cheadle-hulme','/gatley','/heald-green'
   ]);
   const pageIdentity = {
     '/':'home','/latest':'latest-issue','/about.html':'about','/archive.html':'archive',
     '/summer-guide.html':'summer-guide','/guides':'guides','/advertise.html':'advertise','/join':'join',
     '/start':'start','/submit':'submit','/contact':'contact','/business-submissions':'business-submissions',
     '/submit-event':'submit-event','/whats-on':'whats-on','/preferences':'preferences','/privacy.html':'privacy',
-    '/terms.html':'terms','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap','/around-sk8':'around-sk8'
+    '/terms.html':'terms','/editorial-policy.html':'editorial-policy','/sitemap.html':'sitemap','/around-sk8':'around-sk8',
+    '/cheadle':'around-sk8','/cheadle-hulme':'around-sk8','/gatley':'around-sk8','/heald-green':'around-sk8'
   };
   if (publicPaths.has(path)) {
     if (!document.body.dataset.page && pageIdentity[path]) document.body.dataset.page = pageIdentity[path];
