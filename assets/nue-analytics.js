@@ -54,6 +54,16 @@
         filter_value: control.dataset.eventArea || control.dataset.eventFilter || 'unknown'
       });
     });
+
+    document.addEventListener('click', event => {
+      const quick = event.target.closest('.home-quick-answers a[data-quick-answer]');
+      if (!quick || page !== 'home') return;
+      track('homepage_quick_answer_click', {
+        quick_answer: quick.dataset.quickAnswer || 'unknown',
+        link_location: quick.dataset.linkLocation || 'home-quick-answers'
+      });
+    });
+
   };
 
   const recordInitialEvents = () => {
