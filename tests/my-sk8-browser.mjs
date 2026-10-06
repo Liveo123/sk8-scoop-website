@@ -163,6 +163,8 @@ try {
   record('Subscriber shelf is shown on My SK8', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf]')")));
   record('Subscriber shelf starts locked without access cookie', !(await evaluate("document.querySelector('[data-subscriber-shelf-locked]')?.hidden")));
   record('Subscriber shelf unlock form is available', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf-locked] [data-signup-form]')")));
+  record('Unlocked subscriber shelf is genuinely hidden before access', Boolean(await evaluate("getComputedStyle(document.querySelector('[data-subscriber-shelf-unlocked]')).display === 'none'")));
+  record('Subscriber shelf uses compact copy', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('Get all 3 current guides free') && !document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('Personal maps later')")));
 
   record('Two current saves shown', (await text('[data-my-sk8-total]')) === '2', await text('[data-my-sk8-total]'));
   record('Saved weekend event appears', Boolean(await evaluate('document.body.textContent.includes("Storytime at Heald Green Library")')));
@@ -233,14 +235,26 @@ try {
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); true");
 
   await navigate('/free-cheap-guide/');
-  record('Free & Cheap landing explains all-guide unlock', Boolean(await evaluate("document.body.textContent.includes('unlock all subscriber guides') || document.body.textContent.includes('current subscriber guide shelf')")));
+  record('Free & Cheap landing has concise subscriber copy', Boolean(await evaluate("document.body.textContent.includes('Get the full guide free') && !document.body.textContent.includes('Unlock all subscriber guides')")));
   record('Free & Cheap landing has protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"free-cheap\"]')")));
+  record('Locked recognised state is not accidentally visible', Boolean(await evaluate("getComputedStyle(document.querySelector('[data-subscriber-unlocked]')).display === 'none'")));
   await navigate('/52-adventures/');
   record('52 Adventures landing has protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"52-adventures\"]')")));
+  record('52 Adventures signup copy is concise', Boolean(await evaluate("document.body.textContent.includes('Already subscribed? Use the same address.')")));
   await navigate('/halloween-half-term-guide/');
   record('Halloween landing uses unified protected signup form', Boolean(await evaluate("document.querySelector('[data-signup-form][data-guide-key=\"halloween\"]')")));
+  record('Halloween signup copy is concise', Boolean(await evaluate("document.body.textContent.includes('Already subscribed? Use the same address.')")));
   await navigate('/free-cheap-guide/guide/');
   record('Guide route redirects visitors without subscriber pass', Boolean(await evaluate("location.pathname === '/free-cheap-guide/'")));
+
+  await navigate('/my-sk8/');
+  await evaluate("document.querySelector('#my-sk8-subscriber-email').value='preview-test@example.com'; document.querySelector('#my-sk8-subscriber-email').dispatchEvent(new Event('input',{bubbles:true})); true");
+  record('Preview subscriber unlock form submits', await click('[data-subscriber-shelf-locked] button[type="submit"]'));
+  record('Preview subscriber shelf unlocks without production secrets', await waitFor("document.querySelector('[data-subscriber-shelf-unlocked]') && !document.querySelector('[data-subscriber-shelf-unlocked]').hidden", 8000));
+  record('Preview explains that MailerLite was not changed', Boolean(await evaluate("document.body.textContent.includes('Preview unlocked. No email was added to MailerLite.')")));
+  record('Subscriber guide button becomes a working link', (await attr('[data-subscriber-shelf-unlocked] a[href="/free-cheap-guide/guide/"]','href')) === '/free-cheap-guide/guide/');
+  await navigate('/free-cheap-guide/guide/');
+  record('Preview access cookie opens protected guide for manual QA', Boolean(await evaluate("location.pathname === '/free-cheap-guide/guide/'")));
 
   await navigate('/local-history/gatley-shouter/');
   record('Article page shows My SK8 save bar', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
