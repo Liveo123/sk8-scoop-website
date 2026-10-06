@@ -399,9 +399,9 @@
         .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
       window.SK8_EVENT_DATA = events;
-      window.dispatchEvent(new CustomEvent('sk8:events-loaded',{detail:{events}}));
       syncEventSchema();
       render();
+      window.dispatchEvent(new CustomEvent('sk8:events-loaded',{detail:{events}}));
     })
     .catch(error => {
       console.error('SK8 What’s On data failed to load', error);
