@@ -145,6 +145,7 @@ contains('assets/site.js',"const subscriberKey='sk8_subscriber_recognition_v1'")
 contains('assets/site.js',"latest.className='button reader-nav-latest'");
 contains('assets/site.js',"latest.textContent='See what’s new'");
 contains('assets/site.js',"joinButton.textContent='Join free'");
+reject('assets/site.js',"['Join','/join/']");
 contains('assets/styles.css','.nav .reader-nav-latest{');
 contains('assets/styles.css','.nav .reader-nav-join{');
 contains('assets/styles.css','@media(max-width:1199px){');
@@ -157,7 +158,6 @@ for (const navEntry of [
   "['My SK8','/my-sk8/']",
   "['Guides','/guides/']",
   "['Where to start','/start/']",
-  "['Join','/join/']",
   "['Submit','/submit/']",
   "['Contact','/contact/']",
   "['Advertise','/advertise.html']"
