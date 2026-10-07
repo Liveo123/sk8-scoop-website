@@ -315,6 +315,7 @@ try {
   const noindex = await attr('meta[name="robots"]', 'content');
   record('My SK8 experiment is noindex', /noindex/i.test(noindex), noindex);
 
+  // CP8 Issue 16 mobile render regression check after overflow correction.
   const navigateAbsolute = async url => {
     await command('Page.navigate', { url });
     const ok = await waitFor("document.readyState === 'complete'", 15000);
