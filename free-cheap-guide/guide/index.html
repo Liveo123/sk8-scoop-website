@@ -2443,7 +2443,7 @@ Current window: 7 October to 31 October 2026</p>
   const host=document.querySelector('.experience-footer')||document.querySelector('footer');
   if(host&&!document.querySelector('.nue-related-guides')){
     const related=document.createElement('aside');related.className='nue-related-guides';
-    related.innerHTML='<h2>Keep exploring</h2><p>Useful next stops from SK8 Scoop.</p><div class="nue-related-links"><a href="/my-sk8/">Open My SK8</a><a href="/halloween-half-term-guide/">Halloween &amp; Half-Term Guide</a><a href="/52-adventures/">52 Adventures</a><a href="/guides/">All guides</a></div>';
+    related.innerHTML='<h2>Keep exploring</h2><p>Useful next stops from SK8 Scoop.</p><div class="nue-related-links"><a href="/my-sk8/">Open My SK8</a><a href="/halloween-half-term-guide/guide/">Halloween &amp; Half-Term Guide</a><a href="/52-adventures/guide/">52 Adventures</a><a href="/guides/">All guides</a></div>';
     host.parentNode.insertBefore(related,host);
   }
 })();
