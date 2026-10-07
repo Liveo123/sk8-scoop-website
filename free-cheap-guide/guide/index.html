@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="light" name="color-scheme"/><title>SK8 Scoop Free &amp; Cheap Guide — Updated 30 September 2026</title><style>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="light" name="color-scheme"/><title>SK8 Scoop Free &amp; Cheap Guide — Updated 7 October 2026</title><style>
 :root{--teal:#0F6470;--cream:#F7F3EA;--ink:#263238;--lime:#C8E84A;--white:#FFFFFF;--muted:#D9DFDA;--max:1160px;}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--cream)}
@@ -1856,7 +1856,7 @@ h1,h2,h3,h4,.nue-title,.visual-heading strong{
 .nue-related-links{display:flex;flex-wrap:wrap;gap:9px}.nue-related-links a{display:inline-flex;min-height:42px;align-items:center;padding:9px 13px;border-radius:999px;background:#0F6470;color:#fff;text-decoration:none;font-weight:800}
 @media(max-width:560px){.nue-utility-actions a,.nue-utility-actions button,.nue-related-links a{flex:1 1 calc(50% - 9px);text-align:center}.nue-related-guides{padding:19px 16px;border-radius:20px}}
 </style></head><body data-guide-key="free-cheap"><div class="page-shell"><header class="guide-hero guide-hero-banner" id="top"><figure class="hero-banner-figure"><img alt="SK8 Scoop Free and Cheap Guide cover banner with teal background, pencil-style local landmark illustrations, the SK8 Scoop Free and Cheap Guide logo, the SK8 Scoop logo, pricing badges and navigation tabs." class="hero-banner-image" src="/assets/images/free-cheap-guide-maintenance/guide-00-40cab79d02b4.webp"/><nav class="hero-image-hotspots" aria-label="Guide sections"><a class="hero-hotspot internal-link" href="#start-here" aria-label="Go to Start here" style="left:4.9%;top:89%;width:9.0%;height:7%"></a><a class="hero-hotspot internal-link" href="#things-anytime" aria-label="Go to Free ideas" style="left:14.9%;top:89%;width:9.2%;height:7%"></a><a class="hero-hotspot internal-link" href="#rainy-day-starter" aria-label="Go to Rainy day" style="left:25.0%;top:89%;width:9.0%;height:7%"></a><a class="hero-hotspot internal-link" href="#regular-things" aria-label="Go to Regular sessions" style="left:35.0%;top:89%;width:12.8%;height:7%"></a><a class="hero-hotspot internal-link" href="#just-for-fun" aria-label="Go to Just for fun" style="left:48.9%;top:89%;width:9.6%;height:7%"></a><a class="hero-hotspot internal-link" href="#day-out-plans" aria-label="Go to Day-out plans" style="left:59.5%;top:89%;width:11.1%;height:7%"></a><a class="hero-hotspot internal-link" href="#whats-on-now" aria-label="Go to What’s on now" style="left:71.5%;top:89%;width:11.5%;height:7%"></a></nav></figure><nav class="hero-mobile-nav" aria-label="Guide sections on small screens"><a class="internal-link" href="#start-here">Start here</a><a class="internal-link" href="#things-anytime">Free ideas</a><a class="internal-link" href="#rainy-day-starter">Rainy day</a><a class="internal-link" href="#regular-things">Regular sessions</a><a class="internal-link" href="#just-for-fun">Just for fun</a><a class="internal-link" href="#day-out-plans">Day-out plans</a><a class="internal-link" href="#whats-on-now">What’s on now</a></nav></header><p>Looking for something to do without turning a quick outing into a £40 exercise in snacks, parking and regret? This guide pulls together genuinely free and low-cost things around SK8, plus a small number of Stockport and Manchester trips that are worth the extra journey.</p>
-<p class="guide-freshness-note"><strong>What’s On Now and changing venue details checked 30 September 2026.</strong> Always use the official link before a special journey, because prices, availability and schedules can still change.</p>
+<p class="guide-freshness-note"><strong>Guide maintenance updated 7 October 2026.</strong> What’s On Now has been refreshed to the current window and newly added listings were checked for this update. Older evergreen entries retain their recorded source checks, so always use the official link before a special journey because prices, availability and schedules can still change.</p>
 <p><a id="contents"></a></p>
 <details class="contents-panel"><summary>Browse the guide</summary><p class="contents-intro">Jump straight to the part you need.</p><ul>
 <li><a class="internal-link" href="#start-here">Start here — the best ideas</a></li>
@@ -2426,24 +2426,24 @@ Current window: 7 October to 31 October 2026</p>
     const id=(eventDate?'guide-event:free-cheap:':'guide-page:free-cheap:')+slugify(title);
     const isSaved=()=>readSaved().some(item=>item&&item.id===id);
     const buildItem=()=>eventDate?{
-      id,kind:'event',title,date:eventDate,end_date:eventDate,date_range:when,time:'',area:'SK8 / Stockport',venue:where,cost,category:'Free & Cheap Guide',description:(article.querySelector('.entry-narrative')?.textContent||'').trim(),booking_url:official?.href||shareUrl,source_url:official?.href||shareUrl,checked:'Guide updated 30 September 2026',saved_at:new Date().toISOString()
+      id,kind:'event',title,date:eventDate,end_date:eventDate,date_range:when,time:'',area:'SK8 / Stockport',venue:where,cost,category:'Free & Cheap Guide',description:(article.querySelector('.entry-narrative')?.textContent||'').trim(),booking_url:official?.href||shareUrl,source_url:official?.href||shareUrl,checked:'Guide maintenance updated 7 October 2026',saved_at:new Date().toISOString()
     }:{
       id,kind:'page',title,url:location.pathname+'#'+article.id,area:'SK8 / nearby',category:'Free & Cheap Guide',description:(article.querySelector('p')?.textContent||'').trim(),saved_at:new Date().toISOString()
     };
     const wrap=document.createElement('div');wrap.className='nue-utility-actions';wrap.setAttribute('aria-label','Useful actions');
-    const save=document.createElement('button');save.type='button';
+    const save=document.createElement('button');save.type='button';save.dataset.save=id;
     const refreshSave=()=>{const saved=isSaved();save.textContent=saved?'Saved to My SK8':'Save to My SK8';save.setAttribute('aria-pressed',String(saved))};
     save.addEventListener('click',()=>{let items=readSaved();if(isSaved())items=items.filter(item=>item.id!==id);else items.unshift(buildItem());writeSaved(items);refreshSave()});refreshSave();wrap.append(save);
     if(where){const a=document.createElement('a');a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(where);a.target='_blank';a.rel='noopener';a.textContent='Directions';wrap.append(a)}
     if(/^20\d\d-\d\d-\d\d$/.test(eventDate)){const a=document.createElement('a');a.href=gcal(title,eventDate,(when?when+' · ':'')+'SK8 Scoop Free & Cheap Guide: '+shareUrl,where);a.target='_blank';a.rel='noopener';a.textContent='Add to calendar';wrap.append(a)}
-    const share=document.createElement('button');share.type='button';share.textContent='Share';share.addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,url:shareUrl});return}catch{}}const ok=await copyLink(shareUrl);share.textContent=ok?'Link copied':'Copy failed';setTimeout(()=>share.textContent='Share',1800)});wrap.append(share);
-    if(official){const a=document.createElement('a');a.href=official.href;a.target='_blank';a.rel='noopener';a.textContent='Official details';wrap.append(a)}
+    const share=document.createElement('button');share.type='button';share.dataset.guideShare='native_or_copy';share.textContent='Share';share.addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,url:shareUrl});return}catch{}}const ok=await copyLink(shareUrl);share.textContent=ok?'Link copied':'Copy failed';setTimeout(()=>share.textContent='Share',1800)});wrap.append(share);
+    
     article.append(wrap);
   });
   const host=document.querySelector('.experience-footer')||document.querySelector('footer');
   if(host&&!document.querySelector('.nue-related-guides')){
     const related=document.createElement('aside');related.className='nue-related-guides';
-    related.innerHTML='<h2>Keep exploring</h2><p>Useful next stops from SK8 Scoop.</p><div class="nue-related-links"><a href="/my-sk8/">Open My SK8</a><a href="/halloween-half-term-guide/">Halloween &amp; Half-Term Guide</a><a href="/52-adventures/">52 Adventures</a><a href="/guides/">All guides</a></div>';
+    related.innerHTML='<h2>Keep exploring</h2><p>Useful next stops from SK8 Scoop.</p><div class="nue-related-links"><a href="/my-sk8/">Open My SK8</a><a href="/halloween-half-term-guide/guide/">Halloween &amp; Half-Term Guide</a><a href="/52-adventures/guide/">52 Adventures</a><a href="/guides/">All guides</a></div>';
     host.parentNode.insertBefore(related,host);
   }
 })();
