@@ -36,11 +36,11 @@ assert(advertiseJs.includes('/advertise/finder/'), 'Advertiser page links to Cam
 assert(advertiseHtml.includes('/advertise/finder/'), 'Main Advertise page visibly links to Campaign Finder');
 assert(advertiseHtml.includes('/advertise/christmas-eating-out/'), 'Main Advertise page visibly links to Christmas Eating Out');
 assert(advertiseHtml.includes('halloween-scene-v6') && advertiseHtml.includes('halloween-advertising-card-4a.webp'), 'Advertise page uses the richer Halloween visual');
-assert(advertiseHtml.includes('ad-proof-grid-v6') && advertiseHtml.includes('ad-proof-icon'), 'Advertise proof strip uses the icon-led treatment');
-assert(advertiseHtml.includes('ad-route-example-card') && advertiseHtml.includes('FICTIONAL EXAMPLE'), 'Advertise route grid fills the fourth slot with an explicitly fictional example');
-assert(advertiseHtml.includes('ad-placement-demo-v6') && advertiseHtml.includes('cafe-local-business.webp'), 'Advertise example placement contains real imagery instead of an empty artwork placeholder');
+assert(advertiseHtml.includes('ad-proof-grid-v7') && advertiseHtml.includes('ad-proof-pictogram'), 'Advertise proof strip uses the corrected icon-led treatment');
+assert(advertiseHtml.includes('ad-route-help-card') && advertiseHtml.includes('Find the smallest sensible campaign'), 'Advertise route grid fills the fourth slot with decision help rather than a weak advert teaser');
+assert(advertiseHtml.includes('ad-placement-demo-v6') && advertiseHtml.includes('cafe-local-business.webp'), 'Advertise example placement uses the high-resolution cafe source rather than the old low-resolution image');
 assert(advertiseHtml.includes('starter-support-panel') && advertiseHtml.includes('WHAT HAPPENS NEXT'), 'Starter campaign section fills the former right-side empty space with useful support');
-assert(advertiseHtml.includes('audience-pills-v6') && advertiseHtml.includes('audience-art-v6'), 'Audience section uses icon chips and local visual detail');
+assert(advertiseHtml.includes('audience-pills-v6') && advertiseHtml.includes('audience-fit-board'), 'Audience section uses icon chips and the crisp local-fit board');
 assert(advertiseHtml.includes('ad-process-grid-v6') && advertiseHtml.includes('ad-process-icon'), 'Campaign process uses the richer visual treatment');
 assert(advertiseV6.includes('body.advertiser-page [hidden]{display:none!important}'), 'Hidden seasonal package radios cannot render as stray circles');
 assert(advertiseV6.includes('.ad-route-grid') && advertiseV6.includes('grid-template-columns:repeat(2,minmax(0,1fr))'), 'Advertiser route grid is deliberately balanced as a 2x2 layout');
@@ -88,3 +88,5 @@ assert(wrapper.includes("company_fax") && wrapper.includes("sk8_started_at"), 'A
 
 if (process.exitCode) process.exit(process.exitCode);
 console.log('Advertiser growth-engine static checks passed.');
+
+assert(!advertiseHtml.includes('href="#what-you-buy">See the fictional advert'), 'Weak half-page fictional-ad anchor is removed from the route grid');
