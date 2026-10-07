@@ -90,3 +90,7 @@ if (process.exitCode) process.exit(process.exitCode);
 console.log('Advertiser growth-engine static checks passed.');
 
 assert(!advertiseHtml.includes('href="#what-you-buy">See the fictional advert'), 'Weak half-page fictional-ad anchor is removed from the route grid');
+
+assert(advertiseHtml.includes('assets/images/advertise/christmas-hospitality-2026.webp'), 'Christmas hospitality card uses the dedicated festive dining image');
+assert(advertiseHtml.includes('assets/images/advertise/cafe-machine-no-people.webp'), 'Fictional cafe advert uses a people-free coffee-machine image');
+assert(advertiseV6.includes('cafe-machine-no-people.webp'), 'Starter visual uses the people-free coffee-machine image');
