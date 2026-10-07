@@ -15,6 +15,8 @@ const finderJs = read('assets/campaign-finder.js');
 const advertiseHtml = read('advertise.html');
 const advertiseJs = read('assets/advertise.js');
 const advertiseV6 = read('assets/advertise-v6.css');
+const advertiseApprovedXmas = read('assets/advertise-approved-xmas.css');
+const advertiseApprovedCafe = read('assets/advertise-approved-cafe.css');
 const opportunity = read('advertise/christmas-eating-out/index.html');
 const pay = read('advertise/pay/index.html');
 const wrapper = read('worker-business-v2.js');
@@ -91,6 +93,9 @@ console.log('Advertiser growth-engine static checks passed.');
 
 assert(!advertiseHtml.includes('href="#what-you-buy">See the fictional advert'), 'Weak half-page fictional-ad anchor is removed from the route grid');
 
+assert(advertiseHtml.includes('assets/advertise-approved-xmas.css') && advertiseHtml.includes('assets/advertise-approved-cafe.css'), 'Advertise page loads the approved photo treatments after the main advertiser CSS');
+assert(advertiseApprovedXmas.includes('data:image/webp;base64,') && advertiseApprovedXmas.includes('.ad-christmas-scene'), 'Approved Christmas treatment embeds the detailed generated image');
+assert(advertiseApprovedCafe.includes('data:image/webp;base64,') && advertiseApprovedCafe.includes('.cafe-machine-scene') && advertiseApprovedCafe.includes('.starter-visual-machine'), 'Approved cafe treatment embeds the detailed generated image in both relevant placements');
 assert(advertiseHtml.includes('ad-christmas-scene') && advertiseHtml.includes('xmas-place-setting'), 'Christmas hospitality card uses the dedicated festive dining scene');
 assert(advertiseHtml.includes('cafe-machine-scene') && advertiseHtml.includes('cms-machine'), 'Fictional cafe advert uses a people-free coffee-machine scene');
 assert(advertiseV6.includes('.starter-visual-machine:before'), 'Starter visual uses the people-free coffee-machine treatment');
