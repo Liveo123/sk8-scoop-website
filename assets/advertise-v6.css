@@ -791,3 +791,329 @@ body.advertiser-page .ad-process-grid-v6 p{
   body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo,
   body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo img{height:220px!important;min-height:220px!important}
 }
+
+
+/* Visual review corrections, 7 Oct 2026, pass 2. */
+
+/* Proof rail: stop inherited proof-bar rules from pinning icon text to the top edge. */
+body.advertiser-page .ad-proof-grid-v7{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:0!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  border-radius:18px!important;
+  background:rgba(255,255,255,.035)!important;
+}
+body.advertiser-page .ad-proof-grid-v7 .ad-proof-item{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:64px minmax(0,1fr)!important;
+  gap:14px!important;
+  align-items:center!important;
+  min-height:98px!important;
+  padding:16px 20px!important;
+  border-right:1px solid rgba(255,255,255,.16)!important;
+}
+body.advertiser-page .ad-proof-grid-v7 .ad-proof-item:last-child{border-right:0!important}
+body.advertiser-page .ad-proof-grid-v7 .ad-proof-pictogram{
+  position:static!important;
+  inset:auto!important;
+  display:grid!important;
+  width:54px!important;
+  height:54px!important;
+  min-width:54px!important;
+  min-height:54px!important;
+  margin:0!important;
+  padding:0!important;
+  place-items:center!important;
+  border-radius:17px!important;
+  background:#dff3ef!important;
+  color:#0d5d67!important;
+  font:900 1.7rem/1 Inter,Arial,sans-serif!important;
+  letter-spacing:0!important;
+  text-align:center!important;
+  transform:none!important;
+  opacity:1!important;
+}
+body.advertiser-page .ad-proof-grid-v7 .ad-proof-pictogram.warm{
+  background:#ffd58e!important;
+  color:#c45b11!important;
+}
+body.advertiser-page .ad-proof-grid-v7 .ad-proof-item>div{
+  min-width:0!important;
+}
+body.advertiser-page .ad-proof-grid-v7 .ad-proof-item strong{
+  display:block!important;
+  margin:0!important;
+  color:#fff!important;
+  font-size:1.05rem!important;
+  line-height:1.08!important;
+}
+body.advertiser-page .ad-proof-grid-v7 .ad-proof-item>div>span{
+  position:static!important;
+  display:block!important;
+  margin:5px 0 0!important;
+  color:#dcebea!important;
+  font-size:.78rem!important;
+  font-weight:750!important;
+  line-height:1.25!important;
+  letter-spacing:0!important;
+}
+
+/* Replace the weak fictional-card teaser with a decision-help card. */
+body.advertiser-page .ad-route-help-card{
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:360px!important;
+  padding:30px!important;
+  border:1px solid #b9d8d2!important;
+  border-top:7px solid #0f6470!important;
+  border-radius:20px!important;
+  background:
+    radial-gradient(circle at 93% 8%,rgba(248,121,27,.15),transparent 25%),
+    linear-gradient(155deg,#eaf6f3 0%,#fff 74%)!important;
+  box-shadow:0 14px 28px rgba(19,45,49,.07)!important;
+}
+body.advertiser-page .ad-route-help-badge{
+  align-self:flex-start!important;
+  margin-bottom:15px!important;
+  padding:7px 10px!important;
+  border-radius:999px!important;
+  background:#173f45!important;
+  color:#fff!important;
+  font-size:.68rem!important;
+  font-weight:900!important;
+  letter-spacing:.08em!important;
+}
+body.advertiser-page .ad-route-help-card h3{
+  max-width:16ch!important;
+  margin:0 0 10px!important;
+  color:#173f45!important;
+  font-family:Georgia,serif!important;
+  font-size:1.72rem!important;
+  line-height:1.04!important;
+}
+body.advertiser-page .ad-route-help-card>p{
+  margin:0 0 16px!important;
+  color:#50656a!important;
+  line-height:1.48!important;
+}
+body.advertiser-page .ad-route-help-options{
+  display:grid!important;
+  gap:8px!important;
+  margin-bottom:18px!important;
+}
+body.advertiser-page .ad-route-help-options span{
+  display:grid!important;
+  grid-template-columns:minmax(120px,.46fr) 1fr!important;
+  gap:10px!important;
+  padding:10px 12px!important;
+  border:1px solid #d3e1de!important;
+  border-radius:12px!important;
+  background:#fff!important;
+}
+body.advertiser-page .ad-route-help-options b{
+  color:#173f45!important;
+  font-size:.8rem!important;
+}
+body.advertiser-page .ad-route-help-options small{
+  color:#607277!important;
+  font-size:.74rem!important;
+  line-height:1.3!important;
+}
+body.advertiser-page .ad-route-help-card>.button{
+  margin-top:auto!important;
+  width:100%!important;
+  justify-content:center!important;
+  background:#0f6470!important;
+  color:#fff!important;
+}
+
+/* Fictional advert: make the high-res café source read as equipment rather than a portrait. */
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo{
+  height:275px!important;
+  min-height:275px!important;
+  background:#192f32!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo img{
+  width:150%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:left center!important;
+  transform:translateX(-2%)!important;
+  filter:saturate(.9) contrast(1.05)!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo:before{
+  content:"COFFEE · ESPRESSO · CAKES"!important;
+  position:absolute!important;
+  z-index:2!important;
+  right:14px!important;
+  top:14px!important;
+  padding:7px 9px!important;
+  border-radius:8px!important;
+  background:rgba(7,63,72,.88)!important;
+  color:#fff!important;
+  font-size:.62rem!important;
+  font-weight:900!important;
+  letter-spacing:.08em!important;
+}
+
+/* Starter section: right-hand card must fill the column instead of stopping halfway. */
+body.advertiser-page .starter-layout-v6{
+  align-items:stretch!important;
+}
+body.advertiser-page .starter-offer-column{
+  height:100%!important;
+}
+body.advertiser-page .starter-support-panel{
+  display:flex!important;
+  flex-direction:column!important;
+  align-self:stretch!important;
+  height:100%!important;
+  min-height:100%!important;
+}
+body.advertiser-page .starter-examples{
+  margin-top:0!important;
+}
+body.advertiser-page .starter-visual-card-v2{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,.8fr) minmax(260px,1.2fr)!important;
+  gap:0!important;
+  min-height:210px!important;
+  margin-top:auto!important;
+  overflow:hidden!important;
+  border:1px solid #c9ddd8!important;
+  border-radius:17px!important;
+  background:linear-gradient(135deg,#173f45,#0f6470)!important;
+}
+body.advertiser-page .starter-visual-card-v2 .starter-visual-copy{
+  position:static!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding:22px!important;
+  background:transparent!important;
+}
+body.advertiser-page .starter-visual-card-v2 .starter-visual-copy span{
+  color:#ffd39c!important;
+  font-size:.66rem!important;
+  font-weight:900!important;
+  letter-spacing:.09em!important;
+}
+body.advertiser-page .starter-visual-card-v2 .starter-visual-copy strong{
+  margin-top:8px!important;
+  color:#fff!important;
+  font-family:Georgia,serif!important;
+  font-size:1.55rem!important;
+  line-height:1.03!important;
+}
+body.advertiser-page .starter-visual-card-v2 .starter-visual-copy small{
+  margin-top:8px!important;
+  color:#d7e9e6!important;
+  line-height:1.35!important;
+}
+body.advertiser-page .starter-visual-split{
+  display:grid!important;
+  grid-template-columns:1.05fr .95fr!important;
+  min-height:210px!important;
+  background:#fff!important;
+}
+body.advertiser-page .starter-visual-machine{
+  min-width:0!important;
+  background-image:
+    linear-gradient(180deg,rgba(0,0,0,.02),rgba(7,63,72,.18)),
+    url("/assets/images/cafe-local-business.webp")!important;
+  background-size:230% auto!important;
+  background-position:7% 48%!important;
+  background-repeat:no-repeat!important;
+}
+body.advertiser-page .starter-visual-action{
+  display:grid!important;
+  grid-template-columns:42px minmax(0,1fr)!important;
+  gap:9px 10px!important;
+  align-content:center!important;
+  padding:18px!important;
+  background:linear-gradient(155deg,#fff8ee,#f5fbf9)!important;
+}
+body.advertiser-page .starter-visual-action b{
+  display:grid!important;
+  width:40px!important;
+  height:40px!important;
+  place-items:center!important;
+  border-radius:13px!important;
+  background:#f8791b!important;
+  color:#fff!important;
+  font-size:1.1rem!important;
+}
+body.advertiser-page .starter-visual-action b:nth-of-type(2){background:#0f6470!important}
+body.advertiser-page .starter-visual-action span{
+  align-self:center!important;
+  color:#294a50!important;
+  font-size:.8rem!important;
+  font-weight:850!important;
+  line-height:1.2!important;
+}
+
+/* Replace the blurry raster strip with a crisp local-fit board built in HTML/CSS. */
+body.advertiser-page .audience-fit-board{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+  height:auto!important;
+  min-height:160px!important;
+  margin:22px 0 0!important;
+  padding:18px!important;
+  border:1px solid #d6e3df!important;
+  border-radius:17px!important;
+  background:
+    radial-gradient(circle at 95% 0%,rgba(169,201,35,.15),transparent 25%),
+    linear-gradient(145deg,#eef8f5,#fffaf1)!important;
+  opacity:1!important;
+}
+body.advertiser-page .audience-fit-board:after{display:none!important}
+body.advertiser-page .fit-board-card{
+  display:flex!important;
+  min-height:126px!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding:16px!important;
+  border:1px solid #cadeda!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 7px 16px rgba(19,45,49,.05)!important;
+}
+body.advertiser-page .fit-board-card.warm{
+  border-color:#f2d2b9!important;
+  background:#fff9f2!important;
+}
+body.advertiser-page .fit-board-card span{
+  margin-bottom:8px!important;
+  color:#0f6470!important;
+  font-size:.67rem!important;
+  font-weight:950!important;
+  letter-spacing:.08em!important;
+}
+body.advertiser-page .fit-board-card.warm span{color:#d25b12!important}
+body.advertiser-page .fit-board-card strong{
+  color:#173f45!important;
+  font-size:1rem!important;
+  line-height:1.28!important;
+}
+
+@media(max-width:900px){
+  body.advertiser-page .ad-proof-grid-v7{grid-template-columns:1fr 1fr!important}
+  body.advertiser-page .ad-route-help-options span{grid-template-columns:1fr!important}
+  body.advertiser-page .starter-visual-card-v2{grid-template-columns:1fr!important}
+  body.advertiser-page .starter-visual-split{min-height:180px!important}
+  body.advertiser-page .audience-fit-board{grid-template-columns:1fr!important}
+}
+@media(max-width:560px){
+  body.advertiser-page .ad-proof-grid-v7{grid-template-columns:1fr!important}
+  body.advertiser-page .ad-proof-grid-v7 .ad-proof-item{border-right:0!important;border-bottom:1px solid rgba(255,255,255,.14)!important}
+  body.advertiser-page .ad-proof-grid-v7 .ad-proof-item:last-child{border-bottom:0!important}
+  body.advertiser-page .starter-visual-split{grid-template-columns:1fr!important}
+  body.advertiser-page .starter-visual-machine{min-height:150px!important}
+}
