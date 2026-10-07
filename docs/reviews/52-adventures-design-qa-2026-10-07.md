@@ -40,9 +40,11 @@ The existing Image-Rights-Register was checked first and retained. `52-adventure
 
 - 228 DOM-simulation checks: all 104 Finder cards have media/fallback and actions; all 52 chapters have actions; every adventure dialog retains story, facts, availability and shared actions; shared saves/removals and retention of other guides; removal survives reload; calendar choice and exact single-date reminders; no calendar on undated activities.
 - 3 blocked-storage checks: session save works, correct session-only action label and visible limitation notice.
+- Additional 144 Finder URL/copy/static-metadata checks passed, including clipboard success, denial and absence.
 - Existing 594 date-aware availability/Finder checks passed, including 7, 25 and 26 October transitions and combinations. Surprise Me and unfinished-picker exclusion policy unchanged.
 - Exact comparison: all 52 editorial records, original image records and availability overrides preserved.
 - Post-launch NUE preflight and public-sample/subscriber-gate checks passed. Website Health: 0 errors; 1 existing unrelated warning for three expired events hidden by client filtering.
+- The live asset audit caught empty deployed files for adventures 15 and 34. Both were regenerated from the same reviewed originals, decoded and matched the existing rights-record SHA-256 hashes. A required CI image-integrity check now rejects empty/truncated WebP files, wrong routes and changed content hashes for all 32 reviewed assets.
 - JavaScript parses; Git whitespace checks pass. Every new raster asset is decoded locally and its source record includes a content hash.
 - Earlier destination-link, high-decay-fact, closure and duplicate-metadata audit findings remain applicable because those fields were preserved. The Shutlingsloe unsafe-bridge/path-closure warning remains in the maintained entry.
 
