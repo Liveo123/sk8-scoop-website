@@ -103,7 +103,7 @@
 <style id="sk8-halloween-nue-actions-v1">
 /* Functional NUE controls added without changing the approved visual concept */
 .nue-utility-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16)}
-.nue-utility-actions a,.nue-utility-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:2px solid var(--teal);border-radius:999px;background:#fff;color:var(--dark);font:900 .86rem/1.2 inherit;text-decoration:none;cursor:pointer}
+.nue-utility-actions a,.nue-utility-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:2px solid var(--teal);border-radius:999px;background:#fff;color:var(--dark);font:inherit;font-weight:900;font-size:.86rem;line-height:1.2;text-decoration:none;cursor:pointer}
 .nue-utility-actions a:hover,.nue-utility-actions button:hover,.nue-utility-actions button[aria-pressed="true"]{background:var(--dark);color:#fff;border-color:var(--dark)}
 .nue-related-guides{margin:46px auto 10px;max-width:1120px;padding:24px;border-radius:24px;background:#fff;box-shadow:var(--shadow);border:1px solid rgba(15,100,112,.12)}
 .nue-related-guides h2{font-size:1.55rem;margin:0 0 8px}.nue-related-guides p{margin:.35rem 0 1rem}
@@ -585,7 +585,7 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
     if(where){const a=document.createElement('a');a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(where);a.target='_blank';a.rel='noopener';a.textContent='Directions';wrap.append(a)}
     if(ymd){const calendarEnd=span.continuous?(span.end||ymd):ymd;const a=document.createElement('a');a.href=gcal(title,ymd,calendarEnd,(when?when+' · ':'')+'SK8 Scoop Halloween & Half-Term Guide: '+shareUrl,where);a.target='_blank';a.rel='noopener';a.textContent=span.multiple&&!span.continuous?'Add first listed date':(span.continuous?'Add date range':'Add to calendar');wrap.append(a)}
     const share=document.createElement('button');share.type='button';share.dataset.guideShare='native_or_copy';share.textContent='Share';share.addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,url:shareUrl});return}catch{}}const ok=await copyLink(shareUrl);share.textContent=ok?'Link copied':'Copy failed';setTimeout(()=>share.textContent='Share',1800)});wrap.append(share);
-    if(official){const a=document.createElement('a');a.href=official.href;a.target='_blank';a.rel='noopener';a.textContent='Official details';wrap.append(a)}
+    
     card.append(wrap);
   });
   const host=document.querySelector('footer');
