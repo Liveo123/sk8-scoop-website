@@ -119,9 +119,9 @@ jobs:
             path="$1"
             marker="$2"
             url="${base}${path}"
+            body_file="/tmp/sk8-preview-page"
             for attempt in $(seq 1 12); do
-              body="$(curl -fsSL --max-time 20 "$url" || true)"
-              if printf '%s' "$body" | grep -Fq "$marker"; then
+              if curl -fsSL --max-time 20 "$url" -o "$body_file" && grep -Fq "$marker" "$body_file"; then
                 echo "OK preview: $url"
                 return 0
               fi
