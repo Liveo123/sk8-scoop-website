@@ -2355,4 +2355,44 @@ Current window: 7 October to 31 October 2026</p>
   panel.hidden=false;
  }));
 })();
-</script><script src="/assets/free-cheap-guide-analytics.js" defer></script><script src="/assets/guide-analytics.js" defer></script></body></html>
+</script><script src="/assets/free-cheap-guide-analytics.js" defer></script><script src="/assets/guide-analytics.js" defer></script><script id="sk8-nue-actions-script-v1">
+(()=> {
+  const storageKey='sk8-guide-saves:v1';
+  const readSaves=()=>{try{return JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{return {}}};
+  const writeSaves=(value)=>{try{localStorage.setItem(storageKey,JSON.stringify(value))}catch{}};
+  const slugify=(value)=>value.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,72);
+  const copyLink=async(url)=>{try{await navigator.clipboard.writeText(url);return true}catch{return false}};
+  const oneDayAfter=(ymd)=>{const d=new Date(ymd+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+1);return d.toISOString().slice(0,10)};
+  const gcal=(title,date,details,location)=>{
+    const start=date.replace(/-/g,''),end=oneDayAfter(date).replace(/-/g,'');
+    const u=new URL('https://calendar.google.com/calendar/render');
+    u.searchParams.set('action','TEMPLATE');u.searchParams.set('text',title);u.searchParams.set('dates',start+'/'+end);
+    if(details)u.searchParams.set('details',details);if(location)u.searchParams.set('location',location);return u.href;
+  };
+  document.querySelectorAll('article.guide-entry').forEach((article,index)=>{
+    if(article.querySelector('.nue-utility-actions'))return;
+    const title=(article.querySelector('.entry-title,h3,h4')?.textContent||('Guide item '+(index+1))).trim();
+    if(!article.id)article.id='item-'+slugify(title)+'-'+(index+1);
+    const shareUrl=location.origin+location.pathname+'#'+article.id;
+    const facts=[...article.querySelectorAll('.entry-fact')];
+    const fact=(re)=>{const row=facts.find(x=>re.test((x.querySelector('.entry-fact-label')?.textContent||'').trim()));return (row?.querySelector('.entry-fact-value')?.textContent||'').trim()};
+    const where=fact(/WHERE|PLACE/),when=fact(/WHEN|EXPECTED PATTERN/);
+    const official=article.querySelector('a.official-link[href]');
+    const wrap=document.createElement('div');wrap.className='nue-utility-actions';wrap.setAttribute('aria-label','Useful actions');
+    const save=document.createElement('button');save.type='button';
+    const refreshSave=()=>{const saved=!!readSaves()[location.pathname+'#'+article.id];save.textContent=saved?'Saved':'Save';save.setAttribute('aria-pressed',String(saved))};
+    save.addEventListener('click',()=>{const all=readSaves(),key=location.pathname+'#'+article.id;if(all[key])delete all[key];else all[key]={title,url:shareUrl,savedAt:new Date().toISOString()};writeSaves(all);refreshSave()});refreshSave();wrap.append(save);
+    if(where){const a=document.createElement('a');a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(where);a.target='_blank';a.rel='noopener';a.textContent='Directions';wrap.append(a)}
+    if(article.classList.contains('event-card')&&official){try{const d=new URL(official.href).searchParams.get('date');if(/^20\d\d-\d\d-\d\d$/.test(d||'')){const a=document.createElement('a');a.href=gcal(title,d,(when?when+' · ':'')+'SK8 Scoop Free & Cheap Guide: '+shareUrl,where);a.target='_blank';a.rel='noopener';a.textContent='Add to calendar';wrap.append(a)}}catch{}}
+    const share=document.createElement('button');share.type='button';share.textContent='Share';share.addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,url:shareUrl});return}catch{}}const ok=await copyLink(shareUrl);share.textContent=ok?'Link copied':'Copy failed';setTimeout(()=>share.textContent='Share',1800)});wrap.append(share);
+    if(official){const a=document.createElement('a');a.href=official.href;a.target='_blank';a.rel='noopener';a.textContent='Official details';wrap.append(a)}
+    article.append(wrap);
+  });
+  const host=document.querySelector('.experience-footer')||document.querySelector('footer');
+  if(host&&!document.querySelector('.nue-related-guides')){
+    const related=document.createElement('aside');related.className='nue-related-guides';
+    related.innerHTML='<h2>Keep exploring</h2><p>Useful next stops from SK8 Scoop.</p><div class="nue-related-links"><a href="/halloween-half-term-guide/">Halloween &amp; Half-Term Guide</a><a href="/52-adventures/">52 Adventures</a><a href="/guides/">All guides</a></div>';
+    host.parentNode.insertBefore(related,host);
+  }
+})();
+</script></body></html>
