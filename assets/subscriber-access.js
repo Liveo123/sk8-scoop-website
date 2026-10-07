@@ -12,8 +12,11 @@
   const setState = active => {
     document.querySelectorAll('[data-subscriber-guide]').forEach(el => {
       const target = String(el.dataset.subscriberGuide || '');
-      if (active && target.startsWith('/')) el.setAttribute('href', target);
-      else el.removeAttribute('href');
+      if (active && target.startsWith('/')) {
+        el.setAttribute('href', target);
+      } else if (!el.hasAttribute('href')) {
+        el.removeAttribute('href');
+      }
     });
     unlockBlocks.forEach(el => { el.hidden = !active; });
     lockedBlocks.forEach(el => { el.hidden = active; });
