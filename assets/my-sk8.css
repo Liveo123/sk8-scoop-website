@@ -4,6 +4,9 @@
 .my-sk8-action{appearance:none;display:inline-flex;align-items:center;gap:7px;border:1px solid #cbd8d5;background:#fff;color:#0f6470;border-radius:999px;padding:6px 10px 6px 7px;min-height:36px;font:800 .78rem/1 Inter,Arial,sans-serif;text-decoration:none;cursor:pointer;transition:background .16s ease,border-color .16s ease,transform .16s ease}
 .my-sk8-action:hover,.my-sk8-action:focus-visible{background:#eef7f5;border-color:#9bc5c0;outline:none;transform:translateY(-1px)}
 .my-sk8-save{background:#fff8ea;border-color:#eed8b4}
+.my-sk8-storage-note{flex:1 0 100%;display:block;margin:1px 2px 0;color:#637276;font-size:.72rem;line-height:1.35}
+.my-sk8-storage-note a{color:#0f6470;font-weight:800;text-decoration:underline;text-underline-offset:2px}
+.my-sk8-page-storage-note{font-size:.8rem}
 .my-sk8-toast{position:fixed;left:50%;bottom:24px;z-index:80;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#073f48;color:#fff;padding:11px 15px;border-radius:999px;font-weight:800;box-shadow:0 10px 28px rgba(0,0,0,.18);transition:.18s ease}
 .my-sk8-toast.show{opacity:1;transform:translate(-50%,0)}
 .my-sk8-hero{padding:48px 0 38px}
