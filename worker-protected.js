@@ -179,11 +179,9 @@ export default {
       return handleSearchStats(request, env);
     }
 
-    const protectedGuide = getProtectedGuide(url.pathname);
-    if (protectedGuide && (request.method === 'GET' || request.method === 'HEAD')) {
-      return handleProtectedGuideRequest(request, env, ctx, protectedGuide);
-    }
-
+    // Full guide URLs are deliberately direct-access once a reader has the link.
+    // Subscriber recognition may improve landing-page UX, but must never gate the
+    // guide URL by browser, cookie, session, device or subscriber lookup.
     return existingWorker.fetch(request, env, ctx);
   }
 };
