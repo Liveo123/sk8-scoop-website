@@ -494,19 +494,67 @@
     });
   };
 
-  const processSaveParam = () => {
+  const processNewsletterActionParam = () => {
     const params = new URLSearchParams(location.search);
-    const id = params.get('save');
-    if (!id) return;
+    const legacySaveId = params.get('save');
+    const action = String(params.get('my_action') || (legacySaveId ? 'save' : '')).toLowerCase();
+    const id = String(params.get('event') || legacySaveId || '').trim();
+    if (!action || !id) return;
+
     const event = state.byId.get(id);
     if (!event) return;
-    if (event.kind === 'page') savePage(event, 'newsletter_link');
-    else saveEvent(event, 'newsletter_link');
-    showToast('Saved to My SK8');
-    updateSavedBadges();
-    params.delete('save');
-    const next = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
-    history.replaceState({}, '', next);
+
+    const cleanActionParams = () => {
+      params.delete('my_action');
+      params.delete('save');
+      const next = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+      history.replaceState({}, '', next);
+    };
+
+    if (action === 'save') {
+      if (event.kind === 'page') savePage(event, 'newsletter_direct_action');
+      else saveEvent(event, 'newsletter_direct_action');
+      cleanActionParams();
+      showToast('Saved to My SK8');
+      updateSavedBadges();
+      track('my_sk8_newsletter_action', { event_id: id, action: 'save', event_area: event.area || '' });
+      return;
+    }
+
+    if (event.kind === 'page') return;
+
+    if (action === 'remind') {
+      if (!hasReminder(id)) toggleReminder(event);
+      if (!isSaved(id)) saveEvent(event, 'newsletter_direct_action');
+      cleanActionParams();
+      showToast('Reminder set');
+      updateSavedBadges();
+      track('my_sk8_newsletter_action', { event_id: id, action: 'remind', event_area: event.area || '' });
+      return;
+    }
+
+    if (action === 'calendar') {
+      const href = calendarHref(event);
+      if (!href) return;
+      cleanActionParams();
+      track('my_sk8_newsletter_action', { event_id: id, action: 'calendar', event_area: event.area || '' });
+      const link = document.createElement('a');
+      link.href = href;
+      link.download = 'sk8-scoop-' + id + '.ics';
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      showToast('Calendar file ready');
+      return;
+    }
+
+    if (action === 'directions') {
+      const href = directionsHref(event);
+      if (!href) return;
+      track('my_sk8_newsletter_action', { event_id: id, action: 'directions', event_area: event.area || '' });
+      location.assign(href);
+    }
   };
 
   const syncEvents = events => {
@@ -516,7 +564,7 @@
       ...state.events.map(event => [String(event.id || ''), event])
     ]);
     renderEventActions();
-    processSaveParam();
+    processNewsletterActionParam();
     if (document.body.dataset.page === 'my-sk8') renderMySk8();
   };
 
