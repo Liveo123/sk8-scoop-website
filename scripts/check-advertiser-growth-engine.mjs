@@ -91,8 +91,8 @@ console.log('Advertiser growth-engine static checks passed.');
 
 assert(!advertiseHtml.includes('href="#what-you-buy">See the fictional advert'), 'Weak half-page fictional-ad anchor is removed from the route grid');
 
-assert(advertiseHtml.includes('assets/images/advertise/christmas-hospitality-2026.svg'), 'Christmas hospitality card uses the dedicated festive dining image');
-assert(advertiseHtml.includes('assets/images/advertise/cafe-machine-no-people.svg'), 'Fictional cafe advert uses a people-free coffee-machine image');
-assert(advertiseV6.includes('cafe-machine-no-people.webp'), 'Starter visual uses the people-free coffee-machine image');
+assert(advertiseHtml.includes('ad-christmas-scene') && advertiseHtml.includes('xmas-place-setting'), 'Christmas hospitality card uses the dedicated festive dining scene');
+assert(advertiseHtml.includes('cafe-machine-scene') && advertiseHtml.includes('cms-machine'), 'Fictional cafe advert uses a people-free coffee-machine scene');
+assert(advertiseV6.includes('.starter-visual-machine:before'), 'Starter visual uses the people-free coffee-machine treatment');
 
 assert(!advertiseHtml.includes('assets/images/cafe-local-business.webp'), 'Old people-focused cafe image is not used on the Advertise page');
