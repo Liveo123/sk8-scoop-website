@@ -96,8 +96,8 @@ assert(!advertiseHtml.includes('href="#what-you-buy">See the fictional advert'),
 assert(advertiseHtml.includes('assets/advertise-approved-xmas.css') && advertiseHtml.includes('assets/advertise-approved-cafe.css'), 'Advertise page loads the approved photo treatments after the main advertiser CSS');
 assert(advertiseApprovedXmas.includes('data:image/webp;base64,') && advertiseApprovedXmas.includes('.ad-christmas-scene'), 'Approved Christmas treatment embeds the detailed generated image');
 assert(advertiseApprovedCafe.includes('data:image/webp;base64,') && advertiseApprovedCafe.includes('.cafe-machine-scene') && advertiseApprovedCafe.includes('.starter-visual-machine'), 'Approved cafe treatment embeds the detailed generated image in both relevant placements');
-assert(advertiseHtml.includes('ad-christmas-scene') && advertiseHtml.includes('xmas-place-setting'), 'Christmas hospitality card uses the dedicated festive dining scene');
-assert(advertiseHtml.includes('cafe-machine-scene') && advertiseHtml.includes('cms-machine'), 'Fictional cafe advert uses a people-free coffee-machine scene');
-assert(advertiseV6.includes('.starter-visual-machine:before'), 'Starter visual uses the people-free coffee-machine treatment');
+assert(advertiseHtml.includes('ad-christmas-photo') && advertiseHtml.includes('test-canva-thumb.webp'), 'Christmas hospitality card uses the approved detailed festive photo');
+assert(advertiseHtml.includes('test-canva-cafe-thumb.webp'), 'Fictional cafe advert uses the approved detailed coffee-machine photo');
+assert(advertiseV6.includes('test-canva-cafe-thumb.webp'), 'Starter visual reuses the approved detailed cafe photo');
 
 assert(!advertiseHtml.includes('assets/images/cafe-local-business.webp'), 'Old people-focused cafe image is not used on the Advertise page');
