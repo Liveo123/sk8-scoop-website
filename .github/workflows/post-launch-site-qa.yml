@@ -50,6 +50,7 @@ jobs:
           if [ -f assets/site.js ]; then node --check assets/site.js; fi
           if [ -f assets/my-sk8.js ]; then node --check assets/my-sk8.js; fi
           if [ -f tests/my-sk8-browser.mjs ]; then node --check tests/my-sk8-browser.mjs; fi
+          if [ -f scripts/check-header-layout.mjs ]; then node --check scripts/check-header-layout.mjs; fi
           if [ -f assets/secret-trail-feedback-admin.js ]; then node --check assets/secret-trail-feedback-admin.js; fi
           if [ -f assets/campaign-finder.js ]; then node --check assets/campaign-finder.js; fi
           if [ -f assets/advertise.js ]; then node --check assets/advertise.js; fi
@@ -443,3 +444,44 @@ jobs:
             2*|3*|4*) echo "OK contact endpoint reachable: HTTP $contact_code" ;;
             *) echo "Formspark contact endpoint unavailable: HTTP $contact_code"; exit 1 ;;
           esac
+  header-layout:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: live-smoke
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "No Chrome/Chromium available on runner"
+            exit 1
+          fi
+
+      - name: Verify responsive subscriber header
+        env:
+          HEADER_QA_BASE_URL: https://www.sk8scoop.com
+        run: node scripts/check-header-layout.mjs
+
+      - name: Upload header screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: header-layout-qa
+          path: visual-qa/header-layout/
+          retention-days: 7
+
