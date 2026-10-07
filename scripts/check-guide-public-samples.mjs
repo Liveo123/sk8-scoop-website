@@ -7,6 +7,7 @@ const sitemapXml = read('sitemap.xml');
 const sitemapHtml = read('sitemap.html');
 const adventuresLanding = read('52-adventures/index.html');
 const freeCheapLanding = read('free-cheap-guide/index.html');
+const halloweenGuide = read('halloween-half-term-guide/guide/index.html');
 const signupJs = read('assets/signup-protection.js');
 const protectedWorker = read('worker-protected.js');
 
@@ -83,10 +84,10 @@ for (const route of subscriberOnlyTeasers) {
   assert(!sitemapHtml.includes(`href="${normaliseRoute(route)}/"`), `Subscriber-only teaser must not appear in sitemap.html: ${route}`);
 }
 
-for (const forbidden of ['/52-adventures/guide/', '/free-cheap-guide/guide/']) {
-  assert(!sitemapXml.includes(forbidden), `Full subscriber guide must not appear in sitemap.xml: ${forbidden}`);
-  assert(!sitemapHtml.includes(forbidden), `Full subscriber guide must not appear in sitemap.html: ${forbidden}`);
-  assert(!JSON.stringify(discovery).includes(forbidden), `Full subscriber guide must not appear in site search discovery: ${forbidden}`);
+for (const directRoute of ['/52-adventures/guide/', '/free-cheap-guide/guide/', '/halloween-half-term-guide/guide/']) {
+  assert(!sitemapXml.includes(directRoute), `Direct full-guide route must not appear in sitemap.xml: ${directRoute}`);
+  assert(!sitemapHtml.includes(directRoute), `Direct full-guide route must not appear in sitemap.html: ${directRoute}`);
+  assert(!JSON.stringify(discovery).includes(directRoute), `Direct full-guide route must not appear in site search discovery: ${directRoute}`);
 }
 
 assert(adventuresLanding.includes('data-guide-key="52-adventures"'), '52 Adventures signup forms must identify the guide key.');
@@ -100,12 +101,19 @@ assert(!freeCheapLanding.includes('href="/free-cheap-guide/guide/"'), 'Free & Ch
 assert(signupJs.includes('dataset.successUrl'), 'Signup protection must honour each form\'s configured success URL.');
 assert(signupJs.includes('sk8_guide_key'), 'Signup protection must submit the guide key.');
 
-assert(protectedWorker.includes('guide_access_tokens'), 'Protected worker must retain guide access-token storage.');
+assert(protectedWorker.includes('guide_access_tokens'), 'Protected worker must retain subscriber-access storage for site features that still use it.');
 assert(protectedWorker.includes("'guide:52-adventures'"), 'Protected worker must route 52 Adventures signups to their MailerLite group.');
 assert(protectedWorker.includes("'guide:free-cheap'"), 'Protected worker must route Free & Cheap signups to their MailerLite group.');
-assert(protectedWorker.includes("cookie: 'sk8_guide_52'"), 'Protected worker must gate 52 Adventures with its access cookie.');
-assert(protectedWorker.includes("cookie: 'sk8_guide_fc'"), 'Protected worker must gate Free & Cheap with its access cookie.');
-assert(protectedWorker.includes("'x-robots-tag': 'noindex, follow'") || protectedWorker.includes("headers.set('x-robots-tag', 'noindex, follow')"), 'Protected guide responses must remain noindex.');
+assert(protectedWorker.includes("'guide:halloween'"), 'Protected worker must route Halloween Guide signups to their MailerLite group.');
+assert(protectedWorker.includes("guideRequiresAccess(protectedGuide.key)"), 'Guide dispatch must honour the explicit public-by-link access decision before redirecting.');
+assert((protectedWorker.match(/requiresAccess: false/g) || []).length >= 3, 'All current free guide direct routes must remain public-by-link.');
+assert(halloweenGuide.includes('id="filters"'), 'Halloween Guide must retain the #filters anchor.');
+for (const filter of ['local','free','under10','under5','primary','teen','rainy','send']) {
+  assert(halloweenGuide.includes(`data-filter="${filter}"`), `Halloween Guide is missing filter state: ${filter}`);
+}
+assert(halloweenGuide.includes("new URLSearchParams(location.search).get('filter')"), 'Halloween Guide must read the filter query parameter.');
+assert(halloweenGuide.includes("requestedGuideButton.click()"), 'Halloween Guide must apply the requested filter state.');
+assert(halloweenGuide.includes("document.getElementById('filters')?.scrollIntoView"), 'Halloween Guide filter deep links must scroll to the filters.');
 
 if (failures.length) {
   console.error('Guide public-sample/subscriber-gate check failed:');
@@ -113,4 +121,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Guide public-sample/subscriber-gate check passed: 10 public samples per guide and full-guide access remains gated.');
+console.log('Guide public-sample/direct-route check passed: public discovery stays on landing/sample pages while direct full-guide links remain public-by-link and Halloween filters are supported.');
