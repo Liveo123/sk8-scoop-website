@@ -111,6 +111,40 @@ jobs:
           CHROME: ${{ env.CHROME }}
         run: node tests/my-sk8-browser.mjs
 
+      - name: Capture Issue 16 MailerLite render evidence
+        if: always()
+        shell: bash
+        env:
+          I16_SCREENSHOT: "https://storage.googleapis.com/mailerlite-screenshots-prod/screenshot/emails/200591761988387933/1284x7362026-10-07-06:57:01.png"
+          I14_SCREENSHOT: "https://storage.googleapis.com/mailerlite-screenshots-prod/screenshot/emails/199597988175152448/1284x7362026-09-25-17:01:22.png"
+          I16_PREVIEW: "https://connect.mailerlite.com/emails/200591761988387933/preview"
+          I14_PREVIEW: "https://preview.mailerlite.io/preview/2462354/emails/199597988175152448"
+        run: |
+          set -eu
+          mkdir -p visual-qa/mailerlite
+          curl -fsSL --max-time 30 "$I16_SCREENSHOT" -o visual-qa/mailerlite/issue16-desktop.png
+          curl -fsSL --max-time 30 "$I14_SCREENSHOT" -o visual-qa/mailerlite/issue14-desktop.png
+
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --hide-scrollbars             --force-device-scale-factor=1 --window-size=390,844 --virtual-time-budget=7000             --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"             --screenshot=visual-qa/mailerlite/issue16-mobile.png "$I16_PREVIEW"
+
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --hide-scrollbars             --force-device-scale-factor=1 --window-size=390,844 --virtual-time-budget=7000             --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"             --screenshot=visual-qa/mailerlite/issue14-mobile.png "$I14_PREVIEW"
+
+          for name in issue16-desktop issue14-desktop issue16-mobile issue14-mobile; do
+            test -s "visual-qa/mailerlite/$name.png"
+            echo "MAILERLITE_IMAGE_BEGIN:$name"
+            base64 -w0 "visual-qa/mailerlite/$name.png"
+            echo
+            echo "MAILERLITE_IMAGE_END:$name"
+          done
+
+      - name: Upload MailerLite render evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue16-mailerlite-render-qa
+          path: visual-qa/mailerlite/
+          retention-days: 14
+
       - name: Upload screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
