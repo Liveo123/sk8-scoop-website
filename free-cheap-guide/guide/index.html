@@ -2437,7 +2437,7 @@ Current window: 7 October to 31 October 2026</p>
     if(where){const a=document.createElement('a');a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(where);a.target='_blank';a.rel='noopener';a.textContent='Directions';wrap.append(a)}
     if(/^20\d\d-\d\d-\d\d$/.test(eventDate)){const a=document.createElement('a');a.href=gcal(title,eventDate,(when?when+' · ':'')+'SK8 Scoop Free & Cheap Guide: '+shareUrl,where);a.target='_blank';a.rel='noopener';a.textContent='Add to calendar';wrap.append(a)}
     const share=document.createElement('button');share.type='button';share.dataset.guideShare='native_or_copy';share.textContent='Share';share.addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,url:shareUrl});return}catch{}}const ok=await copyLink(shareUrl);share.textContent=ok?'Link copied':'Copy failed';setTimeout(()=>share.textContent='Share',1800)});wrap.append(share);
-    if(official){const a=document.createElement('a');a.href=official.href;a.target='_blank';a.rel='noopener';a.textContent='Official details';wrap.append(a)}
+    
     article.append(wrap);
   });
   const host=document.querySelector('.experience-footer')||document.querySelector('footer');
