@@ -315,6 +315,30 @@ try {
   const noindex = await attr('meta[name="robots"]', 'content');
   record('My SK8 experiment is noindex', /noindex/i.test(noindex), noindex);
 
+  const navigateAbsolute = async url => {
+    await command('Page.navigate', { url });
+    const ok = await waitFor("document.readyState === 'complete'", 15000);
+    if (!ok) throw new Error('Page did not finish loading: ' + url);
+    await waitFor("[...document.images].every(img => img.complete)", 20000);
+    await sleep(1200);
+  };
+  const captureEvidence = async name => {
+    const shot = await command('Page.captureScreenshot', { format: 'png', fromSurface: true, captureBeyondViewport: false });
+    console.log('MAILERLITE_LOCAL_IMAGE_BEGIN:' + name);
+    console.log(shot.data);
+    console.log('MAILERLITE_LOCAL_IMAGE_END:' + name);
+  };
+
+  await setViewport(390, 844, true);
+  const root = 'file://' + process.cwd();
+  await navigateAbsolute(root + '/visual-qa/mailerlite/issue16-final.html');
+  record('Issue 16 raw MailerLite HTML has no mobile horizontal overflow', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
+  await captureEvidence('issue16-mobile-local');
+
+  await navigateAbsolute(root + '/visual-qa/mailerlite/issue14-benchmark.html');
+  record('Issue 14 benchmark raw HTML has no mobile horizontal overflow', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
+  await captureEvidence('issue14-mobile-local');
+
   await writeFile('visual-qa/my-sk8/results.json', JSON.stringify({ preview: PREVIEW_URL, results }, null, 2));
   console.log('Completed ' + results.length + ' My SK8 preview checks.');
 } finally {
