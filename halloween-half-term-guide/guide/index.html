@@ -590,7 +590,7 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
   const host=document.querySelector('footer');
   if(host&&!document.querySelector('.nue-related-guides')){
     const related=document.createElement('aside');related.className='nue-related-guides';
-    related.innerHTML='<h2>Keep exploring</h2><p>Useful next stops from SK8 Scoop.</p><div class="nue-related-links"><a href="/my-sk8/">Open My SK8</a><a href="/free-cheap-guide/">Free &amp; Cheap Guide</a><a href="/52-adventures/">52 Adventures</a><a href="/guides/">All guides</a></div>';
+    related.innerHTML='<h2>Keep exploring</h2><p>Useful next stops from SK8 Scoop.</p><div class="nue-related-links"><a href="/my-sk8/">Open My SK8</a><a href="/free-cheap-guide/guide/">Free &amp; Cheap Guide</a><a href="/52-adventures/guide/">52 Adventures</a><a href="/guides/">All guides</a></div>';
     host.parentNode.insertBefore(related,host);
   }
 })();
