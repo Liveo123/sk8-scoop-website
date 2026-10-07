@@ -1023,9 +1023,7 @@ body.advertiser-page .starter-visual-split{
 }
 body.advertiser-page .starter-visual-machine{
   min-width:0!important;
-  background-image:
-    linear-gradient(180deg,rgba(0,0,0,.02),rgba(7,63,72,.18)),
-    url("/assets/images/advertise/cafe-machine-no-people.svg")!important;
+  background-image:linear-gradient(145deg,#e9dfcf 0%,#d3bea1 100%)!important;
   background-size:230% auto!important;
   background-position:7% 48%!important;
   background-repeat:no-repeat!important;
@@ -1179,4 +1177,224 @@ body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo img{
 body.advertiser-page .starter-visual-machine{
   background-size:cover!important;
   background-position:center!important;
+}
+
+/* No-external-asset visual scenes: robust, crisp and compatible with the site's no-SVG rule. */
+body.advertiser-page .ad-christmas-scene{
+  position:relative!important;
+  height:176px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 18% 22%,rgba(255,213,142,.42),transparent 18%),
+    radial-gradient(circle at 78% 18%,rgba(255,226,162,.35),transparent 20%),
+    linear-gradient(145deg,#173f45 0%,#284d48 52%,#7a3b2b 100%)!important;
+}
+body.advertiser-page .ad-christmas-scene:before{
+  content:""!important;
+  position:absolute!important;
+  left:7%!important;
+  right:7%!important;
+  bottom:-42px!important;
+  height:118px!important;
+  border-radius:50% 50% 0 0!important;
+  background:linear-gradient(180deg,#8a5a3b,#51311f)!important;
+  box-shadow:0 -12px 25px rgba(0,0,0,.18)!important;
+}
+body.advertiser-page .xmas-string-lights{
+  position:absolute!important;
+  left:7%!important;
+  right:7%!important;
+  top:17px!important;
+  display:flex!important;
+  justify-content:space-between!important;
+  z-index:2!important;
+}
+body.advertiser-page .xmas-string-lights:before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;right:0!important;top:3px!important;
+  height:2px!important;
+  background:rgba(238,220,178,.55)!important;
+}
+body.advertiser-page .xmas-string-lights i{
+  position:relative!important;
+  z-index:1!important;
+  width:10px!important;height:10px!important;border-radius:50%!important;
+  background:#ffd583!important;
+  box-shadow:0 0 15px rgba(255,213,131,.95)!important;
+}
+body.advertiser-page .xmas-window-glow{
+  position:absolute!important;
+  width:170px!important;height:90px!important;
+  right:13%!important;top:40px!important;
+  border:5px solid rgba(255,246,220,.38)!important;
+  border-radius:10px!important;
+  background:linear-gradient(180deg,rgba(255,226,162,.36),rgba(255,226,162,.07))!important;
+}
+body.advertiser-page .xmas-table{
+  position:absolute!important;
+  z-index:2!important;
+  left:11%!important;right:11%!important;bottom:7px!important;
+  height:94px!important;
+}
+body.advertiser-page .xmas-candles{
+  position:absolute!important;
+  left:50%!important;bottom:33px!important;
+  display:flex!important;gap:20px!important;
+  transform:translateX(-50%)!important;
+}
+body.advertiser-page .xmas-candles i{
+  position:relative!important;
+  width:7px!important;height:40px!important;
+  border-radius:4px!important;
+  background:#f9edcf!important;
+}
+body.advertiser-page .xmas-candles i:before{
+  content:""!important;
+  position:absolute!important;
+  width:10px!important;height:15px!important;
+  left:-1.5px!important;top:-13px!important;
+  border-radius:50% 50% 48% 48%!important;
+  background:#ffb948!important;
+  box-shadow:0 0 12px rgba(255,185,72,.8)!important;
+}
+body.advertiser-page .xmas-place-setting{
+  position:absolute!important;
+  bottom:8px!important;
+  width:88px!important;height:50px!important;
+}
+body.advertiser-page .xmas-place-setting.ps-one{left:8%!important}
+body.advertiser-page .xmas-place-setting.ps-two{left:50%!important;transform:translateX(-50%)!important}
+body.advertiser-page .xmas-place-setting.ps-three{right:8%!important}
+body.advertiser-page .xmas-place-setting b{
+  position:absolute!important;
+  width:64px!important;height:25px!important;left:0!important;bottom:0!important;
+  border:4px solid #f8f1e4!important;border-radius:50%!important;
+  box-shadow:inset 0 0 0 5px rgba(214,170,91,.48)!important;
+}
+body.advertiser-page .xmas-place-setting em{
+  position:absolute!important;
+  width:18px!important;height:27px!important;right:0!important;top:0!important;
+  border:3px solid rgba(255,255,255,.88)!important;border-radius:4px 4px 10px 10px!important;
+}
+body.advertiser-page .xmas-garland{
+  position:absolute!important;
+  left:20%!important;right:20%!important;bottom:19px!important;height:14px!important;
+  border-radius:999px!important;
+  background:linear-gradient(90deg,#245d46,#3c7654,#245d46)!important;
+  box-shadow:16px -4px 0 -4px #b13d32,-18px 3px 0 -4px #b13d32!important;
+}
+
+/* Cafe advert illustration: deliberately no people. */
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo{
+  position:relative!important;
+  overflow:hidden!important;
+  background:linear-gradient(180deg,#eee0ce,#d8c1a1)!important;
+}
+body.advertiser-page .cafe-machine-scene{
+  position:absolute!important;
+  inset:0!important;
+  overflow:hidden!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.22),transparent 42%),
+    linear-gradient(145deg,#efe2d1,#ceb18c)!important;
+}
+body.advertiser-page .cms-shelf{
+  position:absolute!important;
+  left:7%!important;right:7%!important;top:12%!important;
+  height:7px!important;border-radius:999px!important;background:#6d4430!important;
+}
+body.advertiser-page .cms-shelf i{
+  position:absolute!important;top:-24px!important;width:30px!important;height:25px!important;
+  border-radius:5px 5px 11px 11px!important;background:#f7f4ee!important;
+}
+body.advertiser-page .cms-shelf i:nth-child(1){left:8%!important}
+body.advertiser-page .cms-shelf i:nth-child(2){left:22%!important}
+body.advertiser-page .cms-shelf i:nth-child(3){left:36%!important}
+body.advertiser-page .cms-machine{
+  position:absolute!important;
+  left:7%!important;top:24%!important;width:58%!important;height:52%!important;
+  border-radius:18px 18px 8px 8px!important;
+  background:linear-gradient(145deg,#d9e1df,#87999a 55%,#4a5d5f)!important;
+  box-shadow:0 16px 28px rgba(51,44,36,.22)!important;
+}
+body.advertiser-page .cms-display{
+  position:absolute!important;left:8%!important;right:8%!important;top:10%!important;height:24%!important;
+  border-radius:10px!important;background:#203638!important;
+}
+body.advertiser-page .cms-knob{
+  position:absolute!important;top:17%!important;width:18px!important;height:18px!important;border-radius:50%!important;
+  background:#f8791b!important;box-shadow:0 0 0 4px rgba(255,255,255,.18)!important;
+}
+body.advertiser-page .cms-knob.k1{left:18%!important}
+body.advertiser-page .cms-knob.k2{left:46%!important;background:#dbe5e3!important}
+body.advertiser-page .cms-knob.k3{left:74%!important;background:#dbe5e3!important}
+body.advertiser-page .cms-spout{
+  position:absolute!important;top:46%!important;width:34%!important;height:9px!important;
+  background:#2e4446!important;border-radius:6px!important;
+}
+body.advertiser-page .cms-spout.s1{left:8%!important}
+body.advertiser-page .cms-spout.s2{right:8%!important}
+body.advertiser-page .cms-spout:after{
+  content:""!important;position:absolute!important;left:48%!important;top:7px!important;
+  width:6px!important;height:28px!important;background:#2e4446!important;border-radius:0 0 4px 4px!important;
+}
+body.advertiser-page .cms-cups{
+  position:absolute!important;
+  left:12%!important;bottom:8%!important;
+  display:flex!important;gap:56px!important;
+}
+body.advertiser-page .cms-cups span{
+  position:relative!important;
+  width:70px!important;height:44px!important;
+  border-radius:4px 4px 22px 22px!important;background:#fff!important;
+  box-shadow:0 7px 16px rgba(0,0,0,.12)!important;
+}
+body.advertiser-page .cms-cups span:before{
+  content:""!important;position:absolute!important;left:6px!important;right:6px!important;top:-5px!important;
+  height:10px!important;border-radius:50%!important;background:#4b2c1f!important;
+}
+body.advertiser-page .cms-cups span:after{
+  content:""!important;position:absolute!important;right:-18px!important;top:8px!important;
+  width:20px!important;height:20px!important;border:6px solid #fff!important;border-left:0!important;border-radius:0 50% 50% 0!important;
+}
+body.advertiser-page .cms-pastries{
+  position:absolute!important;
+  right:6%!important;bottom:10%!important;
+  display:flex!important;gap:7px!important;align-items:flex-end!important;
+}
+body.advertiser-page .cms-pastries i{
+  width:42px!important;height:26px!important;border-radius:60% 20% 55% 30%!important;
+  background:#d98c48!important;border:5px solid #edb66e!important;transform:rotate(-8deg)!important;
+}
+body.advertiser-page .cms-pastries i:nth-child(2){height:32px!important;transform:rotate(5deg)!important}
+body.advertiser-page .cms-pastries i:nth-child(3){width:34px!important;height:22px!important;transform:rotate(12deg)!important}
+
+/* Starter-panel mini cafe scene, also people-free and asset-free. */
+body.advertiser-page .starter-visual-machine{
+  position:relative!important;
+  overflow:hidden!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.16),transparent 40%),
+    linear-gradient(145deg,#e7d6c0,#c59b71)!important;
+}
+body.advertiser-page .starter-visual-machine:before{
+  content:""!important;
+  position:absolute!important;
+  left:11%!important;top:18%!important;width:68%!important;height:54%!important;
+  border-radius:16px!important;
+  background:
+    radial-gradient(circle at 22% 20%,#f8791b 0 7px,transparent 8px),
+    radial-gradient(circle at 48% 20%,#dbe5e3 0 7px,transparent 8px),
+    radial-gradient(circle at 74% 20%,#dbe5e3 0 7px,transparent 8px),
+    linear-gradient(145deg,#d8e1df,#667d7e)!important;
+  box-shadow:0 12px 22px rgba(50,40,30,.18)!important;
+}
+body.advertiser-page .starter-visual-machine:after{
+  content:""!important;
+  position:absolute!important;
+  left:18%!important;bottom:10%!important;width:58px!important;height:38px!important;
+  border-radius:5px 5px 20px 20px!important;
+  background:#fff!important;
+  box-shadow:70px 0 0 #fff,138px 5px 0 -4px #d98c48!important;
 }
