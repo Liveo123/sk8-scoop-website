@@ -14,6 +14,9 @@ const finderHtml = read('advertise/finder/index.html');
 const finderJs = read('assets/campaign-finder.js');
 const advertiseHtml = read('advertise.html');
 const advertiseJs = read('assets/advertise.js');
+const advertiseV6 = read('assets/advertise-v6.css');
+const advertiseApprovedXmas = read('assets/advertise-approved-xmas.css');
+const advertiseApprovedCafe = read('assets/advertise-approved-cafe.css');
 const opportunity = read('advertise/christmas-eating-out/index.html');
 const pay = read('advertise/pay/index.html');
 const wrapper = read('worker-business-v2.js');
@@ -34,6 +37,15 @@ assert(advertiseJs.includes("allowedFinderPackages = new Set(['starter_newslette
 assert(advertiseJs.includes('/advertise/finder/'), 'Advertiser page links to Campaign Finder');
 assert(advertiseHtml.includes('/advertise/finder/'), 'Main Advertise page visibly links to Campaign Finder');
 assert(advertiseHtml.includes('/advertise/christmas-eating-out/'), 'Main Advertise page visibly links to Christmas Eating Out');
+assert(advertiseHtml.includes('halloween-scene-v6') && advertiseHtml.includes('halloween-advertising-card-4a.webp'), 'Advertise page uses the richer Halloween visual');
+assert(advertiseHtml.includes('ad-proof-grid-v7') && advertiseHtml.includes('ad-proof-pictogram'), 'Advertise proof strip uses the corrected icon-led treatment');
+assert(advertiseHtml.includes('ad-route-help-card') && advertiseHtml.includes('Find the smallest sensible campaign'), 'Advertise route grid fills the fourth slot with decision help rather than a weak advert teaser');
+assert(advertiseHtml.includes('ad-placement-demo-v6') && advertiseHtml.includes('test-canva-cafe-thumb.webp'), 'Advertise example placement uses the approved detailed cafe photo');
+assert(advertiseHtml.includes('starter-support-panel') && advertiseHtml.includes('WHAT HAPPENS NEXT'), 'Starter campaign section fills the former right-side empty space with useful support');
+assert(advertiseHtml.includes('audience-pills-v6') && advertiseHtml.includes('audience-fit-board'), 'Audience section uses icon chips and the crisp local-fit board');
+assert(advertiseHtml.includes('ad-process-grid-v6') && advertiseHtml.includes('ad-process-icon'), 'Campaign process uses the richer visual treatment');
+assert(advertiseV6.includes('body.advertiser-page [hidden]{display:none!important}'), 'Hidden seasonal package radios cannot render as stray circles');
+assert(advertiseV6.includes('.ad-route-grid') && advertiseV6.includes('grid-template-columns:repeat(2,minmax(0,1fr))'), 'Advertiser route grid is deliberately balanced as a 2x2 layout');
 assert(opportunity.includes('/advertise/finder/?opportunity=christmas-eating-out'), 'Christmas acquisition page feeds Campaign Finder');
 assert(finderJs.includes("opportunity !== 'christmas-eating-out'"), 'Campaign Finder recognises the Christmas opportunity route');
 assert(finderJs.includes("category.value = 'hospitality'"), 'Christmas opportunity preselects hospitality');
@@ -78,3 +90,14 @@ assert(wrapper.includes("company_fax") && wrapper.includes("sk8_started_at"), 'A
 
 if (process.exitCode) process.exit(process.exitCode);
 console.log('Advertiser growth-engine static checks passed.');
+
+assert(!advertiseHtml.includes('href="#what-you-buy">See the fictional advert'), 'Weak half-page fictional-ad anchor is removed from the route grid');
+
+assert(advertiseHtml.includes('assets/advertise-approved-xmas.css') && advertiseHtml.includes('assets/advertise-approved-cafe.css'), 'Advertise page loads the approved photo treatments after the main advertiser CSS');
+assert(advertiseApprovedXmas.includes('data:image/webp;base64,') && advertiseApprovedXmas.includes('.ad-christmas-scene'), 'Approved Christmas treatment embeds the detailed generated image');
+assert(advertiseApprovedCafe.includes('data:image/webp;base64,') && advertiseApprovedCafe.includes('.cafe-machine-scene') && advertiseApprovedCafe.includes('.starter-visual-machine'), 'Approved cafe treatment embeds the detailed generated image in both relevant placements');
+assert(advertiseHtml.includes('ad-christmas-photo') && advertiseHtml.includes('test-canva-thumb.webp'), 'Christmas hospitality card uses the approved detailed festive photo');
+assert(advertiseHtml.includes('test-canva-cafe-thumb.webp'), 'Fictional cafe advert uses the approved detailed coffee-machine photo');
+assert(advertiseV6.includes('test-canva-cafe-thumb.webp'), 'Starter visual reuses the approved detailed cafe photo');
+
+assert(!advertiseHtml.includes('assets/images/cafe-local-business.webp'), 'Old people-focused cafe image is not used on the Advertise page');
