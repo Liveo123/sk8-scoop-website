@@ -84,19 +84,22 @@ const GUIDE_ACCESS = {
     cookie: 'sk8_guide_52',
     cookiePath: '/52-adventures/',
     landing: '/52-adventures/#get-guide',
-    route: '/52-adventures/guide'
+    route: '/52-adventures/guide',
+    requiresAccess: false
   },
   'free-cheap': {
     cookie: 'sk8_guide_fc',
     cookiePath: '/free-cheap-guide/',
     landing: '/free-cheap-guide/#get-guide',
-    route: '/free-cheap-guide/guide'
+    route: '/free-cheap-guide/guide',
+    requiresAccess: false
   },
   halloween: {
     cookie: 'sk8_guide_halloween',
     cookiePath: '/halloween-half-term-guide/',
     landing: '/halloween-half-term-guide/#get-guide',
-    route: '/halloween-half-term-guide/guide'
+    route: '/halloween-half-term-guide/guide',
+    requiresAccess: false
   }
 };
 
@@ -180,7 +183,11 @@ export default {
     }
 
     const protectedGuide = getProtectedGuide(url.pathname);
-    if (protectedGuide && (request.method === 'GET' || request.method === 'HEAD')) {
+    if (
+      protectedGuide &&
+      guideRequiresAccess(protectedGuide.key) &&
+      (request.method === 'GET' || request.method === 'HEAD')
+    ) {
       return handleProtectedGuideRequest(request, env, ctx, protectedGuide);
     }
 
@@ -329,7 +336,8 @@ function getProtectedGuide(pathname) {
 }
 
 function guideRequiresAccess(guideKey) {
-  return !['free-cheap', '52-adventures'].includes(guideKey);
+  const config = GUIDE_ACCESS[guideKey];
+  return Boolean(config && config.requiresAccess === true);
 }
 
 async function handleProtectedGuideRequest(request, env, ctx, guide) {
