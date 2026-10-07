@@ -1398,3 +1398,50 @@ body.advertiser-page .starter-visual-machine:after{
   background:#fff!important;
   box-shadow:70px 0 0 #fff,138px 5px 0 -4px #d98c48!important;
 }
+
+/* Approved final photography, 7 Oct 2026. */
+body.advertiser-page .ad-christmas-photo{
+  position:relative!important;
+  height:176px!important;
+  overflow:hidden!important;
+  background:#173f45!important;
+}
+body.advertiser-page .ad-christmas-photo img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 56%!important;
+}
+body.advertiser-page .ad-christmas-photo:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(180deg,rgba(9,37,40,.04),rgba(9,37,40,.38))!important;
+}
+body.advertiser-page .ad-christmas-photo span{
+  position:absolute!important;
+  z-index:2!important;
+  left:16px!important;
+  bottom:14px!important;
+  padding:7px 10px!important;
+  border-radius:999px!important;
+  background:#073f48!important;
+  color:#fff!important;
+  font-size:.68rem!important;
+  font-weight:900!important;
+  letter-spacing:.07em!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo>img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 52%!important;
+}
+body.advertiser-page .starter-visual-machine{
+  background-image:url("https://res.cloudinary.com/gocq00bt/image/upload/e_gen_restore/c_scale,w_1000/f_webp/q_auto/v1791375244/sk8-scoop/advertise/test-canva-cafe-thumb.webp")!important;
+  background-size:cover!important;
+  background-position:center 50%!important;
+  background-repeat:no-repeat!important;
+}
