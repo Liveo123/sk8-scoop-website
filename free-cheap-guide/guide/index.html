@@ -1855,7 +1855,27 @@ h1,h2,h3,h4,.nue-title,.visual-heading strong{
 .nue-utility-actions a:hover,.nue-utility-actions button:hover{filter:brightness(.92);transform:translateY(-1px)}
 .nue-utility-actions button[aria-pressed="true"]{background:#263238;color:#fff}
 .guide-entry.has-photo .entry-copy>.nue-utility-actions{width:100%}
+.nue-save-note{flex:1 0 100%;margin:1px 2px 0;color:#66747A;font-size:.72rem;line-height:1.35}
+.nue-save-note a{min-height:0!important;display:inline!important;padding:0!important;border:0!important;border-radius:0!important;background:none!important;color:#0F6470!important;box-shadow:none!important;font:inherit!important;text-decoration:underline!important}
 .callout.callout-text-only{grid-template-columns:1fr;min-height:0}.callout.callout-text-only .callout-body{padding:18px 20px}
+.guide-entry.has-photo{grid-template-rows:auto auto}
+.guide-entry.has-photo .entry-media{grid-column:1;grid-row:1;order:0!important}
+.guide-entry.has-photo .entry-copy{grid-column:2;grid-row:1 / span 2;order:0!important}
+.guide-entry.has-photo .entry-media-tail{grid-column:1;grid-row:2;padding:16px 22px 24px;background:linear-gradient(180deg,rgba(247,243,234,.82),rgba(255,255,255,.98));align-self:stretch}
+.guide-entry.has-photo:nth-of-type(even) .entry-media{grid-column:2}
+.guide-entry.has-photo:nth-of-type(even) .entry-copy{grid-column:1}
+.guide-entry.has-photo:nth-of-type(even) .entry-media-tail{grid-column:2}
+.entry-media-tail>.callout,.entry-media-tail>.entry-fact-editorial,.entry-media-tail>.entry-actions,.entry-media-tail>.nue-utility-actions{margin-left:0;margin-right:0}
+.entry-media-tail>.entry-fact-editorial{margin:0 0 16px}
+.entry-media-tail>.callout{margin:0 0 16px}
+.entry-media-tail>.entry-actions{margin:0 0 16px}
+.entry-media-tail>.nue-utility-actions{margin-top:0}
+@media(max-width:860px){
+ .guide-entry.has-photo{display:flex!important;flex-direction:column;gap:0}
+ .guide-entry.has-photo .entry-media{order:0!important;width:100%}
+ .guide-entry.has-photo .entry-copy{order:1!important;width:100%;padding:24px 20px 18px!important}
+ .guide-entry.has-photo .entry-media-tail{order:2!important;width:100%;padding:0 20px 22px;background:#fff}
+}
 @media(max-width:560px){.nue-utility-actions a,.nue-utility-actions button{flex:1 1 calc(50% - 9px);min-width:0;text-align:center}.nue-utility-actions .nue-share{flex-basis:auto}}
 .nue-related-guides{margin:46px 0 12px;padding:24px;border:1px solid rgba(15,100,112,.14);border-radius:24px;background:rgba(255,255,255,.86);box-shadow:0 10px 28px rgba(38,50,56,.055)}
 .nue-related-guides h2{font-size:1.55rem;margin:0 0 8px}.nue-related-guides p{margin:.35rem 0 1rem}
@@ -2429,6 +2449,24 @@ Current window: 7 October to 31 October 2026</p>
     return '<svg class="nue-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+paths[name]+'</svg>';
   };
   const label=(el,name,text)=>{el.classList.add('nue-'+name);el.innerHTML=icon(name)+'<span>'+text+'</span>'};
+  const addSaveNote=wrap=>{
+    if(wrap.querySelector('.nue-save-note'))return;
+    const note=document.createElement('small');note.className='nue-save-note';
+    note.innerHTML='Save keeps this in <a href="/my-sk8/">My SK8</a> on this browser.';
+    wrap.append(note);
+  };
+  const compactPhotoCard=article=>{
+    if(!article.classList.contains('has-photo'))return;
+    const media=article.querySelector(':scope > .entry-media'),copy=article.querySelector(':scope > .entry-copy');
+    if(!media||!copy)return;
+    let tail=article.querySelector(':scope > .entry-media-tail');
+    if(!tail){tail=document.createElement('div');tail.className='entry-media-tail';article.append(tail)}
+    const editorial=copy.querySelector(':scope > .entry-facts-grid .entry-fact-editorial');
+    if(editorial)tail.append(editorial);
+    [...copy.querySelectorAll(':scope > .callout')].forEach(node=>tail.append(node));
+    const actions=copy.querySelector(':scope > .entry-actions');if(actions)tail.append(actions);
+    const utility=copy.querySelector(':scope > .nue-utility-actions');if(utility)tail.append(utility);
+  };
   document.querySelectorAll('article.guide-entry').forEach((article,index)=>{
     if(article.querySelector('.nue-utility-actions'))return;
     if(!article.querySelector('.entry-narrative,.entry-facts-grid,.entry-actions'))return;
@@ -2455,8 +2493,10 @@ Current window: 7 October to 31 October 2026</p>
     if(mapQuery){const a=document.createElement('a');a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(mapQuery);a.target='_blank';a.rel='noopener';label(a,'directions','Directions');wrap.append(a)}
     if(/^20\d\d-\d\d-\d\d$/.test(eventDate)){const a=document.createElement('a');a.href=gcal(title,eventDate,(when?when+' · ':'')+'SK8 Scoop Free & Cheap Guide: '+shareUrl,where||mapQuery);a.target='_blank';a.rel='noopener';label(a,'calendar','Add to calendar');wrap.append(a)}
     const share=document.createElement('button');share.type='button';share.dataset.guideShare='native_or_copy';label(share,'share','Share');share.addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,url:shareUrl});return}catch{}}const ok=await copyLink(shareUrl);label(share,'share',ok?'Link copied':'Copy failed');setTimeout(()=>label(share,'share','Share'),1800)});wrap.append(share);
+    addSaveNote(wrap);
     const target=article.querySelector('.entry-copy')||article;
     target.append(wrap);
+    compactPhotoCard(article);
   });
   const host=document.querySelector('.experience-footer')||document.querySelector('footer');
   if(host&&!document.querySelector('.nue-related-guides')){

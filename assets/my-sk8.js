@@ -482,6 +482,15 @@
       nearby.addEventListener('click', () => track('my_sk8_nearby', { event_id: event.id, event_area: event.area }));
       holder.appendChild(nearby);
 
+      const storageNote = document.createElement('small');
+      storageNote.className = 'my-sk8-storage-note';
+      storageNote.append('Save keeps this in ');
+      const storageLink = document.createElement('a');
+      storageLink.href = '/my-sk8/';
+      storageLink.textContent = 'My SK8';
+      storageNote.append(storageLink, ' on this browser.');
+      holder.appendChild(storageNote);
+
       if (actionObserver && !seenActionRows.has(holder)) actionObserver.observe(holder);
     });
   };
@@ -844,7 +853,12 @@
     const strong = document.createElement('strong');
     strong.textContent = 'Save this for later in My SK8';
     const note = document.createElement('span');
-    note.textContent = 'Keep it with saved events and useful local stuff. Stored in this browser for this test.';
+    note.className = 'my-sk8-storage-note my-sk8-page-storage-note';
+    note.append('Keep it with saved events and useful local stuff. Saved in ');
+    const noteLink = document.createElement('a');
+    noteLink.href = '/my-sk8/';
+    noteLink.textContent = 'My SK8';
+    note.append(noteLink, ' on this browser.');
     copy.append(eyebrow, strong, note);
 
     const actions = document.createElement('div');
