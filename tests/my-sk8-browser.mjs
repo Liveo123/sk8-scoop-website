@@ -153,10 +153,10 @@ try {
   record('My SK8 nav count updates after save', (await text('[data-nav-my-sk8-count]')) === '1', await text('[data-nav-my-sk8-count]'));
   record('Main-nav My SK8 count updates after save', (await text('[data-nav-my-sk8-count]')) === '1' && !(await evaluate("document.querySelector('[data-nav-my-sk8-count]')?.hidden")));
 
-  record('Set reminder intent without saving first', await click('[data-sk8-event-actions="bramhall-halloween-market-2026-10-10"] button:not(.my-sk8-save)'));
+  record('Set reminder intent without saving first', await click('[data-sk8-event-actions="john-lewis-cheadle-baby-beyond-2026-10-08"] button:not(.my-sk8-save)'));
   await sleep(250);
-  record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('bramhall-halloween-market-2026-10-10')")));
-  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'bramhall-halloween-market-2026-10-10')")));
+  record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('john-lewis-cheadle-baby-beyond-2026-10-08')")));
+  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'john-lewis-cheadle-baby-beyond-2026-10-08')")));
 
   await navigate('/my-sk8/');
   record('My SK8 page title visible', (await text('h1')) === 'My SK8', await text('h1'));
@@ -169,7 +169,7 @@ try {
   record('Two current saves shown', (await text('[data-my-sk8-total]')) === '2', await text('[data-my-sk8-total]'));
   record('Saved weekend event appears', Boolean(await evaluate('document.body.textContent.includes("Storytime at Heald Green Library")')));
   record('Weekend plan includes Saturday event', Boolean(await evaluate('document.querySelector("[data-weekend-plan]")?.textContent.includes("Storytime at Heald Green Library")')));
-  record('Reminder panel flags due item', Boolean(await evaluate('document.querySelector("[data-my-sk8-reminders]")?.textContent.includes("Bramhall Halloween Event & Market")')));
+  record('Reminder panel flags due item', Boolean(await evaluate('document.querySelector("[data-my-sk8-reminders]")?.textContent.includes("All Things Baby & Beyond with Dr Dewan")')));
   record('Nearby suggestion appears', Boolean(await evaluate('document.querySelector("[data-my-sk8-active]")?.textContent.includes("Halloween Crafty Kids Pop Up")')));
 
   const mapHref = await attr('[data-map-saved]', 'href');
