@@ -169,7 +169,7 @@ try {
   record('Two current saves shown', (await text('[data-my-sk8-total]')) === '2', await text('[data-my-sk8-total]'));
   record('Saved weekend event appears', Boolean(await evaluate('document.body.textContent.includes("Storytime at Heald Green Library")')));
   record('Weekend plan includes Saturday event', Boolean(await evaluate('document.querySelector("[data-weekend-plan]")?.textContent.includes("Storytime at Heald Green Library")')));
-  record('Reminder panel flags due item', Boolean(await evaluate('document.querySelector("[data-my-sk8-reminders]")?.textContent.includes("Cheadle: Brew and a Biscuit")')));
+  record('Reminder panel flags due item', Boolean(await evaluate('document.querySelector("[data-my-sk8-reminders]")?.textContent.includes("Bramhall Halloween Event & Market")')));
   record('Nearby suggestion appears', Boolean(await evaluate('document.querySelector("[data-my-sk8-active]")?.textContent.includes("Halloween Crafty Kids Pop Up")')));
 
   const mapHref = await attr('[data-map-saved]', 'href');
