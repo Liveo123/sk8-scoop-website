@@ -1025,7 +1025,7 @@ body.advertiser-page .starter-visual-machine{
   min-width:0!important;
   background-image:
     linear-gradient(180deg,rgba(0,0,0,.02),rgba(7,63,72,.18)),
-    url("/assets/images/cafe-local-business.webp")!important;
+    url("/assets/images/advertise/cafe-machine-no-people.webp")!important;
   background-size:230% auto!important;
   background-position:7% 48%!important;
   background-repeat:no-repeat!important;
@@ -1116,4 +1116,67 @@ body.advertiser-page .fit-board-card strong{
   body.advertiser-page .ad-proof-grid-v7 .ad-proof-item:last-child{border-bottom:0!important}
   body.advertiser-page .starter-visual-split{grid-template-columns:1fr!important}
   body.advertiser-page .starter-visual-machine{min-height:150px!important}
+}
+
+
+/* Final image corrections from visual review. */
+body.advertiser-page .ad-christmas-card-v7{
+  padding:0!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:360px!important;
+}
+body.advertiser-page .ad-christmas-media{
+  position:relative!important;
+  height:176px!important;
+  overflow:hidden!important;
+  background:#1f383b!important;
+}
+body.advertiser-page .ad-christmas-media img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 58%!important;
+}
+body.advertiser-page .ad-christmas-media:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(180deg,rgba(18,29,31,.06),rgba(18,29,31,.45))!important;
+}
+body.advertiser-page .ad-christmas-media span{
+  position:absolute!important;
+  z-index:2!important;
+  left:16px!important;
+  bottom:14px!important;
+  padding:7px 10px!important;
+  border-radius:999px!important;
+  background:#073f48!important;
+  color:#fff!important;
+  font-size:.68rem!important;
+  font-weight:900!important;
+  letter-spacing:.07em!important;
+}
+body.advertiser-page .ad-christmas-body{
+  display:flex!important;
+  flex:1!important;
+  flex-direction:column!important;
+  padding:25px 30px 28px!important;
+}
+body.advertiser-page .ad-christmas-body h3{margin-top:0!important}
+body.advertiser-page .ad-christmas-body .button{margin-top:auto!important}
+
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo img{
+  width:100%!important;
+  max-width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  transform:none!important;
+}
+body.advertiser-page .starter-visual-machine{
+  background-size:cover!important;
+  background-position:center!important;
 }
