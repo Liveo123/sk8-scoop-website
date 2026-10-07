@@ -71,17 +71,20 @@ assert(indexComparable.includes(`ISSUE ${issue.number}`), `Homepage latest panel
 assert(indexComparable.includes(`<h2>Issue ${issue.number}</h2>`), `Homepage latest panel heading must show Issue ${issue.number}.`);
 assert(indexComparable.includes(issue.summary), 'Homepage latest panel must contain the current issue summary.');
 assert(indexComparable.includes(issue.url), 'Homepage latest panel must link directly to the current issue.');
+assert(indexText.includes(`config.js?v=issue${issue.number}`), `Homepage must version assets/config.js with current Issue ${issue.number}.`);
 
 assert(archiveComparable.includes(`${issue.issuesPublished} issues and counting`), `Archive hero must show ${issue.issuesPublished} issues and counting.`);
 assert(archiveComparable.includes(`data-issue="${issue.number}"`), `Archive must contain a static card for Issue ${issue.number}.`);
 assert(archiveComparable.includes(issue.headline), 'Archive current issue card must contain the current issue headline.');
 assert(archiveComparable.includes(issue.summary), 'Archive current issue card must contain the current issue summary.');
 assert(archiveComparable.includes(issue.url), 'Archive current issue card must link to the current issue.');
+assert(archiveText.includes(`config.js?v=issue${issue.number}`), `Archive must version assets/config.js with current Issue ${issue.number}.`);
 
 assert(latestComparable.includes(`Issue ${issue.number}`), `Latest page must reference Issue ${issue.number}.`);
 assert(latestComparable.includes(issue.dateDisplay), 'Latest page must contain the current issue date.');
 assert(latestComparable.includes(issue.summary), 'Latest page must contain the current issue summary.');
 assert(latestComparable.includes(issue.url), 'Latest page must link to the current issue.');
+assert(latestText.includes(`config.js?v=issue${issue.number}`), `Latest page must version assets/config.js with current Issue ${issue.number}.`);
 
 if (failures.length) {
   console.error('Current-content freshness check failed:');
