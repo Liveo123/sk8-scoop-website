@@ -1848,9 +1848,15 @@ h1,h2,h3,h4,.nue-title,.visual-heading strong{
 }
 </style><style id="sk8-nue-actions-v1">
 /* SK8 NUE utility actions v1: compact functional controls, not a visual redesign */
-.nue-utility-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(15,100,112,.14)}
-.nue-utility-actions a,.nue-utility-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 13px;border:1px solid rgba(15,100,112,.28);border-radius:999px;background:#fff;color:#0F6470;font:800 .86rem/1.2 Aptos,"Segoe UI",Inter,Arial,sans-serif;text-decoration:none;cursor:pointer}
-.nue-utility-actions a:hover,.nue-utility-actions button:hover,.nue-utility-actions button[aria-pressed="true"]{background:#0F6470;color:#fff;border-color:#0F6470}
+.nue-utility-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;padding-top:14px;border-top:1px solid rgba(15,100,112,.14);clear:both}
+.nue-utility-actions a,.nue-utility-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 13px;border:0;border-radius:999px;color:#fff;font:800 .86rem/1.2 Aptos,"Segoe UI",Inter,Arial,sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 6px 15px rgba(38,50,56,.10)}
+.nue-utility-actions .nue-icon{width:15px;height:15px;display:block;flex:0 0 15px}
+.nue-utility-actions .nue-save{background:#0F6470}.nue-utility-actions .nue-directions{background:#263238}.nue-utility-actions .nue-calendar{background:#D95F24}.nue-utility-actions .nue-share{background:#B7DA2F;color:#263238}
+.nue-utility-actions a:hover,.nue-utility-actions button:hover{filter:brightness(.92);transform:translateY(-1px)}
+.nue-utility-actions button[aria-pressed="true"]{background:#263238;color:#fff}
+.guide-entry.has-photo .entry-copy>.nue-utility-actions{width:100%}
+.callout.callout-text-only{grid-template-columns:1fr;min-height:0}.callout.callout-text-only .callout-body{padding:18px 20px}
+@media(max-width:560px){.nue-utility-actions a,.nue-utility-actions button{flex:1 1 calc(50% - 9px);min-width:0;text-align:center}.nue-utility-actions .nue-share{flex-basis:auto}}
 .nue-related-guides{margin:46px 0 12px;padding:24px;border:1px solid rgba(15,100,112,.14);border-radius:24px;background:rgba(255,255,255,.86);box-shadow:0 10px 28px rgba(38,50,56,.055)}
 .nue-related-guides h2{font-size:1.55rem;margin:0 0 8px}.nue-related-guides p{margin:.35rem 0 1rem}
 .nue-related-links{display:flex;flex-wrap:wrap;gap:9px}.nue-related-links a{display:inline-flex;min-height:42px;align-items:center;padding:9px 13px;border-radius:999px;background:#0F6470;color:#fff;text-decoration:none;font-weight:800}
@@ -2019,7 +2025,7 @@ h1,h2,h3,h4,.nue-title,.visual-heading strong{
 <div class="entry-fact entry-fact-time"><span class="entry-fact-label">WHEN</span><span class="entry-fact-value">Tuesday–Sunday, 10am–5pm. Free public gallery tours are currently listed Thursdays, Saturdays and Sundays, 2–3pm.</span></div>
 <div class="entry-fact entry-fact-place"><span class="entry-fact-label">WHERE</span><span class="entry-fact-value">Mosley Street, Manchester, M2 3JL.</span></div>
 </div>
-<div class="callout callout-booking"><div class="callout-body"><span class="callout-label">BOOKING NOTE</span><p>General admission and the regular public tours do not require booking.</p></div></div>
+<div class="callout callout-booking callout-text-only"><div class="callout-body"><span class="callout-label">BOOKING NOTE</span><p>General admission and the regular public tours do not require booking.</p></div></div>
 <div class="entry-actions"><a class="official-link" href="https://manchesterartgallery.org/" rel="noopener" target="_blank">Plan a Manchester Art Gallery visit</a></div>
 </article>
 <article class="guide-entry place-card" id="local-sk8-libraries"><h4 class="entry-title">YOUR LOCAL SK8 LIBRARIES</h4>
@@ -2413,8 +2419,19 @@ Current window: 7 October to 31 October 2026</p>
     u.searchParams.set('action','TEMPLATE');u.searchParams.set('text',title);u.searchParams.set('dates',start+'/'+end);
     if(details)u.searchParams.set('details',details);if(location)u.searchParams.set('location',location);return u.href;
   };
+  const icon=name=>{
+    const paths={
+      save:'<path d="M5 3.5h10a1 1 0 0 1 1 1V21l-6-3.8L4 21V4.5a1 1 0 0 1 1-1Z"/>',
+      directions:'<path d="m12 2 9 9-9 9-9-9 9-9Z"/><path d="M9 12h6m-2.5-2.5L15 12l-2.5 2.5"/>',
+      calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6m10-6v6M3 10h18"/>',
+      share:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4m-7.6 6.8 7.6 4.4"/>'
+    };
+    return '<svg class="nue-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+paths[name]+'</svg>';
+  };
+  const label=(el,name,text)=>{el.classList.add('nue-'+name);el.innerHTML=icon(name)+'<span>'+text+'</span>'};
   document.querySelectorAll('article.guide-entry').forEach((article,index)=>{
     if(article.querySelector('.nue-utility-actions'))return;
+    if(!article.querySelector('.entry-narrative,.entry-facts-grid,.entry-actions'))return;
     const title=(article.querySelector('.entry-title,h3,h4')?.textContent||('Guide item '+(index+1))).trim();
     if(!article.id)article.id='item-'+slugify(title)+'-'+(index+1);
     const shareUrl=location.origin+location.pathname+'#'+article.id;
@@ -2432,13 +2449,14 @@ Current window: 7 October to 31 October 2026</p>
     };
     const wrap=document.createElement('div');wrap.className='nue-utility-actions';wrap.setAttribute('aria-label','Useful actions');
     const save=document.createElement('button');save.type='button';save.dataset.save=id;
-    const refreshSave=()=>{const saved=isSaved();save.textContent=saved?'Saved to My SK8':'Save to My SK8';save.setAttribute('aria-pressed',String(saved))};
+    const refreshSave=()=>{const saved=isSaved();label(save,'save',saved?'Saved to My SK8':'Save to My SK8');save.setAttribute('aria-pressed',String(saved))};
     save.addEventListener('click',()=>{let items=readSaved();if(isSaved())items=items.filter(item=>item.id!==id);else items.unshift(buildItem());writeSaved(items);refreshSave()});refreshSave();wrap.append(save);
-    if(where){const a=document.createElement('a');a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(where);a.target='_blank';a.rel='noopener';a.textContent='Directions';wrap.append(a)}
-    if(/^20\d\d-\d\d-\d\d$/.test(eventDate)){const a=document.createElement('a');a.href=gcal(title,eventDate,(when?when+' · ':'')+'SK8 Scoop Free & Cheap Guide: '+shareUrl,where);a.target='_blank';a.rel='noopener';a.textContent='Add to calendar';wrap.append(a)}
-    const share=document.createElement('button');share.type='button';share.dataset.guideShare='native_or_copy';share.textContent='Share';share.addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,url:shareUrl});return}catch{}}const ok=await copyLink(shareUrl);share.textContent=ok?'Link copied':'Copy failed';setTimeout(()=>share.textContent='Share',1800)});wrap.append(share);
-    
-    article.append(wrap);
+    const mapQuery=where||((article.classList.contains('place-card')||article.classList.contains('has-photo'))?title.replace(/\s+—.*$/,'').trim():'');
+    if(mapQuery){const a=document.createElement('a');a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(mapQuery);a.target='_blank';a.rel='noopener';label(a,'directions','Directions');wrap.append(a)}
+    if(/^20\d\d-\d\d-\d\d$/.test(eventDate)){const a=document.createElement('a');a.href=gcal(title,eventDate,(when?when+' · ':'')+'SK8 Scoop Free & Cheap Guide: '+shareUrl,where||mapQuery);a.target='_blank';a.rel='noopener';label(a,'calendar','Add to calendar');wrap.append(a)}
+    const share=document.createElement('button');share.type='button';share.dataset.guideShare='native_or_copy';label(share,'share','Share');share.addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title,url:shareUrl});return}catch{}}const ok=await copyLink(shareUrl);label(share,'share',ok?'Link copied':'Copy failed');setTimeout(()=>label(share,'share','Share'),1800)});wrap.append(share);
+    const target=article.querySelector('.entry-copy')||article;
+    target.append(wrap);
   });
   const host=document.querySelector('.experience-footer')||document.querySelector('footer');
   if(host&&!document.querySelector('.nue-related-guides')){
