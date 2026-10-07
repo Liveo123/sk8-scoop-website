@@ -490,6 +490,7 @@ const E=[{"s":"local","n":"Practically Family OCTOBERFEST — two Cheadle Hulme 
 ];
 function visualFor(e){const n=e.n.replace(/&amp;/g,'&');if(/Reddish|Pumpkin|Spooky Plants/i.test(n))return["assets/image-06-c6397a5a5e.webp","Halloween-style illustration of a lantern-lit autumn pumpkin farm."];if(/Steam|Crewe|Waterways/i.test(n))return["assets/image-07-8380964c3d.webp","Halloween-style illustration of a steam railway and canal in autumn."];if(/Quarry|Dunham/i.test(n))return["assets/image-08-5de5651e1c.webp","Halloween-style illustration of an autumn country estate and historic mill."];if(/Science and Industry|Museum Animation|Alien|Spacecraft|Sci-Fi|Space Games|Jodrell|Wallace|Moon|Camera Obscura/i.test(n))return["assets/image-09-54fc8a3d99.webp","Halloween-style illustration of space science, animation crafts and a radio telescope."];if(/K-Pop|Halloween in the City|Monsters Disco|Not Now|Dayglo|Halloween in Concert|Music Makers|Gandeys|Sanderson/i.test(n))return["assets/image-10-803e3ffe69.webp","Halloween-style illustration of a glowing theatre and performance stage."];if(/MCR Monsters|Afrocats|Tegg|Brereton|Apple Day|Knutsford/i.test(n))return["assets/image-11-46af8abe0d.webp","Halloween-style illustration of a lantern-lit autumn woodland trail."];return["assets/image-12-575e9df711.webp","Halloween-style illustration of an autumn arts-and-crafts table."]}
 const EVENT_INDEX=new Map(E.map((event,index)=>[event,index+1]));
+function checkedLabel(e){const text=String(e.c||'');const m=text.match(/checked\s+(\d{1,2})\s+(september|october|november)\s*(2026)?/i);if(m)return `Checked ${Number(m[1])} ${m[2].slice(0,3)} 2026`;return 'Checked 22 Sep 2026'}
 function card(e){const warn=/not published|not captured|needs final check|PRICE CHECK/i.test(e.p),v=visualFor(e);return `<article class="card" data-event-index="${EVENT_INDEX.get(e)}" data-tags="${e.t}">
 <figure class="card-media">
 <img loading="lazy" width="1200" height="800" src="${v[0]}" alt="${v[1]}">
@@ -530,7 +531,7 @@ function card(e){const warn=/not published|not captured|needs final check|PRICE 
 <strong>Next useful experience:</strong> ${e.x}</p>
 <div class="actions">
 <a class="button" href="${e.u}">Official details</a>
-<span class="checked">Checked 22 Sep 2026</span>
+<span class="checked">${checkedLabel(e)}</span>
 </div>
 </article>`}
 document.querySelectorAll('[data-section]').forEach(el=>el.innerHTML=E.filter(e=>e.s===el.dataset.section).map(card).join(''));
@@ -576,7 +577,7 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
     const official=card.querySelector('.actions a.button[href]');
     const span=parseDateSpan(when),ymd=span.start,id='guide-event:halloween:'+slugify(title.replace(/\s+—\s+SOLD OUT$/,''));
     const isSaved=()=>readSaved().some(item=>item&&item.id===id);
-    const buildItem=()=>({id,kind:'event',title,date:ymd,end_date:span.end||ymd,date_range:when,time:'',area:'SK8 / nearby',venue:where,cost,category:'Halloween & Half-Term Guide',description:(card.querySelector('.description')?.textContent||'').trim(),booking_url:official?.href||shareUrl,source_url:official?.href||shareUrl,checked:/SOLD OUT/.test(title)?'Checked 7 October 2026':'Base guide check 22 September 2026; recheck official details before travel',saved_at:new Date().toISOString()});
+    const buildItem=()=>({id,kind:'event',title,date:ymd,end_date:span.end||ymd,date_range:when,time:'',area:'SK8 / nearby',venue:where,cost,category:'Halloween & Half-Term Guide',description:(card.querySelector('.description')?.textContent||'').trim(),booking_url:official?.href||shareUrl,source_url:official?.href||shareUrl,checked:(card.querySelector('.checked')?.textContent||'').trim()||'Recheck official details before travel',saved_at:new Date().toISOString()});
     const wrap=document.createElement('div');wrap.className='nue-utility-actions';wrap.setAttribute('aria-label','Useful actions');
     const save=document.createElement('button');save.type='button';save.dataset.save=id;
     const refreshSave=()=>{const saved=isSaved();save.textContent=saved?'Saved to My SK8':'Save to My SK8';save.setAttribute('aria-pressed',String(saved))};
