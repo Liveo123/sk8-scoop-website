@@ -153,10 +153,10 @@ try {
   record('My SK8 nav count updates after save', (await text('[data-nav-my-sk8-count]')) === '1', await text('[data-nav-my-sk8-count]'));
   record('Main-nav My SK8 count updates after save', (await text('[data-nav-my-sk8-count]')) === '1' && !(await evaluate("document.querySelector('[data-nav-my-sk8-count]')?.hidden")));
 
-  record('Set reminder intent without saving first', await click('[data-sk8-event-actions="cheadle-brew-and-biscuit-2026-10-06"] button:not(.my-sk8-save)'));
+  record('Set reminder intent without saving first', await click('[data-sk8-event-actions="bramhall-halloween-market-2026-10-10"] button:not(.my-sk8-save)'));
   await sleep(250);
-  record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('cheadle-brew-and-biscuit-2026-10-06')")));
-  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'cheadle-brew-and-biscuit-2026-10-06')")));
+  record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('bramhall-halloween-market-2026-10-10')")));
+  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'bramhall-halloween-market-2026-10-10')")));
 
   await navigate('/my-sk8/');
   record('My SK8 page title visible', (await text('h1')) === 'My SK8', await text('h1'));
@@ -218,9 +218,9 @@ try {
   await fullScreenshot('whats-on-my-sk8-mobile-full.png');
 
   await navigate('/my-sk8/');
-  await evaluate("window.SK8MySaved.unsaveEvent('cheadle-brew-and-biscuit-2026-10-06')");
+  await evaluate("window.SK8MySaved.unsaveEvent('bramhall-halloween-market-2026-10-10')");
   await sleep(150);
-  record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('cheadle-brew-and-biscuit-2026-10-06')")));
+  record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('bramhall-halloween-market-2026-10-10')")));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   await navigate('/my-sk8/');
