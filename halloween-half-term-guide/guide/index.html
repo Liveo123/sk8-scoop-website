@@ -533,7 +533,14 @@ const buttons=[...document.querySelectorAll('.filter')],count=document.getElemen
 buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-pressed',String(b===btn));});const f=btn.dataset.filter;let n=0;document.querySelectorAll('.card').forEach(c=>{const ok=f==='all'||c.dataset.tags.split(' ').includes(f);c.hidden=!ok;if(ok)n++});count.textContent=`${n} shown`;none.classList.toggle('show',n===0);const u=new URL(location.href);if(f==='all')u.searchParams.delete('filter');else u.searchParams.set('filter',f);history.replaceState({},'',u)}));
 const requestedGuideFilter=new URLSearchParams(location.search).get('filter');
 const requestedGuideButton=buttons.find(button=>button.dataset.filter===requestedGuideFilter);
-if(requestedGuideButton){requestedGuideButton.click();requestAnimationFrame(()=>document.getElementById('filters')?.scrollIntoView({block:'start'}));}
+if(requestedGuideButton){
+  requestedGuideButton.click();
+  const scrollToRequestedGuideFilter=()=>document.getElementById('filters')?.scrollIntoView({block:'start'});
+  requestAnimationFrame(scrollToRequestedGuideFilter);
+  if(document.readyState==='complete')setTimeout(scrollToRequestedGuideFilter,80);
+  else window.addEventListener('load',()=>setTimeout(scrollToRequestedGuideFilter,80),{once:true});
+  setTimeout(scrollToRequestedGuideFilter,500);
+}
 document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>link.addEventListener('click',()=>{const all=buttons.find(button=>button.dataset.filter==='all');if(all&&!all.classList.contains('active'))all.click();}));
 </script>
 <script id="unique-pencil-card-visuals">
