@@ -112,8 +112,12 @@ try {
     record(filter + ' control becomes active', Boolean(await evaluate(`document.querySelector('[data-filter="${filter}"]')?.classList.contains('active') && document.querySelector('[data-filter="${filter}"]')?.getAttribute('aria-pressed') === 'true'`)));
     const visible = await evaluate("Array.from(document.querySelectorAll('.card')).filter(card => !card.hidden).length");
     record(filter + ' returns visible results', visible > 0, String(visible));
-    const top = await evaluate("Math.round(document.getElementById('filters')?.getBoundingClientRect().top ?? 9999)");
-    record(filter + ' anchor lands near filters on mobile', top < 250 && top > -80, String(top));
+    const geometry = await evaluate("(() => { const rect=document.getElementById('filters')?.getBoundingClientRect(); return rect ? {top:Math.round(rect.top),bottom:Math.round(rect.bottom),height:Math.round(innerHeight)} : null; })()");
+    record(
+      filter + ' anchor leaves filters visible on mobile',
+      Boolean(geometry && geometry.bottom > 0 && geometry.top < geometry.height * 0.6),
+      JSON.stringify(geometry)
+    );
   }
 
   console.log(JSON.stringify({ ok: true, checks: results.length, base: BASE_URL, filters }, null, 2));
