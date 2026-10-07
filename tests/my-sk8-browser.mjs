@@ -292,6 +292,21 @@ try {
   record('Newsletter-style save URL persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'john-lewis-cheadle-baby-beyond-2026-10-08')")));
   record('Save parameter removed after processing', !(await evaluate("location.search.includes('save=')")), await evaluate('location.search'));
 
+  await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
+  await navigate('/whats-on/?event=bramhall-halloween-market-2026-10-10&my_action=save&utm_source=newsletter&utm_medium=email');
+  record('Direct newsletter save action persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'bramhall-halloween-market-2026-10-10')")));
+  record('Direct save action parameter is cleaned', !(await evaluate("location.search.includes('my_action=')")), await evaluate('location.search'));
+
+  await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
+  await navigate('/whats-on/?event=bramhall-halloween-market-2026-10-10&my_action=remind&utm_source=newsletter&utm_medium=email');
+  record('Direct newsletter reminder persists reminder', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('bramhall-halloween-market-2026-10-10')")));
+  record('Direct newsletter reminder also saves event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'bramhall-halloween-market-2026-10-10')")));
+  record('Direct reminder action parameter is cleaned', !(await evaluate("location.search.includes('my_action=')")), await evaluate('location.search'));
+
+  await navigate('/halloween/boo/');
+  record('BOO page reveal starts automatically', await waitFor("document.body.classList.contains('revealed')", 3000));
+  record('BOO page no longer requires a second switch click', !(await evaluate("document.querySelector('#light-switch')")));
+
   await navigate('/my-sk8/?list=heald-green-library-storytime-2026-10-10,john-lewis-cheadle-baby-beyond-2026-10-08,page%3Alocal-history%2Fgatley-shouter');
   record('Shared shortlist renders', !(await evaluate("document.querySelector('[data-shared-shortlist]')?.hidden")));
   record('Shared shortlist has three items', (await text('[data-shared-count]')) === '3', await text('[data-shared-count]'));
