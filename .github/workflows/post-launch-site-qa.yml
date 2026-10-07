@@ -216,7 +216,7 @@ jobs:
           check_direct_guide '/free-cheap-guide/guide/' 'Free & Cheap'
           check_direct_guide '/halloween-half-term-guide/guide/' 'id="filters"'
           for filter in local free under10 under5 primary teen rainy send; do
-            check_direct_guide "/halloween-half-term-guide/guide/?filter=${filter}#filters" "data-filter="${filter}""
+            check_direct_guide "/halloween-half-term-guide/guide/?filter=${filter}#filters" "data-filter=\"${filter}\""
           done
           check_image_asset() {
             url="$1"
@@ -376,7 +376,7 @@ jobs:
           check_direct_guide 'https://www.sk8scoop.com/free-cheap-guide/guide/' 'Free & Cheap'
           check_direct_guide 'https://www.sk8scoop.com/halloween-half-term-guide/guide/' 'id="filters"'
           for filter in local free under10 under5 primary teen rainy send; do
-            check_direct_guide "https://www.sk8scoop.com/halloween-half-term-guide/guide/?filter=${filter}#filters" "data-filter="${filter}""
+            check_direct_guide "https://www.sk8scoop.com/halloween-half-term-guide/guide/?filter=${filter}#filters" "data-filter=\"${filter}\""
           done
           check_page 'https://www.sk8scoop.com/planning/heald-green-local-plan-2026/' '1,672 homes'
           check_page 'https://www.sk8scoop.com/local-history/heald-green-north-history-walk/' '22 history stops'
