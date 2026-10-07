@@ -38,7 +38,7 @@ assert(advertiseHtml.includes('/advertise/christmas-eating-out/'), 'Main Adverti
 assert(advertiseHtml.includes('halloween-scene-v6') && advertiseHtml.includes('halloween-advertising-card-4a.webp'), 'Advertise page uses the richer Halloween visual');
 assert(advertiseHtml.includes('ad-proof-grid-v7') && advertiseHtml.includes('ad-proof-pictogram'), 'Advertise proof strip uses the corrected icon-led treatment');
 assert(advertiseHtml.includes('ad-route-help-card') && advertiseHtml.includes('Find the smallest sensible campaign'), 'Advertise route grid fills the fourth slot with decision help rather than a weak advert teaser');
-assert(advertiseHtml.includes('ad-placement-demo-v6') && advertiseHtml.includes('cafe-local-business.webp'), 'Advertise example placement uses the high-resolution cafe source rather than the old low-resolution image');
+assert(advertiseHtml.includes('ad-placement-demo-v6') && advertiseHtml.includes('assets/images/advertise/cafe-machine-no-people.webp'), 'Advertise example placement uses the dedicated people-free cafe-machine image');
 assert(advertiseHtml.includes('starter-support-panel') && advertiseHtml.includes('WHAT HAPPENS NEXT'), 'Starter campaign section fills the former right-side empty space with useful support');
 assert(advertiseHtml.includes('audience-pills-v6') && advertiseHtml.includes('audience-fit-board'), 'Audience section uses icon chips and the crisp local-fit board');
 assert(advertiseHtml.includes('ad-process-grid-v6') && advertiseHtml.includes('ad-process-icon'), 'Campaign process uses the richer visual treatment');
@@ -94,3 +94,5 @@ assert(!advertiseHtml.includes('href="#what-you-buy">See the fictional advert'),
 assert(advertiseHtml.includes('assets/images/advertise/christmas-hospitality-2026.webp'), 'Christmas hospitality card uses the dedicated festive dining image');
 assert(advertiseHtml.includes('assets/images/advertise/cafe-machine-no-people.webp'), 'Fictional cafe advert uses a people-free coffee-machine image');
 assert(advertiseV6.includes('cafe-machine-no-people.webp'), 'Starter visual uses the people-free coffee-machine image');
+
+assert(!advertiseHtml.includes('assets/images/cafe-local-business.webp'), 'Old people-focused cafe image is not used on the Advertise page');
