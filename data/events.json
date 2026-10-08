@@ -17,7 +17,8 @@
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-10-01",
     "date_mode": "daily",
-    "cost_type": "admission_required"
+    "cost_type": "admission_required",
+    "end_time": "17:00"
   },
   {
     "id": "grimmfest-2026-10-08",
