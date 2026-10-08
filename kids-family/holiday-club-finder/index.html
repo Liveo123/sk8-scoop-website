@@ -22,7 +22,7 @@
 <div class="finder-actions"><a href="#club-list">Find a club ↓</a><a href="/kids-family/">More family ideas</a></div>
 </section>
 <div class="finder-filters" aria-label="Filter clubs">
-<div><label for="area">Area</label><select id="area"><option value="">Any area</option><option value="Cheadle Hulme">Cheadle Hulme</option><option value="Gatley">Gatley</option><option value="Heald Green">Heald Green</option><option value="Bramhall">Bramhall</option><option value="Cheadle Heath">Cheadle Heath</option><option value="Handforth">Handforth</option><option value="Heaton Mersey">Heaton Mersey</option><option value="Heaton Moor">Heaton Moor</option></select></div>
+<div><label for="area">Area</label><select id="area"><option value="">Any area</option><option value="Cheadle Hulme">Cheadle Hulme</option><option value="Gatley">Gatley</option><option value="Heald Green">Heald Green</option><option value="Bramhall">Bramhall</option><option value="Cheadle Heath">Cheadle Heath</option><option value="Handforth">Handforth</option><option value="Heaton Mersey">Heaton Mersey</option><option value="Heaton Moor">Heaton Moor</option><option value="Wythenshawe">Wythenshawe</option></select></div>
 <div><label for="age">Child's age</label><select id="age"><option value="">Any age</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select></div>
 <div><label for="day">Day</label><select id="day"><option value="">Any day</option><option value="26">Mon 26 Oct</option><option value="27">Tue 27 Oct</option><option value="28">Wed 28 Oct</option><option value="29">Thu 29 Oct</option><option value="30">Fri 30 Oct</option></select></div>
 <div><label for="type">Activity</label><select id="type"><option value="">All types</option><option value="Multi-activity">Multi-activity</option><option value="Performing arts">Performing arts</option><option value="Sports">Sports</option><option value="Gymnastics">Gymnastics &amp; trampolining</option></select></div>
@@ -34,34 +34,33 @@
 <script>
 const clubs=[
  {
-  "name": "Practically Family · Greenbank",
+  "name": "ACE Coaching · Trampolining",
   "area": "Cheadle Hulme",
-  "type": "Multi-activity",
+  "type": "Gymnastics",
   "ages": [
-   3,
-   11
+   5,
+   15
   ],
   "days": [
    26,
    27,
    28,
-   29,
-   30
+   29
   ],
-  "date": "26–30 October",
-  "venue": "Greenbank Preparatory School · SK8 6HU",
-  "price": "£20 half / £30 short / £40 full",
-  "hours": "9am–1pm / 9am–3pm / 8am–6pm",
-  "detail": "Holiday childcare with sports, crafts and outdoor play. Tax-Free Childcare and vouchers accepted, according to the organiser.",
-  "url": "https://practicallyfamily.co.uk/holiday-club/book",
-  "source": "Practically Family, Octoberfest 2026"
+  "date": "26–29 October",
+  "venue": "Cheadle Hulme High School · SK8 7JX",
+  "price": "£11.50 half / £23 full",
+  "hours": "10am–12pm / 1pm–3pm; full 10am–3pm",
+  "detail": "The provider's current October 2026 course page confirms 26–29 October at Cheadle Hulme High, 10am–12pm or 1pm–3pm (full day 10am–3pm).",
+  "url": "https://www.acecoachinguk.co.uk/class-types/holiday-courses/",
+  "source": "ACE Coaching holiday-courses page"
  },
  {
-  "name": "Practically Family · Cheadle Catholic",
+  "name": "Elm Cottage · Hursthead",
   "area": "Cheadle Hulme",
   "type": "Multi-activity",
   "ages": [
-   3,
+   4,
    11
   ],
   "days": [
@@ -72,12 +71,12 @@ const clubs=[
    30
   ],
   "date": "26–30 October",
-  "venue": "Cheadle Catholic Infant School · SK8 6DB",
-  "price": "£20 half / £30 short / £40 full",
-  "hours": "9am–1pm / 9am–3pm / 8am–6pm",
-  "detail": "Second Cheadle Hulme venue run by the same organiser as Greenbank; confirm spaces for your preferred days.",
-  "url": "https://practicallyfamily.co.uk/holiday-club/book",
-  "source": "Practically Family, Octoberfest 2026"
+  "venue": "Hursthead Infant School · SK8 7PZ",
+  "price": "£21 half / £25 short / £35 full",
+  "hours": "7.45am–6pm (full day)",
+  "detail": "Daily themed activities and workshops. Children must be school age (Reception–Year 6); clubs accept children from any school. Breakfast and afternoon snacks included on relevant sessions.",
+  "url": "https://bookings.elm-cottage.com/hursthead/",
+  "source": "Elm Cottage October 2026 booking page"
  },
  {
   "name": "Junior Sport Stars · Lane End",
@@ -126,11 +125,11 @@ const clubs=[
   "source": "LSC October 2026 venue page"
  },
  {
-  "name": "Elm Cottage · Hursthead",
+  "name": "Practically Family · Cheadle Catholic",
   "area": "Cheadle Hulme",
   "type": "Multi-activity",
   "ages": [
-   4,
+   3,
    11
   ],
   "days": [
@@ -141,41 +140,19 @@ const clubs=[
    30
   ],
   "date": "26–30 October",
-  "venue": "Hursthead Infant School · SK8 7PZ",
-  "price": "£21 half / £25 short / £35 full",
-  "hours": "7.45am–6pm (full day)",
-  "detail": "Daily themed activities and workshops. Children must be school age (Reception–Year 6); clubs accept children from any school. Breakfast and afternoon snacks included on relevant sessions.",
-  "url": "https://bookings.elm-cottage.com/hursthead/",
-  "source": "Elm Cottage October 2026 booking page"
+  "venue": "Cheadle Catholic Infant School · SK8 6DB",
+  "price": "£20 half / £30 short / £40 full",
+  "hours": "9am–1pm / 9am–3pm / 8am–6pm",
+  "detail": "Second Cheadle Hulme venue run by the same organiser as Greenbank; confirm spaces for your preferred days.",
+  "url": "https://practicallyfamily.co.uk/holiday-club/book",
+  "source": "Practically Family, Octoberfest 2026"
  },
  {
-  "name": "ACE Coaching · Trampolining",
+  "name": "Practically Family · Greenbank",
   "area": "Cheadle Hulme",
-  "type": "Gymnastics",
-  "ages": [
-   5,
-   15
-  ],
-  "days": [
-   26,
-   27,
-   28,
-   29
-  ],
-  "date": "26–29 October",
-  "venue": "Cheadle Hulme High School · SK8 7JX",
-  "price": "Published £11.50 half / £23 full",
-  "hours": "10am–12pm / 1pm–3pm; full 10am–3pm",
-  "detail": "Trampolining and gymnastics for beginners to experienced participants. The online course page has shown changing seasonal dates, so reconfirm the October sessions and price before booking.",
-  "url": "https://www.acecoachinguk.co.uk/class-types/holiday-courses/",
-  "source": "ACE Coaching holiday-courses page"
- },
- {
-  "name": "TD Sports Academy · Gatley",
-  "area": "Gatley",
   "type": "Multi-activity",
   "ages": [
-   4,
+   3,
    11
   ],
   "days": [
@@ -186,12 +163,12 @@ const clubs=[
    30
   ],
   "date": "26–30 October",
-  "venue": "Gatley Primary School · SK8 4NB",
-  "price": "Ask organiser",
-  "hours": "Check holiday session hours",
-  "detail": "Sports, arts and crafts at Gatley Primary. The organiser lists a distinct October camp; do not confuse it with term-time breakfast or after-school care.",
-  "url": "https://td-sports-academy-limited.classforkids.io/camps",
-  "source": "TD Sports Academy October 2026 schedule"
+  "venue": "Greenbank Preparatory School · SK8 6HU",
+  "price": "£20 half / £30 short / £40 full",
+  "hours": "9am–1pm / 9am–3pm / 8am–6pm",
+  "detail": "Holiday childcare with sports, crafts and outdoor play. Tax-Free Childcare and vouchers accepted, according to the organiser.",
+  "url": "https://practicallyfamily.co.uk/holiday-club/book",
+  "source": "Practically Family, Octoberfest 2026"
  },
  {
   "name": "Perform to Inspire · Gatley",
@@ -217,6 +194,29 @@ const clubs=[
   "source": "ClassForKids October 2026 discovery listing"
  },
  {
+  "name": "TD Sports Academy · Gatley",
+  "area": "Gatley",
+  "type": "Multi-activity",
+  "ages": [
+   4,
+   11
+  ],
+  "days": [
+   26,
+   27,
+   28,
+   29,
+   30
+  ],
+  "date": "26–30 October",
+  "venue": "Gatley Primary School · SK8 4NB",
+  "price": "Ask organiser",
+  "hours": "Check holiday session hours",
+  "detail": "Sports, arts and crafts at Gatley Primary. The organiser lists a distinct October camp; do not confuse it with term-time breakfast or after-school care.",
+  "url": "https://td-sports-academy-limited.classforkids.io/camps",
+  "source": "TD Sports Academy October 2026 schedule"
+ },
+ {
   "name": "Kitty Watson Academy · October Intensive",
   "area": "Heald Green",
   "type": "Performing arts",
@@ -236,29 +236,6 @@ const clubs=[
   "detail": "Acting, singing and dance. The £120 is specifically for the organiser's October Intensive; a separate advertised KWA holiday programme has different details. Confirm which programme you want.",
   "url": "https://kw-academy.co.uk/october-intensive",
   "source": "Kitty Watson Academy October Intensive 2026"
- },
- {
-  "name": "Practically Family · Ladybrook",
-  "area": "Bramhall",
-  "type": "Multi-activity",
-  "ages": [
-   3,
-   11
-  ],
-  "days": [
-   26,
-   27,
-   28,
-   29,
-   30
-  ],
-  "date": "26–30 October",
-  "venue": "Ladybrook Primary School · Bramhall",
-  "price": "£20 half / £30 short / £40 full",
-  "hours": "9am–1pm / 9am–3pm / 8am–6pm",
-  "detail": "Same organiser as the two Cheadle Hulme locations. A useful nearby fallback, with Tax-Free Childcare and voucher payment options.",
-  "url": "https://practicallyfamily.co.uk/holiday-club/book",
-  "source": "Practically Family, Octoberfest 2026"
  },
  {
   "name": "Fun Fest · Bramhall",
@@ -284,6 +261,29 @@ const clubs=[
   "source": "Fun Fest 2026/27 Bramhall schedule"
  },
  {
+  "name": "Practically Family · Ladybrook",
+  "area": "Bramhall",
+  "type": "Multi-activity",
+  "ages": [
+   3,
+   11
+  ],
+  "days": [
+   26,
+   27,
+   28,
+   29,
+   30
+  ],
+  "date": "26–30 October",
+  "venue": "Ladybrook Primary School · Bramhall",
+  "price": "£20 half / £30 short / £40 full",
+  "hours": "9am–1pm / 9am–3pm / 8am–6pm",
+  "detail": "Same organiser as the two Cheadle Hulme locations. A useful nearby fallback, with Tax-Free Childcare and voucher payment options.",
+  "url": "https://practicallyfamily.co.uk/holiday-club/book",
+  "source": "Practically Family, Octoberfest 2026"
+ },
+ {
   "name": "Fun Fest · Cheadle Heath",
   "area": "Cheadle Heath",
   "type": "Multi-activity",
@@ -305,6 +305,27 @@ const clubs=[
   "detail": "Flexible, activity-led holiday childcare. Check which sessions and childcare-payment options are available for your chosen dates.",
   "url": "https://fun-fest.co.uk/cheadleheath/",
   "source": "Fun Fest 2026/27 Cheadle Heath schedule"
+ },
+ {
+  "name": "8BY8Football · Handforth",
+  "area": "Handforth",
+  "type": "Sports",
+  "ages": [
+   4,
+   11
+  ],
+  "days": [
+   27,
+   28,
+   29
+  ],
+  "date": "27–29 October",
+  "venue": "Handforth Grange Primary School · SK9 3NG",
+  "price": "£18 half / £30 day / £90 3 days",
+  "hours": "9am–3.30pm; extras 8am–5pm",
+  "detail": "Multi-sports, dodgeball and games. Paid early arrival (£5/day) and late collection (£7.50/day) options are listed.",
+  "url": "https://8by8football.classforkids.io/camp/145",
+  "source": "8BY8Football October camp booking page"
  },
  {
   "name": "Elm Cottage · Didsbury Road",
@@ -374,25 +395,49 @@ const clubs=[
   "source": "Junior Sport Stars October camp booking page"
  },
  {
-  "name": "8BY8Football · Handforth",
-  "area": "Handforth",
+  "name": "Edstart South Manchester · St Peter's",
+  "area": "Wythenshawe",
   "type": "Sports",
   "ages": [
-   4,
-   11
+   5,
+   14
   ],
   "days": [
+   26,
+   27,
+   28,
+   29,
+   30
+  ],
+  "date": "26–30 October",
+  "venue": "St Peter’s Catholic Primary School · M23 2YS",
+  "price": "£20 day / £90 week",
+  "hours": "9am–3pm; extras 8.15am–4pm",
+  "detail": "Multi-sport holiday camp at Newall Green. Early drop-off £2.80/day, late collection £3.25/day. Organiser says Tax-Free Childcare is accepted. Check places directly.",
+  "url": "https://edstart-south-mcr.classforkids.io/camp/80",
+  "source": "Edstart October 2026 booking page"
+ },
+ {
+  "name": "Progressive Sports Manchester · Baguley Hall",
+  "area": "Wythenshawe",
+  "type": "Multi-activity",
+  "ages": [
+   5,
+   12
+  ],
+  "days": [
+   26,
    27,
    28,
    29
   ],
-  "date": "27–29 October",
-  "venue": "Handforth Grange Primary School · SK9 3NG",
-  "price": "£18 half / £30 day / £90 3 days",
-  "hours": "9am–3.30pm; extras 8am–5pm",
-  "detail": "Multi-sports, dodgeball and games. Paid early arrival (£5/day) and late collection (£7.50/day) options are listed.",
-  "url": "https://8by8football.classforkids.io/camp/145",
-  "source": "8BY8Football October camp booking page"
+  "date": "26–29 October",
+  "venue": "Baguley Hall Primary School · M23 1LB",
+  "price": "£20 day / £70 four days",
+  "hours": "9.30am–3pm",
+  "detail": "Multi-sports, games, arts, crafts and other activities at Baguley Hall. The direct organiser booking page lists October dates and pricing.",
+  "url": "https://progressive-sports-manchester.classforkids.io/camp/432",
+  "source": "Progressive Sports October 2026 booking page"
  }
 ];
 const sk8Areas=new Set(["Cheadle Hulme","Gatley","Heald Green"]);const area=document.getElementById("area"),age=document.getElementById("age"),day=document.getElementById("day"),type=document.getElementById("type"),list=document.getElementById("club-list");
