@@ -8,6 +8,8 @@
   const filters = [...document.querySelectorAll('[data-event-filter]')];
   const areaFilters = [...document.querySelectorAll('[data-event-area]')];
   if (!list) return;
+  const core = window.SK8CalendarCore;
+  if (!core) return;
 
   const safeUrl = value => {
     const raw = String(value || '').trim();
@@ -103,6 +105,7 @@
   if (allowedFilters.has(requestedFilter)) activeFilter = requestedFilter;
 
   const requestedEvent = String(params.get('event') || '').trim();
+  let selectedDate = !requestedEvent && core.withinHorizon(params.get('date')) ? params.get('date') : '';
   let requestedEventJumped = false;
 
   const requestedArea = params.get('area');
@@ -119,6 +122,8 @@
     else url.searchParams.set('filter', activeFilter);
     if (activeArea === 'all') url.searchParams.delete('area');
     else url.searchParams.set('area', activeArea);
+    if (selectedDate) url.searchParams.set('date', selectedDate);
+    else url.searchParams.delete('date');
     window.history.replaceState({}, '', url);
   };
 
@@ -170,31 +175,26 @@
     return [start, end];
   };
 
-  const isFree = event => /(^|\b)free(\b|$)/i.test(String(event.cost || ''));
-  const isFamily = event => /family|kids|children|storytime|under-18|ages 10\+/i.test(`${event.category || ''} ${event.title || ''} ${event.description || ''}`);
+  const isFree = event => core.isFree(event);
+  const isFamily = event => core.isFamily(event);
   const eventBounds = event => {
     const start = parseDate(event.date);
     const end = parseDate(event.end_date || event.date);
     return [start, end || start];
   };
   const overlaps = (aStart, aEnd, bStart, bEnd) => Boolean(aStart && aEnd && bStart && bEnd && aStart <= bEnd && aEnd >= bStart);
-  const isToday = event => {
-    const today = parseDate(localToday());
-    const [start, end] = eventBounds(event);
-    return overlaps(start, end, today, today);
-  };
+  const isToday = event => core.onDate(event, localToday());
   const isWeekend = event => {
-    const [eventStart, eventEnd] = eventBounds(event);
     const [start, end] = weekendBounds();
-    return overlaps(eventStart, eventEnd, start, end);
+    return core.withinRange(event, start.toISOString().slice(0, 10), end.toISOString().slice(0, 10));
   };
   const isNextSevenDays = event => {
-    const [eventStart, eventEnd] = eventBounds(event);
     const [start, end] = nextSevenDayBounds();
-    return overlaps(eventStart, eventEnd, start, end);
+    return core.withinRange(event, start.toISOString().slice(0, 10), end.toISOString().slice(0, 10));
   };
 
   const matchesNeed = event => {
+    if (selectedDate && !core.onDate(event, selectedDate)) return false;
     if (activeFilter === 'free') return isFree(event);
     if (activeFilter === 'family') return isFamily(event);
     if (activeFilter === 'weekend') return isWeekend(event);
@@ -220,6 +220,7 @@
     const article = document.createElement('article');
     article.className = 'reader-story event-listing-card';
     article.dataset.eventId = String(event.id || '');
+    if (event.series_id) article.dataset.seriesId = String(event.series_id);
     if (event.id) article.id = 'event-' + String(event.id);
 
     const category = String(event.category || 'LOCAL EVENT').trim() || 'LOCAL EVENT';
@@ -263,6 +264,9 @@
     const facts = document.createElement('div');
     facts.className = 'event-facts';
     [fact('Dates', event.date_range), fact('Time', event.time), fact('Area', event.area), fact('Cost', event.cost)].filter(Boolean).forEach(node => facts.appendChild(node));
+    if (core.mode(event) === 'range_unspecified' && event.end_date) {
+      facts.appendChild(fact('Schedule', 'Session dates may vary; check with the organiser'));
+    }
 
     const venue = document.createElement('p');
     venue.className = 'event-venue';
@@ -308,8 +312,9 @@
   const filterLabel = () => {
     const labels = { all: 'all', today: 'today', week: 'next 7 days', weekend: 'weekend', free: 'free', family: 'family' };
     const need = labels[activeFilter] || activeFilter;
-    if (activeArea === 'all') return need === 'all' ? '' : ` · ${need}`;
-    return ` · ${activeArea}${need === 'all' ? '' : ` · ${need}`}`;
+    const dateLabel = selectedDate ? ' · ' + prettyCheckedDate(selectedDate) : '';
+    if (activeArea === 'all') return (need === 'all' ? '' : ' · ' + need) + dateLabel;
+    return ' · ' + activeArea + (need === 'all' ? '' : ' · ' + need) + dateLabel;
   };
 
   const updateFreshness = visible => {
@@ -322,7 +327,7 @@
 
   const jumpToRequestedEvent = () => {
     if (!requestedEvent || requestedEventJumped) return;
-    const target = [...list.querySelectorAll('[data-event-id]')].find(card => card.dataset.eventId === requestedEvent);
+    const target = [...list.querySelectorAll('[data-event-id]')].find(card => card.dataset.eventId === requestedEvent || card.dataset.seriesId === requestedEvent);
     if (!target) return;
     requestedEventJumped = true;
     target.style.scrollMarginTop = '22px';
@@ -335,10 +340,45 @@
     });
   };
 
+  const cardDate = event => {
+    const kind = core.mode(event);
+    if (kind === 'daily') return selectedDate || (event.date < localToday() ? localToday() : event.date);
+    if (kind === 'specific_dates') return selectedDate ||
+      core.confirmedDates(event).find(date => date >= localToday()) || event.date;
+    if (kind === 'range_unspecified' && event.date < localToday() && event.end_date >= localToday()) return 'range';
+    return event.date;
+  };
+
+  const cardInstance = (event, date) => {
+    if ((core.mode(event) !== 'daily' && core.mode(event) !== 'specific_dates') || date === 'range') return event;
+    const extra = core.mode(event) === 'specific_dates' && Array.isArray(event.occurrences) ?
+      event.occurrences.find(item => typeof item === 'object' && item.date === date) : null;
+    return { ...event, ...(extra || {}), id: event.id + '--' + date, series_id: event.id,
+      date, date_mode: 'single', end_date: undefined, date_range: undefined, occurrences: undefined };
+  };
+
   const render = () => {
     list.replaceChildren();
     const visible = events.filter(matches);
-    visible.forEach(event => list.appendChild(eventCard(event)));
+    const cards = visible.map(event => {
+      const date = cardDate(event);
+      return { date, event: cardInstance(event, date) };
+    }).sort((a, b) => a.date.localeCompare(b.date) ||
+      String(a.event.time || '').localeCompare(String(b.event.time || '')) ||
+      String(a.event.title || '').localeCompare(String(b.event.title || '')));
+    let previousDate = '';
+    for (const item of cards) {
+      if (item.date !== previousDate) {
+        previousDate = item.date;
+        const heading = document.createElement('h3');
+        heading.className = 'whats-on-agenda-date';
+        heading.textContent = item.date === 'range' ? 'Ongoing or date-range activities: check individual sessions' :
+          new Intl.DateTimeFormat('en-GB', {weekday: 'long', day: 'numeric', month: 'long',
+            year: 'numeric', timeZone: 'UTC'}).format(parseDate(item.date));
+        list.appendChild(heading);
+      }
+      list.appendChild(eventCard(item.event));
+    }
     if (empty) empty.hidden = visible.length > 0;
     if (status) status.textContent = visible.length
       ? `${visible.length} ${visible.length === 1 ? 'result' : 'results'} shown${filterLabel()}`
@@ -353,6 +393,12 @@
       const selected = button.dataset.eventArea === activeArea;
       button.setAttribute('aria-pressed', String(selected));
     });
+    window.dispatchEvent(new CustomEvent('sk8:whatson-state', {
+      detail: { filter: activeFilter, area: activeArea, date: selectedDate }
+    }));
+    window.dispatchEvent(new CustomEvent('sk8:events-rendered', {
+      detail: { cardEvents: cards.map(item => item.event) }
+    }));
   };
 
   const syncEventSchema = () => {
@@ -396,8 +442,21 @@
     target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   };
 
+  window.addEventListener('sk8:calendar-day-selected', event => {
+    const date = String(event.detail?.date || '');
+    selectedDate = date && core.withinHorizon(date) ? date : '';
+    if (selectedDate && ['today', 'week', 'weekend'].includes(activeFilter)) activeFilter = 'all';
+    syncViewParams();
+    render();
+  });
+  window.addEventListener('sk8:calendar-clear-date-shortcut', () => {
+    activeFilter = 'all';
+    syncViewParams();
+    render();
+  });
   filters.forEach(button => button.addEventListener('click', () => {
     activeFilter = button.dataset.eventFilter || 'all';
+    selectedDate = '';
     syncViewParams();
     render();
     if (button.dataset.eventJump === 'results') window.requestAnimationFrame(jumpToResults);
@@ -417,12 +476,15 @@
       const today = localToday();
       events = (Array.isArray(data) ? data : [])
         .filter(event => event && !['example', 'cancelled', 'sold_out'].includes(String(event.status || '').toLowerCase()))
-        .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
+        .filter(event => core.validDate(String(event.date || '')) &&
+          (core.mode(event) === 'specific_dates'
+            ? core.confirmedDates(event).some(date => core.withinHorizon(date, today))
+            : String(event.end_date || event.date) >= today && event.date < core.anniversaryExclusive(today)))
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
       window.SK8_EVENT_DATA = events;
       syncEventSchema();
-      render();
       window.dispatchEvent(new CustomEvent('sk8:events-loaded',{detail:{events}}));
+      render();
     })
     .catch(error => {
       console.error('SK8 What’s On data failed to load', error);
