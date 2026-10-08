@@ -47,8 +47,9 @@ try {
   };
   const navigate=async path=>{
     await cmd('Page.navigate',{url:BASE+path});
-    await wait("document.readyState==='complete'");
-    await sleep(400);
+    const slug=path.replace(/^\\/+|\\/+$|\\.html$/g,'');
+    await wait("document.readyState==='complete' && location.pathname.includes("+JSON.stringify(slug)+")");
+    await sleep(600);
   };
   await cmd('Page.enable');await cmd('Runtime.enable');await cmd('Network.enable');
   // A test consent click must not cause a real analytics/ads event.
@@ -69,6 +70,7 @@ try {
   await evalPage("document.querySelector('[data-consent-none]').click();true");
   await wait("JSON.parse(localStorage.getItem('sk8_privacy_choices_v1')||'null')?.analytics===false");
   await navigate('/terms.html');
+  console.log('TERMS_PAGE',await evalPage("JSON.stringify({path:location.pathname,title:document.title,body:document.body.innerText.slice(0,350)})"));
   assert.ok(await evalPage("document.body.innerText.includes('Paul Livesey')"),'Proprietor in terms');
   assert.equal(trackers.length,0,'No trackers after rejecting optional');
   await navigate('/editorial-policy.html');
