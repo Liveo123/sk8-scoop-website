@@ -94,6 +94,7 @@ try {
   check(await evaluate("(() => {const link=document.querySelector('[data-event-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"] a[download]');return link && decodeURIComponent(link.href).includes('DTEND;TZID=Europe/London:20261010T170000');})()"),'verified end time included in calendar export');
   check(await click(selector),'save specific occurrence');
   check(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1')||'[]').some(e=>e.id.endsWith('--2026-10-10')&&e.date==='2026-10-10')"),'saved date agrees with clicked date');
+  await waitFor("!document.querySelector('[data-my-sk8-toast]')?.classList.contains('show')");
   await evaluate("document.querySelector('[data-calendar-controls]').scrollIntoView({block:'start',behavior:'instant'});true");
   await shot('desktop-agenda.png');
   await click('[data-calendar-view="month"]');
