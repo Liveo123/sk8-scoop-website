@@ -98,6 +98,10 @@ try {
   await evaluate("document.querySelector('[data-calendar-month-panel]').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-104);true");
   await pause(350);
   await shot('mobile-month.png');
+  await rpc('Page.navigate',{url:base+'/my-sk8/'});
+  await waitFor("document.querySelector('[data-saved-id]')?.textContent.includes('Quarry Bank')");
+  check(await evaluate("!!document.querySelector('[data-saved-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"]')"),'selected-date save appears in My SK8');
+  check(await evaluate("(() => {const x=document.querySelector('[data-saved-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"] a[download]');return !!x&&decodeURIComponent(x.href).includes('DTEND;TZID=Europe/London:20261010T170000');})()"),'finish time survives My SK8 save');
   check(!errors.length,'no uncaught JS errors: '+errors.join('; '));
   console.log('Calendar integration browser checks passed.');
 } finally {
