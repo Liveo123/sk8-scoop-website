@@ -1,0 +1,28 @@
+name: Calendar foundation QA
+on:
+  pull_request:
+    paths:
+      - 'assets/sk8-calendar-core.js'
+      - 'tests/sk8-calendar-core.mjs'
+      - 'data/events.json'
+      - 'data/event-sources.json'
+      - '.github/workflows/sk8-calendar-foundation-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/sk8-calendar-core.js'
+      - 'tests/sk8-calendar-core.mjs'
+      - 'data/events.json'
+      - 'data/event-sources.json'
+      - '.github/workflows/sk8-calendar-foundation-qa.yml'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/sk8-calendar-core.mjs
+      - run: node scripts/check-events-data.mjs
+      - run: node scripts/check-event-source-registry.mjs
