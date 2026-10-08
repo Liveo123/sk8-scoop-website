@@ -71,7 +71,7 @@ has(page,'Advertising FAQs','31. Reader-first FAQ');
 has(page,'What do £96 and £125 sponsorships include?','32. FAQ explains premium options');
 has(page,'Will I receive a results report?','33. FAQ explains end-of-period results');
 has(page,'How long will my Guide advert stay live?','34. FAQ explains durations');
-has(page,'How do I pay?','35. FAQ explains approval-gated payment');
+has(page,'When and how do I pay?','35. FAQ explains approval-gated payment');
 has(page,'No payment is taken by the enquiry form','36. No direct checkout before approval');
 has(page,'FICTIONAL EXAMPLE','37. Sample is disclosed as fictional');
 has(page,'SPONSORED','38. Commercial labels remain visible');
