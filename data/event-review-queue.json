@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-02",
+  "updated": "2026-10-08",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -57,6 +57,100 @@
         "exact individual dates within the 42-day window",
         "exact start times"
       ]
+    },
+    {
+      "id": "stockroom-subtext-launch-2026-10-15",
+      "title": "Exhibition Launch: SUBTEXT",
+      "status": "ready",
+      "date": "2026-10-15",
+      "time": "17:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PR",
+      "cost": "Free",
+      "category": "Arts / Culture",
+      "description": "Free launch evening for Stockroom's SUBTEXT exhibition, featuring newly commissioned work by Parham Ghalamdar co-produced with people in Stockport. Runs 5pm–7pm.",
+      "booking_url": "https://www.stockroomsk.co.uk/events/exhibition-launch-subtext?date=2026-10-15",
+      "source_url": "https://www.stockroomsk.co.uk/events/exhibition-launch-subtext?date=2026-10-15",
+      "verification": "VENUE_PRIMARY_SOURCE",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08",
+      "reason": "Verified on Stockroom's primary event page: date, 5pm–7pm time, venue and free admission confirmed."
+    },
+    {
+      "id": "stockroom-alicias-amazing-adventure-2026-10-18",
+      "title": "Alicia's Amazing Adventure to Find the First Black Britons",
+      "status": "ready",
+      "date": "2026-10-18",
+      "time": "11:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PR",
+      "cost": "£3–£15",
+      "category": "Family / Theatre",
+      "description": "A family theatre show for ages 7+ using time travel, history and storytelling to explore the first Black Britons, identity and belonging.",
+      "booking_url": "https://www.stockroomsk.co.uk/events/alicias-amazing-adventure?date=2026-10-18",
+      "source_url": "https://www.stockroomsk.co.uk/events/alicias-amazing-adventure?date=2026-10-18",
+      "verification": "VENUE_PRIMARY_SOURCE",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08",
+      "reason": "Verified on Stockroom's primary event page: 18 Oct, 11am, venue, £3–£15 and booking route confirmed."
+    },
+    {
+      "id": "stockroom-dads-club-half-term-2026-10-24",
+      "title": "Stockport Dads Club: October Half Term",
+      "status": "ready",
+      "date": "2026-10-24",
+      "time": "11:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PR",
+      "cost": "Free general event; under-2 sensory session £2",
+      "category": "Family / Community",
+      "description": "Half-term day for dads and father figures with children, including story time, den building, Lego, board games and table football. The under-2 sensory session costs £2 and includes a hot drink and barm.",
+      "booking_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
+      "source_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
+      "verification": "VENUE_PRIMARY_SOURCE",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08",
+      "reason": "Verified on Stockroom's primary event page: 24 Oct, 11am start, venue, general free claim and £2 under-2 sensory-session route confirmed."
+    },
+    {
+      "id": "stockroom-bsl-signed-storytime-2026-10-26",
+      "title": "BSL Signed Storytime",
+      "status": "ready",
+      "date": "2026-10-26",
+      "time": "11:00",
+      "area": "Stockport",
+      "venue": "Stockroom Studios, Merseyway Shopping Centre, Stockport SK1 1PR",
+      "cost": "Free",
+      "category": "Family / Accessibility",
+      "description": "Inclusive British Sign Language signed storytime for under-5s and families, delivered with the National Deaf Children's Society. Particularly suitable for children who are deaf, have hearing loss or additional communication needs.",
+      "booking_url": "https://www.stockroomsk.co.uk/events/bsl-signed-storytime?date=2026-10-26",
+      "source_url": "https://www.stockroomsk.co.uk/events/bsl-signed-storytime?date=2026-10-26",
+      "verification": "VENUE_PRIMARY_SOURCE",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08",
+      "reason": "Verified on Stockroom's primary event page: 26 Oct, 11–11:30am, Stockroom Studios and free admission confirmed."
+    },
+    {
+      "id": "john-lewis-cheadle-baby-beyond-2026-10-08",
+      "title": "All Things Baby & Beyond with Dr Dewan",
+      "status": "rejected",
+      "date": "2026-10-08",
+      "area": "Cheadle",
+      "source_url": "https://www.johnlewis.com/our-shops/cheadle/whats-on",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08",
+      "reason": "Rejected because John Lewis Cheadle's current primary What's On page marks the 8 Oct event Sold out. Remove from live event data and retain here briefly to prevent rediscovery."
+    },
+    {
+      "id": "monster-mugs-kids-2026-10-10",
+      "title": "Monster Mugs kids' clay workshop",
+      "status": "rejected",
+      "date": "2026-10-10",
+      "area": "Stockport",
+      "source_url": "https://www.merseywayworkshop.com/whatson",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08",
+      "reason": "Rejected for current publication because the existing verified event record is marked sold out. Remove from live listings and retain here briefly to prevent rediscovery unless availability changes."
     }
   ]
 }
