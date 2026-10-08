@@ -100,6 +100,10 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
   const c = (value, length = 1000) => String(value || '').trim().slice(0, length);
   const packageLabel = {
     starter_newsletter: 'NEWSLETTER ADVERT £35',
+    guide_card: 'GUIDE CARD £28',
+    guide_bundle: 'GUIDE + NEWSLETTER £60',
+    guide_section: 'GUIDE SECTION SPONSOR £96',
+    guide_main: 'MAIN GUIDE SPONSOR £125',
     halloween_guide: 'HALLOWEEN GUIDE £28',
     halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £60',
     halloween_section: 'HALLOWEEN SECTION SPONSOR £110',
@@ -114,6 +118,9 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
   }[String(data.package || '')] || c(data.package, 80) || 'Not supplied';
 
   const isLocalFitCheck = String(data.package || '') === 'human_review';
+  const guideNames = {not_sure:'Help me choose',halloween:'Halloween & Half-Term Guide',christmas:'Christmas Guide','52-adventures':'52 Adventures','free-cheap':'Free & Cheap Things to Do',summer:'SK8 Summer Guide',secrets:'50 Secrets of SK8',transport:'Getting around SK8',other:'Another SK8 Scoop Guide'};
+  const requestedGuideKey = String(data.guide_choice || '').trim();
+  const requestedGuide = Object.prototype.hasOwnProperty.call(guideNames, requestedGuideKey) ? guideNames[requestedGuideKey] : '';
   let customerConfirmation = { status: 'not_applicable' };
 
   if (isLocalFitCheck) {
@@ -142,6 +149,7 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
         '',
         'Thanks for your advertising enquiry. We have received your request for:',
         packageLabel,
+        ...(requestedGuide ? [`Requested Guide: ${requestedGuide}`] : []),
         '',
         'Next we will check suitability and available dates, then prepare an advert proof and confirm the agreed price.',
         'If you are happy to proceed, we will send you a secure payment link. No payment is due from this enquiry.',
@@ -168,6 +176,7 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
       `Area: ${c(data.area, 100) || 'Not provided'}`,
       `Business type: ${c(data.business_type, 120) || 'Not provided'}`,
       `Requested route: ${packageLabel}`,
+      ...(requestedGuide ? [`Requested Guide: ${requestedGuide}`] : []),
       `Preferred timing: ${c(data.preferred_date, 80)}`,
       `Website / booking / social route: ${c(data.website, 500)}`,
       `Customer acknowledgement: ${customerConfirmation.status}`,
@@ -267,7 +276,7 @@ async function handleStripeWebhook(request, env, ctx) {
   if (
     !Number.isInteger(enquiryId) ||
     enquiryId <= 0 ||
-    !['starter_newsletter', 'halloween_guide', 'halloween_combo', 'halloween_section', 'halloween_main', 'temp_test', 'temp_grow'].includes(packageKey) ||
+    !['starter_newsletter', 'guide_card', 'guide_bundle', 'guide_section', 'guide_main', 'halloween_guide', 'halloween_combo', 'halloween_section', 'halloween_main', 'temp_test', 'temp_grow'].includes(packageKey) ||
     String(metadata.approval_required || '') !== 'true' ||
     String(session.mode || '') !== 'payment'
   ) {
@@ -285,18 +294,18 @@ async function handleStripeWebhook(request, env, ctx) {
 
   const amount = Number.isFinite(Number(session.amount_total)) ? Math.max(0, Math.trunc(Number(session.amount_total))) : 0;
   const currency = String(session.currency || 'gbp').toLowerCase().slice(0, 10);
-  // Sessions approved under earlier prices carry no price version; keep recognising those payments.
-  // New sessions MUST include sk8_pricing_version=2026-10-v2 in Stripe metadata.
-  // All sessions also require approval_required=true, advertiser_enquiry_id and sk8_product.
-  // An unknown price version is never automatically approved.
+  // Version the new generic Guide prices; keep previously agreed sessions valid.
   const pricingVersion = String(metadata.sk8_pricing_version || '').trim().slice(0, 50);
-  const currentPricesPence = { starter_newsletter: 3500, halloween_guide: 2800, halloween_combo: 6000, halloween_section: 11000, halloween_main: 15000, temp_test: 4000, temp_grow: 9000 };
+  const currentPricesPence = { starter_newsletter: 3500, guide_card: 2800, guide_bundle: 6000, guide_section: 9600, guide_main: 12500 };
+  const previousPricesPence = { starter_newsletter: 3500, halloween_guide: 2800, halloween_combo: 6000, halloween_section: 11000, halloween_main: 15000, temp_test: 4000, temp_grow: 9000 };
   const historicalPricesPence = { starter_newsletter: 4000, halloween_guide: 3500, halloween_combo: 7500, halloween_section: 11000, halloween_main: 15000, temp_test: 4000, temp_grow: 9000 };
-  const expectedAmount = pricingVersion === '2026-10-v2'
+  const expectedAmount = pricingVersion === '2026-10-v3'
     ? currentPricesPence[packageKey]
-    : pricingVersion === '' || pricingVersion === 'legacy'
-      ? historicalPricesPence[packageKey]
-      : undefined;
+    : pricingVersion === '2026-10-v2'
+      ? previousPricesPence[packageKey]
+      : pricingVersion === '' || pricingVersion === 'legacy'
+        ? historicalPricesPence[packageKey]
+        : undefined;
   const customerEmail = String((session.customer_details && session.customer_details.email) || session.customer_email || enquiry.email || '').trim().toLowerCase().slice(0, 200);
   const businessName = String((session.collected_information && session.collected_information.business_name) || enquiry.business_name || '').trim().slice(0, 180);
   const sessionId = String(session.id || '').slice(0, 120);
@@ -422,7 +431,7 @@ async function handleAdvertiserEnquiries(request, env) {
     await ensureAdvertiserPaymentsTable(env.DB);
     const rows = (await env.DB.prepare(`SELECT
       a.id,a.business_name,a.contact_name,a.email,a.phone,a.business_type,a.area,a.website,a.package,
-      a.preferred_date,a.advert_copy,a.status,a.created_at,
+      a.preferred_date,a.advert_copy,a.invoice_details,a.status,a.created_at,
       p.campaign_reference,p.package AS paid_package,p.amount_pence,p.currency,p.status AS payment_status,p.paid_at
     FROM advertiser_enquiries a
     LEFT JOIN advertiser_payments p
@@ -451,9 +460,15 @@ function packageLabel(packageKey, pricingVersion = '') {
     halloween_guide: 'HALLOWEEN GUIDE £35 (previously agreed)',
     halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £75 (previously agreed)'
   };
-  if (pricingVersion !== '2026-10-v2' && oldLabels[packageKey]) return oldLabels[packageKey];
+  if ((pricingVersion === '' || pricingVersion === 'legacy') && oldLabels[packageKey]) return oldLabels[packageKey];
+  if (pricingVersion === '2026-10-v2' && packageKey === 'halloween_section') return 'HALLOWEEN SECTION SPONSOR £110';
+  if (pricingVersion === '2026-10-v2' && packageKey === 'halloween_main') return 'HALLOWEEN MAIN SPONSOR £150';
   return {
     starter_newsletter: 'NEWSLETTER ADVERT £35',
+    guide_card: 'GUIDE CARD £28',
+    guide_bundle: 'GUIDE + NEWSLETTER £60',
+    guide_section: 'GUIDE SECTION SPONSOR £96',
+    guide_main: 'MAIN GUIDE SPONSOR £125',
     halloween_guide: 'HALLOWEEN GUIDE £28',
     halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £60',
     halloween_section: 'HALLOWEEN SECTION SPONSOR £110',
