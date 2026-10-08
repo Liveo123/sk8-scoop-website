@@ -36,7 +36,7 @@
   };
 
   const listingContext = node => {
-    const card = node && node.closest ? node.closest('.card, [data-guide-listing], .guide-entry, .story-card, .saved-card, .recent-card') : null;
+    const card = node && node.closest ? node.closest('.card, [data-guide-listing], .guide-entry, .story-card, .saved-card, .recent-card, .finder-card, .dialog-main') : null;
     if (!card) return {};
     const heading = card.querySelector('h2,h3,h4,[data-listing-title]');
     const section = card.closest('[data-section], section[id]');
@@ -101,8 +101,8 @@
       const open = event.target.closest('[data-open]');
       if (open) track('guide_listing_open', { listing_id: open.dataset.open || '' });
 
-      const save = event.target.closest('[data-save], [data-dialog-save]');
-      if (save) track('guide_save', { listing_id: save.dataset.save || '' });
+      const save = event.target.closest('[data-save], [data-dialog-save], [data-utility-save]');
+      if (save) track('guide_save', { listing_id: save.dataset.save || save.dataset.utilitySave || listingContext(save).listing_id || '' });
 
       const complete = event.target.closest('[data-complete], [data-dialog-done]');
       if (complete) track('guide_complete_toggle', { listing_id: complete.dataset.complete || '' });
