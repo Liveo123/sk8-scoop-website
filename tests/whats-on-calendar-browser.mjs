@@ -94,7 +94,8 @@ try {
   await shot('desktop-month.png');
   await rpc('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
   check(await evaluate("document.documentElement.scrollWidth<=window.innerWidth+1"),'mobile month view no horizontal overflow');
-  await evaluate("(() => {const el=document.querySelector('[data-calendar-controls]');window.scrollTo(0,el.getBoundingClientRect().top+window.scrollY-86);return true;})()");
+  await evaluate("document.querySelector('[data-calendar-month-panel]').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-104);true");
+  await pause(350);
   await shot('mobile-month.png');
   check(!errors.length,'no uncaught JS errors: '+errors.join('; '));
   console.log('Calendar integration browser checks passed.');
