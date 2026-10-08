@@ -252,7 +252,11 @@ try {
   record('Halloween benefit cards use visual thumbnails', (await evaluate("document.querySelectorAll('.benefit-mark img').length")) === 3);
   record('Halloween hero has useful content filling the lower-right space', Boolean(await evaluate("document.querySelector('.hero-quick-links')?.textContent.includes('Find the right plan quickly')")));
   await navigate('/free-cheap-guide/guide/');
-  record('Guide route redirects visitors without subscriber pass', Boolean(await evaluate("location.pathname === '/free-cheap-guide/'")));
+  record('Free & Cheap direct guide link works without repeat signup', Boolean(await evaluate("location.pathname === '/free-cheap-guide/guide/'")));
+  await navigate('/52-adventures/guide/');
+  record('52 Adventures direct guide link works without repeat signup', Boolean(await evaluate("location.pathname === '/52-adventures/guide/'")));
+  await navigate('/halloween-half-term-guide/guide/');
+  record('Halloween direct guide link works without repeat signup', Boolean(await evaluate("location.pathname === '/halloween-half-term-guide/guide/'")));
 
   await navigate('/my-sk8/');
   await evaluate("document.querySelector('#my-sk8-subscriber-email').value='preview-test@example.com'; document.querySelector('#my-sk8-subscriber-email').dispatchEvent(new Event('input',{bubbles:true})); true");
@@ -261,7 +265,23 @@ try {
   record('Preview explains that MailerLite was not changed', Boolean(await evaluate("document.body.textContent.includes('Preview unlocked. No email was added to MailerLite.')")));
   record('Subscriber guide button becomes a working link', (await attr('[data-subscriber-shelf-unlocked] a[href="/free-cheap-guide/guide/"]','href')) === '/free-cheap-guide/guide/');
   await navigate('/free-cheap-guide/guide/');
-  record('Preview access cookie opens protected guide for manual QA', Boolean(await evaluate("location.pathname === '/free-cheap-guide/guide/'")));
+  record('Preview subscriber can still open Free & Cheap directly', Boolean(await evaluate("location.pathname === '/free-cheap-guide/guide/'")));
+
+  await navigate('/my-sk8/');
+  record('Preview access status remains active after navigation', Boolean(await evaluate("fetch('/api/subscriber-access-status', {credentials:'same-origin',cache:'no-store'}).then(r => r.json()).then(x => x.active === true)")));
+  record('Preview subscriber shelf remains unlocked on revisit', await waitFor("document.querySelector('[data-subscriber-shelf-unlocked]') && !document.querySelector('[data-subscriber-shelf-unlocked]').hidden", 8000));
+
+  await evaluate("localStorage.setItem('sk8_subscriber_recognition_v1', JSON.stringify({version:1,recognised:true,savedAt:new Date().toISOString(),expiresAt:Date.now()+30*86400000})); true");
+  await navigate('/my-sk8/');
+  record('Recognised reader has See what’s new shortcut', Boolean(await evaluate("document.querySelector('.reader-nav-latest')")));
+  await command('Network.enable');
+  await command('Network.clearBrowserCookies');
+  await navigate('/my-sk8/');
+  record('Cleared cookie deactivates authenticated subscriber shelf', Boolean(await evaluate("fetch('/api/subscriber-access-status', {credentials:'same-origin',cache:'no-store'}).then(r => r.json()).then(x => x.active === false)")));
+  record('Cleared cookie shows the email recovery form', await waitFor("document.querySelector('[data-subscriber-shelf-locked]') && !document.querySelector('[data-subscriber-shelf-locked]').hidden", 8000));
+  record('Browser recognition is kept separately from cookie', Boolean(await evaluate("document.querySelector('.reader-nav-latest')")));
+  await navigate('/halloween-half-term-guide/guide/');
+  record('Direct Halloween guide survives deleted subscriber cookie', Boolean(await evaluate("location.pathname === '/halloween-half-term-guide/guide/'")));
 
   await navigate('/local-history/gatley-shouter/');
   record('Article page shows My SK8 save bar', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
