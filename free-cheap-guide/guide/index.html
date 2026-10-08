@@ -1560,7 +1560,7 @@ h1,h2,h3,h4,.nue-title,.visual-heading strong{
 .secondary-pick-copy strong{display:block;margin-bottom:5px;font-size:1.04rem;line-height:1.22;}
 .secondary-pick-copy span{display:block;color:#546268;font-size:.95rem;line-height:1.48;}
 .secondary-pick-arrow{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;border-radius:999px;background:#F7F3EA;color:#0F6470;font-size:1.1rem;font-weight:900;}
-.secondary-pick--section .secondary-pick-arrow::before{content:'§';}
+.secondary-pick--section .secondary-pick-arrow::before{content:'→';}
 .secondary-pick--link .secondary-pick-arrow::before{content:'→';}
 
 /* How to use */
@@ -1652,7 +1652,8 @@ h1,h2,h3,h4,.nue-title,.visual-heading strong{
   .pick-card h3{font-size:1.42rem;max-width:none;}
   .pick-card p{font-size:1rem;max-width:none;}
   .secondary-picks-grid,.use-steps,.price-lens-grid,.badge-key-grid,.anytime-category-links{grid-template-columns:1fr;}
-  .secondary-pick,.anytime-category-links a{grid-template-columns:52px minmax(0,1fr) auto;}
+  .secondary-pick{grid-template-columns:56px minmax(0,1fr) auto;}
+  .anytime-category-links a{grid-template-columns:52px minmax(0,1fr) auto;}
   .opening-picks-intro,.opening-how-lead,.opening-anytime-lead,.anytime-category-nav-copy p{font-size:1rem;}
   .use-step{padding:20px;}
   .use-step h3{font-size:1.72rem;}
@@ -1666,8 +1667,11 @@ h1,h2,h3,h4,.nue-title,.visual-heading strong{
 }
 @media(max-width:430px){
   .hero-real-nav-links{grid-template-columns:1fr;}
-  .secondary-pick,.anytime-category-links a{grid-template-columns:48px minmax(0,1fr);}
-  .secondary-pick-arrow,.anytime-link-arrow{grid-column:2;justify-self:start;margin-top:6px;}
+  .secondary-pick{grid-template-columns:48px minmax(0,1fr) 34px;gap:10px;padding:15px 14px;}
+  .secondary-pick-badge{width:48px;height:48px;border-radius:15px;font-size:.78rem;}
+  .secondary-pick-arrow{grid-column:3;justify-self:end;margin-top:0;min-width:34px;height:34px;}
+  .anytime-category-links a{grid-template-columns:48px minmax(0,1fr);}
+  .anytime-link-arrow{grid-column:2;justify-self:start;margin-top:6px;}
   .more-picks-panel{padding:18px 16px 6px;}
   .anytime-category-nav{padding:18px 14px;}
 }
@@ -2248,8 +2252,8 @@ h1,h2,h3,h4,.nue-title,.visual-heading strong{
 <p class="entry-narrative">FREE DISABILITY SWIM — LIFE LEISURE CHEADLE</p><div class="entry-price-row"><span class="entry-price-chip">FREE</span></div><p class="entry-narrative">A dedicated free swim session on Wednesday evenings.</p><div class="entry-facts-grid"><div class="entry-fact entry-fact-time"><span class="entry-fact-label">WHEN</span><span class="entry-fact-value">Wednesdays, 8–8.45pm.</span></div><div class="entry-fact entry-fact-note"><span class="entry-fact-label">AGE/CONDITION</span><span class="entry-fact-value">age 11+ and swimmers must be able to manage 25m unaided.</span></div></div>
 <div class="callout callout-access"><div class="callout-visual callout-symbol-access" aria-hidden="true"><span class="callout-symbol">ACCESS</span></div><div class="callout-body"><span class="callout-label">ACCESS INFO</span><p>the centre currently lists accessible changing and a pool hoist.</p></div></div>
 <div class="entry-facts-grid"><div class="entry-fact entry-fact-note"><span class="entry-fact-label">PARKING</span><span class="entry-fact-value">free onsite parking currently available.</span></div></div><div class="entry-actions"><a class="official-link" href="https://lifeleisure.net/centre/cheadle/" rel="noopener" target="_blank">View Life Leisure details</a>
-<a id="play-zone-by-autisk-adswood"></a></div>
-</article><article class="guide-entry recurring-card"><h3 class="entry-title">PLAY ZONE BY AUTISK — ADSWOOD</h3>
+</div>
+</article><article class="guide-entry recurring-card" id="play-zone-by-autisk-adswood"><h3 class="entry-title">PLAY ZONE BY AUTISK — ADSWOOD</h3>
 <div class="entry-badge-row"><span class="badge badge-outside-sk">OUTSIDE SK8</span> • <span class="badge badge-send-informed">SEND-INFORMED</span> • <span class="badge badge-rainy-day">RAINY DAY</span></div><div class="entry-price-row"><span class="entry-price-chip">UNDER £10</span></div><div class="entry-price-detail"><span>£5 per child or £10 per family.</span></div><p class="entry-narrative">A deliberately flexible family session with several things happening at once: gaming and VR, crafts, sensory-room access and activities designed around movement and motor skills. Children do not have to join one fixed activity for the whole session, which makes it much easier for families who need choice, breaks or a quieter space.</p><div class="entry-facts-grid"><div class="entry-fact entry-fact-good"><span class="entry-fact-label">GOOD FOR</span><span class="entry-fact-value">families, SEND-informed outings, rainy days.</span></div><div class="entry-fact entry-fact-time"><span class="entry-fact-label">WHEN</span><span class="entry-fact-value">Friday 4–5.45pm or Saturday 10am–1pm when listed; check the next event date.</span></div><div class="entry-fact entry-fact-note"><span class="entry-fact-label">AGE</span><span class="entry-fact-value">all ages and abilities welcome.</span></div></div><div class="entry-actions"><a class="official-link" href="https://www.stockport.gov.uk/events/play-zone" rel="noopener" target="_blank">View current Stockport Council details</a></div>
 </article><article class="guide-entry recurring-card" id="inclusive-community-gym"><h4 class="entry-title">INCLUSIVE COMMUNITY GYM — SEASHELL, HEALD GREEN</h4>
 <div class="entry-price-row"><span class="entry-price-chip">UNDER £10</span></div><div class="entry-price-detail"><span>£7 pay-per-session.</span></div><p class="entry-narrative">A supported gym session using specialist accessible equipment, with staff available to help people get set up and work out safely rather than simply leaving them to navigate a mainstream gym alone. It is designed to make exercise more practical for disabled adults and young people who may need adapted kit or a more supportive first step into gym use.</p><div class="entry-facts-grid"><div class="entry-fact entry-fact-good"><span class="entry-fact-label">GOOD FOR</span><span class="entry-fact-value">disabled adults and young people looking for an affordable supported gym option.</span></div><div class="entry-fact entry-fact-time"><span class="entry-fact-label">WHEN</span><span class="entry-fact-value">Council listings show Wednesday sessions from 10.30am to 12.30pm; confirm the next date before travelling.</span></div></div><div class="entry-actions"><a class="official-link" href="https://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday" rel="noopener" target="_blank">View current Stockport Council details</a></div>
