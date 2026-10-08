@@ -91,6 +91,9 @@
     }
 
     let totalDays = 0;
+    const monthPrefix = y + '-' + pad(m + 1);
+    const keyboardDate = selectedDate.startsWith(monthPrefix) ? selectedDate :
+      (shownMonth === beginning ? now : isoDate(y, m, 1));
     for (let d = 1; d <= days; d++) {
       const date = isoDate(y, m, d);
       const available = core.withinHorizon(date, now);
@@ -101,6 +104,7 @@
       button.className = 'sk8-calendar-day';
       button.dataset.calendarDay = date;
       button.disabled = !available;
+      button.tabIndex = available && date === keyboardDate ? 0 : -1;
       button.setAttribute('aria-label', datePretty(date) + ': ' +
         (matches.length ? matches.length + (matches.length === 1 ? ' confirmed event' : ' confirmed events') : 'no confirmed events'));
       if (date === now) button.classList.add('is-today');
@@ -129,7 +133,7 @@
     monthPanel.hidden = view !== 'month';
     if (chosenInput) {
       chosenInput.min = now;
-      chosenInput.max = core.dayAfter(horizon) === horizon ? horizon : new Date(Date.parse(horizon + 'T00:00:00Z') - 86400000).toISOString().slice(0, 10);
+      chosenInput.max = new Date(Date.parse(horizon + 'T00:00:00Z') - 86400000).toISOString().slice(0, 10);
       chosenInput.value = selectedDate;
     }
     if (clearButton) clearButton.hidden = !selectedDate;
@@ -161,6 +165,23 @@
     if (date) track('whats_on_calendar_date', { selected_month: date.slice(0, 7) });
     document.getElementById('current-listings')?.scrollIntoView({ behavior: 'auto', block: 'start' });
   }
+
+  monthGrid.addEventListener('keydown', event => {
+    const current = event.target.closest('[data-calendar-day]');
+    if (!current || !['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key)) return;
+    const buttons = [...monthGrid.querySelectorAll('[data-calendar-day]:not(:disabled)')];
+    const index = buttons.indexOf(current);
+    if (index < 0) return;
+    const shift = {ArrowLeft:-1,ArrowRight:1,ArrowUp:-7,ArrowDown:7};
+    let next = index + (shift[event.key] || 0);
+    if (event.key === 'Home') next = index - ((new Date(current.dataset.calendarDay + 'T00:00:00Z').getUTCDay()+6)%7);
+    if (event.key === 'End') next = index + (6 - ((new Date(current.dataset.calendarDay + 'T00:00:00Z').getUTCDay()+6)%7));
+    if (next < 0 || next >= buttons.length) return;
+    event.preventDefault();
+    buttons.forEach(button => button.tabIndex = -1);
+    buttons[next].tabIndex = 0;
+    buttons[next].focus();
+  });
 
   listToggle.addEventListener('click', () => chooseView('agenda'));
   monthToggle.addEventListener('click', () => chooseView('month'));
