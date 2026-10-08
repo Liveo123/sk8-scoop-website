@@ -57,3 +57,9 @@ The prior table above is a **historical record**, not the current final design: 
 **Verification:** website-health/static business-contract preflight and Chromium browser QA for 360, 390, 768, 1024 and 1440 px, including all five prices and product-to-form hand-offs, are required green before review. The cloud preview is `https://preview-advertise-simple-pricing-oct2026.previews.sk8scoop.com/advertise.html`.
 
 **Still not verified:** New- and old-price Stripe test-mode E2E sessions and transactional acknowledgement delivery. Never infer that a public payment checkout is working from a static preview alone. Keep the PR draft and main production branch unchanged until approval.
+
+## Final visual adjustments: October 8
+- Matched the £60 Guide + newsletter main comparison card to its corresponding compact hero card, using warm ivory, a full orange border, and consistent dark-teal price text.
+- Replaced the earlier newsletter backdrop with a compact, local raster WebP illustration of SK8 centred on the neighbouring centres of Gatley, Cheadle, Heald Green and Cheadle Hulme. It is deliberately blurred and not intended for navigation. The image is embedded locally in CSS, making no third-party tile requests.
+- A first-pass vector map triggered the existing no-vector production rule, so that asset was deleted and replaced with a compressed raster file. The rule was preserved and updated visual checks assert the resulting WebP background and card styling at multiple widths.
+- These are preview-only changes; payment/invoice and acknowledgement end-to-end release gates remain unchanged.
