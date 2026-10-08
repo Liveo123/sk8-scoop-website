@@ -51,6 +51,10 @@ try {
   await rpc('Page.enable');await rpc('Runtime.enable');
   await rpc('Page.navigate',{url:base+'/whats-on/'});
   await waitFor("document.querySelector('[data-events-status]')?.textContent.includes('shown')");
+  if (await evaluate("Boolean(document.querySelector('[data-consent-none]')) && !document.querySelector('.privacy-choices')?.hidden")) {
+    await click('[data-consent-none]');
+    await pause(150);
+  }
   check(await evaluate("document.body.dataset.calendarView==='agenda'"),'agenda opens by default');
   check(await evaluate("document.querySelectorAll('.event-listing-card').length>=20"),'real event records render');
   check(await evaluate("document.querySelectorAll('.whats-on-agenda-date').length>=3"),'agenda grouped by date');
@@ -65,6 +69,7 @@ try {
   check(await evaluate("document.body.dataset.calendarView==='month'"),'month mode active');
   check(await evaluate("document.querySelectorAll('[data-calendar-day]').length>=28"),'date grid rendered');
   check(await evaluate("document.querySelector('[data-calendar-day=\"2026-10-10\"]')?.classList.contains('has-events')"),'confirmed date marked');
+  check(await evaluate("(() => { const b=document.querySelector('[data-calendar-day=\"2026-10-10\"]');b.focus();b.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));return document.activeElement?.dataset.calendarDay==='2026-10-11';})()"),'calendar arrow-key navigation accessible');
   check(await evaluate("document.querySelector('[data-calendar-day=\"2026-10-20\"] small')?.textContent.trim()==='1 event'"),'only confirmed daily activity shown, not uncertain theatre sessions');
   for(let i=0;i<12;i++)await click('[data-calendar-next]');
   check(await evaluate("document.querySelector('[data-calendar-next]').disabled"),'12-month browsing limit');
@@ -78,10 +83,14 @@ try {
   const selector='[data-event-id="quarry-bank-scarecrow-festival-2026-10-03--2026-10-10"] .my-sk8-save';
   check(await click(selector),'save specific occurrence');
   check(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1')||'[]').some(e=>e.id.endsWith('--2026-10-10')&&e.date==='2026-10-10')"),'saved date agrees with clicked date');
+  await evaluate("document.querySelector('[data-calendar-controls]').scrollIntoView({block:'start',behavior:'instant'});true");
   await shot('desktop-agenda.png');
-  await rpc('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
   await click('[data-calendar-view="month"]');
+  await evaluate("document.querySelector('[data-calendar-month-panel]').scrollIntoView({block:'start',behavior:'instant'});true");
+  await shot('desktop-month.png');
+  await rpc('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
   check(await evaluate("document.documentElement.scrollWidth<=window.innerWidth+1"),'mobile month view no horizontal overflow');
+  await evaluate("document.querySelector('[data-calendar-month-panel]').scrollIntoView({block:'start',behavior:'instant'});true");
   await shot('mobile-month.png');
   check(!errors.length,'no uncaught JS errors: '+errors.join('; '));
   console.log('Calendar integration browser checks passed.');
