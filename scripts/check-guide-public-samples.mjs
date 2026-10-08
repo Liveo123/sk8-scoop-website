@@ -100,17 +100,18 @@ assert(!freeCheapLanding.includes('href="/free-cheap-guide/guide/"'), 'Free & Ch
 assert(signupJs.includes('dataset.successUrl'), 'Signup protection must honour each form\'s configured success URL.');
 assert(signupJs.includes('sk8_guide_key'), 'Signup protection must submit the guide key.');
 
-assert(protectedWorker.includes('guide_access_tokens'), 'Protected worker must retain guide access-token storage.');
-assert(protectedWorker.includes("'guide:52-adventures'"), 'Protected worker must route 52 Adventures signups to their MailerLite group.');
-assert(protectedWorker.includes("'guide:free-cheap'"), 'Protected worker must route Free & Cheap signups to their MailerLite group.');
-assert(protectedWorker.includes("cookie: 'sk8_guide_52'"), 'Protected worker must gate 52 Adventures with its access cookie.');
-assert(protectedWorker.includes("cookie: 'sk8_guide_fc'"), 'Protected worker must gate Free & Cheap with its access cookie.');
-assert(protectedWorker.includes("'x-robots-tag': 'noindex, follow'") || protectedWorker.includes("headers.set('x-robots-tag', 'noindex, follow')"), 'Protected guide responses must remain noindex.');
+assert(protectedWorker.includes('guide_access_tokens'), 'Worker must retain subscriber-access storage for recognition and signup flows.');
+assert(protectedWorker.includes("'guide:52-adventures'"), 'Worker must route 52 Adventures signups to their MailerLite group.');
+assert(protectedWorker.includes("'guide:free-cheap'"), 'Worker must route Free & Cheap signups to their MailerLite group.');
+assert(protectedWorker.includes("'guide:halloween'"), 'Worker must route Halloween guide signups to their MailerLite group.');
+assert(protectedWorker.includes('const ACCESS_GATED_GUIDES = new Set();'), 'Current subscriber-distributed guides must not be access-gated.');
+assert(protectedWorker.includes('guideRequiresAccess(protectedGuide.key)'), 'Guide route handling must consult the explicit access-gate allow-list before redirecting.');
+assert(protectedWorker.includes("'x-robots-tag': 'noindex, follow'") || protectedWorker.includes("headers.set('x-robots-tag', 'noindex, follow')"), 'Any genuinely private guide response must remain noindex.');
 
 if (failures.length) {
-  console.error('Guide public-sample/subscriber-gate check failed:');
+  console.error('Guide public-sample/direct-access check failed:');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log('Guide public-sample/subscriber-gate check passed: 10 public samples per guide and full-guide access remains gated.');
+console.log('Guide public-sample/direct-access check passed: 10 public samples per guide and current subscriber-distributed full-guide URLs remain directly accessible.');
