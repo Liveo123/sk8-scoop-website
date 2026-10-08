@@ -33,3 +33,6 @@ Status: DRAFT / NOT PUBLISHED
 - Confirm VAT registration/status and quoted-price tax wording; do not invent VAT registration or number.
 - Consider suitable sole-trader professional/public liability and advertising/media liability cover, proportionate to actual activities (commercial recommendation, not automatic legal duty).
 - Privacy and Terms pages contain prominent DRAFT placeholders so they must not be merged/published as-is. Once legitimate operator/address details are supplied for public display, replace placeholders and run fresh QA; do not put a private home address on a public website without deliberate informed choice.
+
+## Additional independent Summer Guide check
+- A public search snapshot of https://summer-guide.sk8scoop.com/ (indexed approximately two months before 8 October 2026) displayed the footer `© 2026 SK8 Scoop, Inc. All rights reserved.` That corporate suffix is inconsistent with the owner-confirmed sole-trader status. The snapshot is dated, not proof of current live content. Verify the current separately hosted landing page and correct the suffix before presenting it as an accurate legal designation. This page is not part of the main GitHub website deployment; any correction requires a separate authorised publishing workflow.
