@@ -135,8 +135,7 @@ try {
       const form = document.querySelector('#campaign-enquiry form');
       const premium = [...document.querySelectorAll('.ad-premium-option')];
       const quickButtons = [...document.querySelectorAll('.ad-hero-quick-item')];
-      const example = document.querySelector('.ad-preview-reworked figure');
-      const goalPanel = document.querySelector('.ad-goal-panel');
+      const example = document.querySelector('.ad-example-only figure');
       return {
         viewport: innerWidth,
         documentWidth: document.documentElement.scrollWidth,
@@ -152,8 +151,9 @@ try {
         quickPrices: quickButtons.map(el => el.querySelector('b')?.textContent),
         quickTargets: quickButtons.map(el => Math.round(rect(el).height)),
         heroWords: document.querySelector('h1')?.textContent?.trim().split(/\\s+/).length,
-        goalChoices: document.querySelectorAll('.ad-goal-panel [data-ad-goal]').length,
-        leftSampleOnDesktop: innerWidth<=900 || (rect(example).left < rect(goalPanel).left && rect(example).width >= rect(goalPanel).width),
+        goalChoices: document.querySelectorAll('[data-ad-goal]').length,
+        exampleVisible: !!example && rect(example).width > 0,
+        artworkChoices: document.querySelectorAll('input[name=artwork_option]').length,
         reportRemoved: !document.querySelector('#reporting'),
         audienceRemoved: !document.querySelector('.audience-section'),
         guideChoiceOptions: document.querySelectorAll('#ad-guide-choice option').length,
@@ -170,7 +170,7 @@ try {
     if (!before.formLabelsPresent || !before.formRequired) fail(width + 'px: essential form labels or required fields missing');
     if (before.pricesVisible.join(',') !== '£35,£28,£60') fail(width + 'px: displayed prices do not match approval');
     if (!before.orderIsClear || !before.heroCtaTargetsPrice) fail(width + 'px: decision and form sequence is unclear');
-    if(before.heroWords!==3 || before.goalChoices!==6 || !before.leftSampleOnDesktop) fail(width+'px: hero or goal/example layout mismatch');
+    if(before.heroWords!==3 || before.goalChoices!==0 || !before.exampleVisible || before.artworkChoices!==3) fail(width+'px: hero, example or artwork options mismatch');
     if(!before.reportRemoved || !before.audienceRemoved) fail(width+'px: removed sections still visible');
     if(before.quickPrices.join(',')!=='£35,£28,£60' || !before.quickTargets.every(n=>n>=44)) fail(width+'px: compact hero prices unreadable');
     if(before.premiumVisible.map(o=>o.price).join(',')!=='£96,£125' || !before.premiumVisible.every(o=>o.shown)) fail(width+'px: sponsorship prices not visible');
