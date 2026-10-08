@@ -900,6 +900,11 @@
   window.SK8MySaved = { readSaved, saveEvent, savePage, unsaveEvent, renderMySk8 };
 
   window.addEventListener('sk8:events-loaded', event => syncEvents(event.detail && event.detail.events));
+  window.addEventListener('sk8:events-rendered', event => {
+    const cards = event.detail && Array.isArray(event.detail.cardEvents) ? event.detail.cardEvents : [];
+    cards.forEach(item => { if (item && item.id) state.byId.set(String(item.id), { ...item, kind: 'event' }); });
+    renderEventActions();
+  });
   window.addEventListener('sk8:saved-items-changed', () => {
     renderEventActions();
     if (document.body.dataset.page === 'my-sk8') renderMySk8();
