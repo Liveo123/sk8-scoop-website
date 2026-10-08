@@ -1,0 +1,52 @@
+/* Three clear advert packages, responsive and accessible. */
+body.advertiser-page .ad-simple-price{background:#fffaf3;padding:64px 0}
+body.advertiser-page .ad-simple-price h2{max-width:850px;margin:8px 0 16px;font-size:clamp(2rem,4.5vw,3.5rem);color:#173f45}
+body.advertiser-page .ad-simple-lead{max-width:790px;font-size:1.1rem;color:#435b60}
+body.advertiser-page .ad-simple-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:30px 0 18px}
+body.advertiser-page .ad-simple-card{display:flex;flex-direction:column;min-width:0;padding:28px;border:1px solid #c8dcd7;border-top:6px solid #0f6470;border-radius:20px;background:#fff;box-shadow:0 12px 30px rgba(20,55,60,.08)}
+body.advertiser-page .ad-simple-card.ad-simple-featured{border-top-color:#f8791b;background:#fff8ed}
+body.advertiser-page .ad-simple-card .eyebrow{color:#0f6470;font-weight:800}
+body.advertiser-page .ad-simple-card h3{margin:12px 0 0;color:#173f45;font-size:1.65rem}
+body.advertiser-page .ad-simple-price-value{font:800 clamp(2.8rem,5vw,4rem)/1 Georgia,serif;color:#173f45;margin:16px 0}
+body.advertiser-page .ad-simple-card p:not(.ad-simple-price-value){color:#39575a;line-height:1.5}
+body.advertiser-page .ad-simple-card ul{padding-left:22px;line-height:1.65;color:#38545a;margin:12px 0 24px}
+body.advertiser-page .ad-simple-card .button{margin-top:auto;width:100%;text-align:center;justify-content:center;color:#fff;background:#0f6470}
+body.advertiser-page .ad-simple-fine{color:#4b6064;font-size:.88rem;line-height:1.55;max-width:1000px}
+body.advertiser-page .ad-simple-extras{margin-top:26px;padding:18px 22px;border:1px solid #d3dfdc;border-radius:16px;background:#fff}
+body.advertiser-page .ad-simple-extras summary{cursor:pointer;color:#173f45;font-weight:800}
+body.advertiser-page .ad-simple-sponsor-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+body.advertiser-page .ad-simple-finder{margin-top:18px}
+body.advertiser-page .ad-simple-process{padding:35px 0}
+body.advertiser-page .ad-simple-process h2{color:#173f45}
+body.advertiser-page .ad-simple-process p{max-width:900px}
+@media(max-width:950px){body.advertiser-page .ad-simple-grid{grid-template-columns:1fr 1fr}body.advertiser-page .ad-simple-featured{grid-column:1/-1}}
+@media(max-width:620px){body.advertiser-page .ad-simple-grid{grid-template-columns:1fr}body.advertiser-page .ad-simple-featured{grid-column:auto}body.advertiser-page .ad-simple-card{padding:22px}body.advertiser-page .ad-simple-price{padding:38px 0}body.advertiser-page .ad-simple-sponsor-actions .button{width:100%}}
+
+/* Conversion/readability adjustments after twenty-pass audit */
+body.advertiser-page #products,body.advertiser-page #campaign-enquiry,body.advertiser-page #what-you-buy{scroll-margin-top:112px}
+body.advertiser-page .ad-simple-card .button{min-height:52px!important;padding:14px 18px!important;color:#fff!important;background:#0b5863!important;border-color:#0b5863!important;font-size:1rem!important;font-weight:800!important;line-height:1.25!important}
+body.advertiser-page .ad-simple-card .button:hover{background:#073f48!important}
+body.advertiser-page .ad-simple-card .button:focus-visible,body.advertiser-page .ad-simple-extras summary:focus-visible,body.advertiser-page .ad-simple-finder a:focus-visible{outline:3px solid #ee7c22!important;outline-offset:4px!important}
+body.advertiser-page .ad-simple-next,body.advertiser-page .ad-simple-fine,body.advertiser-page .ad-simple-finder{font-size:1rem!important;line-height:1.6!important;max-width:950px}
+body.advertiser-page .ad-simple-next{padding:13px 17px;border-left:5px solid #0f6470;background:#eaf7f3;border-radius:4px 12px 12px 4px;color:#173f45}
+body.advertiser-page .ad-simple-fine{margin-top:20px}
+body.advertiser-page .ad-simple-card ul{font-size:.99rem;line-height:1.6}
+body.advertiser-page .ad-simple-card p:not(.ad-simple-price-value){font-size:1rem;line-height:1.56}
+body.advertiser-page .ad-simple-extras{font-size:1rem;line-height:1.6}
+body.advertiser-page .ad-simple-extras summary{min-height:44px;align-content:center}
+body.advertiser-page .ad-route-detail{display:block;margin-top:3px;font-size:.92rem;font-weight:500;line-height:1.45;color:#496268}
+body.advertiser-page .ad-selected-summary{padding:13px 16px;background:#eaf6f3;border-left:5px solid #0f6470;border-radius:4px 10px 10px 4px;font-weight:800;color:#173f45;line-height:1.4}
+body.advertiser-page .ad-form-heading>span{color:#0b5660!important;font-weight:900!important}
+body.advertiser-page #campaign-enquiry .premium-form .wide-button{min-height:54px;background:#0b5863!important;border-color:#0b5863!important;color:#fff!important;font-size:1rem!important}
+body.advertiser-page #campaign-enquiry .premium-form input:focus-visible,body.advertiser-page #campaign-enquiry .premium-form textarea:focus-visible{outline:3px solid #ee7c22;outline-offset:2px}
+body.advertiser-page .premium-form textarea{min-height:115px}
+body.advertiser-page .ad-simple-process p{font-size:1rem;line-height:1.65}
+body.advertiser-page .ad-simple-finder a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){
+body.advertiser-page #campaign-enquiry .premium-form .field-grid{grid-template-columns:1fr!important}
+body.advertiser-page .ad-simple-grid{grid-template-columns:1fr!important}
+body.advertiser-page .ad-simple-featured{grid-column:auto}
+body.advertiser-page .ad-simple-card .button{width:100%!important}
+body.advertiser-page .ad-hero-continuation{display:none!important}
+body.advertiser-page .ad-simple-process{padding:24px 0}
+}
