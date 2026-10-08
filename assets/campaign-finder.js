@@ -24,8 +24,8 @@
   };
 
   const valueLabels = {
-    under20: 'under £20',
-    '20to100': '£20–£100',
+    under20: 'under £40',
+    '20to100': '£40–£100',
     '100to500': '£100–£500',
     '500plus': '£500+',
     unknown: 'unknown'
