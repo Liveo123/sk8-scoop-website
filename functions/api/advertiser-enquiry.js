@@ -12,7 +12,11 @@ export async function onRequestPost({request,env}){
     const selectedGuide=String(d.guide_choice||'').trim();
     if(selectedGuide&&!Object.prototype.hasOwnProperty.call(guideLabels,selectedGuide)) return json({error:'Please choose a valid Guide.'},400);
     const guideRequest=['guide_card','guide_bundle','guide_section','guide_main'].includes(String(d.package))&&selectedGuide?`Requested Guide: ${guideLabels[selectedGuide]}`:'';
-    const invoiceDetails=guideRequest||c(d.invoice_details,500);
+  const artworkOption = ['create','logo','finished'].includes(String(d.artwork_option||'')) ? String(d.artwork_option) : 'create';
+  const artworkUrl = String(d.artwork_url||'').trim().slice(0,400);
+  if (artworkUrl && (!/^https:\/\//i.test(artworkUrl) || /[\r\n]/.test(artworkUrl))) return json({error:'Please provide a valid secure artwork link.'},400);
+  const artworkNote = 'Artwork: ' + artworkOption + (artworkUrl ? '; link: ' + artworkUrl : '; send by reply if supplied');
+  const invoiceDetails = [guideRequest,artworkNote].filter(Boolean).join(' | ').slice(0,500);
 
     await env.DB.prepare(`INSERT INTO advertiser_enquiries (business_name,contact_name,email,phone,business_type,area,website,package,preferred_date,advert_copy,image_link,invoice_details,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?, 'pending',datetime('now'))`)
       .bind(c(d.business_name,180),c(d.contact_name,120),c(d.email,200),c(d.phone,80),c(d.business_type,120),c(d.area,100),c(d.website,500),c(d.package,80),c(d.preferred_date,30),c(d.advert_copy,1000),c(d.image_link,500),c(invoiceDetails,500)).run();
