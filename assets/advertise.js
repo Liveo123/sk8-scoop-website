@@ -73,7 +73,7 @@
     if (formIntro) {
       formIntro.textContent = enabled
         ? 'No payment is taken for this check. SK8 Scoop will first decide whether the business is a sensible match for core SK8 readers.'
-        : 'Newsletter TEST £40. Halloween Guide advertising starts at £35. Payment is normally due only after scope and timing are agreed, and before the campaign starts.';
+        : 'Newsletter advert £35, Halloween Guide advert £28, or both for £60. We confirm dates and send a secure payment link after you approve the advert.';
     }
     if (termsCopy) {
       termsCopy.textContent = enabled
@@ -87,7 +87,7 @@
     if (localFitRoute) localFitRoute.hidden = true;
     if (formTitle) formTitle.textContent = 'Halloween & Half-Term advertising enquiry';
     if (formIntro) {
-      formIntro.textContent = 'Seasonal rates start at £35 for the Guide and £75 for Guide + newsletter. Sponsorship is only suggested when it genuinely fits.';
+      formIntro.textContent = 'Seasonal rates are £28 for the Guide and £60 for Guide + newsletter. Sponsorship is only suggested when it genuinely fits.';
     }
     if (termsCopy) {
       termsCopy.textContent = 'I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not buy editorial inclusion, ranking, recommendation or guaranteed results.';
@@ -164,7 +164,7 @@
         input.dispatchEvent(new Event('change', { bubbles: true }));
       }
       const seasonalChoice = String(button.dataset.seasonalChoice || '').trim();
-      if (route.startsWith('halloween_') && seasonalChoice) setSeasonalMode(seasonalChoice);
+      if (route.startsWith('halloween_')) setSeasonalMode(seasonalChoice);
       scrollToForm(input || form.querySelector('input,textarea,select'));
 
       if (typeof window.sk8Track === 'function') {
