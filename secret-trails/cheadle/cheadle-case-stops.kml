@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>SK8 Secret Trails - The Cheadle Case</name><description>Six listed landmark positions, not a surveyed walking route. Use public paths, safe crossings and the PDF for clues. Source: Historic England listed-building records and derived National Grid coordinates.</description>
+<Placemark><name>1. St Mary’s Church</name><description>Church Street / High Street, Cheadle SK8 1PX - stop 1 of 6. The case PDF holds the clue.</description><Point><coordinates>-2.217481,53.394178,0</coordinates></Point></Placemark>
+<Placemark><name>2. Former Premier Café</name><description>3 High Street, Cheadle SK8 1AX - stop 2 of 6. The case PDF holds the clue.</description><Point><coordinates>-2.21344,53.395004,0</coordinates></Point></Placemark>
+<Placemark><name>3. George &amp; Dragon</name><description>1 High Street, Cheadle SK8 1AX - stop 3 of 6. The case PDF holds the clue.</description><Point><coordinates>-2.21326,53.395076,0</coordinates></Point></Placemark>
+<Placemark><name>4. Manor House</name><description>1 Manchester Road, Cheadle SK8 2NP - stop 4 of 6. The case PDF holds the clue.</description><Point><coordinates>-2.213264,53.395786,0</coordinates></Point></Placemark>
+<Placemark><name>5. Ockleston Memorial</name><description>Queens Gardens, Cheadle - stop 5 of 6. The case PDF holds the clue.</description><Point><coordinates>-2.210839,53.395142,0</coordinates></Point></Placemark>
+<Placemark><name>6. Abney Hall</name><description>Abney Hall Park, Manchester Road, Cheadle SK8 2PD - stop 6 of 6. The case PDF holds the clue.</description><Point><coordinates>-2.212727,53.399769,0</coordinates></Point></Placemark>
+</Document></kml>
