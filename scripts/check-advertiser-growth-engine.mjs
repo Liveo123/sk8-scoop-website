@@ -37,12 +37,12 @@ assert(finderJs.includes("params.set('finder_source', 'campaign_finder')"), 'Fin
 assert(advertiseJs.includes("allowedFinderPackages = new Set(['starter_newsletter', 'human_review'])"), 'Advertiser page only accepts current starter Finder package and review routes');
 assert(advertiseJs.includes('/advertise/finder/'), 'Advertiser page links to Campaign Finder');
 assert(advertiseHtml.includes('/advertise/finder/'), 'Main Advertise page visibly links to Campaign Finder');
-assert(advertiseHtml.includes('/advertise/christmas-eating-out/'), 'Main Advertise page visibly links to Christmas Eating Out');
-assert(advertiseHtml.includes('halloween-scene-v6') && advertiseHtml.includes('halloween-advertising-card-4a.webp'), 'Advertise page uses the richer Halloween visual');
+assert(advertiseHtml.includes('Halloween Guide card · £28'), 'Main Advertise page exposes approved seasonal Guide choice');
+assert(advertiseHtml.includes('ad-simple-grid') && advertiseHtml.includes('ad-simple-featured'), 'Advertise page uses the new three-choice package layout');
 assert(advertiseHtml.includes('ad-proof-grid-v7') && advertiseHtml.includes('ad-proof-pictogram'), 'Advertise proof strip uses the corrected icon-led treatment');
-assert(advertiseHtml.includes('ad-route-help-card') && advertiseHtml.includes('Find the smallest sensible campaign'), 'Advertise route grid fills the fourth slot with decision help rather than a weak advert teaser');
+assert(advertiseHtml.includes('ad-simple-finder') && advertiseHtml.includes('/advertise/finder/'), 'Optional campaign finder remains available without adding another prominent product card');
 assert(advertiseHtml.includes('ad-placement-demo-v6') && advertiseHtml.includes('maple-bean-cafe-2026-final-v2.png'), 'Advertise example placement uses the approved final cafe image');
-assert(advertiseHtml.includes('starter-support-panel') && advertiseHtml.includes('WHAT HAPPENS NEXT'), 'Starter campaign section fills the former right-side empty space with useful support');
+assert(advertiseHtml.includes('Choose, approve, pay, publish.') && advertiseHtml.includes('secure Stripe invoice/payment link'), 'Advertiser page explains proof and payment process before enquiry');
 assert(advertiseHtml.includes('audience-pills-v6') && advertiseHtml.includes('audience-fit-board'), 'Audience section uses icon chips and the crisp local-fit board');
 assert(advertiseHtml.includes('ad-process-grid-v6') && advertiseHtml.includes('ad-process-icon'), 'Campaign process uses the richer visual treatment');
 assert(advertiseV6.includes('body.advertiser-page [hidden]{display:none!important}'), 'Hidden seasonal package radios cannot render as stray circles');
