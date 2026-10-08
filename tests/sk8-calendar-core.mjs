@@ -31,4 +31,11 @@ for(const s of registry.sources) assert.ok(!/cheadlemasjid\.org|cheadle-masjid/i
 assert.match(exclusionReason({source_url:'https://cheadlemasjid.org/events'}),/Excluded organiser/);
 assert.match(exclusionReason({venue:'Cheadle Masjid'}),/Excluded organiser/);
 assert.equal(exclusionReason({venue:'Cheadle Village Hall',source_url:'https://cheadlevillagehall.co.uk/'}),'');
+const gatley = events.find(event => event.id === 'gatley-deckchair-care-welcome-cafe-2026-autumn');
+assert.ok(gatley, 'verified Gatley activity included');
+assert.equal(gatley.date_mode, 'specific_dates');
+assert.equal(core.onDate(gatley, '2026-10-12'), true, 'confirmed Gatley date appears');
+assert.equal(core.onDate(gatley, '2026-10-26'), false, 'unconfirmed school-holiday Monday is omitted');
+assert.equal(core.onDate(gatley, '2026-11-02'), true, 'confirmed future Gatley date appears');
+assert.equal(core.isFree(gatley), true, 'optional donations do not imply mandatory charge');
 console.log('Calendar foundation checks passed (dates, recurrence, price, exclusions).');
