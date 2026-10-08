@@ -266,7 +266,7 @@ contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil
   expect(Array.isArray(harvest.items) && harvest.items.length > 0, 'Website Harvest has no item dispositions');
 
   const allowedDispositions = new Set([
-    'standalone_page','existing_surface','whats_on','whats_on_sold_out',
+    'standalone_page','existing_surface','whats_on','whats_on_sold_out','whats_on_expired',
     'expired_no_web_add','do_not_publish','no_web_add'
   ]);
   const events = JSON.parse(read('data/events.json'));
@@ -292,7 +292,7 @@ contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil
         expect(String(event.availability || '').toLowerCase() === 'sold_out', `${item.id} must have availability=sold_out`);
       }
     }
-    if (['expired_no_web_add','do_not_publish','no_web_add'].includes(item.disposition)) {
+    if (['whats_on_expired','expired_no_web_add','do_not_publish','no_web_add'].includes(item.disposition)) {
       expect(Boolean(item.reason), `${item.id} needs a reason for ${item.disposition}`);
     }
   }
