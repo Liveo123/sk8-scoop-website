@@ -18,11 +18,11 @@
   "overview": {
     "total": 54,
     "dated": 7,
-    "specificClaimChecks": 46,
+    "specificClaimChecks": 49,
     "dateConflicts": 2,
     "timeDiscrepancies": 1,
     "secondaryOnly": 1,
-    "awaitingPrimary": 4
+    "awaitingPrimary": 1
   },
   "entries": [
     {
@@ -796,12 +796,17 @@
       "page_when": "Check the live listing for the next available Friday session and its start time before travelling.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council current events listing shows Friday 9 October 2026 at 11am, Adswood Young People's Centre; organiser-submitted council event page records £5 child/£10 family for its 4 September session, not proof every future Friday recurs."
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events?category=children-family&page=1&pageSize=60",
+        "https://www.stockport.gov.uk/events/no-school-social-2"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-15",
+      "editorial_note": "Current Friday 9 Oct event independently listed; price supported by earlier organiser-submitted 4 Sep event only. Reconfirm with Autisk before promoting later sessions."
     },
     {
       "id": "FC-035",
@@ -1000,11 +1005,15 @@
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday",
       "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
+      "primary_claims_checked": [
+        "Historic organiser-submitted 10 June session £7 and 10.30am–12.30pm; current recurrence NOT verified"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday?date=2026-06-10"
+      ],
+      "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "editorial_note": "Stockport Council organiser-submitted event for 10 June 2026 supports £7/session and 10.30am–12.30pm on that single date, not current October recurrence. Keep PRIMARY_RECHECK_DUE until Seashell confirms next session."
     },
     {
       "id": "FC-044",
@@ -1018,12 +1027,16 @@
       "page_when": "free regular monthly discos around the Stockport area, usually at weekends in the early evening. Venues rotate, so use the current event calendar rather than relying on one fixed Cheadle Hulme venue.",
       "advertised_date": null,
       "page_source_url": "https://www.dementiadisco.org/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Dementia Disco's own website confirms free monthly discos in the Stockport area, weekend early evenings, with a free meal; actual next event date and venue must be checked separately."
+      ],
+      "claim_evidence_urls": [
+        "https://www.dementiadisco.org/"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-15",
+      "editorial_note": "Organiser confirms general format; rotating venue and next event date remain unchecked."
     },
     {
       "id": "FC-045",
@@ -1060,12 +1073,16 @@
       "page_when": "Tuesdays, 4.15–5.15pm when listed; check the next session before travelling.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events/community-sensory-garden",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council current event calendar lists Life Leisure Hazel Grove sessions Tuesday 13, 20 and 27 October 2026 at 4.15pm; no blanket guarantee of future weeks or all cost/eligibility details."
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events?Page=1&category=SEND+and+neurodiversity&pageSize=60"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-15",
+      "editorial_note": "October dates and start time verified on council event calendar; duration 4.15–5.15pm and free price need session-specific reconfirmation before promotion."
     },
     {
       "id": "FC-047",
