@@ -28,6 +28,11 @@ on:
       - 'planning/cheadle-eco-park/index.html'
       - 'local-history/heald-green-north-history-walk/index.html'
       - 'tests/my-sk8-browser.mjs'
+      - 'tests/subscriber-journey-live-browser.mjs'
+      - 'assets/subscriber-access.js'
+      - 'assets/signup-protection.js'
+      - 'assets/nue-links.js'
+      - 'worker-protected.js'
       - '.github/workflows/my-sk8-preview-qa.yml'
 
 jobs:
@@ -117,4 +122,37 @@ jobs:
         with:
           name: my-sk8-preview-qa
           path: visual-qa/my-sk8/
+          retention-days: 14
+
+  subscriber-live-qa:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Find Chrome
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "Chrome is missing from the runner"
+            exit 1
+          fi
+      - name: Run non-invasive production subscriber smoke
+        env:
+          SUBSCRIBER_QA_URL: https://www.sk8scoop.com
+        run: node tests/subscriber-journey-live-browser.mjs
+      - name: Keep browser screenshots and checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: subscriber-journey-live-qa
+          path: visual-qa/subscriber-journey/
           retention-days: 14

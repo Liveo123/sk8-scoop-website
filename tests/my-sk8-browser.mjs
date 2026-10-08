@@ -134,29 +134,70 @@ try {
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   record('What’s On renders My SK8 CTA', await waitFor("document.querySelector('[data-my-sk8-count]') !== null"));
   record('My SK8 script loaded', await waitFor("typeof window.SK8MySaved === 'object'"));
-  record('Event actions render', await waitFor("document.querySelector('[data-sk8-event-actions=\"heald-green-library-storytime-2026-10-10\"] .my-sk8-save') !== null"));
-  record('Event actions use colourful icon markers', Boolean(await evaluate("document.querySelectorAll('[data-sk8-event-actions=\"heald-green-library-storytime-2026-10-10\"] .my-sk8-action-icon').length >= 5")));
+  // Choose current listings at runtime. Fixed October 2026 IDs would make this QA expire
+  // even when the reader features continue working correctly.
+  const visibleIds = await evaluate("[...document.querySelectorAll('[data-sk8-event-actions]')].map(el=>el.dataset.sk8EventActions)");
+  const currentEvents = (await evaluate("fetch('/data/events.json',{cache:'no-store'}).then(r=>r.json())"))
+    .filter(e => visibleIds.includes(e.id) && e.status === 'verified');
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'
+  }).format(new Date());
+  const todayDate = new Date(today+'T00:00:00Z');
+  const day = todayDate.getUTCDay();
+  const saturday = new Date(todayDate);
+  saturday.setUTCDate(saturday.getUTCDate() + (day === 0 ? -1 : day === 6 ? 0 : 6-day));
+  const sunday = new Date(saturday);
+  sunday.setUTCDate(saturday.getUTCDate()+1);
+  const saturdayIso = saturday.toISOString().slice(0,10);
+  const sundayIso = sunday.toISOString().slice(0,10);
+  const tomorrowDate = new Date(todayDate);
+  tomorrowDate.setUTCDate(todayDate.getUTCDate()+1);
+  const tomorrowIso = tomorrowDate.toISOString().slice(0,10);
+  const coreAreas = ['Cheadle','Cheadle Hulme','Gatley','Heald Green'];
+  const weekendEvents = currentEvents.filter(e =>
+    e.date<=sundayIso && (e.end_date||e.date)>=saturdayIso && e.venue);
+  const nearbyCandidates = e => currentEvents.filter(candidate =>
+    candidate.id!==e.id && candidate.area===e.area && candidate.date>=today &&
+    (candidate.end_date||candidate.date)>=today);
+  const primary = weekendEvents.find(e => coreAreas.includes(e.area) && nearbyCandidates(e).length>=2)
+    || weekendEvents.find(e => coreAreas.includes(e.area))
+    || weekendEvents[0];
+  const secondary = currentEvents.find(e =>
+    e.id!==primary?.id && e.date<=tomorrowIso && (e.end_date||e.date)>=today && e.venue)
+    || currentEvents.find(e => e.id!==primary?.id && e.venue);
+  const tertiary = currentEvents.find(e =>
+    e.id!==primary?.id && e.id!==secondary?.id) || secondary;
+  record('Current event fixtures available for browser QA', Boolean(primary && secondary && tertiary));
+  const primarySelector = '[data-sk8-event-actions="' + primary.id + '"]';
+  const secondarySelector = '[data-sk8-event-actions="' + secondary.id + '"]';
+  const nearby = nearbyCandidates(primary).find(e=>e.id!==secondary.id);
+  console.log('LIVE_QA_EVENTS '+JSON.stringify({
+    today, primary:primary.id, secondary:secondary.id, tertiary:tertiary.id,
+    nearby:nearby?.id||null, saturdayIso, sundayIso
+  }));
+  record('Event actions render', await waitFor("document.querySelector(" + JSON.stringify(primarySelector + " .my-sk8-save") + ") !== null"));
+  record('Event actions use colourful icon markers', Boolean(await evaluate("document.querySelectorAll(" + JSON.stringify(primarySelector + " .my-sk8-action-icon") + ").length >= 5")));
   record('My SK8 is visible in main navigation', Boolean(await evaluate("document.querySelector('.nav .nav-my-sk8')")));
   record('My SK8 is prominent after What’s On in main nav', Boolean(await evaluate(`(() => { const hrefs=[...document.querySelectorAll('#main-nav>a')].map(a=>a.getAttribute('href')); const whats=hrefs.indexOf('/whats-on/'); const mine=hrefs.indexOf('/my-sk8/'); const guides=hrefs.indexOf('/guides/'); return whats >= 0 && mine === whats + 1 && guides === mine + 1; })()`)));
-  record('Event action row has five icon call-outs', (await evaluate(`document.querySelectorAll('[data-sk8-event-actions="heald-green-library-storytime-2026-10-10"] .my-sk8-action-icon').length`)) === 5);
-  record('Event action icons have five visual tones', (await evaluate(`new Set([...document.querySelectorAll('[data-sk8-event-actions="heald-green-library-storytime-2026-10-10"] .my-sk8-action-icon')].map(el => [...el.classList].find(name => name.startsWith('tone-')))).size`)) === 5);
+  record('Event action row has five icon call-outs', (await evaluate("document.querySelectorAll(" + JSON.stringify(primarySelector + " .my-sk8-action-icon") + ").length")) === 5);
+  record('Event action icons have five visual tones', (await evaluate("new Set([...document.querySelectorAll(" + JSON.stringify(primarySelector + " .my-sk8-action-icon") + ")].map(el => [...el.classList].find(name=>name.startsWith('tone-')))).size")) === 5);
 
-  const calendarHref = await attr('[data-sk8-event-actions="heald-green-library-storytime-2026-10-10"] a[download]', 'href');
+  const calendarHref = await attr(primarySelector + ' a[download]', 'href');
   record('Calendar action generated', calendarHref.startsWith('data:text/calendar'), calendarHref.slice(0, 40));
 
-  const directionsHref = await evaluate("document.querySelector('[data-sk8-event-actions=\"heald-green-library-storytime-2026-10-10\"] a[target=\"_blank\"]')?.href || ''");
+  const directionsHref = await evaluate("document.querySelector(" + JSON.stringify(primarySelector + ' a[target="_blank"]') + ")?.href || ''");
   record('Directions action generated', directionsHref.includes('google.com/maps/search'), directionsHref);
 
-  record('Save button clickable', await click('[data-sk8-event-actions="heald-green-library-storytime-2026-10-10"] .my-sk8-save'));
+  record('Save button clickable', await click(primarySelector + ' .my-sk8-save'));
   await sleep(250);
-  record('Saved weekend event persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'heald-green-library-storytime-2026-10-10')")));
+  record('Saved weekend event persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x=>x.id===" + JSON.stringify(primary.id) + ")")));
   record('My SK8 nav count updates after save', (await text('[data-nav-my-sk8-count]')) === '1', await text('[data-nav-my-sk8-count]'));
   record('Main-nav My SK8 count updates after save', (await text('[data-nav-my-sk8-count]')) === '1' && !(await evaluate("document.querySelector('[data-nav-my-sk8-count]')?.hidden")));
 
-  record('Set reminder intent without saving first', await click('[data-sk8-event-actions="john-lewis-cheadle-baby-beyond-2026-10-08"] button:not(.my-sk8-save)'));
+  record('Set reminder intent without saving first', await click(secondarySelector + ' button:not(.my-sk8-save)'));
   await sleep(250);
-  record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('john-lewis-cheadle-baby-beyond-2026-10-08')")));
-  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'john-lewis-cheadle-baby-beyond-2026-10-08')")));
+  record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes(" + JSON.stringify(secondary.id) + ")")));
+  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x=>x.id===" + JSON.stringify(secondary.id) + ")")));
 
   await navigate('/my-sk8/');
   record('My SK8 page title visible', (await text('h1')) === 'My SK8', await text('h1'));
@@ -167,10 +208,10 @@ try {
   record('Subscriber shelf uses compact professional copy', Boolean(await evaluate("document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('Unlock the full SK8 Scoop experience') && document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('website extras') && !document.querySelector('[data-subscriber-shelf-locked]')?.textContent.includes('Personal maps later')")));
 
   record('Two current saves shown', (await text('[data-my-sk8-total]')) === '2', await text('[data-my-sk8-total]'));
-  record('Saved weekend event appears', Boolean(await evaluate('document.body.textContent.includes("Storytime at Heald Green Library")')));
-  record('Weekend plan includes Saturday event', Boolean(await evaluate('document.querySelector("[data-weekend-plan]")?.textContent.includes("Storytime at Heald Green Library")')));
-  record('Reminder panel flags due item', Boolean(await evaluate('document.querySelector("[data-my-sk8-reminders]")?.textContent.includes("All Things Baby & Beyond with Dr Dewan")')));
-  record('Nearby suggestion appears', Boolean(await evaluate('document.querySelector("[data-my-sk8-active]")?.textContent.includes("Halloween Crafty Kids Pop Up")')));
+  record('Saved weekend event appears', Boolean(await evaluate("document.body.textContent.includes(" + JSON.stringify(primary.title) + ")")));
+  record('Weekend plan includes Saturday event', Boolean(await evaluate("document.querySelector('[data-weekend-plan]')?.textContent.includes(" + JSON.stringify(primary.title) + ")")));
+  record('Reminder panel flags due item', Boolean(await evaluate("document.querySelector('[data-my-sk8-reminders]')?.textContent.includes(" + JSON.stringify(secondary.date<=tomorrowIso ? secondary.title : 'reminder') + ")")));
+  if (nearby) record('Nearby suggestion appears', Boolean(await evaluate("document.querySelector('[data-my-sk8-active]')?.textContent.includes(" + JSON.stringify(nearby.title) + ")")));
 
   const mapHref = await attr('[data-map-saved]', 'href');
   record('Map saved places enabled', mapHref.includes('google.com/maps/'), mapHref);
@@ -180,7 +221,7 @@ try {
   record('Share button clickable', await click('[data-share-saved]'));
   await sleep(150);
   const shareUrl = await evaluate("window.__sk8ShareData?.url || ''");
-  record('Share URL contains saved IDs', shareUrl.includes('list=') && shareUrl.includes('heald-green-library-storytime-2026-10-10'), shareUrl);
+  record('Share URL contains saved IDs', shareUrl.includes('list=') && shareUrl.includes(primary.id), shareUrl);
 
   await evaluate("localStorage.setItem('sk8_saved_items_v1', JSON.stringify([...JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]'), {id:'expired-test',title:'Expired test event',date:'2026-01-01',end_date:'2026-01-01',area:'Cheadle',venue:'Test venue',cost:'Free',category:'Test',description:'QA only'}]))");
   await navigate('/my-sk8/');
@@ -218,9 +259,9 @@ try {
   await fullScreenshot('whats-on-my-sk8-mobile-full.png');
 
   await navigate('/my-sk8/');
-  await evaluate("window.SK8MySaved.unsaveEvent('bramhall-halloween-market-2026-10-10')");
+  await evaluate("window.SK8MySaved.unsaveEvent(" + JSON.stringify(secondary.id) + ")");
   await sleep(150);
-  record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('bramhall-halloween-market-2026-10-10')")));
+  record('Removing a save also clears its reminder', !(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes(" + JSON.stringify(secondary.id) + ")")));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
   await navigate('/my-sk8/');
@@ -252,7 +293,11 @@ try {
   record('Halloween benefit cards use visual thumbnails', (await evaluate("document.querySelectorAll('.benefit-mark img').length")) === 3);
   record('Halloween hero has useful content filling the lower-right space', Boolean(await evaluate("document.querySelector('.hero-quick-links')?.textContent.includes('Find the right plan quickly')")));
   await navigate('/free-cheap-guide/guide/');
-  record('Guide route redirects visitors without subscriber pass', Boolean(await evaluate("location.pathname === '/free-cheap-guide/'")));
+  record('Free & Cheap direct guide link works without repeat signup', Boolean(await evaluate("location.pathname === '/free-cheap-guide/guide/'")));
+  await navigate('/52-adventures/guide/');
+  record('52 Adventures direct guide link works without repeat signup', Boolean(await evaluate("location.pathname === '/52-adventures/guide/'")));
+  await navigate('/halloween-half-term-guide/guide/');
+  record('Halloween direct guide link works without repeat signup', Boolean(await evaluate("location.pathname === '/halloween-half-term-guide/guide/'")));
 
   await navigate('/my-sk8/');
   await evaluate("document.querySelector('#my-sk8-subscriber-email').value='preview-test@example.com'; document.querySelector('#my-sk8-subscriber-email').dispatchEvent(new Event('input',{bubbles:true})); true");
@@ -261,7 +306,23 @@ try {
   record('Preview explains that MailerLite was not changed', Boolean(await evaluate("document.body.textContent.includes('Preview unlocked. No email was added to MailerLite.')")));
   record('Subscriber guide button becomes a working link', (await attr('[data-subscriber-shelf-unlocked] a[href="/free-cheap-guide/guide/"]','href')) === '/free-cheap-guide/guide/');
   await navigate('/free-cheap-guide/guide/');
-  record('Preview access cookie opens protected guide for manual QA', Boolean(await evaluate("location.pathname === '/free-cheap-guide/guide/'")));
+  record('Preview subscriber can still open Free & Cheap directly', Boolean(await evaluate("location.pathname === '/free-cheap-guide/guide/'")));
+
+  await navigate('/my-sk8/');
+  record('Preview access status remains active after navigation', Boolean(await evaluate("fetch('/api/subscriber-access-status', {credentials:'same-origin',cache:'no-store'}).then(r => r.json()).then(x => x.active === true)")));
+  record('Preview subscriber shelf remains unlocked on revisit', await waitFor("document.querySelector('[data-subscriber-shelf-unlocked]') && !document.querySelector('[data-subscriber-shelf-unlocked]').hidden", 8000));
+
+  await evaluate("localStorage.setItem('sk8_subscriber_recognition_v1', JSON.stringify({version:1,recognised:true,savedAt:new Date().toISOString(),expiresAt:Date.now()+30*86400000})); true");
+  await navigate('/my-sk8/');
+  record('Recognised reader has See what’s new shortcut', Boolean(await evaluate("document.querySelector('.reader-nav-latest')")));
+  await command('Network.enable');
+  await command('Network.clearBrowserCookies');
+  await navigate('/my-sk8/');
+  record('Cleared cookie deactivates authenticated subscriber shelf', Boolean(await evaluate("fetch('/api/subscriber-access-status', {credentials:'same-origin',cache:'no-store'}).then(r => r.json()).then(x => x.active === false)")));
+  record('Cleared cookie shows the email recovery form', await waitFor("document.querySelector('[data-subscriber-shelf-locked]') && !document.querySelector('[data-subscriber-shelf-locked]').hidden", 8000));
+  record('Browser recognition is kept separately from cookie', Boolean(await evaluate("document.querySelector('.reader-nav-latest')")));
+  await navigate('/halloween-half-term-guide/guide/');
+  record('Direct Halloween guide survives deleted subscriber cookie', Boolean(await evaluate("location.pathname === '/halloween-half-term-guide/guide/'")));
 
   await navigate('/local-history/gatley-shouter/');
   record('Article page shows My SK8 save bar', await waitFor("document.querySelector('[data-my-sk8-page-save-bar]') !== null"));
@@ -288,26 +349,26 @@ try {
   record('My SK8 nav count persists on a normal content page', (await text('[data-nav-my-sk8-count]')) === '1' && !(await evaluate("document.querySelector('[data-nav-my-sk8-count]')?.hidden")));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
-  await navigate('/whats-on/?save=john-lewis-cheadle-baby-beyond-2026-10-08&utm_source=newsletter&utm_medium=email');
-  record('Newsletter-style save URL persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'john-lewis-cheadle-baby-beyond-2026-10-08')")));
+  await navigate('/whats-on/?save=' + encodeURIComponent(secondary.id) + '&utm_source=newsletter&utm_medium=email');
+  record('Newsletter-style save URL persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x=>x.id===" + JSON.stringify(secondary.id) + ")")));
   record('Save parameter removed after processing', !(await evaluate("location.search.includes('save=')")), await evaluate('location.search'));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
-  await navigate('/whats-on/?event=bramhall-halloween-market-2026-10-10&my_action=save&utm_source=newsletter&utm_medium=email');
-  record('Direct newsletter save action persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'bramhall-halloween-market-2026-10-10')")));
+  await navigate('/whats-on/?event=' + encodeURIComponent(tertiary.id) + '&my_action=save&utm_source=newsletter&utm_medium=email');
+  record('Direct newsletter save action persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x=>x.id===" + JSON.stringify(tertiary.id) + ")")));
   record('Direct save action parameter is cleaned', !(await evaluate("location.search.includes('my_action=')")), await evaluate('location.search'));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
-  await navigate('/whats-on/?event=bramhall-halloween-market-2026-10-10&my_action=remind&utm_source=newsletter&utm_medium=email');
-  record('Direct newsletter reminder persists reminder', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('bramhall-halloween-market-2026-10-10')")));
-  record('Direct newsletter reminder also saves event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'bramhall-halloween-market-2026-10-10')")));
+  await navigate('/whats-on/?event=' + encodeURIComponent(tertiary.id) + '&my_action=remind&utm_source=newsletter&utm_medium=email');
+  record('Direct newsletter reminder persists reminder', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes(" + JSON.stringify(tertiary.id) + ")")));
+  record('Direct newsletter reminder also saves event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x=>x.id===" + JSON.stringify(tertiary.id) + ")")));
   record('Direct reminder action parameter is cleaned', !(await evaluate("location.search.includes('my_action=')")), await evaluate('location.search'));
 
   await navigate('/halloween/boo/');
   record('BOO page reveal starts automatically', await waitFor("document.body.classList.contains('revealed')", 3000));
   record('BOO page no longer requires a second switch click', !(await evaluate("document.querySelector('#light-switch')")));
 
-  await navigate('/my-sk8/?list=heald-green-library-storytime-2026-10-10,john-lewis-cheadle-baby-beyond-2026-10-08,page%3Alocal-history%2Fgatley-shouter');
+  await navigate('/my-sk8/?list=' + [primary.id,secondary.id,'page:local-history/gatley-shouter'].map(encodeURIComponent).join(','));
   record('Shared shortlist renders', !(await evaluate("document.querySelector('[data-shared-shortlist]')?.hidden")));
   record('Shared shortlist has three items', (await text('[data-shared-count]')) === '3', await text('[data-shared-count]'));
   record('Shared shortlist can contain a saved article', Boolean(await evaluate("document.querySelector('[data-shared-items]')?.textContent.includes('The Gatley Shouter')")));
