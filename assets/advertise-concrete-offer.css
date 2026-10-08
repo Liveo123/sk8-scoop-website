@@ -2,14 +2,6 @@
 body.advertiser-page .ad-conversion-hero .ad-hero-grid{align-items:center!important;padding-bottom:36px!important}
 body.advertiser-page .ad-hero-prices{isolation:isolate;overflow:hidden}
 body.advertiser-page .ad-hero-prices-heading,body.advertiser-page .ad-hero-quick-grid,body.advertiser-page .ad-hero-prices>p,body.advertiser-page .ad-hero-quick-detail{position:relative;z-index:2}
-body.advertiser-page .ad-newsletter-backdrop{pointer-events:none;position:absolute;z-index:-1;inset:0;overflow:hidden;opacity:.38}
-body.advertiser-page .ad-newsletter-backdrop::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(9,66,72,.57),rgba(9,66,72,.46))}
-body.advertiser-page .ad-newsletter-cover{position:absolute;inset:-20px 12% auto 25%;width:470px;height:700px;transform:rotate(-13deg) scale(1.05);background:#fdfcf6;padding:45px 35px;filter:blur(5px);color:#13565e;box-shadow:0 20px 50px #10383e}
-body.advertiser-page .ad-nl-brand{font:900 54px Georgia,serif;letter-spacing:-.06em}
-body.advertiser-page .ad-nl-date{font:800 11px sans-serif;letter-spacing:.1em;padding:16px 0;color:#ba4d14}
-body.advertiser-page .ad-newsletter-cover strong{display:block;font:800 24px/1.2 Georgia,serif}
-body.advertiser-page .ad-nl-story{height:210px;margin-top:24px;background:linear-gradient(30deg,#8f8158,#d9d1a2 40%,#aeae79 70%,#6e7e62)}
-body.advertiser-page .ad-nl-lines{height:130px;background:repeating-linear-gradient(#e8e8df 0 6px,transparent 6px 17px)}
 body.advertiser-page .ad-hero-quick-item{background:rgba(255,253,248,.96)}
 body.advertiser-page .ad-arrow{display:inline-block;vertical-align:middle;flex:0 0 19px;width:19px;height:19px;position:relative;color:inherit}
 body.advertiser-page .ad-arrow:before{content:"";position:absolute;left:2px;top:9px;width:14px;border-top:2px solid currentColor}
@@ -33,6 +25,12 @@ body.advertiser-page .ad-example-full-link:focus-visible{outline:3px solid #ed7a
 body.advertiser-page .ad-simple-process .ad-process-demo{display:inline-flex;align-items:center;gap:5px;font-weight:900;color:#0b4b55;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:700px){body.advertiser-page .ad-hero-prices{margin-top:2px}body.advertiser-page .ad-example-only{max-width:100%}body.advertiser-page .ad-example-full-link{width:100%;justify-content:center;text-align:center}}
 
-/* Blurred genuine newsletter backdrop, adapted from the top of the supplied Issue 14 PDF. */
-body.advertiser-page .ad-newsletter-cover{background-image:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACAWGBwYFCAcGhwkIiAmMFA0MCwsMGJGSjpQdGZ6eHJmcG6AkLicgIiuim5woNqirr7EztDOfJri8uDI8LjKzsb/2wBDASIkJDAqMF40NF7GhHCExsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsb/wAARCACgAHgDASIAAhEBAxEB/8QAGQABAQEBAQEAAAAAAAAAAAAAAAECAwQG/8QAHxABAQEAAwEBAQEBAQAAAAAAAAERAhIhMQMEFBNB/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAYEQEAAwEAAAAAAAAAAAAAAAAAARESQf/aAAwDAQACEQMRAD8A+gEqaDQmpaC6ayA1psZsTAb2GsZTKDeq55WpQaE1NBoSAFZarKSAAqW5Nc/9HHcb5zeOPHf5+XbRHq/6zHP/AETUn5XrjnfwvbSFl3/0cSf0cdcL+HI4fz3t6qPZOWzVZ4cesxpFAAagQVCpItNwDDE7Q7QCxi31vtGbgGpq+HgJqynhMBuQxJyh2gLiWLLpQIEAKxz+N1m/Acbp60oMcZbXTonw0F6HVNTaDXU6s7TaDXU6s7SWg6cZjVc9rc+AsCAFZ5fGql+A4+nrp4ngMXSa34mwE9JxrWxqcgZnGnVrsdgZ606t9jsDE4+t/wDilAgQAqVazQZwxdTaB1Tqum0E6rhptAw6m1ZKBI1kTKZQaKklWgQIAVFqX4DOw2OPK+n1LWnbYbHJBHbtF8rhjrx+A0usgrWmsgNarKiLAgoVm/Gqzy8gPPz4XV48WP0/bKcP22pS6469adVnM7gnWrNO52BfT1ZVBn09a8PASNsxoFgQVCs32NVm/EHm5/lLTj+Ui8+dlXjzqaXPW5wOqdqdqovQ6p2p2oNYZUnJrQTKZV1QI0igsCCoVL8aTAceXDak4O+GJQ5dF6OmGA59Do6YYDn1OrphgOfVcbwwGVXDAIKKP//Z');background-size:cover;background-position:top center;filter:blur(5px);}
-body.advertiser-page .ad-newsletter-cover>*{display:none!important}
+/* Authored SK8 locality diagram, deliberately blurred behind solid pricing buttons. */
+body.advertiser-page .ad-hero-prices{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(135deg,rgba(9,72,80,.92),rgba(13,83,90,.94))!important}
+body.advertiser-page .ad-sk8-map-backdrop{pointer-events:none;position:absolute;inset:0;z-index:-1;overflow:hidden}
+body.advertiser-page .ad-sk8-map-backdrop::before{content:"";position:absolute;inset:-21%;background-image:url('/assets/sk8-local-area-map.svg');background-size:cover;background-position:center 46%;filter:blur(3.8px) saturate(.80);transform:scale(1.07) rotate(-4deg);opacity:.57}
+body.advertiser-page .ad-sk8-map-backdrop::after{content:"";position:absolute;inset:0;background:linear-gradient(95deg,rgba(4,55,61,.34),rgba(4,55,61,.44))}
+body.advertiser-page .ad-hero-prices-heading,body.advertiser-page .ad-hero-quick-grid,body.advertiser-page .ad-hero-prices>p,body.advertiser-page .ad-hero-quick-detail{position:relative;z-index:2}
+/* Match the £60 feature card to the warm off-white / orange bordered hero offer. */
+body.advertiser-page #products .ad-simple-card.ad-simple-featured{background:linear-gradient(180deg,#fffdf8 0%,#fff8ec 100%)!important;border:2px solid #f2a15a!important;border-top:6px solid #f8791b!important;box-shadow:0 12px 27px rgba(31,66,65,.09)!important}
+body.advertiser-page #products .ad-simple-card.ad-simple-featured .ad-simple-price-value{color:#0b5660!important}
