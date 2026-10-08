@@ -43,3 +43,13 @@ Status: DRAFT / NOT PUBLISHED
 - Added ADVERTISING-BOOKING-TERMS-REVIEW-2026-10-08.md as an UNPUBLISHED and NOT YET ACCEPTED contractual draft. It requires confirmed sole-trader particulars, tax treatment, acceptance and payment-flow verification before use.
 - PR #183 is separate and remains a draft at this check. It must receive full review and approval including test payments and appropriate regression checks before merge.
 - Policy review PR #185 is not publish-ready: current privacy and terms draft HTML still contain deliberately visible editorial placeholders for sole-trader name and geographic address. NEVER MERGE THOSE PLACEHOLDERS.
+
+## Implementation update: 8 October 2026, confirmed legal identity
+- Owner confirmed full legal name: Paul Livesey; sole trader trading as JiveLoop and operating the SK8 Scoop publication. Business correspondence address: 136 Stockport Road, Cheadle Heath, Stockport, Cheshire SK3 0JE. The public notice now names the proprietor.
+- Staged a separate public advertising-terms.html page covering advertiser bookings, paid placement, cancellation, delivery errors and reporting limits. Its HTML is linked from policy pages, website site map and XML sitemap.
+- Privacy notice expanded to describe indicative UK GDPR lawful bases, recipients, international-processing uncertainty and retention criteria; no claims of verified international transfer mechanisms or automatically deleted records were invented.
+- Current production source search logs use a conditional 365-day cleanup on new search event insertion. This is not a proof of a scheduled deletion job. Unverified email preference ownership remains a security gap (worker.js and compatible Pages handler).
+- Production entrypoint is worker-business-v2.js importing worker-protected.js and worker.js. Do not patch a duplicate Pages handler alone and claim a security fix.
+- Main website legal pages can be updated independently of advertiser sales PR #183. The separate Summer Guide landing page has not yet been edited; prior indexed Inc claim requires independent verification and correction.
+- The business correspondence address has been supplied, but business establishment jurisdiction and VAT registration status are not independently verified.
+- Automated website-health checks can validate site structure. They do not constitute a live network consent audit or legal signoff.
