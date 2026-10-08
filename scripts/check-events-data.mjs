@@ -1,11 +1,13 @@
 import fs from 'node:fs';
 import { exclusionReason } from './event-editorial-exclusions.mjs';
 
-const events = JSON.parse(fs.readFileSync('data/events.json', 'utf8'));
+const events = JSON.parse(fs.readFileSync(process.env.EVENT_DATA_PATH || 'data/events.json', 'utf8'));
 if (!Array.isArray(events)) throw new Error('data/events.json must contain an array');
 
 const required = ['id','title','date','area','venue','cost','category','description','source_url','verification','checked','status'];
 const iso = /^\d{4}-\d{2}-\d{2}$/;
+const dateModes = new Set(['single','daily','specific_dates','range_unspecified']);
+const costTypes = new Set(['free','paid','admission_required','members_only_free','free_optional_extras','optional_donation','mixed','unknown']);
 const ids = new Set();
 const seen = new Set();
 const failures = [];
@@ -13,7 +15,7 @@ const failures = [];
 const asDate = value => {
   if (!iso.test(String(value || ''))) return null;
   const d = new Date(String(value) + 'T00:00:00Z');
-  return Number.isNaN(d.getTime()) ? null : d;
+  return Number.isNaN(d.getTime()) || d.toISOString().slice(0, 10) !== value ? null : d;
 };
 
 for (const [index,event] of events.entries()) {
@@ -32,6 +34,49 @@ for (const [index,event] of events.entries()) {
   if (!end) failures.push(`${event.id}: invalid end_date`);
   if (start && end && end < start) failures.push(`${event.id}: end_date precedes date`);
   if (!asDate(event.checked)) failures.push(`${event.id}: invalid checked date`);
+  const mode = event.date_mode || (event.end_date ? 'range_unspecified' : 'single');
+  if (!dateModes.has(mode)) failures.push(`${event.id}: invalid date_mode ${mode}`);
+  if (event.cost_type !== undefined && !costTypes.has(event.cost_type)) {
+    failures.push(`${event.id}: invalid cost_type ${event.cost_type}`);
+  }
+  if (mode === 'daily' && !event.end_date) {
+    failures.push(`${event.id}: daily activities require end_date`);
+  }
+  if (mode === 'specific_dates') {
+    if (!event.end_date || !Array.isArray(event.occurrences) || !event.occurrences.length) {
+      failures.push(`${event.id}: specific_dates require an end_date and confirmed occurrence list`);
+    } else {
+      const occurrenceDates = new Set();
+      let confirmedCount = 0;
+      for (const [occurrenceIndex, occurrence] of event.occurrences.entries()) {
+        const obj = typeof occurrence === 'string' ? { date: occurrence } : occurrence;
+        const date = obj && obj.date;
+        const parsed = asDate(date);
+        if (!parsed) {
+          failures.push(`${event.id}: invalid occurrence date at ${occurrenceIndex}`);
+          continue;
+        }
+        if (occurrenceDates.has(date)) failures.push(`${event.id}: duplicate occurrence date ${date}`);
+        occurrenceDates.add(date);
+        if (start && end && (parsed < start || parsed > end)) {
+          failures.push(`${event.id}: occurrence ${date} falls outside declared range`);
+        }
+        if (obj.status !== undefined && !['verified','confirmed','cancelled','unverified'].includes(obj.status)) {
+          failures.push(`${event.id}: unsupported occurrence status on ${date}`);
+        }
+        for (const timeKey of ['time','end_time']) {
+          if (obj[timeKey] !== undefined && !/^([01]\\d|2[0-3]):[0-5]\\d$/.test(String(obj[timeKey]))) {
+            failures.push(`${event.id}: invalid ${timeKey} for occurrence ${date}`);
+          }
+        }
+        if (!['cancelled','unverified'].includes(obj.status)) confirmedCount++;
+      }
+      if (!confirmedCount) failures.push(`${event.id}: no confirmed occurrences`);
+    }
+  }
+  if (event.occurrences !== undefined && mode !== 'specific_dates') {
+    failures.push(`${event.id}: occurrences require specific_dates mode`);
+  }
 
   for (const key of ['source_url','booking_url']) {
     const value = String(event[key] || '').trim();
