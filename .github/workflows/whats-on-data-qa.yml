@@ -5,6 +5,7 @@ on:
     paths:
       - 'data/events.json'
       - 'scripts/check-events-data.mjs'
+      - 'scripts/event-editorial-exclusions.mjs'
       - 'assets/whats-on.js'
       - 'whats-on/index.html'
       - '.github/workflows/whats-on-data-qa.yml'
@@ -14,6 +15,7 @@ on:
     paths:
       - 'data/events.json'
       - 'scripts/check-events-data.mjs'
+      - 'scripts/event-editorial-exclusions.mjs'
       - 'assets/whats-on.js'
       - 'whats-on/index.html'
       - '.github/workflows/whats-on-data-qa.yml'
