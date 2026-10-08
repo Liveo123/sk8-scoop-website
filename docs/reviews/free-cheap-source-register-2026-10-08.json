@@ -18,9 +18,9 @@
   "overview": {
     "total": 54,
     "dated": 7,
-    "specificClaimChecks": 18,
-    "dateConflicts": 1,
-    "awaitingPrimary": 35
+    "specificClaimChecks": 19,
+    "dateConflicts": 2,
+    "awaitingPrimary": 33
   },
   "entries": [
     {
@@ -1053,10 +1053,14 @@
       "page_when": "Friday 16 October 2026, from 7.30pm.",
       "advertised_date": "2026-10-16",
       "page_source_url": "https://www.soul-source.co.uk/events/event/93545-heald-green-northern-soul-motown/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Friday 16 October 2026, 19:30 at Heald Green Social Club, £5 on the door (organiser-submitted listing)"
+      ],
+      "claim_evidence_urls": [
+        "https://www.soul-source.co.uk/events/event/93545-heald-green-northern-soul-motown/"
+      ],
+      "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-14",
       "editorial_note": null
     },
@@ -1118,12 +1122,19 @@
       "page_when": "Saturday 31 October, 11am–3pm. Check for late changes before travelling.",
       "advertised_date": "2026-10-31",
       "page_source_url": "https://arc-centre.org/saturday-art-clubs/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
+      "fact_check_status": "CONFLICT_PENDING_ORGANISER_CONFIRMATION",
+      "primary_claims_checked": [
+        "Stockport Council and Healthy Stockport (organiser-submitted by Arc) list Saturday 31 October 11am–3pm, suggested £3 donation, drop-in",
+        "One Stockport's Arc-hosted events series instead lists Saturday 24 October at the same time"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events/arc-saturday-art-club-oct?date=2026-10-31",
+        "https://www.healthystockport.co.uk/events/details/arc-saturday-art-club-oct",
+        "https://www.onestockport.co.uk/townofcultureevent/arc-saturday-art-clubs/2026-10-24/"
+      ],
+      "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-29",
-      "editorial_note": null
+      "editorial_note": "Two current published date claims (31 Oct Council/Healthy Stockport organiser submissions; 24 Oct One Stockport). Keep guide's existing check-before-travel warning and seek direct Arc confirmation before newsletter promotion."
     }
   ]
 }
