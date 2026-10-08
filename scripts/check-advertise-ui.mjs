@@ -178,6 +178,15 @@ try {
     await evaluate("document.getElementById('products').scrollIntoView({block:'start',behavior:'instant'}); true");
     await sleep(250);
     await screenshot('prices-' + width + '.png');
+    await evaluate("document.querySelector('.ad-premium').scrollIntoView({block:'start',behavior:'instant'});true");
+    await sleep(170);
+    await screenshot('premium-' + width + '.png');
+    await evaluate("document.querySelector('.ad-help-grid').scrollIntoView({block:'start',behavior:'instant'});true");
+    await sleep(170);
+    await screenshot('help-' + width + '.png');
+    await evaluate("document.getElementById('what-you-buy').scrollIntoView({block:'start',behavior:'instant'});true");
+    await sleep(170);
+    await screenshot('sample-goals-' + width + '.png');
     await evaluate("document.querySelector('.ad-hero-quick-item[data-ad-package=guide_card]').click();true");
     await sleep(400);
     const selectedGuide = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent,guideShown:!document.querySelector('[data-guide-choice-wrap]')?.hidden,guideEnabled:!document.querySelector('[name=guide_choice]')?.disabled,goal:document.querySelector('textarea[name=advert_copy]')?.value,formValid:document.querySelector('#campaign-enquiry form')?.checkValidity()})");
