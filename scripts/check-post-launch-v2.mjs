@@ -116,7 +116,7 @@ excludes('advertise.html','<div class="halloween-price">£90</div>');
 excludes('advertise.html','<div class="halloween-price">£125</div>');
 excludes('advertise.html','WEBSITE · price by scope');
 excludes('advertise.html','value="temp_website"');
-contains('advertise.html','data-experiment="advertiser-goal-first-v1"');
+contains('advertise.html','data-experiment="advertiser-local-hero-v2"');
 contains('advertise.html','GUIDE ADVERT');
 contains('worker.js',"'starter_newsletter'");
 contains('worker.js',"'halloween_guide'");
