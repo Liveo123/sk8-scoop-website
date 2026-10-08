@@ -187,7 +187,7 @@
 .lg-page .lg-hero{padding:32px 0 43px;background:#fff8ee}
 .lg-page .lg-hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:35px;align-items:start}
 .lg-page .lg-hero-copy{padding:13px 0 0}
-.lg-page .lg-hero h1{font-size:clamp(3.35rem,5.15vw,5.35rem);margin:0 0 22px;max-width:11.4ch}
+.lg-page .lg-hero h1{font-size:clamp(3.15rem,4.55vw,4.85rem);line-height:1.02;margin:0 0 22px;max-width:none;text-wrap:balance}
 .lg-page .lg-lead{font-size:1.11rem;line-height:1.61;margin:0 0 22px}
 .lg-page .lg-hero-principles{margin-top:25px}
 .lg-page .lg-visual{position:relative;display:grid;grid-template-rows:280px 99px auto;gap:10px;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;transform:none;isolation:auto;align-self:start}
