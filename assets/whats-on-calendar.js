@@ -114,7 +114,13 @@
       const dayNum = document.createElement('strong');
       dayNum.textContent = String(d);
       const indicator = document.createElement('small');
-      indicator.textContent = matches.length ? String(matches.length) + (matches.length === 1 ? ' event' : ' events') : '';
+      indicator.textContent = matches.length ? String(matches.length) : '';
+      if (matches.length) {
+        const noun = document.createElement('span');
+        noun.className = 'sk8-calendar-count-word';
+        noun.textContent = matches.length === 1 ? ' event' : ' events';
+        indicator.appendChild(noun);
+      }
       button.append(dayNum, indicator);
       button.addEventListener('click', () => selectDate(date));
       monthGrid.appendChild(button);
@@ -163,7 +169,8 @@
     syncUrl();
     render();
     if (date) track('whats_on_calendar_date', { selected_month: date.slice(0, 7) });
-    document.getElementById('current-listings')?.scrollIntoView({ behavior: 'auto', block: 'start' });
+    // After choosing a day, take readers to the dated results, not back to the section header.
+    document.querySelector('[data-events-status]')?.scrollIntoView({ behavior: 'auto', block: 'start' });
   }
 
   monthGrid.addEventListener('keydown', event => {
