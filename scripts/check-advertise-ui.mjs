@@ -133,6 +133,10 @@ try {
       const cards = [...document.querySelectorAll('#products .ad-simple-card')];
       const buttons = cards.map(e => e.querySelector('button'));
       const form = document.querySelector('#campaign-enquiry form');
+      const premium = [...document.querySelectorAll('.ad-premium-option')];
+      const quickButtons = [...document.querySelectorAll('.ad-hero-quick-item')];
+      const example = document.querySelector('.ad-preview-reworked figure');
+      const goalPanel = document.querySelector('.ad-goal-panel');
       return {
         viewport: innerWidth,
         documentWidth: document.documentElement.scrollWidth,
@@ -144,6 +148,15 @@ try {
         formRequired: ['business_name','contact_name','email','website','preferred_date','advert_copy']
           .every(n => !!form.querySelector('[name="'+n+'"]')?.required),
         pricesVisible: cards.map(e => e.querySelector('.ad-simple-price-value')?.textContent?.trim()),
+        premiumVisible: premium.map(el => ({price:el.querySelector('.ad-premium-buy b')?.textContent,shown:rect(el).width>0})),
+        quickPrices: quickButtons.map(el => el.querySelector('b')?.textContent),
+        quickTargets: quickButtons.map(el => Math.round(rect(el).height)),
+        heroWords: document.querySelector('h1')?.textContent?.trim().split(/\\s+/).length,
+        goalChoices: document.querySelectorAll('.ad-goal-panel [data-ad-goal]').length,
+        leftSampleOnDesktop: innerWidth<=900 || (rect(example).left < rect(goalPanel).left && rect(example).width >= rect(goalPanel).width),
+        reportRemoved: !document.querySelector('#reporting'),
+        audienceRemoved: !document.querySelector('.audience-section'),
+        guideChoiceOptions: document.querySelectorAll('#ad-guide-choice option').length,
         orderIsClear: [...['products','campaign-enquiry','what-you-buy'].map(id=>document.getElementById(id))]
           .every((el,i,a) => !i || a[i-1].getBoundingClientRect().top + scrollY < el.getBoundingClientRect().top + scrollY),
         heroCtaTargetsPrice: document.querySelector('[data-ad-hero-action="compare_packages"]')?.getAttribute('href') === '#products'
@@ -157,22 +170,33 @@ try {
     if (!before.formLabelsPresent || !before.formRequired) fail(width + 'px: essential form labels or required fields missing');
     if (before.pricesVisible.join(',') !== '£35,£28,£60') fail(width + 'px: displayed prices do not match approval');
     if (!before.orderIsClear || !before.heroCtaTargetsPrice) fail(width + 'px: decision and form sequence is unclear');
+    if(before.heroWords!==3 || before.goalChoices!==6 || !before.leftSampleOnDesktop) fail(width+'px: hero or goal/example layout mismatch');
+    if(!before.reportRemoved || !before.audienceRemoved) fail(width+'px: removed sections still visible');
+    if(before.quickPrices.join(',')!=='£35,£28,£60' || !before.quickTargets.every(n=>n>=44)) fail(width+'px: compact hero prices unreadable');
+    if(before.premiumVisible.map(o=>o.price).join(',')!=='£96,£125' || !before.premiumVisible.every(o=>o.shown)) fail(width+'px: sponsorship prices not visible');
+    if(before.guideChoiceOptions<8) fail(width+'px: not all Guides offered');
     await evaluate("document.getElementById('products').scrollIntoView({block:'start',behavior:'instant'}); true");
     await sleep(250);
     await screenshot('prices-' + width + '.png');
-    await evaluate("document.querySelector('#products button[data-ad-package=halloween_guide]').click();true");
-    await sleep(550);
-    const selectedGuide = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent,goal:document.querySelector('textarea[name=advert_copy]')?.value,formValid:document.querySelector('#campaign-enquiry form')?.checkValidity()})");
-    if(selectedGuide.checked !== 'halloween_guide' || !selectedGuide.summary.includes('£28')) fail(width+'px: Guide selection did not carry to form');
-    if(selectedGuide.goal !== '' || selectedGuide.formValid) fail(width+'px: empty offer can pass enquiry validation');
+    await evaluate("document.querySelector('.ad-hero-quick-item[data-ad-package=guide_card]').click();true");
+    await sleep(400);
+    const selectedGuide = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent,guideShown:!document.querySelector('[data-guide-choice-wrap]')?.hidden,guideEnabled:!document.querySelector('[name=guide_choice]')?.disabled,goal:document.querySelector('textarea[name=advert_copy]')?.value,formValid:document.querySelector('#campaign-enquiry form')?.checkValidity()})");
+    if(selectedGuide.checked !== 'guide_card' || !selectedGuide.summary.includes('£28') || !selectedGuide.guideShown || !selectedGuide.guideEnabled) fail(width+'px: any-Guide £28 selection did not carry to form');
+    if(selectedGuide.goal !== '' || selectedGuide.formValid) fail(width+'px: empty advertising objective can pass validation');
     await screenshot('guide-selected-' + width + '.png');
-    await evaluate("document.querySelector('#products button[data-ad-package=halloween_combo]').click();true");
-    const selectedCombo = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent})");
-    if(selectedCombo.checked !== 'halloween_combo' || !selectedCombo.summary.includes('£60')) fail(width+'px: Combo selection did not carry to form');
-    await evaluate("document.querySelector('#products details.ad-simple-extras').open=true;document.querySelector('button[data-ad-package=halloween_section]').click();true");
-    const selectedSponsor = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,shown:document.querySelector('[data-sponsor-option=halloween_section]')?.hidden===false,summary:document.querySelector('[data-ad-selection-summary]')?.textContent})");
-    if(selectedSponsor.checked !== 'halloween_section' || !selectedSponsor.shown || !selectedSponsor.summary.includes('£110')) fail(width+'px: Optional sponsorship choice is invisible or unselected');
-    console.log('ADVERT_SELECTION ' + JSON.stringify({width,guide:selectedGuide,combo:selectedCombo,sponsor:selectedSponsor}));
+    await evaluate("document.querySelector('#ad-guide-choice').value='52-adventures';document.querySelector('#products button[data-ad-package=guide_bundle]').click();true");
+    const selectedCombo = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent,guide:document.querySelector('[name=guide_choice]').value})");
+    if(selectedCombo.checked !== 'guide_bundle' || !selectedCombo.summary.includes('£60') || selectedCombo.guide!=='52-adventures') fail(width+'px: Guide + newsletter does not retain chosen Guide');
+    await evaluate("document.querySelector('.ad-premium-buy button[data-ad-package=guide_section]').click();true");
+    const selectedSponsor = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent,guideShown:!document.querySelector('[data-guide-choice-wrap]')?.hidden})");
+    if(selectedSponsor.checked !== 'guide_section' || !selectedSponsor.guideShown || !selectedSponsor.summary.includes('£96')) fail(width+'px: Section sponsor £96 cannot be selected');
+    await evaluate("document.querySelector('.ad-premium-buy button[data-ad-package=guide_main]').click();true");
+    const selectedMain = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent})");
+    if(selectedMain.checked !== 'guide_main' || !selectedMain.summary.includes('£125')) fail(width+'px: Main sponsorship £125 cannot be selected');
+    await evaluate("document.querySelector('.ad-hero-quick-item[data-ad-package=starter_newsletter]').click();true");
+    const selectedNewsletter = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,guideHidden:document.querySelector('[data-guide-choice-wrap]')?.hidden,guideDisabled:document.querySelector('[name=guide_choice]')?.disabled})");
+    if(selectedNewsletter.checked!=='starter_newsletter'||!selectedNewsletter.guideHidden||!selectedNewsletter.guideDisabled) fail(width+'px: newsletter retains unneeded guide selection');
+    console.log('ADVERT_SELECTION ' + JSON.stringify({width,guide:selectedGuide,combo:selectedCombo,section:selectedSponsor,main:selectedMain,newsletter:selectedNewsletter}));
     console.log('PASS advertiser UX at '+width+'px');
   }
   console.log('PASS five viewport widths, all package handoffs, real goal validation, no horizontal overflow.');
