@@ -165,3 +165,6 @@ body.advertiser-page #advertiser-faq .ad-faq-grid details p{font-size:.97rem;lin
     grid-column:1/-1!important;min-height:31px!important;padding:3px 6px!important;font-size:.83rem!important
   }
 }
+
+/* Sticky navigation must not cover the premium and help headings after in-page jumps. */
+body.advertiser-page .ad-premium,body.advertiser-page .ad-help-grid{scroll-margin-top:112px}
