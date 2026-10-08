@@ -55,6 +55,7 @@ function secureResponse(response, url) {
   const headers = new Headers(response.headers);
   headers.set('x-content-type-options', 'nosniff');
   headers.set('referrer-policy', 'strict-origin-when-cross-origin');
+  if (url.pathname === '/api/confirm-preferences') headers.set('referrer-policy', 'no-referrer');
   headers.set('permissions-policy', 'camera=(), microphone=(), geolocation=()');
   headers.set('x-frame-options', 'DENY');
   if (
