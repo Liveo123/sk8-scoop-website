@@ -547,7 +547,27 @@ const buttons=[...document.querySelectorAll('.filter')],count=document.getElemen
 buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-pressed',String(b===btn));});const f=btn.dataset.filter;let n=0;document.querySelectorAll('.card').forEach(c=>{const ok=f==='all'||c.dataset.tags.split(' ').includes(f);c.hidden=!ok;if(ok)n++});count.textContent=`${n} shown`;none.classList.toggle('show',n===0);const u=new URL(location.href);if(f==='all')u.searchParams.delete('filter');else u.searchParams.set('filter',f);history.replaceState({},'',u)}));
 const requestedGuideFilter=new URLSearchParams(location.search).get('filter');
 const requestedGuideButton=buttons.find(button=>button.dataset.filter===requestedGuideFilter);
-if(requestedGuideButton){requestedGuideButton.click();requestAnimationFrame(()=>document.getElementById('filters')?.scrollIntoView({block:'start'}));}
+if(requestedGuideButton){
+  requestedGuideButton.click();
+  const target=document.getElementById('filters');
+  // Image layout and the browser's native #filters navigation can both happen
+  // after the first animation frame. Reposition after load settles instead of
+  // leaving email readers at an apparently unfiltered part of the page.
+  let userHasScrolled=false;
+  window.addEventListener('wheel',()=>{userHasScrolled=true;},{once:true,passive:true});
+  window.addEventListener('touchstart',()=>{userHasScrolled=true;},{once:true,passive:true});
+  window.addEventListener('keydown',event=>{
+    if(['PageDown','PageUp','ArrowDown','ArrowUp',' ','Home','End'].includes(event.key))userHasScrolled=true;
+  },{once:true});
+  const placeFilters=()=>{if(target&&!userHasScrolled)target.scrollIntoView({block:'start',behavior:'instant'});};
+  requestAnimationFrame(placeFilters);
+  const settleFilters=()=>{
+    setTimeout(placeFilters,120);
+    setTimeout(placeFilters,650);
+  };
+  if(document.readyState==='complete')settleFilters();
+  else window.addEventListener('load',settleFilters,{once:true});
+}
 document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>link.addEventListener('click',()=>{const all=buttons.find(button=>button.dataset.filter==='all');if(all&&!all.classList.contains('active'))all.click();}));
 </script>
 <script id="unique-pencil-card-visuals">

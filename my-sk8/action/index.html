@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Quick action | My SK8 | SK8 Scoop</title>
+<style>
+:root{color-scheme:light;font-family:Arial,"Trebuchet MS",sans-serif;color:#2C172D;background:#F8F1E8}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:28px 16px 60px;background:linear-gradient(170deg,#F8F1E8,#FFF9F1)}
+main{max-width:530px;margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:4px 0 28px}
+header a{font-family:Georgia,serif;color:#2C172D;text-decoration:none;font-size:26px;font-weight:bold;letter-spacing:-1px}
+header .eight{color:#E56323}
+header span.small{font:700 11px/1.3 Arial,sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:#0D5960}
+article{background:#FFFDF7;border:1px solid #E1D5C9;border-radius:19px;box-shadow:0 12px 32px rgba(38,24,32,.09);padding:30px 28px}
+.eyebrow{font:700 11px/1.4 Arial,sans-serif;letter-spacing:1.6px;color:#B94D1B;text-transform:uppercase}
+.icon{width:52px;height:52px;line-height:48px;border-radius:50%;background:#E2F0EA;color:#0D5960;text-align:center;font:700 29px/48px Arial,sans-serif;margin:20px 0 14px}
+.icon.error{background:#FBE4DC;color:#932E1F}
+h1{font:700 clamp(27px,6vw,36px)/1.15 Georgia,"Times New Roman",serif;margin:0 0 12px}
+.message{font-size:17px;line-height:1.6;color:#352F33;margin:0 0 18px}
+.event{border-top:1px solid #E7D9CE;border-bottom:1px solid #E7D9CE;padding:14px 0;margin:20px 0}
+.event strong{display:block;font-size:18px;line-height:1.35}
+.event span{display:block;color:#5F5A5D;font-size:14px;line-height:1.5;margin-top:4px}
+.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:12px 18px;background:#0D5960;border-radius:7px;color:white!important;font-weight:700;text-align:center;text-decoration:none;line-height:1.25}
+.btn:focus-visible,.more:focus-visible,header a:focus-visible{outline:3px solid #E56323;outline-offset:4px}
+.more{display:inline-flex;align-items:center;padding:10px 3px;min-height:48px;color:#0D5960;font-weight:700;text-decoration:underline}
+.note{margin:24px 0 0;font-size:13px;line-height:1.6;color:#635C5C}
+.note a{color:#0D5960}
+footer{font-size:13px;line-height:1.6;color:#696166;text-align:center;margin-top:26px}
+@media(max-width:430px){body{padding:20px 12px 40px}article{padding:25px 18px}.links{display:flex;flex-direction:column}.links a{width:100%}}
+</style>
+</head>
+<body>
+<main>
+<header><a href="/" aria-label="SK8 Scoop home">SK<span class="eight">8</span> Scoop</a><span class="small">MY SK8</span></header>
+<article aria-live="polite" aria-busy="true" id="action-card">
+<div class="eyebrow">QUICK ACTION · SK8 SCOOP</div>
+<div class="icon" aria-hidden="true" id="status-icon">·</div>
+<h1 id="status-title">Checking your event…</h1>
+<p class="message" id="status-message">Just confirming the details before making a change.</p>
+<div class="event" id="event-detail" hidden><strong id="event-title"></strong><span id="event-meta"></span></div>
+<div class="links"><a class="btn" href="/my-sk8/" id="primary-link">Open My SK8</a><a class="more" href="/whats-on/">Find more local events →</a></div>
+<p class="note" id="browser-note">My SK8 saves and on-site reminders are kept in this browser. They do not automatically sync to another device. <a href="/my-sk8/">More about My SK8</a>.</p>
+</article>
+<footer>SK8 Scoop · The useful, the local and the mildly nosy.</footer>
+</main>
+<script>
+(async function(){
+  'use strict';
+  const params=new URLSearchParams(location.search);
+  const action=(params.get('my_action')||'').trim().toLowerCase();
+  const id=(params.get('event')||params.get('save')||'').trim();
+  const card=document.getElementById('action-card');
+  const title=document.getElementById('status-title');
+  const msg=document.getElementById('status-message');
+  const icon=document.getElementById('status-icon');
+  const details=document.getElementById('event-detail');
+  const detailTitle=document.getElementById('event-title');
+  const meta=document.getElementById('event-meta');
+  const primary=document.getElementById('primary-link');
+  const savedKey='sk8_saved_items_v1';
+  const reminderKey='sk8_reminders_v1';
+  const safeActions=['save','remind','calendar','directions'];
+  function display(kind,heading,description){
+    icon.textContent=kind==='error'?'!':'✓';
+    icon.classList.toggle('error',kind==='error');
+    title.textContent=heading;
+    msg.textContent=description;
+    card.setAttribute('aria-busy','false');
+    document.title=heading+' | My SK8 | SK8 Scoop';
+  }
+  function error(message){
+    display('error','This action was not completed',message);
+    primary.textContent='See current events';
+    primary.href='/whats-on/';
+  }
+  function readList(key){
+    const raw=localStorage.getItem(key);
+    if(!raw)return[];
+    const value=JSON.parse(raw);
+    if(!Array.isArray(value))throw Error('Invalid saved list');
+    return value;
+  }
+  function store(key,items){
+    localStorage.setItem(key,JSON.stringify(items));
+    const check=JSON.parse(localStorage.getItem(key)||'null');
+    if(!Array.isArray(check))throw Error('Saving blocked');
+  }
+  function eventRecord(e){
+    const value=k=>String(e[k]||'').trim();
+    return {id:value('id'),kind:'event',title:value('title'),date:value('date'),end_date:value('end_date')||value('date'),date_range:value('date_range'),time:value('time'),area:value('area'),venue:value('venue'),cost:value('cost'),category:value('category'),description:value('description'),booking_url:value('booking_url'),source_url:value('source_url'),checked:value('checked'),saved_at:new Date().toISOString()};
+  }
+  function save(e){
+    const list=readList(savedKey),item=eventRecord(e);
+    const old=list.findIndex(x=>x&&x.id===id);
+    if(old>=0)list[old]={...list[old],...item,saved_at:list[old].saved_at||item.saved_at};
+    else list.unshift(item);
+    store(savedKey,list);
+    return old<0;
+  }
+  const pad=n=>String(n).padStart(2,'0');
+  function calendar(e){
+    const date=String(e.date||'');
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date))return null;
+    const titleText=String(e.title||'SK8 event');
+    const esc=x=>String(x||'').replace(/\\/g,'\\\\').replace(/[\r\n]+/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;');
+    const start=date.replace(/-/g,'');
+    const timed=/^\d{2}:\d{2}$/.test(String(e.time||''));
+    const end=new Date((e.end_date||date)+'T00:00:00Z');
+    end.setUTCDate(end.getUTCDate()+1);
+    const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//SK8 Scoop//My SK8//EN','BEGIN:VEVENT','UID:'+id+'@sk8scoop.com','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z'),(timed?'DTSTART;TZID=Europe/London:':'DTSTART;VALUE=DATE:')+start+(timed?'T'+String(e.time).replace(':','')+'00':''),...(!timed?['DTEND;VALUE=DATE:'+end.toISOString().slice(0,10).replace(/-/g,'')]:[]),'SUMMARY:'+esc(titleText),'LOCATION:'+esc(e.venue),'DESCRIPTION:'+esc(e.description),'END:VEVENT','END:VCALENDAR'];
+    return 'data:text/calendar;charset=utf-8,'+encodeURIComponent(lines.join('\r\n'));
+  }
+  if(!id||!safeActions.includes(action)){error('That link is missing the event or action. Please use the current listings instead.');return;}
+  let events;
+  try{
+    const response=await fetch('/data/events.json',{cache:'no-store'});
+    if(!response.ok)throw Error('Event data unavailable');
+    events=await response.json();
+    if(!Array.isArray(events))throw Error('Unexpected events data');
+  }catch(_){error('Event details could not be loaded. Nothing has been saved or changed.');return;}
+  const event=events.find(e=>String(e.id||'')===id);
+  if(!event){error('This event is no longer in the current listings. Nothing has been saved or changed.');return;}
+  details.hidden=false;
+  detailTitle.textContent=String(event.title||'Local event');
+  meta.textContent=[event.date_range||event.date,event.time,event.area,event.venue].filter(Boolean).join(' · ');
+  try{
+    if(action==='save'){
+      const newly=save(event);
+      display('success',newly?'Saved to My SK8':'Already saved to My SK8','This event is in your saved list on this browser. No extra clicks needed.');
+    }else if(action==='remind'){
+      save(event);
+      const reminders=readList(reminderKey),already=reminders.includes(id);
+      if(!already)reminders.push(id);
+      store(reminderKey,[...new Set(reminders)]);
+      display('success',already?'Reminder already set':'Reminder set','This is an on-site My SK8 reminder for this browser, not an email, text or push notification.');
+    }else if(action==='calendar'){
+      const url=calendar(event);
+      if(!url){error('This event has no usable calendar date.');return;}
+      display('success','Calendar file ready','Use the button to download an event file that can be added to your calendar.');
+      primary.textContent='Download calendar file';
+      primary.href=url;
+      primary.setAttribute('download','sk8-scoop-'+id+'.ics');
+    }else if(action==='directions'){
+      const venue=String(event.venue||event.area||'').trim();
+      if(!venue){error('No destination is available for this event.');return;}
+      const url='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(venue);
+      display('success','Directions ready','Open the map for '+venue+'.');
+      primary.textContent='Open directions';
+      primary.href=url;
+      primary.removeAttribute('download');
+    }
+  }catch(_){error('This browser could not save the action. Nothing has been confirmed. Please check browser storage settings and try again.');}
+})();
+</script>
+</body>
+</html>
