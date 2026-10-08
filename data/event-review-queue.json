@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-02",
+  "updated": "2026-10-08",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -57,6 +57,28 @@
         "exact individual dates within the 42-day window",
         "exact start times"
       ]
+    },
+    {
+      "id": "john-lewis-cheadle-baby-beyond-2026-10-08",
+      "title": "All Things Baby & Beyond with Dr Dewan",
+      "status": "rejected",
+      "date": "2026-10-08",
+      "area": "Cheadle",
+      "source_url": "https://www.johnlewis.com/our-shops/cheadle/whats-on",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08",
+      "reason": "Rejected because John Lewis Cheadle's current primary What's On page marks the 8 Oct event Sold out. Remove from live event data and retain here briefly to prevent rediscovery."
+    },
+    {
+      "id": "monster-mugs-kids-2026-10-10",
+      "title": "Monster Mugs kids' clay workshop",
+      "status": "rejected",
+      "date": "2026-10-10",
+      "area": "Stockport",
+      "source_url": "https://www.merseywayworkshop.com/whatson",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08",
+      "reason": "Rejected for current publication because the existing verified event record is marked sold out. Remove from live listings and retain here briefly to prevent rediscovery unless availability changes."
     }
   ]
 }
