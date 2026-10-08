@@ -99,9 +99,9 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
 
   const c = (value, length = 1000) => String(value || '').trim().slice(0, length);
   const packageLabel = {
-    starter_newsletter: 'NEWSLETTER TEST £40',
-    halloween_guide: 'HALLOWEEN GUIDE £35',
-    halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £75',
+    starter_newsletter: 'NEWSLETTER ADVERT £35',
+    halloween_guide: 'HALLOWEEN GUIDE £28',
+    halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £60',
     halloween_section: 'HALLOWEEN SECTION SPONSOR £110',
     halloween_main: 'HALLOWEEN MAIN SPONSOR £150',
     temp_test: 'HISTORICAL TEST £40',
@@ -265,7 +265,18 @@ async function handleStripeWebhook(request, env, ctx) {
 
   const amount = Number.isFinite(Number(session.amount_total)) ? Math.max(0, Math.trunc(Number(session.amount_total))) : 0;
   const currency = String(session.currency || 'gbp').toLowerCase().slice(0, 10);
-  const expectedAmount = { starter_newsletter: 4000, halloween_guide: 3500, halloween_combo: 7500, halloween_section: 11000, halloween_main: 15000, temp_test: 4000, temp_grow: 9000 }[packageKey];
+  // Sessions approved under earlier prices carry no price version; keep recognising those payments.
+  // New sessions MUST include sk8_pricing_version=2026-10-v2 in Stripe metadata.
+  // All sessions also require approval_required=true, advertiser_enquiry_id and sk8_product.
+  // An unknown price version is never automatically approved.
+  const pricingVersion = String(metadata.sk8_pricing_version || '').trim().slice(0, 50);
+  const currentPricesPence = { starter_newsletter: 3500, halloween_guide: 2800, halloween_combo: 6000, halloween_section: 11000, halloween_main: 15000, temp_test: 4000, temp_grow: 9000 };
+  const historicalPricesPence = { starter_newsletter: 4000, halloween_guide: 3500, halloween_combo: 7500, halloween_section: 11000, halloween_main: 15000, temp_test: 4000, temp_grow: 9000 };
+  const expectedAmount = pricingVersion === '2026-10-v2'
+    ? currentPricesPence[packageKey]
+    : pricingVersion === '' || pricingVersion === 'legacy'
+      ? historicalPricesPence[packageKey]
+      : undefined;
   const customerEmail = String((session.customer_details && session.customer_details.email) || session.customer_email || enquiry.email || '').trim().toLowerCase().slice(0, 200);
   const businessName = String((session.collected_information && session.collected_information.business_name) || enquiry.business_name || '').trim().slice(0, 180);
   const sessionId = String(session.id || '').slice(0, 120);
@@ -332,6 +343,7 @@ async function handleStripeWebhook(request, env, ctx) {
         sessionId,
         campaignReference,
         packageKey,
+        pricingVersion,
         amount,
         currency,
         businessName
@@ -413,11 +425,17 @@ async function handleAdvertiserEnquiries(request, env) {
   }
 }
 
-function packageLabel(packageKey) {
+function packageLabel(packageKey, pricingVersion = '') {
+  const oldLabels = {
+    starter_newsletter: 'NEWSLETTER TEST £40 (previously agreed)',
+    halloween_guide: 'HALLOWEEN GUIDE £35 (previously agreed)',
+    halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £75 (previously agreed)'
+  };
+  if (pricingVersion !== '2026-10-v2' && oldLabels[packageKey]) return oldLabels[packageKey];
   return {
-    starter_newsletter: 'NEWSLETTER TEST £40',
-    halloween_guide: 'HALLOWEEN GUIDE £35',
-    halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £75',
+    starter_newsletter: 'NEWSLETTER ADVERT £35',
+    halloween_guide: 'HALLOWEEN GUIDE £28',
+    halloween_combo: 'HALLOWEEN GUIDE + NEWSLETTER £60',
     halloween_section: 'HALLOWEEN SECTION SPONSOR £110',
     halloween_main: 'HALLOWEEN MAIN SPONSOR £150',
     temp_test: 'HISTORICAL TEST £40',
@@ -435,11 +453,12 @@ async function sendPaymentNotifications(env, {
   sessionId,
   campaignReference,
   packageKey,
+  pricingVersion,
   amount,
   currency,
   businessName
 }) {
-  const route = packageLabel(packageKey);
+  const route = packageLabel(packageKey, pricingVersion);
   const money = moneyLabel(amount, currency);
   const business = String(businessName || enquiry.business_name || 'Advertiser').trim().slice(0, 180);
   const reference = String(campaignReference || `SK8-AD-${enquiry.id}`).trim().slice(0, 100);
