@@ -132,6 +132,26 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
       ].join('\n'),
       replyTo: CONTACT_INBOX
     });
+   else {
+    // Transactional acknowledgement only, not a marketing sequence or a booking confirmation.
+    customerConfirmation = await sendResendEmail(env, {
+      to: c(data.email, 200).toLowerCase(),
+      subject: 'SK8 Scoop advertising enquiry received',
+      text: [
+        `Hi ${c(data.contact_name, 120)},`,
+        '',
+        'Thanks for your advertising enquiry. We have received your request for:',
+        packageLabel,
+        '',
+        'Next we will check suitability and available dates, then prepare an advert proof and confirm the agreed price.',
+        'If you are happy to proceed, we will send you a secure payment link. No payment is due from this enquiry.',
+        '',
+        'You can reply to this email if you need to change any details.',
+        '',
+        'SK8 Scoop'
+      ].join('\n'),
+      replyTo: CONTACT_INBOX
+    });
   }
 
   const notification = await notifyAdvertiserInbox(env, {
@@ -150,7 +170,7 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
       `Requested route: ${packageLabel}`,
       `Preferred timing: ${c(data.preferred_date, 80)}`,
       `Website / booking / social route: ${c(data.website, 500)}`,
-      isLocalFitCheck ? `Customer confirmation email: ${customerConfirmation.status}` : '',
+      `Customer acknowledgement: ${customerConfirmation.status}`,
       '',
       c(data.advert_copy, 1000) ? `Goal / useful message:\n${c(data.advert_copy, 1000)}` : 'No additional campaign note.'
     ].filter(Boolean).join('\n')
