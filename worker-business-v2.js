@@ -132,7 +132,7 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
       ].join('\n'),
       replyTo: CONTACT_INBOX
     });
-   else {
+  } else {
     // Transactional acknowledgement only, not a marketing sequence or a booking confirmation.
     customerConfirmation = await sendResendEmail(env, {
       to: c(data.email, 200).toLowerCase(),
