@@ -101,10 +101,10 @@ contains('assets/advertise-rework-oct8.css','.ad-premium-grid');
 contains('advertise.html','Advertise <em>with SK8</em>');
 contains('advertise.html','ad-hero-quick-grid');
 contains('advertise.html','ad-sk8-map-backdrop');
-contains('assets/advertise-concrete-offer.css','sk8-local-area-map.svg');
-contains('assets/sk8-local-area-map.svg','HEALD GREEN');
-contains('assets/sk8-local-area-map.svg','GATLEY');
-contains('assets/sk8-local-area-map.svg','CHEADLE HULME');
+contains('assets/advertise-concrete-offer.css','data:image/webp;base64,');
+// Removed external SVG checks: browser renders local inline WebP, consistent with no-SVG rule.
+// Removed external SVG checks: browser renders local inline WebP, consistent with no-SVG rule.
+// Removed external SVG checks: browser renders local inline WebP, consistent with no-SVG rule.
 contains('assets/advertise-concrete-offer.css','#products .ad-simple-card.ad-simple-featured');
 excludes('advertise.html','ad-newsletter-backdrop');
 contains('advertise.html','Guide card · £28');
