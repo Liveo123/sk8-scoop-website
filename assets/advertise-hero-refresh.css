@@ -146,6 +146,7 @@ body.advertiser-page .ad-hero-action-secondary{
 }
 body.advertiser-page .ad-hero-action-secondary:hover{color:#ffcf93}
 body.advertiser-page .ad-hero-actions a:focus-visible,
+body.advertiser-page .ad-specimen-fake-button:focus-visible,
 body.advertiser-page .ad-showcase-bottom a:focus-visible,
 body.advertiser-page .ad-goal-details summary:focus-visible{
   outline:3px solid #ffcf93!important;
@@ -339,6 +340,7 @@ body.advertiser-page .ad-specimen-fake-button{
   font-size:.68rem;
   font-weight:950;
   letter-spacing:.055em;
+  text-decoration:none;
 }
 body.advertiser-page .ad-specimen-fake-button span{font-size:1rem}
 body.advertiser-page .ad-showcase-bottom{
