@@ -6,6 +6,10 @@ keep_vars = true
 # Worker Previews base. Preview deployments do not inherit production secrets or D1.
 previews = { }
 
+[triggers]
+# Daily UTC cleanup of expired first-party editorial search / Trail feedback records.
+crons = [ "17 3 * * *" ]
+
 [secrets]
 required = [ "ADMIN_TOKEN", "MAILERLITE_API_TOKEN", "TURNSTILE_SECRET_KEY", "RESEND_API_KEY", "STRIPE_WEBHOOK_SECRET" ]
 
