@@ -278,6 +278,10 @@ jobs:
           echo "OK Preview isolation: STRIPE_WEBHOOK_SECRET is not inherited"
 
 
+      - name: Check out Free & Cheap guide QA scripts
+        if: startsWith(github.head_ref, 'free-cheap-')
+        uses: actions/checkout@v4
+
       - name: Verify Free & Cheap guide browser navigation
         if: startsWith(github.head_ref, 'free-cheap-')
         shell: bash
