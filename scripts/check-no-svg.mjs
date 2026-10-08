@@ -6,6 +6,8 @@ const SKIP_DIRS = new Set(['.git','node_modules','.wrangler','.cache']);
 const TEXT_EXTS = new Set(['.html','.css','.js','.mjs','.json','.xml','.md','.yml','.yaml']);
 const svgFiles = [];
 const svgRefs = [];
+const inlineSvg = [];
+const inlineSvgPattern = /<svg(?=[\s/>])/i;
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -23,6 +25,9 @@ function walk(dir) {
     const text = fs.readFileSync(full, 'utf8');
     const lines = text.split(/\r?\n/);
     lines.forEach((line, index) => {
+      if (ext === '.html' && inlineSvgPattern.test(line)) {
+        inlineSvg.push(`${rel}:${index + 1}: ${line.trim().slice(0,220)}`);
+      }
       if (/\.svg(?:[?#"'')\s]|$)/i.test(line)) {
         svgRefs.push(`${rel}:${index + 1}: ${line.trim().slice(0,220)}`);
       }
@@ -32,7 +37,7 @@ function walk(dir) {
 
 walk(ROOT);
 
-if (svgFiles.length || svgRefs.length) {
+if (svgFiles.length || svgRefs.length || inlineSvg.length) {
   console.error('Reader-facing SVG ban failed.');
   if (svgFiles.length) {
     console.error('\nSVG files still present:');
@@ -42,7 +47,11 @@ if (svgFiles.length || svgRefs.length) {
     console.error('\nSVG references still present:');
     svgRefs.forEach(x => console.error(' - ' + x));
   }
+  if (inlineSvg.length) {
+    console.error('\nInline <svg> elements in reader-facing HTML:');
+    inlineSvg.forEach(x => console.error(' - ' + x));
+  }
   console.error('\nSK8 Scoop rule: no SVG visual assets in website, newsletter or guide production. Use approved raster assets (WebP/PNG/JPG) or HTML/CSS for functional UI.');
   process.exit(1);
 }
-console.log('OK: no SVG files or SVG references found.');
+console.log('OK: no SVG files, .svg references or inline SVG in HTML found.');
