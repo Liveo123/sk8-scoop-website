@@ -107,6 +107,7 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
     temp_test: 'HISTORICAL TEST £40',
     temp_grow: 'HISTORICAL GROW £90',
     human_review: 'LOCAL-FIT CHECK',
+    local_growth_pilot: 'LOCAL GROWTH PILOT ENQUIRY (PROPOSED, NO PAYMENT)',
     local_spotlight: 'Legacy Local Spotlight',
     monthly_partner: 'Legacy Monthly Partner',
     category_partner: 'Legacy Category Partner',
