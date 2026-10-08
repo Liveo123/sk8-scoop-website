@@ -57,6 +57,13 @@ try {
   }
   check(await evaluate("document.body.dataset.calendarView==='agenda'"),'agenda opens by default');
   check(await evaluate("document.querySelectorAll('.event-listing-card').length>=20"),'real event records render');
+  check(await click('[data-event-area="Gatley"]'),'Gatley filter selectable');
+  check(await evaluate("document.querySelector('[data-events-list]').textContent.includes('Deckchair Care Welcome Café')"),'verified Gatley recurring activity visible');
+  check(await click('[data-calendar-view="month"]'),'Gatley monthly view opens');
+  check(await evaluate("document.querySelector('[data-calendar-day=\\\"2026-10-12\\\"]')?.classList.contains('has-events')"),'verified Gatley occurrence displayed on 12 October');
+  check(await evaluate("!document.querySelector('[data-calendar-day=\\\"2026-10-26\\\"]')?.classList.contains('has-events')"),'unconfirmed half-term Gatley session not invented');
+  await click('[data-calendar-view="agenda"]');
+  await click('[data-event-area="all"]');
   check(await evaluate("document.querySelectorAll('.whats-on-agenda-date').length>=3"),'agenda grouped by date');
   check(await evaluate("document.querySelectorAll('.event-listing-card .my-sk8-save').length>=20"),'My SK8 buttons render');
   check(await evaluate("document.querySelector('[data-event-id=\"reddish-vale-halloween-pumpkin-festival-2026-10-10\"] a[download]')===null"),'unknown session dates do not export misleading ICS');
