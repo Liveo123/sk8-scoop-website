@@ -278,6 +278,37 @@ jobs:
           echo "OK Preview isolation: STRIPE_WEBHOOK_SECRET is not inherited"
 
 
+      - name: Check out Free & Cheap guide QA scripts
+        if: startsWith(github.head_ref, 'free-cheap-')
+        uses: actions/checkout@v4
+
+      - name: Verify Free & Cheap guide browser navigation
+        if: startsWith(github.head_ref, 'free-cheap-')
+        shell: bash
+        env:
+          FREE_CHEAP_QA_BASE_URL: ${{ env.CLOUDFLARE_PREVIEW_BASE }}
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            export CHROME="$(command -v google-chrome)"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then
+            export CHROME="$(command -v google-chrome-stable)"
+          elif command -v chromium >/dev/null 2>&1; then
+            export CHROME="$(command -v chromium)"
+          else
+            echo "Chrome not found for guide QA"
+            exit 1
+          fi
+          node scripts/check-free-cheap-guide-browser.mjs
+
+      - name: Upload Free & Cheap guide browser screenshots
+        if: always() && startsWith(github.head_ref, 'free-cheap-')
+        uses: actions/upload-artifact@v4
+        with:
+          name: free-cheap-guide-browser-qa
+          path: visual-qa/free-cheap-guide/
+          retention-days: 7
+
+
   live-smoke:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: preflight

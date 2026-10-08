@@ -30,6 +30,21 @@ const idset = new Set(ids);
 for (const [, fragment] of hits(free, /\bhref="#([^"]+)"/g))
   assert.ok(idset.has(fragment), 'Internal link has no target: ' + fragment);
 
+const guideAnchors=[["hat-works-stockport","HAT WORKS"],["stockport-museum-market-place","STOCKPORT MUSEUM"],["stockport-air-raid-shelters","STOCKPORT AIR RAID SHELTERS"],["staircase-house-stockport-market-place","STAIRCASE HOUSE"],["bramall-hall-bramhall","BRAMALL HALL"],["explore-stockports-underbanks","EXPLORE STOCKPORT"],["manchester-museum","MANCHESTER MUSEUM"],["science-and-industry-museum-manchester","SCIENCE AND INDUSTRY MUSEUM"],["john-rylands-library-manchester","JOHN RYLANDS LIBRARY"],["the-whitworth-manchester","THE WHITWORTH"],["bruntwood-park-cheadle","BRUNTWOOD PARK"],["gatley-skatepark","GATLEY SKATEPARK"]];
+const listingBlocks=hits(free, /<article\b[^>]*>[\s\S]*?<\/article>/gi).map(m=>m[0]);
+for (const [anchorId, titlePrefix] of guideAnchors) {
+  const block=listingBlocks.find(a=>a.slice(0,a.indexOf('>')+1).includes('id="'+anchorId+'"'));
+  assert.ok(block, 'Hash link does not point to its own article: '+anchorId);
+  const heading=block.match(/<h[234][^>]*class="entry-title"[^>]*>([\s\S]*?)<\/h[234]>/i)?.[1]||'';
+  assert.ok(heading.startsWith(titlePrefix),'Hash link points to wrong listing: '+anchorId);
+  assert.ok(!free.includes('<a id="'+anchorId+'"></a>'),'Old misplaced hash anchor remains: '+anchorId);
+}
+assert.match(free, /Adult lunch choices include sandwiches from £6\.50, jacket potatoes from £8/, 'Damson Tree adult prices missing');
+assert.match(free, /children’s menu, sandwiches are £3/, 'Damson Tree £3 sandwiches must be identified as children’s menu');
+assert.match(free, /id="free-disability-swim-cheadle"><h4 class="entry-title">FREE DISABILITY SWIM/, 'Swim listing must have its own accessible heading');
+assert.match(free, /published both 8pm and 8\.30pm/, 'Station House conflicting start times must be disclosed');
+assert.doesNotMatch(free, /<strong>GROUP PRICE: £16–£28/, 'Duplicate bowling price label');
+
 for (const [img] of hits(free, /<img\b[^>]*>/gi))
   assert.match(img, /\balt="[^"]+"/, 'Every image needs non-empty alt text');
 for (const [a] of hits(free, /<a\b[^>]*target="_blank"[^>]*>/gi))
