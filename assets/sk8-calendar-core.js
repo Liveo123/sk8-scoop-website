@@ -51,10 +51,10 @@
     const kind = mode(event);
     if (kind === 'specific_dates') return confirmedDates(event).some(date => date >= start && date <= end);
     if (kind === 'daily') return validDate(event.date) && validDate(event.end_date) && event.date <= end && event.end_date >= start;
-    if (kind === 'range_unspecified' && start !== end) {
-      return validDate(event.date) && (event.end_date || event.date) >= start && event.date <= end;
-    }
-    return event.date >= start && event.date <= end;
+    // An overall event run does not prove any particular intermediate session.
+    // Only the verified first date is eligible for interval filters until
+    // organisers confirm individual dates or a genuinely daily activity.
+    return validDate(event.date) && event.date >= start && event.date <= end;
   }
   function isFree(event) {
     if (event.cost_type) return event.cost_type === 'free' ||
