@@ -25,7 +25,7 @@ chrome.stderr.on('data', chunk => process.stderr.write(chunk));
 let version;
 for (let i = 0; i < 120; i++) {
   try {
-    const response = await fetch('http://127.0.0.1:9224/json/version');
+    const response = await fetch('http://127.0.0.1:9238/json/version');
     if (response.ok) {
       version = await response.json();
       break;
@@ -35,7 +35,7 @@ for (let i = 0; i < 120; i++) {
 }
 if (!version) throw new Error('Chrome DevTools endpoint did not start');
 
-const targetResponse = await fetch('http://127.0.0.1:9224/json/new?about:blank', { method: 'PUT' });
+const targetResponse = await fetch('http://127.0.0.1:9238/json/new?about:blank', { method: 'PUT' });
 const target = await targetResponse.json();
 const ws = new WebSocket(target.webSocketDebuggerUrl);
 await new Promise((resolve, reject) => {
