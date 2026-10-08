@@ -135,6 +135,8 @@ try {
       const form = document.querySelector('#campaign-enquiry form');
       const premium = [...document.querySelectorAll('.ad-premium-option')];
       const quickButtons = [...document.querySelectorAll('.ad-hero-quick-item')];
+      const heroCard = document.querySelector('.ad-hero-prices');
+      const heroIntro = document.querySelector('.ad-hero-copy');
       const example = document.querySelector('.ad-example-only figure');
       return {
         viewport: innerWidth,
@@ -150,6 +152,10 @@ try {
         premiumVisible: premium.map(el => ({price:el.querySelector('.ad-premium-buy b')?.textContent,shown:rect(el).width>0})),
         quickPrices: quickButtons.map(el => el.querySelector('b')?.textContent),
         quickTargets: quickButtons.map(el => Math.round(rect(el).height)),
+        heroCardOwnsButtons: !!heroCard && quickButtons.length===3 && quickButtons.every(el=>heroCard.contains(el)),
+        heroCardWidth: heroCard ? rect(heroCard).width : 0,
+        heroCardWithinViewport: heroCard ? rect(heroCard).left>=-1 && rect(heroCard).right<=innerWidth+1 : false,
+        heroIntroAndCardColumns: innerWidth<900 || (rect(heroIntro).left < rect(heroCard).left && rect(heroCard).left >= rect(heroIntro).right - 2),
         heroWords: document.querySelector('h1')?.textContent?.trim().split(/\\s+/).length,
         goalChoices: document.querySelectorAll('[data-ad-goal]').length,
         exampleVisible: !!example && rect(example).width > 0,
@@ -177,6 +183,7 @@ try {
     if(before.heroWords!==3 || before.goalChoices!==0 || !before.exampleVisible || before.artworkChoices!==3) fail(width+'px: hero, example or artwork options mismatch');
     if(!before.reportRemoved || !before.audienceRemoved) fail(width+'px: removed sections still visible');
     if(before.quickPrices.join(',')!=='£35,£28,£60' || !before.quickTargets.every(n=>n>=44)) fail(width+'px: compact hero prices unreadable');
+    if(!before.heroCardOwnsButtons || !before.heroCardWithinViewport || !before.heroIntroAndCardColumns || before.heroCardWidth<260) fail(width+'px: quick pricing buttons no longer contained in hero map panel');
     if(before.premiumVisible.map(o=>o.price).join(',')!=='£96,£125' || !before.premiumVisible.every(o=>o.shown)) fail(width+'px: sponsorship prices not visible');
     if(before.guideChoiceOptions<8) fail(width+'px: not all Guides offered');
     await evaluate("document.getElementById('products').scrollIntoView({block:'start',behavior:'instant'}); true");
