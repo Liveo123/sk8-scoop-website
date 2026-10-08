@@ -4,6 +4,7 @@ on:
     paths:
       - 'assets/sk8-calendar-core.js'
       - 'tests/sk8-calendar-core.mjs'
+      - 'scripts/event-editorial-exclusions.mjs'
       - 'data/events.json'
       - 'data/event-sources.json'
       - '.github/workflows/sk8-calendar-foundation-qa.yml'
@@ -12,6 +13,7 @@ on:
     paths:
       - 'assets/sk8-calendar-core.js'
       - 'tests/sk8-calendar-core.mjs'
+      - 'scripts/event-editorial-exclusions.mjs'
       - 'data/events.json'
       - 'data/event-sources.json'
       - '.github/workflows/sk8-calendar-foundation-qa.yml'
