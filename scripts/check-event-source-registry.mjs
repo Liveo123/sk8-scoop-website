@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { exclusionReason } from './event-editorial-exclusions.mjs';
 
 const path = 'data/event-sources.json';
 const raw = fs.readFileSync(path, 'utf8');
@@ -14,6 +15,8 @@ const modes = new Set(['fetch','search','manual-social','internal']);
 
 for (const [index, source] of data.sources.entries()) {
   const label = `source[${index}]`;
+  const excluded = exclusionReason(source);
+  if (excluded) throw new Error(`${label}: ${excluded}`);
   for (const key of ['id','name','tier','area','role','cadence_days','mode']) {
     if (source[key] === undefined || source[key] === '') {
       throw new Error(`${label} missing ${key}`);
