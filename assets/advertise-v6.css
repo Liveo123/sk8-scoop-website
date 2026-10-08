@@ -1445,3 +1445,110 @@ body.advertiser-page .starter-visual-machine{
   background-position:center 50%!important;
   background-repeat:no-repeat!important;
 }
+
+
+/* Final approved advertiser imagery, 8 Oct 2026.
+   Keep the supplied artwork at its natural aspect ratio: no cropping, no duplicate overlays. */
+body.advertiser-page .halloween-scene-v6{
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+  overflow:hidden!important;
+}
+body.advertiser-page .halloween-scene-v6>img{
+  flex:0 0 auto!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+body.advertiser-page .halloween-scene-v6:after{display:none!important}
+body.advertiser-page .halloween-scene-v6 .halloween-scene-caption{
+  position:static!important;
+  inset:auto!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr)!important;
+  gap:5px 16px!important;
+  align-items:center!important;
+  padding:16px 18px!important;
+  border:0!important;
+  border-top:1px solid rgba(255,255,255,.14)!important;
+  border-radius:0!important;
+  background:linear-gradient(100deg,#21182c,#183c43)!important;
+  backdrop-filter:none!important;
+}
+body.advertiser-page .halloween-scene-v6 .halloween-scene-caption small{
+  grid-column:1!important;grid-row:1!important;color:#ffd09d!important;
+}
+body.advertiser-page .halloween-scene-v6 .halloween-scene-caption strong{
+  grid-column:1!important;grid-row:2!important;margin:0!important;font-size:1.25rem!important;line-height:1!important;
+}
+body.advertiser-page .halloween-scene-v6 .halloween-scene-caption span{
+  grid-column:2!important;grid-row:1 / span 2!important;margin:0!important;color:#f3eaf5!important;
+}
+
+body.advertiser-page .ad-christmas-photo{
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:1916 / 821!important;
+  overflow:hidden!important;
+  background:#173f45!important;
+}
+body.advertiser-page .ad-christmas-photo img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+body.advertiser-page .ad-christmas-photo:after{display:none!important}
+body.advertiser-page .ad-christmas-photo span{display:none!important}
+
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo{
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:1672 / 941!important;
+  overflow:hidden!important;
+  background:#f7f2ea!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo>img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  filter:none!important;
+}
+body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo:before{
+  display:none!important;
+  content:none!important;
+}
+body.advertiser-page .ad-demo-fake-stamp,
+body.advertiser-page .ad-demo-photo-brand{display:none!important}
+
+@media(max-width:720px){
+  body.advertiser-page .halloween-scene-v6{min-height:0!important}
+  body.advertiser-page .halloween-scene-v6>img{min-height:0!important}
+  body.advertiser-page .halloween-scene-v6 .halloween-scene-caption{
+    grid-template-columns:1fr!important;
+  }
+  body.advertiser-page .halloween-scene-v6 .halloween-scene-caption small,
+  body.advertiser-page .halloween-scene-v6 .halloween-scene-caption strong,
+  body.advertiser-page .halloween-scene-v6 .halloween-scene-caption span{
+    grid-column:1!important;
+    grid-row:auto!important;
+  }
+}
+@media(max-width:520px){
+  body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo,
+  body.advertiser-page .ad-placement-demo-v6 .ad-demo-photo img{
+    height:auto!important;
+    min-height:0!important;
+  }
+}
