@@ -266,6 +266,40 @@
     "checked": "2026-10-06"
   },
   {
+    "id": "gatley-deckchair-care-welcome-cafe-2026-autumn",
+    "title": "Deckchair Care Welcome Café",
+    "status": "verified",
+    "date": "2026-10-12",
+    "end_date": "2026-12-07",
+    "date_mode": "specific_dates",
+    "occurrences": [
+      "2026-10-12",
+      "2026-10-19",
+      "2026-11-02",
+      "2026-11-09",
+      "2026-11-23",
+      "2026-12-07"
+    ],
+    "date_range": "Selected confirmed Mondays, 12 Oct–7 Dec 2026",
+    "time": "13:00",
+    "end_time": "15:00",
+    "area": "Gatley",
+    "venue": "Gatley United Reformed Church, Elm Road, Gatley SK8 4LY",
+    "cost": "Free; voluntary donations welcome",
+    "cost_type": "optional_donation",
+    "category": "Community / Older Adults",
+    "audience_tags": [
+      "adults",
+      "older_adults",
+      "community"
+    ],
+    "description": "Deckchair Care's welcoming, dementia-friendly community café offers company, conversation and activities for older residents, carers and anyone who would enjoy some company. The listed sessions run 1pm–3pm. Dates are individually sourced; check with the organiser for any changes.",
+    "booking_url": "https://www.eventbrite.com/e/welcome-cafe-deckchair-care-tickets-2002511771615",
+    "source_url": "https://www.eventbrite.com/e/welcome-cafe-deckchair-care-tickets-2002511771615",
+    "verification": "ORGANISER_PRIMARY_EVENT_PAGE_AND_COUNCIL_LISTINGS",
+    "checked": "2026-10-08"
+  },
+  {
     "id": "stockroom-subtext-launch-2026-10-15",
     "title": "Exhibition Launch: SUBTEXT",
     "status": "verified",
