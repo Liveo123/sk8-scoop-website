@@ -165,7 +165,7 @@ try {
     console.log('ADVERT_LAYOUT ' + JSON.stringify(before));
     if (before.documentWidth > width + 1) fail(width + 'px: horizontal page overflow');
     const appearance=await evaluate("(() => {const featured=getComputedStyle(document.querySelector('#products .ad-simple-featured'));const backdrop=getComputedStyle(document.querySelector('.ad-sk8-map-backdrop'),'::before');return {cardGradient:featured.backgroundImage,borderTop:featured.borderTopColor,map:backdrop.backgroundImage,blur:backdrop.filter}})()");
-    if (!appearance.map.includes('sk8-local-area-map.svg') || !appearance.blur.includes('blur(')) fail(width+'px: blurred SK8 map missing');
+    if (!appearance.map.includes('data:image/webp;base64,') || !appearance.blur.includes('blur(')) fail(width+'px: blurred SK8 map missing');
     if (!appearance.cardGradient.includes('linear-gradient') || appearance.borderTop !== 'rgb(248, 121, 27)') fail(width+'px: featured card styling not applied');
     console.log('ADVERT_DESIGN '+JSON.stringify({width,appearance}));
     if (!before.cards.every(c => c.left > -1 && c.right <= width + 1)) fail(width + 'px: pricing cards clipped horizontally');
