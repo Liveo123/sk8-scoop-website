@@ -141,7 +141,7 @@ assert(!advertiseHtml.includes('test-canva-thumb.webp') && !advertiseHtml.includ
 assert(!advertiseHtml.includes('e_gen_restore'), 'Advertiser HTML does not upscale low-resolution source images');
 assert(!advertiseV6.includes('e_gen_restore'), 'Advertiser CSS does not upscale low-resolution source images');
 
-assert(advertiseHtml.includes('halloween-scene-caption'), 'Halloween campaign copy sits below the artwork instead of covering it');
+assert(advertiseHtml.includes('specific start date, end date') && advertiseHtml.includes('not indefinitely'), 'Guide advert explains duration and prohibits accidental indefinite exposure claims');
 assert(!advertiseHtml.includes('<span>CHRISTMAS 2026 · HOSPITALITY</span>'), 'Christmas label is not duplicated over the final artwork');
 assert(!advertiseHtml.includes('ad-demo-fake-stamp'), 'Cafe image does not receive a duplicate fictional-example overlay');
 assert(!advertiseHtml.includes('<div class="ad-demo-photo-brand">'), 'Cafe image does not receive a duplicate Maple & Bean lock-up');
