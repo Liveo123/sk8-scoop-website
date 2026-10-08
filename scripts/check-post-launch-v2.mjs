@@ -94,16 +94,16 @@ contains('latest/index.html','/local-history/');
 excludes('assets/latest-polish.css','NEXT FRIDAY');
 const latestHtml = read('latest/index.html');
 expect((latestHtml.match(/<section\b/g) || []).length === (latestHtml.match(/<\/section>/g) || []).length, 'latest/index.html has unbalanced section tags');
-contains('advertise.html','ad-product-grid ad-route-grid');
+contains('advertise.html','ad-simple-grid');
 contains('assets/advertise-v5.css','#advertiser-tools .ad-route-grid');
 
 // Current advertiser offer and backend contract.
 // Owner-approved reversion to the established prices on 5 October 2026.
-contains('advertise.html','Newsletter TEST · £40');
-contains('advertise.html','<div class="halloween-price">£35</div>');
-contains('advertise.html','<div class="halloween-price">£75</div>');
-contains('advertise.html','<div class="halloween-price">£110</div>');
-contains('advertise.html','<div class="halloween-price">£150</div>');
+contains('advertise.html','Newsletter advert · £35');
+contains('advertise.html','Halloween Guide card · £28');
+contains('advertise.html','Guide + newsletter · £60');
+contains('advertise.html','section sponsor (£110)');
+contains('advertise.html','main Guide sponsor (£150)');
 contains('advertise.html','value="starter_newsletter"');
 contains('advertise.html','value="halloween_guide"');
 contains('advertise.html','value="halloween_combo"');
@@ -117,7 +117,10 @@ excludes('advertise.html','<div class="halloween-price">£125</div>');
 excludes('advertise.html','WEBSITE · price by scope');
 excludes('advertise.html','value="temp_website"');
 contains('advertise.html','data-experiment="advertiser-local-hero-v2"');
-contains('advertise.html','GUIDE ADVERT');
+contains('advertise.html','Guide advert');
+excludes('advertise.html','£40');
+excludes('advertise.html','£75');
+contains('advertise.html','assets/advertise-simple-pricing.css');
 contains('worker.js',"'starter_newsletter'");
 contains('worker.js',"'halloween_guide'");
 contains('worker.js',"'halloween_combo'");
