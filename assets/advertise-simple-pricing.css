@@ -1,0 +1,23 @@
+/* Three clear advert packages, responsive and accessible. */
+body.advertiser-page .ad-simple-price{background:#fffaf3;padding:64px 0}
+body.advertiser-page .ad-simple-price h2{max-width:850px;margin:8px 0 16px;font-size:clamp(2rem,4.5vw,3.5rem);color:#173f45}
+body.advertiser-page .ad-simple-lead{max-width:790px;font-size:1.1rem;color:#435b60}
+body.advertiser-page .ad-simple-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:30px 0 18px}
+body.advertiser-page .ad-simple-card{display:flex;flex-direction:column;min-width:0;padding:28px;border:1px solid #c8dcd7;border-top:6px solid #0f6470;border-radius:20px;background:#fff;box-shadow:0 12px 30px rgba(20,55,60,.08)}
+body.advertiser-page .ad-simple-card.ad-simple-featured{border-top-color:#f8791b;background:#fff8ed}
+body.advertiser-page .ad-simple-card .eyebrow{color:#0f6470;font-weight:800}
+body.advertiser-page .ad-simple-card h3{margin:12px 0 0;color:#173f45;font-size:1.65rem}
+body.advertiser-page .ad-simple-price-value{font:800 clamp(2.8rem,5vw,4rem)/1 Georgia,serif;color:#173f45;margin:16px 0}
+body.advertiser-page .ad-simple-card p:not(.ad-simple-price-value){color:#39575a;line-height:1.5}
+body.advertiser-page .ad-simple-card ul{padding-left:22px;line-height:1.65;color:#38545a;margin:12px 0 24px}
+body.advertiser-page .ad-simple-card .button{margin-top:auto;width:100%;text-align:center;justify-content:center;color:#fff;background:#0f6470}
+body.advertiser-page .ad-simple-fine{color:#4b6064;font-size:.88rem;line-height:1.55;max-width:1000px}
+body.advertiser-page .ad-simple-extras{margin-top:26px;padding:18px 22px;border:1px solid #d3dfdc;border-radius:16px;background:#fff}
+body.advertiser-page .ad-simple-extras summary{cursor:pointer;color:#173f45;font-weight:800}
+body.advertiser-page .ad-simple-sponsor-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+body.advertiser-page .ad-simple-finder{margin-top:18px}
+body.advertiser-page .ad-simple-process{padding:35px 0}
+body.advertiser-page .ad-simple-process h2{color:#173f45}
+body.advertiser-page .ad-simple-process p{max-width:900px}
+@media(max-width:950px){body.advertiser-page .ad-simple-grid{grid-template-columns:1fr 1fr}body.advertiser-page .ad-simple-featured{grid-column:1/-1}}
+@media(max-width:620px){body.advertiser-page .ad-simple-grid{grid-template-columns:1fr}body.advertiser-page .ad-simple-featured{grid-column:auto}body.advertiser-page .ad-simple-card{padding:22px}body.advertiser-page .ad-simple-price{padding:38px 0}body.advertiser-page .ad-simple-sponsor-actions .button{width:100%}}
