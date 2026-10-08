@@ -141,16 +141,6 @@
       "url": "https://www.avroheritagemuseum.co.uk/events"
     },
     {
-      "id": "cheadle-masjid",
-      "name": "Cheadle Masjid events",
-      "tier": "A",
-      "area": "Heald Green",
-      "role": "primary",
-      "cadence_days": 2,
-      "mode": "fetch",
-      "url": "https://cheadlemasjid.org/events-activities/list/"
-    },
-    {
       "id": "st-marys-cheadle",
       "name": "St Mary's Church Cheadle calendar",
       "tier": "A",
