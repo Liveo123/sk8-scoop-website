@@ -459,12 +459,18 @@
     selectedDate = '';
     syncViewParams();
     render();
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('whats_on_filter', { filter: activeFilter, area: activeArea, view: document.body.dataset.calendarView || 'agenda' });
+    }
     if (button.dataset.eventJump === 'results') window.requestAnimationFrame(jumpToResults);
   }));
   areaFilters.forEach(button => button.addEventListener('click', () => {
     activeArea = button.dataset.eventArea || 'all';
     syncViewParams();
     render();
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('whats_on_area_filter', { area: activeArea, filter: activeFilter, view: document.body.dataset.calendarView || 'agenda' });
+    }
   }));
 
   fetch(DATA_URL, { cache: 'no-store' })
