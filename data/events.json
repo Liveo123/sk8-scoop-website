@@ -15,7 +15,9 @@
     "booking_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/b6e0abf7-77f5-4ef9-84bc-63fe70de6eae",
     "source_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/b6e0abf7-77f5-4ef9-84bc-63fe70de6eae",
     "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-10-01"
+    "checked": "2026-10-01",
+    "date_mode": "daily",
+    "cost_type": "admission_required"
   },
   {
     "id": "grimmfest-2026-10-08",
@@ -81,7 +83,8 @@
     "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-10-06",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "members_only_free"
   },
   {
     "id": "ben-nuttall-footy-factory-2026-10-10",
@@ -359,7 +362,8 @@
     "source_url": "https://www.stockport.gov.uk/landing/bramall-hall",
     "verification": "VENUE_AND_COUNCIL_EVENT_SOURCE",
     "checked": "2026-09-25",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "admission_required"
   },
   {
     "id": "cheadle-hulme-con-club-iconic-2026-10-24",
@@ -375,7 +379,8 @@
     "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-10-06",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "members_only_free"
   },
   {
     "id": "stockroom-dads-club-half-term-2026-10-24",
@@ -391,7 +396,8 @@
     "booking_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
     "source_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
     "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "cost_type": "free_optional_extras"
   },
   {
     "id": "jodrell-wallace-gromit-2026-10-24",
@@ -409,7 +415,8 @@
     "source_url": "https://www.jodrellbank.net/events/grand-day-out/",
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-09-25",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "admission_required"
   },
   {
     "id": "stockroom-bsl-signed-storytime-2026-10-26",
@@ -443,7 +450,8 @@
     "source_url": "https://www.jodrellbank.net/events/october-half-term-at-jodrell-bank/",
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-09-25",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "admission_required"
   },
   {
     "id": "foodie-friday-2026-10-30",
@@ -459,7 +467,8 @@
     "source_url": "https://skfoodiefriday.co.uk/",
     "verification": "ORGANISER_PRIMARY_SOURCE",
     "checked": "2026-09-25",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "free_optional_extras"
   },
   {
     "id": "arc-saturday-art-club-2026-10-31",
@@ -475,7 +484,8 @@
     "booking_url": "",
     "source_url": "https://arc-centre.org/saturday-art-clubs/",
     "verification": "ORGANISER_PRIMARY_SOURCE",
-    "checked": "2026-10-01"
+    "checked": "2026-10-01",
+    "cost_type": "optional_donation"
   },
   {
     "id": "heald-green-halloween-crafty-kids-2026-10-31",
