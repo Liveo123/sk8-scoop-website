@@ -1,19 +1,13 @@
 (() => {
-  const extraStylesheet = '/assets/advertise-v5.css';
-  if (!document.querySelector(`link[href="${extraStylesheet}"]`)) {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = extraStylesheet;
-    link.dataset.sk8AdvertiseV5 = 'true';
-    document.head.appendChild(link);
-  }
-
   const form = document.querySelector('[data-form-kind="advertiser"]');
   if (!form) return;
 
   const actionField = form.querySelector('[name="advert_copy"]');
   const preferredMonthField = form.querySelector('[name="preferred_date"]');
   const packageInputs = [...form.querySelectorAll('input[name="package"]')];
+  const sponsorOptions = [...form.querySelectorAll('[data-sponsor-option]')];
+  const selectionSummary = form.querySelector('[data-ad-selection-summary]');
+  const packageLabels = {starter_newsletter:'Newsletter advert · £35',halloween_guide:'Halloween Guide card · £28',halloween_combo:'Guide + newsletter · £60',halloween_section:'Section sponsor · £110',halloween_main:'Main Guide sponsor · £150',human_review:'Local-fit check · no payment'};
   const localFitRoute = form.querySelector('[data-local-fit-route]');
   const formTitle = form.querySelector('[data-ad-form-title]');
   const formIntro = form.querySelector('[data-ad-form-intro]');
@@ -69,34 +63,34 @@
 
   function setReviewMode(enabled) {
     if (localFitRoute) localFitRoute.hidden = !enabled;
-    if (formTitle) formTitle.textContent = enabled ? 'Request a local-fit check' : 'Advertise with SK8 Scoop';
+    if (formTitle) formTitle.textContent = enabled ? 'Request a local-fit check' : 'Request your advert';
     if (formIntro) {
       formIntro.textContent = enabled
         ? 'No payment is taken for this check. SK8 Scoop will first decide whether the business is a sensible match for core SK8 readers.'
-        : 'Newsletter advert £35, Halloween Guide advert £28, or both for £60. We confirm dates and send a secure payment link after you approve the advert.';
+        : 'Newsletter £35, Halloween Guide £28, or both for £60. We confirm suitability, exact dates and payment details before you commit.';
     }
     if (termsCopy) {
       termsCopy.textContent = enabled
         ? 'I understand this is a fit check only. Any later paid campaign would still be subject to suitability, availability and separate agreement.'
         : 'I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not guarantee results or favourable editorial coverage.';
     }
-    if (submitButton) submitButton.textContent = enabled ? 'Send local-fit check' : 'Send advertising enquiry';
+    if (submitButton) submitButton.textContent = enabled ? 'Send local-fit check' : 'Send enquiry · no payment now';
   }
 
   function setSeasonalMode(choice = '') {
     if (localFitRoute) localFitRoute.hidden = true;
     if (formTitle) formTitle.textContent = 'Halloween & Half-Term advertising enquiry';
     if (formIntro) {
-      formIntro.textContent = 'Seasonal rates are £28 for the Guide and £60 for Guide + newsletter. Sponsorship is only suggested when it genuinely fits.';
+      formIntro.textContent = choice && choice.includes('sponsor')
+        ? `${choice}. Subject to available inventory; we confirm dates and price before payment.`
+        : 'Halloween Guide £28 or Guide + newsletter £60. We confirm the Guide period and issue date before payment.';
     }
     if (termsCopy) {
       termsCopy.textContent = 'I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not buy editorial inclusion, ranking, recommendation or guaranteed results.';
     }
-    if (submitButton) submitButton.textContent = 'Send Halloween advertising enquiry';
+    if (submitButton) submitButton.textContent = 'Send enquiry · no payment now';
 
-    if (choice && actionField && !actionField.value.trim()) {
-      actionField.value = `Halloween & Half-Term 2026 package: ${choice}.\n\nWhat I want local readers to do: `;
-    }
+    // Do not put package text into the required goal field: the user must write a real objective.
     if (preferredMonthField && !preferredMonthField.value) preferredMonthField.value = '2026-10';
   }
 
@@ -112,7 +106,7 @@
 
     if (actionField && allowedFinderGoals.has(finderGoal) && !actionField.value.trim()) {
       const opportunityLabel = allowedFinderOpportunities.get(finderOpportunity);
-      actionField.value = `Campaign Finder goal: ${finderGoal}.${opportunityLabel ? ` Opportunity: ${opportunityLabel}.` : ''} `;
+      actionField.placeholder = `Your goal: ${finderGoal}. Please describe your actual offer or message here.`;
     }
 
     if (typeof window.sk8Track === 'function') {
@@ -144,7 +138,7 @@
       goalLinks.forEach(item => item.setAttribute('aria-current', item === link ? 'true' : 'false'));
 
       if (goal && actionField && !actionField.value.trim()) {
-        actionField.value = `${goal}: `;
+        actionField.placeholder = `What would you like readers to ${goal.toLowerCase()}? Include a specific offer, event or useful reason.`;
       }
 
       scrollToForm(actionField);
@@ -165,7 +159,7 @@
       }
       const seasonalChoice = String(button.dataset.seasonalChoice || '').trim();
       if (route.startsWith('halloween_')) setSeasonalMode(seasonalChoice);
-      scrollToForm(input || form.querySelector('input,textarea,select'));
+      scrollToForm(form.querySelector('[name="business_name"]'));
 
       if (typeof window.sk8Track === 'function') {
         window.sk8Track('advertiser_package_jump', { route });
@@ -173,9 +167,15 @@
     });
   });
 
+  function reflectSelection(route) {
+    sponsorOptions.forEach(label => { label.hidden = label.dataset.sponsorOption !== route; });
+    if (selectionSummary) selectionSummary.textContent = `Selected: ${packageLabels[route] || 'Advertising enquiry'} · No payment taken now`;
+  }
+
   packageInputs.forEach(input => input.addEventListener('change', () => {
     if (!input.checked) return;
-    if (input.value.startsWith('halloween_')) setSeasonalMode();
+    reflectSelection(input.value);
+    if (input.value.startsWith('halloween_')) setSeasonalMode(packageLabels[input.value] || '');
     else setReviewMode(input.value === 'human_review');
     if (typeof window.sk8Track === 'function') {
       window.sk8Track('advertiser_route_selected', { route: input.value });
@@ -186,8 +186,11 @@
     window.setTimeout(() => {
       setReviewMode(false);
       if (localFitRoute) localFitRoute.hidden = true;
+      reflectSelection('starter_newsletter');
     }, 0);
   });
+
+  reflectSelection(form.querySelector('input[name="package"]:checked')?.value || 'starter_newsletter');
 
   /* The established backend already accepts the generic `bespoke` route.
      Keep the reader-facing value specific and useful, then map it only at submit time. */
