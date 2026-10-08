@@ -47,7 +47,7 @@ try {
   };
   const navigate=async path=>{
     await cmd('Page.navigate',{url:BASE+path});
-    const slug=path.replace(/^\\/+|\\/+$|\\.html$/g,'');
+    const slug=path.split('/').filter(Boolean).pop().replace('.html','');
     await wait("document.readyState==='complete' && location.pathname.includes("+JSON.stringify(slug)+")");
     await sleep(600);
   };
