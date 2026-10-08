@@ -116,6 +116,12 @@ const heroCriticismChecks = [
 ];
 for (const [name,passed] of heroCriticismChecks) assert(passed, 'Hero criticism pass '+name);
 
+assert(advertiseHtml.includes('assets/images/advertise/sk8-local-map-sunset-2026.webp'), 'Approved SK8 sunset artwork is used in the advertiser hero');
+assert(advertiseHtml.includes('width="1100" height="393"'), 'Approved hero image reserves its layout space');
+assert(!advertiseHtml.includes('ad-specimen-art-glow') && !advertiseHtml.includes('ad-specimen-area') && !advertiseHtml.includes('ad-specimen-art-title'), 'Old placeholder labels and overlays are removed');
+assert(advertiseHeroCss.includes('aspect-ratio:2098 / 750') && advertiseHeroCss.includes('object-fit:contain'), 'Hero illustration displays at full aspect ratio without cropping');
+
+
 if (process.exitCode) process.exit(process.exitCode);
 console.log('Advertiser growth-engine static checks passed.');
 
