@@ -1,3 +1,4 @@
+import { startPreferenceVerification, renderPreferenceConfirmation, finishPreferenceVerification } from './preference-verification.js';
 const SCHEMA = `
 CREATE TABLE IF NOT EXISTS qr_events (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -150,7 +151,13 @@ export default {
         return handleSubmitEvent(request, env);
       }
       if (url.pathname === '/api/save-preferences' && request.method === 'POST') {
-        return handleSavePreferences(request, env);
+        return startPreferenceVerification(request, env);
+      }
+      if (url.pathname === '/api/confirm-preferences' && request.method === 'GET') {
+        return renderPreferenceConfirmation(request);
+      }
+      if (url.pathname === '/api/confirm-preferences' && request.method === 'POST') {
+        return finishPreferenceVerification(request, env);
       }
       if (url.pathname === '/api/reader-submission' && request.method === 'POST') {
         return handleReaderSubmission(request, env);
@@ -283,17 +290,6 @@ async function handleSubmitEvent(request, env) {
   await env.DB.prepare(`INSERT INTO event_submissions (event_name,event_date,event_time,venue,area,cost,booking_url,description,contact_name,email,image_note,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,'pending',datetime('now'))`)
     .bind(c(d.event_name, 160), c(d.event_date, 20), c(d.event_time, 80), c(d.venue, 220), c(d.area, 80), c(d.cost, 100), c(d.booking_url, 500), c(d.description, 1200), c(d.contact_name, 120), c(d.email, 200), c(d.image_note, 400)).run();
   return json({ message: 'Thank you. The event is in the moderation queue for checking.' });
-}
-
-async function handleSavePreferences(request, env) {
-  const d = await readJson(request);
-  if (!isEmail(d.email)) return json({ error: 'Please provide a valid email address.' }, 400);
-  if (String(d.preference_consent || '') !== 'yes') return json({ error: 'Please confirm that you want these preferences saved.' }, 400);
-  const yn = key => String(d[key] || '') === 'yes' ? 1 : 0;
-  const email = String(d.email).trim().toLowerCase().slice(0, 200);
-  await env.DB.prepare(`INSERT INTO subscriber_preferences (email,families_children,events,food_drink,offers_savings,home_property,pets_outdoors,practical_updates,updated_at) VALUES (?,?,?,?,?,?,?,?,datetime('now')) ON CONFLICT(email) DO UPDATE SET families_children=excluded.families_children,events=excluded.events,food_drink=excluded.food_drink,offers_savings=excluded.offers_savings,home_property=excluded.home_property,pets_outdoors=excluded.pets_outdoors,practical_updates=excluded.practical_updates,updated_at=datetime('now')`)
-    .bind(email, yn('families_children'), yn('events'), yn('food_drink'), yn('offers_savings'), yn('home_property'), yn('pets_outdoors'), yn('practical_updates')).run();
-  return json({ message: 'Your optional SK8 Scoop interests have been saved.' });
 }
 
 async function handleReaderSubmission(request, env) {
