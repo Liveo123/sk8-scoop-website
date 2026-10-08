@@ -1,0 +1,54 @@
+name: Policy and Consent Preview QA
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'privacy.html'
+      - 'terms.html'
+      - 'editorial-policy.html'
+      - 'advertising-terms.html'
+      - 'advertise.html'
+      - 'tests/policy-consent-preview-browser.mjs'
+      - '.github/workflows/policy-consent-preview-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  policy-browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            exit 1
+          fi
+      - name: Wait for updated policy preview
+        shell: bash
+        run: |
+          for attempt in $(seq 1 25); do
+            code="$(curl -sSL --max-time 20 -o /tmp/sk8-policy-preview.html -w '%{http_code}' https://release-policies-sole-trader-20261008.previews.sk8scoop.com/privacy.html || true)"
+            if [ "$code" = "200" ] && grep -Fq 'Paul Livesey' /tmp/sk8-policy-preview.html; then
+              echo "Policy preview detected"
+              exit 0
+            fi
+            sleep 8
+          done
+          exit 1
+      - name: Check script syntax
+        run: node --check tests/policy-consent-preview-browser.mjs
+      - name: Browser consent, operator and policy QA
+        env:
+          PREVIEW_URL: https://release-policies-sole-trader-20261008.previews.sk8scoop.com
+          CHROME: ${{ env.CHROME }}
+        run: node tests/policy-consent-preview-browser.mjs
