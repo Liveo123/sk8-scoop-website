@@ -18,6 +18,7 @@ const advertiseV6 = read('assets/advertise-v6.css');
 const advertiseHeroCss = read('assets/advertise-hero-refresh.css');
 const advertiseApprovedXmas = read('assets/advertise-approved-xmas.css');
 const advertiseApprovedCafe = read('assets/advertise-approved-cafe.css');
+const simpleCss = read('assets/advertise-simple-pricing.css');
 const opportunity = read('advertise/christmas-eating-out/index.html');
 const pay = read('advertise/pay/index.html');
 const wrapper = read('worker-business-v2.js');
@@ -30,7 +31,7 @@ for (const value of ['book','enquire','visit','register','buy','awareness']) {
 for (const name of ['category','area','timing','value','specific','route','freecheap','none']) {
   assert(finderHtml.includes(`name="${name}"`), `Campaign Finder includes ${name} input`);
 }
-for (const label of ['TEST','£40','FIX FIRST','WAIT','NOT A FIT','HUMAN REVIEW']) {
+for (const label of ['newsletter advert','£35','FIX FIRST','WAIT','NOT A FIT','HUMAN REVIEW']) {
   assert(finderJs.includes(label), `Decision logic includes ${label}`);
 }
 assert(finderJs.includes("params.set('finder_source', 'campaign_finder')"), 'Finder hands recommendations to advertiser enquiry');
@@ -42,17 +43,17 @@ assert(advertiseHtml.includes('ad-simple-grid') && advertiseHtml.includes('ad-si
 assert(advertiseHtml.includes('ad-proof-grid-v7') && advertiseHtml.includes('ad-proof-pictogram'), 'Advertise proof strip uses the corrected icon-led treatment');
 assert(advertiseHtml.includes('ad-simple-finder') && advertiseHtml.includes('/advertise/finder/'), 'Optional campaign finder remains available without adding another prominent product card');
 assert(advertiseHtml.includes('ad-placement-demo-v6') && advertiseHtml.includes('maple-bean-cafe-2026-final-v2.png'), 'Advertise example placement uses the approved final cafe image');
-assert(advertiseHtml.includes('Choose, approve, pay, publish.') && advertiseHtml.includes('secure Stripe invoice/payment link'), 'Advertiser page explains proof and payment process before enquiry');
+assert(advertiseHtml.includes('Choose → approve → pay → publish') && advertiseHtml.includes('secure payment link'), 'Advertiser page explains proof and payment process before enquiry');
 assert(advertiseHtml.includes('audience-pills-v6') && advertiseHtml.includes('audience-fit-board'), 'Audience section uses icon chips and the crisp local-fit board');
-assert(advertiseHtml.includes('ad-process-grid-v6') && advertiseHtml.includes('ad-process-icon'), 'Campaign process uses the richer visual treatment');
+assert(advertiseHtml.includes('ad-simple-process') && advertiseHtml.includes('This form never takes payment'), 'Campaign process clearly states no payment at enquiry');
 assert(advertiseV6.includes('body.advertiser-page [hidden]{display:none!important}'), 'Hidden seasonal package radios cannot render as stray circles');
-assert(advertiseV6.includes('.ad-route-grid') && advertiseV6.includes('grid-template-columns:repeat(2,minmax(0,1fr))'), 'Advertiser route grid is deliberately balanced as a 2x2 layout');
+assert(simpleCss.includes('.ad-simple-grid') && simpleCss.includes('@media(max-width:700px)'), 'Three-package comparison is responsive');
 assert(opportunity.includes('/advertise/finder/?opportunity=christmas-eating-out'), 'Christmas acquisition page feeds Campaign Finder');
 assert(finderJs.includes("opportunity !== 'christmas-eating-out'"), 'Campaign Finder recognises the Christmas opportunity route');
 assert(finderJs.includes("category.value = 'hospitality'"), 'Christmas opportunity preselects hospitality');
 assert(finderJs.includes("finder_opportunity"), 'Campaign Finder carries opportunity context into advertiser handoff');
 assert(advertiseJs.includes('allowedFinderOpportunities'), 'Advertiser enquiry preserves approved opportunity context');
-assert(opportunity.includes('£40'), 'Christmas acquisition page defaults to the restored newsletter TEST rate');
+assert(opportunity.includes('£35') && !opportunity.includes('£40'), 'Christmas enquiry reflects the approved newsletter rate');
 assert(!opportunity.includes('GROW £90'), 'Christmas acquisition page no longer promotes historical GROW pricing');
 assert(opportunity.includes('noindex,follow'), 'Christmas acquisition page stays noindex during preview');
 assert(pay.includes('Payment follows campaign approval'), 'Payment page remains approval-gated');
@@ -71,7 +72,7 @@ assert(wrapper.includes('STRIPE_WEBHOOK_SECRET'), 'Stripe webhook requires its s
 assert(wrapper.includes('verifyStripeSignature'), 'Stripe webhook verifies signatures before recording payments');
 assert(wrapper.includes('advertiser_payments'), 'Stripe webhook records advertiser payments in D1');
 assert(wrapper.includes("status='paid'"), 'Successful Stripe payment marks the advertiser enquiry paid');
-assert(wrapper.includes('starter_newsletter: 4000') && wrapper.includes('halloween_guide: 3500') && wrapper.includes('halloween_combo: 7500') && wrapper.includes('halloween_section: 11000') && wrapper.includes('halloween_main: 15000'), 'Stripe webhook validates restored newsletter and Halloween amounts before marking paid');
+assert(wrapper.includes('starter_newsletter: 3500') && wrapper.includes('halloween_guide: 2800') && wrapper.includes('halloween_combo: 6000') && wrapper.includes('sk8_pricing_version') && wrapper.includes('historicalPricesPence'), 'Stripe validates approved prices with explicit version and preserves historical invoices');
 assert(wrapper.includes("'review_required'"), 'Wrong Stripe amount is held for review rather than marked paid');
 assert(wrapper.includes('Stripe mode mismatch'), 'Stripe webhook rejects live/test environment mismatches');
 assert(wrapper.includes("approval_required") && wrapper.includes("session.mode"), 'Stripe webhook requires approved one-time payment metadata');
@@ -95,10 +96,10 @@ assert(wrapper.includes("company_fax") && wrapper.includes("sk8_started_at"), 'A
 const heroCriticismChecks = [
   ['01. Business-first headline', advertiseHtml.includes('Got something worth <em>telling SK8?</em>')],
   ['02. Specific SK8 locality', advertiseHtml.includes('Cheadle · Cheadle Hulme · Gatley · Heald Green')],
-  ['03. Useful business hooks', advertiseHtml.includes('A class, an offer, an event')],
+  ['03. Useful business hooks', advertiseHtml.includes('A class, an offer, a local service')],
   ['04. Clear production promise', advertiseHtml.includes('We prepare the advert. You approve it')],
-  ['05. Main CTA above the page proof section', advertiseHtml.indexOf('data-ad-hero-action="see_example"') < advertiseHtml.indexOf('ad-proof-bar')],
-  ['06. Immediate campaign finder alternative', advertiseHtml.includes('data-ad-hero-action="campaign_finder" href="/advertise/finder/"')],
+  ['05. Main CTA shows package choices', advertiseHtml.includes('data-ad-hero-action="compare_packages" href="#products"')],
+  ['06. Simple hero alternative shows example', advertiseHtml.includes('data-ad-hero-action="see_example" href="#what-you-buy"')],
   ['07. Dynamic audience rather than a frozen number', advertiseHtml.includes('data-stat="subscriberCount"')],
   ['08. Stale issues-published tile removed from hero', !advertiseHtml.slice(advertiseHtml.indexOf('ad-conversion-hero'),advertiseHtml.indexOf('ad-proof-bar')).includes('issuesPublished')],
   ['09. Goal-picker no longer crowds the first screen', advertiseHtml.indexOf('class="ad-goal-grid"') > advertiseHtml.indexOf('id="what-you-buy"')],
@@ -107,7 +108,7 @@ const heroCriticismChecks = [
   ['12. Example explicitly not a real campaign', advertiseHtml.includes('FICTIONAL FORMAT EXAMPLE') && advertiseHtml.includes('not a real advertiser')],
   ['13. Clear example next action', advertiseHtml.includes('data-ad-hero-action="sample_link" href="#what-you-buy"') || advertiseHtml.includes('href="#what-you-buy" data-ad-hero-action="sample_link"')],
   ['14. Owner-approved newsletter price visible', advertiseHtml.includes('Newsletter advert') && advertiseHtml.includes('£35')],
-  ['15. Advert example comes before three package choices', advertiseHtml.indexOf('id="what-you-buy"') < advertiseHtml.indexOf('id="products"')],
+  ['15. Package choices appear before long advert example', advertiseHtml.indexOf('id="products"') < advertiseHtml.indexOf('id="what-you-buy"')],
   ['16. Halloween seasonal offers and optional finder remain available', advertiseHtml.includes('Halloween') && advertiseHtml.includes('/advertise/finder/')],
   ['17. Editorial and sponsored independence explicit', advertiseHtml.includes('never buys favourable editorial coverage')],
   ['18. Accessible mobile treatment and link focus', advertiseHeroCss.includes('@media(max-width:600px)') && advertiseHeroCss.includes('a:focus-visible')],
@@ -130,9 +131,9 @@ assert(!advertiseHtml.includes('href="#what-you-buy">See the fictional advert'),
 assert(advertiseHtml.includes('assets/advertise-approved-xmas.css') && advertiseHtml.includes('assets/advertise-approved-cafe.css'), 'Advertise page loads the approved photo treatments after the main advertiser CSS');
 assert(advertiseApprovedXmas.includes('data:image/webp;base64,') && advertiseApprovedXmas.includes('.ad-christmas-scene'), 'Approved Christmas treatment embeds the detailed generated image');
 assert(advertiseApprovedCafe.includes('data:image/webp;base64,') && advertiseApprovedCafe.includes('.cafe-machine-scene') && advertiseApprovedCafe.includes('.starter-visual-machine'), 'Approved cafe treatment embeds the detailed generated image in both relevant placements');
-assert(advertiseHtml.includes('ad-christmas-photo') && advertiseHtml.includes('christmas-hospitality-2026-final-v2.png'), 'Christmas hospitality card uses the approved final festive image');
+assert(advertiseHtml.includes('/advertise/christmas-eating-out/'), 'Christmas hospitality offer remains discoverable as an optional link');
 assert(advertiseHtml.includes('maple-bean-cafe-2026-final-v2.png'), 'Fictional cafe advert uses the approved final coffee-machine image');
-assert(advertiseV6.includes('maple-bean-cafe-2026-sharp.png'), 'Starter visual reuses the approved detailed cafe photo');
+assert(simpleCss.includes('min-height:52px') && simpleCss.includes('outline:3px'), 'Pricing CTA has mobile-safe touch size and visible keyboard focus');
 
 assert(!advertiseHtml.includes('assets/images/cafe-local-business.webp'), 'Old people-focused cafe image is not used on the Advertise page');
 
