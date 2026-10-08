@@ -9,6 +9,8 @@ const adventuresLanding = read('52-adventures/index.html');
 const freeCheapLanding = read('free-cheap-guide/index.html');
 const signupJs = read('assets/signup-protection.js');
 const protectedWorker = read('worker-protected.js');
+const businessWorker = read('worker-business-v2.js');
+const guidesIndex = read('guides/index.html');
 
 const failures = [];
 const assert = (condition, message) => {
@@ -83,7 +85,7 @@ for (const route of subscriberOnlyTeasers) {
   assert(!sitemapHtml.includes(`href="${normaliseRoute(route)}/"`), `Subscriber-only teaser must not appear in sitemap.html: ${route}`);
 }
 
-for (const forbidden of ['/52-adventures/guide/', '/free-cheap-guide/guide/']) {
+for (const forbidden of ['/52-adventures/guide/', '/free-cheap-guide/guide/', '/halloween-half-term-guide/guide/']) {
   assert(!sitemapXml.includes(forbidden), `Full subscriber guide must not appear in sitemap.xml: ${forbidden}`);
   assert(!sitemapHtml.includes(forbidden), `Full subscriber guide must not appear in sitemap.html: ${forbidden}`);
   assert(!JSON.stringify(discovery).includes(forbidden), `Full subscriber guide must not appear in site search discovery: ${forbidden}`);
@@ -100,17 +102,31 @@ assert(!freeCheapLanding.includes('href="/free-cheap-guide/guide/"'), 'Free & Ch
 assert(signupJs.includes('dataset.successUrl'), 'Signup protection must honour each form\'s configured success URL.');
 assert(signupJs.includes('sk8_guide_key'), 'Signup protection must submit the guide key.');
 
-assert(protectedWorker.includes('guide_access_tokens'), 'Protected worker must retain guide access-token storage.');
+assert(protectedWorker.includes('guide_access_tokens'), 'Subscriber recognition storage must remain available for optional landing-page convenience.');
 assert(protectedWorker.includes("'guide:52-adventures'"), 'Protected worker must route 52 Adventures signups to their MailerLite group.');
 assert(protectedWorker.includes("'guide:free-cheap'"), 'Protected worker must route Free & Cheap signups to their MailerLite group.');
-assert(protectedWorker.includes("cookie: 'sk8_guide_52'"), 'Protected worker must gate 52 Adventures with its access cookie.');
-assert(protectedWorker.includes("cookie: 'sk8_guide_fc'"), 'Protected worker must gate Free & Cheap with its access cookie.');
-assert(protectedWorker.includes("'x-robots-tag': 'noindex, follow'") || protectedWorker.includes("headers.set('x-robots-tag', 'noindex, follow')"), 'Protected guide responses must remain noindex.');
+assert(
+  !protectedWorker.includes("return handleProtectedGuideRequest(request, env, ctx, protectedGuide);"),
+  'Full guide URLs must not be redirected through a subscriber cookie/session gate.'
+);
+for (const route of ['/52-adventures/guide', '/free-cheap-guide/guide', '/halloween-half-term-guide/guide']) {
+  assert(businessWorker.includes(`url.pathname.startsWith('${route}')`), `Full guide route must remain noindex at the HTTP layer: ${route}`);
+}
+for (const [landing, direct] of [
+  ['../52-adventures/', '/52-adventures/guide/'],
+  ['../free-cheap-guide/', '/free-cheap-guide/guide/'],
+  ['../halloween-half-term-guide/', '/halloween-half-term-guide/guide/']
+]) {
+  assert(
+    guidesIndex.includes(`href="${landing}" data-subscriber-guide="${direct}"`),
+    `Guides page must keep acquisition fallback while allowing recognised browsers to open directly: ${direct}`
+  );
+}
 
 if (failures.length) {
-  console.error('Guide public-sample/subscriber-gate check failed:');
+  console.error('Guide public-sample/direct-access policy check failed:');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log('Guide public-sample/subscriber-gate check passed: 10 public samples per guide and full-guide access remains gated.');
+console.log('Guide public-sample/direct-access check passed: public samples stay controlled and direct full-guide URLs are not cookie/session gated.');
