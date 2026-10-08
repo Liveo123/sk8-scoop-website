@@ -83,6 +83,7 @@ try {
   check(await evaluate("(() => {const e=document.querySelector('[data-calendar-choose-date]');e.value='2026-10-10';e.dispatchEvent(new Event('change',{bubbles:true}));return true;})()"),'select confirmed date');
   const selector='[data-event-id="quarry-bank-scarecrow-festival-2026-10-03--2026-10-10"] .my-sk8-save';
   check(await evaluate("document.querySelector('[data-event-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"] a[download]')!==null"),'confirmed daily occurrence offers calendar export');
+  check(await evaluate("(() => {const link=document.querySelector('[data-event-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"] a[download]');return link && decodeURIComponent(link.href).includes('DTEND;TZID=Europe/London:20261010T170000');})()"),'verified end time included in calendar export');
   check(await click(selector),'save specific occurrence');
   check(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1')||'[]').some(e=>e.id.endsWith('--2026-10-10')&&e.date==='2026-10-10')"),'saved date agrees with clicked date');
   await evaluate("document.querySelector('[data-calendar-controls]').scrollIntoView({block:'start',behavior:'instant'});true");
