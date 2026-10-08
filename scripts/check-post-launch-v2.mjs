@@ -95,39 +95,37 @@ excludes('assets/latest-polish.css','NEXT FRIDAY');
 const latestHtml = read('latest/index.html');
 expect((latestHtml.match(/<section\b/g) || []).length === (latestHtml.match(/<\/section>/g) || []).length, 'latest/index.html has unbalanced section tags');
 contains('advertise.html','ad-simple-grid');
-contains('assets/advertise-v5.css','#advertiser-tools .ad-route-grid');
+contains('assets/advertise-rework-oct8.css','.ad-premium-grid');
 
-// Current advertiser offer and backend contract.
-// Owner-approved reversion to the established prices on 5 October 2026.
+// Current advertiser offer and backend contract, approved 8 October 2026.
+contains('advertise.html','Advertise <em>with SK8</em>');
+contains('advertise.html','ad-hero-quick-grid');
+contains('advertise.html','Guide card · £28');
 contains('advertise.html','Newsletter advert · £35');
-contains('advertise.html','Halloween Guide card · £28');
 contains('advertise.html','Guide + newsletter · £60');
-contains('advertise.html','section sponsor (£110)');
-contains('advertise.html','main Guide sponsor (£150)');
-contains('advertise.html','value="starter_newsletter"');
-contains('advertise.html','value="halloween_guide"');
-contains('advertise.html','value="halloween_combo"');
-contains('advertise.html','value="halloween_section"');
-contains('advertise.html','value="halloween_main"');
-excludes('advertise.html','NEWSLETTER STARTER · £20');
-excludes('advertise.html','<div class="halloween-price">£15</div>');
-excludes('advertise.html','<div class="halloween-price">£30</div>');
-excludes('advertise.html','<div class="halloween-price">£90</div>');
-excludes('advertise.html','<div class="halloween-price">£125</div>');
-excludes('advertise.html','WEBSITE · price by scope');
-excludes('advertise.html','value="temp_website"');
+contains('advertise.html','Guide section sponsor · £96');
+contains('advertise.html','Main Guide sponsor · £125');
+for (const key of ['starter_newsletter','guide_card','guide_bundle','guide_section','guide_main']) {
+  contains('advertise.html',`value="${key}"`);
+  contains('worker.js',`'${key}'`);
+  contains('functions/api/advertiser-enquiry.js',`'${key}'`);
+}
+for (const obsolete of ['£40','£75','Guide section sponsor · £110','Main Guide sponsor · £150','Who it is for','Clicks matter. Business outcomes matter more.','halloween_guide"']) excludes('advertise.html',obsolete);
+contains('advertise.html','data-guide-choice-wrap');
+contains('advertise.html','ad-goal-panel');
+contains('advertise.html','ad-policy-short');
+contains('advertise.html','ad-help-grid');
+contains('advertise.html','assets/advertise-rework-oct8.css');
 contains('advertise.html','data-experiment="advertiser-local-hero-v2"');
-contains('advertise.html','Guide advert');
-excludes('advertise.html','£40');
-excludes('advertise.html','£75');
-contains('advertise.html','assets/advertise-simple-pricing.css');
-contains('worker.js',"'starter_newsletter'");
+const adHtml = read('advertise.html');
+expect((adHtml.match(/<section\\b/g) || []).length === (adHtml.match(/<\\/section>/g) || []).length,'advertise.html has balanced sections');
+expect(adHtml.indexOf('id="products"') < adHtml.indexOf('id="campaign-enquiry"') && adHtml.indexOf('id="campaign-enquiry"') < adHtml.indexOf('id="what-you-buy"'),'Price, enquiry, sample order maintained');
+contains('worker-business-v2.js','guide_section: 9600');
+contains('worker-business-v2.js','guide_main: 12500');
+contains('worker-business-v2.js',"2026-10-v3");
+// Older route keys remain accepted only for earlier approved enquiries/payments.
 contains('worker.js',"'halloween_guide'");
 contains('worker.js',"'halloween_combo'");
-contains('functions/api/advertiser-enquiry.js',"'starter_newsletter'");
-contains('functions/api/advertiser-enquiry.js',"'halloween_guide'");
-contains('functions/api/advertiser-enquiry.js',"'halloween_combo'");
-// Historical package keys remain accepted only to honour earlier commitments.
 contains('worker.js',"'temp_test'");
 contains('worker.js',"'temp_grow'");
 
