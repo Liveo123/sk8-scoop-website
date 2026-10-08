@@ -65,6 +65,9 @@ try {
   check(await evaluate("!document.querySelector('[data-calendar-day=\\\"2026-10-26\\\"]')?.classList.contains('has-events')"),'unconfirmed half-term Gatley session not invented');
   await click('[data-calendar-view="agenda"]');
   await click('[data-event-area="all"]');
+  check(await click('[data-event-filter="weekend"]'),'weekend filter accessible');
+  check(await evaluate("document.querySelector('[data-events-list]').textContent.includes('Grimmfest 2026')"),'verified Saturday/Sunday Grimmfest dates remain visible in weekend filter');
+  await click('[data-event-filter="all"]');
   check(await evaluate("document.querySelectorAll('.whats-on-agenda-date').length>=3"),'agenda grouped by date');
   check(await evaluate("document.querySelectorAll('.event-listing-card .my-sk8-save').length>=20"),'My SK8 buttons render');
   check(await evaluate("document.querySelector('[data-event-id=\"reddish-vale-halloween-pumpkin-festival-2026-10-10\"] a[download]')===null"),'unknown session dates do not export misleading ICS');
