@@ -56,6 +56,7 @@ try {
     await pause(150);
   }
   check(await evaluate("document.body.dataset.calendarView==='agenda'"),'agenda opens by default');
+  check(await evaluate("document.querySelector('.whats-on-seasonal-watch')?.textContent.includes('planning themes, not scheduled events')"),'unconfirmed seasonal themes clearly separated');
   check(await evaluate("document.querySelectorAll('.event-listing-card').length>=20"),'real event records render');
   check(await click('[data-event-area="Gatley"]'),'Gatley filter selectable');
   check(await evaluate("document.querySelector('[data-events-list]').textContent.includes('Deckchair Care Welcome Café')"),'verified Gatley recurring activity visible');
