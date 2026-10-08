@@ -45,6 +45,8 @@ jobs:
         run: node scripts/check-post-launch-v2.mjs
       - name: Enforce no-SVG visual rule
         run: node scripts/check-no-svg.mjs
+      - name: Check Free & Cheap guide presentation and expiry
+        run: node scripts/check-free-cheap-guide-ui.mjs
       - name: Check advertiser growth-engine JavaScript
         run: |
           if [ -f worker-business-v2.js ]; then node --check worker-business-v2.js; fi
