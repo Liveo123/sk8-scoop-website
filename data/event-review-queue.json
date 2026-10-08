@@ -79,6 +79,143 @@
       "discovered": "2026-10-08",
       "checked": "2026-10-08",
       "reason": "Rejected for current publication because the existing verified event record is marked sold out. Remove from live listings and retain here briefly to prevent rediscovery unless availability changes."
+    },
+    {
+      "id": "players-rope-2026-11-16-review",
+      "title": "Rope at Players Theatre",
+      "area": "Cheadle Hulme",
+      "date": "2026-11-16",
+      "end_date": "2026-11-23",
+      "venue": "Players Theatre, Anfield Road, Cheadle Hulme SK8 5EX",
+      "source_url": "https://www.playersdramatic.co.uk/post/2026-2027-season-announcement",
+      "reason": "The official 2026/27 season announcement gives 16–23 Nov, while the current programme labels the run Monday–Saturday starting 16 Nov. Dates conflict; do not publish until individual performances are verified.",
+      "missing": [
+        "resolve 16–23 Nov versus Monday–Saturday date conflict",
+        "exact performances and start times",
+        "ticket prices and confirmed booking route"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "players-folk-2027-03-08-review",
+      "title": "Folk by Tom Wells at Players Theatre",
+      "area": "Cheadle Hulme",
+      "date": "2027-03-08",
+      "end_date": "2027-03-13",
+      "venue": "Players Theatre, Anfield Road, Cheadle Hulme SK8 5EX",
+      "source_url": "https://www.playersdramatic.co.uk/post/2026-2027-season-announcement",
+      "reason": "Organiser has announced 8–13 March 2027; current programme indicates Monday–Saturday and opening event 7:45pm. Check full confirmed session times, ticket prices and sales before publication.",
+      "missing": [
+        "confirm all individual performance start and finish times",
+        "ticket price and sales/booking status"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "players-blackadder-2027-05-10-review",
+      "title": "Blackadder Goes Forth at Players Theatre",
+      "area": "Cheadle Hulme",
+      "date": "2027-05-10",
+      "end_date": "2027-05-15",
+      "venue": "Players Theatre, Anfield Road, Cheadle Hulme SK8 5EX",
+      "source_url": "https://www.playersdramatic.co.uk/post/2026-2027-season-announcement",
+      "reason": "The official 2026/27 season confirms 10–15 May 2027. The current programme gives an opening show 7:45pm; verify full dates and booking details before calendar promotion.",
+      "missing": [
+        "verify each performance start and finish time",
+        "ticket prices and booking availability"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "hg-jack-beanstalk-2026-11-30-review",
+      "title": "Jack and the Beanstalk at Heald Green Theatre",
+      "area": "Heald Green",
+      "date": "2026-11-30",
+      "end_date": "2026-12-06",
+      "venue": "Heald Green Theatre, Motcombe Grove (off Styal Road), SK8 3TW",
+      "source_url": "https://www.hgtheatre.co.uk/post/chairperson-s-update-september-2026",
+      "reason": "The theatre confirms the 2026 pantomime run 30 November–6 December. Individual evening/matinee dates, admission prices and booking availability are not yet independently verified.",
+      "missing": [
+        "confirmed individual show dates and times",
+        "ticket prices and booking availability"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "hg-menopause-2027-02-16-review",
+      "title": "Menopause Made Me Do It! at Heald Green Theatre",
+      "area": "Heald Green",
+      "date": "2027-02-16",
+      "end_date": "2027-02-20",
+      "venue": "Heald Green Theatre, Motcombe Grove (off Styal Road), SK8 3TW",
+      "source_url": "https://www.hgtheatre.co.uk/post/chairperson-s-update-september-2026",
+      "reason": "The theatre announces this comedy for 16–20 February 2027. Verify actual performances and ticketing before promoting confirmed individual sessions.",
+      "missing": [
+        "individual session dates and times",
+        "ticket prices and booking route"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "hg-heroes-villains-2027-04-13-review",
+      "title": "Musicals: Heroes and Villains at Heald Green Theatre",
+      "area": "Heald Green",
+      "date": "2027-04-13",
+      "end_date": "2027-04-17",
+      "venue": "Heald Green Theatre, Motcombe Grove (off Styal Road), SK8 3TW",
+      "source_url": "https://www.hgtheatre.co.uk/post/chairperson-s-update-september-2026",
+      "reason": "The theatre's September 2026 season announcement identifies Musicals: Heroes and Villains, 13–17 April 2027, but booking details and individual performances require reconfirmation.",
+      "missing": [
+        "exact session days and times",
+        "ticket price and sales link"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "hg-cluedo-2027-05-25-review",
+      "title": "Cluedo at Heald Green Theatre",
+      "area": "Heald Green",
+      "date": "2027-05-25",
+      "end_date": "2027-05-29",
+      "venue": "Heald Green Theatre, Motcombe Grove (off Styal Road), SK8 3TW",
+      "source_url": "https://www.hgtheatre.co.uk/post/chairperson-s-update-september-2026",
+      "reason": "The theatre announced Cluedo for 25–29 May 2027; check availability, individual performances and ticket price closer to publication.",
+      "missing": [
+        "confirmed show sessions and times",
+        "ticket cost and live booking link"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "chads-bull-2027-02-23-review",
+      "title": "Bull by Mike Bartlett at CHADS Theatre",
+      "area": "Cheadle Hulme",
+      "date": "2027-02-23",
+      "end_date": "2027-02-27",
+      "venue": "CHADS Theatre, Mellor Road, Cheadle Hulme SK8 5AU",
+      "source_url": "https://chads.co.uk/auditions/",
+      "reason": "CHADS' season-casting update explicitly reschedules the production to 23–27 February 2027, replacing an earlier plan. Check performance times, price and live booking status before publication.",
+      "missing": [
+        "exact nightly session times",
+        "ticket prices and booking route"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-10-08",
+      "checked": "2026-10-08"
     }
   ]
 }
