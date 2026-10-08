@@ -7,7 +7,7 @@
   "full_guide": "https://www.sk8scoop.com/free-cheap-guide/guide/",
   "historic_approved_ledger": "https://docs.google.com/document/d/1s28d9sW2SsGHCUo_a-3HzZAC6qQJLs-m3iTOu1sftco/edit",
   "historic_discovery_master": "https://drive.google.com/file/d/1ihniFUtiMbf004vO07tOwXZqObjrzTB_/view",
-  "notes": "Inventory derived from current published selections, not automatic reapproval of old research. SPECIFIC_CLAIMS_CHECKED applies only to claims listed, not every claim on the card. No new entries or images.",
+  "notes": "Inventory derived from current published selections, not automatic reapproval of old research. SPECIFIC_CLAIMS_CHECKED applies only to claims listed, not every claim on the card. No new entries or images. Audit refinement 8 Oct: some claims are independently checked only in limited respects, with historic/secondary caveats shown per record. Quiz timing remains unresolved. Damson Tree £3 sandwiches are from the children’s menu.",
   "maintenance_schedule": {
     "dated": "Check original date 2 days before, auto-expire after UK date",
     "recurring": "Primary recheck fortnightly before promotion",
@@ -18,9 +18,11 @@
   "overview": {
     "total": 54,
     "dated": 7,
-    "specificClaimChecks": 29,
+    "specificClaimChecks": 46,
     "dateConflicts": 2,
-    "awaitingPrimary": 23
+    "timeDiscrepancies": 1,
+    "secondaryOnly": 1,
+    "awaitingPrimary": 4
   },
   "entries": [
     {
@@ -173,11 +175,15 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/visit-the-underbanks",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council confirms Underbanks conservation-area streets and heritage/independent businesses; free self-guided walk is a reasonable inference from open public streets"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/visit-the-underbanks"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-11-07",
       "editorial_note": null
     },
     {
@@ -284,11 +290,15 @@
       "page_when": "Opening and staffed hours vary by branch; check the current Cheadle, Cheadle Hulme or Heald Green library page. Open+ can add unstaffed hours.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/landing/libraries",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council confirms three named SK8 libraries offer free services; Open+ self-service has eligibility/PIN rules and facilities such as printing may be unavailable during unstaffed periods"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/opening-times-libraries/open-plus-libraries"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -326,11 +336,15 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/abney-hall-park",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council lists park with heritage/wetland grounds and two free on-site car parks"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/abney-hall-park"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -345,11 +359,15 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/bruntwood-park",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council lists accessible play area, free BMX track with protective clothing, and a separate pay-and-display car park"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/bruntwood-park"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -364,11 +382,15 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/adswood-park",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council lists park with children's play area, accessible swings, free on-site parking and open games area"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/adswood-park"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -383,12 +405,16 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/news/stockport-council-invests-in-upgraded-play-areas-across-borough",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council reported new playground equipment at Oak Meadow in 2024; this is historical evidence of installation, not independent confirmation of current physical condition"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/news/stockport-council-invests-in-upgraded-play-areas-across-borough"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
+      "editorial_note": "Historical primary evidence confirms creation/installation, not current site condition; revisit after closures or complaints."
     },
     {
       "id": "FC-018",
@@ -402,11 +428,15 @@
       "page_when": "Every day, dawn to dusk.",
       "advertised_date": null,
       "page_source_url": "https://www.manchester.gov.uk/online-directories/parks-leisure-and-the-arts-directories/parks-playgrounds-allotments-and-open-spaces-directories/parks-and-open-spaces/all-parks-playgrounds-and-open-spaces/fletcher-moss-botanical-gardens",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Manchester City Council says gardens open every day dawn to dusk; tennis is *not free* at that park and some garden areas restrict dogs"
+      ],
+      "claim_evidence_urls": [
+        "https://www.manchester.gov.uk/online-directories/parks-leisure-and-the-arts-directories/parks-playgrounds-allotments-and-open-spaces-directories/parks-and-open-spaces/all-parks-playgrounds-and-open-spaces/fletcher-moss-botanical-gardens"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -421,11 +451,15 @@
       "page_when": "Plan a daylight visit; the main car park gate is locked at dusk.",
       "advertised_date": null,
       "page_source_url": "https://www.gatleycarrs.org.uk/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "The conservation group confirms free parking, maintained paths and main car-park gate locked at dusk"
+      ],
+      "claim_evidence_urls": [
+        "https://www.gatleycarrs.org.uk/maps/how-to-find-us"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -440,11 +474,15 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/seasons-of-stories",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council confirms accessible Alexandra Park story trail from play-area entrance along water to Edgeley Library; story rotates with seasons, last updated 26 June 2026"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/seasons-of-stories"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -482,12 +520,16 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/news/new-skatepark-opens-in-gatley",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council documents the new concrete skatepark's opening in March 2023; current equipment condition has not been physically checked"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/news/new-skatepark-opens-in-gatley"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
+      "editorial_note": "Historical primary evidence confirms creation/installation, not current site condition; revisit after closures or complaints."
     },
     {
       "id": "FC-023",
@@ -501,11 +543,15 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/east-avenue-park",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council lists outdoor exercise equipment and basketball/football/cricket activity space at East Avenue Park, Heald Green; no in-park parking"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/east-avenue-park"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -585,20 +631,20 @@
       "listing_anchor": "damson-tree-cafe",
       "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#damson-tree-cafe",
       "page_price_band": "UNDER £10",
-      "page_price_detail": null,
+      "page_price_detail": "Adult sandwiches from £6.50; children's sandwiches £3; jacket potatoes from £8; two-filling omelette £9.",
       "page_when": "Term time: Monday 10am–4pm, Tuesday–Friday 8.45am–4pm, Saturday 10am–2pm. School holiday hours differ; check before visiting.",
       "advertised_date": null,
       "page_source_url": "https://www.thedamsontree.co.uk/menu",
       "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
       "primary_claims_checked": [
-        "Basic sandwiches £3; jacket potatoes from £8; omelette £9"
+        "Adult lunch sandwiches from £6.50 and jacket potatoes £8; £3 sandwiches are on the CHILDREN'S menu, not standard adult lunch menu; omelette £9"
       ],
       "claim_evidence_urls": [
         "https://www.thedamsontree.co.uk/menu"
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": "Critique correction 8 Oct: previous draft falsely implied £3 adult sandwiches. Must distinguish child-only price."
     },
     {
       "id": "FC-028",
@@ -727,11 +773,15 @@
       "page_when": "Friday sessions when listed, 6–8pm; check the next event date.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events/teen-hangout-3",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Organiser-submitted Stockport Council listing dated 6 November 2026 confirms Friday 6–8pm, ages 11–18, £5 per teen or £10 per family; other weeks must be confirmed"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events/teen-hangout-3"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-22",
       "editorial_note": null
     },
     {
@@ -765,12 +815,16 @@
       "page_when": "Every Monday from 8.30pm.",
       "advertised_date": null,
       "page_source_url": "https://www.almond-pubs.co.uk/january-at-the-station-house/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "fact_check_status": "SOURCE_TIME_DISCREPANCY",
+      "primary_claims_checked": [
+        "Venue's September 2026 post confirms free Monday quiz but says 8pm for a selected Monday; older venue post says 8.30pm. Start time is not settled"
+      ],
+      "claim_evidence_urls": [
+        "https://www.almond-pubs.co.uk/cask-ale-week-2026/"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-09",
+      "editorial_note": "Recent venue notices say both 8pm and 8.30pm; guide now advises checking time."
     },
     {
       "id": "FC-036",
@@ -807,11 +861,15 @@
       "page_when": "Thursday afternoon sessions are listed; check the live page for the next date and start time.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Gallery-submitted Stockport Council event confirms Thursday 1.30–3.30pm free drop-in; bring own drawing supplies"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events/mindful-still-life-drawing?date=2026-06-25"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-22",
       "editorial_note": null
     },
     {
@@ -826,12 +884,16 @@
       "page_when": "last Saturday of the month, January to November, excluding August; drop in between 11am and 3pm.",
       "advertised_date": null,
       "page_source_url": "https://arc-centre.org/saturday-art-clubs",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Arc-submitted Council description confirms regular last-Saturday drop-in with suggested £3 donation; October One Stockport page has 24th versus Council 31st, so actual date still needs direct confirmation"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events/arc-saturday-art-club-sept?date=2026-09-26"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-22",
+      "editorial_note": "Recurring series description is verified; October 24/31 date discrepancy remains unresolved."
     },
     {
       "id": "FC-039",
@@ -868,30 +930,38 @@
       "page_when": "Mondays, 1–2pm, when listed.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "fact_check_status": "SECONDARY_CALENDAR_ONLY",
+      "primary_claims_checked": [
+        "One Stockport's October 2026 calendar lists a 26 October Heald Green library crochet/knit drop-in from 1pm–2pm; secondary programme evidence only, not independently verified with the library"
+      ],
+      "claim_evidence_urls": [
+        "https://www.onestockport.co.uk/townofcultureevents/category/makes/2026-11/"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-09",
+      "editorial_note": "Current calendar supports activity but library itself has not confirmed schedule."
     },
     {
       "id": "FC-041",
-      "heading": "ACCESSIBLE & INCLUSIVE",
+      "heading": "FREE DISABILITY SWIM — LIFE LEISURE CHEADLE",
       "section": "Regular things to do",
       "review_class": "RECURRING",
-      "listing_anchor": null,
-      "public_url": null,
+      "listing_anchor": "free-disability-swim-cheadle",
+      "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#free-disability-swim-cheadle",
       "page_price_band": "FREE",
       "page_price_detail": null,
       "page_when": "Wednesdays, 8–8.45pm.",
       "advertised_date": null,
       "page_source_url": "https://lifeleisure.net/centre/cheadle/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Life Leisure Cheadle current hub page confirms free Wednesday disability swim 8–8.45pm, aged 11+, able to swim 25m unaided, accessible changing/hoist and free car parking"
+      ],
+      "claim_evidence_urls": [
+        "https://lifeleisure.net/centre/cheadle/"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-22",
       "editorial_note": null
     },
     {
@@ -967,11 +1037,15 @@
       "page_when": "Tuesdays in term time. Ages 11–16: 5–6pm; ages 16+: 6–7pm.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events/all-ability-county-pan-disability-multi-sports-club",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Organiser-submitted Council 6 October 2026 entry confirms free term-time Tuesdays; ages 11–16 5–6pm and ages 16+ 6–7pm"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events/all-ability-county-pan-disability-multi-sports-club?date=2026-10-06"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-22",
       "editorial_note": null
     },
     {
@@ -1005,11 +1079,15 @@
       "page_when": "Dates and times vary; check the current free events programme.",
       "advertised_date": null,
       "page_source_url": "https://www.stockrm.org/events?free=true",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockroom official live filtered programme lists specific free sessions into November 2026; availability and dates vary by individual session"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockrm.org/events?free=true&page=1&pageSize=60"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-22",
       "editorial_note": null
     },
     {
