@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import core from '../assets/sk8-calendar-core.js';
+import { exclusionReason } from '../scripts/event-editorial-exclusions.mjs';
 
 assert.equal(core.validDate('2026-02-29'),false,'reject impossible leap date');
 assert.equal(core.validDate('2028-02-29'),true,'accept leap date');
@@ -27,4 +28,7 @@ const events=JSON.parse(fs.readFileSync('data/events.json','utf8'));
 const registry=JSON.parse(fs.readFileSync('data/event-sources.json','utf8'));
 for(const e of events) assert.ok(!/cheadlemasjid\.org|Cheadle Masjid/i.test([e.source_url,e.booking_url,e.venue].join(' ')),'excluded event resurfaced '+e.id);
 for(const s of registry.sources) assert.ok(!/cheadlemasjid\.org|cheadle-masjid/i.test([s.id,s.url].join(' ')),'excluded source resurfaced '+s.id);
+assert.match(exclusionReason({source_url:'https://cheadlemasjid.org/events'}),/Excluded organiser/);
+assert.match(exclusionReason({venue:'Cheadle Masjid'}),/Excluded organiser/);
+assert.equal(exclusionReason({venue:'Cheadle Village Hall',source_url:'https://cheadlevillagehall.co.uk/'}),'');
 console.log('Calendar foundation checks passed (dates, recurrence, price, exclusions).');
