@@ -106,20 +106,20 @@
       value: valueLabels[v.value],
       state: 'starter',
       badge: 'STARTER',
-      title: 'Start with the newsletter TEST.',
-      price: '£40',
+      title: 'Start with the newsletter advert.',
+      price: '£35',
       doFirst: v.goal === 'awareness'
         ? 'You have a specific message worth testing. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.'
         : 'Your answers include a clear proposition and a practical way for readers to act. SK8 Scoop just needs to confirm suitability and newsletter availability before payment.',
       why: [
         v.goal === 'awareness'
-          ? 'The newsletter TEST gives you one sponsored newsletter placement focused on one specific message.'
-          : 'The newsletter TEST gives you one sponsored newsletter placement focused on one clear reader action.',
+          ? 'The newsletter advert gives you one sponsored newsletter placement focused on one specific message.'
+          : 'The newsletter advert gives you one sponsored newsletter placement focused on one clear reader action.',
         'It keeps the first spend small while giving you a defined campaign to learn from.'
       ],
       alternative: '',
       package: 'starter_newsletter',
-      cta: 'Ask about the £40 TEST'
+      cta: 'Enquire about a £35 newsletter advert'
     };
 
     if (v.area === 'outside') {
@@ -204,7 +204,7 @@
         title: 'Give readers a specific reason to act first.',
         price: '',
         doFirst: 'Choose one bookable service, dated event, genuine offer, launch, menu, course, limited-place opportunity or similarly clear proposition.',
-        why: ['You want readers to take action, but the message is still too general to make a useful £40 TEST.'],
+        why: ['You want readers to take action, but the message is still too general to make a useful £35 advert.'],
         alternative: '',
         package: '',
         cta: ''
@@ -244,13 +244,13 @@
     if (v.timing === 'ongoing' && v.goal === 'awareness') {
       base.why = [
         'SK8 Scoop does not currently offer automatic recurring awareness placements.',
-        'A one-off newsletter TEST can still show whether one specific message earns useful local attention.'
+        'A one-off newsletter advert can still show whether one specific message earns useful local attention.'
       ];
-      base.doFirst = 'Define one message and one thing you want to learn from a single newsletter TEST. Treat it as a one-off experiment rather than an open-ended awareness campaign.';
+      base.doFirst = 'Define one message and one thing you want to learn from a single newsletter advert. Treat it as a one-off experiment rather than an open-ended awareness campaign.';
     }
 
     if (v.freecheap) {
-      base.why.push('A relevant Guide may be useful later, but the current general first-campaign route is still the £40 newsletter TEST unless a named seasonal Guide offer applies.');
+      base.why.push('A relevant Guide may be useful later, but the current general first-campaign route is still the £35 newsletter advert unless a named seasonal Guide offer applies.');
     }
 
     if (v.value === 'under20') {
@@ -258,7 +258,7 @@
     } else if (v.value === 'unknown') {
       base.why.push('Customer value is unknown, so keeping the first spend small reduces risk while you learn whether the campaign produces useful business outcomes.');
     } else {
-      base.why.push(`A typical customer value of ${base.value} makes a £40 first experiment proportionate, while results still remain uncertain.`);
+      base.why.push(`A typical customer value of ${base.value} makes a £35 first experiment proportionate, while results still remain uncertain.`);
     }
 
     return base;
