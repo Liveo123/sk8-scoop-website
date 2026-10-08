@@ -39,7 +39,10 @@ for (const [anchorId, titlePrefix] of guideAnchors) {
   assert.ok(heading.startsWith(titlePrefix),'Hash link points to wrong listing: '+anchorId);
   assert.ok(!free.includes('<a id="'+anchorId+'"></a>'),'Old misplaced hash anchor remains: '+anchorId);
 }
-assert.match(free, /basic sandwiches at £3, jacket potatoes from £8/, 'Damson Tree menu correction missing');
+assert.match(free, /Adult lunch choices include sandwiches from £6\.50, jacket potatoes from £8/, 'Damson Tree adult prices missing');
+assert.match(free, /children’s menu, sandwiches are £3/, 'Damson Tree £3 sandwiches must be identified as children’s menu');
+assert.match(free, /id="free-disability-swim-cheadle"><h4 class="entry-title">FREE DISABILITY SWIM/, 'Swim listing must have its own accessible heading');
+assert.match(free, /published both 8pm and 8\.30pm/, 'Station House conflicting start times must be disclosed');
 assert.doesNotMatch(free, /<strong>GROUP PRICE: £16–£28/, 'Duplicate bowling price label');
 
 for (const [img] of hits(free, /<img\b[^>]*>/gi))
