@@ -50,3 +50,38 @@ Expanded from six trial entries to **18 separately listed venue/programme locati
 3. Trust and risk: no endorsement promise, no paid priority, no booking guarantee, correction route, seasonal expiry and preview-only status.
 
 Status: **EXPANDED 18-LOCATION DRAFT, standalone browser QA PASSED, still not publish-ready**.
+
+## 8 October 2026 final pre-release QA addendum (supersedes any conflicting notes above)
+
+**Status**: Prepared for owner review, NOT released. Draft PR #189, no `main` merge or production publication.
+
+**Source/fact corrections**
+- Practically Family's three October venues and dates are supported by https://practicallyfamily.co.uk/holiday-club/book; earlier Halloween Guide copy claimed £30/£38/£42 and different hours, whereas current official location/price pages show £20/£30/£40. The exact October checkout total cannot be reconciled from available sources. Both guide profiles and all three finder cards now avoid unsupported fixed prices, direct to the current booking system and ask readers to confirm session length and cost. Do not restore previous numbers without a contemporaneous checkout/provider confirmation.
+- Kitty Watson's three-day October Intensive is distinct from the provider's other holiday-camp programmes. The finder specifies the Intensive and the Heald Green Methodist venue, while asking parents to confirm details before booking: https://kw-academy.co.uk/october-intensive
+- Perform to Inspire's link now targets its ClassForKids `/camps` hub rather than an unrelated search location. October prices, exact hours and confirmation of direct-booking availability remain unresolved. https://perform-to-inspire-events.classforkids.io/camps (automated fetch may receive 403).
+- TD Sports Academy Gatley October programme remains listed without invented hours or prices. https://td-sports-academy-limited.classforkids.io/camps
+- The HAF signpost points to Stockport Council's parent/carer information and should not imply universal eligibility: https://www.stockport.gov.uk/information-for-parents-and-carers-haf
+
+**Guide integration prepared on this same branch**
+- Full direct Halloween Guide `halloween-half-term-guide/guide/index.html`: one contextual Holiday Club Finder link in intro, deliberately distinguishes holiday childcare from one-off activities; two old Practically Family price claims and blog links corrected.
+- Kids & Family `kids-family/index.html`: one navigation card link to finder, staging-only.
+- Finder `kids-family/holiday-club-finder/index.html`: 18 venue/programme locations, 9 core SK8 and 9 nearby; 4 client-side filters. `noindex,follow` deliberately retained while under review. No paid placements or asserted safety endorsements.
+
+**Seasonal expiry**
+- From 1 November 2026 UTC, finder client code hides old results/filters and displays an expired notice pointing to current family information. End-of-season manual editorial review/redirect still required. Do not assume client-only expiry handles all indexing, static cached HTML or referrals.
+
+**Test evidence**
+- Direct GitHub branch content/source-level assertions PASSED: 18 unique venue names, 9 core/9 nearby, unique venue location, filter controls, expiry guard, 1 guide link, Kids & Family link, 3 neutral Practically prices, 0 old £30/£38/£42 guide price strings. Tests performed against `feature/october-holiday-club-finder-2026` on 8 October 2026.
+- Standalone browser preview PASSED in headless Chromium at desktop 1280px, tablet, phone 390px and phone 360px: no JavaScript errors or horizontal overflow; age, day, town, activity filters and zero-results behavior worked; future-dated expiry check worked. The preview can be opened as a local HTML test file but is not a hosted Cloudflare deployment.
+- Website Health GitHub Actions: passing on earlier draft; **refresh CI status for newest commit** before release. Real Cloudflare-hosted staging URL **not verified**, so no claim of end-to-end server-side browser QA or live form/nav/asset QA.
+- Outbound links to ClassForKids sometimes return 403 to automated retrieval. This alone does not prove failure to human browsers; direct human visit plus provider confirmation still required for unresolved programmes.
+- No passwords, credentials, audience emails or personal data involved.
+
+**Open blockers and final approval gate**
+1. Confirm hosted Cloudflare branch-preview URL and run true web-hosted page checks including correct logo/assets, mobile navigation, tablet rendering, keyboard/focus order and all real booking links.
+2. Recheck session and availability details before 26 October. Resolve TD and Perform to Inspire unknowns or keep plainly qualified/remove listings where booking destination cannot be verified. Reconfirm Practically Family exact price in booking checkout if quoting again.
+3. Recheck current CI completion and prevent merging if it fails.
+4. Obtain explicit Paul approval for `main` merge/production deployment and adding live guide link. Production remains unchanged pending approval.
+5. Retain/update a source record and promptly correct any reported fact. After October switch to evergreen finder or redirect, not expired promotional listings.
+
+**Owner-facing status:** All reasonable branch-level draft edits and static/standalone browser QA completed. Waiting on live Cloudflare preview verification and final provider-booking checks, then explicit publication approval.
