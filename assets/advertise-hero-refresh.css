@@ -244,68 +244,23 @@ body.advertiser-page .ad-specimen-masthead span{
   font-weight:900;
   font-size:.67rem;
 }
+/* Approved SK8 local illustration, 8 October 2026. No text overlays, no cropping. */
 body.advertiser-page .ad-specimen-art{
-  position:relative;
-  isolation:isolate;
+  width:100%;
+  height:auto;
+  aspect-ratio:2098 / 750;
   overflow:hidden;
-  height:152px;
-  background:
-    repeating-linear-gradient(23deg,transparent 0 57px,rgba(255,255,255,.08) 57px 59px,transparent 59px 99px),
-    linear-gradient(127deg,#126875 0%,#1e5e61 55%,#82402b 100%);
+  background:#382842;
 }
-body.advertiser-page .ad-specimen-art-glow{
-  position:absolute;
-  width:190px;
-  height:190px;
-  border-radius:50%;
-  top:-84px;
-  right:-20px;
-  background:#f7b86d;
-  opacity:.86;
-  filter:blur(1px);
+body.advertiser-page .ad-specimen-art img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  transform:none;
+  filter:none;
 }
-body.advertiser-page .ad-specimen-art-title{
-  position:absolute;
-  left:21px;
-  bottom:7px;
-  color:#fff;
-  font-family:Georgia,serif;
-  font-weight:900;
-  font-size:clamp(4.4rem,7vw,6.9rem);
-  line-height:1;
-  letter-spacing:-.075em;
-  text-shadow:0 7px 15px rgba(0,0,0,.15);
-}
-body.advertiser-page .ad-specimen-art-title span{
-  display:inline-block;
-  vertical-align:middle;
-  margin-left:10px;
-  font-family:Arial,sans-serif;
-  font-size:.63rem;
-  letter-spacing:.16em;
-  font-weight:950;
-  background:#ffcf93;
-  color:#0b4650;
-  padding:7px 9px;
-  border-radius:5px;
-  transform:rotate(-3deg);
-  text-shadow:none;
-}
-body.advertiser-page .ad-specimen-area{
-  position:absolute;
-  z-index:2;
-  border-radius:999px;
-  padding:5px 9px;
-  background:rgba(255,253,245,.96);
-  color:#185059;
-  font-size:.62rem;
-  font-weight:850;
-  box-shadow:0 3px 9px rgba(0,0,0,.13);
-}
-body.advertiser-page .ad-specimen-area.area-cheadle{left:21px;top:17px;transform:rotate(-5deg)}
-body.advertiser-page .ad-specimen-area.area-gatley{left:39%;top:36px;transform:rotate(4deg)}
-body.advertiser-page .ad-specimen-area.area-hulme{right:6%;bottom:25px;transform:rotate(-4deg)}
-body.advertiser-page .ad-specimen-area.area-heald{right:5%;top:18px;transform:rotate(2deg)}
 body.advertiser-page .ad-specimen-copy{padding:17px 19px 19px}
 body.advertiser-page .ad-specimen-kicker{
   font-size:.65rem;
@@ -446,8 +401,6 @@ body.advertiser-page #what-you-buy{
   body.advertiser-page .ad-hero-reader-count strong{font-size:1.9rem}
   body.advertiser-page .ad-hero-fairness{margin-top:9px}
   body.advertiser-page .ad-hero-showcase{padding:12px;border-radius:17px}
-  body.advertiser-page .ad-specimen-art{height:135px}
-  body.advertiser-page .ad-specimen-art-title{font-size:4.5rem}
   body.advertiser-page .ad-specimen-copy{padding:15px}
   body.advertiser-page .ad-showcase-bottom{align-items:flex-start}
   body.advertiser-page .ad-showcase-bottom>div{gap:8px}
@@ -458,9 +411,7 @@ body.advertiser-page #what-you-buy{
   body.advertiser-page #what-you-buy{scroll-margin-top:78px}
 }
 @media(max-width:360px){
-  body.advertiser-page .ad-specimen-area.area-hulme{display:none}
   body.advertiser-page .ad-showcase-bottom{display:grid}
-  body.advertiser-page .ad-specimen-art-title{font-size:4rem}
   body.advertiser-page .ad-goal-details .ad-goal-grid{grid-template-columns:1fr!important}
 }
 @media(prefers-reduced-motion:reduce){
