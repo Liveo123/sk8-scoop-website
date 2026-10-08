@@ -35,3 +35,25 @@ Do not merge/deploy until: Website Health green; full Post-launch preflight gree
 
 ## Deferred work
 The advertiser page still references many historical CSS files. Consolidating them may improve performance, but removing them opportunistically could break approved imagery and site-wide form styling. Treat stylesheet consolidation as a separate measured change after this simpler purchasing flow is released.
+
+## Owner-requested revision (later on 8 October 2026): supersedes initial Halloween-only packages
+
+The owner then explicitly requested the following revisions, all implemented on this **preview branch only**:
+
+- Three-word hero: **Advertise with SK8**, with one shorter sentence explaining the newsletter and Guides.
+- Hero artwork replaced by three **real, clickable mini-pricing choices** (£35 newsletter, £28 Guide, £60 Guide + newsletter).
+- The formerly collapsed premium section is now visibly available at **£96** (Guide section sponsor) and **£125** (main Guide sponsor). Both have working package choices in the enquiry form.
+- **£28 Guide cards and £60 combined adverts apply to any suitable SK8 Scoop Guide** with available advertising space, not only Halloween. Guide selection includes all current Guide categories plus forthcoming Christmas and help-me-choose. Ongoing Guides: 30-day paid period; seasonal Guides: exact agreed remaining promotional window. Dates are confirmed before payment.
+- Prominent, separate **Campaign Finder** and **Christmas hospitality** helper blocks.
+- Example advert moved left (~60% of desktop content), six **always-visible** goal options placed on the right. Fictional and sponsored labels remain.
+- Removed standalone analytics-results section and duplicated "Who it is for" section. A brief promise of an **end-of-placement advert-link report** now appears in the purchase process and FAQ.
+- Retained a compact labelled **independent editorial policy** section and updated the FAQ for five prices, all Guides, duration, reporting and payment.
+- Mobile first-visit privacy panel compacted **on the Advertise page only**, retaining Allow, Reject and Choose separately.
+- Generic new form package IDs (`guide_card`, `guide_bundle`, `guide_section`, `guide_main`) replace Halloween-specific IDs for new requests; historic Halloween routes remain accepted for previous commitments. The selected Guide is saved via existing `invoice_details` field, so no migration is required.
+- **Stripe release requirement:** New generic Guide Checkout Sessions and newsletter sessions must carry `sk8_pricing_version=2026-10-v3`, `approval_required=true`, `advertiser_enquiry_id` and `sk8_product`. The webhook expects exactly £35/£28/£60/£96/£125 for v3; v2 and unversioned legacy sessions remain separately validated at old amounts.
+
+The prior table above is a **historical record**, not the current final design: £110/£150 premium pricing, Halloween-only card availability, and the old v2 prices are superseded by this revision.
+
+**Verification:** website-health/static business-contract preflight and Chromium browser QA for 360, 390, 768, 1024 and 1440 px, including all five prices and product-to-form hand-offs, are required green before review. The cloud preview is `https://preview-advertise-simple-pricing-oct2026.previews.sk8scoop.com/advertise.html`.
+
+**Still not verified:** New- and old-price Stripe test-mode E2E sessions and transactional acknowledgement delivery. Never infer that a public payment checkout is working from a static preview alone. Keep the PR draft and main production branch unchanged until approval.
