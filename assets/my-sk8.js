@@ -215,6 +215,7 @@
     end_date: String(event.end_date || event.date || '').trim(),
     date_range: String(event.date_range || '').trim(),
     time: String(event.time || '').trim(),
+    end_time: String(event.end_time || '').trim(),
     area: String(event.area || '').trim(),
     venue: String(event.venue || '').trim(),
     cost: String(event.cost || '').trim(),
@@ -304,6 +305,7 @@
     const source = String(event.booking_url || event.source_url || '');
     const date = String(event.date || '');
     const time = String(event.time || '');
+    const endTime = String(event.end_time || '');
     // A date range without a confirmed occurrence is not a calendar appointment.
     // Daily activities use distinct, dated records from the What's On calendar.
     if (event.end_date && event.end_date !== date && !event.series_id) return '';
@@ -332,7 +334,9 @@
       'UID:' + String(event.id || 'event') + '@sk8scoop.com',
       'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z'),
       (timed ? 'DTSTART;TZID=Europe/London:' : 'DTSTART;VALUE=DATE:') + dtstart,
-      ...(!timed ? ['DTEND;VALUE=DATE:' + stamp(dayAfter(inclusiveEnd))] : []),
+      ...(!timed ? ['DTEND;VALUE=DATE:' + stamp(dayAfter(inclusiveEnd))] :
+        (/^\d{2}:\d{2}$/.test(endTime) && endTime > time ?
+          ['DTEND;TZID=Europe/London:' + stamp(date) + 'T' + stamp(endTime) + '00'] : [])),
       'SUMMARY:' + icsEscape(title),
       'LOCATION:' + icsEscape(venue),
       'DESCRIPTION:' + icsEscape(description),
