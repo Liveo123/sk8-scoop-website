@@ -180,7 +180,11 @@ export default {
     }
 
     const protectedGuide = getProtectedGuide(url.pathname);
-    if (protectedGuide && (request.method === 'GET' || request.method === 'HEAD')) {
+    if (
+      protectedGuide &&
+      guideRequiresAccess(protectedGuide.key) &&
+      (request.method === 'GET' || request.method === 'HEAD')
+    ) {
       return handleProtectedGuideRequest(request, env, ctx, protectedGuide);
     }
 
@@ -328,8 +332,10 @@ function getProtectedGuide(pathname) {
   return null;
 }
 
+const ACCESS_GATED_GUIDES = new Set();
+
 function guideRequiresAccess(guideKey) {
-  return !['free-cheap', '52-adventures'].includes(guideKey);
+  return ACCESS_GATED_GUIDES.has(guideKey);
 }
 
 async function handleProtectedGuideRequest(request, env, ctx, guide) {
