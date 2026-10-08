@@ -112,7 +112,10 @@ for (const key of ['starter_newsletter','guide_card','guide_bundle','guide_secti
 }
 for (const obsolete of ['£40','£75','Guide section sponsor · £110','Main Guide sponsor · £150','Who it is for','Clicks matter. Business outcomes matter more.','halloween_guide"']) excludes('advertise.html',obsolete);
 contains('advertise.html','data-guide-choice-wrap');
-contains('advertise.html','ad-goal-panel');
+contains('advertise.html','ad-example-only');
+contains('advertise.html','name="artwork_option"');
+contains('advertise.html','/advertise/example/');
+contains('advertise/example/index.html','FICTIONAL BUSINESS');
 contains('advertise.html','ad-policy-short');
 contains('advertise.html','ad-help-grid');
 contains('advertise.html','assets/advertise-rework-oct8.css');
