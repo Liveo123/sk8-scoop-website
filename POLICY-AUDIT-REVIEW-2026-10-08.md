@@ -36,3 +36,10 @@ Status: DRAFT / NOT PUBLISHED
 
 ## Additional independent Summer Guide check
 - A public search snapshot of https://summer-guide.sk8scoop.com/ (indexed approximately two months before 8 October 2026) displayed the footer `© 2026 SK8 Scoop, Inc. All rights reserved.` That corporate suffix is inconsistent with the owner-confirmed sole-trader status. The snapshot is dated, not proof of current live content. Verify the current separately hosted landing page and correct the suffix before presenting it as an accurate legal designation. This page is not part of the main GitHub website deployment; any correction requires a separate authorised publishing workflow.
+
+## Commercial alignment completed 8 October 2026
+- Identified distinct already-existing advertiser preview PR #183, with the exact five standard options: newsletter GBP 35; Guide GBP 28; Guide + newsletter GBP 60; section sponsorship GBP 96; main sponsorship GBP 125. No duplicate pricing implementation has been created in this policy branch.
+- Inserted clearly controlling 8 October decision headings into the existing Google Drive Current Advertiser Offer & Pricing Record and Pre-NUE Advertiser Agent Brief. Historic figures retained as dated evidence. Auto-send remains PAUSED.
+- Added ADVERTISING-BOOKING-TERMS-REVIEW-2026-10-08.md as an UNPUBLISHED and NOT YET ACCEPTED contractual draft. It requires confirmed sole-trader particulars, tax treatment, acceptance and payment-flow verification before use.
+- PR #183 is separate and remains a draft at this check. It must receive full review and approval including test payments and appropriate regression checks before merge.
+- Policy review PR #185 is not publish-ready: current privacy and terms draft HTML still contain deliberately visible editorial placeholders for sole-trader name and geographic address. NEVER MERGE THOSE PLACEHOLDERS.
