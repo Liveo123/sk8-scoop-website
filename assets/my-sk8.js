@@ -304,6 +304,9 @@
     const source = String(event.booking_url || event.source_url || '');
     const date = String(event.date || '');
     const time = String(event.time || '');
+    // A date range without a confirmed occurrence is not a calendar appointment.
+    // Daily activities use distinct, dated records from the What's On calendar.
+    if (event.end_date && event.end_date !== date && !event.series_id) return '';
     const icsEscape = value => String(value || '')
       .replace(/\\/g, '\\\\')
       .replace(/\r?\n/g, '\\n')
