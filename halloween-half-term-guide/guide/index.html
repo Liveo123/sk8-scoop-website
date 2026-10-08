@@ -104,7 +104,7 @@
 /* Functional NUE controls added without changing the approved visual concept */
 .nue-utility-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(85,44,85,.15)}
 .nue-utility-actions a,.nue-utility-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 13px;border:0;border-radius:999px;color:#fff;font:inherit;font-weight:900;font-size:.86rem;line-height:1.2;text-decoration:none;cursor:pointer;box-shadow:0 6px 15px rgba(50,27,55,.12)}
-.nue-utility-actions .nue-icon{width:15px;height:15px;display:block;flex:0 0 15px}
+.nue-utility-actions .nue-icon{min-width:15px;display:inline-grid;place-items:center;flex:0 0 15px;font:950 .9rem/1 Aptos,"Segoe UI",Arial,sans-serif}
 .nue-utility-actions .nue-save{background:var(--teal)}.nue-utility-actions .nue-directions{background:var(--plum)}.nue-utility-actions .nue-calendar{background:var(--orange)}.nue-utility-actions .nue-share{background:var(--gold);color:var(--dark)}
 .nue-utility-actions a:hover,.nue-utility-actions button:hover{filter:brightness(.92);transform:translateY(-1px)}
 .nue-utility-actions button[aria-pressed="true"]{background:var(--dark);color:#fff}
@@ -574,12 +574,7 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
   const oneDayAfter=(ymd)=>{const d=new Date(ymd+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+1);return d.toISOString().slice(0,10)};
   const gcal=(title,startDate,endDate,details,location)=>{const start=startDate.replace(/-/g,''),end=oneDayAfter(endDate||startDate).replace(/-/g,'');const u=new URL('https://calendar.google.com/calendar/render');u.searchParams.set('action','TEMPLATE');u.searchParams.set('text',title);u.searchParams.set('dates',start+'/'+end);if(details)u.searchParams.set('details',details);if(location)u.searchParams.set('location',location);return u.href};
   const prettyDate=ymd=>new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(ymd+'T12:00:00Z'));
-  const icon=name=>{const paths={
-    save:'<path d="M5 3.5h10a1 1 0 0 1 1 1V21l-6-3.8L4 21V4.5a1 1 0 0 1 1-1Z"/>',
-    directions:'<path d="m12 2 9 9-9 9-9-9 9-9Z"/><path d="M9 12h6m-2.5-2.5L15 12l-2.5 2.5"/>',
-    calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6m10-6v6M3 10h18"/>',
-    share:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4m-7.6 6.8 7.6 4.4"/>'
-  };return '<svg class="nue-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+paths[name]+'</svg>'};
+  const icon=name=>{const symbols={save:'★',directions:'↗',calendar:'+',share:'↗'};return '<span class="nue-icon" aria-hidden="true">'+(symbols[name]||'•')+'</span>'};
   const label=(el,name,text)=>{el.classList.add('nue-'+name);el.innerHTML=icon(name)+'<span>'+text+'</span>'};
   const addSaveNote=wrap=>{const note=document.createElement('small');note.className='nue-save-note';note.innerHTML='Save keeps this in <a href="/my-sk8/">My SK8</a> on this browser.';wrap.append(note)};
   document.querySelectorAll('.card').forEach((card,index)=>{
