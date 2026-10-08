@@ -2,7 +2,7 @@
   "issue": 15,
   "issue_date": "2026-10-02",
   "final_issue_checked": true,
-  "checked_date": "2026-10-06",
+  "checked_date": "2026-10-08",
   "source": "Final Issue 15 editorial/build record, not the early research shortlist",
   "items": [
     {
@@ -51,8 +51,9 @@
     {
       "id": "cheadle-brew-and-biscuit",
       "classification": "WEBSITE",
-      "disposition": "whats_on",
-      "event_id": "cheadle-brew-and-biscuit-2026-10-06"
+      "disposition": "whats_on_expired",
+      "event_id": "cheadle-brew-and-biscuit-2026-10-06",
+      "reason": "Published to What's On; 6 October listing removed after expiry on 8 October 2026."
     },
     {
       "id": "gatley-welcome-cafe",
@@ -63,8 +64,9 @@
     {
       "id": "monster-mugs-kids",
       "classification": "GUIDE / MULTI-USE",
-      "disposition": "whats_on_sold_out",
-      "event_id": "monster-mugs-kids-2026-10-10"
+      "disposition": "whats_on_unavailable",
+      "event_id": "monster-mugs-kids-2026-10-10",
+      "reason": "Published to What's On, then removed on 8 October 2026 after current verification confirmed it was sold out."
     },
     {
       "id": "staircase-beaded-spiders",
@@ -100,20 +102,23 @@
     {
       "id": "cheadle-work-skills-navigator",
       "classification": "WEBSITE",
-      "disposition": "whats_on",
-      "event_id": "cheadle-work-skills-navigator-2026-10-06"
+      "disposition": "whats_on_expired",
+      "event_id": "cheadle-work-skills-navigator-2026-10-06",
+      "reason": "Published to What's On; 6 October listing removed after expiry on 8 October 2026."
     },
     {
       "id": "the-light-cafe-cheadle",
       "classification": "WEBSITE",
-      "disposition": "whats_on",
-      "event_id": "the-light-cafe-cheadle-2026-10-07"
+      "disposition": "whats_on_expired",
+      "event_id": "the-light-cafe-cheadle-2026-10-07",
+      "reason": "Published to What's On; 7 October listing removed after expiry on 8 October 2026."
     },
     {
       "id": "lum-head-open-day",
       "classification": "WEBSITE",
-      "disposition": "whats_on",
-      "event_id": "lum-head-open-day-2026-10-07"
+      "disposition": "whats_on_expired",
+      "event_id": "lum-head-open-day-2026-10-07",
+      "reason": "Published to What's On; 7 October listing removed after expiry on 8 October 2026."
     },
     {
       "id": "stockport-plaza-wrestling",
