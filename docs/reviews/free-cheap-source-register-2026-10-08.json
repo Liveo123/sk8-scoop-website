@@ -18,9 +18,9 @@
   "overview": {
     "total": 54,
     "dated": 7,
-    "specificClaimChecks": 19,
+    "specificClaimChecks": 29,
     "dateConflicts": 2,
-    "awaitingPrimary": 33
+    "awaitingPrimary": 23
   },
   "entries": [
     {
@@ -81,11 +81,15 @@
       "page_when": "Tuesday–Saturday 10am–5pm; Sunday 11am–4pm. Closed Mondays and Bank Holidays.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/planning-your-visit-to-stockport-museum",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Council lists free entry; Tue–Sat 10am–5pm, Sun 11am–4pm; closed Monday/bank holidays"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/planning-your-visit-to-stockport-museum"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -188,11 +192,15 @@
       "page_when": "Tuesday, Thursday, Friday and Sunday, 10am–5pm; Wednesday until 9pm. Saturday, 8am–5pm, with only selected galleries open until 10am. Closed Monday outside August.",
       "advertised_date": null,
       "page_source_url": "https://www.museum.manchester.ac.uk/plan-your-visit/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Official museum lists free main galleries; Mon closed except August; Tue/Thu/Fri/Sun 10am–5pm, Wed until 9pm; Saturday quiet 8–10am then remaining galleries from 10"
+      ],
+      "claim_evidence_urls": [
+        "https://www.museum.manchester.ac.uk/plan-your-visit/"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -207,11 +215,15 @@
       "page_when": "open daily, 10am–5pm.",
       "advertised_date": null,
       "page_source_url": "https://www.scienceandindustrymuseum.org.uk/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Official museum lists free general admission; daily 10am–5pm; some buildings closed for construction, optional paid special events"
+      ],
+      "claim_evidence_urls": [
+        "https://www.scienceandindustrymuseum.org.uk/visit"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -226,11 +238,15 @@
       "page_when": "Wednesday–Saturday, 10am–5pm. No booking required for general admission.",
       "advertised_date": null,
       "page_source_url": "https://www.library.manchester.ac.uk/rylands/visit/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "University lists free admission without booking, Wednesday–Saturday 10am–5pm, last entry 4.40pm"
+      ],
+      "claim_evidence_urls": [
+        "https://www.library.manchester.ac.uk/rylands/visit/index.htm"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -245,11 +261,15 @@
       "page_when": "Tuesday–Sunday, 10am–5pm. Free public gallery tours are currently listed Thursdays, Saturdays and Sundays, 2–3pm.",
       "advertised_date": null,
       "page_source_url": "https://manchesterartgallery.org/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Gallery FAQ lists free admission without booking, Tuesday–Sunday 10am–5pm; no bank-holiday opening"
+      ],
+      "claim_evidence_urls": [
+        "https://manchesterartgallery.org/faqs/"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -283,11 +303,15 @@
       "page_when": "Tuesday–Sunday, 10am–5pm; Thursday until 9pm. Closed Monday, including Bank Holiday Mondays.",
       "advertised_date": null,
       "page_source_url": "https://www.whitworth.manchester.ac.uk/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Official university gallery says general admission free and lists free, drop-in Tuesday–Sunday 2pm highlights/park tours; current opening-hour detail not independently verified"
+      ],
+      "claim_evidence_urls": [
+        "https://www.whitworth.manchester.ac.uk/visit/"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -435,11 +459,15 @@
       "page_when": null,
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/tennis",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council lists one tennis court at Gatley Recreation Ground as free to use under its general free-unless-stated policy"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/tennis"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -538,11 +566,15 @@
       "page_when": "Tuesday, Thursday, Friday and Saturday, 9am–4.30pm.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/stockport-market",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Stockport Council gives covered Market Hall trading Tuesday, Thursday, Friday, Saturday 9am–4.30pm"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/stockport-market/market-opening-times"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2027-01-06",
       "editorial_note": null
     },
     {
@@ -649,11 +681,15 @@
       "page_when": "Saturdays, 11–11.30am.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events/heald-green-library-storytime",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Organiser-submitted Stockport Council weekly Saturday 11am–11.30am free, with future Saturday 14 November date listed"
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events/heald-green-library-storytime"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-22",
       "editorial_note": null
     },
     {
@@ -809,11 +845,15 @@
       "page_when": "Next dates on the organiser’s calendar: Saturday 7 November and Saturday 5 December 2026, 10am–4pm. Check the listing before travelling.",
       "advertised_date": null,
       "page_source_url": "https://www.themakersmarket.co.uk/venue/cheadle/",
-      "fact_check_status": "NEEDS_PRIMARY_RECHECK",
-      "primary_claims_checked": [],
-      "claim_evidence_urls": [],
-      "claim_check_date": null,
-      "next_review_due": "2026-10-08",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Organiser venue calendar lists Cheadle Green free entry and Saturday 7 November and 5 December 2026 market dates"
+      ],
+      "claim_evidence_urls": [
+        "https://www.themakersmarket.co.uk/venue/cheadle/"
+      ],
+      "claim_check_date": "2026-10-08",
+      "next_review_due": "2026-10-22",
       "editorial_note": null
     },
     {
