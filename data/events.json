@@ -32,11 +32,18 @@
     "venue": "ODEON Great Northern, Manchester",
     "cost": "Individual screening tickets vary",
     "category": "Film / Halloween",
-    "description": "Manchester's international festival of fantastic film runs for four days with horror, thrillers, sci-fi and dark comedy, plus Q&As, signings and a weekend market. Day and weekend passes are sold out; individual screening tickets remain the useful route.",
+    "description": "Manchester's international festival of fantastic film runs for four days with horror, thrillers, sci-fi and dark comedy, plus Q&As, signings and a weekend market. Individual screening times, age certificates (generally 15 or 18) and ticket availability vary. Check the organiser’s dated programme before booking.",
     "booking_url": "https://www.grimmfest.com/festival/",
     "source_url": "https://www.grimmfest.com/festival/",
     "verification": "ORGANISER_PRIMARY_SOURCE",
-    "checked": "2026-10-06"
+    "checked": "2026-10-08",
+    "date_mode": "specific_dates",
+    "occurrences": [
+      "2026-10-08",
+      "2026-10-09",
+      "2026-10-10",
+      "2026-10-11"
+    ]
   },
   {
     "id": "cheadle-library-storytime-2026-10-08",
