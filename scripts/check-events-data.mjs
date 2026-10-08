@@ -65,7 +65,7 @@ for (const [index,event] of events.entries()) {
           failures.push(`${event.id}: unsupported occurrence status on ${date}`);
         }
         for (const timeKey of ['time','end_time']) {
-          if (obj[timeKey] !== undefined && !/^([01]\\d|2[0-3]):[0-5]\\d$/.test(String(obj[timeKey]))) {
+          if (obj[timeKey] !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(String(obj[timeKey]))) {
             failures.push(`${event.id}: invalid ${timeKey} for occurrence ${date}`);
           }
         }
