@@ -118,7 +118,7 @@ contains('advertise.html','ad-help-grid');
 contains('advertise.html','assets/advertise-rework-oct8.css');
 contains('advertise.html','data-experiment="advertiser-local-hero-v2"');
 const adHtml = read('advertise.html');
-expect((adHtml.match(/<section\\b/g) || []).length === (adHtml.match(/<\\/section>/g) || []).length,'advertise.html has balanced sections');
+expect((adHtml.match(/<section\b/g) || []).length === (adHtml.match(/<\\/section>/g) || []).length,'advertise.html has balanced sections');
 expect(adHtml.indexOf('id="products"') < adHtml.indexOf('id="campaign-enquiry"') && adHtml.indexOf('id="campaign-enquiry"') < adHtml.indexOf('id="what-you-buy"'),'Price, enquiry, sample order maintained');
 contains('worker-business-v2.js','guide_section: 9600');
 contains('worker-business-v2.js','guide_main: 12500');
