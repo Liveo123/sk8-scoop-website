@@ -153,10 +153,10 @@ try {
   record('My SK8 nav count updates after save', (await text('[data-nav-my-sk8-count]')) === '1', await text('[data-nav-my-sk8-count]'));
   record('Main-nav My SK8 count updates after save', (await text('[data-nav-my-sk8-count]')) === '1' && !(await evaluate("document.querySelector('[data-nav-my-sk8-count]')?.hidden")));
 
-  record('Set reminder intent without saving first', await click('[data-sk8-event-actions="john-lewis-cheadle-baby-beyond-2026-10-08"] button:not(.my-sk8-save)'));
+  record('Set reminder intent without saving first', await click('[data-sk8-event-actions="quarry-bank-scarecrow-festival-2026-10-03"] button:not(.my-sk8-save)'));
   await sleep(250);
-  record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('john-lewis-cheadle-baby-beyond-2026-10-08')")));
-  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'john-lewis-cheadle-baby-beyond-2026-10-08')")));
+  record('Reminder persisted', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_reminders_v1') || '[]').includes('quarry-bank-scarecrow-festival-2026-10-03')")));
+  record('Reminder also saves the event', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'quarry-bank-scarecrow-festival-2026-10-03')")));
 
   await navigate('/my-sk8/');
   record('My SK8 page title visible', (await text('h1')) === 'My SK8', await text('h1'));
@@ -169,7 +169,7 @@ try {
   record('Two current saves shown', (await text('[data-my-sk8-total]')) === '2', await text('[data-my-sk8-total]'));
   record('Saved weekend event appears', Boolean(await evaluate('document.body.textContent.includes("Storytime at Heald Green Library")')));
   record('Weekend plan includes Saturday event', Boolean(await evaluate('document.querySelector("[data-weekend-plan]")?.textContent.includes("Storytime at Heald Green Library")')));
-  record('Reminder panel flags due item', Boolean(await evaluate('document.querySelector("[data-my-sk8-reminders]")?.textContent.includes("All Things Baby & Beyond with Dr Dewan")')));
+  record('Reminder panel flags due item', Boolean(await evaluate('document.querySelector("[data-my-sk8-reminders]")?.textContent.includes("Quarry Bank Scarecrow Festival")')));
   record('Nearby suggestion appears', Boolean(await evaluate('document.querySelector("[data-my-sk8-active]")?.textContent.includes("Halloween Crafty Kids Pop Up")')));
 
   const mapHref = await attr('[data-map-saved]', 'href');
@@ -308,8 +308,8 @@ try {
   record('My SK8 nav count persists on a normal content page', (await text('[data-nav-my-sk8-count]')) === '1' && !(await evaluate("document.querySelector('[data-nav-my-sk8-count]')?.hidden")));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
-  await navigate('/whats-on/?save=john-lewis-cheadle-baby-beyond-2026-10-08&utm_source=newsletter&utm_medium=email');
-  record('Newsletter-style save URL persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'john-lewis-cheadle-baby-beyond-2026-10-08')")));
+  await navigate('/whats-on/?save=quarry-bank-scarecrow-festival-2026-10-03&utm_source=newsletter&utm_medium=email');
+  record('Newsletter-style save URL persists item', Boolean(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1') || '[]').some(x => x.id === 'quarry-bank-scarecrow-festival-2026-10-03')")));
   record('Save parameter removed after processing', !(await evaluate("location.search.includes('save=')")), await evaluate('location.search'));
 
   await evaluate("localStorage.removeItem('sk8_saved_items_v1'); localStorage.removeItem('sk8_reminders_v1'); true");
@@ -327,7 +327,7 @@ try {
   record('BOO page reveal starts automatically', await waitFor("document.body.classList.contains('revealed')", 3000));
   record('BOO page no longer requires a second switch click', !(await evaluate("document.querySelector('#light-switch')")));
 
-  await navigate('/my-sk8/?list=heald-green-library-storytime-2026-10-10,john-lewis-cheadle-baby-beyond-2026-10-08,page%3Alocal-history%2Fgatley-shouter');
+  await navigate('/my-sk8/?list=heald-green-library-storytime-2026-10-10,quarry-bank-scarecrow-festival-2026-10-03,page%3Alocal-history%2Fgatley-shouter');
   record('Shared shortlist renders', !(await evaluate("document.querySelector('[data-shared-shortlist]')?.hidden")));
   record('Shared shortlist has three items', (await text('[data-shared-count]')) === '3', await text('[data-shared-count]'));
   record('Shared shortlist can contain a saved article', Boolean(await evaluate("document.querySelector('[data-shared-items]')?.textContent.includes('The Gatley Shouter')")));
