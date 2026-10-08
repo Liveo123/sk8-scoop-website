@@ -1,35 +1,52 @@
-# October 2026 Holiday Club Finder — staging QA and guide handoff
+# October 2026 Holiday Club Finder — verification and release record
+Checked: 8 October 2026. Branch: `feature/october-holiday-club-finder-2026`. Draft PR #189. Production unchanged.
 
-Checked: 8 October 2026. Feature branch: `feature/october-holiday-club-finder-2026`. Draft PR #189. Production not changed.
+## Scope
+Expanded from six trial entries to **16 separately bookable venue/programme locations**: **9 in core SK8** (Cheadle Hulme 6, Gatley 2, Heald Green 1), **7 nearby** (Bramhall 2, Cheadle Heath 1, Heaton Mersey 2, Heaton Moor 1, Handforth 1). These represent **10 organising brands** because some run several venues. All shown dates fall in 26–30 October 2026 (some only part-week). Programmes are listed, not guaranteed vacancies.
 
-## Sources and editorial decisions
+## Primary sources for the 16 proposed entries
+1-2. Practically Family / Greenbank and Cheadle Catholic: https://practicallyfamily.co.uk/holiday-club/book ; https://www.practicallyfamily.co.uk/our-clubs ; published 26–30 October; 3–11; £20/£30/£40 sessions; payment options.
+3. Junior Sport Stars / Lane End: https://junior-sport-stars.classforkids.io/camp/293 ; 26–30 October; £30/day £20 half £125 week; ages 4–12, Reception restriction.
+4. LSC / Thorn Grove: https://wearelsc.co.uk/holiday-clubs/thorn-grove-primary-school/ ; published 26–30 October; ages 4–11; 8am–6pm; price not confirmed.
+5. Elm Cottage / Hursthead: https://bookings.elm-cottage.com/hursthead/ ; 26–30 October daily booking entries; ages Reception–Year 6, 07:45–18:00, £21/£25/£35. Search-engine and site snapshots can be stale; recheck actual booking route in production QA.
+6. ACE Coaching / Cheadle Hulme High: https://www.acecoachinguk.co.uk/class-types/holiday-courses/ ; live search indexes October 26–29 and £11.50/£23, but older cached page shows summer dates. **Pending fresh direct date/price confirmation**; page explicitly warns to recheck.
+7. TD Sports Academy / Gatley Primary: https://td-sports-academy-limited.classforkids.io/camps ; distinct October holiday camp 26–30, ages 4–11. Price and hours unconfirmed.
+8. Perform to Inspire / Gatley URC: https://classforkids.io/en-GB/classes/heaton-moor ; October 26–30, ages 5–12. **Direct October booking URL, hours and price unconfirmed**; do not reuse summer prices.
+9. Kitty Watson Academy / Heald Green: https://kw-academy.co.uk/october-intensive ; 26–28 October age 7+ intensive at £120. Site also offers a separately described holiday camp with different price/age details. Do not treat distinct KWA programmes as one.
+10. Practically Family / Ladybrook, Bramhall: same source as items 1–2.
+11. Fun Fest / Queensgate, Bramhall: https://fun-fest.co.uk/cheview/ ; 26–30 October current 2026/27 listing; £24 half, £40 day, £180 week. Payment-method transfer warning.
+12. Fun Fest / Cheadle Heath Primary: https://fun-fest.co.uk/cheadleheath/ ; 26–30 October; £24 half, £40 day, £180 week.
+13. Elm Cottage / Didsbury Road Primary, Heaton Mersey: https://bookings.elm-cottage.com/didsbury-road/ ; 26–30 October; ages school Reception–Year 6, £21/£35, 07:45–18:00.
+14. Junior Sport Stars / Sunaco House, Heaton Mersey: https://junior-sport-stars.classforkids.io/camp/291 ; 26–30 October, ages 5–14, £32/day £150 week; early/late add-ons.
+15. Junior Sport Stars / Tithe Barn, Heaton Moor: https://junior-sport-stars.classforkids.io/camp/294 ; 27–29 October, ages 4–12, £20 half / £30 day / £90 programme.
+16. 8BY8Football / Handforth Grange: https://8by8football.classforkids.io/camp/145 ; 27–29 October, ages 4–11, £18 half / £30 day / £90 programme; early/late add-ons.
 
-- Stockport Council 2026–27 term dates: standard autumn half-term 26–30 October 2026 (https://www.stockport.gov.uk/school-term-dates/2026-to-2027-term-dates). Individual academy/independent calendars may differ.
-- Practically Family: organiser confirms Greenbank Preparatory, Cheadle Catholic Infant and Ladybrook Primary, 26–30 October 2026, ages 3–11, £20 / £30 / £40 for 9am–1pm / 9am–3pm / 8am–6pm. Voucher/Tax-Free Childcare published, but do not claim that individual places remain available. https://practicallyfamily.co.uk/holiday-club/book and https://www.practicallyfamily.co.uk/our-clubs
-- Junior Sport Stars: Lane End Primary School, 26–30 October, ages 4–12 with Reception restriction for four-year-olds; 9am–3.30pm £30/day, £125/week, £20 morning half-day. Paid early and late options. Source: https://junior-sport-stars.classforkids.io/camp/293 . Verify live places again before releasing.
-- Kitty Watson Academy: provider's October Intensive page presents a three-day £120 age 7+ option, whereas its holiday-camp page presents a £90 camp with a different age description. Same provider publishes contradictory October price/programme information. Draft deliberately asks readers to confirm. Direct confirmation needed before headline prices are published. https://kw-academy.co.uk/october-intensive and https://kw-academy.co.uk/holiday-camps
-- Perform to Inspire Events: 26–30 October 2026 at Gatley URC, ages 5–12 listed in ClassForKids discovery results (https://classforkids.io/en-GB/classes/heaton-moor). An exact October 2026 booking route, hours and pricing **not confirmed**. Older 2024/February 2026/summer 2026 camp prices must NOT be passed off as current October prices.
-- Ladybrook is outside core SK8 and deliberately labelled nearby.
+## Reserves NOT listed because current suitability remains unconfirmed
+- Fun Fest Bolshaw, Heald Green SK8 3LW: venue and Ofsted record exist, but October 2026 dates or operation at this venue not independently established. https://reports.ofsted.gov.uk/search?order=desc&q=SK8+5ET&rows=10&sort=relevancy&start=60&status%5B0%5D=1
+- ZoZo's Day Nursery, Gatley: provider advertises October holiday club but eligibility, dates/ages/fees require confirmation. https://zozosdaynursery.co.uk/
+- Elm Cottage Hursthead search has occasionally served cached May content; inspect live page on final check.
+- Sport First / St Winifred's (19–23 October), Fun Fest Altrincham (19–30 October), other Stockport/Manchester providers: earlier/greater catchment. Do not add as 26–30 listings without an intentional scope change.
 
-## Code/structural checks performed
-- All 4 controls, result counter, no-results panel, filtered render function, and select event listeners found in current branch source.
-- Cards use textContent for source data, not unsafe innerHTML.
-- Mobile CSS media queries provided, actual viewport screenshot not yet obtained.
-- noindex,follow retained during testing; cannot launch for SEO while noindex remains.
-- Real SK8 logo referenced, no extra visual assets or SVG introduced.
-- Kids & Family cross-link added **on staging branch only**.
+## Checks performed on expanded branch
+- Programme data: 16 unique named venue/programme entries; no duplicate venue; all age ranges valid; all days within 26–30 Oct.
+- Core SK8 9 and nearby 7; location options cover all 8 areas.
+- New `Gymnastics` type option added for appropriate entries.
+- Inline JS parsing passed, no structural data issues in source test; this is **not** a browser filter test.
+- Cards use textContent and external links; no fabricated safety endorsements or paid placements.
+- Existing noindex retained: correct while unpublished, not appropriate if intentional search indexation.
+- Correct genuine SK8 Scoop logo still referenced, no SVG or third-party decorative images.
 
-## Still to perform BEFORE publishing
-1. Obtain actual Cloudflare staging preview URL and run rendered mobile (360–390px), tablet and desktop visual checks. JS runtime/filter interaction tests, including no-match states. A static code inspection is not a browser test.
-2. Verify that all provider links resolve to correct current club, not an unrelated result; direct provider confirmation for the disputed and unconfirmed entries.
-3. Confirm page is accessible without login, image assets are present, no browser errors; inspect heading structure, contrast, keyboard navigation and external link behaviour.
-4. Confirm guide destination and its canonical editing source; add a contextual link only after the finder is live and approved. Suggested link: **Find an October holiday club around SK8** with description **Compare dates, ages, times and costs; check places directly with providers.**
-5. Before live release, decide indexing policy: keep noindex for small experimental guide-only distribution OR remove it once genuinely publication-ready and SEO desired. Record Paul's approval for production merge/deploy.
-6. Plan to archive, update or redirect this dated page after 30 October 2026. Do not display expired holiday clubs as current.
+## Release blockers / open QA
+1. Live rendering in real browser at 360px, tablet and desktop; test every filter combination, empty results, keyboard navigation and outbound links.
+2. Direct confirmation of ACE October dates, TD hours/price, Perform to Inspire October booking route and Kitty programme differences. Where not obtainable, withhold any specific unverified fields or drop candidate.
+3. Recheck all source links and that October sessions are still bookable. Never present historic availability as current.
+4. Publish/merge/Cloudflare deployment only on Paul's approval and after active preview, accessibility and external-link tests.
+5. Add link from Halloween guide only after the finder is genuinely live.
+6. End-of-season review/remove/redirect after 30 October 2026.
 
-## Critique cycles
-1. Reader utility: prioritised date/age/area filters and direct booking actions; retain small scope.
-2. Evidence: replaced generic/unrelated booking search, marked unknown hours/prices, highlighted conflicting Kitty Watson descriptions.
-3. Trust/UX: no independent provider approval claim, clearly no paid placement; status noindex; added corrections path and sensible cancellation/booking caution.
+## Three-cycle critical QA
+1. Reader value: original six were insufficient; expanded to 16, split core SK8 vs sensible nearby, reclassified provider locations, added area/type filters.
+2. Source quality: dated 2026 primary booking sources prioritized; unclear price/hours clearly marked; excluded Bolshaw and ZoZo until supported.
+3. Trust and risk: no endorsement promise, no paid priority, no booking guarantee, correction route, seasonal expiry and preview-only status.
 
-**Status: WORKING DRAFT, NOT PUBLISH-READY.**
+Status: **IMPROVED DRAFT, still not publish-ready**.
