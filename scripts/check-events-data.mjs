@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { exclusionReason } from './event-editorial-exclusions.mjs';
 
 const events = JSON.parse(fs.readFileSync('data/events.json', 'utf8'));
 if (!Array.isArray(events)) throw new Error('data/events.json must contain an array');
@@ -17,6 +18,8 @@ const asDate = value => {
 
 for (const [index,event] of events.entries()) {
   const label = `event[${index}]`;
+  const excluded = exclusionReason(event);
+  if (excluded) failures.push(`${label} ${event.id}: ${excluded}`);
   for (const key of required) {
     if (event[key] === undefined || String(event[key]).trim() === '') failures.push(`${label} missing ${key}`);
   }
