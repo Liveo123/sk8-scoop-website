@@ -95,7 +95,7 @@ try {
   await shot('desktop-month.png');
   await rpc('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
   check(await evaluate("document.documentElement.scrollWidth<=window.innerWidth+1"),'mobile month view no horizontal overflow');
-  check(await evaluate("getComputedStyle(document.querySelector('[data-calendar-day=\\\"2026-10-10\\\"] .sk8-calendar-count-word')).display==='none'"),'mobile calendar counts stay compact');
+  check(await evaluate("getComputedStyle(document.querySelector('.sk8-calendar-count-word')).display==='none'"),'mobile calendar counts stay compact');
   await evaluate("document.querySelector('[data-calendar-month-panel]').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-104);true");
   await pause(350);
   await shot('mobile-month.png');
