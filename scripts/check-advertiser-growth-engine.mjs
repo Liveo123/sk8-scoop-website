@@ -105,7 +105,7 @@ const heroCriticismChecks = [
   ['10. Six existing outcome shortcuts remain available', (advertiseHtml.match(/data-ad-goal=/g)||[]).length === 6],
   ['11. Sponsor label visible in example', advertiseHtml.includes('ad-specimen-masthead') && advertiseHtml.includes('<span>SPONSORED</span>')],
   ['12. Example explicitly not a real campaign', advertiseHtml.includes('FICTIONAL FORMAT EXAMPLE') && advertiseHtml.includes('not a real advertiser')],
-  ['13. Clear example next action', advertiseHtml.includes('ONE CLEAR READER ACTION')],
+  ['13. Clear example next action', advertiseHtml.includes('data-ad-hero-action="sample_link" href="#what-you-buy"') || advertiseHtml.includes('href="#what-you-buy" data-ad-hero-action="sample_link"')],
   ['14. Introductory newsletter price retained', advertiseHtml.includes('Introductory newsletter test') && advertiseHtml.includes('£40')],
   ['15. Full advertising example comes before seasonal upsell', advertiseHtml.indexOf('id="what-you-buy"') < advertiseHtml.indexOf('id="halloween-half-term"')],
   ['16. Halloween and Christmas routes retained', advertiseHtml.includes('id="halloween-half-term"') && advertiseHtml.includes('/advertise/christmas-eating-out/')],
