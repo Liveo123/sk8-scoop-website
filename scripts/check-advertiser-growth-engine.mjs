@@ -105,3 +105,8 @@ assert(!advertiseHtml.includes('assets/images/cafe-local-business.webp'), 'Old p
 assert(!advertiseHtml.includes('test-canva-thumb.webp') && !advertiseHtml.includes('test-canva-cafe-thumb.webp'), 'No thumbnail-derived advertiser images remain');
 assert(!advertiseHtml.includes('e_gen_restore'), 'Advertiser HTML does not upscale low-resolution source images');
 assert(!advertiseV6.includes('e_gen_restore'), 'Advertiser CSS does not upscale low-resolution source images');
+
+assert(advertiseHtml.includes('halloween-scene-caption'), 'Halloween campaign copy is moved into a caption below the artwork');
+assert(!advertiseHtml.includes('<span>CHRISTMAS 2026 · HOSPITALITY</span>'), 'Christmas hospitality label is not duplicated over an image that already contains it');
+assert(!advertiseHtml.includes('<div class="ad-demo-photo-brand"><strong>Maple &amp; Bean</strong>'), 'Maple & Bean brand text is not duplicated over the approved image');
+assert(advertiseV6.includes('.halloween-scene-v6 .halloween-scene-caption'), 'Halloween caption styling keeps text off the image focal area');
