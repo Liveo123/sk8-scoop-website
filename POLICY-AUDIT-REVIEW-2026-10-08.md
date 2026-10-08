@@ -7,7 +7,7 @@ Status: DRAFT / NOT PUBLISHED
 - privacy.html: expanded subject rights and ICO complaint route (no invented controller name or retention commitment).
 
 ## Outstanding approval and verification gates
-1. Verify legal operating entity/controller, contact address and any company statutory disclosures.
+1. STATUS CONFIRMED BY OWNER ON 8 OCTOBER 2026: SK8 Scoop operates as a **sole trader**, not a limited company. Public policy drafts now describe that structure. BEFORE PUBLICATION: confirm the proprietor's **full legal name**, geographic business establishment/address suitable for required public disclosure, service/correspondence address for invoices and the correct country of establishment. The Website Manual identifies Paul Livesey as owner, but do not assume this is the exact current legal proprietor without verification. No company registration number, Ltd or Inc claim should appear.
 2. Map personal data processing, lawful bases, processors, international transfer mechanism and retention; test actual deletion.
 3. Verify all tracking and consent journeys via browser network on main site and separately hosted properties.
 4. Current main site and Campaign Finder still contain historical GBP 40 newsletter and GBP 35/75/110/150 Halloween prices. User's latest GBP 28/60/96/125 decision requires complete product-scope/terms mapping before updating every related offer surface and the Drive pricing source of truth; honour existing agreements.
@@ -23,3 +23,13 @@ Status: DRAFT / NOT PUBLISHED
 - Browser/network/production smoke tests NOT RUN.
 - No changes to production main, prices, mail, databases, adverts, tracking or subscriber preferences in this draft.
 - Draft is NOT ready to merge for public compliance claims until blockers resolved.
+
+## Sole-trader legal checklist (added 8 October 2026)
+- GOV.UK confirms that sole traders using a business name must state the individual's name and business name on official paperwork. Invoices must include their legal name, trading name, and a usable address for service: https://www.gov.uk/become-sole-trader/choose-your-business-name and https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include
+- The Electronic Commerce (EC Directive) Regulations 2002, regulation 6, generally require easily accessible provider identity, geographic establishment address and contact details for online services, plus clarity on tax in prices: https://www.legislation.gov.uk/uksi/2002/2013/regulation/6
+- The ICO's right-to-be-informed guidance calls for the actual data controller's name and contact details: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/the-right-to-be-informed/what-privacy-information-should-we-provide/
+- Do not assume whether the proprietor is established in the UK from a UK audience alone. If outside the UK without a UK establishment, check Article 27/UK representative duties and whether any exception applies: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/receiving-personal-information-from-the-eea/
+- Assess whether an ICO data protection fee is payable; not all sole traders are exempt, and processing personal information may bring an obligation: https://ico.org.uk/for-organisations/data-protection-fee/faqs-data-protection-fee-payment-and-online-registration/
+- Confirm VAT registration/status and quoted-price tax wording; do not invent VAT registration or number.
+- Consider suitable sole-trader professional/public liability and advertising/media liability cover, proportionate to actual activities (commercial recommendation, not automatic legal duty).
+- Privacy and Terms pages contain prominent DRAFT placeholders so they must not be merged/published as-is. Once legitimate operator/address details are supplied for public display, replace placeholders and run fresh QA; do not put a private home address on a public website without deliberate informed choice.
