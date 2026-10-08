@@ -1,0 +1,120 @@
+/* SK8 Scoop What's On calendar. Retain approved SK8 editorial visual system. */
+body[data-page="whats-on"] .whats-on-calendar-ui{
+  margin:20px 0 16px;padding:16px 18px 14px;border:1px solid #c5d8d2;
+  border-radius:16px;background:#fff;box-shadow:0 8px 22px rgba(18,57,59,.045);
+}
+body[data-page="whats-on"] .sk8-calendar-toolbar{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+}
+body[data-page="whats-on"] .sk8-calendar-choices{display:flex;gap:4px;padding:4px;background:#e8f1ee;border-radius:11px}
+body[data-page="whats-on"] .sk8-calendar-choice{
+  padding:10px 15px;min-height:43px;border:0;border-radius:8px;background:transparent;
+  color:#0a4953;font-weight:800;cursor:pointer;font-size:.86rem;
+}
+body[data-page="whats-on"] .sk8-calendar-choice[aria-pressed="true"]{
+  color:#fff;background:#07454e;box-shadow:0 4px 11px rgba(7,63,72,.15);
+}
+body[data-page="whats-on"] .sk8-calendar-date-choice{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+body[data-page="whats-on"] .sk8-calendar-date-choice label{font-size:.82rem;font-weight:850;color:#194e57}
+body[data-page="whats-on"] .sk8-calendar-date-choice input{
+  min-height:43px;border:1px solid #9abcb5;border-radius:9px;padding:8px 11px;
+  background:#fff;color:#1d3d41;font:inherit;max-width:205px;color-scheme:light;
+}
+body[data-page="whats-on"] .sk8-calendar-clear{
+  border:0;background:transparent;text-decoration:underline;text-underline-offset:3px;
+  padding:10px 2px;color:#0b505a;font-size:.82rem;font-weight:800;cursor:pointer;
+}
+body[data-page="whats-on"] .sk8-calendar-intro{
+  margin:10px 0 0!important;font-size:.82rem!important;line-height:1.55;color:#526b6b!important;
+}
+body[data-page="whats-on"] [data-calendar-month-panel]{
+  margin:14px 0 18px;background:linear-gradient(150deg,#f9faf6,#fff);
+  padding:20px;border:1px solid #cddbd4;border-radius:17px;
+}
+body[data-page="whats-on"] [data-calendar-month-panel][hidden],
+body[data-page="whats-on"] .sk8-calendar-clear[hidden],
+body[data-page="whats-on"] [data-events-empty][hidden]{display:none!important}
+body[data-page="whats-on"] .sk8-calendar-month-top{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;
+}
+body[data-page="whats-on"] .sk8-calendar-month-top h3{
+  margin:0;font-family:Georgia,'Times New Roman',serif;line-height:1.14;
+  font-size:clamp(1.35rem,2.4vw,1.85rem);letter-spacing:-.025em;color:#183f45;
+}
+body[data-page="whats-on"] .sk8-calendar-month-nav{display:flex;gap:8px}
+body[data-page="whats-on"] .sk8-calendar-month-nav button{
+  border:1px solid #a7c6bd;border-radius:9px;background:#fff;color:#10505a;
+  padding:9px 12px;min-height:44px;font-weight:800;cursor:pointer;
+}
+body[data-page="whats-on"] .sk8-calendar-month-nav button:hover:not(:disabled){background:#e7f2ee}
+body[data-page="whats-on"] .sk8-calendar-month-nav button:disabled{opacity:.4;cursor:not-allowed}
+body[data-page="whats-on"] .sk8-calendar-month-grid{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;
+}
+body[data-page="whats-on"] .sk8-calendar-weekday{
+  text-align:center;padding:4px 0 7px;color:#536c69;text-transform:uppercase;
+  letter-spacing:.09em;font-size:.68rem;font-weight:850;
+}
+body[data-page="whats-on"] .sk8-calendar-blank{min-height:75px}
+body[data-page="whats-on"] .sk8-calendar-day{
+  min-width:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;
+  padding:10px 11px;min-height:81px;border:1px solid #d2dfd8;border-radius:11px;
+  background:#fff;color:#24494a;text-align:left;cursor:pointer;position:relative;
+}
+body[data-page="whats-on"] .sk8-calendar-day strong{font-size:.98rem;line-height:1.1}
+body[data-page="whats-on"] .sk8-calendar-day small{
+  font-size:.65rem;line-height:1.15;color:#405f61;min-height:1.1em;letter-spacing:.01em;
+}
+body[data-page="whats-on"] .sk8-calendar-day.has-events{
+  border-color:#8aada3;background:#e7f2ed;box-shadow:0 3px 7px rgba(17,74,76,.03);
+}
+body[data-page="whats-on"] .sk8-calendar-day.has-events:before{
+  content:"";width:7px;height:7px;border-radius:50%;background:#b35a2c;
+  position:absolute;top:10px;right:10px;
+}
+body[data-page="whats-on"] .sk8-calendar-day.is-today strong{
+  color:#ac471a;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;
+}
+body[data-page="whats-on"] .sk8-calendar-day.is-selected{outline:3px solid #cc6f3b;outline-offset:0}
+body[data-page="whats-on"] .sk8-calendar-day:hover:not(:disabled){border-color:#0b6570;background:#dbece6}
+body[data-page="whats-on"] .sk8-calendar-day:disabled{background:#f3f5f2;color:#9aaba6;cursor:not-allowed;opacity:.7}
+body[data-page="whats-on"] .sk8-calendar-month-status{
+  margin:15px 0 0!important;color:#405c5a;font-size:.82rem!important;line-height:1.55;
+}
+body[data-page="whats-on"] .sk8-calendar-coverage{
+  margin:10px 0 0;font-size:.77rem;color:#526b69;
+}
+body[data-page="whats-on"] .whats-on-agenda-date{
+  grid-column:1 / -1;font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(1.3rem,2.1vw,1.75rem);line-height:1.22;letter-spacing:-.02em;
+  margin:16px 0 0;padding:0 0 10px;border-bottom:1px solid #bdcfc8;color:#163f44;
+}
+body[data-page="whats-on"] .whats-on-agenda-date:first-child{margin-top:0}
+body[data-page="whats-on"][data-calendar-view="month"] [data-events-list],
+body[data-page="whats-on"][data-calendar-view="month"] [data-events-empty],
+body[data-page="whats-on"][data-calendar-view="month"] [data-events-status]{display:none!important}
+body[data-page="whats-on"] :is(.sk8-calendar-day,.sk8-calendar-choice,.sk8-calendar-clear,.sk8-calendar-month-nav button,.sk8-calendar-date-choice input):focus-visible{
+  outline:3px solid #c76832;outline-offset:3px;
+}
+@media(max-width:680px){
+  body[data-page="whats-on"] .whats-on-calendar-ui{padding:13px;margin:16px 0 12px}
+  body[data-page="whats-on"] .sk8-calendar-toolbar{align-items:stretch;gap:12px}
+  body[data-page="whats-on"] .sk8-calendar-choices{width:100%}
+  body[data-page="whats-on"] .sk8-calendar-choice{flex:1}
+  body[data-page="whats-on"] .sk8-calendar-date-choice{width:100%;justify-content:space-between}
+  body[data-page="whats-on"] .sk8-calendar-date-choice input{flex:1;max-width:none;min-width:135px}
+  body[data-page="whats-on"] [data-calendar-month-panel]{padding:11px 9px}
+  body[data-page="whats-on"] .sk8-calendar-month-grid{gap:3px}
+  body[data-page="whats-on"] .sk8-calendar-day{min-height:60px;padding:7px 4px;border-radius:7px}
+  body[data-page="whats-on"] .sk8-calendar-day strong{font-size:.86rem}
+  body[data-page="whats-on"] .sk8-calendar-day small{font-size:.58rem;overflow-wrap:anywhere}
+  body[data-page="whats-on"] .sk8-calendar-day.has-events:before{width:5px;height:5px;top:6px;right:6px}
+  body[data-page="whats-on"] .sk8-calendar-blank{min-height:60px}
+  body[data-page="whats-on"] .whats-on-agenda-date{margin-top:19px}
+  body[data-page="whats-on"] .sk8-calendar-month-top{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  body[data-page="whats-on"] .sk8-calendar-day{scroll-behavior:auto;transition:none}
+}
