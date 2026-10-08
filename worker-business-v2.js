@@ -121,6 +121,8 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
   const guideNames = {not_sure:'Help me choose',halloween:'Halloween & Half-Term Guide',christmas:'Christmas Guide','52-adventures':'52 Adventures','free-cheap':'Free & Cheap Things to Do',summer:'SK8 Summer Guide',secrets:'50 Secrets of SK8',transport:'Getting around SK8',other:'Another SK8 Scoop Guide'};
   const requestedGuideKey = String(data.guide_choice || '').trim();
   const requestedGuide = Object.prototype.hasOwnProperty.call(guideNames, requestedGuideKey) ? guideNames[requestedGuideKey] : '';
+  const artworkOption = ['create','logo','finished'].includes(String(data.artwork_option||'')) ? String(data.artwork_option) : 'create';
+  const artworkLink = String(data.artwork_url||'').trim().slice(0,400);
   let customerConfirmation = { status: 'not_applicable' };
 
   if (isLocalFitCheck) {
@@ -150,6 +152,10 @@ async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
         'Thanks for your advertising enquiry. We have received your request for:',
         packageLabel,
         ...(requestedGuide ? [`Requested Guide: ${requestedGuide}`] : []),
+      `Advert artwork: ${artworkOption}`,
+      ...(artworkLink ? [`Artwork URL: ${artworkLink}`] : []),
+        `Advert artwork: ${artworkOption}`,
+        ...(artworkLink ? [`Artwork URL: ${artworkLink}`] : []),
         '',
         'Next we will check suitability and available dates, then prepare an advert proof and confirm the agreed price.',
         'If you are happy to proceed, we will send you a secure payment link. No payment is due from this enquiry.',
