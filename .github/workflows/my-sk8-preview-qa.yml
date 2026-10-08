@@ -16,6 +16,8 @@ on:
       - 'assets/site.js'
       - 'whats-on/index.html'
       - 'my-sk8/index.html'
+      - 'my-sk8/action/index.html'
+      - 'halloween-half-term-guide/guide/index.html'
       - 'privacy.html'
       - 'local-history/gatley-shouter/index.html'
       - 'planning/heald-green-east/index.html'
@@ -28,6 +30,7 @@ on:
       - 'planning/cheadle-eco-park/index.html'
       - 'local-history/heald-green-north-history-walk/index.html'
       - 'tests/my-sk8-browser.mjs'
+      - 'tests/my-sk8-email-actions-browser.mjs'
       - 'tests/subscriber-journey-live-browser.mjs'
       - 'assets/subscriber-access.js'
       - 'assets/signup-protection.js'
@@ -115,6 +118,18 @@ jobs:
           PREVIEW_URL: ${{ env.PREVIEW_URL }}
           CHROME: ${{ env.CHROME }}
         run: node tests/my-sk8-browser.mjs
+
+      - name: Verify compact action page syntax
+        shell: bash
+        run: |
+          set -eu
+          node --check tests/my-sk8-email-actions-browser.mjs
+
+      - name: Test all seven Issue 16 newsletter actions on mobile
+        env:
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
+          CHROME: ${{ env.CHROME }}
+        run: node tests/my-sk8-email-actions-browser.mjs
 
       - name: Upload screenshots and results
         if: always()
