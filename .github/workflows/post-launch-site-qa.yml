@@ -348,27 +348,28 @@ jobs:
           check_page 'https://www.sk8scoop.com/secret-trails/cheadle/feedback/' 'action="/api/secret-trail-feedback"'
           check_page 'https://www.sk8scoop.com/assets/site.js' "'secret-trail-feedback':'secret_trail_feedback_visit'"
           check_page 'https://www.sk8scoop.com/admin/secret-trail-feedback/' 'data-secret-trail-feedback-admin'
-          check_gated_guide() {
+          check_direct_guide() {
             url="$1"
-            expected_location="$2"
+            marker="$2"
             for attempt in $(seq 1 10); do
-              headers="$(curl -sS --max-time 20 -D - -o /dev/null "$url" | tr -d '\r' || true)"
-              code="$(printf '%s\n' "$headers" | awk 'NR==1 {print $2}')"
-              robots="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^x-robots-tag:/ {sub(/^x-robots-tag:[[:space:]]*/, ""); print; exit}')"
-              location="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^location:/ {sub(/^location:[[:space:]]*/, ""); print; exit}')"
-              if [ "$code" = "302" ] && printf '%s' "$robots" | grep -Fqi 'noindex' && printf '%s' "$location" | grep -Fq "$expected_location"; then
-                echo "OK subscriber-gated guide: $url -> $location"
+              headers="/tmp/sk8-live-guide-headers"
+              body="/tmp/sk8-live-guide-body"
+              code="$(curl -sS --max-time 20 -D "$headers" -o "$body" -w '%{http_code}' "$url" || true)"
+              robots="$(tr -d '\r' < "$headers" | awk 'BEGIN{IGNORECASE=1} /^x-robots-tag:/ {sub(/^x-robots-tag:[[:space:]]*/, ""); print; exit}')"
+              location="$(tr -d '\r' < "$headers" | awk 'BEGIN{IGNORECASE=1} /^location:/ {sub(/^location:[[:space:]]*/, ""); print; exit}')"
+              if [ "$code" = "200" ] && printf '%s' "$robots" | grep -Fqi 'noindex' && grep -Fq "$marker" "$body" && [ -z "$location" ]; then
+                echo "OK direct subscriber-distributed guide: $url"
                 return 0
               fi
-              echo "Waiting for subscriber guide gate: $url (attempt $attempt/10; code=$code; robots=$robots; location=$location)"
+              echo "Waiting for direct guide: $url (attempt $attempt/10; code=$code; robots=$robots; location=$location)"
               sleep 15
             done
-            echo "FAILED subscriber guide gate: $url"
+            echo "FAILED direct guide access: $url"
             return 1
           }
-          check_gated_guide 'https://www.sk8scoop.com/52-adventures/guide/' '/52-adventures/#get-guide'
-          check_gated_guide 'https://www.sk8scoop.com/free-cheap-guide/guide/' '/free-cheap-guide/#get-guide'
-          check_gated_guide 'https://www.sk8scoop.com/halloween-half-term-guide/guide/' '/halloween-half-term-guide/#get-guide'
+          check_direct_guide 'https://www.sk8scoop.com/52-adventures/guide/' '52 Adventures'
+          check_direct_guide 'https://www.sk8scoop.com/free-cheap-guide/guide/' 'Free &amp; Cheap'
+          check_direct_guide 'https://www.sk8scoop.com/halloween-half-term-guide/guide/' 'Halloween &amp; Half-Term Guide 2026'
           check_page 'https://www.sk8scoop.com/planning/heald-green-local-plan-2026/' '1,672 homes'
           check_page 'https://www.sk8scoop.com/local-history/heald-green-north-history-walk/' '22 history stops'
           check_page 'https://www.sk8scoop.com/local-history/cheadle-war-memorial-air-raid-victims/' 'eight civilian names'
