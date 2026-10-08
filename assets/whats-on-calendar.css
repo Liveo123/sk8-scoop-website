@@ -92,6 +92,7 @@ body[data-page="whats-on"] .whats-on-agenda-date{
   margin:16px 0 0;padding:0 0 10px;border-bottom:1px solid #bdcfc8;color:#163f44;
 }
 body[data-page="whats-on"] .whats-on-agenda-date:first-child{margin-top:0}
+body[data-page="whats-on"] [data-events-status]{scroll-margin-top:108px}
 body[data-page="whats-on"][data-calendar-view="month"] [data-events-list],
 body[data-page="whats-on"][data-calendar-view="month"] [data-events-empty],
 body[data-page="whats-on"][data-calendar-view="month"] [data-events-status]{display:none!important}
@@ -109,7 +110,8 @@ body[data-page="whats-on"] :is(.sk8-calendar-day,.sk8-calendar-choice,.sk8-calen
   body[data-page="whats-on"] .sk8-calendar-month-grid{gap:3px}
   body[data-page="whats-on"] .sk8-calendar-day{min-height:60px;padding:7px 4px;border-radius:7px}
   body[data-page="whats-on"] .sk8-calendar-day strong{font-size:.86rem}
-  body[data-page="whats-on"] .sk8-calendar-day small{font-size:.58rem;overflow-wrap:anywhere}
+  body[data-page="whats-on"] .sk8-calendar-day small{font-size:.65rem;overflow-wrap:anywhere;font-weight:800}
+  body[data-page="whats-on"] .sk8-calendar-count-word{display:none}
   body[data-page="whats-on"] .sk8-calendar-day.has-events:before{width:5px;height:5px;top:6px;right:6px}
   body[data-page="whats-on"] .sk8-calendar-blank{min-height:60px}
   body[data-page="whats-on"] .whats-on-agenda-date{margin-top:19px}
