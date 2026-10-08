@@ -120,13 +120,13 @@ try {
     let loaded = false;
     for (let attempt = 0; attempt < 8; attempt++) {
       await navigate('/advertise.html?advertiser-ui-qa=' + width);
-      if (await waitFor("document.querySelectorAll('#products .ad-simple-card').length === 3 && document.querySelector('[data-stat=subscriberCount]')", 5000)) {
+      if (await waitFor("document.querySelectorAll('#products .ad-simple-card').length === 3 && document.querySelector('.ad-example-only')", 5000)) {
         loaded = true;
         break;
       }
       await sleep(3000);
     }
-    if (!loaded) fail(width + 'px: preview did not load the three-package page');
+    if (!loaded) fail(width + 'px: preview did not load updated three-package page');
     await screenshot('hero-' + width + '.png');
     const before = await evaluate(`(() => {
       const rect = e => e.getBoundingClientRect().toJSON();
