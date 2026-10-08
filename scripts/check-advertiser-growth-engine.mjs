@@ -15,6 +15,7 @@ const finderJs = read('assets/campaign-finder.js');
 const advertiseHtml = read('advertise.html');
 const advertiseJs = read('assets/advertise.js');
 const advertiseV6 = read('assets/advertise-v6.css');
+const advertiseHeroCss = read('assets/advertise-hero-refresh.css');
 const advertiseApprovedXmas = read('assets/advertise-approved-xmas.css');
 const advertiseApprovedCafe = read('assets/advertise-approved-cafe.css');
 const opportunity = read('advertise/christmas-eating-out/index.html');
@@ -87,6 +88,33 @@ assert(wrapper.includes("strict-transport-security"), 'Production SK8 domains re
 assert(wrapper.includes("company_fax") && wrapper.includes("sk8_started_at"), 'Advertiser submission applies bot screening');
 
 
+
+
+/* Twenty explicit hero quality gates from the October 2026 criticism pass.
+   These are structural regression checks; visual/browser tests run in the site QA workflow. */
+const heroCriticismChecks = [
+  ['01. Business-first headline', advertiseHtml.includes('Got something worth <em>telling SK8?</em>')],
+  ['02. Specific SK8 locality', advertiseHtml.includes('Cheadle · Cheadle Hulme · Gatley · Heald Green')],
+  ['03. Useful business hooks', advertiseHtml.includes('A class, an offer, an event')],
+  ['04. Clear production promise', advertiseHtml.includes('We prepare the advert. You approve it')],
+  ['05. Main CTA above the page proof section', advertiseHtml.indexOf('data-ad-hero-action="see_example"') < advertiseHtml.indexOf('ad-proof-bar')],
+  ['06. Immediate campaign finder alternative', advertiseHtml.includes('data-ad-hero-action="campaign_finder" href="/advertise/finder/"')],
+  ['07. Dynamic audience rather than a frozen number', advertiseHtml.includes('data-stat="subscriberCount"')],
+  ['08. Stale issues-published tile removed from hero', !advertiseHtml.slice(advertiseHtml.indexOf('ad-conversion-hero'),advertiseHtml.indexOf('ad-proof-bar')).includes('issuesPublished')],
+  ['09. Goal-picker no longer crowds the first screen', advertiseHtml.indexOf('class="ad-goal-grid"') > advertiseHtml.indexOf('id="what-you-buy"')],
+  ['10. Six existing outcome shortcuts remain available', (advertiseHtml.match(/data-ad-goal=/g)||[]).length === 6],
+  ['11. Sponsor label visible in example', advertiseHtml.includes('ad-specimen-masthead') && advertiseHtml.includes('<span>SPONSORED</span>')],
+  ['12. Example explicitly not a real campaign', advertiseHtml.includes('FICTIONAL FORMAT EXAMPLE') && advertiseHtml.includes('not a real advertiser')],
+  ['13. Clear example next action', advertiseHtml.includes('data-ad-hero-action="sample_link" href="#what-you-buy"') || advertiseHtml.includes('href="#what-you-buy" data-ad-hero-action="sample_link"')],
+  ['14. Introductory newsletter price retained', advertiseHtml.includes('Introductory newsletter test') && advertiseHtml.includes('£40')],
+  ['15. Full advertising example comes before seasonal upsell', advertiseHtml.indexOf('id="what-you-buy"') < advertiseHtml.indexOf('id="halloween-half-term"')],
+  ['16. Halloween and Christmas routes retained', advertiseHtml.includes('id="halloween-half-term"') && advertiseHtml.includes('/advertise/christmas-eating-out/')],
+  ['17. Editorial and sponsored independence explicit', advertiseHtml.includes('never buys favourable editorial coverage')],
+  ['18. Accessible mobile treatment and link focus', advertiseHeroCss.includes('@media(max-width:600px)') && advertiseHeroCss.includes('a:focus-visible')],
+  ['19. Respect for reduced motion and responsive graphics', advertiseHeroCss.includes('prefers-reduced-motion:reduce') && advertiseHeroCss.includes('minmax(0,1.06fr)')],
+  ['20. Intent events separated from submissions', advertiseJs.includes('advertiser_hero_action') && advertiseJs.includes("variant: 'local_hero_v2'")],
+];
+for (const [name,passed] of heroCriticismChecks) assert(passed, 'Hero criticism pass '+name);
 
 if (process.exitCode) process.exit(process.exitCode);
 console.log('Advertiser growth-engine static checks passed.');

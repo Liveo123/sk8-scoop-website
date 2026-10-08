@@ -19,6 +19,15 @@
   const formIntro = form.querySelector('[data-ad-form-intro]');
   const termsCopy = form.querySelector('[data-ad-terms-copy]');
   const submitButton = form.querySelector('[data-ad-submit]');
+  // Distinguish new above-the-fold engagement from enquiry submissions.
+  document.querySelectorAll('[data-ad-hero-action]').forEach(link => {
+    link.addEventListener('click', () => {
+      const action = String(link.dataset.adHeroAction || '').trim();
+      if (action && typeof window.sk8Track === 'function') {
+        window.sk8Track('advertiser_hero_action', { action, variant: 'local_hero_v2' });
+      }
+    });
+  });
   const goalLinks = [...document.querySelectorAll('[data-ad-goal]')];
   const packageJumps = [...document.querySelectorAll('[data-ad-package]')];
   const issueStat = document.querySelector('[data-stat="issuesPublished"]');
