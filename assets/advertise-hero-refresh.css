@@ -1,0 +1,466 @@
+/* Advertiser hero refresh, 8 Oct 2026.
+   Purpose: show the value and advert treatment before asking visitors to choose packages.
+   Scoped to this page, without modifying previously approved campaign images. */
+
+body.advertiser-page .ad-conversion-hero{
+  position:relative!important;
+  isolation:isolate;
+  overflow:hidden;
+  padding:34px 0 0!important;
+  background:
+    radial-gradient(ellipse at 86% 4%,rgba(255,191,116,.17),transparent 32%),
+    radial-gradient(ellipse at 4% 100%,rgba(91,166,154,.17),transparent 30%),
+    linear-gradient(118deg,#103a42 0%,#0a4b54 53%,#173d46 100%)!important;
+  color:#fff!important;
+}
+body.advertiser-page .ad-conversion-hero:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  right:-110px;
+  top:-170px;
+  width:540px;
+  height:540px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:50%;
+  box-shadow:0 0 0 74px rgba(255,255,255,.018),0 0 0 145px rgba(255,255,255,.012);
+  pointer-events:none;
+}
+body.advertiser-page .ad-conversion-hero .ad-hero-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr)!important;
+  gap:clamp(25px,4.4vw,54px)!important;
+  align-items:center!important;
+  padding:0 0 26px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+body.advertiser-page .ad-conversion-hero .ad-hero-copy{
+  min-width:0!important;
+  max-width:none!important;
+  padding:14px 0 10px!important;
+}
+body.advertiser-page .ad-hero-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:#e1f7ed!important;
+  font-size:.71rem;
+  letter-spacing:.13em;
+  line-height:1.5;
+  font-weight:900;
+}
+body.advertiser-page .ad-hero-eyebrow-mark{
+  display:block;
+  width:12px;
+  height:12px;
+  flex:0 0 12px;
+  border-radius:50%;
+  background:#ffc679;
+  box-shadow:0 0 0 5px rgba(255,198,121,.13);
+}
+body.advertiser-page .ad-conversion-hero .ad-hero-copy h1{
+  max-width:14ch!important;
+  font-family:Georgia,serif!important;
+  font-size:clamp(3.1rem,5vw,5rem)!important;
+  line-height:.99!important;
+  letter-spacing:-.052em!important;
+  text-wrap:balance;
+  margin:22px 0 20px!important;
+  color:#fff!important;
+}
+body.advertiser-page .ad-conversion-hero .ad-hero-copy h1 em{
+  position:relative;
+  display:inline;
+  font-style:normal;
+  color:#ffcf93;
+  white-space:normal;
+}
+body.advertiser-page .ad-conversion-hero .ad-hero-copy h1 em:after{
+  content:"";
+  position:absolute;
+  left:7%;
+  right:3%;
+  bottom:-8px;
+  height:5px;
+  background:#f8791b;
+  border-radius:60% 40% 65% 35%;
+  transform:rotate(-1.2deg);
+}
+body.advertiser-page .ad-conversion-hero .ad-hero-copy .hero-lead{
+  max-width:620px!important;
+  color:#f0f8f6!important;
+  font-size:clamp(1.08rem,1.3vw,1.21rem)!important;
+  line-height:1.56!important;
+  margin:0 0 12px!important;
+}
+body.advertiser-page .ad-hero-promise{
+  max-width:610px;
+  margin:0 0 25px;
+  color:#d5e9e6;
+  font-size:.94rem;
+  line-height:1.55;
+}
+body.advertiser-page .ad-hero-promise strong{color:#fff}
+body.advertiser-page .ad-hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 20px;
+  align-items:center;
+}
+body.advertiser-page .ad-conversion-hero .ad-hero-action-primary{
+  display:inline-flex!important;
+  gap:18px;
+  min-height:56px;
+  align-items:center;
+  justify-content:space-between;
+  max-width:100%;
+  border-radius:12px!important;
+  padding:14px 19px!important;
+  border:2px solid #ffcf93!important;
+  background:#ffcf93!important;
+  color:#16383e!important;
+  box-shadow:0 8px 0 rgba(2,29,35,.28)!important;
+  font-size:.94rem;
+  line-height:1.25;
+  font-weight:950;
+  text-align:left;
+  text-decoration:none;
+  transition:transform .18s ease,box-shadow .18s ease!important;
+}
+body.advertiser-page .ad-hero-action-primary span{font-size:1.4rem;line-height:1}
+body.advertiser-page .ad-conversion-hero .ad-hero-action-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 0 rgba(2,29,35,.26)!important;
+}
+body.advertiser-page .ad-hero-action-secondary{
+  color:#fff;
+  padding:12px 2px;
+  font-weight:850;
+  font-size:.91rem;
+  text-decoration:underline;
+  text-decoration-color:#ffcf93;
+  text-underline-offset:6px;
+}
+body.advertiser-page .ad-hero-action-secondary:hover{color:#ffcf93}
+body.advertiser-page .ad-hero-actions a:focus-visible,
+body.advertiser-page .ad-showcase-bottom a:focus-visible,
+body.advertiser-page .ad-goal-details summary:focus-visible{
+  outline:3px solid #ffcf93!important;
+  outline-offset:4px!important;
+}
+body.advertiser-page .ad-hero-proofline{
+  display:grid;
+  grid-template-columns:minmax(145px,.64fr) minmax(0,1fr);
+  gap:14px;
+  align-items:center;
+  border-top:1px solid rgba(255,255,255,.23);
+  margin:30px 0 8px;
+  padding-top:17px;
+}
+body.advertiser-page .ad-hero-reader-count{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+body.advertiser-page .ad-hero-reader-count strong{
+  font-family:Georgia,serif;
+  color:#ffcf93;
+  font-size:2.15rem;
+  letter-spacing:-.055em;
+  line-height:1;
+}
+body.advertiser-page .ad-hero-reader-count span,
+body.advertiser-page .ad-hero-areas span{
+  font-size:.75rem;
+  line-height:1.3;
+  color:#d5e9e6;
+  font-weight:750;
+}
+body.advertiser-page .ad-hero-areas{
+  display:grid;
+  gap:3px;
+  padding-left:16px;
+  border-left:1px solid rgba(255,255,255,.19);
+}
+body.advertiser-page .ad-hero-areas strong{font-size:.86rem;color:#fff}
+body.advertiser-page .ad-hero-fairness{
+  margin:13px 0 0;
+  font-size:.72rem;
+  line-height:1.4;
+  color:#d1e1dc;
+}
+body.advertiser-page .ad-hero-showcase{
+  position:relative;
+  width:100%;
+  min-width:0;
+  padding:17px;
+  border-radius:23px;
+  border:1px solid rgba(255,255,255,.25);
+  background:linear-gradient(148deg,rgba(245,252,248,.16),rgba(255,255,255,.045));
+  box-shadow:0 23px 48px rgba(0,24,27,.23);
+}
+body.advertiser-page .ad-hero-showcase-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 4px 12px;
+  gap:12px;
+  color:#f8e4c8;
+  font-size:.71rem;
+  line-height:1.3;
+  letter-spacing:.12em;
+  font-weight:950;
+}
+body.advertiser-page .ad-hero-paper-clip{color:#ffcf93;font-size:1.5rem;line-height:1}
+body.advertiser-page .ad-hero-specimen{
+  overflow:hidden;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.08);
+  background:#fffcf7;
+  color:#16393e;
+  box-shadow:0 10px 22px rgba(0,24,27,.16);
+}
+body.advertiser-page .ad-specimen-masthead{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 16px;
+  background:#0b4650;
+  color:#fff;
+  font-size:.72rem;
+  letter-spacing:.075em;
+}
+body.advertiser-page .ad-specimen-masthead strong{font-size:.9rem;letter-spacing:.085em}
+body.advertiser-page .ad-specimen-masthead span{
+  background:#b64d13;
+  padding:5px 9px;
+  border-radius:5px;
+  color:#fff;
+  font-weight:900;
+  font-size:.67rem;
+}
+body.advertiser-page .ad-specimen-art{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  height:152px;
+  background:
+    repeating-linear-gradient(23deg,transparent 0 57px,rgba(255,255,255,.08) 57px 59px,transparent 59px 99px),
+    linear-gradient(127deg,#126875 0%,#1e5e61 55%,#82402b 100%);
+}
+body.advertiser-page .ad-specimen-art-glow{
+  position:absolute;
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  top:-84px;
+  right:-20px;
+  background:#f7b86d;
+  opacity:.86;
+  filter:blur(1px);
+}
+body.advertiser-page .ad-specimen-art-title{
+  position:absolute;
+  left:21px;
+  bottom:7px;
+  color:#fff;
+  font-family:Georgia,serif;
+  font-weight:900;
+  font-size:clamp(4.4rem,7vw,6.9rem);
+  line-height:1;
+  letter-spacing:-.075em;
+  text-shadow:0 7px 15px rgba(0,0,0,.15);
+}
+body.advertiser-page .ad-specimen-art-title span{
+  display:inline-block;
+  vertical-align:middle;
+  margin-left:10px;
+  font-family:Arial,sans-serif;
+  font-size:.63rem;
+  letter-spacing:.16em;
+  font-weight:950;
+  background:#ffcf93;
+  color:#0b4650;
+  padding:7px 9px;
+  border-radius:5px;
+  transform:rotate(-3deg);
+  text-shadow:none;
+}
+body.advertiser-page .ad-specimen-area{
+  position:absolute;
+  z-index:2;
+  border-radius:999px;
+  padding:5px 9px;
+  background:rgba(255,253,245,.96);
+  color:#185059;
+  font-size:.62rem;
+  font-weight:850;
+  box-shadow:0 3px 9px rgba(0,0,0,.13);
+}
+body.advertiser-page .ad-specimen-area.area-cheadle{left:21px;top:17px;transform:rotate(-5deg)}
+body.advertiser-page .ad-specimen-area.area-gatley{left:39%;top:36px;transform:rotate(4deg)}
+body.advertiser-page .ad-specimen-area.area-hulme{right:6%;bottom:25px;transform:rotate(-4deg)}
+body.advertiser-page .ad-specimen-area.area-heald{right:5%;top:18px;transform:rotate(2deg)}
+body.advertiser-page .ad-specimen-copy{padding:17px 19px 19px}
+body.advertiser-page .ad-specimen-kicker{
+  font-size:.65rem;
+  font-weight:950;
+  letter-spacing:.12em;
+  color:#9a4c16;
+}
+body.advertiser-page .ad-specimen-copy h2{
+  margin:5px 0 7px;
+  font-family:Georgia,serif!important;
+  font-weight:900;
+  color:#14383e;
+  font-size:clamp(1.65rem,2.7vw,2.1rem);
+  letter-spacing:-.025em;
+  line-height:1.12;
+}
+body.advertiser-page .ad-specimen-copy p{
+  margin:0 0 13px;
+  line-height:1.48;
+  color:#4d6465;
+  font-size:.87rem;
+}
+body.advertiser-page .ad-specimen-fake-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:22px;
+  padding:9px 13px;
+  border-radius:7px;
+  background:#0f6470;
+  color:#fff;
+  font-size:.68rem;
+  font-weight:950;
+  letter-spacing:.055em;
+}
+body.advertiser-page .ad-specimen-fake-button span{font-size:1rem}
+body.advertiser-page .ad-showcase-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  border-top:1px solid rgba(255,255,255,.22);
+  margin-top:15px;
+  padding:14px 5px 0;
+}
+body.advertiser-page .ad-showcase-bottom>div{display:flex;gap:12px;align-items:center;min-width:0}
+body.advertiser-page .ad-showcase-bottom>div>strong{
+  font-family:Georgia,serif;
+  color:#ffcf93;
+  font-size:2.25rem;
+  line-height:.9;
+}
+body.advertiser-page .ad-showcase-bottom>div>span{
+  font-size:.79rem;
+  font-weight:850;
+  line-height:1.3;
+}
+body.advertiser-page .ad-showcase-bottom small{font-size:.71rem;font-weight:500;color:#d7e6e3}
+body.advertiser-page .ad-showcase-bottom a{font-size:.76rem;color:#ffcf93;text-decoration:underline;text-underline-offset:4px;font-weight:900;white-space:nowrap}
+body.advertiser-page .ad-showcase-fine{margin:12px 5px 0;color:#d7e6e3;font-size:.7rem}
+body.advertiser-page .ad-hero-continuation{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  flex-wrap:wrap;
+  padding:13px 0 16px;
+  color:#c7e4df;
+  border-top:1px solid rgba(255,255,255,.14);
+  font-size:.74rem;
+}
+body.advertiser-page .ad-hero-continuation span:nth-child(2){
+  color:#ffcf93;
+  letter-spacing:.1em;
+  font-size:.68rem;
+  font-weight:950;
+}
+body.advertiser-page .ad-hero-continuation span:last-child{font-size:1.2rem;line-height:1;color:#ffcf93}
+body.advertiser-page .ad-hero-continuation-rule{height:2px;width:30px;background:#ffcf93}
+
+/* Keep the six existing outcome-to-enquiry shortcuts available, but no longer let them dominate the first screen. */
+body.advertiser-page .ad-goal-details{
+  margin:19px 0 24px;
+  border:1px solid #bfd5d0;
+  border-radius:13px;
+  background:#f2faf7;
+  overflow:hidden;
+}
+body.advertiser-page .ad-goal-details>summary{
+  display:list-item;
+  cursor:pointer;
+  padding:13px 17px;
+  color:#0d505b;
+  font-size:.93rem;
+  font-weight:900;
+}
+body.advertiser-page .ad-goal-details[open]>summary{border-bottom:1px solid #c9dfd8}
+body.advertiser-page .ad-goal-details .ad-goal-wrap{
+  margin:0!important;
+  max-width:none!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.advertiser-page .ad-goal-details .ad-goal-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+body.advertiser-page #what-you-buy{
+  scroll-margin-top:100px;
+}
+@media(max-width:940px){
+  body.advertiser-page .ad-conversion-hero .ad-hero-grid{
+    grid-template-columns:1fr!important;
+    gap:24px!important;
+  }
+  body.advertiser-page .ad-conversion-hero .ad-hero-copy h1{max-width:15ch!important}
+  body.advertiser-page .ad-hero-showcase{max-width:570px;margin:0 auto}
+}
+@media(max-width:600px){
+  body.advertiser-page .ad-conversion-hero{padding-top:19px!important}
+  body.advertiser-page .ad-conversion-hero .ad-hero-grid{padding-bottom:18px!important;gap:26px!important}
+  body.advertiser-page .ad-conversion-hero .ad-hero-copy{padding:7px 0 0!important}
+  body.advertiser-page .ad-hero-eyebrow{font-size:.62rem;letter-spacing:.08em}
+  body.advertiser-page .ad-conversion-hero .ad-hero-copy h1{
+    max-width:15ch!important;
+    margin:15px 0 16px!important;
+    font-size:clamp(2.6rem,11vw,3.45rem)!important;
+    line-height:.99!important;
+  }
+  body.advertiser-page .ad-conversion-hero .ad-hero-copy .hero-lead{font-size:1.03rem!important;line-height:1.5!important}
+  body.advertiser-page .ad-hero-promise{font-size:.85rem;margin-bottom:19px}
+  body.advertiser-page .ad-hero-actions{display:grid;gap:9px}
+  body.advertiser-page .ad-conversion-hero .ad-hero-action-primary{width:100%;min-height:53px;font-size:.88rem}
+  body.advertiser-page .ad-hero-action-secondary{text-align:center}
+  body.advertiser-page .ad-hero-proofline{grid-template-columns:1fr;gap:9px;margin-top:17px;padding-top:13px}
+  body.advertiser-page .ad-hero-areas{padding:0;border:0;gap:2px}
+  body.advertiser-page .ad-hero-reader-count strong{font-size:1.9rem}
+  body.advertiser-page .ad-hero-fairness{margin-top:9px}
+  body.advertiser-page .ad-hero-showcase{padding:12px;border-radius:17px}
+  body.advertiser-page .ad-specimen-art{height:135px}
+  body.advertiser-page .ad-specimen-art-title{font-size:4.5rem}
+  body.advertiser-page .ad-specimen-copy{padding:15px}
+  body.advertiser-page .ad-showcase-bottom{align-items:flex-start}
+  body.advertiser-page .ad-showcase-bottom>div{gap:8px}
+  body.advertiser-page .ad-showcase-bottom>div>strong{font-size:1.9rem}
+  body.advertiser-page .ad-showcase-bottom a{font-size:.7rem}
+  body.advertiser-page .ad-hero-continuation{gap:7px;font-size:.7rem}
+  body.advertiser-page .ad-goal-details .ad-goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.advertiser-page #what-you-buy{scroll-margin-top:78px}
+}
+@media(max-width:360px){
+  body.advertiser-page .ad-specimen-area.area-hulme{display:none}
+  body.advertiser-page .ad-showcase-bottom{display:grid}
+  body.advertiser-page .ad-specimen-art-title{font-size:4rem}
+  body.advertiser-page .ad-goal-details .ad-goal-grid{grid-template-columns:1fr!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.advertiser-page .ad-conversion-hero .ad-hero-action-primary{transition:none!important}
+}
