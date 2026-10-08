@@ -1,0 +1,34 @@
+/* Advertiser conversion revision, 8 October 2026 */
+body.advertiser-page .ad-conversion-hero .ad-hero-grid{align-items:center!important;padding-bottom:36px!important}
+body.advertiser-page .ad-hero-prices{isolation:isolate;overflow:hidden}
+body.advertiser-page .ad-hero-prices-heading,body.advertiser-page .ad-hero-quick-grid,body.advertiser-page .ad-hero-prices>p,body.advertiser-page .ad-hero-quick-detail{position:relative;z-index:2}
+body.advertiser-page .ad-newsletter-backdrop{pointer-events:none;position:absolute;z-index:-1;inset:0;overflow:hidden;opacity:.38}
+body.advertiser-page .ad-newsletter-backdrop::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(9,66,72,.57),rgba(9,66,72,.46))}
+body.advertiser-page .ad-newsletter-cover{position:absolute;inset:-20px 12% auto 25%;width:470px;height:700px;transform:rotate(-13deg) scale(1.05);background:#fdfcf6;padding:45px 35px;filter:blur(5px);color:#13565e;box-shadow:0 20px 50px #10383e}
+body.advertiser-page .ad-nl-brand{font:900 54px Georgia,serif;letter-spacing:-.06em}
+body.advertiser-page .ad-nl-date{font:800 11px sans-serif;letter-spacing:.1em;padding:16px 0;color:#ba4d14}
+body.advertiser-page .ad-newsletter-cover strong{display:block;font:800 24px/1.2 Georgia,serif}
+body.advertiser-page .ad-nl-story{height:210px;margin-top:24px;background:linear-gradient(30deg,#8f8158,#d9d1a2 40%,#aeae79 70%,#6e7e62)}
+body.advertiser-page .ad-nl-lines{height:130px;background:repeating-linear-gradient(#e8e8df 0 6px,transparent 6px 17px)}
+body.advertiser-page .ad-hero-quick-item{background:rgba(255,253,248,.96)}
+body.advertiser-page .ad-arrow{display:inline-block;vertical-align:middle;flex:0 0 19px;width:19px;height:19px;position:relative;color:inherit}
+body.advertiser-page .ad-arrow:before{content:"";position:absolute;left:2px;top:9px;width:14px;border-top:2px solid currentColor}
+body.advertiser-page .ad-arrow:after{content:"";position:absolute;left:10px;top:5px;width:7px;height:7px;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg)}
+body.advertiser-page .ad-arrow-down{transform:rotate(90deg)}
+body.advertiser-page .ad-hero-quick-item .ad-arrow{color:#0b5863}
+body.advertiser-page .ad-hero-action-primary,body.advertiser-page .ad-hero-action-secondary,body.advertiser-page .ad-help-card .button,body.advertiser-page .ad-policy-bar .button,body.advertiser-page .ad-example-full-link{display:inline-flex!important;align-items:center;gap:9px}
+body.advertiser-page .ad-hero-action-primary .ad-arrow{color:#093c42}
+body.advertiser-page .ad-artwork-fieldset{margin:18px 0;padding:18px;border:1px solid #b8d8d1;border-radius:16px;background:#f4fbf8}
+body.advertiser-page .ad-artwork-fieldset legend{font-weight:900;font-size:1.05rem;color:#104b56;padding:0 7px}
+body.advertiser-page .ad-artwork-fieldset>p{font-size:.92rem;line-height:1.55}
+body.advertiser-page .ad-artwork-fieldset>label:not(.ad-artwork-link){display:flex!important;align-items:center;gap:10px;padding:9px 0;font-weight:750}
+body.advertiser-page .ad-artwork-fieldset input[type=radio]{width:20px;height:20px;flex:0 0 20px;accent-color:#0f6470}
+body.advertiser-page .ad-artwork-link{display:block;margin-top:15px}
+body.advertiser-page .ad-artwork-link input{width:100%}
+body.advertiser-page .ad-example-only{max-width:780px;margin:18px auto}
+body.advertiser-page .ad-example-only .ad-placement-demo-v6{width:100%;max-width:none}
+body.advertiser-page .ad-example-full-link{width:fit-content;min-height:48px;padding:13px 20px;border-radius:12px;background:#0b5863;color:#fff!important;font-weight:900;text-decoration:none}
+body.advertiser-page .ad-example-full-link:hover{background:#06414b}
+body.advertiser-page .ad-example-full-link:focus-visible{outline:3px solid #ed7a20;outline-offset:3px}
+body.advertiser-page .ad-simple-process .ad-process-demo{display:inline-flex;align-items:center;gap:5px;font-weight:900;color:#0b4b55;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){body.advertiser-page .ad-hero-prices{margin-top:2px}body.advertiser-page .ad-example-only{max-width:100%}body.advertiser-page .ad-example-full-link{width:100%;justify-content:center;text-align:center}}
