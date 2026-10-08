@@ -62,6 +62,7 @@ try {
   await navigate('/privacy.html');
   assert.equal(trackers.length,0,'No optional tracker requests before consent');
   assert.ok(await evalPage("document.body.innerText.includes('Paul Livesey')"),'Operator identity visible');
+  assert.ok(await evalPage("document.body.innerText.includes('Guide links and optional subscriber recognition')"),'Latest revised guide-access wording is actually deployed');
   assert.ok(await evalPage("document.body.innerText.includes('JiveLoop')"),'Umbrella trading name visible');
   assert.ok(await evalPage("document.body.innerText.includes('136 Stockport Road')"),'Correspondence address visible');
   assert.ok(await evalPage("document.querySelector('.privacy-choices') && !document.querySelector('.privacy-choices').hidden"),'Fresh visitor sees privacy choice');
