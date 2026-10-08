@@ -55,10 +55,16 @@ const starts = events.map(event => event.date).filter(Boolean).sort();
 const londonToday = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit'
 }).format(new Date());
+const expired = events.filter(event => String(event.end_date || event.date) < londonToday);
 const active = events.filter(event => String(event.end_date || event.date) >= londonToday);
 const activeCore = active.filter(event => coreAreas.has(event.area));
 const latestChecked = events.map(event => event.checked).filter(value => iso.test(String(value || ''))).sort().at(-1);
 
+if (expired.length > 0) {
+  console.error(`What's On event-data QA failed: ${expired.length} expired listing(s) remain on ${londonToday}.`);
+  expired.forEach(event => console.error(`- ${event.id}: ${event.end_date || event.date}`));
+  process.exit(1);
+}
 if (active.length === 0) {
   console.error(`What's On event-data QA failed: no current listings remain on ${londonToday}.`);
   process.exit(1);
