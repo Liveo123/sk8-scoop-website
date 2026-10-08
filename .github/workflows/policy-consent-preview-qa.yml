@@ -36,7 +36,8 @@ jobs:
         shell: bash
         run: |
           for attempt in $(seq 1 25); do
-            if curl -fsSL --max-time 20 https://policy-audit-2026-10-08-draft.previews.sk8scoop.com/privacy.html | grep -Fq 'Paul Livesey'; then
+            code="$(curl -sSL --max-time 20 -o /tmp/sk8-policy-preview.html -w '%{http_code}' https://policy-audit-2026-10-08-draft.previews.sk8scoop.com/privacy.html || true)"
+            if [ "$code" = "200" ] && grep -Fq 'Paul Livesey' /tmp/sk8-policy-preview.html; then
               echo "Policy preview detected"
               exit 0
             fi
