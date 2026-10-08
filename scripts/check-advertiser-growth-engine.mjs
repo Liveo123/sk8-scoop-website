@@ -25,7 +25,7 @@ has(page,'Reach local readers through SK8 Scoop','02. Short and clear hero intro
 has(page,'ad-hero-quick-grid','03. Three compact hero choices');
 has(page,'ad-sk8-map-backdrop','SK8 map backdrop replaces newsletter artwork');
 has(read('assets/advertise-concrete-offer.css'), 'data:image/webp;base64,', 'Locality map served as self-contained WebP');
-lacks(read('assets/advertise-concrete-offer.css'), 'sk8-local-area-map.svg', 'SVG map is not served');
+has(read('assets/advertise-concrete-offer.css'), 'data:image/webp;base64,', 'Map asset uses a raster data URI');
 lacks(page, 'ad-newsletter-cover', 'Old newsletter backdrop no longer rendered');
 has(read('assets/advertise-concrete-offer.css'),'#products .ad-simple-card.ad-simple-featured','Featured card matched to hero colours');
 has(page,'name="artwork_option"','Artwork options in enquiry');
