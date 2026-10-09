@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Advertise with SK8 Scoop | Reach Local SK8 Readers</title>
+  <title>Advertise to local SK8 readers | SK8 Scoop</title>
   <meta name="description" content="Advertise locally in Cheadle, Cheadle Hulme, Gatley and Heald Green with SK8 Scoop. Clear sponsored placements, £35 newsletter adverts, £28 Guide cards, £60 bundles, and premium sponsorships.">
   <link rel="canonical" href="https://www.sk8scoop.com/advertise">
   <meta name="theme-color" content="#0f6470">
@@ -32,9 +32,9 @@
   <div class="wrap ad-hero-grid">
     <div class="ad-hero-copy">
       <div class="ad-hero-eyebrow"><span aria-hidden="true" class="ad-hero-eyebrow-mark"></span> ADVERTISING FOR BUSINESSES IN AND AROUND SK8</div>
-      <h1 id="advertise-hero-title">Advertise <em>with SK8</em></h1>
-      <p class="hero-lead">Reach local readers through SK8 Scoop’s newsletter and Guides. Choose where your advert appears.</p>
-      <p class="ad-hero-promise">You tell us your goal. We create the advert, or use yours. You approve it.</p>
+      <h1 id="advertise-hero-title">Show local readers <em>what you offer</em></h1>
+      <p class="hero-lead">Promote a class, event, service or special offer through the weekly SK8 newsletter or a relevant Guide. Prices start at £28.</p>
+      <p class="ad-hero-promise">Tell us what you want local people to do. We create the advert, or use yours. You approve the proof and dates before payment.</p><p class="ad-audience-proof"><strong>685 active newsletter subscribers</strong><span>MailerLite count checked 9 October 2026. List size, not a promise of advert views, clicks or sales.</span></p>
       <div class="ad-hero-actions">
         <a class="button ad-hero-action-primary" data-ad-hero-action="compare_packages" href="#products">Choose your advert <span class="ad-arrow ad-arrow-down" aria-hidden="true"></span></a>
         <a class="ad-hero-action-secondary" data-ad-hero-action="see_example" href="#what-you-buy">See a finished example <span class="ad-arrow ad-arrow-right" aria-hidden="true"></span></a>
@@ -52,7 +52,7 @@
           <span><strong>Guide card</strong><small>One agreed Guide</small></span><b>£28</b><span class="ad-arrow ad-arrow-right" aria-hidden="true"></span>
         </button>
         <button class="ad-hero-quick-item ad-hero-quick-featured" type="button" data-ad-package="guide_bundle">
-          <span><strong>Guide + newsletter</strong><small>One of each</small></span><b>£60</b><span class="ad-arrow ad-arrow-right" aria-hidden="true"></span>
+          <span><strong>Guide + newsletter</strong><small>Two placements for one action</small></span><b>£60</b><span class="ad-arrow ad-arrow-right" aria-hidden="true"></span>
         </button>
       </div>
       <p>Choose a price to start a short enquiry. We confirm availability and dates before you pay.</p>
@@ -116,20 +116,20 @@
 <section class="section soft-teal ad-simple-process" aria-labelledby="simple-process-title"><div class="wrap"><h2 id="simple-process-title">From idea to results</h2><p>Tell us the action you want. We prepare the advert (or use yours). You approve it, we publish it, track available response and send a simple report. Payment follows approval of the draft and dates. <a class="ad-process-demo" href="/advertise/example/">See the complete example campaign <span class="ad-arrow ad-arrow-right" aria-hidden="true"></span></a></p></div></section>
 <section class="section white" id="campaign-enquiry">
   <div class="wrap enquiry-grid">
-    <div class="ad-enquiry-guide"><div class="eyebrow">Ready when you are</div><h2>Just the essentials.</h2><p>Tell us about your business and what you would like readers to do. We handle the wording and design.</p><div class="ad-before-form"><span>AFTER YOU ENQUIRE</span><ol><li>We check suitability and available dates.</li><li>You approve the advert proof and agreed price.</li><li>We send a secure payment link.</li></ol></div></div>
+    <div class="ad-enquiry-guide"><div class="eyebrow">Ready when you are</div><h2>A quick enquiry, not a booking.</h2><p>Start with your business, email and preferred placement. We can sort out dates, artwork and the exact advert afterwards.</p><div class="ad-before-form"><span>AFTER YOU ENQUIRE</span><ol><li>We check suitability and available dates.</li><li>You approve the advert proof and agreed price.</li><li>We send a secure payment link.</li></ol></div></div>
 
     <form class="form-card premium-form" action="/api/advertiser-enquiry" method="post" data-api-form data-form-kind="advertiser" data-success-event="advertising_enquiry_completed">
       <label class="form-honeypot" aria-hidden="true">Leave this field empty<input name="company_fax" tabindex="-1" autocomplete="off"></label>
       <input type="hidden" name="sk8_started_at" value="">
       <div class="ad-form-heading"><div><div class="eyebrow">Short enquiry</div><h2 data-ad-form-title>Request your advert</h2></div><span>NO PAYMENT NOW</span></div>
       <p class="form-intro" data-ad-form-intro>Choose from £35, £28, £60, £96 or £125. We confirm the chosen Guide, dates and payment details before you commit.</p>
-      <div class="field-grid"><label>Business name<input name="business_name" required></label><label>Your name<input name="contact_name" autocomplete="name" required></label></div>
+      <div class="field-grid"><label>Business name<input name="business_name" autocomplete="organization" required></label><label>Your name <small>(optional)</small><input name="contact_name" autocomplete="name"></label></div>
       <label>Email address<input type="email" name="email" autocomplete="email" required></label>
-      <label>Business website, booking page or public social profile<input type="url" name="website" placeholder="https://example.com" inputmode="url" required></label>
+      <label>Website, booking link or public social profile <small>(optional for now)</small><input type="url" name="website" placeholder="https://example.com" inputmode="url"></label>
       <fieldset class="ad-route-fieldset"><legend>Your advertising package</legend><p class="ad-route-help">Your choice from above is already selected. You can change it here.</p>
         <label class="checkbox-row"><input type="radio" name="package" value="starter_newsletter" checked required><span><strong>Newsletter advert · £35</strong><span class="ad-route-detail">One weekly issue</span></span></label>
         <label class="checkbox-row"><input type="radio" name="package" value="guide_card" required><span><strong>Guide card · £28</strong><span class="ad-route-detail">One chosen Guide</span></span></label>
-        <label class="checkbox-row"><input type="radio" name="package" value="guide_bundle" required><span><strong>Guide + newsletter · £60</strong><span class="ad-route-detail">One Guide card and one newsletter issue</span></span></label>
+        <label class="checkbox-row"><input type="radio" name="package" value="guide_bundle" required><span><strong>Guide + newsletter · £60</strong><span class="ad-route-detail">One Guide card plus one newsletter issue</span></span></label>
         <label class="checkbox-row ad-premium-route"><input type="radio" name="package" value="guide_section" required><span><strong>Guide section sponsor · £96</strong><span class="ad-route-detail">More prominent Guide section position</span></span></label>
         <label class="checkbox-row ad-premium-route"><input type="radio" name="package" value="guide_main" required><span><strong>Main Guide sponsor · £125</strong><span class="ad-route-detail">Lead position in the agreed Guide</span></span></label>
         <label class="checkbox-row" data-local-fit-route hidden><input type="radio" name="package" value="human_review" required><span><strong>Local-fit check · no payment</strong><span class="ad-route-detail">We check whether this is right for SK8 first</span></span></label>
@@ -149,8 +149,8 @@
         </select>
       </div>
       <p class="ad-selected-summary" data-ad-selection-summary aria-live="polite">Selected: Newsletter advert · £35 · No payment now</p>
-      <label>Preferred month <small>(we will confirm the exact date)</small><input type="month" name="preferred_date" required></label>
-      <label>What would you like readers to do?<textarea name="advert_copy" required minlength="12" placeholder="For example: book our Saturday class, visit for lunch or request a quote"></textarea></label><fieldset class="ad-artwork-fieldset"><legend>Your artwork</legend><p>We can prepare the advert, or use your own artwork or logo.</p><label><input type="radio" name="artwork_option" value="create" checked> Create my advert for me</label><label><input type="radio" name="artwork_option" value="logo"> I have a logo or photos to provide</label><label><input type="radio" name="artwork_option" value="finished"> I have a finished advert</label><label class="ad-artwork-link">Artwork link <small>(optional)</small><input type="url" name="artwork_url" inputmode="url" placeholder="https://example.com/artwork"></label><p class="fine">You can also reply to our acknowledgement email with your artwork or logo attached. We review suitability and image quality before publication.</p></fieldset>
+      <label>Preferred month <small>(optional; we can discuss dates)</small><input type="month" name="preferred_date"></label>
+      <label>What would you like readers to do? <small>(optional at this stage)</small><textarea name="advert_copy" placeholder="For example: book our Saturday class, visit for lunch or request a quote"></textarea></label><details class="ad-artwork-details"><summary>Have your own artwork or logo? <small>Optional</small></summary><fieldset class="ad-artwork-fieldset"><legend>Artwork options</legend><p>We can prepare the advert, or use your own artwork or logo.</p><label><input type="radio" name="artwork_option" value="create" checked> Create my advert for me</label><label><input type="radio" name="artwork_option" value="logo"> I have a logo or photos to provide</label><label><input type="radio" name="artwork_option" value="finished"> I have a finished advert</label><label class="ad-artwork-link">Artwork link <small>(optional)</small><input type="url" name="artwork_url" inputmode="url" placeholder="https://example.com/artwork"></label><p class="fine">You can also reply to our acknowledgement email with your artwork or logo attached. We review suitability and image quality before publication.</p></fieldset></details>
       <input type="hidden" name="image_link" value=""><input type="hidden" name="invoice_details" value="">
       <label class="checkbox-row"><input type="checkbox" name="terms_accepted" value="yes" required><span data-ad-terms-copy>I understand this is clearly labelled paid visibility, subject to suitability and availability, and that advertising does not guarantee results or favourable editorial coverage.</span></label>
 <p class="fine">This is an enquiry, not a booking. We agree your Guide or newsletter placement, dates, any applicable taxes and total price in writing before payment. Please read the <a href="/advertising-terms.html">advertising booking terms</a>.</p>
