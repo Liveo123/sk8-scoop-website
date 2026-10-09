@@ -98,7 +98,10 @@ contains('advertise.html','ad-simple-grid');
 contains('assets/advertise-rework-oct8.css','.ad-premium-grid');
 
 // Current advertiser offer and backend contract, approved 8 October 2026.
-contains('advertise.html','Advertise <em>with SK8</em>');
+contains('advertise.html','Show local readers <em>what you offer</em>');
+contains('advertise.html','685 active newsletter subscribers');
+contains('advertise.html','List size, not a promise of advert views, clicks or sales.');
+contains('advertise.html','assets/advertise-clarity-oct9.css');
 contains('advertise.html','ad-hero-quick-grid');
 contains('advertise.html','ad-sk8-map-backdrop');
 contains('assets/advertise-concrete-offer.css','data:image/webp;base64,');
@@ -149,6 +152,15 @@ contains('assets/config.js','https://submit-form.com/X3MWnWHXI');
 contains('submit-event/index.html','action="/api/submit-event"');
 contains('worker.js',"url.pathname === '/api/submit-event'");
 contains('advertise.html','action="/api/advertiser-enquiry"');
+for (const field of ['contact_name','website','preferred_date','advert_copy']) {
+  const adField = read('advertise.html').match(new RegExp('<(?:input|textarea)[^>]*name="'+field+'"[^>]*>'));
+  expect(adField && !adField[0].includes('required'), 'Advertiser first-stage field should be optional: '+field);
+}
+contains('worker.js',"const required = ['business_name', 'email', 'package', 'terms_accepted']");
+contains('functions/api/advertiser-enquiry.js',"const required=['business_name','email','package','terms_accepted']");
+contains('worker.js',"d.preferred_date || 'To be agreed'");
+contains('functions/api/advertiser-enquiry.js',"d.preferred_date||'To be agreed'");
+
 contains('worker.js',"url.pathname === '/api/advertiser-enquiry'");
 
 // Subscriber-aware header actions must stay consistent across the whole site.
