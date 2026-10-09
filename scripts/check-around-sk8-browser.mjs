@@ -98,7 +98,17 @@ try{
     await cmd('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:false,screenWidth:width,screenHeight:900});
     await cmd('Page.navigate',{url:BASE+'/around-sk8/'});
     await wait("document.readyState==='complete'&&!!document.querySelector('.around-quick-board')",'Around SK8 at '+width);
-    await sleep(600);
+    await sleep(350);
+    // Browser lazy-loading deliberately defers images below the fold.
+    // Scroll each story visual into view, then assert it actually loads.
+    const imageCount=await evaluate("document.querySelectorAll('.around-story-visual img').length");
+    expect(imageCount===3, `${width}px expected exactly three editorial images`);
+    for(let imageIndex=0;imageIndex<imageCount;imageIndex++){
+      await evaluate(`(()=>{const img=document.querySelectorAll('.around-story-visual img')[${imageIndex}];img.scrollIntoView({block:'center',behavior:'instant'});return true;})()`);
+      await wait(`(()=>{const img=document.querySelectorAll('.around-story-visual img')[${imageIndex}];return img.complete&&img.naturalWidth>0})()`,`image ${imageIndex+1} at ${width}px`,140);
+    }
+    await evaluate("(()=>{window.scrollTo({top:0,left:0,behavior:'instant'});return true;})()");
+    await sleep(200);
     const metrics=await evaluate(`(()=>{
       const rect=el=>{const b=el.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height};};
       const quick=[...document.querySelectorAll('.around-quick-link')];
