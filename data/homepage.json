@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02",
+  "updated": "2026-10-09",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
@@ -35,16 +35,16 @@
     {
       "mode": "DISCOVER",
       "label": "DISCOVER THIS",
-      "title": "An 11th-century surprise inside St Mary’s Cheadle",
-      "meta": "Cheadle · Grade I listed · history hiding in plain sight",
-      "summary": "The church contains an 11th-century cross, later medieval monuments and Tudor woodwork, while the medieval cross shaft outside became a sundial.",
-      "href": "/local-history/",
-      "linkLabel": "Explore the local-history trail →",
+      "title": "Heyhead: the village that disappeared near Heald Green",
+      "meta": "Heald Green · farms, chapel and a vanished hamlet",
+      "summary": "Homes, market gardens and a chapel once stood here. The real story is how Manchester’s growth and airport expansion gradually changed the area.",
+      "href": "/local-history/heyhead-village-disappeared/",
+      "linkLabel": "Discover what happened to Heyhead →",
       "visualType": "dicm",
       "fit": "contain",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1790008119/issue14-st-marys-rich-v6.png",
-      "alt": "St Mary's Cheadle field guide showing historic details including the 11th-century cross and medieval cross-shaft sundial"
+      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1791298427/issue16-final-15.webp",
+      "alt": "SK8 Scoop historical illustration of Heyhead between Heald Green and the airport, showing the former chapel and vanished hamlet; not an archive photograph"
     }
   ],
   "explore": [
