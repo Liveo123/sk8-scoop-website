@@ -36,22 +36,6 @@
     "checked": "2026-10-06"
   },
   {
-    "id": "cheadle-library-storytime-2026-10-08",
-    "title": "Storytime at Cheadle Library",
-    "date": "2026-10-08",
-    "time": "14:00",
-    "area": "Cheadle",
-    "venue": "Cheadle Library, 23 Ashfield Road, Cheadle, Stockport SK8 1BB",
-    "cost": "Check council listing",
-    "category": "Family",
-    "description": "A relaxed story and rhyme session for pre-school children with parents or carers, listed for Thursday afternoon at Cheadle Library.",
-    "booking_url": "",
-    "source_url": "https://www.stockport.gov.uk/events",
-    "verification": "OFFICIAL_COUNCIL_LISTING",
-    "checked": "2026-10-06",
-    "status": "verified"
-  },
-  {
     "id": "cheadle-library-digital-support-2026-10-09",
     "title": "Digital support drop-in at Cheadle Library",
     "date": "2026-10-09",
@@ -82,6 +66,22 @@
     "source_url": "https://cheadlemasjid.org/events-activities/sisters-youth-qiyam-y10-y13-15/",
     "verification": "ORGANISER_PRIMARY_SOURCE",
     "checked": "2026-10-06"
+  },
+  {
+    "id": "jai-yoga-pregnancy-2026-10-10",
+    "title": "Yoga for Pregnancy at Jai Yoga Studio",
+    "status": "verified",
+    "date": "2026-10-10",
+    "time": "12:15",
+    "area": "Cheadle Hulme",
+    "venue": "Jai Yoga Studio, Metropolitan House (fourth floor), Station Road, Cheadle Hulme SK8 7AZ",
+    "cost": "£15",
+    "category": "Health & Wellbeing",
+    "description": "Saturday 10 October, 12:15–1:15pm. Yoga suitable from 15 weeks of pregnancy, with no previous experience needed. Equipment is provided; book directly with the studio.",
+    "booking_url": "https://www.yogawithjai.co.uk/booking",
+    "source_url": "https://www.healthystockport.co.uk/events/details/yoga-for-pregnancy-sat?date=2026-10-10",
+    "verification": "OFFICIAL_COUNCIL_EVENT_PAGE",
+    "checked": "2026-10-09"
   },
   {
     "id": "cheadle-hulme-con-club-babalola-2026-10-10",
@@ -276,6 +276,22 @@
     "source_url": "https://www.stockport.gov.uk/events/free-pregnancy-social?date=2026-10-11",
     "verification": "OFFICIAL_COUNCIL_EVENT_PAGE",
     "checked": "2026-10-06"
+  },
+  {
+    "id": "heald-green-library-crochet-knit-2026-10-12",
+    "title": "Crochet & Knit at Heald Green Library",
+    "status": "verified",
+    "date": "2026-10-12",
+    "time": "13:00",
+    "area": "Heald Green",
+    "venue": "Heald Green Library, Finney Lane, Heald Green SK8 3JB",
+    "cost": "Free",
+    "category": "Community / Crafts",
+    "description": "Monday 12 October, 1–2pm. Bring your knitting, crochet or another craft to this free drop-in, meet fellow makers and enjoy a brew and a chat. Beginners and experienced crafters welcome.",
+    "booking_url": "",
+    "source_url": "https://www.onestockport.co.uk/townofcultureevent/crochet-knit-heald-green-library/2026-10-12/",
+    "verification": "OFFICIAL_ONESTOCKPORT_EVENT_LISTING",
+    "checked": "2026-10-09"
   },
   {
     "id": "stockroom-subtext-launch-2026-10-15",
