@@ -1,0 +1,68 @@
+name: Around SK8 Browser QA
+
+on:
+  pull_request:
+    paths:
+      - 'around-sk8/index.html'
+      - 'assets/around-sk8-preview.css'
+      - 'scripts/check-around-sk8-browser.mjs'
+      - '.github/workflows/around-sk8-browser-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  around-sk8-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out proposed page code
+        uses: actions/checkout@v4
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Find Chrome
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "Missing Chrome/Chromium"
+            exit 1
+          fi
+      - name: Start local source server
+        shell: bash
+        run: |
+          set -eu
+          python3 -m http.server 8767 --bind 127.0.0.1 >/tmp/sk8-around-qa-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl -fsS --max-time 2 http://127.0.0.1:8767/around-sk8/ -o /tmp/sk8-around-page.html; then
+              break
+            fi
+            sleep 1
+          done
+          grep -Fq 'What do you need?' /tmp/sk8-around-page.html
+      - name: Test real browser layout and simulated signup
+        env:
+          PREVIEW_URL: http://127.0.0.1:8767
+          CHROME: ${{ env.CHROME }}
+        shell: bash
+        run: |
+          set -eu
+          node --check scripts/check-around-sk8-browser.mjs
+          node scripts/check-around-sk8-browser.mjs
+      - name: Upload desktop and mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: around-sk8-browser-qa
+          path: visual-qa/around-sk8/
+          retention-days: 7
+          if-no-files-found: ignore
