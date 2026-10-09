@@ -98,3 +98,7 @@ body[data-page="around-sk8"] .nue-next-section[data-nue-generated="true"]{displa
 /* Compact local-history image: fill the media frame rather than letterboxing. */
 body[data-page="around-sk8"] .around-story-compact .around-story-visual{padding:0}
 body[data-page="around-sk8"] .around-story-compact .around-story-visual img{object-fit:cover;background:transparent}
+
+/* Production adds its real Turnstile check asynchronously. The preview/local
+   state has no widget, so do not reserve a misleading empty 65px slot. */
+body[data-page="around-sk8"] [data-sk8-turnstile]:not([data-rendered="true"]){min-height:0!important;margin-top:0!important}
