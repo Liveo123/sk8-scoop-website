@@ -16,7 +16,8 @@ const html=(heading,message,status=200,button='')=>new Response(
   '</head><body><main><h1>'+heading+'</h1><p>'+message+'</p>'+button+
   '<p><a href="https://www.sk8scoop.com/privacy">Privacy notice</a></p></main></body></html>',
   {status,headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store',
-    'referrer-policy':'no-referrer','x-content-type-options':'nosniff','x-robots-tag':'noindex, nofollow'}}
+    // A strict-origin policy keeps the one-time token out of Referer without turning form POST Origin into null.
+    'referrer-policy':'strict-origin','x-content-type-options':'nosniff','x-robots-tag':'noindex, nofollow'}}
 );
 function matchesOrigin(request){
   const origin=request.headers.get('origin');
