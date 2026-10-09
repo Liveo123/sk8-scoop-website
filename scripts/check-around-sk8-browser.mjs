@@ -46,6 +46,7 @@ try{
   await new Promise((ok,bad)=>{socket.addEventListener('open',ok,{once:true});socket.addEventListener('error',bad,{once:true})});
   let seq=0;
   const pending=new Map();
+  let cmd;
   const cmdPending=pending;
   socket.addEventListener('message',event=>{
     const message=JSON.parse(String(event.data));
