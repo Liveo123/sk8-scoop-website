@@ -92,3 +92,9 @@ body[data-page="around-sk8"] a:focus-visible,body[data-page="around-sk8"] input:
   body[data-page="around-sk8"] .around-signup-fields{flex-direction:column}
   body[data-page="around-sk8"] .around-signup-fields .button{width:100%}
 }
+/* This gateway already contains a bespoke journeys shelf and tip prompt. Hide the
+   generic auto-generated NUE continuation to avoid sending readers in circles. */
+body[data-page="around-sk8"] .nue-next-section[data-nue-generated="true"]{display:none!important}
+/* Compact local-history image: fill the media frame rather than letterboxing. */
+body[data-page="around-sk8"] .around-story-compact .around-story-visual{padding:0}
+body[data-page="around-sk8"] .around-story-compact .around-story-visual img{object-fit:cover;background:transparent}
