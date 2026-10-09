@@ -1,5 +1,5 @@
 /* Around SK8 browser QA: uses Chrome DevTools Protocol without third-party packages.
- * Runs only against a local copy of the PR. MailerLite is intercepted, never contacted.
+ * Runs only against a local copy of the PR. Newsletter API and Turnstile are mocked, never called.
  */
 import {spawn} from 'node:child_process';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
@@ -11,7 +11,6 @@ const PORT=9400+randomInt(100,500);
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const fail=m=>{throw new Error('Around SK8 browser QA: '+m)};
 const expect=(ok,m)=>{if(!ok)fail(m)};
-const formEndpoint='https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe';
 
 const pageMarkup=await readFile('around-sk8/index.html','utf8');
 const pageCss=await readFile('assets/around-sk8-preview.css','utf8');
@@ -47,30 +46,12 @@ try{
   await new Promise((ok,bad)=>{socket.addEventListener('open',ok,{once:true});socket.addEventListener('error',bad,{once:true})});
   let seq=0;
   const pending=new Map();
-  let interceptMode=null;
-  let interceptHits=0;
-  let cmd;
+  const cmdPending=pending;
   socket.addEventListener('message',event=>{
     const message=JSON.parse(String(event.data));
     if(message.id){
-      const request=pending.get(message.id);
-      if(request){pending.delete(message.id);message.error?request.reject(Error(message.error.message)):request.resolve(message.result);}
-    }
-    if(message.method==='Fetch.requestPaused'){
-      const requestId=message.params.requestId;
-      const url=message.params.request?.url||'';
-      if(url.startsWith(formEndpoint)){
-        interceptHits++;
-        const payload=interceptMode==='error'?{success:false,errors:{fields:{email:['This test email was not accepted.']}}}:{success:true};
-        const body=Buffer.from(JSON.stringify(payload)).toString('base64');
-        void cmd('Fetch.fulfillRequest',{requestId,responseCode:200,responseHeaders:[
-          {name:'content-type',value:'application/json'},
-          {name:'access-control-allow-origin',value:'*'},
-          {name:'access-control-allow-methods',value:'POST, OPTIONS'}
-        ],body}).catch(error=>{console.error('Mocked MailerLite response failed',error);});
-      } else {
-        void cmd('Fetch.continueRequest',{requestId}).catch(()=>{});
-      }
+      const request=cmdPending.get(message.id);
+      if(request){cmdPending.delete(message.id);message.error?request.reject(Error(message.error.message)):request.resolve(message.result);}
     }
   });
   cmd=(method,params={})=>new Promise((resolve,reject)=>{
@@ -150,28 +131,53 @@ try{
     console.log(`PASS: ${width}px page layout, ${metrics.quick.length} shortcuts, ${metrics.area.length} neighbourhoods, ${metrics.images.length} images, one form; saved ${name}`);
   }
 
-  // Synthetic MailerLite error and success: intercept requests in Chrome.
-  // We do not submit any real email, create any record or call MailerLite.
+  // Test the real guarded signup path using synthetic same-origin API responses.
+  // A special checkout-only script runs before assets/signup-protection.js so
+  // the configuration and Turnstile are mocked without contacting live services.
+  await cmd('Page.addScriptToEvaluateOnNewDocument',{source:`(() => {
+    window.__aroundSignupMode = 'error';
+    window.__aroundSignupHits = 0;
+    window.turnstile = {
+      render(container, opts) {
+        opts.callback('synthetic-turnstile-token-for-qa');
+        return 'synthetic-widget';
+      },
+      reset() {}
+    };
+    const nativeFetch = window.fetch.bind(window);
+    window.fetch = (input, options) => {
+      const raw = typeof input === 'string' ? input : input.url;
+      const path = new URL(raw, location.href).pathname;
+      if(path === '/api/signup-config') {
+        return Promise.resolve(new Response(JSON.stringify({siteKey:'test-only-site-key'}),{
+          status:200,headers:{'content-type':'application/json'}
+        }));
+      }
+      if(path === '/api/newsletter-signup') {
+        window.__aroundSignupHits++;
+        const rejection = window.__aroundSignupMode === 'error';
+        return Promise.resolve(new Response(JSON.stringify(rejection
+          ? {success:false,error:'This test email was not accepted.'}
+          : {success:true}),{status:rejection?400:200,headers:{'content-type':'application/json'}}));
+      }
+      return nativeFetch(input,options);
+    };
+  })();`});
   await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:900,deviceScaleFactor:1,mobile:false,screenWidth:390,screenHeight:900});
   await cmd('Page.navigate',{url:BASE+'/around-sk8/'});
-  await wait("document.readyState==='complete'&&!!document.querySelector('.around-signup-form')",'newsletter form');
-  await cmd('Fetch.enable',{patterns:[{urlPattern:'https://assets.mailerlite.com/*',requestStage:'Request'}]});
-  interceptMode='error';
-  await evaluate(`(()=>{const f=document.querySelector('.around-signup-form');f.querySelector('input').value='around-sk8-preview-test@example.invalid';f.requestSubmit();return true;})()`);
+  await wait("document.readyState==='complete'&&document.querySelector('[data-sk8-turnstile-for=\"around-sk8-inline\"]')?.dataset.rendered==='true'&&!!document.querySelector('.around-signup-form input[name=\"cf-turnstile-response\"]')?.value",'mocked protection ready');
+  await evaluate(`(()=>{const f=document.querySelector('.around-signup-form');f.querySelector('input[type="email"]').value='around-sk8-preview-test@example.invalid';f.requestSubmit();return true;})()`);
   await wait("document.querySelector('.around-signup-form+.signup-status')?.classList.contains('error')",'simulated signup error');
-  const error=await evaluate("(()=>({message:document.querySelector('.around-signup-form+.signup-status')?.textContent,enabled:!document.querySelector('.around-signup-form button').disabled}))()");
-  console.log('MailerLite mocked rejection detail:',JSON.stringify({error,interceptHits}));
-  expect(interceptHits===1,'Expected intercepted MailerLite rejection; intercepted='+interceptHits);
-  expect(error.enabled,'Mock signup rejection must restore enabled button');
-  expect(error.message&&error.message.trim()&&!error.message.includes('You’re in'),'Mock signup rejection must not claim success');
-  console.log('PASS: MailerLite rejected signup shows error, with button restored');
+  const error=await evaluate("(()=>({message:document.querySelector('.around-signup-form+.signup-status')?.textContent,enabled:!document.querySelector('.around-signup-form button').disabled,requests:window.__aroundSignupHits}))()");
+  expect(error.requests===1,'Expected one mocked server-side newsletter signup request');
+  expect(error.enabled,'Mock rejection must restore enabled button');
+  expect(error.message.includes('This test email was not accepted.'),'Mock rejection must preserve the server validation message: '+error.message);
+  console.log('PASS: protected signup rejects mock server error correctly, enabling retry');
 
-  interceptMode='success';
-  await evaluate("(()=>{const f=document.querySelector('.around-signup-form');f.requestSubmit();return true;})()");
+  await evaluate("(()=>{window.__aroundSignupMode='success';const f=document.querySelector('.around-signup-form');f.requestSubmit();return true;})()");
   await wait("location.pathname==='/signup-success/'",'simulated success redirection');
-  expect(interceptHits===2,'Expected exactly two mocked MailerLite requests, received '+interceptHits);
-  console.log('PASS: Mocked MailerLite success redirects to success page; zero real subscriptions made');
-  console.log('PASS: Around SK8 complete desktop, tablet, phone, links, images, CSS, and mocked signup QA');
+  console.log('PASS: protected signup accepts mocked response and redirects; no real signups made');
+  console.log('PASS: Around SK8 complete desktop, tablet, phone, links, images, CSS, and mocked protected signup QA');
 }finally{
   try{socket?.close();}catch{}
   try{chrome.kill('SIGTERM');}catch{}
