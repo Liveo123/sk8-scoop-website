@@ -20,9 +20,12 @@ const check = (ok, label) => {
 const has = (text, literal, label) => check(text.includes(literal), label);
 const lacks = (text, literal, label) => check(!text.includes(literal), label);
 
-has(page,'Advertise <em>with SK8</em>','01. Unambiguous three-word hero title');
-has(page,'Reach local readers through SK8 Scoop','02. Short and clear hero introduction');
+has(page,'Show local readers <em>what you offer</em>','01. Outcome-led local hero title');
+has(page,'Promote a class, event, service or special offer','02. Specific local business offer in hero');
 has(page,'ad-hero-quick-grid','03. Three compact hero choices');
+has(page,'685 active newsletter subscribers','Dated, verified email-list evidence');
+has(page,'List size, not a promise of advert views','Honest disclosure about reach uncertainty');
+has(page,'ad-artwork-details','Optional creative options can be expanded');
 has(page,'ad-sk8-map-backdrop','SK8 map backdrop replaces newsletter artwork');
 has(read('assets/advertise-concrete-offer.css'), 'data:image/webp;base64,', 'Locality map served as self-contained WebP');
 has(read('assets/advertise-concrete-offer.css'), 'data:image/webp;base64,', 'Map asset uses a raster data URI');
