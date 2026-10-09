@@ -20,8 +20,27 @@ export default {
     }
 
     return secureResponse(await siteWorker.fetch(request, env, ctx), url);
+  },
+  async scheduled(_controller, env) {
+    if (!env.DB) throw Error('Editorial retention cleanup requires the D1 database binding');
+    await purgeExpiredEditorialRecords(env.DB);
   }
 };
+
+// These two logging tables are the only databases managed by this retention job.
+// Other subscriber, business and accounting records have separate retention rules.
+export async function purgeExpiredEditorialRecords(db) {
+  for (const table of ['search_events', 'secret_trail_feedback']) {
+    const present = await db.prepare(
+      'SELECT name FROM sqlite_master WHERE type = ? AND name = ?'
+    ).bind('table', table).first();
+    if (!present) continue;
+    const result = await db.prepare(
+      `DELETE FROM ${table} WHERE created_at < datetime('now', '-365 days')`
+    ).run();
+    console.log('editorial_retention_cleanup', table, result?.meta?.changes ?? 'completed');
+  }
+}
 
 function secureResponse(response, url) {
   const headers = new Headers(response.headers);
