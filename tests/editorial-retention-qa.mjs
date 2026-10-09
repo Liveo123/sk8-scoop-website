@@ -29,4 +29,9 @@ assert.ok(all.queries.every(q => !q.includes('subscriber_preferences')), 'never 
 const none = fakeDatabase(new Set());
 await purgeExpiredEditorialRecords(none.db);
 assert.equal(none.queries.length, 0, 'missing logging tables must be skipped');
+const withPending=fakeDatabase(new Set(['search_events','secret_trail_feedback','pending_interest_confirmations']));
+await purgeExpiredEditorialRecords(withPending.db);
+assert.equal(withPending.queries.length,3,'expired confirmation tokens should also be cleared');
+assert.match(withPending.queries[2],/^DELETE FROM pending_interest_confirmations WHERE expires_at <= datetime\('now'\)$/);
+
 console.log('PASS: editorial retention deletes exactly two permitted datasets; absent tables skipped');

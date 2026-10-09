@@ -40,12 +40,22 @@ export async function purgeExpiredEditorialRecords(db) {
     ).run();
     console.log('editorial_retention_cleanup', table, result?.meta?.changes ?? 'completed');
   }
+  const pending = await db.prepare(
+    'SELECT name FROM sqlite_master WHERE type = ? AND name = ?'
+  ).bind('table', 'pending_interest_confirmations').first();
+  if (pending) {
+    await db.prepare(
+      "DELETE FROM pending_interest_confirmations WHERE expires_at <= datetime('now')"
+    ).run();
+    console.log('expired_preference_confirmation_tokens_removed');
+  }
 }
 
 function secureResponse(response, url) {
   const headers = new Headers(response.headers);
   headers.set('x-content-type-options', 'nosniff');
   headers.set('referrer-policy', 'strict-origin-when-cross-origin');
+  if (url.pathname === '/api/confirm-preferences') headers.set('referrer-policy', 'no-referrer');
   headers.set('permissions-policy', 'camera=(), microphone=(), geolocation=()');
   headers.set('x-frame-options', 'DENY');
   if (
