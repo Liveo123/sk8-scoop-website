@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 
-const BASE_URL = (process.env.ADVERT_QA_BASE_URL || 'https://preview-advertise-simple-pricing-oct2026.previews.sk8scoop.com').replace(/\/$/, '');
+const BASE_URL = (process.env.ADVERT_QA_BASE_URL || 'https://preview-advertising-conversion-audit-20261009.previews.sk8scoop.com').replace(/\/$/, '');
 const CHROME = process.env.CHROME || 'google-chrome';
 const widths = [360, 390, 768, 1024, 1440];
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -146,8 +146,10 @@ try {
         bodyFontSize: parseFloat(getComputedStyle(cards[0].querySelector('p:not(.ad-simple-price-value)')).fontSize),
         formLabelsPresent: ['business_name','contact_name','email','website','preferred_date','advert_copy']
           .every(n => form.querySelector('[name="'+n+'"]')?.labels?.length > 0),
-        formRequired: ['business_name','contact_name','email','website','preferred_date','advert_copy']
-          .every(n => !!form.querySelector('[name="'+n+'"]')?.required),
+        formRequired: ['business_name','email','terms_accepted']
+          .every(n => !!form.querySelector('[name="'+n+'"]')?.required)
+          && ['contact_name','website','preferred_date','advert_copy']
+            .every(n => !form.querySelector('[name="'+n+'"]')?.required),
         pricesVisible: cards.map(e => e.querySelector('.ad-simple-price-value')?.textContent?.trim()),
         premiumVisible: premium.map(el => ({price:el.querySelector('.ad-premium-buy b')?.textContent,shown:rect(el).width>0})),
         quickPrices: quickButtons.map(el => el.querySelector('b')?.textContent),
@@ -156,7 +158,7 @@ try {
         heroCardWidth: heroCard ? rect(heroCard).width : 0,
         heroCardWithinViewport: heroCard ? rect(heroCard).left>=-1 && rect(heroCard).right<=innerWidth+1 : false,
         heroIntroAndCardColumns: innerWidth<900 || (rect(heroIntro).left < rect(heroCard).left && rect(heroCard).left >= rect(heroIntro).right - 2),
-        heroWords: document.querySelector('h1')?.textContent?.trim().split(/\\s+/).length,
+        heroHeading: document.querySelector('h1')?.textContent?.trim(),
         goalChoices: document.querySelectorAll('[data-ad-goal]').length,
         exampleVisible: !!example && rect(example).width > 0,
         artworkChoices: document.querySelectorAll('input[name=artwork_option]').length,
@@ -180,7 +182,7 @@ try {
     if (!before.formLabelsPresent || !before.formRequired) fail(width + 'px: essential form labels or required fields missing');
     if (before.pricesVisible.join(',') !== '£35,£28,£60') fail(width + 'px: displayed prices do not match approval');
     if (!before.orderIsClear || !before.heroCtaTargetsPrice) fail(width + 'px: decision and form sequence is unclear');
-    if(before.heroWords!==3 || before.goalChoices!==0 || !before.exampleVisible || before.artworkChoices!==3) fail(width+'px: hero, example or artwork options mismatch');
+    if(!before.heroHeading?.includes('Show local readers') || before.goalChoices!==0 || !before.exampleVisible || before.artworkChoices!==3) fail(width+'px: hero, example or artwork options mismatch');
     if(!before.reportRemoved || !before.audienceRemoved) fail(width+'px: removed sections still visible');
     if(before.quickPrices.join(',')!=='£35,£28,£60' || !before.quickTargets.every(n=>n>=44)) fail(width+'px: compact hero prices unreadable');
     if(!before.heroCardOwnsButtons || !before.heroCardWithinViewport || !before.heroIntroAndCardColumns || before.heroCardWidth<260) fail(width+'px: quick pricing buttons no longer contained in hero map panel');
@@ -202,7 +204,7 @@ try {
     await sleep(400);
     const selectedGuide = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent,guideShown:!document.querySelector('[data-guide-choice-wrap]')?.hidden,guideEnabled:!document.querySelector('[name=guide_choice]')?.disabled,goal:document.querySelector('textarea[name=advert_copy]')?.value,formValid:document.querySelector('#campaign-enquiry form')?.checkValidity()})");
     if(selectedGuide.checked !== 'guide_card' || !selectedGuide.summary.includes('£28') || !selectedGuide.guideShown || !selectedGuide.guideEnabled) fail(width+'px: any-Guide £28 selection did not carry to form');
-    if(selectedGuide.goal !== '' || selectedGuide.formValid) fail(width+'px: empty advertising objective can pass validation');
+    if(selectedGuide.formValid) fail(width+'px: incomplete enquiry can pass validation');
     await screenshot('guide-selected-' + width + '.png');
     await evaluate("document.querySelector('#ad-guide-choice').value='52-adventures';document.querySelector('#products button[data-ad-package=guide_bundle]').click();true");
     const selectedCombo = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,summary:document.querySelector('[data-ad-selection-summary]')?.textContent,guide:document.querySelector('[name=guide_choice]').value})");
@@ -217,6 +219,9 @@ try {
     const selectedNewsletter = await evaluate("({checked:document.querySelector('input[name=package]:checked')?.value,guideHidden:document.querySelector('[data-guide-choice-wrap]')?.hidden,guideDisabled:document.querySelector('[name=guide_choice]')?.disabled})");
     if(selectedNewsletter.checked!=='starter_newsletter'||!selectedNewsletter.guideHidden||!selectedNewsletter.guideDisabled) fail(width+'px: newsletter retains unneeded guide selection');
     console.log('ADVERT_SELECTION ' + JSON.stringify({width,guide:selectedGuide,combo:selectedCombo,section:selectedSponsor,main:selectedMain,newsletter:selectedNewsletter}));
+    const shortForm = await evaluate("(() => {const form=document.querySelector('#campaign-enquiry form');form.querySelector('[name=business_name]').value='SK8 QA test';form.querySelector('[name=email]').value='qa@example.test';form.querySelector('[name=terms_accepted]').checked=true;return {valid:form.checkValidity(),optionalBlank:['contact_name','website','preferred_date','advert_copy'].every(name=>!form.querySelector('[name='+name+']').value)}})()");
+    if(!shortForm.valid || !shortForm.optionalBlank) fail(width+'px: short first-stage enquiry should validate without optional details');
+    console.log('ADVERT_SHORT_ENQUIRY '+JSON.stringify({width,shortForm}));
     console.log('PASS advertiser UX at '+width+'px');
   }
   console.log('PASS five viewport widths, all package handoffs, real goal validation, no horizontal overflow.');
