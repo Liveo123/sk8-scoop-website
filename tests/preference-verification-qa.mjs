@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { startPreferenceVerification, renderPreferenceConfirmation, finishPreferenceVerification } from '../preference-verification.js';
 
 const sent=[],pending=new Map(),verified=new Map(),queries=[];
@@ -69,7 +70,24 @@ try{
   const page=renderPreferenceConfirmation(new Request(link));
   assert.equal(page.status,200);
   assert.match(await page.text(),/Confirm my email interests/);
+  // The previous response header no-referrer made normal browser form POSTs send Origin: null.
+  // strict-origin avoids that false rejection without exposing the URL's token in Referer.
+  assert.equal(page.headers.get('referrer-policy'),'strict-origin');
+  const wrapper=readFileSync(new URL('../worker-business-v2.js', import.meta.url),'utf8');
+  assert.ok(wrapper.includes("if (url.pathname === '/api/confirm-preferences') headers.set('referrer-policy', 'strict-origin');"),
+    'Production Worker must preserve the strict-origin response header');
   const token=new URL(link).searchParams.get('token');
+  const rejectedNull=await finishPreferenceVerification(new Request('https://www.sk8scoop.com/api/confirm-preferences',{
+    method:'POST',headers:{origin:'null','content-type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams({token})
+  }),env);
+  assert.equal(rejectedNull.status,403,'opaque origins must not bypass ownership verification');
+  const rejectedForeign=await finishPreferenceVerification(new Request('https://www.sk8scoop.com/api/confirm-preferences',{
+    method:'POST',headers:{origin:'https://unrelated.example','content-type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams({token})
+  }),env);
+  assert.equal(rejectedForeign.status,403,'foreign sites must not confirm email interests');
+  assert.equal(verified.size,0,'rejected forms must not save interests');
   const verifiedResponse=await finishPreferenceVerification(new Request('https://www.sk8scoop.com/api/confirm-preferences',{
     method:'POST',headers:{origin:'https://www.sk8scoop.com','content-type':'application/x-www-form-urlencoded'},
     body:new URLSearchParams({token})
@@ -87,5 +105,5 @@ try{
   assert.equal(foreign.status,403);
   assert.equal(sent.length,1,'cross-origin requests must not send confirmation emails');
   assert.ok(queries.every(q=>!q.includes('INSERT INTO subscriber_preferences(')),'legacy unverified table must never receive writes');
-  console.log('PASS confirmed-only storage, one-use random links, no email leakage, cross-origin protection and no legacy writes');
+  console.log('PASS confirmed-only storage, strict-origin browser form policy, one-use links, no token referrer leakage, cross-origin protection and no legacy writes');
 }finally{globalThis.fetch=oldFetch;}
