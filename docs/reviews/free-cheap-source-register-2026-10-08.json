@@ -2,12 +2,12 @@
   "name": "SK8 Scoop Free & Cheap Guide publication reconciliation / freshness register",
   "status": "WORKING_BASELINE_NOT_FULL_EDITORIAL_REVERIFICATION",
   "created_on": "2026-10-08",
-  "published_source_commit": "25eb807534a7da40eebb24a5b065d1a8d13fb33a",
+  "published_source_commit": "56c2afd1b7f916a277bcea79e637a3474267b8be",
   "staging_guide_blob_sha": "5313c0ff5cf44e02a1f8f888c1528abfcf878c37",
   "full_guide": "https://www.sk8scoop.com/free-cheap-guide/guide/",
   "historic_approved_ledger": "https://docs.google.com/document/d/1s28d9sW2SsGHCUo_a-3HzZAC6qQJLs-m3iTOu1sftco/edit",
   "historic_discovery_master": "https://drive.google.com/file/d/1ihniFUtiMbf004vO07tOwXZqObjrzTB_/view",
-  "notes": "Inventory derived from current published selections, not automatic reapproval of old research. SPECIFIC_CLAIMS_CHECKED applies only to claims listed, not every claim on the card. No new entries or images. Audit refinement 8 Oct: some claims are independently checked only in limited respects, with historic/secondary caveats shown per record. Quiz timing remains unresolved. Damson Tree £3 sandwiches are from the children’s menu.",
+  "notes": "Inventory based on published selections, not blanket editorial verification. SPECIFIC_CLAIMS_CHECKED covers only recorded claims. Autisk, Dementia Disco and Station House organiser replies of 8 October 2026 have been reconciled with the guide on 9 October; the quiz-time discrepancy is resolved. Other independent date conflicts, secondary-only sources, and unconfirmed Seashell recurrence remain open. Historic price evidence is distinguished from current organiser confirmation.",
   "maintenance_schedule": {
     "dated": "Check original date 2 days before, auto-expire after UK date",
     "recurring": "Primary recheck fortnightly before promotion",
@@ -18,9 +18,9 @@
   "overview": {
     "total": 54,
     "dated": 7,
-    "specificClaimChecks": 49,
+    "specificClaimChecks": 50,
     "dateConflicts": 2,
-    "timeDiscrepancies": 1,
+    "timeDiscrepancies": 0,
     "secondaryOnly": 1,
     "awaitingPrimary": 1
   },
@@ -793,20 +793,21 @@
       "public_url": null,
       "page_price_band": "UNDER £10",
       "page_price_detail": "£5 per child or £10 per family.",
-      "page_when": "Check the live listing for the next available Friday session and its start time before travelling.",
+      "page_when": "Fridays during term time, 11am–2pm; drop in without booking.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events",
       "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
       "primary_claims_checked": [
-        "Stockport Council current events listing shows Friday 9 October 2026 at 11am, Adswood Young People's Centre; organiser-submitted council event page records £5 child/£10 family for its 4 September session, not proof every future Friday recurs."
+        "Autisk organiser Jan Bennett sent current flyers directly on 8 October 2026: No School Social Friday term time, 11am–2pm, no booking needed, £5 per child / £10 per family, Adswood Young People’s Centre, Neston Grove, SK3 8PH.",
+        "Stockport Council listing for 9 October was independent date evidence; older council pricing was historical and is superseded by the organiser flyer."
       ],
       "claim_evidence_urls": [
         "https://www.stockport.gov.uk/events?category=children-family&page=1&pageSize=60",
         "https://www.stockport.gov.uk/events/no-school-social-2"
       ],
       "claim_check_date": "2026-10-08",
-      "next_review_due": "2026-10-15",
-      "editorial_note": "Current Friday 9 Oct event independently listed; price supported by earlier organiser-submitted 4 Sep event only. Reconfirm with Autisk before promoting later sessions."
+      "next_review_due": "2026-10-22",
+      "editorial_note": "Organiser flyer resolves price, timing and booking uncertainties as of 8 Oct. Term-time restriction remains; check dates before a special journey."
     },
     {
       "id": "FC-035",
@@ -817,19 +818,20 @@
       "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#station-house-weekly-quiz",
       "page_price_band": "FREE",
       "page_price_detail": null,
-      "page_when": "Every Monday from 8.30pm.",
+      "page_when": "Monday evenings from 8pm, confirmed directly by pub 8 October 2026.",
       "advertised_date": null,
       "page_source_url": "https://www.almond-pubs.co.uk/january-at-the-station-house/",
-      "fact_check_status": "SOURCE_TIME_DISCREPANCY",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
       "primary_claims_checked": [
-        "Venue's September 2026 post confirms free Monday quiz but says 8pm for a selected Monday; older venue post says 8.30pm. Start time is not settled"
+        "Direct email from Lucy Gibson, Assistant Manager at The Station House, 8 October 2026: Monday quiz starts 8pm, entry free, vouchers total £75 across the evening.",
+        "Conflicting older 8.30pm venue listing now superseded by current manager confirmation."
       ],
       "claim_evidence_urls": [
         "https://www.almond-pubs.co.uk/cask-ale-week-2026/"
       ],
       "claim_check_date": "2026-10-08",
-      "next_review_due": "2026-10-09",
-      "editorial_note": "Recent venue notices say both 8pm and 8.30pm; guide now advises checking time."
+      "next_review_due": "2026-11-08",
+      "editorial_note": "Quiz start time, free entry and £75 total voucher prizes confirmed by current venue manager; no outstanding timing discrepancy."
     },
     {
       "id": "FC-036",
@@ -978,19 +980,20 @@
       "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#play-zone-by-autisk-adswood",
       "page_price_band": "UNDER £10",
       "page_price_detail": "£5 per child or £10 per family.",
-      "page_when": "Friday 4–5.45pm or Saturday 10am–1pm when listed; check the next event date.",
+      "page_when": "Fridays during term time, 4–5.45pm; Saturdays 10am–1pm according to organiser's current flyer.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events/play-zone",
       "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
       "primary_claims_checked": [
-        "Friday 9 & Saturday 10 October sessions advertised; organiser-submitted July listing gives £5 child/£10 family"
+        "Autisk organiser Jan Bennett supplied current Play Zone flyer on 8 October 2026: Friday term-time 4–5.45pm, Saturdays 10am–1pm, £5 per child / £10 per family, Adswood Young People’s Centre, Neston Grove, SK3 8PH.",
+        "Council past-event pricing is dated supporting evidence, not the basis of current price claim."
       ],
       "claim_evidence_urls": [
         "https://www.stockport.gov.uk/events/play-zone?date=2026-07-25"
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": "Current organiser flyer replaces older schedule assumptions. Check Saturday dates before travelling."
     },
     {
       "id": "FC-043",
@@ -1024,19 +1027,20 @@
       "public_url": null,
       "page_price_band": "FREE",
       "page_price_detail": null,
-      "page_when": "free regular monthly discos around the Stockport area, usually at weekends in the early evening. Venues rotate, so use the current event calendar rather than relying on one fixed Cheadle Hulme venue.",
+      "page_when": "Cheadle Hulme: second Saturday monthly, 5–7pm, Ladybridge Park Residents Club, Edenbridge Road, Cheadle, SK8 5PX. Heaton Mersey: fourth Saturday 5–7pm; Poynton: first Saturday 5–7pm.",
       "advertised_date": null,
       "page_source_url": "https://www.dementiadisco.org/",
       "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
       "primary_claims_checked": [
-        "Dementia Disco's own website confirms free monthly discos in the Stockport area, weekend early evenings, with a free meal; actual next event date and venue must be checked separately."
+        "Dementia Disco organiser Kate confirmed by direct email 8 October 2026: Cheadle Hulme second Saturday monthly 5–7pm, Ladybridge Park Residents Club, Edenbridge Road, SK8 5PX; Heaton Mersey fourth Saturday, Poynton first Saturday, both 5–7pm.",
+        "Admission, meal, tea and coffee are free; other drinks may be purchased. Free tickets available at https://portal.dementiadisco.org/."
       ],
       "claim_evidence_urls": [
         "https://www.dementiadisco.org/"
       ],
       "claim_check_date": "2026-10-08",
-      "next_review_due": "2026-10-15",
-      "editorial_note": "Organiser confirms general format; rotating venue and next event date remain unchecked."
+      "next_review_due": "2026-10-22",
+      "editorial_note": "Organiser supplied recurring venue schedules and direct booking URL; booking availability and exceptions must still be checked for individual dates."
     },
     {
       "id": "FC-045",
@@ -1271,5 +1275,6 @@
       "next_review_due": "2026-10-29",
       "editorial_note": "Two current published date claims (31 Oct Council/Healthy Stockport organiser submissions; 24 Oct One Stockport). Keep guide's existing check-before-travel warning and seek direct Arc confirmation before newsletter promotion."
     }
-  ]
+  ],
+  "last_factual_reconciliation": "2026-10-09"
 }
