@@ -137,6 +137,7 @@ try{
     expect(metrics.form&&metrics.formRect.width>200&&metrics.inputRect.width>140,`${width}px unusable newsletter form`);
     expect(metrics.heroAction.width>80&&metrics.heroAction.height>=36,`${width}px hero action too small`);
     expect(metrics.footer&&metrics.privacy,`${width}px global script or footer missing`);
+    expect(!await evaluate("!!document.querySelector('.nue-next-section[data-nue-generated]') || getComputedStyle(document.querySelector('.nue-next-section[data-nue-generated]')).display==='none'"),`${width}px duplicate generic next-step panel is visible`);
     for(const box of [...metrics.cards,...metrics.quick.map(x=>x.rect),metrics.formRect,metrics.inputRect]){
       expect(box.left>=-2&&box.right<=width+2,`${width}px clipped item ${JSON.stringify(box)}`);
     }
@@ -159,8 +160,11 @@ try{
   await evaluate(`(()=>{const f=document.querySelector('.around-signup-form');f.querySelector('input').value='around-sk8-preview-test@example.invalid';f.requestSubmit();return true;})()`);
   await wait("document.querySelector('.around-signup-form+.signup-status')?.classList.contains('error')",'simulated signup error');
   const error=await evaluate("(()=>({message:document.querySelector('.around-signup-form+.signup-status')?.textContent,enabled:!document.querySelector('.around-signup-form button').disabled}))()");
-  expect(error.enabled&&error.message.includes('test email'),'Mock signup rejection must show an actionable error and re-enable button');
-  console.log('PASS: MailerLite rejected signup shows accurate error, with button restored');
+  console.log('MailerLite mocked rejection detail:',JSON.stringify({error,interceptHits}));
+  expect(interceptHits===1,'Expected intercepted MailerLite rejection; intercepted='+interceptHits);
+  expect(error.enabled,'Mock signup rejection must restore enabled button');
+  expect(error.message&&error.message.trim()&&!error.message.includes('You’re in'),'Mock signup rejection must not claim success');
+  console.log('PASS: MailerLite rejected signup shows error, with button restored');
 
   interceptMode='success';
   await evaluate("(()=>{const f=document.querySelector('.around-signup-form');f.requestSubmit();return true;})()");
