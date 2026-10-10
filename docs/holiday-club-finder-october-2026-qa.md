@@ -1,0 +1,109 @@
+# October 2026 Holiday Club Finder — verification and release record
+Checked: 8 October 2026. Branch: `feature/october-holiday-club-finder-2026`. Draft PR #189. Production unchanged.
+
+## Scope
+Expanded from six trial entries to **18 separately listed venue/programme locations**: **9 in core SK8** (Cheadle Hulme 6, Gatley 2, Heald Green 1), **9 nearby** (Bramhall 2, Cheadle Heath 1, Heaton Mersey 2, Heaton Moor 1, Handforth 1, Wythenshawe 2). These represent **12 organising brands** because some run several venues. All shown dates fall in 26–30 October 2026 (some only part-week). Programmes are listed, not guaranteed vacancies.
+
+## Primary sources for the 18 proposed entries
+1-2. Practically Family / Greenbank and Cheadle Catholic: https://practicallyfamily.co.uk/holiday-club/book ; https://www.practicallyfamily.co.uk/our-clubs ; published 26–30 October; 3–11; £20/£30/£40 sessions; payment options.
+3. Junior Sport Stars / Lane End: https://junior-sport-stars.classforkids.io/camp/293 ; 26–30 October; £30/day £20 half £125 week; ages 4–12, Reception restriction.
+4. LSC / Thorn Grove: https://wearelsc.co.uk/holiday-clubs/thorn-grove-primary-school/ ; published 26–30 October; ages 4–11; 8am–6pm; price not confirmed.
+5. Elm Cottage / Hursthead: https://bookings.elm-cottage.com/hursthead/ ; 26–30 October daily booking entries; ages Reception–Year 6, 07:45–18:00, £21/£25/£35. Search-engine and site snapshots can be stale; recheck actual booking route in production QA.
+6. ACE Coaching / Cheadle Hulme High: https://www.acecoachinguk.co.uk/class-types/holiday-courses/ ; directly verified current provider page confirms October 26–29 and £11.50 half-day/£23 full day; https://www.acecoachinguk.co.uk/home/ has matching dated 14 September 2026 update.
+7. TD Sports Academy / Gatley Primary: https://td-sports-academy-limited.classforkids.io/camps ; distinct October holiday camp 26–30, ages 4–11. Price and hours unconfirmed.
+8. Perform to Inspire / Gatley URC: https://classforkids.io/en-GB/classes/heaton-moor ; October 26–30, ages 5–12. **Direct October booking URL, hours and price unconfirmed**; do not reuse summer prices.
+9. Kitty Watson Academy / Heald Green: https://kw-academy.co.uk/october-intensive ; 26–28 October age 7+ intensive at £120. Site also offers a separately described holiday camp with different price/age details. Do not treat distinct KWA programmes as one.
+10. Practically Family / Ladybrook, Bramhall: same source as items 1–2.
+11. Fun Fest / Queensgate, Bramhall: https://fun-fest.co.uk/cheview/ ; 26–30 October current 2026/27 listing; £24 half, £40 day, £180 week. Payment-method transfer warning.
+12. Fun Fest / Cheadle Heath Primary: https://fun-fest.co.uk/cheadleheath/ ; 26–30 October; £24 half, £40 day, £180 week.
+13. Elm Cottage / Didsbury Road Primary, Heaton Mersey: https://bookings.elm-cottage.com/didsbury-road/ ; 26–30 October; ages school Reception–Year 6, £21/£35, 07:45–18:00.
+14. Junior Sport Stars / Sunaco House, Heaton Mersey: https://junior-sport-stars.classforkids.io/camp/291 ; 26–30 October, ages 5–14, £32/day £150 week; early/late add-ons.
+15. Junior Sport Stars / Tithe Barn, Heaton Moor: https://junior-sport-stars.classforkids.io/camp/294 ; 27–29 October, ages 4–12, £20 half / £30 day / £90 programme.
+16. 8BY8Football / Handforth Grange: https://8by8football.classforkids.io/camp/145 ; 27–29 October, ages 4–11, £18 half / £30 day / £90 programme; early/late add-ons.
+
+17. Edstart South Manchester / St Peter’s Catholic Primary, Newall Green, Wythenshawe: https://edstart-south-mcr.classforkids.io/camp/80 ; 26–30 October, ages 5–14, £20/day £90 week, 9am–3pm with paid early and late options; organiser claims Ofsted registration and Tax-Free Childcare. Describe only as provider claims until independent checks are complete.\n18. Progressive Sports Manchester / Baguley Hall Primary: https://progressive-sports-manchester.classforkids.io/camp/432 ; 26–29 October, ages 5–12, £20/day £70 four days, 9.30am–3pm; activities and direct booking page confirmed.\n\n## Reserves NOT listed because current suitability remains unconfirmed
+- Fun Fest Bolshaw, Heald Green SK8 3LW: venue and Ofsted record exist, but October 2026 dates or operation at this venue not independently established. https://reports.ofsted.gov.uk/search?order=desc&q=SK8+5ET&rows=10&sort=relevancy&start=60&status%5B0%5D=1
+- ZoZo's Day Nursery, Gatley: provider advertises October holiday club but eligibility, dates/ages/fees require confirmation. https://zozosdaynursery.co.uk/
+- Elm Cottage Hursthead search has occasionally served cached May content; inspect live page on final check.
+- Sport First / St Winifred's (19–23 October), Fun Fest Altrincham (19–30 October), other Stockport/Manchester providers: earlier/greater catchment. Do not add as 26–30 listings without an intentional scope change.
+
+## Checks performed on expanded branch
+- Programme data: 18 unique named venue/programme entries; no duplicate venue; all age ranges valid; all days within 26–30 Oct.
+- Core SK8 9 and nearby 9; location options cover all 9 areas.
+- New `Gymnastics` type option added for appropriate entries.
+- GitHub inline JS parsing passed and there were no structural data issues in source test.\n- A separate standalone HTML preview mirroring the 18 venue datasets was tested using headless Chromium at 1280px, 390px and 360px: 18 cards, zero JS errors, zero horizontal overflow. Gatley area returned 2, Gymnastics 2, Friday 13, age 3 returned 5, and no-match state appeared correctly. **This is a real standalone browser test, but NOT yet a Cloudflare production/branch deployment QA test.**
+- Cards use textContent and external links; no fabricated safety endorsements or paid placements.
+- Existing noindex retained: correct while unpublished, not appropriate if intentional search indexation.
+- Correct genuine SK8 Scoop logo still referenced, no SVG or third-party decorative images.
+
+## Release blockers / open QA
+1. Confirm Cloudflare hosted branch preview loads; conduct tablet + deployment browser QA, keyboard navigation, and inspect outbound destinations. Desktop and 360/390px behaviour already tested in the standalone HTML preview only.
+2. Direct confirmation of TD hours/price, Perform to Inspire October booking route and Kitty programme differences. Where not obtainable, withhold any specific unverified fields or drop candidate.
+3. Recheck all source links and that October sessions are still bookable. Never present historic availability as current.
+4. Publish/merge/Cloudflare deployment only on Paul's approval and after active preview, accessibility and external-link tests.
+5. Add link from Halloween guide only after the finder is genuinely live.
+6. End-of-season review/remove/redirect after 30 October 2026.
+
+## Three-cycle critical QA
+1. Reader value: original six were insufficient; expanded to 16, split core SK8 vs sensible nearby, reclassified provider locations, added area/type filters.
+2. Source quality: dated 2026 primary booking sources prioritized; unclear price/hours clearly marked; excluded Bolshaw and ZoZo until supported.
+3. Trust and risk: no endorsement promise, no paid priority, no booking guarantee, correction route, seasonal expiry and preview-only status.
+
+Status: **EXPANDED 18-LOCATION DRAFT, standalone browser QA PASSED, still not publish-ready**.
+
+## 8 October 2026 final pre-release QA addendum (supersedes any conflicting notes above)
+
+**Status**: Prepared for owner review, NOT released. Draft PR #189, no `main` merge or production publication.
+
+**Source/fact corrections**
+- Practically Family's three October venues and dates are supported by https://practicallyfamily.co.uk/holiday-club/book; earlier Halloween Guide copy claimed £30/£38/£42 and different hours, whereas current official location/price pages show £20/£30/£40. The exact October checkout total cannot be reconciled from available sources. Both guide profiles and all three finder cards now avoid unsupported fixed prices, direct to the current booking system and ask readers to confirm session length and cost. Do not restore previous numbers without a contemporaneous checkout/provider confirmation.
+- Kitty Watson's three-day October Intensive is distinct from the provider's other holiday-camp programmes. The finder specifies the Intensive and the Heald Green Methodist venue, while asking parents to confirm details before booking: https://kw-academy.co.uk/october-intensive
+- Perform to Inspire's link now targets its ClassForKids `/camps` hub rather than an unrelated search location. October prices, exact hours and confirmation of direct-booking availability remain unresolved. https://perform-to-inspire-events.classforkids.io/camps (automated fetch may receive 403).
+- TD Sports Academy Gatley October programme remains listed without invented hours or prices. https://td-sports-academy-limited.classforkids.io/camps
+- The HAF signpost points to Stockport Council's parent/carer information and should not imply universal eligibility: https://www.stockport.gov.uk/information-for-parents-and-carers-haf
+
+**Guide integration prepared on this same branch**
+- Full direct Halloween Guide `halloween-half-term-guide/guide/index.html`: one contextual Holiday Club Finder link in intro, deliberately distinguishes holiday childcare from one-off activities; two old Practically Family price claims and blog links corrected.
+- Kids & Family `kids-family/index.html`: one navigation card link to finder, staging-only.
+- Finder `kids-family/holiday-club-finder/index.html`: 18 venue/programme locations, 9 core SK8 and 9 nearby; 4 client-side filters. `noindex,follow` deliberately retained while under review. No paid placements or asserted safety endorsements.
+
+**Seasonal expiry**
+- From 1 November 2026 UTC, finder client code hides old results/filters and displays an expired notice pointing to current family information. End-of-season manual editorial review/redirect still required. Do not assume client-only expiry handles all indexing, static cached HTML or referrals.
+
+**Test evidence**
+- Direct GitHub branch content/source-level assertions PASSED: 18 unique venue names, 9 core/9 nearby, unique venue location, filter controls, expiry guard, 1 guide link, Kids & Family link, 3 neutral Practically prices, 0 old £30/£38/£42 guide price strings. Tests performed against `feature/october-holiday-club-finder-2026` on 8 October 2026.
+- Standalone browser preview PASSED in headless Chromium at desktop 1280px, tablet, phone 390px and phone 360px: no JavaScript errors or horizontal overflow; age, day, town, activity filters and zero-results behavior worked; future-dated expiry check worked. The preview can be opened as a local HTML test file but is not a hosted Cloudflare deployment.
+- Website Health GitHub Actions: passing on earlier draft; **refresh CI status for newest commit** before release. Real Cloudflare-hosted staging URL **not verified**, so no claim of end-to-end server-side browser QA or live form/nav/asset QA.
+- Outbound links to ClassForKids sometimes return 403 to automated retrieval. This alone does not prove failure to human browsers; direct human visit plus provider confirmation still required for unresolved programmes.
+- No passwords, credentials, audience emails or personal data involved.
+
+**Open blockers and final approval gate**
+1. Confirm hosted Cloudflare branch-preview URL and run true web-hosted page checks including correct logo/assets, mobile navigation, tablet rendering, keyboard/focus order and all real booking links.
+2. Recheck session and availability details before 26 October. Resolve TD and Perform to Inspire unknowns or keep plainly qualified/remove listings where booking destination cannot be verified. Reconfirm Practically Family exact price in booking checkout if quoting again.
+3. Recheck current CI completion and prevent merging if it fails.
+4. Obtain explicit Paul approval for `main` merge/production deployment and adding live guide link. Production remains unchanged pending approval.
+5. Retain/update a source record and promptly correct any reported fact. After October switch to evergreen finder or redirect, not expired promotional listings.
+
+**Owner-facing status:** All reasonable branch-level draft edits and static/standalone browser QA completed. Waiting on live Cloudflare preview verification and final provider-booking checks, then explicit publication approval.
+
+## 10 October 2026 — promotion readiness continuation
+
+- Source-only change in the draft finder: a non-gated newsletter continuation after the booking/help information, linking to the existing /join/ route. It never blocks provider links or promises that a booking is available.
+- CTA has `id="finder-join-free"`; its click attempts `holiday_finder_join_click` through the existing consent-aware `window.sk8Track` handler. Confirm the event appears for consenting users in a real browser before relying on analytics. Do not mistake CTA clicks or website form success for net-new subscribers: MailerLite remains authoritative.
+- Keep the existing `noindex,follow` while the page is a draft. Before an intentional public search launch, explicitly decide indexability and verify canonical/robots behaviour.
+- 10 October release audit found previous-head browser-qa FAILED in an unrelated newsletter-to-My SK8 action settling test; other core/preview checks passed. Current-head CI must pass, and the exact failure needs regression triage before full release readiness.
+- Draft finder diverges substantially from current main; reconcile with latest main and repeat QA before any merge. The calendar draft is separately staged and must not be silently bundled into this release.
+- Current organiser evidence continues to support some dated October offerings, but TD/Perform booking details and provider checkout/remaining availability must remain qualified until independently reconfirmed. ClassForKids retrieval restrictions are not proof of a broken human booking route.
+- This is a staged usability/conversion improvement only. No production deployment, newsletter send, advertising purchase or provider outreach was performed.
+
+## 10 October 2026 — current-main reconciliation and promotion tests
+
+- This branch was reconciled non-destructively against current `main` after the SK8 Calendar was merged. Only four originally proposed files were changed: finder page, Kids & Family navigation, Halloween guide contextual link and corrected two legacy Practically Family pricing claims, and this QA record.
+- All 18 programme locations retained: 9 core SK8, 9 nearby. All price, booking and places claims remain subject to changes; do not imply a guaranteed place.
+- Source checks (10 October): ACE official October 26–29 and half-day/full-day prices; Practically Family October 26–30 across three sites with conflicting past guide prices still best handled by advising current checkout check; Kitty Watson October Intensive 26–28 £120; Fun Fest Cheadle Heath dates and price on official site; TD Sports provider ClassForKids hub explicitly shows October 26–30 at Gatley Primary but hours and price unknown; Perform to Inspire's 26–30 October listing appears on ClassForKids directory, while exact hours, price and direct bookable session require human confirmation. HAF Stockport Council eligibility confirmed; don't promise universal free childcare.
+- Kept a non-gated bottom `/join/` link, with consent-aware CTA event `holiday_finder_join_click`. Added `holiday_club_filter_used` (sends only control ID, never child age/value), and `holiday_club_booking_click` (sends area only), through existing `window.sk8Track`. These clicks are not confirmed subscribers or bookings; MailerLite remains subscriber truth. Test actual analytics consent and successful events in a hosted browser before relying on them.
+- Release experiment 1: organisation-shared finder vs Facebook group promotion. Measure confirmed new MailerLite subscribers per attributed finder visits where consent/tracking coverage permits; distinguish channel selection and sample size.
+- Release experiment 2: finder-to-organiser action. Measure unique consenting finder visitors clicking an organiser booking/detail route; compare four-week engagement to baseline. No provider booking outcomes should be inferred from clicks.
+- Release experiment 3: browsing benefit. Compare consenting booking/detail clicks with versus without use of an area/day/type filter, without logging age values or child data. Treat this as observational, not causal.
+- Hold publication until latest-commit CI is all green, human real booking links are checked, hosted preview images/nav/mobile/keyboard work, and current `main` is reconciled. Previous browser QA failure involved My SK8 email action timing, outside the finder itself, but cannot be ignored.
+- All changes remain review-only; never merge to production or send outreach/spend without explicit authorisation. Remove noindex only as part of approved search-visible launch.
