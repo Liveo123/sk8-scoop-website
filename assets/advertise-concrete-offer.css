@@ -1,0 +1,36 @@
+/* Advertiser conversion revision, 8 October 2026 */
+body.advertiser-page .ad-conversion-hero .ad-hero-grid{align-items:center!important;padding-bottom:36px!important}
+body.advertiser-page .ad-hero-prices{isolation:isolate;overflow:hidden}
+body.advertiser-page .ad-hero-prices-heading,body.advertiser-page .ad-hero-quick-grid,body.advertiser-page .ad-hero-prices>p,body.advertiser-page .ad-hero-quick-detail{position:relative;z-index:2}
+body.advertiser-page .ad-hero-quick-item{background:rgba(255,253,248,.96)}
+body.advertiser-page .ad-arrow{display:inline-block;vertical-align:middle;flex:0 0 19px;width:19px;height:19px;position:relative;color:inherit}
+body.advertiser-page .ad-arrow:before{content:"";position:absolute;left:2px;top:9px;width:14px;border-top:2px solid currentColor}
+body.advertiser-page .ad-arrow:after{content:"";position:absolute;left:10px;top:5px;width:7px;height:7px;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg)}
+body.advertiser-page .ad-arrow-down{transform:rotate(90deg)}
+body.advertiser-page .ad-hero-quick-item .ad-arrow{color:#0b5863}
+body.advertiser-page .ad-hero-action-primary,body.advertiser-page .ad-hero-action-secondary,body.advertiser-page .ad-help-card .button,body.advertiser-page .ad-policy-bar .button,body.advertiser-page .ad-example-full-link{display:inline-flex!important;align-items:center;gap:9px}
+body.advertiser-page .ad-hero-action-primary .ad-arrow{color:#093c42}
+body.advertiser-page .ad-artwork-fieldset{margin:18px 0;padding:18px;border:1px solid #b8d8d1;border-radius:16px;background:#f4fbf8}
+body.advertiser-page .ad-artwork-fieldset legend{font-weight:900;font-size:1.05rem;color:#104b56;padding:0 7px}
+body.advertiser-page .ad-artwork-fieldset>p{font-size:.92rem;line-height:1.55}
+body.advertiser-page .ad-artwork-fieldset>label:not(.ad-artwork-link){display:flex!important;align-items:center;gap:10px;padding:9px 0;font-weight:750}
+body.advertiser-page .ad-artwork-fieldset input[type=radio]{width:20px;height:20px;flex:0 0 20px;accent-color:#0f6470}
+body.advertiser-page .ad-artwork-link{display:block;margin-top:15px}
+body.advertiser-page .ad-artwork-link input{width:100%}
+body.advertiser-page .ad-example-only{max-width:780px;margin:18px auto}
+body.advertiser-page .ad-example-only .ad-placement-demo-v6{width:100%;max-width:none}
+body.advertiser-page .ad-example-full-link{width:fit-content;min-height:48px;padding:13px 20px;border-radius:12px;background:#0b5863;color:#fff!important;font-weight:900;text-decoration:none}
+body.advertiser-page .ad-example-full-link:hover{background:#06414b}
+body.advertiser-page .ad-example-full-link:focus-visible{outline:3px solid #ed7a20;outline-offset:3px}
+body.advertiser-page .ad-simple-process .ad-process-demo{display:inline-flex;align-items:center;gap:5px;font-weight:900;color:#0b4b55;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){body.advertiser-page .ad-hero-prices{margin-top:2px}body.advertiser-page .ad-example-only{max-width:100%}body.advertiser-page .ad-example-full-link{width:100%;justify-content:center;text-align:center}}
+
+/* Authored SK8 locality diagram, deliberately blurred behind solid pricing buttons. */
+body.advertiser-page .ad-hero-prices{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(135deg,rgba(9,72,80,.92),rgba(13,83,90,.94))!important}
+body.advertiser-page .ad-sk8-map-backdrop{pointer-events:none;position:absolute;inset:0;z-index:-1;overflow:hidden}
+body.advertiser-page .ad-sk8-map-backdrop::before{content:"";position:absolute;inset:-21%;background-image:url('data:image/webp;base64,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');background-size:cover;background-position:center 46%;filter:blur(2px) saturate(.86);transform:scale(1.07) rotate(-4deg);opacity:.74}
+body.advertiser-page .ad-sk8-map-backdrop::after{content:"";position:absolute;inset:0;background:linear-gradient(95deg,rgba(4,55,61,.26),rgba(4,55,61,.35))}
+body.advertiser-page .ad-hero-prices-heading,body.advertiser-page .ad-hero-quick-grid,body.advertiser-page .ad-hero-prices>p,body.advertiser-page .ad-hero-quick-detail{position:relative;z-index:2}
+/* Match the £60 feature card to the warm off-white / orange bordered hero offer. */
+body.advertiser-page #products .ad-simple-card.ad-simple-featured{background:linear-gradient(180deg,#fffdf8 0%,#fff8ec 100%)!important;border:2px solid #f2a15a!important;border-top:6px solid #f8791b!important;box-shadow:0 12px 27px rgba(31,66,65,.09)!important}
+body.advertiser-page #products .ad-simple-card.ad-simple-featured .ad-simple-price-value{color:#0b5660!important}

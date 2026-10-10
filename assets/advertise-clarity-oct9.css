@@ -1,0 +1,10 @@
+/* Advertising conversion clarity: 9 October 2026. Scoped to the advertising route. */
+body.advertiser-page .ad-audience-proof{display:grid;gap:4px;max-width:520px;padding:13px 16px;margin:18px 0;background:#f9f6ed;border:1px solid #e6dac6;border-left:4px solid #0f6470;border-radius:12px;color:#173e45;font-size:.9rem;line-height:1.48}
+body.advertiser-page .ad-audience-proof strong{color:#0b4b55;font-size:1.04rem}
+body.advertiser-page .ad-audience-proof span{color:#395b60}
+body.advertiser-page .ad-artwork-details{margin:14px 0;border:1px solid #a4c7c2;border-radius:13px;background:#f3f9f6;overflow:hidden}
+body.advertiser-page .ad-artwork-details summary{padding:14px 16px;cursor:pointer;font-weight:800;color:#104853}
+body.advertiser-page .ad-artwork-details summary small{font-size:.8rem;font-weight:600;color:#486a69}
+body.advertiser-page .ad-artwork-details[open] summary{border-bottom:1px solid #bad4cf}
+body.advertiser-page .ad-artwork-details .ad-artwork-fieldset{margin:10px;border:0;background:transparent;padding:12px}
+@media(max-width:700px){body.advertiser-page .ad-audience-proof{font-size:.85rem;padding:12px;margin:14px 0}body.advertiser-page .ad-audience-proof strong{font-size:.98rem}}

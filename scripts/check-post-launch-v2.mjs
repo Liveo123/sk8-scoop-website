@@ -73,7 +73,10 @@ contains('terms.html','rel="canonical" href="https://www.sk8scoop.com/terms"');
 contains('sitemap.xml','https://www.sk8scoop.com/52-adventures/</loc><lastmod>2026-09-26</lastmod>');
 contains('sitemap.xml','https://www.sk8scoop.com/free-cheap-guide/</loc><lastmod>2026-09-30</lastmod>');
 contains('sitemap.xml','https://www.sk8scoop.com/guides/</loc><lastmod>2026-10-01</lastmod>');
-contains('archive.html','Browse all 15 published SK8 Scoop issues');
+const publishedIssueMatch = read('assets/config.js').match(/issuesPublished:\s*(\d+)/);
+expect(Boolean(publishedIssueMatch), 'assets/config.js is missing the published issue count');
+const publishedIssueCount = Number(publishedIssueMatch?.[1] || 0);
+contains('archive.html',`Browse all ${publishedIssueCount} published SK8 Scoop issues`);
 
 // Halloween indexing contracts.
 contains('halloween-half-term-guide/index.html','rel="canonical" href="https://www.sk8scoop.com/halloween-half-term-guide/"');
@@ -88,43 +91,60 @@ contains('guides/index.html','href="../halloween-half-term-guide/"'); // Hallowe
 contains('latest/index.html','/assets/latest-polish.css');
 contains('latest/index.html','latest-issue-mosaic');
 contains('latest/index.html','latest-feature-card');
-contains('latest/index.html','Issue 15');
-contains('latest/index.html','/planning/');
+const currentIssueMatch = read('assets/config.js').match(/currentIssue:\s*\{\s*number:\s*(\d+)/);
+expect(Boolean(currentIssueMatch), 'assets/config.js is missing currentIssue.number');
+const currentIssueNumber = Number(currentIssueMatch?.[1] || 0);
+contains('latest/index.html',`Issue ${currentIssueNumber}`);
+expect(read('latest/index.html').includes('/planning/') || read('latest/index.html').includes('/updates/'), 'Latest issue requires at least one actionable planning or local-updates route');
 contains('latest/index.html','/local-history/');
 excludes('assets/latest-polish.css','NEXT FRIDAY');
 const latestHtml = read('latest/index.html');
 expect((latestHtml.match(/<section\b/g) || []).length === (latestHtml.match(/<\/section>/g) || []).length, 'latest/index.html has unbalanced section tags');
-contains('advertise.html','ad-product-grid ad-route-grid');
-contains('assets/advertise-v5.css','#advertiser-tools .ad-route-grid');
+contains('advertise.html','ad-simple-grid');
+contains('assets/advertise-rework-oct8.css','.ad-premium-grid');
 
-// Current advertiser offer and backend contract.
-// Owner-approved reversion to the established prices on 5 October 2026.
-contains('advertise.html','Newsletter TEST · £40');
-contains('advertise.html','<div class="halloween-price">£35</div>');
-contains('advertise.html','<div class="halloween-price">£75</div>');
-contains('advertise.html','<div class="halloween-price">£110</div>');
-contains('advertise.html','<div class="halloween-price">£150</div>');
-contains('advertise.html','value="starter_newsletter"');
-contains('advertise.html','value="halloween_guide"');
-contains('advertise.html','value="halloween_combo"');
-contains('advertise.html','value="halloween_section"');
-contains('advertise.html','value="halloween_main"');
-excludes('advertise.html','NEWSLETTER STARTER · £20');
-excludes('advertise.html','<div class="halloween-price">£15</div>');
-excludes('advertise.html','<div class="halloween-price">£30</div>');
-excludes('advertise.html','<div class="halloween-price">£90</div>');
-excludes('advertise.html','<div class="halloween-price">£125</div>');
-excludes('advertise.html','WEBSITE · price by scope');
-excludes('advertise.html','value="temp_website"');
+// Current advertiser offer and backend contract, approved 8 October 2026.
+contains('advertise.html','Show local readers <em>what you offer</em>');
+contains('advertise.html','685 active newsletter subscribers');
+contains('advertise.html','List size, not a promise of advert views, clicks or sales.');
+contains('advertise.html','assets/advertise-clarity-oct9.css');
+contains('advertise.html','ad-hero-quick-grid');
+contains('advertise.html','ad-sk8-map-backdrop');
+contains('assets/advertise-concrete-offer.css','data:image/webp;base64,');
+// Removed external SVG checks: browser renders local inline WebP, consistent with no-SVG rule.
+// Removed external SVG checks: browser renders local inline WebP, consistent with no-SVG rule.
+// Removed external SVG checks: browser renders local inline WebP, consistent with no-SVG rule.
+contains('assets/advertise-concrete-offer.css','#products .ad-simple-card.ad-simple-featured');
+excludes('advertise.html','ad-newsletter-backdrop');
+contains('advertise.html','Guide card · £28');
+contains('advertise.html','Newsletter advert · £35');
+contains('advertise.html','Guide + newsletter · £60');
+contains('advertise.html','Guide section sponsor · £96');
+contains('advertise.html','Main Guide sponsor · £125');
+for (const key of ['starter_newsletter','guide_card','guide_bundle','guide_section','guide_main']) {
+  contains('advertise.html',`value="${key}"`);
+  contains('worker.js',`'${key}'`);
+  contains('functions/api/advertiser-enquiry.js',`'${key}'`);
+}
+for (const obsolete of ['£40','£75','Guide section sponsor · £110','Main Guide sponsor · £150','Who it is for','Clicks matter. Business outcomes matter more.','halloween_guide"']) excludes('advertise.html',obsolete);
+contains('advertise.html','data-guide-choice-wrap');
+contains('advertise.html','ad-example-only');
+contains('advertise.html','name="artwork_option"');
+contains('advertise.html','/advertise/example/');
+contains('advertise/example/index.html','FICTIONAL BUSINESS');
+contains('advertise.html','ad-policy-short');
+contains('advertise.html','ad-help-grid');
+contains('advertise.html','assets/advertise-rework-oct8.css');
 contains('advertise.html','data-experiment="advertiser-local-hero-v2"');
-contains('advertise.html','GUIDE ADVERT');
-contains('worker.js',"'starter_newsletter'");
+const adHtml = read('advertise.html');
+expect((adHtml.match(/<section\b/g) || []).length === (adHtml.match(/<\/section>/g) || []).length,'advertise.html has balanced sections');
+expect(adHtml.indexOf('id="products"') < adHtml.indexOf('id="campaign-enquiry"') && adHtml.indexOf('id="campaign-enquiry"') < adHtml.indexOf('id="what-you-buy"'),'Price, enquiry, sample order maintained');
+contains('worker-business-v2.js','guide_section: 9600');
+contains('worker-business-v2.js','guide_main: 12500');
+contains('worker-business-v2.js',"2026-10-v3");
+// Older route keys remain accepted only for earlier approved enquiries/payments.
 contains('worker.js',"'halloween_guide'");
 contains('worker.js',"'halloween_combo'");
-contains('functions/api/advertiser-enquiry.js',"'starter_newsletter'");
-contains('functions/api/advertiser-enquiry.js',"'halloween_guide'");
-contains('functions/api/advertiser-enquiry.js',"'halloween_combo'");
-// Historical package keys remain accepted only to honour earlier commitments.
 contains('worker.js',"'temp_test'");
 contains('worker.js',"'temp_grow'");
 
@@ -138,6 +158,15 @@ contains('assets/config.js','https://submit-form.com/X3MWnWHXI');
 contains('submit-event/index.html','action="/api/submit-event"');
 contains('worker.js',"url.pathname === '/api/submit-event'");
 contains('advertise.html','action="/api/advertiser-enquiry"');
+for (const field of ['contact_name','website','preferred_date','advert_copy']) {
+  const adField = read('advertise.html').match(new RegExp('<(?:input|textarea)[^>]*name="'+field+'"[^>]*>'));
+  expect(adField && !adField[0].includes('required'), 'Advertiser first-stage field should be optional: '+field);
+}
+contains('worker.js',"const required = ['business_name', 'email', 'package', 'terms_accepted']");
+contains('functions/api/advertiser-enquiry.js',"const required=['business_name','email','package','terms_accepted']");
+contains('worker.js',"d.preferred_date || 'To be agreed'");
+contains('functions/api/advertiser-enquiry.js',"d.preferred_date||'To be agreed'");
+
 contains('worker.js',"url.pathname === '/api/advertiser-enquiry'");
 
 // Subscriber-aware header actions must stay consistent across the whole site.

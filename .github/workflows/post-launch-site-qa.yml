@@ -522,3 +522,49 @@ jobs:
           path: visual-qa/header-layout/
           retention-days: 7
 
+
+  advertise-ux-preview:
+    env:
+      ADVERT_QA_BASE_URL: ${{ github.head_ref == 'preview/advertising-conversion-audit-20261009' && 'https://preview-advertising-conversion-audit-20261009.previews.sk8scoop.com' || 'https://preview-advertise-simple-pricing-oct2026.previews.sk8scoop.com' }}
+    if: github.event_name == 'pull_request' && (github.head_ref == 'preview/advertise-simple-pricing-oct2026' || github.head_ref == 'preview/advertising-conversion-audit-20261009')
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out proposal
+        uses: actions/checkout@v4
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "No Chrome/Chromium available"
+            exit 1
+          fi
+      - name: Wait for current Cloudflare preview
+        shell: bash
+        run: |
+          for attempt in $(seq 1 24); do
+            if curl -fsSL --max-time 15 "${ADVERT_QA_BASE_URL}/advertise.html" | grep -Fq 'ad-selected-summary'; then
+              echo "Advertiser preview available"
+              exit 0
+            fi
+            echo "Waiting for updated preview ($attempt/24)"
+            sleep 10
+          done
+          exit 1
+      - name: Check mobile, tablet and desktop purchase flow
+        run: node scripts/check-advertise-ui.mjs
+      - name: Upload pricing and form screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: advertise-conversion-qa
+          path: visual-qa/advertise/
+          retention-days: 7

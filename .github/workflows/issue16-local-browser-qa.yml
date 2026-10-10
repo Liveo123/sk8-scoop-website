@@ -1,0 +1,67 @@
+name: Issue 16 Local Browser QA
+
+on:
+  pull_request:
+    paths:
+      - 'my-sk8/action/index.html'
+      - 'halloween-half-term-guide/guide/index.html'
+      - 'tests/my-sk8-email-actions-browser.mjs'
+      - '.github/workflows/issue16-local-browser-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-action-and-guide-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out exact PR content
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "No Chrome/Chromium binary available"
+            exit 1
+          fi
+      - name: Start local site server
+        shell: bash
+        run: |
+          set -eu
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/sk8-issue16-server.log 2>&1 &
+          echo $! > /tmp/sk8-issue16-server.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS --max-time 3 http://127.0.0.1:8765/data/events.json -o /tmp/issue16-events.json; then
+              break
+            fi
+            sleep 1
+          done
+          test -s /tmp/issue16-events.json
+      - name: Run actual Issue 16 email action and Guide browser tests
+        env:
+          PREVIEW_URL: http://127.0.0.1:8765
+        shell: bash
+        run: |
+          set -eu
+          node --check tests/my-sk8-email-actions-browser.mjs
+          node tests/my-sk8-email-actions-browser.mjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue16-local-browser-screenshots
+          path: visual-qa/my-sk8
+          if-no-files-found: ignore

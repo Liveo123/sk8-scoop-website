@@ -1,0 +1,30 @@
+name: Verified Reader Preferences QA
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'preference-verification.js'
+      - 'worker.js'
+      - 'worker-business-v2.js'
+      - 'functions/api/save-preferences.js'
+      - 'functions/api/confirm-preferences.js'
+      - 'preferences/index.html'
+      - 'tests/preference-verification-qa.mjs'
+      - 'tests/editorial-retention-qa.mjs'
+      - '.github/workflows/verified-preferences-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-preferences:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check worker.js
+      - run: node --check preference-verification.js
+      - run: node tests/preference-verification-qa.mjs
+      - run: node tests/editorial-retention-qa.mjs

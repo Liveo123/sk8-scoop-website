@@ -1,3 +1,4 @@
+import { startPreferenceVerification, renderPreferenceConfirmation, finishPreferenceVerification } from './preference-verification.js';
 const SCHEMA = `
 CREATE TABLE IF NOT EXISTS qr_events (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -150,7 +151,13 @@ export default {
         return handleSubmitEvent(request, env);
       }
       if (url.pathname === '/api/save-preferences' && request.method === 'POST') {
-        return handleSavePreferences(request, env);
+        return startPreferenceVerification(request, env);
+      }
+      if (url.pathname === '/api/confirm-preferences' && request.method === 'GET') {
+        return renderPreferenceConfirmation(request);
+      }
+      if (url.pathname === '/api/confirm-preferences' && request.method === 'POST') {
+        return finishPreferenceVerification(request, env);
       }
       if (url.pathname === '/api/reader-submission' && request.method === 'POST') {
         return handleReaderSubmission(request, env);
@@ -232,15 +239,27 @@ async function handleQrStats(request, env) {
 
 async function handleAdvertiserEnquiry(request, env) {
   const d = await readJson(request);
-  const required = ['business_name', 'contact_name', 'email', 'package', 'preferred_date', 'website', 'terms_accepted'];
+  const required = ['business_name', 'email', 'package', 'terms_accepted'];
   if (required.some(key => !String(d[key] || '').trim())) return json({ error: 'Please complete all required fields.' }, 400);
   if (!isEmail(d.email)) return json({ error: 'Please provide a valid email address.' }, 400);
-  if (!isUrl(d.website)) return json({ error: 'Please provide a valid website or landing page.' }, 400);
-  const allowed = ['starter_newsletter', 'halloween_guide', 'halloween_combo', 'halloween_section', 'halloween_main', 'temp_test', 'temp_grow', 'human_review', 'local_spotlight', 'monthly_partner', 'category_partner', 'bespoke'];
+  if (String(d.website || '').trim() && !isUrl(d.website)) return json({ error: 'Please provide a valid website or landing page.' }, 400);
+  const allowed = ['starter_newsletter', 'guide_card', 'guide_bundle', 'guide_section', 'guide_main', 'halloween_guide', 'halloween_combo', 'halloween_section', 'halloween_main', 'temp_test', 'temp_grow', 'human_review', 'local_spotlight', 'monthly_partner', 'category_partner', 'bespoke'];
   if (!allowed.includes(String(d.package))) return json({ error: 'Please choose a valid campaign option.' }, 400);
   const c = (value, length = 1000) => String(value || '').trim().slice(0, length);
+  // Keep the requested guide with the existing enquiry without changing the D1 schema.
+  const guideLabels = {not_sure:'Help me choose',halloween:'Halloween & Half-Term Guide',christmas:'Christmas Guide', '52-adventures':'52 Adventures','free-cheap':'Free & Cheap Things to Do',summer:'SK8 Summer Guide',secrets:'50 Secrets of SK8',transport:'Getting around SK8',other:'Another SK8 Scoop Guide'};
+  const selectedGuide = String(d.guide_choice || '').trim();
+  if (selectedGuide && !Object.prototype.hasOwnProperty.call(guideLabels, selectedGuide)) return json({error:'Please choose a valid Guide.'},400);
+  const guideRequest = ['guide_card','guide_bundle','guide_section','guide_main'].includes(String(d.package)) && selectedGuide
+    ? `Requested Guide: ${guideLabels[selectedGuide]}` : '';
+  const artworkOption = ['create','logo','finished'].includes(String(d.artwork_option||'')) ? String(d.artwork_option) : 'create';
+  const artworkUrl = String(d.artwork_url||'').trim().slice(0,400);
+  if (artworkUrl && (!/^https:\/\//i.test(artworkUrl) || /[\r\n]/.test(artworkUrl))) return json({error:'Please provide a valid secure artwork link.'},400);
+  const artworkNote = 'Artwork: ' + artworkOption + (artworkUrl ? '; link: ' + artworkUrl : '; send by reply if supplied');
+  const invoiceDetails = [guideRequest,artworkNote].filter(Boolean).join(' | ').slice(0,500);
+
   await env.DB.prepare(`INSERT INTO advertiser_enquiries (business_name,contact_name,email,phone,business_type,area,website,package,preferred_date,advert_copy,image_link,invoice_details,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?, 'pending',datetime('now'))`)
-    .bind(c(d.business_name, 180), c(d.contact_name, 120), c(d.email, 200), c(d.phone, 80), c(d.business_type, 120), c(d.area, 100), c(d.website, 500), c(d.package, 80), c(d.preferred_date, 30), c(d.advert_copy, 1000), c(d.image_link, 500), c(d.invoice_details, 500)).run();
+    .bind(c(d.business_name, 180), c(d.contact_name || 'Not provided', 120), c(d.email, 200), c(d.phone, 80), c(d.business_type, 120), c(d.area, 100), c(d.website || 'Not provided', 500), c(d.package, 80), c(d.preferred_date || 'To be agreed', 30), c(d.advert_copy, 1000), c(d.image_link, 500), c(invoiceDetails, 500)).run();
   const message = String(d.package) === 'human_review'
     ? 'Thanks. Your local-fit check has been sent to SK8 Scoop. We will review whether your business is a sensible match for SK8 readers before suggesting any paid option.'
     : 'Thank you. Your campaign enquiry has been saved for suitability and availability checks.';
@@ -271,17 +290,6 @@ async function handleSubmitEvent(request, env) {
   await env.DB.prepare(`INSERT INTO event_submissions (event_name,event_date,event_time,venue,area,cost,booking_url,description,contact_name,email,image_note,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,'pending',datetime('now'))`)
     .bind(c(d.event_name, 160), c(d.event_date, 20), c(d.event_time, 80), c(d.venue, 220), c(d.area, 80), c(d.cost, 100), c(d.booking_url, 500), c(d.description, 1200), c(d.contact_name, 120), c(d.email, 200), c(d.image_note, 400)).run();
   return json({ message: 'Thank you. The event is in the moderation queue for checking.' });
-}
-
-async function handleSavePreferences(request, env) {
-  const d = await readJson(request);
-  if (!isEmail(d.email)) return json({ error: 'Please provide a valid email address.' }, 400);
-  if (String(d.preference_consent || '') !== 'yes') return json({ error: 'Please confirm that you want these preferences saved.' }, 400);
-  const yn = key => String(d[key] || '') === 'yes' ? 1 : 0;
-  const email = String(d.email).trim().toLowerCase().slice(0, 200);
-  await env.DB.prepare(`INSERT INTO subscriber_preferences (email,families_children,events,food_drink,offers_savings,home_property,pets_outdoors,practical_updates,updated_at) VALUES (?,?,?,?,?,?,?,?,datetime('now')) ON CONFLICT(email) DO UPDATE SET families_children=excluded.families_children,events=excluded.events,food_drink=excluded.food_drink,offers_savings=excluded.offers_savings,home_property=excluded.home_property,pets_outdoors=excluded.pets_outdoors,practical_updates=excluded.practical_updates,updated_at=datetime('now')`)
-    .bind(email, yn('families_children'), yn('events'), yn('food_drink'), yn('offers_savings'), yn('home_property'), yn('pets_outdoors'), yn('practical_updates')).run();
-  return json({ message: 'Your optional SK8 Scoop interests have been saved.' });
 }
 
 async function handleReaderSubmission(request, env) {

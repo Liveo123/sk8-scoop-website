@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { exclusionReason } from './event-editorial-exclusions.mjs';
 
 const queuePath = process.env.EVENT_QUEUE_PATH || 'data/event-review-queue.json';
 const eventsPath = process.env.EVENT_DATA_PATH || 'data/events.json';
@@ -16,6 +17,8 @@ const seenReady = new Set();
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 
 for (const item of ready) {
+  const excluded = exclusionReason(item);
+  if (excluded) throw new Error(`${item.id}: ${excluded}`);
   for (const field of ['id','title','date','area','venue','cost','category','description','source_url','verification','checked']) {
     if (!item[field]) throw new Error(item.id + ': missing ' + field);
   }

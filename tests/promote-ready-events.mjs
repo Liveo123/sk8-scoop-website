@@ -111,4 +111,20 @@ try {
 }
 if (!duplicateFailed) throw new Error('duplicate ready IDs did not fail safely');
 
+// Cycle 4: excluded organiser/source must fail before altering published data.
+const excludedQueue = structuredClone(baseQueue);
+excludedQueue.items = [{...excludedQueue.items[0],
+  id: 'excluded-event',
+  title: 'Example event',
+  venue: 'Cheadle Masjid',
+  source_url: 'https://cheadlemasjid.org/events-activities/list/'
+}];
+let excludedFailed = false;
+try {
+  run(excludedQueue, structuredClone(baseEvents));
+} catch (error) {
+  excludedFailed = /Excluded organiser\/source/.test(String(error.stderr || error.message || error));
+}
+if (!excludedFailed) throw new Error('excluded event was not blocked before promotion');
+
 console.log('event promotion fixture tests OK');

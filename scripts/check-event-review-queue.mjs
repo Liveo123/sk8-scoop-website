@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { exclusionReason } from './event-editorial-exclusions.mjs';
 
 const queuePath = 'data/event-review-queue.json';
 const eventsPath = 'data/events.json';
@@ -16,6 +17,8 @@ const seen = new Set();
 
 for (const [i,item] of queue.items.entries()) {
   const label = `queue.items[${i}]`;
+  const excluded = exclusionReason(item);
+  if (excluded && item.status !== 'rejected') throw new Error(`${label}: ${excluded}`);
   for (const key of ['id','title','status','area','source_url','discovered','reason']) {
     if (item[key] === undefined || item[key] === '') throw new Error(`${label} missing ${key}`);
   }
