@@ -85,7 +85,7 @@ try {
   check(await evaluate("document.querySelector('[data-calendar-day=\"2026-10-20\"] small')?.textContent.trim()==='1 event'"),'only confirmed daily activity shown, not uncertain theatre sessions');
   for(let i=0;i<12;i++)await click('[data-calendar-next]');
   check(await evaluate("document.querySelector('[data-calendar-next]').disabled"),'12-month browsing limit');
-  check(await evaluate("document.querySelector('[data-calendar-day=\"2027-10-08\"]')?.disabled"),'future date outside horizon disabled');
+  check(await evaluate("(() => { const end=window.SK8CalendarCore.anniversaryExclusive(window.SK8CalendarCore.localToday()); return document.querySelector('[data-calendar-day=\\\"'+end+'\\\"]')?.disabled === true; })()"),'exact 12-month boundary is disabled');
   check(await click('[data-calendar-view="agenda"]'),'back to agenda');
   check(await evaluate("(() => {const e=document.querySelector('[data-calendar-choose-date]');e.value='2026-10-20';e.dispatchEvent(new Event('change',{bubbles:true}));return true;})()"),'select unconfirmed date');
   check(await evaluate("document.querySelectorAll('.event-listing-card').length===1 && !document.querySelector('[data-events-list]').textContent.includes('The Girl on the Train')"),'date-range performances are not fabricated; verified festival remains');
