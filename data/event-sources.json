@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-25",
+  "updated": "2026-10-10",
   "purpose": "Rolling discovery registry for SK8 Scoop What's On. Discovery is not verification: publishable event facts should be checked against an organiser, venue, council or other primary source wherever practical.",
   "policy": {
     "core_areas": [
@@ -953,6 +953,26 @@
         "site:stockport.gov.uk/events Life Leisure Cheadle",
         "site:healthystockport.co.uk/events Life Leisure Cheadle"
       ]
+    },
+    {
+      "id": "deckchair-care-gatley-welcome-cafe",
+      "name": "Deckchair Care Welcome Café, Gatley",
+      "tier": "A",
+      "area": "Gatley",
+      "role": "primary+community-events",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://www.eventbrite.com/e/welcome-cafe-deckchair-care-tickets-2002511771615"
+    },
+    {
+      "id": "lum-head-primary-school-gatley",
+      "name": "Lum Head Primary School prospective parents",
+      "tier": "A",
+      "area": "Gatley",
+      "role": "primary+school-open-days",
+      "cadence_days": 14,
+      "mode": "fetch",
+      "url": "https://www.lumhead.stockport.sch.uk/"
     }
   ]
 }
