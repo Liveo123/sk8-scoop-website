@@ -524,7 +524,9 @@ jobs:
 
 
   advertise-ux-preview:
-    if: github.event_name == 'pull_request' && github.head_ref == 'preview/advertise-simple-pricing-oct2026'
+    env:
+      ADVERT_QA_BASE_URL: ${{ github.head_ref == 'preview/advertising-conversion-audit-20261009' && 'https://preview-advertising-conversion-audit-20261009.previews.sk8scoop.com' || 'https://preview-advertise-simple-pricing-oct2026.previews.sk8scoop.com' }}
+    if: github.event_name == 'pull_request' && (github.head_ref == 'preview/advertise-simple-pricing-oct2026' || github.head_ref == 'preview/advertising-conversion-audit-20261009')
     needs: preflight
     runs-on: ubuntu-latest
     steps:
@@ -549,7 +551,7 @@ jobs:
         shell: bash
         run: |
           for attempt in $(seq 1 24); do
-            if curl -fsSL --max-time 15 'https://preview-advertise-simple-pricing-oct2026.previews.sk8scoop.com/advertise.html' | grep -Fq 'ad-selected-summary'; then
+            if curl -fsSL --max-time 15 "${ADVERT_QA_BASE_URL}/advertise.html" | grep -Fq 'ad-selected-summary'; then
               echo "Advertiser preview available"
               exit 0
             fi
@@ -558,8 +560,6 @@ jobs:
           done
           exit 1
       - name: Check mobile, tablet and desktop purchase flow
-        env:
-          ADVERT_QA_BASE_URL: https://preview-advertise-simple-pricing-oct2026.previews.sk8scoop.com
         run: node scripts/check-advertise-ui.mjs
       - name: Upload pricing and form screenshots
         if: always()

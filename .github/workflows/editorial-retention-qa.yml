@@ -1,0 +1,23 @@
+name: Editorial Retention QA
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'worker-business-v2.js'
+      - 'wrangler.toml'
+      - 'tests/editorial-retention-qa.mjs'
+      - '.github/workflows/editorial-retention-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-retention:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check worker-business-v2.js
+      - run: node tests/editorial-retention-qa.mjs
