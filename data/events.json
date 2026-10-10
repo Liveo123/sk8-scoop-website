@@ -15,7 +15,10 @@
     "booking_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/b6e0abf7-77f5-4ef9-84bc-63fe70de6eae",
     "source_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/b6e0abf7-77f5-4ef9-84bc-63fe70de6eae",
     "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-10-01"
+    "checked": "2026-10-01",
+    "date_mode": "daily",
+    "cost_type": "admission_required",
+    "end_time": "17:00"
   },
   {
     "id": "grimmfest-2026-10-08",
@@ -29,27 +32,18 @@
     "venue": "ODEON Great Northern, Manchester",
     "cost": "Individual screening tickets vary",
     "category": "Film / Halloween",
-    "description": "Manchester's international festival of fantastic film runs for four days with horror, thrillers, sci-fi and dark comedy, plus Q&As, signings and a weekend market. Day and weekend passes are sold out; individual screening tickets remain the useful route.",
+    "description": "Manchester's international festival of fantastic film runs for four days with horror, thrillers, sci-fi and dark comedy, plus Q&As, signings and a weekend market. Individual screening times, age certificates (generally 15 or 18) and ticket availability vary. Check the organiser’s dated programme before booking.",
     "booking_url": "https://www.grimmfest.com/festival/",
     "source_url": "https://www.grimmfest.com/festival/",
     "verification": "ORGANISER_PRIMARY_SOURCE",
-    "checked": "2026-10-06"
-  },
-  {
-    "id": "jai-yoga-pregnancy-2026-10-10",
-    "title": "Yoga for Pregnancy at Jai Yoga Studio",
-    "status": "verified",
-    "date": "2026-10-10",
-    "time": "12:15",
-    "area": "Cheadle Hulme",
-    "venue": "Jai Yoga Studio, Metropolitan House (fourth floor), Station Road, Cheadle Hulme SK8 7AZ",
-    "cost": "£15",
-    "category": "Health & Wellbeing",
-    "description": "Saturday 10 October, 12:15–1:15pm. Yoga suitable from 15 weeks of pregnancy, with no previous experience needed. Equipment is provided; book directly with the studio.",
-    "booking_url": "https://www.yogawithjai.co.uk/booking",
-    "source_url": "https://www.healthystockport.co.uk/events/details/yoga-for-pregnancy-sat?date=2026-10-10",
-    "verification": "OFFICIAL_COUNCIL_EVENT_PAGE",
-    "checked": "2026-10-09"
+    "checked": "2026-10-08",
+    "date_mode": "specific_dates",
+    "occurrences": [
+      "2026-10-08",
+      "2026-10-09",
+      "2026-10-10",
+      "2026-10-11"
+    ]
   },
   {
     "id": "cheadle-hulme-con-club-babalola-2026-10-10",
@@ -65,7 +59,8 @@
     "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-10-06",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "members_only_free"
   },
   {
     "id": "ben-nuttall-footy-factory-2026-10-10",
@@ -230,6 +225,22 @@
     "status": "verified"
   },
   {
+    "id": "jai-yoga-pregnancy-2026-10-10",
+    "title": "Yoga for Pregnancy at Jai Yoga Studio",
+    "status": "verified",
+    "date": "2026-10-10",
+    "time": "12:15",
+    "area": "Cheadle Hulme",
+    "venue": "Jai Yoga Studio, Metropolitan House (fourth floor), Station Road, Cheadle Hulme SK8 7AZ",
+    "cost": "£15",
+    "category": "Health & Wellbeing",
+    "description": "Saturday 10 October, 12:15–1:15pm. Yoga suitable from 15 weeks of pregnancy, with no previous experience needed. Equipment is provided; book directly with the studio.",
+    "booking_url": "https://www.yogawithjai.co.uk/booking",
+    "source_url": "https://www.healthystockport.co.uk/events/details/yoga-for-pregnancy-sat?date=2026-10-10",
+    "verification": "OFFICIAL_COUNCIL_EVENT_PAGE",
+    "checked": "2026-10-09"
+  },
+  {
     "id": "pregnancy-social-brezo-2026-10-11",
     "title": "Free pregnancy social at Brezo Lounge",
     "status": "verified",
@@ -260,6 +271,40 @@
     "source_url": "https://www.onestockport.co.uk/townofcultureevent/crochet-knit-heald-green-library/2026-10-12/",
     "verification": "OFFICIAL_ONESTOCKPORT_EVENT_LISTING",
     "checked": "2026-10-09"
+  },
+  {
+    "id": "gatley-deckchair-care-welcome-cafe-2026-autumn",
+    "title": "Deckchair Care Welcome Café",
+    "status": "verified",
+    "date": "2026-10-12",
+    "end_date": "2026-12-07",
+    "date_mode": "specific_dates",
+    "occurrences": [
+      "2026-10-12",
+      "2026-10-19",
+      "2026-11-02",
+      "2026-11-09",
+      "2026-11-23",
+      "2026-12-07"
+    ],
+    "date_range": "Selected confirmed Mondays, 12 Oct–7 Dec 2026",
+    "time": "13:00",
+    "end_time": "15:00",
+    "area": "Gatley",
+    "venue": "Gatley United Reformed Church, Elm Road, Gatley SK8 4LY",
+    "cost": "Free; voluntary donations welcome",
+    "cost_type": "optional_donation",
+    "category": "Community / Older Adults",
+    "audience_tags": [
+      "adults",
+      "older_adults",
+      "community"
+    ],
+    "description": "Deckchair Care's welcoming, dementia-friendly community café offers company, conversation and activities for older residents, carers and anyone who would enjoy some company. The listed sessions run 1pm–3pm. Dates are individually sourced; check with the organiser for any changes.",
+    "booking_url": "https://www.eventbrite.com/e/welcome-cafe-deckchair-care-tickets-2002511771615",
+    "source_url": "https://www.eventbrite.com/e/welcome-cafe-deckchair-care-tickets-2002511771615",
+    "verification": "ORGANISER_PRIMARY_EVENT_PAGE_AND_COUNCIL_LISTINGS",
+    "checked": "2026-10-08"
   },
   {
     "id": "stockroom-subtext-launch-2026-10-15",
@@ -359,7 +404,8 @@
     "source_url": "https://www.stockport.gov.uk/landing/bramall-hall",
     "verification": "VENUE_AND_COUNCIL_EVENT_SOURCE",
     "checked": "2026-09-25",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "admission_required"
   },
   {
     "id": "cheadle-hulme-con-club-iconic-2026-10-24",
@@ -375,7 +421,8 @@
     "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-10-06",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "members_only_free"
   },
   {
     "id": "stockroom-dads-club-half-term-2026-10-24",
@@ -391,7 +438,8 @@
     "booking_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
     "source_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
     "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "cost_type": "free_optional_extras"
   },
   {
     "id": "jodrell-wallace-gromit-2026-10-24",
@@ -409,7 +457,8 @@
     "source_url": "https://www.jodrellbank.net/events/grand-day-out/",
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-09-25",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "admission_required"
   },
   {
     "id": "stockroom-bsl-signed-storytime-2026-10-26",
@@ -443,7 +492,8 @@
     "source_url": "https://www.jodrellbank.net/events/october-half-term-at-jodrell-bank/",
     "verification": "VENUE_PRIMARY_SOURCE",
     "checked": "2026-09-25",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "admission_required"
   },
   {
     "id": "foodie-friday-2026-10-30",
@@ -459,7 +509,8 @@
     "source_url": "https://skfoodiefriday.co.uk/",
     "verification": "ORGANISER_PRIMARY_SOURCE",
     "checked": "2026-09-25",
-    "status": "verified"
+    "status": "verified",
+    "cost_type": "free_optional_extras"
   },
   {
     "id": "arc-saturday-art-club-2026-10-31",
@@ -475,7 +526,8 @@
     "booking_url": "",
     "source_url": "https://arc-centre.org/saturday-art-clubs/",
     "verification": "ORGANISER_PRIMARY_SOURCE",
-    "checked": "2026-10-01"
+    "checked": "2026-10-01",
+    "cost_type": "optional_donation"
   },
   {
     "id": "heald-green-halloween-crafty-kids-2026-10-31",
@@ -492,22 +544,6 @@
     "verification": "OFFICIAL_COUNCIL_LISTING",
     "checked": "2026-09-25",
     "status": "verified"
-  },
-  {
-    "id": "sisters-youth-qiyam-y7-y9-2026-11-06",
-    "title": "Sisters Youth Qiyam – Y7–Y9",
-    "status": "verified",
-    "date": "2026-11-06",
-    "time": "20:30",
-    "area": "Heald Green",
-    "venue": "Cheadle Masjid, 377 Wilmslow Road, Heald Green, Cheadle SK8 3NP",
-    "cost": "Free",
-    "category": "Youth",
-    "description": "A Friday-night youth session for girls in school Years 7–9 with activities, games, reminders and refreshments. Registration is compulsory and opens at 8:30pm on the Wednesday before the event.",
-    "booking_url": "https://cheadlemasjid.org/events-activities/sisters-youth-qiyam-y7-y9-16/",
-    "source_url": "https://cheadlemasjid.org/events-activities/sisters-youth-qiyam-y7-y9-16/",
-    "verification": "ORGANISER_PRIMARY_SOURCE",
-    "checked": "2026-10-01"
   },
   {
     "id": "cheadle-hulme-con-club-north-room-2026-11-07",

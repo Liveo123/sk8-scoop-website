@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="../assets/whats-on-card-polish.css">
   <link rel="stylesheet" href="../assets/whats-on-empty-fix.css">
   <link rel="stylesheet" href="../assets/my-sk8.css">
+  <link rel="stylesheet" href="../assets/whats-on-calendar.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -39,7 +40,7 @@
       <div class="wrap">
         <div class="eyebrow">Checked local listings</div>
         <h1>What’s on around SK8?</h1>
-        <p class="hero-lead">A practical, checked list of things worth doing around Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby. Not an endless calendar.</p>
+        <p class="hero-lead">A practical calendar of local events, activities and things worth doing around Cheadle, Cheadle Hulme, Gatley, Heald Green and selected nearby places. Dates are only shown when confirmed.</p>
         <div class="button-row"><a class="button" href="#current-listings">See current listings</a><a class="button secondary" href="/my-sk8/">My SK8 <span class="my-sk8-count-badge" data-my-sk8-count hidden>0</span></a><a class="button secondary" href="../submit-event/">Submit an event</a></div>
       </div>
     </section>
@@ -48,7 +49,7 @@
       <div class="wrap">
         <div class="section-head reader-section-head whats-on-listings-head">
           <div><div class="eyebrow">Current listings</div><h2>Checked things to do</h2></div>
-          <div><p class="whats-on-listings-intro">Pick what you need, then narrow it by place. The list updates immediately.</p><p><a class="reader-link" href="/halloween-half-term-guide/" data-nue-link data-nue-type="guide" data-track-event="whats_on_halloween_guide_click">Planning October half-term? Open 40 checked ideas →</a></p><a class="reader-link" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Prefer evergreen cheaper ideas? Open Free &amp; Cheap →</a></div>
+          <div><p class="whats-on-listings-intro">Find an activity for this week or choose a date up to 12 months ahead. Filters update the agenda and calendar.</p><p><a class="reader-link" href="/halloween-half-term-guide/" data-nue-link data-nue-type="guide" data-track-event="whats_on_halloween_guide_click">Planning October half-term? Open 40 checked ideas →</a></p><a class="reader-link" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Prefer evergreen cheaper ideas? Open Free &amp; Cheap →</a></div>
         </div>
 
         <div class="whats-on-freshness" aria-live="polite">
@@ -81,8 +82,34 @@
           </div>
         </div>
 
-        <p class="reader-muted-link whats-on-filter-note">Place filters focus on the core SK8 patch. Nearby listings remain available under All areas.</p>
-        <p class="reader-muted-link whats-on-status" data-events-status>Loading checked listings...</p>
+        <p class="reader-muted-link whats-on-filter-note">Place filters focus on the core SK8 patch. Nearby highlights remain available under All areas.</p>
+        <div class="whats-on-calendar-ui" data-calendar-controls data-experiment="calendar-agenda-vs-month">
+          <div class="sk8-calendar-toolbar">
+            <div class="sk8-calendar-choices" role="group" aria-label="View events as an agenda or a month">
+              <button type="button" class="sk8-calendar-choice" data-calendar-view="agenda" aria-pressed="true">Agenda</button>
+              <button type="button" class="sk8-calendar-choice" data-calendar-view="month" aria-pressed="false">Month calendar</button>
+            </div>
+            <div class="sk8-calendar-date-choice">
+              <label for="whats-on-date">Choose a date</label>
+              <input type="date" id="whats-on-date" data-calendar-choose-date aria-describedby="whats-on-calendar-hint">
+              <button class="sk8-calendar-clear" type="button" data-calendar-clear-date hidden>Clear date</button>
+            </div>
+          </div>
+          <p class="sk8-calendar-intro" id="whats-on-calendar-hint">Browse 12 months ahead. Only confirmed dates appear on the calendar. Clubs and activities appear when their individual sessions are verified.</p>
+        </div>
+        <section data-calendar-month-panel hidden aria-label="Choose a calendar date">
+          <div class="sk8-calendar-month-top">
+            <h3 data-calendar-month-heading>Calendar</h3>
+            <div class="sk8-calendar-month-nav">
+              <button type="button" data-calendar-prev aria-label="Previous month">← Previous</button>
+              <button type="button" data-calendar-next aria-label="Next month">Next →</button>
+            </div>
+          </div>
+          <div class="sk8-calendar-month-grid" data-calendar-month-grid role="group" aria-label="Confirmed events by day"></div>
+          <p class="sk8-calendar-month-status" role="status" aria-live="polite" data-calendar-month-status>Loading confirmed dates…</p>
+          <p class="sk8-calendar-coverage">Know an event we missed? <a href="/submit-event/">Send it in for checking</a>. Listings are verified before appearing here.</p>
+        </section>
+        <p class="reader-muted-link whats-on-status" data-events-status role="status" aria-live="polite">Loading checked listings...</p>
         <div class="reader-card-grid" data-events-list></div>
 
         <div class="reader-panel" data-events-empty hidden>
@@ -91,6 +118,11 @@
           <p>Rather than pad the page with stale or uncertain events, try another filter, the latest Scoop or the Free &amp; Cheap Guide.</p>
           <div class="button-row"><a class="button" href="/latest" data-nue-link data-nue-type="latest">See current ideas in the latest Scoop</a><a class="button secondary" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Open Free &amp; Cheap</a></div>
         </div>
+        <aside class="whats-on-seasonal-watch" aria-labelledby="whats-on-seasonal-title">
+          <div class="eyebrow">Longer-range planning · not confirmed events</div>
+          <h3 id="whats-on-seasonal-title">Seasonal dates to watch for</h3>
+          <p>Christmas markets and lights, February half term, Easter and summer activities are worth checking as the year unfolds. These are <strong>planning themes, not scheduled events</strong>. We only put dates in the calendar above after organisers confirm them.</p>
+        </aside>
       </div>
     </section>
 
@@ -99,8 +131,8 @@
         <article class="reader-panel whats-on-info-card whats-on-info-curated">
           <div class="whats-on-type-marker" aria-hidden="true"><span>01</span><b>CURATE</b></div>
           <div class="eyebrow">How this works</div>
-          <h2>Curated first. Calendar later.</h2>
-          <p>What’s On stays deliberately smaller so dates, prices and booking details can be checked. Past events disappear automatically instead of lingering as filler.</p>
+          <h2>Local events, confirmed dates</h2>
+          <p>Browse upcoming events, classes and community activities, with longer-range dates only when confirmed. We check listings before publication, and past events hide automatically. A date-range listing does not mean every day has a session.</p>
         </article>
         <article class="reader-panel whats-on-info-card whats-on-info-submit">
           <div class="whats-on-type-marker" aria-hidden="true"><span>02</span><b>SEND IT IN</b></div>
@@ -132,7 +164,9 @@
   </footer>
   <script src="../assets/config.js"></script>
   <script src="../assets/site.js?v=20261007-navfix4"></script>
+  <script src="../assets/sk8-calendar-core.js"></script>
   <script src="../assets/my-sk8.js"></script>
   <script src="../assets/whats-on.js"></script>
+  <script src="../assets/whats-on-calendar.js"></script>
 </body>
 </html>

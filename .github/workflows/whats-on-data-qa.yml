@@ -5,6 +5,9 @@ on:
     paths:
       - 'data/events.json'
       - 'scripts/check-events-data.mjs'
+      - 'tests/check-events-data-fixtures.mjs'
+      - 'assets/sk8-calendar-core.js'
+      - 'scripts/event-editorial-exclusions.mjs'
       - 'assets/whats-on.js'
       - 'whats-on/index.html'
       - '.github/workflows/whats-on-data-qa.yml'
@@ -14,6 +17,9 @@ on:
     paths:
       - 'data/events.json'
       - 'scripts/check-events-data.mjs'
+      - 'tests/check-events-data-fixtures.mjs'
+      - 'assets/sk8-calendar-core.js'
+      - 'scripts/event-editorial-exclusions.mjs'
       - 'assets/whats-on.js'
       - 'whats-on/index.html'
       - '.github/workflows/whats-on-data-qa.yml'
@@ -27,3 +33,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/check-events-data.mjs
+      - run: node tests/check-events-data-fixtures.mjs

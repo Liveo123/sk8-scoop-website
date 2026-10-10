@@ -1,6 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
+const core = require('../assets/sk8-calendar-core.js');
 
 const source = fs.readFileSync('assets/whats-on.js', 'utf8');
 const dates = source.slice(source.indexOf('  const localToday ='), source.indexOf('  const matches ='));
@@ -9,7 +10,7 @@ function includes(now, eventDate) {
     constructor(...args) { super(...(args.length ? args : [now])); }
   }
   return vm.runInNewContext(`${dates}\nisWeekend({date: eventDate})`, {
-    Date: Clock, Intl, eventDate
+    Date: Clock, Intl, eventDate, core
   });
 }
 
