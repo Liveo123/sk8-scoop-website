@@ -1,136 +1,197 @@
 {
-  "issue": 15,
-  "issue_date": "2026-10-02",
+  "issue": 16,
+  "issue_date": "2026-10-09",
   "final_issue_checked": true,
-  "checked_date": "2026-10-08",
-  "source": "Final Issue 15 editorial/build record, not the early research shortlist",
+  "checked_date": "2026-10-10",
+  "source": "Final sent Issue 16 MailerLite campaign 200654241293927443, final winning version 200874486930605777, checked against current website and the prepared Issue 16 release",
+  "previous_harvest": "data/website-harvest-issue15.json",
   "items": [
     {
-      "id": "phoenix-nights",
-      "classification": "NEWSLETTER",
-      "disposition": "expired_no_web_add",
-      "reason": "3 October event had expired before catch-up review"
+      "id": "grimmfest-2026",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "grimmfest-2026-10-08",
+      "checked": "2026-10-10",
+      "reason": "Active 8–11 October event already published in What's On; no additional standalone Manchester festival page"
     },
     {
-      "id": "hive-cheadle-hulme",
-      "classification": "NEWSLETTER",
-      "disposition": "expired_no_web_add",
-      "reason": "3 October event had expired before catch-up review"
+      "id": "bramhall-halloween-market",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "bramhall-halloween-market-2026-10-10",
+      "checked": "2026-10-10",
+      "reason": "Current Saturday market already in What's On and Halloween guide"
     },
     {
-      "id": "nansen-firs-20mph",
-      "classification": "AWAITING VERIFICATION",
-      "disposition": "do_not_publish",
-      "reason": "Final Issue 15 freshness check found conflicting live consultation status"
+      "id": "quarry-bank-scarecrows",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "quarry-bank-scarecrow-festival-2026-10-03",
+      "checked": "2026-10-10",
+      "reason": "Seasonal event runs through 1 November in What's On"
     },
     {
-      "id": "heald-green-lost-place-names",
-      "classification": "MULTI-USE",
-      "disposition": "standalone_page",
-      "route": "/local-history/heald-green-lost-place-names/"
-    },
-    {
-      "id": "217-finney-lane-the-brew",
-      "classification": "MULTI-USE",
-      "disposition": "standalone_page",
-      "route": "/local-history/217-finney-lane-the-brew/"
-    },
-    {
-      "id": "cheadle-hulme-density-study",
-      "classification": "MULTI-USE",
-      "disposition": "standalone_page",
-      "route": "/planning/cheadle-hulme-density-study/"
-    },
-    {
-      "id": "stockport-local-plan-reg19",
-      "classification": "MULTI-USE",
+      "id": "40-idea-halloween-half-term-guide",
+      "classification": "SK8-OWNED / MULTI-USE",
       "disposition": "existing_surface",
-      "route": "/planning/",
-      "reason": "Planning hub already carries the live Regulation 19 consultation"
+      "route": "/halloween-half-term-guide/",
+      "checked": "2026-10-10",
+      "reason": "Approved maintained Halloween Guide landing and interactive guide already live, linked from homepage and What's On"
     },
     {
-      "id": "cheadle-brew-and-biscuit",
-      "classification": "WEBSITE",
-      "disposition": "whats_on_expired",
-      "event_id": "cheadle-brew-and-biscuit-2026-10-06",
-      "reason": "Published to What's On; 6 October listing removed after expiry on 8 October 2026."
-    },
-    {
-      "id": "gatley-welcome-cafe",
-      "classification": "WEBSITE",
-      "disposition": "expired_no_web_add",
-      "reason": "5 October event expired before catch-up review"
-    },
-    {
-      "id": "monster-mugs-kids",
-      "classification": "GUIDE / MULTI-USE",
-      "disposition": "whats_on_unavailable",
-      "event_id": "monster-mugs-kids-2026-10-10",
-      "reason": "Published to What's On, then removed on 8 October 2026 after current verification confirmed it was sold out."
-    },
-    {
-      "id": "staircase-beaded-spiders",
-      "classification": "GUIDE / MULTI-USE",
-      "disposition": "whats_on",
-      "event_id": "staircase-beaded-spiders-2026-10-10"
-    },
-    {
-      "id": "cheadle-hulme-dementia-disco",
-      "classification": "WEBSITE",
-      "disposition": "whats_on",
-      "event_id": "dementia-disco-cheadle-hulme-2026-10-10"
-    },
-    {
-      "id": "heald-green-library-storytime",
-      "classification": "WEBSITE",
-      "disposition": "whats_on",
-      "event_id": "heald-green-library-storytime-2026-10-10"
-    },
-    {
-      "id": "guides",
-      "classification": "SK8-OWNED",
+      "id": "guide-free-under10-age-filters",
+      "classification": "SK8-OWNED / MULTI-USE",
       "disposition": "existing_surface",
-      "route": "/guides/",
-      "reason": "52 Adventures and Free & Cheap already have maintained owned surfaces"
+      "route": "/halloween-half-term-guide/guide/",
+      "checked": "2026-10-10",
+      "reason": "Free, under-£10, age and rainy-day filters maintained in interactive guide; duplicate website index would add noise"
     },
     {
-      "id": "house-ad-poll-letters",
-      "classification": "NOT WEBSITE",
+      "id": "free-cheap-guide",
+      "classification": "SK8-OWNED / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/free-cheap-guide/",
+      "checked": "2026-10-10",
+      "reason": "The evergreen Free & Cheap Guide is already an independent maintained resource"
+    },
+    {
+      "id": "scare-city-at-camelot",
+      "classification": "NEWSLETTER ONLY",
       "disposition": "no_web_add",
-      "reason": "Newsletter interaction/commercial modules are not editorial website harvest items"
+      "reason": "Wider-area, ticketed scare attraction mentioned in issue but not part of core SK8 What’s On dataset or the current 40-idea guide; no dedicated SK8 page created",
+      "checked": "2026-10-10"
     },
     {
-      "id": "cheadle-work-skills-navigator",
-      "classification": "WEBSITE",
-      "disposition": "whats_on_expired",
-      "event_id": "cheadle-work-skills-navigator-2026-10-06",
-      "reason": "Published to What's On; 6 October listing removed after expiry on 8 October 2026."
+      "id": "heyhead-village-disappeared",
+      "classification": "MULTI-USE / EVERGREEN",
+      "disposition": "standalone_page",
+      "route": "/local-history/heyhead-village-disappeared/",
+      "checked": "2026-10-10",
+      "reason": "Approved and published permanent history article; linked from homepage and Local History; newly added to search and sitemap"
     },
     {
-      "id": "the-light-cafe-cheadle",
-      "classification": "WEBSITE",
-      "disposition": "whats_on_expired",
-      "event_id": "the-light-cafe-cheadle-2026-10-07",
-      "reason": "Published to What's On; 7 October listing removed after expiry on 8 October 2026."
+      "id": "cheadle-station-advance-footway-works",
+      "classification": "SK8-OWNED / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/updates/#cheadle-station-footway",
+      "checked": "2026-10-10",
+      "reason": "Stockport Council Manchester Road notice added to Useful Updates and linked from Cheadle area hub in Issue 16 handoff"
     },
     {
-      "id": "lum-head-open-day",
-      "classification": "WEBSITE",
-      "disposition": "whats_on_expired",
-      "event_id": "lum-head-open-day-2026-10-07",
-      "reason": "Published to What's On; 7 October listing removed after expiry on 8 October 2026."
+      "id": "white-hart-halloween-pub-joke",
+      "classification": "NEWSLETTER ONLY",
+      "disposition": "no_web_add",
+      "reason": "Halloween-framed local pub feature is editorial colour, not yet a separately sourced permanent pub profile; official venue link remains in newsletter",
+      "checked": "2026-10-10"
     },
     {
-      "id": "stockport-plaza-wrestling",
-      "classification": "WEBSITE",
+      "id": "reddish-vale-pumpkin-festival",
+      "classification": "WEBSITE / MULTI-USE",
       "disposition": "whats_on",
-      "event_id": "stockport-plaza-wrestling-2026-10-10"
+      "event_id": "reddish-vale-halloween-pumpkin-festival-2026-10-10",
+      "checked": "2026-10-10",
+      "reason": "Current pumpkin-festival listing in What’s On through 31 October; avoid inventing a fixed all-in ticket price"
     },
     {
-      "id": "upper-room-cafe-drop-in",
-      "classification": "WEBSITE",
-      "disposition": "expired_no_web_add",
-      "reason": "5 October session had expired before catch-up review"
+      "id": "jai-yoga-pregnancy",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "jai-yoga-pregnancy-2026-10-10",
+      "checked": "2026-10-10",
+      "reason": "£15 Saturday class added to What’s On in the Issue 16 website handoff"
+    },
+    {
+      "id": "babalola-cheadle-hulme-con-club",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "cheadle-hulme-con-club-babalola-2026-10-10",
+      "checked": "2026-10-10",
+      "reason": "Cheadle Hulme Saturday music; free for members, £5 for non-members"
+    },
+    {
+      "id": "heald-green-library-knitting",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "heald-green-library-crochet-knit-2026-10-12",
+      "checked": "2026-10-10",
+      "reason": "Free Monday 12 October library craft session added to What’s On in the Issue 16 handoff"
+    },
+    {
+      "id": "the-girl-on-the-train-chads",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "girl-on-the-train-chads-2026-10-17",
+      "checked": "2026-10-10",
+      "reason": "17–24 October CHADS theatre listing already maintained in What’s On"
+    },
+    {
+      "id": "meet-the-quakers-cheadle-hulme",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "meet-the-quakers-cheadle-hulme-2026-10-10",
+      "checked": "2026-10-10",
+      "reason": "Current community open-day listing already maintained in What’s On"
+    },
+    {
+      "id": "saturday-snack-down-halloween",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "snack-down-halloween-2026-10-17",
+      "checked": "2026-10-10",
+      "reason": "Mentioned as a lower-cost Halloween pick, with the dated listing already maintained"
+    },
+    {
+      "id": "arc-saturday-art-club",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "whats_on",
+      "event_id": "arc-saturday-art-club-2026-10-31",
+      "checked": "2026-10-10",
+      "reason": "Later-October family art-club listing already maintained"
+    },
+    {
+      "id": "reader-halloween-photos-and-stories",
+      "classification": "SK8-OWNED / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/submit/",
+      "checked": "2026-10-10",
+      "reason": "General submissions page already collects tips, stories and photos; no separate Halloween-specific form needed"
+    },
+    {
+      "id": "pub-trail-volunteer-call",
+      "classification": "NEWSLETTER ONLY",
+      "disposition": "no_web_add",
+      "reason": "Reader testing request for an unfinished Pub Trail project; keep in newsletter/replies until product and testing route are ready",
+      "checked": "2026-10-10"
+    },
+    {
+      "id": "five-halloween-easter-eggs",
+      "classification": "NEWSLETTER ONLY",
+      "disposition": "no_web_add",
+      "reason": "Newsletter-only reader puzzle; BOO page is intentionally an interaction destination rather than an independently promoted search result",
+      "checked": "2026-10-10"
+    },
+    {
+      "id": "issue16-reader-poll",
+      "classification": "NEWSLETTER ONLY",
+      "disposition": "no_web_add",
+      "reason": "Issue-specific in-email preference poll has a working dedicated endpoint, but is not a general navigation/editorial article",
+      "checked": "2026-10-10"
+    },
+    {
+      "id": "issue16-advertising-house-promotion",
+      "classification": "SK8-OWNED / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/advertise.html",
+      "checked": "2026-10-10",
+      "reason": "Distinctly labelled house advertisement points to the maintained advertising page; not editorial coverage"
+    },
+    {
+      "id": "issue16-full-newsletter",
+      "classification": "SK8-OWNED / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/latest",
+      "checked": "2026-10-10",
+      "reason": "Confirmed sent Issue 16 is now featured as latest and in archive, linking to the confirmed winning MailerLite webview"
     }
   ]
 }
