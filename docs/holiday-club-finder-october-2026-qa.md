@@ -85,3 +85,13 @@ Status: **EXPANDED 18-LOCATION DRAFT, standalone browser QA PASSED, still not pu
 5. Retain/update a source record and promptly correct any reported fact. After October switch to evergreen finder or redirect, not expired promotional listings.
 
 **Owner-facing status:** All reasonable branch-level draft edits and static/standalone browser QA completed. Waiting on live Cloudflare preview verification and final provider-booking checks, then explicit publication approval.
+
+## 10 October 2026 — promotion readiness continuation
+
+- Source-only change in the draft finder: a non-gated newsletter continuation after the booking/help information, linking to the existing /join/ route. It never blocks provider links or promises that a booking is available.
+- CTA has `id="finder-join-free"`; its click attempts `holiday_finder_join_click` through the existing consent-aware `window.sk8Track` handler. Confirm the event appears for consenting users in a real browser before relying on analytics. Do not mistake CTA clicks or website form success for net-new subscribers: MailerLite remains authoritative.
+- Keep the existing `noindex,follow` while the page is a draft. Before an intentional public search launch, explicitly decide indexability and verify canonical/robots behaviour.
+- 10 October release audit found previous-head browser-qa FAILED in an unrelated newsletter-to-My SK8 action settling test; other core/preview checks passed. Current-head CI must pass, and the exact failure needs regression triage before full release readiness.
+- Draft finder diverges substantially from current main; reconcile with latest main and repeat QA before any merge. The calendar draft is separately staged and must not be silently bundled into this release.
+- Current organiser evidence continues to support some dated October offerings, but TD/Perform booking details and provider checkout/remaining availability must remain qualified until independently reconfirmed. ClassForKids retrieval restrictions are not proof of a broken human booking route.
+- This is a staged usability/conversion improvement only. No production deployment, newsletter send, advertising purchase or provider outreach was performed.
