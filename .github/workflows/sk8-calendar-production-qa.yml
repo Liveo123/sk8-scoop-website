@@ -1,0 +1,76 @@
+name: SK8 Calendar Production QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'whats-on/index.html'
+      - 'assets/whats-on.js'
+      - 'assets/whats-on-calendar.js'
+      - 'assets/whats-on-calendar.css'
+      - 'assets/sk8-calendar-core.js'
+      - 'assets/my-sk8.js'
+      - 'data/events.json'
+      - 'tests/whats-on-calendar-browser.mjs'
+      - '.github/workflows/sk8-calendar-production-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-calendar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Wait for the production calendar deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://www.sk8scoop.com"
+          for attempt in $(seq 1 35); do
+            page="$(curl -fsSL --max-time 20 "${base}/whats-on/?qa_release=${GITHUB_SHA}" || true)"
+            data="$(curl -fsSL --max-time 20 "${base}/data/events.json?qa_release=${GITHUB_SHA}" || true)"
+            calendar="$(curl -fsSL --max-time 20 "${base}/assets/whats-on-calendar.js?qa_release=${GITHUB_SHA}" || true)"
+            if printf '%s' "$page" | grep -Fq 'data-calendar-controls' &&
+              printf '%s' "$page" | grep -Fq 'data-calendar-month-grid' &&
+              printf '%s' "$page" | grep -Fq 'data-event-area="Gatley"' &&
+              printf '%s' "$calendar" | grep -Fq 'sk8:events-loaded' &&
+              printf '%s' "$data" | grep -Fq 'gatley-deckchair-care-welcome-cafe-2026-autumn' &&
+              ! printf '%s' "$data" | grep -Eqi 'cheadlemasjid\\.org|Cheadle Masjid'; then
+              echo "PASS: live calendar controls, date grid, Gatley listing and exclusion safeguards"
+              exit 0
+            fi
+            echo "Waiting for published calendar: attempt $attempt/35"
+            sleep 12
+          done
+          echo "FAILED: live site does not serve expected calendar release markers"
+          exit 1
+      - name: Find Chrome
+        shell: bash
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "Chrome is not available on the runner"
+            exit 1
+          fi
+      - name: Exercise live agenda, month, event links and My SK8
+        env:
+          PREVIEW_URL: https://www.sk8scoop.com
+          CHROME: ${{ env.CHROME }}
+        run: node tests/whats-on-calendar-browser.mjs
+      - name: Retain QA screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: calendar-production-browser-qa
+          path: visual-qa/calendar/
+          if-no-files-found: ignore
+          retention-days: 14
