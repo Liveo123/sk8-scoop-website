@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-08",
+  "updated": "2026-10-10",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -79,6 +79,41 @@
       "discovered": "2026-10-08",
       "checked": "2026-10-08",
       "reason": "Rejected for current publication because the existing verified event record is marked sold out. Remove from live listings and retain here briefly to prevent rediscovery unless availability changes."
+    },
+    {
+      "id": "gatley-deckchair-care-welcome-cafe-2026-10-12",
+      "title": "Deckchair Care Welcome Café",
+      "status": "ready",
+      "date": "2026-10-12",
+      "time": "13:00",
+      "area": "Gatley",
+      "venue": "Gatley United Reformed Church, Elm Road, Gatley, SK8 4LY",
+      "cost": "Free; voluntary donations welcome",
+      "category": "Community",
+      "description": "A dementia-friendly Welcome Café, open to everyone. Join a friendly term-time Monday gathering for company, conversation and activities, 1–3pm. Donations to help run the café are voluntary. Check the organiser's event page for attendance details.",
+      "source_url": "https://www.eventbrite.com/e/welcome-cafe-deckchair-care-tickets-2002511771615",
+      "booking_url": "https://www.eventbrite.com/e/welcome-cafe-deckchair-care-tickets-2002511771615",
+      "verification": "ORGANISER_PRIMARY_AND_STOCKPORT_COUNCIL_DATE",
+      "discovered": "2026-10-10",
+      "checked": "2026-10-10",
+      "reason": "The organiser's current Welcome Café event and Stockport Council's 12 October 2026 listing confirm a free 1–3pm session at Gatley URC. Stage one dated entry, not a daily date range or duplicated weekly listing."
+    },
+    {
+      "id": "gatley-lum-head-prospective-parents-2026-11-19",
+      "title": "Lum Head Primary nursery and reception open day",
+      "status": "ready",
+      "date": "2026-11-19",
+      "time": "14:00",
+      "area": "Gatley",
+      "venue": "Lum Head Primary School, Troutbeck Road, Gatley, Cheadle SK8 4RR",
+      "cost": "Free",
+      "category": "Family",
+      "description": "A school tour for families looking at nursery or reception places for September 2027, 2–3pm. Please book with the school office in advance: admin@lumhead.stockport.sch.uk or 0161 428 7992.",
+      "source_url": "https://www.lumhead.stockport.sch.uk/",
+      "verification": "SCHOOL_PRIMARY_AND_STOCKPORT_COUNCIL",
+      "discovered": "2026-10-10",
+      "checked": "2026-10-10",
+      "reason": "Lum Head Primary School's current prospective-parents page confirms Thursday 19 November, 2–3pm, and booking details; Stockport Council also confirms the event is free."
     }
   ]
 }
