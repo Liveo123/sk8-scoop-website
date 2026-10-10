@@ -46,25 +46,25 @@ window.SK8_CONFIG = {
   metaPixelId: "4649116095416763",
   formsparkContactEndpoint: "https://submit-form.com/X3MWnWHXI",
   publicStats: {
-    subscriberCount: "600+",
-    subscriberProof: "600+",
-    issuesPublished: 15,
-    checkedDate: "6 October 2026",
-    latestMainSendRecipients: 639,
+    subscriberCount: "650+",
+    subscriberProof: "650+",
+    issuesPublished: 16,
+    checkedDate: "10 October 2026",
+    latestMainSendRecipients: 685,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "2 October 2026",
+    latestIssueDate: "9 October 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 15,
-    dateIso: "2026-10-02",
-    dateDisplay: "Friday 2 October 2026",
-    title: "Issue 15 · Friday 2 October 2026",
-    headline: "Phoenix Nights, lost road names and what eight storeys actually means",
-    summary: "Heald Green’s old place names, The Brew’s Sunday-school past, Cheadle Hulme’s density study, the Local Plan and Halloween picks.",
-    url: "https://preview.mailerlite.io/preview/2462354/emails/200243291356136553"
+    number: 16,
+    dateIso: "2026-10-09",
+    dateDisplay: "Friday 9 October 2026",
+    title: "Issue 16 · Friday 9 October 2026",
+    headline: "Grimmfest, scarecrows + 40 Halloween ideas near SK8",
+    summary: "Grimmfest, Bramhall Halloween market, 40 half-term ideas, the vanished village of Heyhead and Cheadle Station works.",
+    url: "https://preview.mailerlite.io/preview/2462354/emails/200874486930605777"
   },
   stripeLinks: {
     local_spotlight: "",
