@@ -41,7 +41,7 @@ jobs:
               printf '%s' "$page" | grep -Fq 'data-event-area="Gatley"' &&
               printf '%s' "$calendar" | grep -Fq 'sk8:events-loaded' &&
               printf '%s' "$data" | grep -Fq 'gatley-deckchair-care-welcome-cafe-2026-autumn' &&
-              ! printf '%s' "$data" | grep -Eqi 'cheadlemasjid\\.org|Cheadle Masjid'; then
+              ! printf '%s' "$data" | grep -Eqi 'cheadlemasjid[.]org|Cheadle Masjid'; then
               echo "PASS: live calendar controls, date grid, Gatley listing and exclusion safeguards"
               exit 0
             fi
