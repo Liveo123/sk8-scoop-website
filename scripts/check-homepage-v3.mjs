@@ -19,7 +19,11 @@ const rejectText = (source, text, label) => {
 // Baseline: homepage and current issue remain intact.
 requireText(home, 'data-page="home"', 'homepage identity');
 requireText(home, 'What’s good around SK8?', 'homepage headline');
-requireText(config, 'subscriberCount: "600+"', 'public subscriber proof');
+const countMatch = config.match(/subscriberCount:\s*"(\d+)\+"/);
+const proofMatch = config.match(/subscriberProof:\s*"(\d+)\+"/);
+if (!countMatch || !proofMatch || countMatch[1] !== proofMatch[1] || Number(countMatch[1]) < 600) {
+  failures.push('public subscriber proof: requires matching, rounded and checked figures of at least 600+');
+}
 requireText(config, 'currentIssue: {', 'current issue config');
 requireText(home, 'assets/homepage-v4.css', 'homepage V4 stylesheet');
 

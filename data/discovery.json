@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-06",
+  "updated": "2026-10-10",
   "records": [
     {
       "id": "around-sk8",
@@ -939,6 +939,28 @@
       ],
       "freshness": "current",
       "checked": "2026-10-06"
+    },
+    {
+      "id": "heyhead-village-disappeared",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Heyhead: the village that disappeared near Heald Green",
+      "summary": "A former hamlet of farms, market gardens and a Congregational chapel south-west of Heald Green, gradually reshaped by Manchester's growth and airport expansion.",
+      "href": "/local-history/heyhead-village-disappeared/",
+      "area": "Heald Green",
+      "tags": [
+        "heyhead",
+        "lost village",
+        "heald green",
+        "manchester airport",
+        "ringway",
+        "chapel",
+        "market gardens",
+        "local history",
+        "airport expansion"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-10-10"
     }
   ]
 }
