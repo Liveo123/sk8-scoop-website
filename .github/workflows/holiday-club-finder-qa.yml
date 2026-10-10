@@ -57,3 +57,60 @@ jobs:
           name: holiday-club-finder-desktop-mobile
           path: visual-qa/holiday-club-finder
           if-no-files-found: ignore
+
+  hosted-finder-qa:
+    needs: holiday-finder-qa
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Find Chromium
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "Chrome/Chromium unavailable"
+            exit 1
+          fi
+      - name: Wait for Cloudflare finder route and assets
+        shell: bash
+        env:
+          PREVIEW_URL: https://feature-october-holiday-club-finder-2026.previews.sk8scoop.com
+        run: |
+          set -eu
+          found=false
+          for i in $(seq 1 35); do
+            if curl -fsSL --max-time 20 "$PREVIEW_URL/kids-family/holiday-club-finder/" -o /tmp/hosted-sk8-finder.html \
+                && grep -Fq "holiday_club_booking_click" /tmp/hosted-sk8-finder.html \
+                && grep -Fq 'id="finder-join-free"' /tmp/hosted-sk8-finder.html; then
+              found=true
+              break
+            fi
+            sleep 7
+          done
+          if [ "$found" != true ]; then
+            echo "Cloudflare finder preview not ready"
+            exit 1
+          fi
+          curl -fsSL --max-time 20 "$PREVIEW_URL/assets/sk8-scoop-logo.webp" -o /tmp/sk8-finder-logo.webp
+          test -s /tmp/sk8-finder-logo.webp
+          curl -fsSL --max-time 20 "$PREVIEW_URL/assets/site.js" -o /tmp/sk8-finder-site.js
+          test -s /tmp/sk8-finder-site.js
+      - name: Exercise hosted Cloudflare finder on desktop and phone
+        env:
+          PREVIEW_URL: https://feature-october-holiday-club-finder-2026.previews.sk8scoop.com
+        run: node tests/holiday-club-finder-browser.mjs
+      - name: Store hosted finder screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hosted-holiday-club-finder-desktop-mobile
+          path: visual-qa/holiday-club-finder
+          if-no-files-found: ignore
