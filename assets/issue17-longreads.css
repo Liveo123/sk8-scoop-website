@@ -58,3 +58,9 @@
 .feature-longread-page .fp-timeline-row span{color:#3b5055}
 @media (max-width:820px){.feature-longread-page .fp-hero-inner{grid-template-columns:1fr;gap:25px}.feature-longread-page .fp-poster{min-height:235px;max-width:600px}.feature-longread-page .fp-poster .fp-poster-number{font-size:5rem}.feature-longread-page .fp-story-layout{grid-template-columns:1fr;gap:25px}.feature-longread-page .fp-side{position:static;order:2}.feature-longread-page .fp-story-wrap{padding:35px 0 48px}}
 @media (max-width:560px){.feature-longread-page .fp-hero{padding:29px 0}.feature-longread-page .fp-hero h1{font-size:clamp(2.45rem,10vw,3.35rem)}.feature-longread-page .fp-facts-inner{grid-template-columns:1fr;gap:14px}.feature-longread-page .fp-fact{padding-left:12px}.feature-longread-page .fp-story .fp-lede{font-size:1.14rem}.feature-longread-page .fp-story p{font-size:1.02rem;line-height:1.69}.feature-longread-page .fp-story h2{margin-top:34px;font-size:1.75rem}.feature-longread-page .fp-story-wrap{padding-top:27px}.feature-longread-page .fp-timeline-row{grid-template-columns:73px 1fr;gap:10px}.feature-longread-page .fp-poster{min-height:210px;padding:20px}.feature-longread-page .fp-next .reader-panel{padding:20px}}
+
+/* Issue 17 illustrated hero, explicitly not documentary images */
+.feature-longread-page .fp-feature-art{margin:0;min-width:0;align-self:start}
+.feature-longread-page .fp-feature-art img{display:block;width:100%;height:auto;aspect-ratio:4 / 3;object-fit:cover;border:1px solid #d9c3a6;box-shadow:10px 12px 0 rgba(65,53,33,.12);background:#faf3e7}
+.feature-longread-page .fp-feature-art figcaption{color:#475b5c;font:normal .8rem/1.5 Arial,sans-serif;margin-top:16px;max-width:50ch}
+@media(max-width:820px){.feature-longread-page .fp-feature-art img{box-shadow:6px 7px 0 rgba(65,53,33,.12)}.feature-longread-page .fp-feature-art figcaption{font-size:.78rem;margin-top:12px}}
