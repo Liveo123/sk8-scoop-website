@@ -1,0 +1,88 @@
+name: Issue 17 longreads visual and content QA
+
+on:
+  pull_request:
+    paths:
+      - 'local-history/premier-cafe-cheadle/**'
+      - 'outdoors/carr-wood-cheadle-hulme-bramhall/**'
+      - 'local-history/index.html'
+      - 'outdoors/index.html'
+      - 'assets/issue17-longreads.css'
+      - 'scripts/check-issue17-longreads.mjs'
+      - '.github/workflows/issue17-longreads-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'local-history/premier-cafe-cheadle/**'
+      - 'outdoors/carr-wood-cheadle-hulme-bramhall/**'
+      - 'local-history/index.html'
+      - 'outdoors/index.html'
+      - 'assets/issue17-longreads.css'
+      - 'scripts/check-issue17-longreads.mjs'
+      - '.github/workflows/issue17-longreads-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  article-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout proposed website changes
+        uses: actions/checkout@v4
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate editorial content, rights discipline, links and mobile CSS
+        run: node scripts/check-issue17-longreads.mjs
+      - name: Select installed Chromium
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "Chromium missing on QA runner"
+            exit 1
+          fi
+      - name: Serve branch content locally
+        shell: bash
+        run: |
+          set -eu
+          python3 -m http.server 8766 --bind 127.0.0.1 > /tmp/sk8-issue17-server.log 2>&1 &
+          for attempt in $(seq 1 20); do
+            if curl -fsS --max-time 3 "http://127.0.0.1:8766/local-history/premier-cafe-cheadle/" -o /tmp/issue17-history.html; then
+              break
+            fi
+            sleep 1
+          done
+          grep -q "The Art Deco café" /tmp/issue17-history.html
+      - name: Inspect real browser rendering and capture phone and desktop previews
+        shell: bash
+        run: |
+          set -eu
+          mkdir -p visual-qa/issue17
+          for kind in history walk; do
+            if [ "$kind" = "history" ]; then route="local-history/premier-cafe-cheadle"; expected="Premier Café"; else route="outdoors/carr-wood-cheadle-hulme-bramhall"; expected="Carr Wood"; fi
+            url="http://127.0.0.1:8766/$route/"
+            "$CHROME" --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --window-size=1440,1200 --virtual-time-budget=3500 --screenshot="visual-qa/issue17/$kind-desktop.png" "$url" >/dev/null 2>&1
+            "$CHROME" --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --window-size=390,1100 --force-device-scale-factor=1 --virtual-time-budget=3500 --screenshot="visual-qa/issue17/$kind-mobile.png" "$url" >/dev/null 2>&1
+            "$CHROME" --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --virtual-time-budget=3000 --dump-dom "$url" > "visual-qa/issue17/$kind-rendered.html" 2>/dev/null
+            grep -q "$expected" "visual-qa/issue17/$kind-rendered.html"
+            test -s "visual-qa/issue17/$kind-desktop.png"
+            test -s "visual-qa/issue17/$kind-mobile.png"
+          done
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue17-longreads-desktop-mobile
+          path: visual-qa/issue17
+          retention-days: 14
+          if-no-files-found: ignore
