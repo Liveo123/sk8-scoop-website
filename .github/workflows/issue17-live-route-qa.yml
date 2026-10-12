@@ -1,0 +1,45 @@
+name: Issue 17 published routes live check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/issue17-live-route-qa.yml'
+      - 'local-history/premier-cafe-cheadle/**'
+      - 'outdoors/carr-wood-cheadle-hulme-bramhall/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-article-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Confirm both published articles and their hub links
+        shell: bash
+        run: |
+          set -eu
+          check_page() {
+            url="$1"
+            marker="$2"
+            out="$(mktemp)"
+            for attempt in $(seq 1 16); do
+              code="$(curl -sS -L --max-time 20 -o "$out" -w '%{http_code}' "$url" || true)"
+              if [ "$code" = "200" ] && grep -Fq "$marker" "$out"; then
+                echo "LIVE VERIFIED: $url"
+                rm -f "$out"
+                return 0
+              fi
+              echo "Waiting for production ($attempt/16): $url, HTTP $code"
+              sleep 12
+            done
+            rm -f "$out"
+            echo "Not live or missing unique article marker: $url"
+            return 1
+          }
+          check_page 'https://www.sk8scoop.com/local-history/premier-cafe-cheadle/' 'The Art Deco café hiding above Cheadle High Street'
+          check_page 'https://www.sk8scoop.com/outdoors/carr-wood-cheadle-hulme-bramhall/' 'The wooded third of the walk to Bramhall'
+          check_page 'https://www.sk8scoop.com/local-history/' '/local-history/premier-cafe-cheadle/'
+          check_page 'https://www.sk8scoop.com/outdoors/' '/outdoors/carr-wood-cheadle-hulme-bramhall/'
