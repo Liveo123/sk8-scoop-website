@@ -43,3 +43,7 @@ jobs:
           check_page 'https://www.sk8scoop.com/outdoors/carr-wood-cheadle-hulme-bramhall/' 'The wooded third of the walk to Bramhall'
           check_page 'https://www.sk8scoop.com/local-history/' '/local-history/premier-cafe-cheadle/'
           check_page 'https://www.sk8scoop.com/outdoors/' '/outdoors/carr-wood-cheadle-hulme-bramhall/'
+          check_page 'https://www.sk8scoop.com/local-history/premier-cafe-cheadle/' 'premier-editorial-illustration.webp'
+          check_page 'https://www.sk8scoop.com/local-history/premier-cafe-cheadle/' 'Illustration: SK8 Scoop.'
+          check_page 'https://www.sk8scoop.com/outdoors/carr-wood-cheadle-hulme-bramhall/' 'wood-editorial-illustration.webp'
+          check_page 'https://www.sk8scoop.com/outdoors/carr-wood-cheadle-hulme-bramhall/' 'Illustration: SK8 Scoop.'
