@@ -20,7 +20,9 @@ for (const [rel, source, caution] of articles) {
  assert.match(html,source,`${rel}: primary source`);
  assert.match(html,caution,`${rel}: evidence caution`);
  assert.doesNotMatch(html,/<svg\b/i,`${rel}: publication SVG prohibited`);
- assert.doesNotMatch(html,/<img[^>]+src="https?:/i,`${rel}: no unlicensed hotlinked image`);
+ const remoteImages=[...html.matchAll(/<img[^>]+src="(https?:[^"]+)"/gi)].map(m=>m[1]);
+ for(const url of remoteImages){ assert.match(url,/^https:\/\/res\.cloudinary\.com\/gocq00bt\/image\/upload\/v\d+\/sk8-scoop\/issue17\/(premier|wood)-editorial-illustration\.webp$/, `${rel}: only known SK8-owned Cloudinary originals permitted: ${url}`); }
+ if(remoteImages.length){assert.match(html,/Illustration: SK8 Scoop/, `${rel}: generated art must be explicitly captioned`);}
  assert.doesNotMatch(html,/FACTORY LINK PLAN|NOT READER COPY/i,`${rel}: internal note leaked`);
  assert.ok(html.replace(/<[^>]*>/g,' ').trim().split(/\s+/).length>800,`${rel}: feature too short`);
  for (const href of html.matchAll(/\bhref="([^"]+)"/g)) {
