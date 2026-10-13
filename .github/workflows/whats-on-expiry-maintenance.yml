@@ -1,44 +1,66 @@
 name: What's On expiry maintenance
+
 on:
   schedule:
     - cron: '20 5 * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/prune-expired-events.mjs'
+      - 'tests/prune-expired-events-fixtures.mjs'
+      - '.github/workflows/whats-on-expiry-maintenance.yml'
+
 permissions:
   contents: write
-  pull-requests: write
+
 concurrency:
-  group: whats-on-expiry-maintenance
+  group: whats-on-expiry-maintenance-main
   cancel-in-progress: false
+
 jobs:
   expiry:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
+          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Remove expired records (no new publications)
+      - name: Check expiry safety fixtures
+        run: node tests/prune-expired-events-fixtures.mjs
+      - name: Retire expired records and reconcile historical handoffs
         run: node scripts/prune-expired-events.mjs --apply
-      - name: Validate all remaining records
+      - name: Validate data, history, and editorial gates
         run: |
           node scripts/check-events-data.mjs
           node tests/check-events-data-fixtures.mjs
           node scripts/check-event-review-queue.mjs
           node scripts/promote-ready-events.mjs
-      - name: Commit data-only expiry cleanup
+          node scripts/check-post-launch-v2.mjs
+          git diff --check
+      - name: Confirm change scope
+        shell: bash
+        run: |
+          extras="$(git diff --name-only -- . ':!data/events.json' ':!data/website-harvest.json')"
+          if [ -n "$extras" ]; then
+            echo "Unexpected modified files: $extras"
+            exit 1
+          fi
+      - name: Commit only verified expiry changes
+        shell: bash
         run: |
           if git diff --quiet -- data/events.json data/website-harvest.json; then
-            echo "No expired events; no changes."
+            echo 'No expired events; nothing to commit.'
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/events.json data/website-harvest.json
-          if git diff --cached --name-only | grep -vE '^data/(events|website-harvest)\.json
-          git commit -m "Prune expired What's On events"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- data/events.json data/website-harvest.json
+          git commit -m 'chore(whats-on): retire expired events and preserve audit'
           git push origin HEAD:main
-; then exit 1; fi
-          git commit -m "Prune expired What's On events"
-          git push origin HEAD:main
+          echo 'Changed source; production deployment must still be verified.'
