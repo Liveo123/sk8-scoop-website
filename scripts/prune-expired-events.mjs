@@ -50,7 +50,7 @@ for (const e of events) {
 }
 const core = new Set(['Cheadle', 'Cheadle Hulme', 'Gatley', 'Heald Green']);
 if (!retained.length || !retained.some(e => core.has(e.area))) {
-  throw new Error('Refusing to empty live What's On or remove every core-SK8 listing');
+  throw new Error("Refusing to empty live What\u2019s On or remove every core-SK8 listing");
 }
 const expiredIds = new Set(expired.map(e => e.id));
 let changedHandoffs = 0;
