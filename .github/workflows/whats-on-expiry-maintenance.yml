@@ -64,3 +64,27 @@ jobs:
           git commit -m 'chore(whats-on): retire expired events and preserve audit'
           git push origin HEAD:main
           echo 'Changed source; production deployment must still be verified.'
+
+
+      - name: Verify exact production JSON parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          # GITHUB_TOKEN pushes do not trigger ordinary GitHub Actions push workflows.
+          # Cloudflare has independent Git integration; verify actual public JSON
+          # before declaring a cleanup published.
+          expected_commit="$(git rev-parse HEAD)"
+          for attempt in $(seq 1 30); do
+            url="https://www.sk8scoop.com/data/events.json?whatson_parity=$expected_commit-$attempt"
+            if curl --fail --silent --show-error --location --max-time 20 \
+              -H 'Cache-Control: no-cache' "$url" -o /tmp/sk8-expiry-live.json; then
+              if node -e 'const fs=require("node:fs");const expected=JSON.parse(fs.readFileSync("data/events.json","utf8"));const actual=JSON.parse(fs.readFileSync("/tmp/sk8-expiry-live.json","utf8"));if(JSON.stringify(actual)!==JSON.stringify(expected)){console.error("Live events.json differs from checked-out GitHub source");process.exit(1)}'; then
+                echo "PASS: live What's On event JSON exactly matches $expected_commit"
+                exit 0
+              fi
+            fi
+            echo "Cloudflare production parity not ready (attempt $attempt/30)"
+            sleep 12
+          done
+          echo 'ERROR: daily expiry task cannot verify production parity; treat job as FAILED.'
+          exit 1
