@@ -29,13 +29,16 @@ jobs:
           node scripts/promote-ready-events.mjs
       - name: Commit data-only expiry cleanup
         run: |
-          if git diff --quiet -- data/events.json; then
+          if git diff --quiet -- data/events.json data/website-harvest.json; then
             echo "No expired events; no changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/events.json
-          git diff --cached --name-only | grep -qx 'data/events.json'
+          git add data/events.json data/website-harvest.json
+          if git diff --cached --name-only | grep -vE '^data/(events|website-harvest)\.json
+          git commit -m "Prune expired What's On events"
+          git push origin HEAD:main
+; then exit 1; fi
           git commit -m "Prune expired What's On events"
           git push origin HEAD:main
