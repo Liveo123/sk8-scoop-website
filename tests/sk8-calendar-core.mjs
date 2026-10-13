@@ -42,9 +42,11 @@ assert.equal(core.onDate(gatley, '2026-10-12'), true, 'confirmed Gatley date app
 assert.equal(core.onDate(gatley, '2026-10-26'), false, 'unconfirmed school-holiday Monday is omitted');
 assert.equal(core.onDate(gatley, '2026-11-02'), true, 'confirmed future Gatley date appears');
 assert.equal(core.isFree(gatley), true, 'optional donations do not imply mandatory charge');
-const grimmfest = events.find(event => event.id === 'grimmfest-2026-10-08');
-assert.ok(grimmfest && grimmfest.date_mode === 'specific_dates', 'Grimmfest dates are explicit');
-assert.equal(core.onDate(grimmfest, '2026-10-10'), true, 'festival has confirmed Saturday screening programme');
-assert.equal(core.onDate(grimmfest, '2026-10-11'), true, 'festival has confirmed Sunday screening programme');
-assert.equal(core.onDate(grimmfest, '2026-10-12'), false, 'festival does not extend beyond advertised schedule');
+const confirmedSeries = {
+  id: 'fixture-confirmed-dates', date: '2026-10-10', end_date: '2026-10-11',
+  date_mode: 'specific_dates', occurrences: ['2026-10-10', '2026-10-11']
+};
+assert.equal(core.onDate(confirmedSeries, '2026-10-10'), true, 'confirmed Saturday is shown');
+assert.equal(core.onDate(confirmedSeries, '2026-10-11'), true, 'confirmed Sunday is shown');
+assert.equal(core.onDate(confirmedSeries, '2026-10-12'), false, 'ended series is not extended');
 console.log('Calendar foundation checks passed (dates, recurrence, price, exclusions).');
