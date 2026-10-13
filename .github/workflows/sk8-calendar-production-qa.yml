@@ -36,13 +36,17 @@ jobs:
             page="$(curl -fsSL --max-time 20 "${base}/whats-on/?qa_release=${GITHUB_SHA}" || true)"
             data="$(curl -fsSL --max-time 20 "${base}/data/events.json?qa_release=${GITHUB_SHA}" || true)"
             calendar="$(curl -fsSL --max-time 20 "${base}/assets/whats-on-calendar.js?qa_release=${GITHUB_SHA}" || true)"
+            # Compare every live event field with the exact GitHub main revision, not just a marker.
+            # A stale Cloudflare build or cached event JSON must fail production parity.
+            printf '%s' "$data" > /tmp/sk8-live-events.json
             if printf '%s' "$page" | grep -Fq 'data-calendar-controls' &&
               printf '%s' "$page" | grep -Fq 'data-calendar-month-grid' &&
               printf '%s' "$page" | grep -Fq 'data-event-area="Gatley"' &&
               printf '%s' "$calendar" | grep -Fq 'sk8:events-loaded' &&
               printf '%s' "$data" | grep -Fq 'gatley-deckchair-care-welcome-cafe-2026-autumn' &&
-              ! printf '%s' "$data" | grep -Eqi 'cheadlemasjid[.]org|Cheadle Masjid'; then
-              echo "PASS: live calendar controls, date grid, Gatley listing and exclusion safeguards"
+              ! printf '%s' "$data" | grep -Eqi 'cheadlemasjid[.]org|Cheadle Masjid' &&
+              node -e 'const fs=require("node:fs");const expected=JSON.parse(fs.readFileSync("data/events.json","utf8"));const actual=JSON.parse(fs.readFileSync("/tmp/sk8-live-events.json","utf8"));if(JSON.stringify(expected)!==JSON.stringify(actual)){console.error("Production events.json does not match checked-out main commit");process.exit(1)}'; then
+              echo "PASS: live calendar controls, Gatley listing, exclusion safeguards and EXACT events.json parity with GitHub main"
               exit 0
             fi
             echo "Waiting for published calendar: attempt $attempt/35"
