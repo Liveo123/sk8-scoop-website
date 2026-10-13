@@ -28,5 +28,17 @@ const core=new Set(['Cheadle','Cheadle Hulme','Gatley','Heald Green']);
 if (!kept.some(e=>core.has(e.area))) throw new Error('Refusing to leave calendar without core SK8 events');
 console.log(JSON.stringify({date:today,removed:removed.map(e=>e.id),kept:kept.length,core:kept.filter(e=>core.has(e.area)).length}));
 if (process.argv.includes('--apply') && removed.length) {
+  const harvestPath = process.env.HARVEST_DATA_PATH || 'data/website-harvest.json';
+  const harvest = JSON.parse(fs.readFileSync(harvestPath, 'utf8'));
+  if (!Array.isArray(harvest.items)) throw new Error('Website Harvest items missing');
+  const retired = new Set(removed.map(e => e.id));
+  for (const item of harvest.items) {
+    if (item.disposition === 'whats_on' && retired.has(item.event_id)) {
+      item.disposition = 'whats_on_expired';
+      item.reason = 'Previously published event finished before '+today+
+        '; retired from the live rolling event feed. Original newsletter handoff retained for audit.';
+    }
+  }
   fs.writeFileSync(path,JSON.stringify(kept,null,2)+'\n');
+  fs.writeFileSync(harvestPath,JSON.stringify(harvest,null,2)+'\n');
 }
