@@ -1,0 +1,41 @@
+name: What's On expiry maintenance
+on:
+  schedule:
+    - cron: '20 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: whats-on-expiry-maintenance
+  cancel-in-progress: false
+jobs:
+  expiry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Remove expired records (no new publications)
+        run: node scripts/prune-expired-events.mjs --apply
+      - name: Validate all remaining records
+        run: |
+          node scripts/check-events-data.mjs
+          node tests/check-events-data-fixtures.mjs
+          node scripts/check-event-review-queue.mjs
+          node scripts/promote-ready-events.mjs
+      - name: Commit data-only expiry cleanup
+        run: |
+          if git diff --quiet -- data/events.json; then
+            echo "No expired events; no changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/events.json
+          git diff --cached --name-only | grep -qx 'data/events.json'
+          git commit -m "Prune expired What's On events"
+          git push origin HEAD:main
