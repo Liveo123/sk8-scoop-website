@@ -75,7 +75,7 @@ try{
   // The event feed is rolling; expired Issue 16 fixtures are no longer guaranteed to exist.
   // Test seven current event actions rather than failing as soon as last week's IDs expire.
   const today=new Date().toISOString().slice(0,10);
-  ids=events.filter(e=>typeof e.id==='string' && /^20\\d{2}-\\d{2}-\\d{2}$/.test(e.date||'') && e.date>=today && e.venue).slice(0,7).map(e=>e.id);
+  ids=events.filter(e=>typeof e.id==='string' && /^20[0-9]{2}-[0-9]{2}-[0-9]{2}$/.test(e.date||'') && e.date>=today && e.venue).slice(0,7).map(e=>e.id);
   record('Seven live catalogue events are available for the newsletter action test',ids.length===7);
   record('Every selected newsletter action ID exists in the event catalogue',ids.every(id=>events.some(e=>e.id===id)));
   await evaluate("localStorage.removeItem('sk8_saved_items_v1');localStorage.removeItem('sk8_reminders_v1');true");
