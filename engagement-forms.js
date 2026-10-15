@@ -75,8 +75,13 @@ export async function handleEngagementForms(req,env,{notify}){
      const txt=['New SK8 Scoop advertiser discovery enquiry','', 'Business: '+name, 'Area: '+(area||'Not stated'),'Goal: '+interest, 'Contact: '+(contact||'Not stated'),'Email: '+email,'Telephone: '+(phone||'Not stated'),'Additional information: '+(notes||'None'), 'Source: '+(trim(d.source,60)||'newsletter_issue17'),'Enquiry ID: '+id,'','No payment has been taken. Suitability and pricing need human review.'].join('\n');
      const result=await notifyOwner(notify,inbox,'SK8 Scoop advertiser enquiry: '+name,txt);
      const status=result.status==='sent'?'sent':'failed';
-     await env.DB.prepare("UPDATE sk8_advertiser_interest SET notification_status=?,notified_at=CASE WHEN ?='sent' THEN datetime('now') ELSE NULL END WHERE id=?").bind(status,status,id).run();
-     return output({saved:true,emailed:status==='sent',message:status==='sent'?'Thanks. Your enquiry has been sent to SK8 Scoop.':'Thanks. Your enquiry was saved, but the email notification is delayed. You can also email contact@sk8scoop.com.'});
+     // A notification audit-write failure must not misreport a successfully saved enquiry.
+     try {
+       await env.DB.prepare("UPDATE sk8_advertiser_interest SET notification_status=?,notified_at=CASE WHEN ?='sent' THEN datetime('now') ELSE NULL END WHERE id=?").bind(status,status,id).run();
+     } catch (error) {
+       console.error('Advertiser enquiry was saved; notification-status update failed', error);
+     }
+     return output({saved:true,emailed:status==='sent',message:status==='sent'?'Thanks. Your enquiry has been received by SK8 Scoop.':'Thanks. Your enquiry was saved, but the email notification is delayed. You can also email contact@sk8scoop.com.'});
    }catch(e){return formError('We could not save the enquiry. Please email contact@sk8scoop.com.',503)}
  }
  if(path==='/api/reader-demographics'){
@@ -111,13 +116,23 @@ export async function handleEngagementForms(req,env,{notify}){
      if(!pending)return formError('This confirmation link has expired or already been used.',410);
      const prof=await env.DB.prepare('SELECT area,relationship,age_band,children_bands,interests FROM sk8_reader_demographics WHERE id=? AND link_consent=1').bind(pending.response_id).first();
      if(!prof)return formError('This response no longer exists.',410);
-     const update=await env.DB.prepare("UPDATE sk8_demographics_confirmations SET used_at=datetime('now') WHERE token_hash=? AND used_at IS NULL").bind(hash).run();
-     if(!update.meta||update.meta.changes!==1)return formError('Already confirmed.',410);
      const snapshot={...prof,children_bands:JSON.parse(prof.children_bands),interests:JSON.parse(prof.interests)};
-     await env.DB.prepare("UPDATE sk8_reader_demographics SET linked_email=?,confirmed_at=datetime('now'),link_status='verified' WHERE id=?").bind(pending.email,pending.response_id).run();
+     // Record confirmation separately so temporary MailerLite failures do not erase verified consent.
+     await env.DB.prepare("UPDATE sk8_reader_demographics SET linked_email=?,confirmed_at=COALESCE(confirmed_at,datetime('now')),link_status='verified_pending_sync' WHERE id=?").bind(pending.email,pending.response_id).run();
      const sync=await verifiedFieldSync(env,pending.email,snapshot);
      await env.DB.prepare('UPDATE sk8_reader_demographics SET link_status=? WHERE id=?').bind(sync,pending.response_id).run();
-     return output({confirmed:true,message:'Email address confirmed. Thank you for helping SK8 Scoop understand its readers.',profile_sync:sync==='synced'?'updated':'pending'});
+     const terminal=['synced','not_existing_subscriber','not_active'].includes(sync);
+     // Preserve retry eligibility for recoverable API and field-configuration failures.
+     if(terminal) {
+       const update=await env.DB.prepare("UPDATE sk8_demographics_confirmations SET used_at=datetime('now') WHERE token_hash=? AND used_at IS NULL").bind(hash).run();
+       if(!update.meta||update.meta.changes!==1)return formError('Already confirmed.',410);
+     }
+     const message=sync==='synced'
+       ? 'Email confirmed. Your preferences were added to your existing subscriber profile.'
+       : sync==='not_existing_subscriber'||sync==='not_active'
+         ? 'Email confirmed, but there is no active SK8 Scoop subscription at that address. No subscriber profile was changed.'
+         : 'Email confirmed. Your answers are saved, but the profile update is temporarily pending. You may retry while the link remains valid.';
+     return output({confirmed:true,message,profile_sync:sync==='synced'?'updated':sync,can_retry:!terminal});
    }catch(e){return formError('Unable to confirm at present. Please contact SK8 Scoop.',503)}
  }
  return formError('Not found.',404);
