@@ -60,8 +60,8 @@ export async function handleEngagementForms(req,env,{notify}){
  if(req.method!=='POST')return formError('Method not allowed.',405);
  let d;try{d=await requestJson(req)}catch(e){return formError(e.message)}
  if(trim(d.company_fax,200))return output({message:'Thank you. Your response has been recorded.'});
- if(!timing(d))return formError('Please refresh this page and try again.');
- if(d.privacy_acknowledged!==true)return formError('Please read and acknowledge the privacy notice.');
+ if(path!=='/api/reader-demographics/confirm'&&!timing(d))return formError('Please refresh this page and try again.');
+ if(path!=='/api/reader-demographics/confirm'&&d.privacy_acknowledged!==true)return formError('Please read and acknowledge the privacy notice.');
  if(path==='/api/advertiser-interest'){
    const name=trim(d.business_name,180),area=trim(d.area,75),interest=trim(d.interest,60),contact=trim(d.contact_name,120),email=trim(d.email,200).toLowerCase(),phone=trim(d.phone,60),notes=trim(d.notes,450);
    if(!name||!validOne(interest,goals)||!emailRegex.test(email))return formError('Please provide your business name, one advertising goal and a valid contact email.');
