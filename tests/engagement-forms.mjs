@@ -19,5 +19,6 @@ r=await handleEngagementForms(post('/api/reader-demographics',{...shared,area:'g
 r=await handleEngagementForms(post('/api/reader-demographics',{...shared,area:'gatley',relationship:'live',age_band:'prefer_not',children_bands:[],interests:['history'],email:'subscriber@example.com'}),env,{notify});assert.equal(r.status,400);
 r=await handleEngagementForms(new Request('https://www.sk8scoop.com/api/reader-demographics/summary',{headers:{}}),env,{notify});assert.equal(r.status,401);
 r=await handleEngagementForms(post('/api/reader-demographics/confirm',{...shared,token:'ABC'}),env,{notify});assert.equal(r.status,400);
+r=await handleEngagementForms(post('/api/reader-demographics/confirm',{token:'ABC'}),env,{notify});assert.equal(r.status,400);j=await r.json();assert.equal(j.error,'This link is invalid.');
 for(const p of ['advertise/ask/index.html','reader-survey/index.html','reader-survey/verify/index.html']){let html=readFileSync(new URL('../'+p,import.meta.url),'utf8');assert.ok(html.includes('/assets/sk8-scoop-logo.webp'));assert.ok(html.includes('privacy'));}
 console.log('PASS: 10 API / form-structure checks, no external email deliveries, mocked database only.');
