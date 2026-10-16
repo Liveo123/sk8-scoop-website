@@ -279,11 +279,11 @@ jobs:
 
 
       - name: Check out Free & Cheap guide QA scripts
-        if: startsWith(github.head_ref, 'free-cheap-')
+        if: (startsWith(github.head_ref, 'free-cheap-') || startsWith(github.head_ref, 'maintenance/free-cheap-'))
         uses: actions/checkout@v4
 
       - name: Verify Free & Cheap guide browser navigation
-        if: startsWith(github.head_ref, 'free-cheap-')
+        if: (startsWith(github.head_ref, 'free-cheap-') || startsWith(github.head_ref, 'maintenance/free-cheap-'))
         shell: bash
         env:
           FREE_CHEAP_QA_BASE_URL: ${{ env.CLOUDFLARE_PREVIEW_BASE }}
@@ -301,7 +301,7 @@ jobs:
           node scripts/check-free-cheap-guide-browser.mjs
 
       - name: Upload Free & Cheap guide browser screenshots
-        if: always() && startsWith(github.head_ref, 'free-cheap-')
+        if: always() && (startsWith(github.head_ref, 'free-cheap-') || startsWith(github.head_ref, 'maintenance/free-cheap-'))
         uses: actions/upload-artifact@v4
         with:
           name: free-cheap-guide-browser-qa
