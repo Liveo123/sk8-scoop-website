@@ -640,7 +640,7 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
 <script id="sk8-guide-auto-expiry-v1">
 /* Non-destructive UK-date expiry for selected events. Unparseable dates remain visible for manual checking. */
 (() => {
-  const ukToday = () => new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const ukToday = () => {const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const value=k=>parts.find(p=>p.type===k)?.value;return value('year')+'-'+value('month')+'-'+value('day');};
   const monthNumber = {january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12};
   const stamp = (day,month) => {
     const y=2026,m=monthNumber[month.toLowerCase()];
@@ -670,7 +670,7 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
     for(const day of document.querySelectorAll('.calendar-grid .day')) {
       for(const li of day.querySelectorAll('li')) {
         const links=[...li.querySelectorAll('a[href^="#event-"]')];
-        if(links.length && links.every(a=>expired.has(a.hash.slice(7)))) li.hidden=true;
+        if(links.length) li.hidden=links.every(a=>expired.has(a.hash.slice(7)));
       }
       day.hidden=![...day.querySelectorAll('li')].some(li=>!li.hidden);
     }
@@ -678,9 +678,9 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
     const count=document.getElementById('result-count');if(count)count.textContent=showing+' shown';
     const none=document.getElementById('no-results');if(none)none.classList.toggle('show',showing===0);
     const hero=document.querySelector('.hero-copy strong');
-    if(hero && /\d+ genuinely useful ideas/.test(hero.textContent)) hero.textContent=showing+' currently listed ideas';
+    if(hero) hero.textContent=cards.filter(card=>!expiredCard(card)).length+' currently listed ideas';
     const intro=document.querySelector('.intro-grid p:not(.eyebrow)');
-    if(intro) intro.textContent=intro.textContent.replace(/\b46 useful choices\b/,showing+' current choices');
+    if(intro) intro.textContent=intro.textContent.replace(/\b46 useful choices\b/,cards.filter(card=>!expiredCard(card)).length+' current choices');
   };
   const filters=document.querySelectorAll('.filter');
   filters.forEach(button=>button.addEventListener('click',update));
