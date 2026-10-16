@@ -148,7 +148,7 @@
           const a = document.createElement('a');a.href='/free-cheap-guide/guide/';a.textContent='Free & Cheap Guide';
           note.replaceChildren(document.createTextNode('The dated Halloween activities have finished for this year. Explore our '),a,document.createTextNode(' for year-round ideas.'));
         } else note.textContent = 'Past event dates are hidden automatically using the UK calendar. Always check the organiser before travelling.';
-        if (/^#event-\\d+$/.test(location.hash)) {
+        if (/^#event-\d+$/.test(location.hash)) {
           const target = document.getElementById(location.hash.slice(1))?.closest('.card');
           if (target?.dataset.dateStatus === 'expired') {
             note.textContent = 'The event in that link has finished. Browse the current activities below.';
