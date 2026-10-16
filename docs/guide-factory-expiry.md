@@ -52,7 +52,7 @@ A selected_dates window determines when to retire a listing, but does not prove 
 - Run a preview against the real guide page; verify Cloudflare deployment corresponds to the latest source commit; do not silently merge or deploy production.
 
 ## Source of truth
-The master structured date schedule and the verified official event source are authoritative. The visible human-readable When text must match the structured schedule; make date edits in both, then rerun the validator. The Halloween 2026 pilot includes 43 dated entries, one evergreen entry and two open-ended/uncertain entries awaiting recheck. Do not copy its actual 2026 dates into another guide.
+The master structured date schedule and the verified official event source are authoritative. The visible human-readable When text must match the structured schedule; make date edits in both, then rerun the validator. The Halloween 2026 pilot now includes 45 dated entries and one evergreen entry. Two formerly incomplete entries were verified directly with the Whitworth and Waterside on 16 October 2026; Afrocats still has conflicting weekday/date labels in its organiser listing, and selected-day events require a final booking-calendar check. Do not copy its actual 2026 dates into another guide.
 
 Reusable implementation: assets/guide-expiry.js
 Release validation: tools/validate-guide-expiry.mjs
