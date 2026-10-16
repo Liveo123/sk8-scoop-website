@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://www.sk8scoop.com/</loc><lastmod>2026-10-10</lastmod></url>
-<url><loc>https://www.sk8scoop.com/latest</loc><lastmod>2026-10-10</lastmod></url>
-<url><loc>https://www.sk8scoop.com/archive</loc><lastmod>2026-10-10</lastmod></url>
+<url><loc>https://www.sk8scoop.com/</loc><lastmod>2026-10-16</lastmod></url>
+<url><loc>https://www.sk8scoop.com/latest</loc><lastmod>2026-10-16</lastmod></url>
+<url><loc>https://www.sk8scoop.com/archive</loc><lastmod>2026-10-16</lastmod></url>
 <url><loc>https://www.sk8scoop.com/guides/</loc><lastmod>2026-10-01</lastmod></url>
 <url><loc>https://www.sk8scoop.com/whats-on/</loc><lastmod>2026-10-06</lastmod></url>
 <url><loc>https://www.sk8scoop.com/food-drink/</loc><lastmod>2026-09-25</lastmod></url>
@@ -58,4 +58,7 @@
 <url><loc>https://www.sk8scoop.com/privacy</loc><lastmod>2026-10-08</lastmod></url>
 <url><loc>https://www.sk8scoop.com/terms</loc><lastmod>2026-10-08</lastmod></url>
 <url><loc>https://www.sk8scoop.com/sitemap.html</loc></url>
+<url><loc>https://www.sk8scoop.com/issues/issue-17/</loc><lastmod>2026-10-16</lastmod></url>
+<url><loc>https://www.sk8scoop.com/food-drink/chiverton-tap/</loc><lastmod>2026-10-16</lastmod></url>
+<url><loc>https://www.sk8scoop.com/kids-family/stockport-haf-october-half-term-2026/</loc><lastmod>2026-10-16</lastmod></url>
 </urlset>
