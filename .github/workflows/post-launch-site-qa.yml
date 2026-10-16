@@ -67,6 +67,8 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository for preview-level browser QA
+        uses: actions/checkout@v4
       - name: Wait for the Cloudflare version preview and verify release markers
         shell: bash
         env:
