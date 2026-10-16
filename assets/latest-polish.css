@@ -388,7 +388,7 @@ body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic .latest-mosai
 body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic .latest-mosaic-badge{
   display:none;
 }
-body[data-page="latest-issue"] .latest-feature-card:first-child .latest-feature-image img{
+body[data-page="latest-issue"] .latest-feature-card.issue17-poster-feature .latest-feature-image img{
   object-fit:contain;
   background:#772660;
 }
