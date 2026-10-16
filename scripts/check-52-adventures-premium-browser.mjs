@@ -70,9 +70,17 @@ try {
   console.log('PASS hidden by default; original 52 adventures preserved');
 
   function injectFictionalOnlyInPage(){
-    const sources=[...document.querySelectorAll('img[data-imgkey][src]')]
-      .map(img=>({src:img.currentSrc||img.src,alt:img.alt||'Existing guide photograph'}))
+    // A real advert would use one operator's cleared images. The test may use
+    // existing illustrative guide photos, but NEVER the SK8 brand/logo image.
+    // Prefer woodland and outdoors entries so the screenshot demonstrates a
+    // realistic photographic gallery, not an unrelated logo montage.
+    const preferred=['a19','a20','a24','a47','a18','a17'];
+    const all=[...document.querySelectorAll('img[data-imgkey][src]')]
+      .filter(img=>img.dataset.imgkey!=='brand' && !/logo|brand-mini/i.test((img.alt||'')+' '+(img.className||'')))
+      .map(img=>({key:img.dataset.imgkey,src:img.currentSrc||img.src,alt:img.alt||'Existing guide photograph'}))
       .filter(photo=>photo.src.startsWith('https://'));
+    const wanted=preferred.map(key=>all.find(img=>img.key===key)).filter(Boolean);
+    const sources=[...wanted,...all];
     const unique=[...new Map(sources.map(photo=>[photo.src,photo])).values()].slice(0,5);
     if(unique.length<2)return{ok:false,available:unique.length};
     const datePieces=new Intl.DateTimeFormat('en-GB',{
