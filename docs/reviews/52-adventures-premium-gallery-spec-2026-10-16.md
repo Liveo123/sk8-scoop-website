@@ -45,3 +45,20 @@ Proposed review after three compliant paid placements or 60 days, whichever is l
 - Release is still blocked until PR #172 is individually approved/merged, gallery is rebased and visually QA-tested with genuinely cleared images, inventory and VAT/invoice/Stripe mapping are checked, and Paul gives fresh approval before publication, sending any outreach or charging.
 - The premium config starts with enabled=false, ownerApproved=false and imageRightsCleared=false; an enquiry alone must not flip those flags.
 - Practical launch checklist: approve a single suitable placement, collect original sources and written creative permission, check one booking link and copy, record campaign ID and exact UK start/end dates, verify access and interaction on phone/tablet/desktop, confirm consent-gated analytics, gain owner publication approval, then run post-launch smoke and expiry check.
+
+## 16 October additional verified preview and payment checks
+
+- GitHub PR #218 remains a **draft**, with upstream guide PR #172 still open/unmerged; neither represents a production release.
+- Commit `d05161e52cbbeab3620f5f74e7394c039ede6e63`: Website Health and Post-launch site QA **PASSED**. In the preview-smoke job, **Test disabled and fictional paid-gallery states in Chromium: SUCCESS** and **Save premium gallery browser QA screenshots: SUCCESS**. The browser check exercises the deployed guide at 390, 740, 900 and 1440 pixels, with a temporary, browser-only fictional gallery built from existing guide imagery. The gallery is absent before and after reload. It tests the thumbnail/arrow/keyboard navigation, visibility and one tracked paid CTA click. The runner archives screenshots for seven days. Do not misstate this as a real campaign going live.
+- The first attempt at adding this browser test was marked **SKIPPED** despite a green build because the preview-smoke job did not check out the repo. That defect was corrected in the draft workflow before the subsequent successful run.
+- Read-only inspection of **SK8 Scoop live Stripe account** on 16 October found exactly two active historical one-off products and two active prices: GROW £90 and TEST £40. No active payment links. There is **no** corresponding active £39 premium gallery product and no £28 Guide advert price in the current connected catalogue. Existing products have **not** been altered. The 14 October standard rate card and 16 October premium price are sales/operating decisions, **not payment-catalogue parity**. Do not request or collect money until a separately authorised billing reconciliation.
+- Public advertiser-facing `advertise.html` and `advertise/intro/index.html` on the inspected GitHub default branch still list the standard five products only, so a £39 gallery selection is **not** part of the published standard enquiry form. This is intentional while the premium product stays under release hold. The existing form should not be made to pretend it books the new product.
+
+### Final safe handoff for the owner
+
+1. The **price decision is done**: £39 introductory one-off gallery for 30 days; £28 ordinary Guide card unchanged.
+2. Before releasing anything, approve an actual paid-slot position/inventory policy and the upstream guide refresh PR #172; rebase and rerun PR #218's Chromium and contract tests against its eventual main-branch context.
+3. Obtain advertiser creative, factual copy, explicit rights for each photograph, operator booking URL, action and the exact inclusive UK calendar dates.
+4. Verify tax treatment, £39 one-time GBP amount, payment approval and webhooks against the live Stripe account **without** overwriting or retiring historical products unless separately instructed.
+5. Recheck all specific email recipients against outreach legal, hyperlocal, suppression and correspondence gates; only send owner-approved exact messages once the product is demonstrably bookable.
+6. Secure explicit owner permission to publish, send and take payment; then verify the deployed advert, run expiry check and report consented measurable paid clicks, not estimated sales.
