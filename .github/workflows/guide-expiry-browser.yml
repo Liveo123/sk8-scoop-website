@@ -40,6 +40,7 @@ jobs:
           done
           node --check assets/guide-expiry.js
           node --check tests/guide-expiry-browser.mjs
+          node tools/validate-guide-expiry.mjs halloween-half-term-guide/guide/index.html
           node tests/guide-expiry-browser.mjs
       - name: Upload mobile QA screenshot
         if: always()
