@@ -560,16 +560,28 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
   sk8TrackCurrentPage();
 
   const observed=new WeakSet();
+  const analyticsViewEnabled=()=>Boolean(sk8Consent&&sk8Consent.analytics&&typeof window.gtag==='function');
+  const recordSignupFormView=form=>{
+    if(observed.has(form)||!analyticsViewEnabled())return;
+    observed.add(form);
+    sk8Track('signup_form_view',{form_position:form.dataset.formPosition||'unknown'});
+    if(observer)observer.unobserve(form);
+  };
   const observer='IntersectionObserver' in window?new IntersectionObserver(entries=>entries.forEach(entry=>{
-    if(entry.isIntersecting&&!observed.has(entry.target)){
-      observed.add(entry.target);
-      sk8Track('signup_form_view',{form_position:entry.target.dataset.formPosition||'unknown'});
-      observer.unobserve(entry.target);
-    }
+    if(entry.isIntersecting&&entry.intersectionRatio>=.45)recordSignupFormView(entry.target);
   }),{threshold:.45}):null;
-  document.querySelectorAll('[data-signup-form]').forEach(form=>{
-    if(observer) observer.observe(form); else sk8Track('signup_form_view',{form_position:form.dataset.formPosition||'unknown'});
+  const signupForms=[...document.querySelectorAll('[data-signup-form]')];
+  signupForms.forEach(form=>{
+    if(observer)observer.observe(form);else recordSignupFormView(form);
     form.addEventListener('submit',()=>sk8Track('signup_form_submit',{form_position:form.dataset.formPosition||'unknown'}));
+  });
+  // Forms in view before the first consent decision must be checked again afterwards.
+  document.addEventListener('sk8:analytics-consent-enabled',()=>{
+    signupForms.forEach(form=>{
+      if(observed.has(form))return;
+      if(observer){observer.unobserve(form);observer.observe(form);}
+      else recordSignupFormView(form);
+    });
   });
 
   document.addEventListener('click',event=>{
@@ -661,6 +673,7 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
       return;
     }
     loadAnalytics();
+    if(!previousAnalytics&&sk8Consent.analytics)document.dispatchEvent(new Event('sk8:analytics-consent-enabled'));
     sk8TrackCurrentPage();
     panel.hidden=true;launcher.hidden=false;
   };
