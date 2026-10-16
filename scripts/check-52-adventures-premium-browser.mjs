@@ -113,22 +113,47 @@ try {
 
   function measureInPage(){
     const card=document.querySelector('.sk8-premium'),slot=document.querySelector('#sk8-52-premium-slot');
-    slot.scrollIntoView({block:'center'});
+    // Smooth scrolling made mobile screenshots capture the quick-route tiles
+    // rather than the sponsored feature: disable it and place the ad below
+    // the fixed guide header before capturing evidence.
+    document.documentElement.style.scrollBehavior='auto';
+    const target=window.scrollY+slot.getBoundingClientRect().top-92;
+    window.scrollTo({top:Math.max(0,target),behavior:'auto'});
     const a=card.getBoundingClientRect(),b=card.querySelector('.sk8-premium-action').getBoundingClientRect();
+    const stage=card.querySelector('.sk8-premium-stage').getBoundingClientRect();
+    const label=card.querySelector('.sk8-premium-label').getBoundingClientRect();
     return{viewport:innerWidth,documentWidth:document.documentElement.scrollWidth,
-      cardLeft:a.left,cardRight:a.right,ctaLeft:b.left,ctaRight:b.right,
+      cardTop:a.top,cardLeft:a.left,cardRight:a.right,ctaLeft:b.left,ctaRight:b.right,
+      stageTop:stage.top,stageHeight:stage.height,labelTop:label.top,
       thumbs:card.querySelectorAll('.sk8-premium-thumbs button').length,
-      label:card.querySelector('.sk8-premium-label')?.textContent};
+      labelText:card.querySelector('.sk8-premium-label')?.textContent};
+  }
+  function scrollToDetailsInPage(){
+    const details=document.querySelector('.sk8-premium-details');
+    window.scrollTo({top:Math.max(0,window.scrollY+details.getBoundingClientRect().top-88),behavior:'auto'});
+    const a=details.getBoundingClientRect();
+    const c=details.querySelector('.sk8-premium-action').getBoundingClientRect();
+    return{detailsTop:a.top,ctaTop:c.top,ctaBottom:c.bottom};
   }
   for(const width of [390,740,900,1440]){
     await viewport(width);await sleep(450);
     const m=await evaluate('('+measureInPage.toString()+')()');
     assert.equal(m.thumbs,setup.photoCount,'Thumbnail count '+width);
+    assert.equal(m.labelText,'ADVERTISEMENT','Sponsored label must appear '+width);
     assert.ok(m.cardLeft>=-2&&m.cardRight<=width+2,'Card clipped at '+width+': '+JSON.stringify(m));
     assert.ok(m.ctaLeft>=-2&&m.ctaRight<=width+2,'CTA clipped at '+width);
     assert.ok(m.documentWidth<=width+1,'Page overflow at '+width+': '+JSON.stringify(m));
-    await sleep(200);await screenshot(width);
-    console.log('PASS gallery layout '+width+'px');
+    assert.ok(m.cardTop>=60&&m.cardTop<200,'QA screenshot did not actually scroll to the ad at '+width+': '+JSON.stringify(m));
+    assert.ok(m.labelTop>=65&&m.labelTop<240,'Sponsored label is not visible at '+width+': '+JSON.stringify(m));
+    assert.ok(m.stageHeight>=180,'Photograph stage collapsed at '+width+': '+JSON.stringify(m));
+    await sleep(350);await screenshot(width);
+    if(width===390||width===740){
+      const detail=await evaluate('('+scrollToDetailsInPage.toString()+')()');
+      assert.ok(detail.detailsTop>=55&&detail.detailsTop<200,'Cannot inspect mobile advert text '+width+': '+JSON.stringify(detail));
+      assert.ok(detail.ctaTop>=0&&detail.ctaBottom<950,'Mobile CTA not visible in detail screenshot '+width+': '+JSON.stringify(detail));
+      await sleep(350);await screenshot(width+'-details');
+    }
+    console.log('PASS gallery layout and visible screenshot '+width+'px');
   }
   assert.ok(await waitFor("document.querySelector('.sk8-premium-stage>img')?.complete && document.querySelector('.sk8-premium-stage>img')?.naturalWidth>0"),'Primary image loads');
 
