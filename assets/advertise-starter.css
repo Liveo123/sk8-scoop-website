@@ -1,0 +1,70 @@
+/* Short, conversation-first advertiser page. Uses the site's real logo, navigation, typography and enquiry endpoint. */
+body.advertiser-starter{background:#fff9ed}
+.advertiser-starter .button,.advertiser-starter .nav .button{background:#0f6470;color:#fff;box-shadow:none;min-height:48px;border-radius:8px}
+.advertiser-starter .button:hover,.advertiser-starter .button:focus-visible{background:#0b4f59;color:#fff}
+.advertiser-starter .button:focus-visible,.advertiser-starter a:focus-visible,.advertiser-starter input:focus-visible,.advertiser-starter textarea:focus-visible,.advertiser-starter select:focus-visible,.advertiser-starter summary:focus-visible{outline:3px solid #f8791b;outline-offset:3px}
+.advertiser-starter [hidden]{display:none!important}
+.advertiser-starter h1,.advertiser-starter h2,.advertiser-starter h3{color:#132d31}
+.advertiser-starter .s8-hero{padding:68px 0 62px;background:#f3f7f3;border-bottom:1px solid #d9dfda}
+.advertiser-starter .s8-hero-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:50px;align-items:center}
+.advertiser-starter .s8-eyebrow{color:#0f6470;font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.77rem}
+.advertiser-starter .s8-hero h1{font-family:Georgia,serif;font-size:clamp(2.8rem,5.4vw,5.5rem);letter-spacing:-.04em;line-height:1.01;margin:14px 0 18px;max-width:760px}
+.advertiser-starter .s8-hero p{font-size:1.12rem;max-width:620px;margin:0 0 18px}
+.advertiser-starter .s8-hero .s8-no-fuss{font-weight:750;font-size:1rem}
+.advertiser-starter .s8-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin:25px 0 16px}
+.advertiser-starter .s8-text-link{font-weight:800;text-underline-offset:4px;color:#0b525b}
+.advertiser-starter .s8-proof{background:#fff;border:1px solid #cbdcd5;border-top:5px solid #0f6470;border-radius:15px;padding:28px;box-shadow:0 12px 28px rgba(19,45,49,.07)}
+.advertiser-starter .s8-proof-number{font:700 clamp(2.8rem,4vw,4.4rem)/1 Georgia,serif;letter-spacing:-.04em;color:#132d31;margin:12px 0}
+.advertiser-starter .s8-proof strong{display:block;font-size:1.04rem}
+.advertiser-starter .s8-proof p{font-size:.93rem;color:#495c5f;margin:9px 0 0}
+.advertiser-starter .s8-proof-places{margin-top:22px;padding-top:15px;border-top:1px solid #d9dfda;font-weight:750}
+.advertiser-starter .s8-section{padding:58px 0}
+.advertiser-starter .s8-section-heading{max-width:720px;margin:0 0 27px}
+.advertiser-starter .s8-section h2{font:700 clamp(2rem,3.7vw,3.2rem)/1.1 Georgia,serif;margin:10px 0 14px}
+.advertiser-starter .s8-section-heading p{font-size:1.07rem;margin:0;color:#485e60}
+.advertiser-starter .s8-price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.advertiser-starter .s8-offer{background:#fff;border:1px solid #d6e0dc;border-radius:14px;padding:25px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.advertiser-starter .s8-offer.is-featured{border:2px solid #0f6470}
+.advertiser-starter .s8-offer h3{font:700 1.5rem/1.2 Georgia,serif;margin:0}
+.advertiser-starter .s8-price{font:700 2.9rem/1 Georgia,serif;letter-spacing:-.04em;color:#132d31;margin:4px 0}
+.advertiser-starter .s8-offer p{margin:0;color:#3e5154}
+.advertiser-starter .s8-offer .button{margin-top:auto;align-self:flex-start}
+.advertiser-starter .s8-small{font-size:.9rem;color:#4a5d60}
+.advertiser-starter .s8-rate-note{margin:21px 0 0;color:#46595c;max-width:910px}
+.advertiser-starter .s8-premium{margin-top:18px;border:1px solid #cbdcd5;border-radius:10px;background:#f3f7f3;padding:15px 18px}
+.advertiser-starter .s8-premium summary{cursor:pointer;font-weight:850;color:#0b525b}
+.advertiser-starter .s8-premium-inner{display:flex;flex-wrap:wrap;gap:15px;margin-top:17px}
+.advertiser-starter .s8-premium-inner p{flex:1 1 225px;margin:0}
+.advertiser-starter .s8-step-band{background:#e8f1ee;border-block:1px solid #ceded9}
+.advertiser-starter .s8-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:25px}
+.advertiser-starter .s8-steps div{border-left:3px solid #0f6470;padding:0 0 0 16px}
+.advertiser-starter .s8-steps strong{display:block;margin-bottom:4px}
+.advertiser-starter .s8-steps p{margin:0;color:#42585b}
+.advertiser-starter .s8-enquiry-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:38px;align-items:start}
+.advertiser-starter .s8-form{box-shadow:0 12px 30px rgba(19,45,49,.08);border-top:5px solid #0f6470}
+.advertiser-starter .s8-form label{font-weight:750}
+.advertiser-starter .s8-form input,.advertiser-starter .s8-form textarea,.advertiser-starter .s8-form select{font-size:1rem;min-height:45px}
+.advertiser-starter .s8-form textarea{min-height:85px}
+.advertiser-starter .s8-form h3{font:700 1.6rem Georgia,serif;margin:0 0 8px}
+.advertiser-starter .s8-choice-group{border:0;padding:0;margin:22px 0 5px}
+.advertiser-starter .s8-choice-group legend{font-weight:850;padding:0;margin-bottom:6px}
+.advertiser-starter .s8-choice{display:flex!important;align-items:flex-start;gap:10px;border:1px solid #d9dfda;border-radius:8px;padding:11px 12px;margin:8px 0!important;cursor:pointer}
+.advertiser-starter .s8-choice:has(input:checked){border-color:#0f6470;background:#e8f3f1}
+.advertiser-starter .s8-choice input{flex:0 0 18px!important;width:18px!important;min-height:18px!important;margin:3px 0 0;accent-color:#0f6470}
+.advertiser-starter .s8-choice span{font-weight:500}
+.advertiser-starter .s8-choice strong{font-weight:850}
+.advertiser-starter .s8-choice-note{font-weight:500;font-size:.85rem;color:#506163;display:block}
+.advertiser-starter .s8-form .s8-terms{display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.89rem;margin:19px 0}
+.advertiser-starter .s8-terms input{flex:0 0 18px;width:18px;min-height:18px;margin:3px 0 0;accent-color:#0f6470}
+.advertiser-starter .s8-form .form-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.advertiser-starter .s8-form button[type=submit]{width:100%}
+.advertiser-starter .s8-form .s8-inline{margin-top:14px}
+.advertiser-starter .s8-example{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:36px;align-items:center}
+.advertiser-starter .s8-example figure{margin:0;background:#fff;border:1px solid #d9dfda;border-radius:12px;overflow:hidden}
+.advertiser-starter .s8-example img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.advertiser-starter .s8-example figcaption{padding:12px 16px;background:#f3f7f3;font-weight:750;color:#0b525b;font-size:.82rem;letter-spacing:.03em}
+.advertiser-starter .s8-example p{color:#41595c}
+.advertiser-starter .s8-final{padding:32px 0;background:#e8f1ee;border-top:1px solid #d9dfda}
+.advertiser-starter .s8-final p{margin:8px 0 0}
+@media(max-width:900px){.advertiser-starter .s8-hero-layout,.advertiser-starter .s8-enquiry-grid,.advertiser-starter .s8-example{grid-template-columns:1fr;gap:25px}.advertiser-starter .s8-price-grid{grid-template-columns:1fr}.advertiser-starter .s8-steps{grid-template-columns:1fr}.advertiser-starter .s8-hero{padding:44px 0}.advertiser-starter .s8-section{padding:42px 0}.advertiser-starter .s8-offer .button{align-self:stretch}.advertiser-starter .s8-proof{padding:22px}}
+@media(prefers-reduced-motion:reduce){.advertiser-starter *{scroll-behavior:auto!important}}
