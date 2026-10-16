@@ -122,6 +122,14 @@ check('Scrolling away cancels pending impression', scrolledAway.timeouts.length 
 instant = '2026-10-31T12:00:00Z';
 ready.intervals[0]();
 check('Long-running tab auto expires', ready.slot.hidden);
+const beforeExpiryClick = render();
+const expiryCard = beforeExpiryClick.slot.children[0];
+const expiryLink = expiryCard.children[1].children[1].children.find(el => el.tag === 'a');
+instant = '2026-10-31T12:01:00Z';
+let expiredPrevented = false;
+expiryLink.events.click({ preventDefault: () => { expiredPrevented = true; } });
+check('Expiry click blocked before interval fires', expiredPrevented && beforeExpiryClick.slot.hidden);
+check('Expired button does not count paid clicks', beforeExpiryClick.events.filter(e => e.name === 'guide_advertiser_click').length === 0);
 instant = '2026-10-16T23:50:00Z'; // Local UK date is already 17 October (BST).
 check('Uses UK date, not UTC date', !render({ startDate: '2026-10-17', endDate: '2026-11-15' }).slot.hidden);
 instant = '2026-10-16T12:00:00Z';
