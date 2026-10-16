@@ -128,7 +128,7 @@
         if (!card.hidden) showing++;
         if (state === 'current') {
           const next = futureSlots(entry.schedule, today)[0];
-          if (next) {dated++;events.push({ next, number, entry });}
+          if (next) {dated++;if (!entry.schedule.selected_dates) events.push({ next, number, entry });}
         }
         if (today !== lastDay && entry) {
           setNextDateNote(card, entry.schedule, today);
@@ -143,7 +143,19 @@
       }
       if (calendar && today !== lastDay) buildCalendar(calendar, events, today);
       const note = document.getElementById('sk8-guide-expiry-note');
-      if (note) note.textContent = dated === 0 ? 'The dated Halloween activities have finished for this year. For year-round ideas, explore our Free & Cheap Guide.' : 'Past event dates are hidden automatically using the UK calendar. Always check the organiser before travelling.';
+      if (note) {
+        if (dated === 0) {
+          const a = document.createElement('a');a.href='/free-cheap-guide/guide/';a.textContent='Free & Cheap Guide';
+          note.replaceChildren(document.createTextNode('The dated Halloween activities have finished for this year. Explore our '),a,document.createTextNode(' for year-round ideas.'));
+        } else note.textContent = 'Past event dates are hidden automatically using the UK calendar. Always check the organiser before travelling.';
+        if (/^#event-\\d+$/.test(location.hash)) {
+          const target = document.getElementById(location.hash.slice(1))?.closest('.card');
+          if (target?.dataset.dateStatus === 'expired') {
+            note.textContent = 'The event in that link has finished. Browse the current activities below.';
+            note.scrollIntoView({ block: 'start', behavior: 'auto' });
+          }
+        }
+      }
       lastDay = today;
       if (typeof onReviewNeeded === 'function' && review.size) onReviewNeeded([...review]);
       return { today, remaining, showing, dated, needsReview: [...review] };
@@ -165,13 +177,13 @@
         const day = document.createElement('article');day.className = 'day';
         const head = document.createElement('h3');head.textContent = labelSpan(first, last);day.append(head);
         const ul = document.createElement('ul');
-        for (const { next, number, entry } of items) {
+        for (const { next, number, entry } of items.slice(0, 8)) {
           const li = document.createElement('li');
           const link = document.createElement('a');link.href = '#event-' + number;
           const doc = document.createElement('span');doc.textContent = ' · ' + (entry.schedule.selected_dates ? 'selected days, check organiser' : labelSpan(next.start, next.end));
           link.textContent = entry.n.replace(/&amp;/g, '&');li.append(link, doc);ul.append(li);
         }
-        day.append(ul);host.append(day);
+        if (items.length > 8) { const more = document.createElement('li'); const a = document.createElement('a'); a.href = '#filters'; a.textContent = 'See all ' + items.length + ' activities in this period below'; more.append(a); ul.append(more); } day.append(ul);host.append(day);
       }
     }
     filterButtons.forEach(button => button.addEventListener('click', () => render()));
