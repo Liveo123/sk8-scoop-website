@@ -7,7 +7,7 @@
   "full_guide": "https://www.sk8scoop.com/free-cheap-guide/guide/",
   "historic_approved_ledger": "https://docs.google.com/document/d/1s28d9sW2SsGHCUo_a-3HzZAC6qQJLs-m3iTOu1sftco/edit",
   "historic_discovery_master": "https://drive.google.com/file/d/1ihniFUtiMbf004vO07tOwXZqObjrzTB_/view",
-  "notes": "Inventory based on published selections, not blanket editorial verification. SPECIFIC_CLAIMS_CHECKED covers only recorded claims. Autisk, Dementia Disco and Station House organiser replies of 8 October 2026 have been reconciled with the guide on 9 October; the quiz-time discrepancy is resolved. Other independent date conflicts, secondary-only sources, and unconfirmed Seashell recurrence remain open. Historic price evidence is distinguished from current organiser confirmation.",
+  "notes": "Inventory based on published selections, not blanket editorial verification. SPECIFIC_CLAIMS_CHECKED covers only recorded claims. Autisk, Dementia Disco and Station House organiser replies of 8 October 2026 have been reconciled with the guide on 9 October; the quiz-time discrepancy is resolved. Other independent date conflicts, secondary-only sources, and unconfirmed Seashell recurrence remain open. Historic price evidence is distinguished from current organiser confirmation. Targeted maintenance 16 October is staged only; no blanket fact-check sign-off. Per-record maintenance audit distinguishes fresh checks from carried-forward evidence. Canonical register filename is retained to preserve identity.",
   "maintenance_schedule": {
     "dated": "Check original date 2 days before, auto-expire after UK date",
     "recurring": "Primary recheck fortnightly before promotion",
@@ -22,7 +22,10 @@
     "dateConflicts": 2,
     "timeDiscrepancies": 0,
     "secondaryOnly": 1,
-    "awaitingPrimary": 1
+    "awaitingPrimary": 1,
+    "proposed_active_listings": 50,
+    "proposed_dated_cards": 3,
+    "archived_or_postponed_records": 4
   },
   "entries": [
     {
@@ -46,7 +49,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Standard adult £9, concession £7, 11–16 £5 and under-11 free match current admission table.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-001",
+          "url": "https://www.avroheritagemuseum.co.uk/admission-charges",
+          "response": "200\thttps://www.avroheritagemuseum.co.uk/admission-charges",
+          "exit": 0,
+          "chars": 3903
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Standard adult £9, concession £7, 11–16 £5 and under-11 free match current admission table."
+      }
     },
     {
       "id": "FC-002",
@@ -69,7 +87,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-002",
+          "url": "https://www.stockport.gov.uk/planning-your-visit-to-hat-works",
+          "response": "403\thttps://www.stockport.gov.uk/planning-your-visit-to-hat-works",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-003",
@@ -92,7 +124,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-003",
+          "url": "https://www.stockport.gov.uk/planning-your-visit-to-stockport-museum",
+          "response": "403\thttps://www.stockport.gov.uk/planning-your-visit-to-stockport-museum",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-004",
@@ -115,7 +161,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-004",
+          "url": "https://www.stockport.gov.uk/planning-your-visit-to-the-air-raid-shelters",
+          "response": "403\thttps://www.stockport.gov.uk/planning-your-visit-to-the-air-raid-shelters",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-005",
@@ -138,7 +198,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-005",
+          "url": "https://www.stockport.gov.uk/planning-your-visit-to-staircase-house",
+          "response": "403\thttps://www.stockport.gov.uk/planning-your-visit-to-staircase-house",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-006",
@@ -161,7 +235,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-006",
+          "url": "https://www.stockport.gov.uk/planning-your-visit-to-bramall-hall",
+          "response": "403\thttps://www.stockport.gov.uk/planning-your-visit-to-bramall-hall",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-007",
@@ -184,7 +272,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-007",
+          "url": "https://www.stockport.gov.uk/visit-the-underbanks",
+          "response": "403\thttps://www.stockport.gov.uk/visit-the-underbanks",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-008",
@@ -207,7 +309,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Main admission free; current opening hours and Human Natures ending 1 November match visit page.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-008",
+          "url": "https://www.museum.manchester.ac.uk/plan-your-visit/",
+          "response": "200\thttps://www.museum.manchester.ac.uk/plan-your-visit/",
+          "exit": 0,
+          "chars": 57256
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Main admission free; current opening hours and Human Natures ending 1 November match visit page."
+      }
     },
     {
       "id": "FC-009",
@@ -230,7 +347,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Current homepage says free admission and daily 10am–5pm.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-009",
+          "url": "https://www.scienceandindustrymuseum.org.uk/",
+          "response": "200\thttps://www.scienceandindustrymuseum.org.uk/",
+          "exit": 0,
+          "chars": 23971
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Current homepage says free admission and daily 10am–5pm."
+      }
     },
     {
       "id": "FC-010",
@@ -253,7 +385,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Free without booking, Wednesday–Saturday 10am–5pm; last entry 4.40pm on current university page.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-010",
+          "url": "https://www.library.manchester.ac.uk/rylands/visit/",
+          "response": "200\thttps://www.library.manchester.ac.uk/rylands/visit/",
+          "exit": 0,
+          "chars": 6625
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Free without booking, Wednesday–Saturday 10am–5pm; last entry 4.40pm on current university page."
+      }
     },
     {
       "id": "FC-011",
@@ -276,7 +423,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-011",
+          "url": "https://manchesterartgallery.org/",
+          "response": "403\thttps://manchesterartgallery.org/",
+          "exit": 0,
+          "chars": 16
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-012",
@@ -299,7 +460,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-012",
+          "url": "https://www.stockport.gov.uk/landing/libraries",
+          "response": "403\thttps://www.stockport.gov.uk/landing/libraries",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-013",
@@ -322,7 +497,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-013",
+          "url": "https://www.whitworth.manchester.ac.uk/",
+          "response": "200\thttps://www.whitworth.manchester.ac.uk/",
+          "exit": 0,
+          "chars": 12757
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-014",
@@ -345,7 +534,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-014",
+          "url": "https://www.stockport.gov.uk/abney-hall-park",
+          "response": "403\thttps://www.stockport.gov.uk/abney-hall-park",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-015",
@@ -368,7 +571,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-015",
+          "url": "https://www.stockport.gov.uk/bruntwood-park",
+          "response": "403\thttps://www.stockport.gov.uk/bruntwood-park",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-016",
@@ -391,7 +608,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-016",
+          "url": "https://www.stockport.gov.uk/adswood-park",
+          "response": "403\thttps://www.stockport.gov.uk/adswood-park",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-017",
@@ -414,7 +645,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": "Historical primary evidence confirms creation/installation, not current site condition; revisit after closures or complaints."
+      "editorial_note": "Historical primary evidence confirms creation/installation, not current site condition; revisit after closures or complaints.",
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-017",
+          "url": "https://www.stockport.gov.uk/news/stockport-council-invests-in-upgraded-play-areas-across-borough",
+          "response": "403\thttps://www.stockport.gov.uk/news/stockport-council-invests-in-upgraded-play-areas-across-borough",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-018",
@@ -437,7 +682,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Council parks page confirms dawn–dusk and tennis £4 off-peak/£5 peak.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-018",
+          "url": "https://www.manchester.gov.uk/online-directories/parks-leisure-and-the-arts-directories/parks-playgrounds-allotments-and-open-spaces-directories/parks-and-open-spaces/all-parks-playgrounds-and-open-spaces/fletcher-moss-botanical-gardens",
+          "response": "200\thttps://www.manchester.gov.uk/online-directories/parks-leisure-and-the-arts-directories/parks-playgrounds-allotments-and-open-spaces-directories/parks-and-open-spaces/all-parks-playgrounds-and-open-spaces/fletcher-moss-botanical-gardens",
+          "exit": 0,
+          "chars": 5713
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Council parks page confirms dawn–dusk and tennis £4 off-peak/£5 peak."
+      }
     },
     {
       "id": "FC-019",
@@ -460,7 +720,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Reserve site confirms free parking, wheelchair/buggy-friendly paths and dusk car-park lock.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-019",
+          "url": "https://www.gatleycarrs.org.uk/",
+          "response": "200\thttps://www.gatleycarrs.org.uk/",
+          "exit": 0,
+          "chars": 5248
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Reserve site confirms free parking, wheelchair/buggy-friendly paths and dusk car-park lock."
+      }
     },
     {
       "id": "FC-020",
@@ -483,7 +758,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-020",
+          "url": "https://www.stockport.gov.uk/seasons-of-stories",
+          "response": "403\thttps://www.stockport.gov.uk/seasons-of-stories",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-021",
@@ -506,7 +795,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-021",
+          "url": "https://www.stockport.gov.uk/tennis",
+          "response": "403\thttps://www.stockport.gov.uk/tennis",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-022",
@@ -529,7 +832,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": "Historical primary evidence confirms creation/installation, not current site condition; revisit after closures or complaints."
+      "editorial_note": "Historical primary evidence confirms creation/installation, not current site condition; revisit after closures or complaints.",
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-022",
+          "url": "https://www.stockport.gov.uk/news/new-skatepark-opens-in-gatley",
+          "response": "403\thttps://www.stockport.gov.uk/news/new-skatepark-opens-in-gatley",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-023",
@@ -552,7 +869,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-023",
+          "url": "https://www.stockport.gov.uk/east-avenue-park",
+          "response": "403\thttps://www.stockport.gov.uk/east-avenue-park",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-024",
@@ -575,7 +906,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Provider FAQ supports outdoor £9 per person/60 minutes, mini courts from £6 per court/30 minutes, daily 7am–9pm.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-024",
+          "url": "https://www.manchesterpadel.club/faqs-1",
+          "response": "200\thttps://www.manchesterpadel.club/faqs-1",
+          "exit": 0,
+          "chars": 26225
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Provider FAQ supports outdoor £9 per person/60 minutes, mini courts from £6 per court/30 minutes, daily 7am–9pm."
+      }
     },
     {
       "id": "FC-025",
@@ -598,7 +944,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Current lane table still shows £16 early, £26 off-peak, £28 peak/40 minutes; school-holiday timing differs.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-025",
+          "url": "https://stockport.thelight.co.uk/pricing",
+          "response": "200\thttps://stockport.thelight.co.uk/pricing",
+          "exit": 0,
+          "chars": 8756
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Current lane table still shows £16 early, £26 off-peak, £28 peak/40 minutes; school-holiday timing differs."
+      }
     },
     {
       "id": "FC-026",
@@ -621,7 +982,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2027-01-06",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-026",
+          "url": "https://www.stockport.gov.uk/stockport-market",
+          "response": "403\thttps://www.stockport.gov.uk/stockport-market",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-027",
@@ -644,7 +1019,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": "Critique correction 8 Oct: previous draft falsely implied £3 adult sandwiches. Must distinguish child-only price."
+      "editorial_note": "Critique correction 8 Oct: previous draft falsely implied £3 adult sandwiches. Must distinguish child-only price.",
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Menu still supports adult lunch sandwiches from £6.50, jackets £8, omelette £9 and child sandwich £3.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-027",
+          "url": "https://www.thedamsontree.co.uk/menu",
+          "response": "200\thttps://www.thedamsontree.co.uk/menu",
+          "exit": 0,
+          "chars": 5050
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Menu still supports adult lunch sandwiches from £6.50, jackets £8, omelette £9 and child sandwich £3."
+      }
     },
     {
       "id": "FC-028",
@@ -667,7 +1057,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-07",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Menu still shows masala omelette £4.95, plain paratha £5 and bun kebab £9.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-028",
+          "url": "https://nafeessweetscentre.com/menu/",
+          "response": "200\thttps://nafeessweetscentre.com/menu/",
+          "exit": 0,
+          "chars": 18770
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Menu still shows masala omelette £4.95, plain paratha £5 and bun kebab £9."
+      }
     },
     {
       "id": "FC-029",
@@ -690,7 +1095,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-029",
+          "url": "https://www.stockport.gov.uk/events",
+          "response": "403\thttps://www.stockport.gov.uk/events",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-030",
@@ -713,7 +1132,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-030",
+          "url": "https://www.stockport.gov.uk/events/storytime-at-cheadle-hulme-library-2026",
+          "response": "403\thttps://www.stockport.gov.uk/events/storytime-at-cheadle-hulme-library-2026",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-031",
@@ -736,7 +1169,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-031",
+          "url": "https://www.stockport.gov.uk/events/heald-green-library-storytime",
+          "response": "403\thttps://www.stockport.gov.uk/events/heald-green-library-storytime",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-032",
@@ -759,7 +1206,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-032",
+          "url": "https://www.stockrm.org/events",
+          "response": "403\thttps://www.stockrm.org/events",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-033",
@@ -782,7 +1243,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-033",
+          "url": "https://www.stockport.gov.uk/events/teen-hangout-3",
+          "response": "403\thttps://www.stockport.gov.uk/events/teen-hangout-3",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-034",
@@ -807,7 +1282,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": "Organiser flyer resolves price, timing and booking uncertainties as of 8 Oct. Term-time restriction remains; check dates before a special journey."
+      "editorial_note": "Organiser flyer resolves price, timing and booking uncertainties as of 8 Oct. Term-time restriction remains; check dates before a special journey.",
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-034",
+          "url": "https://www.stockport.gov.uk/events",
+          "response": "403\thttps://www.stockport.gov.uk/events",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-035",
@@ -831,7 +1320,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-11-08",
-      "editorial_note": "Quiz start time, free entry and £75 total voucher prizes confirmed by current venue manager; no outstanding timing discrepancy."
+      "editorial_note": "Quiz start time, free entry and £75 total voucher prizes confirmed by current venue manager; no outstanding timing discrepancy.",
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-035",
+          "url": "https://www.almond-pubs.co.uk/january-at-the-station-house/",
+          "response": "200\thttps://www.almond-pubs.co.uk/january-at-the-station-house/",
+          "exit": 0,
+          "chars": 8067
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-036",
@@ -854,7 +1357,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Current venue page confirms Wednesday 8pm/£1 quiz and Friday 9pm live music; separately advertised special charity dinner is not a new guide addition.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-036",
+          "url": "https://www.thejohnmillington.co.uk/whats-on/",
+          "response": "200\thttps://www.thejohnmillington.co.uk/whats-on/",
+          "exit": 0,
+          "chars": 6541
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Current venue page confirms Wednesday 8pm/£1 quiz and Friday 9pm live music; separately advertised special charity dinner is not a new guide addition."
+      }
     },
     {
       "id": "FC-037",
@@ -877,7 +1395,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-037",
+          "url": "https://www.stockport.gov.uk/events",
+          "response": "403\thttps://www.stockport.gov.uk/events",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-038",
@@ -900,7 +1432,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": "Recurring series description is verified; October 24/31 date discrepancy remains unresolved."
+      "editorial_note": "Recurring series description is verified; October 24/31 date discrepancy remains unresolved.",
+      "maintenance_2026_10_16": {
+        "classification": "CORRECT",
+        "reason": "Mirror unresolved 24/31 October conflict in recurring Arc card; series pattern is not date confirmation.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-038",
+          "url": "https://arc-centre.org/saturday-art-clubs",
+          "response": "200\thttps://arc-centre.org/saturday-art-clubs/",
+          "exit": 0,
+          "chars": 8157
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Arc confirms standard last-Saturday/drop-in pattern and voluntary £3 donation; this does not resolve conflicting October date."
+      }
     },
     {
       "id": "FC-039",
@@ -923,7 +1470,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Provider calendar still shows 7 November and 5 December 2026.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-039",
+          "url": "https://www.themakersmarket.co.uk/venue/cheadle/",
+          "response": "200\thttps://www.themakersmarket.co.uk/venue/cheadle/",
+          "exit": 0,
+          "chars": 7046
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Provider calendar still shows 7 November and 5 December 2026."
+      }
     },
     {
       "id": "FC-040",
@@ -946,7 +1508,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-09",
-      "editorial_note": "Current calendar supports activity but library itself has not confirmed schedule."
+      "editorial_note": "Current calendar supports activity but library itself has not confirmed schedule.",
+      "maintenance_2026_10_16": {
+        "classification": "STALE-CHECK",
+        "reason": "No library reply in original email thread; generic council calendar could not be freshly retrieved. Keep existing explicit uncertainty notice. No new primary confirmation.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-040",
+          "url": "https://www.stockport.gov.uk/events",
+          "response": "403\thttps://www.stockport.gov.uk/events",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-041",
@@ -969,7 +1545,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Provider hub still confirms free Wednesday 8–8.45pm swim, 11+ and 25m unaided.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-041",
+          "url": "https://lifeleisure.net/centre/cheadle/",
+          "response": "200\thttps://lifeleisure.net/centre/cheadle/",
+          "exit": 0,
+          "chars": 24709
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Provider hub still confirms free Wednesday 8–8.45pm swim, 11+ and 25m unaided."
+      }
     },
     {
       "id": "FC-042",
@@ -993,7 +1584,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": "Current organiser flyer replaces older schedule assumptions. Check Saturday dates before travelling."
+      "editorial_note": "Current organiser flyer replaces older schedule assumptions. Check Saturday dates before travelling.",
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-042",
+          "url": "https://www.stockport.gov.uk/events/play-zone",
+          "response": "403\thttps://www.stockport.gov.uk/events/play-zone",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-043",
@@ -1002,8 +1607,8 @@
       "review_class": "RECURRING",
       "listing_anchor": "inclusive-community-gym",
       "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#inclusive-community-gym",
-      "page_price_band": "UNDER £10",
-      "page_price_detail": "£7 pay-per-session.",
+      "page_price_band": "COST TO CONFIRM",
+      "page_price_detail": "Historic £7; current price unconfirmed.",
       "page_when": "Council listings show Wednesday sessions from 10.30am to 12.30pm; confirm the next date before travelling.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday",
@@ -1016,7 +1621,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-08",
-      "editorial_note": "Stockport Council organiser-submitted event for 10 June 2026 supports £7/session and 10.30am–12.30pm on that single date, not current October recurrence. Keep PRIMARY_RECHECK_DUE until Seashell confirms next session."
+      "editorial_note": "Stockport Council organiser-submitted event for 10 June 2026 supports £7/session and 10.30am–12.30pm on that single date, not current October recurrence. Keep PRIMARY_RECHECK_DUE until Seashell confirms next session.",
+      "maintenance_2026_10_16": {
+        "classification": "CORRECT",
+        "reason": "Historic £7 and Wednesday hours are unconfirmed for October. Replace under-£10 chip and qualify price/time; remove from under-£10 quick choices.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-043",
+          "url": "https://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday",
+          "response": "403\thttps://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-044",
@@ -1040,7 +1659,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": "Organiser supplied recurring venue schedules and direct booking URL; booking availability and exceptions must still be checked for individual dates."
+      "editorial_note": "Organiser supplied recurring venue schedules and direct booking URL; booking availability and exceptions must still be checked for individual dates.",
+      "maintenance_2026_10_16": {
+        "classification": "CORRECT",
+        "reason": "Remove stale next-session 10 October wording; preserve organiser-confirmed recurring schedule and booking route.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-044",
+          "url": "https://www.dementiadisco.org/",
+          "response": "200\thttps://www.dementiadisco.org/",
+          "exit": 0,
+          "chars": 1715
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-045",
@@ -1063,7 +1696,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-045",
+          "url": "https://www.stockport.gov.uk/events/all-ability-county-pan-disability-multi-sports-club",
+          "response": "403\thttps://www.stockport.gov.uk/events/all-ability-county-pan-disability-multi-sports-club",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-046",
@@ -1074,19 +1721,36 @@
       "public_url": null,
       "page_price_band": "FREE",
       "page_price_detail": null,
-      "page_when": "Tuesdays, 4.15–5.15pm when listed; check the next session before travelling.",
+      "page_when": "20 and 27 October 2026, 4.15–5.15pm; later dates unconfirmed.",
       "advertised_date": null,
       "page_source_url": "https://www.stockport.gov.uk/events/community-sensory-garden",
       "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
       "primary_claims_checked": [
-        "Stockport Council current event calendar lists Life Leisure Hazel Grove sessions Tuesday 13, 20 and 27 October 2026 at 4.15pm; no blanket guarantee of future weeks or all cost/eligibility details."
+        "Stockport Council current event calendar lists Life Leisure Hazel Grove sessions Tuesday 13, 20 and 27 October 2026 at 4.15pm; no blanket guarantee of future weeks or all cost/eligibility details.",
+        "Checked 16 October: Life Leisure-submitted council pages for 20 and 27 October independently state 4.15–5.15pm, free and open to everyone. Booking not explicitly stated; later recurrence not established."
       ],
       "claim_evidence_urls": [
-        "https://www.stockport.gov.uk/events?Page=1&category=SEND+and+neurodiversity&pageSize=60"
+        "https://www.stockport.gov.uk/events?Page=1&category=SEND+and+neurodiversity&pageSize=60",
+        "https://prod-windows-webplatform-origin.smbcdigital.net/events/community-sensory-garden?date=2026-10-20",
+        "https://prod-windows-webplatform-origin.smbcdigital.net/events/community-sensory-garden?date=2026-10-27"
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-15",
-      "editorial_note": "October dates and start time verified on council event calendar; duration 4.15–5.15pm and free price need session-specific reconfirmation before promotion."
+      "editorial_note": "October price/time now specifically supported; direct reply/booking and post-October continuity remain open.",
+      "maintenance_2026_10_16": {
+        "classification": "CORRECT",
+        "reason": "Life Leisure-submitted council records now independently support free 20 and 27 October sessions, 4.15–5.15pm. Scope times/price to those dates; booking and later dates remain unresolved.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-046",
+          "url": "https://www.stockport.gov.uk/events/community-sensory-garden",
+          "response": "403\thttps://www.stockport.gov.uk/events/community-sensory-garden",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-047",
@@ -1109,7 +1773,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-22",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Carry forward unchanged under existing review cadence and recorded claim evidence; not a new whole-listing verification.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-047",
+          "url": "https://www.stockrm.org/events?free=true",
+          "response": "403\thttps://www.stockrm.org/events?free=true",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-048",
@@ -1132,7 +1810,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-08",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "REMOVE",
+        "reason": "10 October date has passed. Remove source card, not merely client-hide it.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-048",
+          "url": "https://www.stockport.gov.uk/events/ben-nuttalls-footy-factory?date=2026-10-10",
+          "response": "403\thttps://www.stockport.gov.uk/events/ben-nuttalls-footy-factory?date=2026-10-10",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": false,
+        "prior_claim_check_date": "2026-10-08"
+      },
+      "publication_state": "ARCHIVED_EXPIRED"
     },
     {
       "id": "FC-049",
@@ -1155,7 +1848,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-11",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "REMOVE",
+        "reason": "13 October date has passed. Remove source card.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-049",
+          "url": "https://www.stockport.gov.uk/events/escapism-and-nonsense-talk-by-david-seddon?date=2026-10-13",
+          "response": "403\thttps://www.stockport.gov.uk/events/escapism-and-nonsense-talk-by-david-seddon?date=2026-10-13",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": false,
+        "prior_claim_check_date": "2026-10-08"
+      },
+      "publication_state": "ARCHIVED_EXPIRED"
     },
     {
       "id": "FC-050",
@@ -1178,7 +1886,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-13",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "REMOVE",
+        "reason": "15 October exhibition launch has passed. Remove launch card; do not infer that the exhibition itself has ended.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-050",
+          "url": "https://www.stockrm.org/events/exhibition-launch-subtext?date=2026-10-15",
+          "response": "403\thttps://www.stockrm.org/events/exhibition-launch-subtext?date=2026-10-15",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": false,
+        "prior_claim_check_date": "2026-10-08"
+      },
+      "publication_state": "ARCHIVED_EXPIRED"
     },
     {
       "id": "FC-051",
@@ -1197,11 +1920,27 @@
         "Friday 16 October 2026, 19:30 at Heald Green Social Club, £5 on the door (organiser-submitted listing)"
       ],
       "claim_evidence_urls": [
-        "https://www.soul-source.co.uk/events/event/93545-heald-green-northern-soul-motown/"
+        "https://www.soul-source.co.uk/events/event/93545-heald-green-northern-soul-motown/",
+        "https://www.soul-source.co.uk/events/event/93545-postponed-til-november-heald-green-northern-soul-motown/"
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-14",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "REMOVE",
+        "reason": "Event owner’s existing Soul Source listing now says POSTPONED TIL NOVEMBER and POSTPONED. Replace October event card with a plain postponement notice; no replacement date verified.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-051",
+          "url": "https://www.soul-source.co.uk/events/event/93545-heald-green-northern-soul-motown/",
+          "response": "200\thttps://www.soul-source.co.uk/events/event/93545-postponed-til-november-heald-green-northern-soul-motown/",
+          "exit": 0,
+          "chars": 24397
+        },
+        "active_in_proposed_guide": false,
+        "prior_claim_check_date": "2026-10-08"
+      },
+      "publication_state": "POSTPONED_NOTICE_ONLY"
     },
     {
       "id": "FC-052",
@@ -1224,7 +1963,22 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-15",
-      "editorial_note": null
+      "editorial_note": null,
+      "maintenance_2026_10_16": {
+        "classification": "KEEP",
+        "reason": "Current market-organiser submission on council platform confirms 17 October, noon–5pm, free and no tickets.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-052",
+          "url": "https://www.stockport.gov.uk/events/saturday-snack-down-halloween-spooktacular?date=2026-10-17",
+          "response": "403\thttps://www.stockport.gov.uk/events/saturday-snack-down-halloween-spooktacular?date=2026-10-17",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Current market-organiser submission on council platform confirms 17 October, noon–5pm, free and no tickets."
+      }
     },
     {
       "id": "FC-053",
@@ -1247,7 +2001,21 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-19",
-      "editorial_note": "Stockroom event organiser lists Wednesday 21 October; council lists Tuesday 20 October. Do not silently claim resolution."
+      "editorial_note": "Stockroom event organiser lists Wednesday 21 October; council lists Tuesday 20 October. Do not silently claim resolution.",
+      "maintenance_2026_10_16": {
+        "classification": "CORRECT",
+        "reason": "Keep 20/21 October conflict prominent in date heading; prevent calendar/dately saved event creation while unresolved.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-053",
+          "url": "https://www.stockrm.org/events/amoeba-photography-network?date=2026-10-21",
+          "response": "403\thttps://www.stockrm.org/events/amoeba-photography-network?date=2026-10-21",
+          "exit": 0,
+          "chars": 585
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08"
+      }
     },
     {
       "id": "FC-054",
@@ -1273,8 +2041,26 @@
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-29",
-      "editorial_note": "Two current published date claims (31 Oct Council/Healthy Stockport organiser submissions; 24 Oct One Stockport). Keep guide's existing check-before-travel warning and seek direct Arc confirmation before newsletter promotion."
+      "editorial_note": "Two current published date claims (31 Oct Council/Healthy Stockport organiser submissions; 24 Oct One Stockport). Keep guide's existing check-before-travel warning and seek direct Arc confirmation before newsletter promotion.",
+      "maintenance_2026_10_16": {
+        "classification": "CORRECT",
+        "reason": "Keep 24/31 October conflict prominent in heading and WHEN; prevent calendar/dately saved event creation while unresolved.",
+        "audit_date": "2026-10-16",
+        "source_retrieval": {
+          "id": "FC-054",
+          "url": "https://arc-centre.org/saturday-art-clubs/",
+          "response": "200\thttps://arc-centre.org/saturday-art-clubs/",
+          "exit": 0,
+          "chars": 8157
+        },
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "specific_claim_recheck": "Arc series details remain supported, but exact October date unresolved."
+      }
     }
   ],
-  "last_factual_reconciliation": "2026-10-09"
+  "last_factual_reconciliation": "2026-10-09",
+  "last_maintenance_audit": "2026-10-16",
+  "maintenance_release_state": "STAGING_NOT_PUBLISHED",
+  "maintenance_scope": "Existing selections only. 54 baseline records retained for history, 50 proposed active listings, three future event cards and one postponement notice."
 }
