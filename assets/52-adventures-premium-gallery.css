@@ -8,8 +8,8 @@
 .sk8-premium-label{font:850 12px/1.4 Aptos,"Segoe UI",Arial,sans-serif;letter-spacing:.14em;color:#192f2e;text-transform:uppercase}
 .sk8-premium-separator{font:650 12px/1.4 Aptos,"Segoe UI",Arial,sans-serif;color:#425952}
 .sk8-premium-layout{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr)}
-.sk8-premium-photos{min-width:0;background:#163d42}
-.sk8-premium-stage{position:relative;background:#163d42;aspect-ratio:4/3;overflow:hidden}
+.sk8-premium-photos{min-width:0;background:#163d42;display:flex;flex-direction:column}
+.sk8-premium-stage{position:relative;background:#163d42;aspect-ratio:4/3;flex:1 1 auto;min-height:0;overflow:hidden}
 .sk8-premium-stage>img{display:block;width:100%;height:100%;object-fit:cover}
 .sk8-premium-image-label{position:absolute;bottom:14px;left:14px;max-width:calc(100% - 90px);padding:7px 10px;background:rgba(16,61,64,.92);color:#fff;font:650 12px/1.4 Aptos,"Segoe UI",Arial,sans-serif}
 .sk8-premium-photo-count{position:absolute;right:14px;bottom:14px;background:rgba(16,61,64,.95);color:white;font:750 12px/1.4 Aptos,"Segoe UI",Arial,sans-serif;padding:7px 10px}
@@ -32,6 +32,6 @@
 .sk8-premium-action:hover{background:#103d40;border-color:#103d40}
 .sk8-premium-disclosure{font:500 11px/1.5 Aptos,"Segoe UI",Arial,sans-serif;color:#55605c;margin:16px 0 0}
 .sk8-premium-sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-@media (max-width:810px){.sk8-premium-layout{grid-template-columns:1fr}.sk8-premium-stage{aspect-ratio:16/10}.sk8-premium-details{padding:24px}}
+@media (max-width:810px){.sk8-premium-layout{grid-template-columns:1fr}.sk8-premium-photos{display:block}.sk8-premium-stage{aspect-ratio:16/10}.sk8-premium-details{padding:24px}}
 @media (max-width:430px){#sk8-52-premium-slot{margin:25px auto 35px}.sk8-premium-labelbar{padding:12px 15px}.sk8-premium-stage{aspect-ratio:4/3}.sk8-premium-thumbs{gap:3px;padding:5px}.sk8-premium-thumbs button{border-width:2px;min-height:45px}.sk8-premium-details{padding:21px 17px 26px}.sk8-premium-facts{gap:10px}.sk8-premium-details h2{font-size:2.15rem}.sk8-premium-action{width:100%;align-self:stretch}}
 @media (prefers-reduced-motion:reduce){.sk8-premium *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
