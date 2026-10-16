@@ -42,7 +42,7 @@ try {
  check('Filter respects expiry and shows matching total',filters.active==='free' && filters.counter===filters.shown+' shown');
  await evalJs("document.querySelector('.filter[data-filter=\"all\"]').click();true");
  await cmd('Emulation.setDeviceMetricsOverride',{width:320,height:670,screenWidth:320,screenHeight:670,deviceScaleFactor:1,mobile:true});
- const diag320=await evalJs("(() => {const doc=document.documentElement;return {scrollWidth:doc.scrollWidth,clientWidth:doc.clientWidth,innerWidth,overflow:[...document.querySelectorAll('body *')].map(e=>({tag:e.tagName,cls:String(e.className||'').slice(0,80),text:(e.textContent||'').trim().slice(0,35),left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right,scroll:e.scrollWidth,client:e.clientWidth})).filter(o=>o.right>innerWidth+1||o.left< -1).slice(0,18)}})()");
+ const diag320=await evalJs("(() => {const doc=document.documentElement;return {scrollWidth:doc.scrollWidth,clientWidth:doc.clientWidth,innerWidth,visualViewportWidth:visualViewport.width,overflow:[...document.querySelectorAll('body *')].map(e=>({tag:e.tagName,cls:String(e.className||'').slice(0,80),text:(e.textContent||'').trim().slice(0,35),left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right,scroll:e.scrollWidth,client:e.clientWidth})).filter(o=>o.right>doc.clientWidth+0.3||o.left< -0.3).slice(0,18)}})()");
  console.log('320px overflow diagnostics',JSON.stringify(diag320));
  check('No horizontal overflow on small phone',await evalJs("document.documentElement.scrollWidth<=document.documentElement.clientWidth+1"));
  await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
