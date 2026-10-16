@@ -277,6 +277,24 @@ jobs:
           fi
           echo "OK Preview isolation: STRIPE_WEBHOOK_SECRET is not inherited"
 
+      - name: Test disabled and fictional paid-gallery states in Chromium
+        if: ${{ hashFiles('scripts/check-52-adventures-premium-browser.mjs') != '' }}
+        shell: bash
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then export CHROME="$(command -v google-chrome)"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then export CHROME="$(command -v google-chrome-stable)"
+          elif command -v chromium >/dev/null 2>&1; then export CHROME="$(command -v chromium)"
+          else echo "Chrome/Chromium is required for real browser QA"; exit 1; fi
+          node scripts/check-52-adventures-premium-browser.mjs
+
+      - name: Save premium gallery browser QA screenshots
+        if: always() && hashFiles('scripts/check-52-adventures-premium-browser.mjs') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: premium-gallery-browser-qa
+          path: visual-qa/52-premium-gallery/
+          retention-days: 7
+          if-no-files-found: ignore
 
   live-smoke:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
