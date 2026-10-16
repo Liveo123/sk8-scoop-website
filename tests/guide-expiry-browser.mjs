@@ -38,6 +38,12 @@ try {
  check('17 October session still visible',state.upcoming);
  check('Expired date omitted from calendar',!state.hasOldLink);
  check('No horizontal mobile overflow',!state.overflow);
+ const filters=await evalJs("(() => {document.querySelector('.filter[data-filter=\"free\"]').click();const cards=[...document.querySelectorAll('.card')].filter(c=>!c.hidden);return {active:document.querySelector('.filter.active')?.dataset.filter, shown:cards.length, counter:document.getElementById('result-count')?.textContent};})()");
+ check('Filter respects expiry and shows matching total',filters.active==='free' && filters.counter===filters.shown+' shown');
+ await evalJs("document.querySelector('.filter[data-filter=\"all\"]').click();true");
+ await cmd('Emulation.setDeviceMetricsOverride',{width:320,height:670,screenWidth:320,screenHeight:670,deviceScaleFactor:1,mobile:true});
+ check('No horizontal overflow on small phone',await evalJs("document.documentElement.scrollWidth<=document.documentElement.clientWidth+1"));
+ await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
  const after17=await dateCase('2026-10-18');
  check('One-day 17 October event hides on 18 October',after17.remaining===44);
  const linkState=await evalJs("({oneDay:document.querySelector('.card[data-event-index=\"43\"]').hidden,moonlight:!document.querySelector('.card[data-event-index=\"3\"]').hidden,dates:[...document.querySelectorAll('.card[data-event-index=\"3\"] .nue-date-choices a')].map(a=>a.textContent.trim())})");
