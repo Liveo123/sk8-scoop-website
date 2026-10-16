@@ -360,3 +360,40 @@ body[data-page="latest-issue"] .latest-feature-card:hover{transform:translateY(-
   body[data-page="latest-issue"] .latest-join-card{width:calc(100% - 24px);margin:-30px auto 0}
   body[data-page="latest-issue"] .latest-mosaic-badge{left:16px;top:16px}
 }
+
+/* ISSUE 17 POSTER - NO CROPPING
+   The approved Merseyday banner is 2048 x 953. The previous portrait
+   mosaic used cover, which would amputate its text. This issue-specific
+   layout puts the whole banner above two editorial illustrations. */
+body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:245px 190px;
+  min-height:0;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic .latest-mosaic-main{
+  grid-column:1/-1;
+  grid-row:1;
+  background:#772660;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic .latest-mosaic-small{
+  grid-row:2;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic .latest-mosaic-main img{
+  object-fit:contain;
+  object-position:center;
+  background:#772660;
+}
+body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic .latest-mosaic-main:after,
+body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic .latest-mosaic-main > span,
+body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic .latest-mosaic-badge{
+  display:none;
+}
+body[data-page="latest-issue"] .latest-feature-card:first-child .latest-feature-image img{
+  object-fit:contain;
+  background:#772660;
+}
+@media(max-width:620px){
+  body[data-page="latest-issue"] .latest-issue-mosaic.issue17-mosaic{
+    grid-template-rows:clamp(150px,46vw,220px) 145px;
+  }
+}
