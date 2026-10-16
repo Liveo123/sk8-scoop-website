@@ -636,7 +636,68 @@ document.querySelectorAll('.calendar-grid a[href^="#event-"]').forEach(link=>lin
     host.parentNode.insertBefore(related,host);
   }
 })();
-</script><script src="/assets/config.js"></script>
+</script>
+<script id="sk8-guide-auto-expiry-v1">
+/* Non-destructive UK-date expiry for selected events. Unparseable dates remain visible for manual checking. */
+(() => {
+  const ukToday = () => new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const monthNumber = {january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12};
+  const stamp = (day,month) => {
+    const y=2026,m=monthNumber[month.toLowerCase()];
+    if(!m || day<1 || day>new Date(Date.UTC(y,m,0)).getUTCDate()) return null;
+    return y+'-'+String(m).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+  };
+  const lastDate = (when) => {
+    const s=String(when||'').toLowerCase().replace(/[–—]/g,'-');
+    // Day ranges, including 24 October - 1 November and 12-14 and 19-21 October.
+    const found=[];
+    const cross=/\b(\d{1,2})\s+(january|february|march|april|may|june|july|august|september|october|november|december)\s*-\s*(\d{1,2})\s+(january|february|march|april|may|june|july|august|september|october|november|december)\b/g;
+    for(const m of s.matchAll(cross)) found.push(stamp(+m[1],m[2]),stamp(+m[3],m[4]));
+    const sameMonth=/((?:\b\d{1,2}\b\s*(?:,|and|\-|to)?\s*){1,12})(january|february|march|april|may|june|july|august|september|october|november|december)\b/g;
+    for(const m of s.matchAll(sameMonth)) for(const d of m[1].matchAll(/\b\d{1,2}\b/g)) found.push(stamp(+d[0],m[2]));
+    return found.filter(Boolean).sort().at(-1)||null;
+  };
+  const expiryByIndex = new Map(E.map((entry,i) => [String(i+1),lastDate(entry.w)]));
+  const cards=[...document.querySelectorAll('.card[data-event-index]')];
+  const expiredCard = card => {const end=expiryByIndex.get(card.dataset.eventIndex);return Boolean(end && end<ukToday())};
+  const update = () => {
+    const expired=new Set();
+    for(const card of cards) {
+      const old=expiredCard(card);
+      if(old) expired.add(card.dataset.eventIndex);
+      if(old) card.hidden=true; // Never revive an expired item when switching filters.
+    }
+    for(const day of document.querySelectorAll('.calendar-grid .day')) {
+      for(const li of day.querySelectorAll('li')) {
+        const links=[...li.querySelectorAll('a[href^="#event-"]')];
+        if(links.length && links.every(a=>expired.has(a.hash.slice(7)))) li.hidden=true;
+      }
+      day.hidden=![...day.querySelectorAll('li')].some(li=>!li.hidden);
+    }
+    const showing=cards.filter(card=>!card.hidden).length;
+    const count=document.getElementById('result-count');if(count)count.textContent=showing+' shown';
+    const none=document.getElementById('no-results');if(none)none.classList.toggle('show',showing===0);
+    const hero=document.querySelector('.hero-copy strong');
+    if(hero && /\d+ genuinely useful ideas/.test(hero.textContent)) hero.textContent=showing+' currently listed ideas';
+    const intro=document.querySelector('.intro-grid p:not(.eyebrow)');
+    if(intro) intro.textContent=intro.textContent.replace(/\b46 useful choices\b/,showing+' current choices');
+  };
+  const filters=document.querySelectorAll('.filter');
+  filters.forEach(button=>button.addEventListener('click',update));
+  update();
+  const nextUKMidnight=()=> {
+    const now=new Date();
+    const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);
+    const hour=Number(parts.find(x=>x.type==='hour')?.value||0), minute=Number(parts.find(x=>x.type==='minute')?.value||0);
+    return Math.max(60000,((24*60)-(hour*60+minute))*60000+60000);
+  };
+  let clock;
+  const refresh=()=> {update();clearTimeout(clock);clock=setTimeout(refresh,Math.min(nextUKMidnight(),2147483647));};
+  clock=setTimeout(refresh,nextUKMidnight());
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)update();});
+})();
+</script>
+<script src="/assets/config.js"></script>
 <script src="/assets/site.js"></script>
 <script src="/assets/guide-analytics.js"></script>
 </body>
