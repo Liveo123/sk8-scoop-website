@@ -39,6 +39,8 @@ jobs:
         run: node scripts/check-guide-public-samples.mjs
       - name: Check 52 Adventures reviewed image integrity
         run: node scripts/check-52-adventures-images.mjs
+      - name: Verify optional 52 Adventures premium gallery safety and tracking
+        run: node scripts/check-52-adventures-premium.mjs
       - name: Check current issue freshness
         run: node scripts/check-current-content.mjs
       - name: Check post-launch NUE contracts
@@ -277,6 +279,29 @@ jobs:
           fi
           echo "OK Preview isolation: STRIPE_WEBHOOK_SECRET is not inherited"
 
+
+      - name: Check out premium gallery browser QA source
+        if: startsWith(github.head_ref, 'preview/52-adventures-gallery-')
+        uses: actions/checkout@v4
+
+      - name: Verify fictional gallery inside deployed 52 Adventures preview
+        if: startsWith(github.head_ref, 'preview/52-adventures-gallery-')
+        shell: bash
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then export CHROME="$(command -v google-chrome)"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then export CHROME="$(command -v google-chrome-stable)"
+          elif command -v chromium >/dev/null 2>&1; then export CHROME="$(command -v chromium)"
+          else echo "Chrome/Chromium unavailable for QA"; exit 1; fi
+          node scripts/check-52-adventures-premium-browser.mjs
+
+      - name: Archive gallery layout screenshots for review
+        if: always() && startsWith(github.head_ref, 'preview/52-adventures-gallery-')
+        uses: actions/upload-artifact@v4
+        with:
+          name: premium-gallery-mainline-browser-qa
+          path: visual-qa/52-premium-gallery/
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Check out Free & Cheap guide QA scripts
         if: startsWith(github.head_ref, 'free-cheap-')
