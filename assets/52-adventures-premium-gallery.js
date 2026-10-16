@@ -6,22 +6,39 @@
   const cfg = window.SK8_52_PREMIUM;
   if (!slot || !cfg || cfg.enabled !== true || cfg.ownerApproved !== true ||
       cfg.advertiserArtworkApproved !== true || cfg.imageRightsCleared !== true) return;
-  const today = new Date().toISOString().slice(0, 10);
-  const dateOK = s => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && !Number.isNaN(Date.parse(s + 'T00:00:00Z'));
-  if (!dateOK(cfg.startDate) || !dateOK(cfg.endDate) || today < cfg.startDate || today > cfg.endDate) return;
+  // Campaign days use UK civil dates, not UTC, so expiry follows the local calendar.
+  const ukToday = () => {
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+    const value = name => (parts.find(part => part.type === name) || {}).value || '';
+    return [value('year'), value('month'), value('day')].join('-');
+  };
+  const dateOK = value => {
+    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+    const stamp = Date.parse(value + 'T00:00:00Z');
+    return Number.isFinite(stamp) && new Date(stamp).toISOString().slice(0, 10) === value;
+  };
+  // A 30-day campaign lasts from startDate through endDate inclusive.
+  if (!dateOK(cfg.startDate) || !dateOK(cfg.endDate) ||
+      (Date.parse(cfg.endDate + 'T00:00:00Z') - Date.parse(cfg.startDate + 'T00:00:00Z')) !== 29 * 86400000) return;
+  if (ukToday() < cfg.startDate || ukToday() > cfg.endDate) return;
   const clean = v => typeof v === 'string' ? v.trim().slice(0, 400) : '';
   const text = (tag, cls, value) => { const el = document.createElement(tag); if (cls) el.className = cls; el.textContent = clean(value); return el; };
   const safeUrl = value => {
     if (!value || typeof value !== 'string') return null;
     try {
       const u = new URL(value, location.href);
-      if (u.protocol !== 'https:' && !(u.protocol === 'http:' && u.hostname === 'localhost')) return null;
+      if (u.protocol !== 'https:') return null;
       return u.href;
     } catch { return null; }
   };
-  const images = Array.isArray(cfg.photos) ? cfg.photos.slice(0, 5)
-    .map(p => ({src: safeUrl(p && p.src), alt: clean(p && p.alt), credit: clean(p && p.credit), rightsBasis: clean(p && p.rightsBasis)}))
-    .filter(p => p.src && p.alt && p.rightsBasis) : [];
+  if (!Array.isArray(cfg.photos) || cfg.photos.length < 2 || cfg.photos.length > 5) return;
+  const allowedRights = new Set(['PAUL', 'PERMISSION', 'LICENCE']);
+  const images = cfg.photos.map(p => ({
+    src: safeUrl(p && p.src), alt: clean(p && p.alt), credit: clean(p && p.credit),
+    rightsBasis: clean(p && p.rightsBasis)
+  }));
+  // Every image must be cleared. Never silently skip a photo with missing rights.
+  if (images.some(p => !p.src || !p.alt || !allowedRights.has(p.rightsBasis))) return;
   const actionUrl = safeUrl(cfg.actionUrl);
   if (!actionUrl || !clean(cfg.businessName) || !clean(cfg.headline) || !clean(cfg.description) ||
       !clean(cfg.placementId) || !clean(cfg.actionLabel) || images.length < 2) return;
@@ -92,5 +109,41 @@
   info.append(link,text('p','sk8-premium-disclosure','Advertisement. The operator supplies the activity information and approved photographs. SK8 Scoop retains independent editorial control.'));
   layout.append(photos,info);card.append(layout);
   slot.append(card);slot.hidden=false;
-  track('guide_advertiser_render');
+  track('guide_advertiser_render'); // DOM insertion only, NOT a measured view.
+  // View events require at least 50% visible for one continuous second.
+  // No supported observer means no claimed view, rather than a guessed impression.
+  if ('IntersectionObserver' in window) {
+    let viewTimer = null;
+    let viewed = false;
+    const observer = new IntersectionObserver(entries => {
+      if (viewed) return;
+      const entry = entries.find(item => item.target === card);
+      if (!entry) return;
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5 && document.visibilityState !== 'hidden') {
+        if (!viewTimer) viewTimer = setTimeout(() => {
+          viewTimer = null;
+          if (document.visibilityState === 'hidden' || slot.hidden || viewed) return;
+          viewed = true;
+          track('guide_advertiser_view');
+          observer.disconnect();
+        }, 1000);
+      } else if (viewTimer) {
+        clearTimeout(viewTimer);
+        viewTimer = null;
+      }
+    }, { threshold: [0, 0.5] });
+    observer.observe(card);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden' && viewTimer) {
+        clearTimeout(viewTimer);
+        viewTimer = null;
+      }
+    });
+  }
+  const expireIfNeeded = () => {
+    if (ukToday() > cfg.endDate) slot.hidden = true;
+  };
+  // Long-open browser tabs should not keep showing an expired placement.
+  document.addEventListener('visibilitychange', expireIfNeeded);
+  window.setInterval(expireIfNeeded, 60000);
 })();
