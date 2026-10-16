@@ -105,7 +105,16 @@
   const link = text('a','sk8-premium-action',cfg.actionLabel + ' →');
   link.href=actionUrl; link.target='_blank'; link.rel='noopener noreferrer sponsored';
   link.dataset.advertiser = clean(cfg.businessName);
-  link.addEventListener('click',()=>track('guide_advertiser_click',{link_label:clean(cfg.actionLabel),destination_host:new URL(actionUrl).hostname}));
+  link.addEventListener('click', event => {
+    // A long-open page must not accept an advertiser click after expiry, even
+    // during the minute before the next automatic expiry check.
+    if (ukToday() < cfg.startDate || ukToday() > cfg.endDate || slot.hidden) {
+      event.preventDefault();
+      slot.hidden = true;
+      return;
+    }
+    track('guide_advertiser_click',{link_label:clean(cfg.actionLabel),destination_host:new URL(actionUrl).hostname});
+  });
   info.append(link,text('p','sk8-premium-disclosure','Advertisement. The operator supplies the activity information and approved photographs. SK8 Scoop retains independent editorial control.'));
   layout.append(photos,info);card.append(layout);
   slot.append(card);slot.hidden=false;
