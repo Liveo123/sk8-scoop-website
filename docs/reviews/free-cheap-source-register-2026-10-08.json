@@ -16,15 +16,15 @@
     "unverified": "Queue immediately"
   },
   "overview": {
-    "total": 54,
-    "dated": 7,
-    "specificClaimChecks": 50,
+    "total": 57,
+    "dated": 10,
+    "specificClaimChecks": 53,
     "dateConflicts": 2,
     "timeDiscrepancies": 0,
     "secondaryOnly": 1,
     "awaitingPrimary": 1,
-    "proposed_active_listings": 50,
-    "proposed_dated_cards": 3,
+    "proposed_active_listings": 53,
+    "proposed_dated_cards": 6,
     "archived_or_postponed_records": 4
   },
   "entries": [
@@ -2057,10 +2057,115 @@
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Arc series details remain supported, but exact October date unresolved."
       }
+    },
+    {
+      "id": "FC-055",
+      "heading": "CHEADLE SOUL CLUB HALLOWEEN SPECIAL",
+      "section": "What’s On Now",
+      "review_class": "DATE_SPECIFIC",
+      "listing_anchor": "cheadle-soul-club-halloween-2026",
+      "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#cheadle-soul-club-halloween-2026",
+      "page_price_band": "£5 ON THE DOOR",
+      "page_price_detail": "£5 on the door",
+      "page_when": "Saturday 31 October 2026, 8.30pm until late.",
+      "advertised_date": "2026-10-31",
+      "page_source_url": "https://www.soul-source.co.uk/events/event/92822-cheadle-soul-club-halloween-special-cheadle-con-club/",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Saturday 31 October 2026, 8.30pm until late.",
+        "Cheadle & Gatley Conservative Club, 24 Stockport Road, Cheadle, SK8 2AA.",
+        "£5 ON THE DOOR",
+        "Pay on the door. Smart dress is requested; no admission after 11pm. Drinks are extra. Check the organiser’s listing before travelling."
+      ],
+      "claim_evidence_urls": [
+        "https://www.soul-source.co.uk/events/event/92822-cheadle-soul-club-halloween-special-cheadle-con-club/"
+      ],
+      "claim_check_date": "2026-10-16",
+      "next_review_due": "2026-10-29",
+      "editorial_note": "Owner explicitly selected first three strongest candidates on 16 October 2026. Added to staging only; not publication approval.",
+      "approval": {
+        "status": "APPROVED_FOR_THIS_UPDATE",
+        "date": "2026-10-16",
+        "instruction": "Add to the guide the first three strongest."
+      },
+      "image_rights_basis": "TEXT-ONLY",
+      "publication_state": "STAGING_APPROVED_ADDITION"
+    },
+    {
+      "id": "FC-056",
+      "heading": "MERSEYDAY OF THE DEAD — PART 2",
+      "section": "What’s On Now",
+      "review_class": "DATE_SPECIFIC",
+      "listing_anchor": "merseyday-of-the-dead-2026",
+      "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#merseyday-of-the-dead-2026",
+      "page_price_band": "FREE",
+      "page_price_detail": null,
+      "page_when": "Saturday 24 October 2026: Merseyway noon–3pm; Redrock 5–7pm. There is a break between the two programmes.",
+      "advertised_date": "2026-10-24",
+      "page_source_url": "https://merseyway.com/events/merseyday-of-the-dead-part-2/",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Saturday 24 October 2026: Merseyway noon–3pm; Redrock 5–7pm. There is a break between the two programmes.",
+        "Merseyway Shopping Centre and Redrock, Stockport town centre.",
+        "FREE",
+        "The organiser advertises a free family event. Come in costume if you like; travel, parking, food and drinks can add to the outing’s cost. Check the current programme before travelling."
+      ],
+      "claim_evidence_urls": [
+        "https://merseyway.com/events/merseyday-of-the-dead-part-2/"
+      ],
+      "claim_check_date": "2026-10-16",
+      "next_review_due": "2026-10-22",
+      "editorial_note": "Owner explicitly selected first three strongest candidates on 16 October 2026. Added to staging only; not publication approval.",
+      "approval": {
+        "status": "APPROVED_FOR_THIS_UPDATE",
+        "date": "2026-10-16",
+        "instruction": "Add to the guide the first three strongest."
+      },
+      "image_rights_basis": "TEXT-ONLY",
+      "publication_state": "STAGING_APPROVED_ADDITION"
+    },
+    {
+      "id": "FC-057",
+      "heading": "HALLOWEEN ALTERNATIVE MARKET",
+      "section": "What’s On Now",
+      "review_class": "DATE_SPECIFIC",
+      "listing_anchor": "stockport-alternative-market-halloween-2026",
+      "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#stockport-alternative-market-halloween-2026",
+      "page_price_band": "FREE ENTRY",
+      "page_price_detail": null,
+      "page_when": "Sunday 25 October 2026, 4–8pm general access. A separate quiet hour runs 3–4pm.",
+      "advertised_date": "2026-10-25",
+      "page_source_url": "https://www.stockport.gov.uk/events/stockport-alternative-market-halloween?date=2026-10-25",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Sunday 25 October 2026, 4–8pm general access. A separate quiet hour runs 3–4pm.",
+        "Stockport Masonic Guildhall, 169–171 Wellington Road South, Stockport, SK1 3UA.",
+        "FREE ENTRY",
+        "All ages welcome. Entry and parking are advertised as free; purchases, food and drinks are extra. Quiet-hour entry needs a free Eventbrite ticket, reached through the organiser’s Instagram link on the event page."
+      ],
+      "claim_evidence_urls": [
+        "https://prod-windows-webplatform-origin.smbcdigital.net/events/stockport-alternative-market-halloween?date=2026-10-25",
+        "https://totallystockport.co.uk/event/stockport-alternative-market-halloween-2026/"
+      ],
+      "claim_check_date": "2026-10-16",
+      "next_review_due": "2026-10-23",
+      "editorial_note": "Owner explicitly selected first three strongest candidates on 16 October 2026. Added to staging only; not publication approval.",
+      "approval": {
+        "status": "APPROVED_FOR_THIS_UPDATE",
+        "date": "2026-10-16",
+        "instruction": "Add to the guide the first three strongest."
+      },
+      "image_rights_basis": "TEXT-ONLY",
+      "publication_state": "STAGING_APPROVED_ADDITION"
     }
   ],
   "last_factual_reconciliation": "2026-10-09",
   "last_maintenance_audit": "2026-10-16",
   "maintenance_release_state": "STAGING_NOT_PUBLISHED",
-  "maintenance_scope": "Existing selections only. 54 baseline records retained for history, 50 proposed active listings, three future event cards and one postponement notice."
+  "maintenance_scope": "54 baseline records audited, four archived/postponed, plus three explicitly owner-approved new dated entries; 53 proposed active listings, six future dated cards and one postponement notice.",
+  "owner_approved_additions_2026_10_16": [
+    "FC-055",
+    "FC-056",
+    "FC-057"
+  ]
 }
