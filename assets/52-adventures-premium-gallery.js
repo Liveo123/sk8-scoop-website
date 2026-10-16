@@ -115,29 +115,33 @@
   if ('IntersectionObserver' in window) {
     let viewTimer = null;
     let viewed = false;
+    let sufficientlyVisible = false;
+    const cancelPendingView = () => {
+      if (viewTimer) clearTimeout(viewTimer);
+      viewTimer = null;
+    };
+    const queueView = () => {
+      if (!sufficientlyVisible || document.visibilityState === 'hidden' || slot.hidden || viewed || viewTimer) return;
+      viewTimer = setTimeout(() => {
+        viewTimer = null;
+        if (document.visibilityState === 'hidden' || slot.hidden || !sufficientlyVisible || viewed) return;
+        viewed = true;
+        track('guide_advertiser_view');
+        observer.disconnect();
+      }, 1000);
+    };
     const observer = new IntersectionObserver(entries => {
       if (viewed) return;
       const entry = entries.find(item => item.target === card);
       if (!entry) return;
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.5 && document.visibilityState !== 'hidden') {
-        if (!viewTimer) viewTimer = setTimeout(() => {
-          viewTimer = null;
-          if (document.visibilityState === 'hidden' || slot.hidden || viewed) return;
-          viewed = true;
-          track('guide_advertiser_view');
-          observer.disconnect();
-        }, 1000);
-      } else if (viewTimer) {
-        clearTimeout(viewTimer);
-        viewTimer = null;
-      }
+      sufficientlyVisible = entry.isIntersecting && entry.intersectionRatio >= 0.5;
+      if (sufficientlyVisible) queueView();
+      else cancelPendingView();
     }, { threshold: [0, 0.5] });
     observer.observe(card);
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden' && viewTimer) {
-        clearTimeout(viewTimer);
-        viewTimer = null;
-      }
+      if (document.visibilityState === 'hidden') cancelPendingView();
+      else queueView(); // Restore counting after someone returns to a visible tab.
     });
   }
   const expireIfNeeded = () => {
