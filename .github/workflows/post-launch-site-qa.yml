@@ -39,6 +39,8 @@ jobs:
         run: node scripts/check-guide-public-samples.mjs
       - name: Check 52 Adventures reviewed image integrity
         run: node scripts/check-52-adventures-images.mjs
+      - name: Check premium gallery activation, image rights, exact expiry and measurement
+        run: node scripts/check-52-adventures-premium.mjs
       - name: Check current issue freshness
         run: node scripts/check-current-content.mjs
       - name: Check post-launch NUE contracts
