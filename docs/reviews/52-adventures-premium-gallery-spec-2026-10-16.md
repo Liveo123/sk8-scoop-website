@@ -16,8 +16,8 @@
 - `52-adventures/guide/index.html`: a new **hidden**, standalone section after quick routes and before editorial picks. Existing 52 entries, finder data and editorial recommendations unchanged.
 - `assets/52-adventures-premium-gallery.css`: independent responsive styles, high-contrast ad header, keyboard focus, no forced oversized white panels.
 - `assets/52-adventures-premium-config.js`: all required activation flags default `false`; no current advertiser.
-- `assets/52-adventures-premium-gallery.js`: checks owner approval, artwork and rights approval, valid dates, essential business fields, verified HTTPS link and 2–5 images with alt and rights basis. Uses DOM text assignments; does not interpolate untrusted content to `innerHTML`. No ad is rendered unless every gate passes; editorial remains fully usable.
-- Tracks `guide_advertiser_render`, `guide_advertiser_gallery` and `guide_advertiser_click` via the existing consent-aware `window.sk8Track`. Count renders as render attempts, not guaranteed viewability. Impression counts would need additional IntersectionObserver once a real test begins. Clicks do not equal sales.
+- `assets/52-adventures-premium-gallery.js`: checks owner, artwork and rights approval, exactly 30 inclusive UK calendar days, essential fields, HTTPS-only action/image links, and 2–5 images. Every image must have alt text and an accepted PAUL / PERMISSION / LICENCE rights basis; one invalid image blocks the entire advert. Uses Europe/London to respect BST, hides expired cards in long-open tabs, and avoids untrusted innerHTML. All 52 independent adventures remain usable.
+- Tracks `guide_advertiser_render` (component inserted), `guide_advertiser_view` (at least 50% visible for one uninterrupted second), `guide_advertiser_gallery` (image navigation) and `guide_advertiser_click` (CTA clicks) via consent-aware `window.sk8Track`. Never treat renders as impressions; disclose tracking-consent limitations. Clicks are not bookings.
 - Original guide tracking remains separate from paid performance: don't count ordinary editorial entry opens or internal guide navigation as sponsor results.
 
 ## Blockers before any real booking
@@ -33,3 +33,15 @@
 Guide Performance worksheet: 8–14 October full-guide active users **10**, guide_view events **36**, listing_open events **8** (not necessarily unique people). These data are early and do not establish readership of any specific sponsored slot. Small sample and current inventory uncertainty mean pricing is a **test hypothesis**, not market-validated.
 
 Proposed review after three compliant paid placements or 60 days, whichever is later: total paid GBP, editorial impact complaints, guide traffic, sponsored clicks/CTR if actual viewable impressions are measured, business-confirmed leads/bookings where voluntarily provided, renewal, production minutes. Do not attribute page visits or organic editorial clicks to paid ads.
+
+## Verification and safe launch handoff (16 October 2026)
+- Draft PR #218 is against unmerged guide refresh PR #172 and remains intentionally disabled.
+- Continuous PR QA added at scripts/check-52-adventures-premium.mjs: activation gates, expiry, 30-day UK dates, licence/permissions, safe URLs, all 52 original entries, gallery navigation, one-second view event, tab visibility/return and paid-click classification.
+- On GitHub commit 0c22ec89156f3ae9f7df20283ebb7136e76d4e50, Website Health, Post-launch site QA, the new premium regression step and preview smoke all PASSED. Main live smoke and header-layout were SKIPPED.
+- The separate standalone sales-page preview with fictional photography was checked in Chromium at 390, 740, 900 and 1440 pixels: zero horizontal overflow, missing images or JavaScript errors. This does NOT amount to rendered browser QA of a real activated card inside the production guide.
+- Campaign publication requires written advertiser content and photo approval, actual rights evidence for each photo, correct operator and contact checks, final approved public position, 30-day exact booking dates, and a confirmed secure HTTPS booking URL.
+- Approved £39 gallery is a ONE-OFF INTRODUCTORY product; it does not change the £28 Guide card, nor silently alter the £60 standard Guide + newsletter bundle.
+- Commercial measurement: consenting tracked viewable-card events and paid CTA clicks, no false impression or booking guarantee. Explicitly separate paid clicks from organic editorial adventure clicks.
+- Release is still blocked until PR #172 is individually approved/merged, gallery is rebased and visually QA-tested with genuinely cleared images, inventory and VAT/invoice/Stripe mapping are checked, and Paul gives fresh approval before publication, sending any outreach or charging.
+- The premium config starts with enabled=false, ownerApproved=false and imageRightsCleared=false; an enquiry alone must not flip those flags.
+- Practical launch checklist: approve a single suitable placement, collect original sources and written creative permission, check one booking link and copy, record campaign ID and exact UK start/end dates, verify access and interaction on phone/tablet/desktop, confirm consent-gated analytics, gain owner publication approval, then run post-launch smoke and expiry check.
