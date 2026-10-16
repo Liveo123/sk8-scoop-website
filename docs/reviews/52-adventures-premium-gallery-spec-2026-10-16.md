@@ -1,10 +1,10 @@
 # 52 Adventures premium gallery: owner-approved direction, NOT approved launch
 
-**Status:** PREVIEW ONLY. Owner approved treating the five-photo gallery as a **separate premium product** while retaining the existing **£28 standard Guide advert**. Owner did **not** approve a new premium price, publishing, live payments, deployment or outbound send. Do not conflate this prototype with inventory offered for sale.
+**Status:** PRICE APPROVED, TECHNICAL PREVIEW ONLY. On 16 October 2026 Paul approved **£39 introductory / 30 days** for this separate 52 Adventures premium gallery. Existing **£28 standard Guide advert** is unchanged. Price approval does **not** authorise publishing, sending emails, payment collection, live activation or promising available inventory.
 
 ## Product / editorial contract
 - Standard Guide card **£28** for 30 days remains unchanged and must remain independently available as approved.
-- **Suggested launch experiment: £39 per 30-day premium gallery**, proposed, not authorised. This is an £11 premium over the standard Guide ad, intended as a low-risk pricing hypothesis for a young product with light measured full-guide reach. If actual build/management time exceeds 30 minutes, revisit price. No claims of a published price until approved and synchronized.
+- **Approved introductory price: £39 per 30-day premium gallery** (Paul, 16 October 2026). It is £11 above the £28 standard Guide advert. Price approved, **sale and activation on hold** until placement, billing and fulfilment checks pass and owner expressly authorises publishing, sending and accepting payment.
 - Premium product: one separate, up-front **ADVERTISEMENT** block in the 52 Adventures home view, one paid slot maximum, 2–5 approved operator photographs (target five), useful practical details, one booking/enquiry CTA, tracking, and advertiser approval. This is **in addition** to, not a rewrite of, the original editorial listing. Do not sell improved editorial ranking, placement within the editorial eight picks, or other organic advantage.
 - One paid placement only for this MVP, duration 30 days inclusive; monthly reach and measurable link clicks reported without minimum guarantees or identifying reader data. Operator supplies correct information, usage rights and approval; SK8 checks, edits and publishes; no automatic renewal.
 - Labels and border distinguish paid material; write *ADVERTISEMENT* at top. <https://www.asa.org.uk/advice-online/recognising-ads-advertisement-features.html>.
@@ -21,7 +21,7 @@
 - Original guide tracking remains separate from paid performance: don't count ordinary editorial entry opens or internal guide navigation as sponsor results.
 
 ## Blockers before any real booking
-1. Owner explicitly approves an exact premium price, 30-day period, single-slot inventory, creative scope and location.
+1. **Pricing done:** £39 for 30 days approved 16 October. Owner still needs to approve specific available inventory, detailed creative scope and slot location at the release gate.
 2. Production deployment/visual design of the underlying PR #172 passes Paul's review and release gate. Rebase after PR #172 merges and rerun QA.
 3. Verify operational checkout/product identifiers, VAT/tax status, booking form, invoice and confirmation against approved price; don't modify payments until authorisation.
 4. Reconfirm advertiser's exact operator, contact legality, complete inbox/CRM history, objections and actual current campaign fit. Don't send held prospect drafts.
