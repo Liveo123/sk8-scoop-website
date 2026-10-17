@@ -1,4 +1,5 @@
 import siteWorker from './worker-protected.js';
+import { handleEngagementForms } from './engagement-forms.js';
 
 const CONTACT_INBOX = 'contact@sk8scoop.com';
 const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
@@ -6,6 +7,13 @@ const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith('/api/reader-demographics') || url.pathname === '/api/advertiser-interest') {
+      const handled = await handleEngagementForms(request, env, {
+        notify: async (to, subject, text) => sendResendEmail(env, { to, subject, text, replyTo: CONTACT_INBOX })
+      });
+      if (handled) return secureResponse(handled, url);
+    }
 
     if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') {
       return secureResponse(await handleAdvertiserEnquiryWithNotification(request, env, ctx), url);

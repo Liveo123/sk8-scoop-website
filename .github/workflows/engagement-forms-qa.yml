@@ -1,0 +1,28 @@
+name: SK8 Engagement Forms QA
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'engagement-forms.js'
+      - 'worker-business-v2.js'
+      - 'assets/engagement-forms.js'
+      - 'assets/engagement-forms.css'
+      - 'advertise/ask/index.html'
+      - 'reader-survey/**'
+      - 'migrations/2026-10-15-engagement-forms.sql'
+      - 'tests/engagement-forms.mjs'
+      - '.github/workflows/engagement-forms-qa.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check engagement-forms.js
+      - run: node --check worker-business-v2.js
+      - run: node --check assets/engagement-forms.js
+      - run: node tests/engagement-forms.mjs
