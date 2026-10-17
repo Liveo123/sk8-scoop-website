@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="light" name="color-scheme"/><title>SK8 Scoop Free &amp; Cheap Guide — Updated 16 October 2026</title><style>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="light" name="color-scheme"/><title>SK8 Scoop Free &amp; Cheap Guide — Updated 17 October 2026</title><style>
 :root{--teal:#0F6470;--cream:#F7F3EA;--ink:#263238;--lime:#C8E84A;--white:#FFFFFF;--muted:#D9DFDA;--max:1160px;}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--cream)}
@@ -2437,7 +2437,7 @@ Selected October 2026 events · Past dates are automatically hidden</p>
     const id=(eventDate?'guide-event:free-cheap:':'guide-page:free-cheap:')+slugify(title);
     const isSaved=()=>readSaved().some(item=>item&&item.id===id);
     const buildItem=()=>eventDate?{
-      id,kind:'event',title,date:eventDate,end_date:eventDate,date_range:when,time:'',area:'SK8 / Stockport',venue:where,cost,category:'Free & Cheap Guide',description:(article.querySelector('.entry-narrative')?.textContent||'').trim(),booking_url:official?.href||shareUrl,source_url:official?.href||shareUrl,checked:'Guide maintenance review 16 October 2026; listing facts may have earlier check dates',saved_at:new Date().toISOString()
+      id,kind:'event',title,date:eventDate,end_date:eventDate,date_range:when,time:'',area:'SK8 / Stockport',venue:where,cost,category:'Free & Cheap Guide',description:(article.querySelector('.entry-narrative')?.textContent||'').trim(),booking_url:official?.href||shareUrl,source_url:official?.href||shareUrl,checked:'Guide maintenance review 17 October 2026; listing facts may have earlier check dates',saved_at:new Date().toISOString()
     }:{
       id,kind:'page',title,url:location.pathname+'#'+article.id,area:'SK8 / nearby',category:'Free & Cheap Guide',description:(article.querySelector('p')?.textContent||'').trim(),saved_at:new Date().toISOString()
     };
