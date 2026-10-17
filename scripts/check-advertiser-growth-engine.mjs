@@ -23,7 +23,7 @@ const lacks = (text, literal, label) => check(!text.includes(literal), label);
 has(page,'Show local readers <em>what you offer</em>','01. Outcome-led local hero title');
 has(page,'Promote a class, event, service or special offer','02. Specific local business offer in hero');
 has(page,'ad-hero-quick-grid','03. Three compact hero choices');
-has(page,'685 active newsletter subscribers','Dated, verified email-list evidence');
+has(page,'722 active newsletter subscribers','Dated, verified email-list evidence');
 has(page,'List size, not a promise of advert views','Honest disclosure about reach uncertainty');
 has(page,'ad-artwork-details','Optional creative options can be expanded');
 has(page,'ad-sk8-map-backdrop','SK8 map backdrop replaces newsletter artwork');

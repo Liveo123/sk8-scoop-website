@@ -105,7 +105,7 @@ contains('assets/advertise-rework-oct8.css','.ad-premium-grid');
 
 // Current advertiser offer and backend contract, approved 8 October 2026.
 contains('advertise.html','Show local readers <em>what you offer</em>');
-contains('advertise.html','685 active newsletter subscribers');
+expect(/\b\d{3,5} active newsletter subscribers\b/.test(read('advertise.html')), 'Advertiser page must show a numeric active newsletter subscriber count');
 contains('advertise.html','List size, not a promise of advert views, clicks or sales.');
 contains('advertise.html','assets/advertise-clarity-oct9.css');
 contains('advertise.html','ad-hero-quick-grid');
