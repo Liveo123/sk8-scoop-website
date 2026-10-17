@@ -51,6 +51,34 @@ try{
     if(state.docWidth>width+1)fail(width+'px: horizontal overflow '+state.docWidth);
     if(state.cards.length<2)fail(width+'px: missing secondary cards');
     for(const c of state.cards)if(c.left<-1||c.right>width+1||c.arrowLeft<c.left-1||c.arrowRight>c.right+1)fail(width+'px: arrow/card clipping '+JSON.stringify(c));
+
+    // The small features must use existing free, permanent entries and preserve their targets.
+    const featureState=await evaluate(`(()=>{
+      const host=document.getElementById('free-surprise'),button=document.getElementById('free-surprise-pick'),again=document.getElementById('free-surprise-again');
+      const entries=[...document.querySelectorAll('article[data-free-surprise]')];
+      if(!host||host.hidden||!button||!again)return {error:'free picker unavailable'};
+      const valid=entries.length===8&&entries.every(a=>a.id&&a.querySelector('.entry-price-chip')?.textContent.trim()==='FREE'&&!a.classList.contains('event-card')&&!a.classList.contains('recurring-card'));
+      const picks=[];button.click();
+      for(let i=0;i<16;i++){
+        if(i)again.click();
+        const link=document.querySelector('#free-surprise-result a');
+        const card=link&&document.getElementById(link.getAttribute('href').slice(1));
+        if(!card||!entries.includes(card))return {error:'pick target outside approved free pool'};
+        picks.push(card.id);
+      }
+      const noteBounds=[...document.querySelectorAll('.guide-mini-note')].map(e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right}});
+      const buttonBounds=button.getBoundingClientRect();
+      return {valid,picks,challenges:document.querySelectorAll('[data-guide-feature="challenge"]').length,facts:document.querySelectorAll('[data-guide-feature="fact"]').length,live:document.querySelector('#free-surprise-result').getAttribute('aria-live'),againVisible:!again.hidden,minTap:buttonBounds.height,notesClipped:noteBounds.some(b=>b.left<0||b.right>innerWidth+1)};
+    })()`);
+    if(featureState.error||!featureState.valid)fail(width+'px: '+(featureState.error||'invalid free pool'));
+    if(featureState.picks.some((id,i,a)=>i>0&&id===a[i-1]))fail(width+'px: immediate repeat');
+    if(new Set(featureState.picks.slice(0,8)).size!==8||new Set(featureState.picks.slice(8)).size!==8)fail(width+'px: repeat before free pool exhausted');
+    if(featureState.challenges!==3||featureState.facts!==2||featureState.live!=='polite'||!featureState.againVisible||featureState.minTap<48||featureState.notesClipped)fail(width+'px: feature accessibility/layout contract');
+    await evaluate("document.getElementById('free-surprise').scrollIntoView({block:'start',behavior:'instant'});true");
+    const featureShot=await cmd('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});
+    await writeFile('visual-qa/free-cheap-guide/features-'+width+'.png',Buffer.from(featureShot.data,'base64'));
+    console.log('PASS Free & Cheap small features '+width+'px: 8-free-item shuffle bag, 3 challenges, 2 facts, 48px target');
+
     const chosen=width===390?targets:targets.filter(x=>['hat-works-stockport','gatley-skatepark','play-zone-by-autisk-adswood','free-disability-swim-cheadle'].includes(x[0]));
     for(const [id,prefix] of chosen){
       const result=await evaluate("(()=>{const a=document.getElementById("+JSON.stringify(id)+");if(!a)return null;a.scrollIntoView({block:'start',behavior:'instant'});const b=a.getBoundingClientRect();return {top:b.top,left:b.left,right:b.right,title:a.querySelector('.entry-title')?.textContent.trim()||''}})()");

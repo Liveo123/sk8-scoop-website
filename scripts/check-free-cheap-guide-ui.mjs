@@ -50,14 +50,21 @@ for (const [img] of hits(free, /<img\b[^>]*>/gi))
 for (const [a] of hits(free, /<a\b[^>]*target="_blank"[^>]*>/gi))
   assert.match(a, /\brel="[^"]*noopener/, 'External new-window link missing noopener');
 
-const dates = hits(free, /<article class="guide-entry event-card" data-event-date="(\d{4}-\d{2}-\d{2})"/g).map(m => m[1]);
+const dates = listingBlocks.filter(a=>/class="guide-entry event-card"/.test(a)).map(a=>a.match(/data-event-date="(\d{4}-\d{2}-\d{2})"/)?.[1]);
+assert.ok(dates.every(Boolean), 'Every event card needs expiry metadata regardless of attribute order');
 assert.ok(dates.length > 0, 'Dated event metadata has disappeared');
 assert.deepEqual(dates, [...dates].sort(), 'Dated entries should be chronological');
 assert.match(free, /id="dated-event-expiry-guard"/, 'Europe/London dated-event expiry script missing');
 assert.match(free, /timeZone:'Europe\/London'/, 'Expiry dates must use UK time');
 assert.match(free, /id="dated-events-empty" hidden/, 'Guide needs an end-of-window fallback');
 assert.doesNotMatch(free, /WEDNESDAY 7 OCTOBER|Saturday 3 October 2026|beyond this 31-day window/, 'Known expired or contradictory date has returned');
-assert.match(free, /Arc’s 31 October session is listed in the council events calendar/, 'Arc’s 31 October event must remain supported by a specific dated listing');
+// Contradictory source dates must remain visibly unresolved, with no calendar action.
+const disputed=listingBlocks.filter(a=>/data-date-unconfirmed="true"/.test(a));
+assert.equal(disputed.length,2,'Arc and Amoeba must retain explicit disputed-date state');
+for(const block of disputed) assert.match(block,/DATE UNCONFIRMED/,'Disputed event heading must not imply a confirmed date');
+assert.match(free,/article\.dataset\.dateUnconfirmed!==\x27true\x27/,'Disputed dates must not become calendar/saved-event dates');
+assert.match(free,/24 OR 31 OCTOBER — DATE UNCONFIRMED/,'Arc October discrepancy must remain visible');
+assert.doesNotMatch(free,/Next Cheadle Hulme second-Saturday session falls on 10 October/,'Expired next-session claim must not return');
 
 for (const [label, html] of [['Free & Cheap', free], ['Halloween', halloween]]) {
   const scripts = hits(html, /<script\b([^>]*)>([\s\S]*?)<\/script>/gi);
