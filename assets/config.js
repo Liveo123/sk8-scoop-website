@@ -46,25 +46,25 @@ window.SK8_CONFIG = {
   metaPixelId: "4649116095416763",
   formsparkContactEndpoint: "https://submit-form.com/X3MWnWHXI",
   publicStats: {
-    subscriberCount: "650+",
-    subscriberProof: "650+",
-    issuesPublished: 16,
-    checkedDate: "10 October 2026",
-    latestMainSendRecipients: 685,
+    subscriberCount: "700+",
+    subscriberProof: "700+",
+    issuesPublished: 17,
+    checkedDate: "16 October 2026",
+    latestMainSendRecipients: 721,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "9 October 2026",
+    latestIssueDate: "16 October 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 16,
-    dateIso: "2026-10-09",
-    dateDisplay: "Friday 9 October 2026",
-    title: "Issue 16 · Friday 9 October 2026",
-    headline: "Grimmfest, scarecrows + 40 Halloween ideas near SK8",
-    summary: "Grimmfest, Bramhall Halloween market, 40 half-term ideas, the vanished village of Heyhead and Cheadle Station works.",
-    url: "https://preview.mailerlite.io/preview/2462354/emails/200874486930605777"
+    number: 17,
+    dateIso: "2026-10-16",
+    dateDisplay: "Friday 16 October 2026",
+    title: "Issue 17 · Friday 16 October 2026",
+    headline: "FREE Merseyday of the Dead + Cheadle's Art Deco secret",
+    summary: "Free Merseyday of the Dead, Premier Café history, Carr Wood, HAF booking help and 46 half-term ideas.",
+    url: "/issues/issue-17/"
   },
   stripeLinks: {
     local_spotlight: "",
@@ -136,7 +136,7 @@ window.SK8_CONFIG = {
     const factStrong = document.querySelector('.issue-facts div:first-child strong');
     const factSmall = document.querySelector('.issue-facts small');
     if (snapshot) snapshot.textContent = `${stats.issuesPublished} issues in, with ${stats.subscriberCount} active subscribers.`;
-    if (snapshotText) snapshotText.textContent = `SK8 Scoop passed 500 subscribers by ${stats.checkedDate}. The public figure is deliberately rounded because the live count changes as people join and leave.`;
+    if (snapshotText) snapshotText.textContent = `SK8 Scoop had ${stats.subscriberCount} active subscribers at the ${stats.checkedDate} check. The public figure is deliberately rounded because the live count changes as people join and leave.`;
     if (factStrong) factStrong.textContent = stats.issuesPublished;
     if (factSmall) factSmall.textContent = `Subscriber milestone checked on ${stats.checkedDate}. Campaign-performance figures are deliberately omitted here until the latest issue has enough data to be meaningful.`;
   }

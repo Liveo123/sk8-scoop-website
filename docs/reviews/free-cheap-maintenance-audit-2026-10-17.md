@@ -116,3 +116,7 @@ Failed automated retrieval of council/Stockroom pages is not evidence of cancell
 Review draft https://maintenance-free-cheap-2026-10-16.previews.sk8scoop.com/free-cheap-guide/guide/
 PR https://github.com/Liveo123/sk8-scoop-website/pull/217
 Recheck UK date before merge. Snack Down is removed from visible load state from18October. Maintain partial editorial freshness until unresolved organiser facts are confirmed. Publication requires owner approval.
+
+
+## Validation blocker repair — 17 October
+Owner requested “Fix the problem and give me preview.” Reconciled homepage data with the existing Issue17 fallback cards; corrected current-issue summary parity and stale issue16 config-cache tags in homepage/archive/latest. Homepage small Issue16 badge corrected to17. Local current-content check now PASS. Refreshed staging branch onto current main dbf0604a1e8a777bc70f395327d13a2c08aa8b09 without replacing guide maintenance changes. Adding a review query to the known platform guide URL returned matching17October guide HTML, while the unversioned response was stale. Exact final-head CI/browser/deployment evidence follows in PR/control. Production remains unchanged.
