@@ -3,7 +3,7 @@
   "status": "WORKING_BASELINE_NOT_FULL_EDITORIAL_REVERIFICATION",
   "created_on": "2026-10-08",
   "published_source_commit": "56c2afd1b7f916a277bcea79e637a3474267b8be",
-  "staging_guide_blob_sha": "5313c0ff5cf44e02a1f8f888c1528abfcf878c37",
+  "staging_guide_blob_sha": null,
   "full_guide": "https://www.sk8scoop.com/free-cheap-guide/guide/",
   "historic_approved_ledger": "https://docs.google.com/document/d/1s28d9sW2SsGHCUo_a-3HzZAC6qQJLs-m3iTOu1sftco/edit",
   "historic_discovery_master": "https://drive.google.com/file/d/1ihniFUtiMbf004vO07tOwXZqObjrzTB_/view",
@@ -64,6 +64,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Standard adult £9, concession £7, 11–16 £5 and under-11 free match current admission table."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Provider admission £9 adult, £5 ages 11–16, under-11 free, cockpit extras reconfirmed.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
       }
     },
     {
@@ -101,6 +109,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -138,6 +154,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -175,6 +199,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -212,6 +244,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -249,6 +289,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -286,6 +334,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -324,6 +380,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Main admission free; current opening hours and Human Natures ending 1 November match visit page."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -362,6 +426,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Current homepage says free admission and daily 10am–5pm."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -400,6 +472,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Free without booking, Wednesday–Saturday 10am–5pm; last entry 4.40pm on current university page."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -437,6 +517,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -474,6 +562,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -511,6 +607,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -548,6 +652,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -585,6 +697,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -622,6 +742,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -659,6 +787,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -697,6 +833,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Council parks page confirms dawn–dusk and tennis £4 off-peak/£5 peak."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -735,6 +879,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Reserve site confirms free parking, wheelchair/buggy-friendly paths and dusk car-park lock."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -772,6 +924,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -809,6 +969,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -846,6 +1014,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -883,6 +1059,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -921,6 +1105,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Provider FAQ supports outdoor £9 per person/60 minutes, mini courts from £6 per court/30 minutes, daily 7am–9pm."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Provider outdoor £36 whole court/60 minutes, undercover £48, mini £6/30 minutes; supplied equipment and booking route reconfirmed.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
       }
     },
     {
@@ -959,6 +1151,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Current lane table still shows £16 early, £26 off-peak, £28 peak/40 minutes; school-holiday timing differs."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Provider lane rates £16 early bird / £26 off-peak / £28 peak for 40 minutes reconfirmed; shared-lane condition retained.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
       }
     },
     {
@@ -996,6 +1196,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1034,6 +1242,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Menu still supports adult lunch sandwiches from £6.50, jackets £8, omelette £9 and child sandwich £3."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Venue menu still supports adult lunch sandwich £6.50, jacket £8 and separate children’s menu; no change.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
       }
     },
     {
@@ -1044,20 +1260,21 @@
       "listing_anchor": "nafees-heald-green",
       "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#nafees-heald-green",
       "page_price_band": "UNDER £10 OPTIONS",
-      "page_price_detail": null,
+      "page_price_detail": "Masala omelette £7; plain paratha £4; bun kebab £4.95.",
       "page_when": "Daily, 9am–9pm.",
       "advertised_date": null,
       "page_source_url": "https://nafeessweetscentre.com/menu/",
       "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
       "primary_claims_checked": [
-        "Heald Green open daily 9am–9pm, several food choices under £10"
+        "Heald Green open daily 9am–9pm, several food choices under £10",
+        "17 October menu DOM: Masala Omelette £7.00, Bun Kebab £4.95, Plain Paratha £4.00. Price precedes heading within same .media-body."
       ],
       "claim_evidence_urls": [
         "https://nafeessweetscentre.com/menu/"
       ],
-      "claim_check_date": "2026-10-08",
-      "next_review_due": "2026-11-07",
-      "editorial_note": null,
+      "claim_check_date": "2026-10-17",
+      "next_review_due": "2026-11-16",
+      "editorial_note": "17 October prices supersede earlier price associations: masala omelette £7; plain paratha £4; bun kebab £4.95. Earlier claim records are historical.",
       "maintenance_2026_10_16": {
         "classification": "KEEP",
         "reason": "Menu still shows masala omelette £4.95, plain paratha £5 and bun kebab £9.",
@@ -1072,6 +1289,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Menu still shows masala omelette £4.95, plain paratha £5 and bun kebab £9."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "CORRECT",
+        "reason": "Current venue menu DOM associates each preceding .fbox-number price with its own dish heading: masala omelette £7; plain paratha £4; bun kebab £4.95. Prior extraction shifted prices between adjacent dishes.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "PRIMARY_MENU_DOM_RECHECK"
       }
     },
     {
@@ -1109,6 +1334,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1146,6 +1379,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1183,6 +1424,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1220,6 +1469,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1257,6 +1514,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1296,6 +1561,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1334,6 +1607,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1372,6 +1653,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Current venue page confirms Wednesday 8pm/£1 quiz and Friday 9pm live music; separately advertised special charity dinner is not a new guide addition."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1409,6 +1698,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1447,6 +1744,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Arc confirms standard last-Saturday/drop-in pattern and voluntary £3 donation; this does not resolve conflicting October date."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "STALE-CHECK",
+        "reason": "Arc monthly terms still supported by organiser; October 24/31 date conflict remains unresolved.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "UNRESOLVED_OR_TARGETED_CORRECTION"
       }
     },
     {
@@ -1485,6 +1790,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Provider calendar still shows 7 November and 5 December 2026."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1522,6 +1835,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "STALE-CHECK",
+        "reason": "no direct library reply; old community-calendar evidence is not new primary confirmation.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "UNRESOLVED_OR_TARGETED_CORRECTION"
       }
     },
     {
@@ -1560,6 +1881,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Provider hub still confirms free Wednesday 8–8.45pm swim, 11+ and 25m unaided."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1598,6 +1927,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1609,15 +1946,17 @@
       "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#inclusive-community-gym",
       "page_price_band": "COST TO CONFIRM",
       "page_price_detail": "Historic £7; current price unconfirmed.",
-      "page_when": "Council listings show Wednesday sessions from 10.30am to 12.30pm; confirm the next date before travelling.",
+      "page_when": "An older council listing showed Wednesday, 10.30am–12.30pm. The next session and current timetable are unconfirmed; check with Seashell before travelling.",
       "advertised_date": null,
-      "page_source_url": "https://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday",
+      "page_source_url": "https://www.seashelltrust.org.uk/seashell-active/health-and-fitness/",
       "fact_check_status": "NEEDS_PRIMARY_RECHECK",
       "primary_claims_checked": [
-        "Historic organiser-submitted 10 June session £7 and 10.30am–12.30pm; current recurrence NOT verified"
+        "Historic organiser-submitted 10 June session £7 and 10.30am–12.30pm; current recurrence NOT verified",
+        "17 October: current provider fitness page requires induction before first booking and directs enquiries/pricing to active@seashelltrust.org.uk. Does not verify the particular October community session."
       ],
       "claim_evidence_urls": [
-        "https://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday?date=2026-06-10"
+        "https://www.stockport.gov.uk/events/inclusive-community-gym-session-wednesday?date=2026-06-10",
+        "https://www.seashelltrust.org.uk/seashell-active/health-and-fitness/"
       ],
       "claim_check_date": "2026-10-08",
       "next_review_due": "2026-10-08",
@@ -1635,6 +1974,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "CORRECT",
+        "reason": "replace historic council destination with current Seashell fitness/booking page and explain first-booking induction. October community-session schedule, cost and eligibility remain unconfirmed.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "UNRESOLVED_OR_TARGETED_CORRECTION"
       }
     },
     {
@@ -1673,6 +2020,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1710,6 +2065,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1750,6 +2113,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "STALE-CHECK",
+        "reason": "20/27 October time, free cost and open-to-all reconfirmed in Life Leisure-submitted council pages; booking and later dates still open.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "UNRESOLVED_OR_TARGETED_CORRECTION"
       }
     },
     {
@@ -1787,6 +2158,14 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Carry forward under recorded review cadence; no fresh whole-listing verification.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
       }
     },
     {
@@ -1825,7 +2204,15 @@
         "active_in_proposed_guide": false,
         "prior_claim_check_date": "2026-10-08"
       },
-      "publication_state": "ARCHIVED_EXPIRED"
+      "publication_state": "ARCHIVED_EXPIRED",
+      "maintenance_2026_10_17": {
+        "classification": "REMOVE",
+        "reason": "already archived in 16 October maintenance; do not reinstate expired/postponed event. No new removal today.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": false,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
+      }
     },
     {
       "id": "FC-049",
@@ -1863,7 +2250,15 @@
         "active_in_proposed_guide": false,
         "prior_claim_check_date": "2026-10-08"
       },
-      "publication_state": "ARCHIVED_EXPIRED"
+      "publication_state": "ARCHIVED_EXPIRED",
+      "maintenance_2026_10_17": {
+        "classification": "REMOVE",
+        "reason": "already archived in 16 October maintenance; do not reinstate expired/postponed event. No new removal today.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": false,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
+      }
     },
     {
       "id": "FC-050",
@@ -1901,7 +2296,15 @@
         "active_in_proposed_guide": false,
         "prior_claim_check_date": "2026-10-08"
       },
-      "publication_state": "ARCHIVED_EXPIRED"
+      "publication_state": "ARCHIVED_EXPIRED",
+      "maintenance_2026_10_17": {
+        "classification": "REMOVE",
+        "reason": "already archived in 16 October maintenance; do not reinstate expired/postponed event. No new removal today.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": false,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
+      }
     },
     {
       "id": "FC-051",
@@ -1940,7 +2343,15 @@
         "active_in_proposed_guide": false,
         "prior_claim_check_date": "2026-10-08"
       },
-      "publication_state": "POSTPONED_NOTICE_ONLY"
+      "publication_state": "POSTPONED_NOTICE_ONLY",
+      "maintenance_2026_10_17": {
+        "classification": "REMOVE",
+        "reason": "already archived in 16 October maintenance; do not reinstate expired/postponed event. No new removal today.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": false,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "CARRIED_FORWARD"
+      }
     },
     {
       "id": "FC-052",
@@ -1978,11 +2389,19 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Current market-organiser submission on council platform confirms 17 October, noon–5pm, free and no tickets."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Organiser-submitted council page confirms 17 October noon–5pm/free/no ticket. Retain through UK date; hide from 18 October on page load.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
       }
     },
     {
       "id": "FC-053",
-      "heading": "WEDNESDAY 21 OCTOBER AMOEBA PHOTOGRAPHY NETWORK",
+      "heading": "20 OR 21 OCTOBER — DATE UNCONFIRMED AMOEBA PHOTOGRAPHY NETWORK",
       "section": "What’s On Now",
       "review_class": "DATE_SPECIFIC",
       "listing_anchor": null,
@@ -2015,18 +2434,26 @@
         },
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08"
+      },
+      "maintenance_2026_10_17": {
+        "classification": "STALE-CHECK",
+        "reason": "Stockroom still lists 21 October from 5pm; existing council 20 October conflict not resolved by a new reply. Preserve warning/no-calendar state.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "UNRESOLVED_OR_TARGETED_CORRECTION"
       }
     },
     {
       "id": "FC-054",
-      "heading": "SATURDAY 31 OCTOBER ARC SATURDAY ART CLUB",
+      "heading": "24 OR 31 OCTOBER — DATE UNCONFIRMED ARC SATURDAY ART CLUB",
       "section": "What’s On Now",
       "review_class": "DATE_SPECIFIC",
       "listing_anchor": null,
       "public_url": null,
       "page_price_band": "SUGGESTED £3 DONATION",
       "page_price_detail": null,
-      "page_when": "Saturday 31 October, 11am–3pm. Check for late changes before travelling.",
+      "page_when": "Saturday 24 or Saturday 31 October — not yet confirmed. Published session times are 11am–3pm; confirm directly before travelling.",
       "advertised_date": "2026-10-31",
       "page_source_url": "https://arc-centre.org/saturday-art-clubs/",
       "fact_check_status": "CONFLICT_PENDING_ORGANISER_CONFIRMATION",
@@ -2056,6 +2483,14 @@
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-08",
         "specific_claim_recheck": "Arc series details remain supported, but exact October date unresolved."
+      },
+      "maintenance_2026_10_17": {
+        "classification": "STALE-CHECK",
+        "reason": "no Arc reply; general last-Saturday pattern is not enough to resolve competing specific dates.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-08",
+        "verification_scope": "UNRESOLVED_OR_TARGETED_CORRECTION"
       }
     },
     {
@@ -2089,7 +2524,15 @@
         "instruction": "Add to the guide the first three strongest."
       },
       "image_rights_basis": "TEXT-ONLY",
-      "publication_state": "STAGING_APPROVED_ADDITION"
+      "publication_state": "STAGING_APPROVED_ADDITION",
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Organiser-owned source still confirms 31 October 20:30, £5, 24 Stockport Road, smart dress, no admission after 23:00.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-16",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
+      }
     },
     {
       "id": "FC-056",
@@ -2122,7 +2565,15 @@
         "instruction": "Add to the guide the first three strongest."
       },
       "image_rights_basis": "TEXT-ONLY",
-      "publication_state": "STAGING_APPROVED_ADDITION"
+      "publication_state": "STAGING_APPROVED_ADDITION",
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Current official Part 2 page confirms Saturday 24 October 2026, Merseyway noon–15:00 and Redrock17:00–19:00, free family entry.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-16",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
+      }
     },
     {
       "id": "FC-057",
@@ -2156,16 +2607,26 @@
         "instruction": "Add to the guide the first three strongest."
       },
       "image_rights_basis": "TEXT-ONLY",
-      "publication_state": "STAGING_APPROVED_ADDITION"
+      "publication_state": "STAGING_APPROVED_ADDITION",
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "reason": "Organiser-submitted council page reconfirms 25 October16:00–20:00, quiet hour15:00–16:00 by free ticket; free entry/parking.",
+        "audit_date": "2026-10-17",
+        "active_in_proposed_guide": true,
+        "prior_claim_check_date": "2026-10-16",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
+      }
     }
   ],
   "last_factual_reconciliation": "2026-10-09",
-  "last_maintenance_audit": "2026-10-16",
-  "maintenance_release_state": "STAGING_NOT_PUBLISHED",
-  "maintenance_scope": "54 baseline records audited, four archived/postponed, plus three explicitly owner-approved new dated entries; 53 proposed active listings, six future dated cards and one postponement notice.",
+  "last_maintenance_audit": "2026-10-17",
+  "maintenance_release_state": "STAGING_ONLY_NOT_PUBLISHED",
+  "maintenance_scope": "Targeted next-day pass on the 16 October owner-approved staging master; no blanket factual reverification. Existing evergreen review dates retained. Improvements demo remains separate.",
   "owner_approved_additions_2026_10_16": [
     "FC-055",
     "FC-056",
     "FC-057"
-  ]
+  ],
+  "staging_guide_blob_note": "Superseded historical blob reference; current guide is in PR #217, maintenance pass 17 October 2026.",
+  "next_publication_gate": "Owner approval; recheck UK date at merge. Snack Down remains valid through 17 October and expires on 18 October. Separate feature proposal is not part of this release."
 }
