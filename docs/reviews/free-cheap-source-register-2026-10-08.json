@@ -7,7 +7,7 @@
   "full_guide": "https://www.sk8scoop.com/free-cheap-guide/guide/",
   "historic_approved_ledger": "https://docs.google.com/document/d/1s28d9sW2SsGHCUo_a-3HzZAC6qQJLs-m3iTOu1sftco/edit",
   "historic_discovery_master": "https://drive.google.com/file/d/1ihniFUtiMbf004vO07tOwXZqObjrzTB_/view",
-  "notes": "Inventory based on published selections, not blanket editorial verification. SPECIFIC_CLAIMS_CHECKED covers only recorded claims. Autisk, Dementia Disco and Station House organiser replies of 8 October 2026 have been reconciled with the guide on 9 October; the quiz-time discrepancy is resolved. Other independent date conflicts, secondary-only sources, and unconfirmed Seashell recurrence remain open. Historic price evidence is distinguished from current organiser confirmation. Targeted maintenance 16 October is staged only; no blanket fact-check sign-off. Per-record maintenance audit distinguishes fresh checks from carried-forward evidence. Canonical register filename is retained to preserve identity.",
+  "notes": "Inventory based on published selections, not blanket editorial verification. SPECIFIC_CLAIMS_CHECKED covers only recorded claims. Autisk, Dementia Disco and Station House organiser replies of 8 October 2026 have been reconciled with the guide on 9 October; the quiz-time discrepancy is resolved. Other independent date conflicts, secondary-only sources, and unconfirmed Seashell recurrence remain open. Historic price evidence is distinguished from current organiser confirmation. Targeted maintenance 16 October is staged only; no blanket fact-check sign-off. Per-record maintenance audit distinguishes fresh checks from carried-forward evidence. Canonical register filename is retained to preserve identity. Owner-requested follow-up, 17 October: remove today's SnackDown, hold unconfirmed Heald Green crochet card out, remove the organiser-contact sentence throughout and clear the old 16 October postponement notice. Existing discovery features retained. No replacement candidates approved or added.",
   "maintenance_schedule": {
     "dated": "Check original date 2 days before, auto-expire after UK date",
     "recurring": "Primary recheck fortnightly before promotion",
@@ -16,16 +16,16 @@
     "unverified": "Queue immediately"
   },
   "overview": {
-    "total": 57,
-    "dated": 10,
-    "specificClaimChecks": 53,
+    "total": 60,
+    "dated": 13,
+    "specificClaimChecks": 56,
     "dateConflicts": 2,
     "timeDiscrepancies": 0,
     "secondaryOnly": 1,
     "awaitingPrimary": 1,
-    "proposed_active_listings": 53,
-    "proposed_dated_cards": 6,
-    "archived_or_postponed_records": 4
+    "proposed_active_listings": 54,
+    "proposed_dated_cards": 8,
+    "archived_or_postponed_records": 6
   },
   "entries": [
     {
@@ -1837,12 +1837,12 @@
         "prior_claim_check_date": "2026-10-08"
       },
       "maintenance_2026_10_17": {
-        "classification": "STALE-CHECK",
-        "reason": "no direct library reply; old community-calendar evidence is not new primary confirmation.",
+        "classification": "REMOVE",
+        "reason": "Hold out pending primary confirmation: One Stockport calendar still repeats the group, but current library confirmation was not found. Manchester City of Literature's matching programme is explicitly dated June 2023; it cannot verify October 2026.",
         "audit_date": "2026-10-17",
-        "active_in_proposed_guide": true,
+        "active_in_proposed_guide": false,
         "prior_claim_check_date": "2026-10-08",
-        "verification_scope": "UNRESOLVED_OR_TARGETED_CORRECTION"
+        "verification_scope": "CURRENT_PRIMARY_UNCONFIRMED"
       }
     },
     {
@@ -2391,12 +2391,12 @@
         "specific_claim_recheck": "Current market-organiser submission on council platform confirms 17 October, noon–5pm, free and no tickets."
       },
       "maintenance_2026_10_17": {
-        "classification": "KEEP",
-        "reason": "Organiser-submitted council page confirms 17 October noon–5pm/free/no ticket. Retain through UK date; hide from 18 October on page load.",
+        "classification": "REMOVE",
+        "reason": "Removed 17 October SnackDown now, including today's event, at the owner's explicit request.",
         "audit_date": "2026-10-17",
-        "active_in_proposed_guide": true,
+        "active_in_proposed_guide": false,
         "prior_claim_check_date": "2026-10-08",
-        "verification_scope": "TARGETED_PRIMARY_RECHECK"
+        "verification_scope": "OWNER_REQUESTED_TODAY_REMOVAL"
       }
     },
     {
@@ -2614,6 +2614,120 @@
         "audit_date": "2026-10-17",
         "active_in_proposed_guide": true,
         "prior_claim_check_date": "2026-10-16",
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
+      }
+    },
+    {
+      "id": "FC-058",
+      "heading": "SENSORY SUNDAY — STOCKROOM",
+      "section": "What’s On Now",
+      "review_class": "DATE_SPECIFIC",
+      "listing_anchor": "sensory-sunday-stockroom-2026",
+      "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#sensory-sunday-stockroom-2026",
+      "page_price_band": "FREE",
+      "page_price_detail": null,
+      "page_when": "Sunday 25 October 2026, from 11.30am. The event page does not publish a finish time; check before travelling.",
+      "advertised_date": "2026-10-25",
+      "page_source_url": "https://www.stockrm.org/events/sensory-sunday?date=2026-10-25",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Sunday 25 October 2026, from 11.30am. The event page does not publish a finish time; check before travelling.",
+        "Stockroom, Merseyway Shopping Centre, Stockport.",
+        "FREE",
+        "Free drop-in. Check with Stockroom if you need specific access arrangements; travel, parking and refreshments may cost extra."
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockrm.org/events/sensory-sunday?date=2026-10-25"
+      ],
+      "claim_check_date": "2026-10-17",
+      "next_review_due": "2026-10-23",
+      "approval": {
+        "status": "APPROVED_FOR_THIS_UPDATE",
+        "date": "2026-10-17",
+        "instruction": "Add three of them",
+        "scope": "All three suggestions in preceding response"
+      },
+      "image_rights_basis": "TEXT-ONLY",
+      "publication_state": "STAGING_APPROVED_ADDITION",
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "active_in_proposed_guide": true,
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
+      }
+    },
+    {
+      "id": "FC-059",
+      "heading": "CHRISTMAS CRAFT NIGHT — CHEADLE LIBRARY",
+      "section": "What’s On Now",
+      "review_class": "DATE_SPECIFIC",
+      "listing_anchor": "christmas-craft-night-cheadle-library-2026",
+      "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#christmas-craft-night-cheadle-library-2026",
+      "page_price_band": "FREE",
+      "page_price_detail": null,
+      "page_when": "Thursday 12 November 2026, 5.30–7pm.",
+      "advertised_date": "2026-11-12",
+      "page_source_url": "https://www.stockport.gov.uk/events/christmas-craft-night?date=2026-11-12",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Thursday 12 November 2026, 5.30–7pm.",
+        "Cheadle Library, 23 Ashfield Road, Cheadle, SK8 1BB.",
+        "FREE",
+        "Ages 16 and over. Free, with booking via the library’s TicketSource link on the event page. Check availability before making plans; travel and parking may cost extra."
+      ],
+      "claim_evidence_urls": [
+        "https://www.stockport.gov.uk/events/christmas-craft-night?date=2026-11-12"
+      ],
+      "claim_check_date": "2026-10-17",
+      "next_review_due": "2026-11-10",
+      "approval": {
+        "status": "APPROVED_FOR_THIS_UPDATE",
+        "date": "2026-10-17",
+        "instruction": "Add three of them",
+        "scope": "All three suggestions in preceding response"
+      },
+      "image_rights_basis": "TEXT-ONLY",
+      "publication_state": "STAGING_APPROVED_ADDITION",
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "active_in_proposed_guide": true,
+        "verification_scope": "TARGETED_PRIMARY_RECHECK"
+      }
+    },
+    {
+      "id": "FC-060",
+      "heading": "STOCKPORT’S SPECTACULAR SUNDAY",
+      "section": "What’s On Now",
+      "review_class": "DATE_SPECIFIC",
+      "listing_anchor": "stockport-spectacular-sunday-2026",
+      "public_url": "https://www.sk8scoop.com/free-cheap-guide/guide/#stockport-spectacular-sunday-2026",
+      "page_price_band": "FREE",
+      "page_price_detail": null,
+      "page_when": "Sunday 15 November 2026, noon–5pm. Christmas lights switch-on at 4.45pm.",
+      "advertised_date": "2026-11-15",
+      "page_source_url": "https://totallystockport.co.uk/stockports-spectacular-sunday-15-november-2026-12pm-5pm-stockport-town-centre-free/",
+      "fact_check_status": "SPECIFIC_CLAIMS_CHECKED",
+      "primary_claims_checked": [
+        "Sunday 15 November 2026, noon–5pm. Christmas lights switch-on at 4.45pm.",
+        "Stockport town centre, including Merseyway, Suffragette Square, the Underbanks, Market Place, Redrock and Warren Street.",
+        "FREE",
+        "Free entertainment; no ticket step is advertised. The full programme is still to be announced. Check the organiser’s latest details before travelling; shopping, refreshments, parking and travel are extra."
+      ],
+      "claim_evidence_urls": [
+        "https://totallystockport.co.uk/stockports-spectacular-sunday-15-november-2026-12pm-5pm-stockport-town-centre-free/"
+      ],
+      "claim_check_date": "2026-10-17",
+      "next_review_due": "2026-11-13",
+      "approval": {
+        "status": "APPROVED_FOR_THIS_UPDATE",
+        "date": "2026-10-17",
+        "instruction": "Add three of them",
+        "scope": "All three suggestions in preceding response"
+      },
+      "image_rights_basis": "TEXT-ONLY",
+      "publication_state": "STAGING_APPROVED_ADDITION",
+      "maintenance_2026_10_17": {
+        "classification": "KEEP",
+        "active_in_proposed_guide": true,
         "verification_scope": "TARGETED_PRIMARY_RECHECK"
       }
     }
