@@ -1,0 +1,51 @@
+name: Guide Expiry Browser QA
+on:
+  pull_request:
+    paths:
+      - 'assets/guide-expiry.js'
+      - 'halloween-half-term-guide/guide/index.html'
+      - 'tests/guide-expiry-browser.mjs'
+      - '.github/workflows/guide-expiry-browser.yml'
+  workflow_dispatch:
+jobs:
+  expiry-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Checkout preview code
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Locate browser
+        shell: bash
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            exit 1
+          fi
+      - name: Start local preview and test guide
+        shell: bash
+        env:
+          PREVIEW_URL: http://127.0.0.1:8765
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/guide-expiry-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS "http://127.0.0.1:8765/halloween-half-term-guide/guide/" -o /dev/null && break
+            sleep 1
+          done
+          node --check assets/guide-expiry.js
+          node --check tests/guide-expiry-browser.mjs
+          node tools/validate-guide-expiry.mjs halloween-half-term-guide/guide/index.html
+          node tests/guide-expiry-browser.mjs
+      - name: Upload mobile QA screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: guide-expiry-mobile
+          path: visual-qa/guide-expiry/
+          if-no-files-found: ignore
