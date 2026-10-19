@@ -20,6 +20,7 @@ function fixture(consent=null,withObserver=true){
   }
   const doc={querySelectorAll:s=>s==='[data-signup-form]'?[form]:[],addEventListener:(n,cb)=>listeners.set(n,cb)};
   const win=consent?.analytics?{gtag(){}}:{};
+  if(withObserver)win.IntersectionObserver=FakeObserver;
   const ctx={document:doc,window:win,sk8Consent:consent,sk8TrackCurrentPage(){},sk8Track:(name,params)=>events.push({name,params}),...(withObserver?{IntersectionObserver:FakeObserver}:{})};
   runInNewContext(block,ctx);
   return {events,observer,grant(){ctx.sk8Consent={analytics:true};win.gtag=()=>{};listeners.get('sk8:analytics-consent-enabled')();},again(){listeners.get('sk8:analytics-consent-enabled')();}};
