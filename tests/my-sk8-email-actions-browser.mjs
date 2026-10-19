@@ -5,7 +5,7 @@ const BASE=(process.env.PREVIEW_URL||'').replace(/\/$/,'');
 const CHROME=process.env.CHROME||'google-chrome';
 if(!BASE)throw Error('PREVIEW_URL is required');
 
-const ids=[
+const historicalIssue16Ids=[
   'grimmfest-2026-10-08',
   'bramhall-halloween-market-2026-10-10',
   'quarry-bank-scarecrow-festival-2026-10-03',
@@ -80,9 +80,16 @@ try{
   await cmd('Page.navigate',{url:BASE+'/my-sk8/'});
   record('Same-origin My SK8 loads',await ready("document.readyState==='complete'"));
   const events=await evaluate("fetch('/data/events.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(Error('not found')))");
-  record('Every newsletter action ID exists in the event catalogue',ids.every(id=>events.some(e=>e.id===id)));
+  const retiredIssue16Ids=historicalIssue16Ids.filter(id=>!events.some(e=>e.id===id));
+  console.log('INFO: '+retiredIssue16Ids.length+' historic Issue 16 events have been retired from current listings.');
+  const currentIds=events.filter(e=>e.status==='verified'&&e.id&&String(e.date||'').length===10&&String(e.date)[4]==='-').slice(0,7).map(e=>e.id);
+  record('Seven current verified dated events available for action regression',currentIds.length===7);
+  for(const archivedId of retiredIssue16Ids){
+    await visit('save',archivedId);
+    record('Retired Issue 16 event fails safely: '+archivedId,(await heading())==='This action was not completed');
+  }
   await evaluate("localStorage.removeItem('sk8_saved_items_v1');localStorage.removeItem('sk8_reminders_v1');true");
-  for(const id of ids){
+  for(const id of currentIds){
     await visit('save',id);
     record('Saved confirmation for '+id,(await heading()).includes('Saved'));
     record('Storage contains '+id,(await saved()).some(e=>e.id===id));
@@ -90,24 +97,24 @@ try{
     record('No horizontal overflow at 390px',Boolean(await evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth+1')));
   }
   const count=(await saved()).length;
-  record('Exactly seven events saved',count===ids.length,String(count));
-  await visit('save',ids[0]);
-  record('Idempotent repeat click',(await saved()).length===ids.length);
+  record('Exactly seven events saved',count===currentIds.length,String(count));
+  await visit('save',currentIds[0]);
+  record('Idempotent repeat click',(await saved()).length===currentIds.length);
   await screenshot('email-save-confirmation-mobile.png');
-  await visit('remind',ids[1]);
-  record('Reminder stored',(await reminders()).includes(ids[1]));
+  await visit('remind',currentIds[1]);
+  record('Reminder stored',(await reminders()).includes(currentIds[1]));
   record('Reminder clearly described as on-site',Boolean(await evaluate("document.getElementById('status-message')?.textContent.includes('on-site')")));
   await screenshot('email-reminder-confirmation-mobile.png');
-  await visit('calendar',ids[2]);
+  await visit('calendar',currentIds[2]);
   record('Calendar presents a downloadable .ics',Boolean(await evaluate("document.querySelector('a[download$=\".ics\"]')?.href.startsWith('data:text/calendar')")));
-  await visit('directions',ids[3]);
+  await visit('directions',currentIds[3]);
   record('Directions lead to Google Maps',Boolean(await evaluate("document.getElementById('primary-link')?.href.startsWith('https://www.google.com/maps/search/')")));
   await visit('save','nonexistent-issue16-qa-id');
   record('Unknown event never reports success',(await heading())==='This action was not completed');
-  record('Unknown event does not modify saves',(await saved()).length===ids.length);
+  record('Unknown event does not modify saves',(await saved()).length===currentIds.length);
   await screenshot('email-invalid-confirmation-mobile.png');
   await cmd('Emulation.setDeviceMetricsOverride',{width:320,height:670,screenWidth:320,screenHeight:670,deviceScaleFactor:1,mobile:true});
-  await visit('save',ids[1]);
+  await visit('save',currentIds[1]);
   record('No horizontal overflow at 320px',Boolean(await evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth+1')));
   record('Buttons meet mobile minimum touch height',Boolean(await evaluate("document.getElementById('primary-link').getBoundingClientRect().height>=48")));
   await screenshot('email-action-320-mobile.png');
@@ -128,7 +135,7 @@ try{
     record('Guide mobile width fits '+filter,result.documentWidth<=result.viewport+1,String(result.documentWidth)+'/'+String(result.viewport));
     if(filter==='rainy')await screenshot('halloween-rainy-filter-mobile.png');
   }
-  console.log('Issue 16 compact actions and all eight Halloween Guide links passed.');
+  console.log('Current My SK8 actions, safely retired historic links and all eight Halloween Guide filters passed.');
 
 }finally{
   try{ws.close();}catch{}
