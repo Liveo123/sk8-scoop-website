@@ -5,10 +5,18 @@ Owner-approved commercial model: GBP 14.99 one-off price via Payhip, or one rewa
 ## Payhip
 
 - Seller has created a product with the confirmed URL `https://payhip.com/b/r5tML`.
-- Stripe has a separate one-off product at GBP 14.99, but **Payhip must be connected to Stripe separately** to accept payments. Creating a Stripe product is not the same as connecting the payment gateway.
-- Confirm the correct product ZIP has been uploaded to Payhip (v8 test pack, currently 9.1 MB), and **Payhip has the correct price/currency and description**.
+- Payhip Payment Details screen (17 October 2026) showed **Stripe Connected** and default currency **GBP**. That confirms a Stripe gateway is connected, but the connected account identity and actual payment settlement have not yet been verified by a transaction. Stripe has a separate GBP 14.99 product, which is not used for Payhip fulfilment.
+- Payhip settings screenshot confirmed price **GBP 14.99**, cover image, a description and an uploaded **v8 test ZIP**. The description retains unverified 6-12 children / 75-110 minute claims. These must be corrected to the current kit guidance of ages 8-11 / 4-12 children / 90-130 minutes including a break and adjusted after real family testing.
 - Product must stay Invisible until testing is authorised; Invisible means checkout does not work for buyers. For the approved test, set Unlisted, perform a 100% coupon checkout with a test buyer account, verify download and email, then return to Invisible until launch approval. Do not turn Invisible on again once actual paying customers need access to the file.
 - At launch, use Payhip URL for the checkout, not the stand-alone Stripe Payment Link. Both have their own payment workflows; running both creates duplicate fulfilment/support work.
+
+## Clean release candidate prepared (17 October 2026)
+
+- Local customer release candidate `Birthday_Time_Machine_Release_Candidate.zip`: 7 files, removing all customer-visible family test labels and the private feedback sheet, correcting references to the files shipped in the ZIP, preserving the interactive game and PDFs.
+- SHA-256: `d9951e610ffa69f8a81a15f5150dddc4fe15c7fb374d78d2e5120b084b37fb1e`. QA: 10/10 puzzles + finale, 390px mobile layout, link targets, ZIP integrity and PDF text audit passed.
+- Separate `Birthday_Time_Machine_Family_Playtest_Pack.zip` includes the cleaned candidate **plus** a private family playtest form and adult instructions (9 files). Only this copy should go to playtesters.
+- **Not ready for sales yet**: real family playtest, direct local-file opening, commercial image rights, Payhip receipt/email delivery, tax/refund terms, and reward verification are still outstanding.
+- Do not merge this PR, upload replacement customer ZIP as a live deliverable, or promote any product before explicit launch approval.
 
 ## Minimal subscriber referral pilot
 
@@ -39,7 +47,7 @@ Owner-approved commercial model: GBP 14.99 one-off price via Payhip, or one rewa
 All boxes below must be approved before any public promotion or sending:
 
 - [ ] Payhip product description and file verified
-- [ ] Stripe connection inside Payhip verified
+- [x] Stripe connection inside Payhip visually confirmed (exact Stripe account and settlement remain untested)
 - [ ] Checkout with 100% test coupon and download/email verified
 - [ ] Referral code issuance and MailerLite field capture verified
 - [ ] Referral counting excludes existing, self, repeated and non-active subscribers
