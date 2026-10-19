@@ -1,0 +1,66 @@
+/* Issue 17 extended articles: editorial reading layouts, no synthetic documentary visuals. */
+:root{--fp-ink:#153c43;--fp-deep:#073f48;--fp-teal:#0f6470;--fp-orange:#b74f16;--fp-paper:#fcf7ed;--fp-rule:#d7ddd8}
+.feature-longread-page{background:#fffefa;color:#15363b}
+.feature-longread-page .fp-hero{background:#faf3e7;border-top:1px solid #efe2ce;border-bottom:1px solid #e3d7c7;padding:48px 0 40px}
+.feature-longread-page .fp-hero-inner{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(265px,.7fr);gap:54px;align-items:center}
+.feature-longread-page .fp-kicker{display:inline-block;color:#9c471c;text-transform:uppercase;letter-spacing:.17em;font-size:.73rem;font-weight:900;margin-bottom:15px}
+.feature-longread-page .fp-hero h1{font-family:Georgia,serif;font-weight:700;letter-spacing:-.045em;font-size:clamp(2.8rem,5vw,5rem);line-height:1.03;color:#0a3440;max-width:16ch;margin:0 0 22px}
+.feature-longread-page .fp-deck{font-size:clamp(1.08rem,1.5vw,1.23rem);line-height:1.58;color:#374c4f;max-width:660px;margin:0 0 18px}
+.feature-longread-page .fp-hero-note{font-size:.87rem;color:#446267;font-weight:700;letter-spacing:.01em;margin:0}
+.feature-longread-page .fp-poster{position:relative;isolation:isolate;overflow:hidden;min-height:360px;padding:27px;border:1px solid rgba(5,46,53,.18);box-shadow:12px 14px 0 rgba(96,57,20,.12);display:flex;flex-direction:column;justify-content:space-between;background:#0a4550;color:#fbf1dc}
+.feature-longread-page .fp-poster:before{position:absolute;inset:0;z-index:-1;content:"";background:radial-gradient(circle at 83% 18%,rgba(220,123,46,.2),transparent 28%),repeating-linear-gradient(9deg,rgba(247,238,217,.055) 0px,rgba(247,238,217,.055) 1px,transparent 1px,transparent 9px)}
+.feature-longread-page .fp-poster .fp-poster-supra{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;font-weight:900;border-bottom:1px solid rgba(255,245,218,.36);padding-bottom:14px}
+.feature-longread-page .fp-poster .fp-poster-number{font:700 clamp(5.5rem,10vw,9.3rem)/.95 Georgia,serif;color:#d87b35;letter-spacing:-.08em}
+.feature-longread-page .fp-poster .fp-poster-bottom{max-width:19ch;font:700 1.25rem/1.24 Georgia,serif}
+.feature-longread-page .fp-poster--wood{background:#e9efdf;color:#0b4b46;border-color:#aebfb1}
+.feature-longread-page .fp-poster--wood:before{background:radial-gradient(circle at 90% 20%,rgba(33,89,72,.18),transparent 48%),repeating-linear-gradient(-12deg,rgba(22,70,59,.055) 0px,rgba(22,70,59,.055) 1px,transparent 1px,transparent 12px)}
+.feature-longread-page .fp-poster--wood .fp-poster-supra{border-color:#9bb0a8}
+.feature-longread-page .fp-poster--wood .fp-poster-number{color:#0c6570;font-size:clamp(4.6rem,8vw,7.3rem)}
+.feature-longread-page .fp-poster--wood .fp-poster-bottom{color:#1a5344}
+.feature-longread-page .fp-facts{background:#0c4852;color:#fff;padding:19px 0}
+.feature-longread-page .fp-facts-inner{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+.feature-longread-page .fp-fact{border-left:2px solid #dc9a53;padding-left:16px;display:flex;flex-direction:column;gap:6px}
+.feature-longread-page .fp-fact span{color:#e2d9cb;text-transform:uppercase;letter-spacing:.13em;font-size:.66rem;font-weight:900}
+.feature-longread-page .fp-fact strong{font-size:1.04rem;line-height:1.3;color:#fff}
+.feature-longread-page .fp-story-wrap{padding:56px 0 66px}
+.feature-longread-page .fp-story-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(230px,.68fr);gap:clamp(32px,6vw,94px);align-items:start}
+.feature-longread-page .fp-story{max-width:780px;font-family:Georgia,serif}
+.feature-longread-page .fp-story .fp-lede{font-size:1.3rem;line-height:1.72;color:#193f46;font-weight:500;margin:0 0 35px}
+.feature-longread-page .fp-story h2{font-family:Georgia,serif;font-size:clamp(1.7rem,2.4vw,2.15rem);line-height:1.17;color:#0a3e48;margin:42px 0 18px;letter-spacing:-.03em}
+.feature-longread-page .fp-story h3{font-family:Arial,sans-serif;font-size:1.18rem;color:#124f58;margin:28px 0 9px}
+.feature-longread-page .fp-story p{font-size:1.09rem;line-height:1.79;margin:0 0 22px;color:#2b3c3e}
+.feature-longread-page .fp-story a,.feature-longread-page .fp-side a{color:#0d6370;text-decoration:underline;text-underline-offset:3px}
+.feature-longread-page .fp-story a:focus-visible,.feature-longread-page .fp-side a:focus-visible{outline:3px solid #ee9b41;outline-offset:3px}
+.feature-longread-page .fp-story blockquote{padding:13px 25px;margin:28px 0 30px;border-left:4px solid #ba6126;background:#fff4e8;font-family:Georgia,serif;color:#134853;font-size:1.2rem;line-height:1.55}
+.feature-longread-page .fp-side{font-family:Arial,sans-serif;position:sticky;top:24px;border-top:4px solid #b6561f;background:#f7f5ef;padding:24px 22px}
+.feature-longread-page .fp-side h2{font-size:1rem;line-height:1.25;text-transform:uppercase;letter-spacing:.07em;margin:0 0 13px;color:#10464e}
+.feature-longread-page .fp-side p,.feature-longread-page .fp-side li{font-size:.91rem;color:#395259;line-height:1.6}
+.feature-longread-page .fp-side ul{padding-left:19px;margin:8px 0 16px}
+.feature-longread-page .fp-source-section{padding:30px 0 44px;background:#f4f5ef;border-top:1px solid #dce3d9}
+.feature-longread-page .fp-source-section h2{font:700 1.5rem/1.2 Georgia,serif;color:#0f4451}
+.feature-longread-page .fp-source-section p,.feature-longread-page .fp-source-section li{max-width:820px;font-size:.94rem;line-height:1.7;color:#385054}
+.feature-longread-page .fp-source-section a{color:#0c6470;text-decoration:underline}
+.feature-longread-page .fp-source-section ul{padding-left:20px}
+.feature-longread-page .fp-next{padding:42px 0 60px}
+.feature-longread-page .fp-next .reader-panel{max-width:860px;padding:29px}
+.feature-longread-page .fp-next h2{font:700 1.65rem/1.15 Georgia,serif;margin:5px 0 11px}
+.feature-longread-page .fp-disclosure{border-left:4px solid #bf6a2e;background:#fff7e9;padding:15px 19px;margin:25px 0}
+.feature-longread-page .fp-disclosure p{margin:0;font-size:.98rem;line-height:1.65}
+.feature-longread-page .fp-crumbs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:.84rem;color:#496369;margin-bottom:18px}
+.feature-longread-page .fp-crumbs a{color:#0e5b67;text-decoration:underline;text-underline-offset:3px}
+.feature-longread-page .fp-inline-source{font-size:.88rem!important;color:#687476!important}
+.feature-longread-page .fp-list{padding-left:21px;margin:14px 0 26px}
+.feature-longread-page .fp-list li{font-size:1.06rem;line-height:1.7;color:#314448;margin:9px 0}
+.feature-longread-page .fp-note{margin:24px 0;padding:20px;border:1px solid #d7dfd9;background:#f6faf6;color:#305257;font:normal .96rem/1.65 Arial,sans-serif}
+.feature-longread-page .fp-timeline{border-top:1px solid #cadad7;margin:28px 0}
+.feature-longread-page .fp-timeline-row{display:grid;grid-template-columns:95px 1fr;gap:17px;border-bottom:1px solid #d9e3df;padding:17px 0;font:normal 1rem/1.55 Arial,sans-serif}
+.feature-longread-page .fp-timeline-row strong{color:#b75b25}
+.feature-longread-page .fp-timeline-row span{color:#3b5055}
+@media (max-width:820px){.feature-longread-page .fp-hero-inner{grid-template-columns:1fr;gap:25px}.feature-longread-page .fp-poster{min-height:235px;max-width:600px}.feature-longread-page .fp-poster .fp-poster-number{font-size:5rem}.feature-longread-page .fp-story-layout{grid-template-columns:1fr;gap:25px}.feature-longread-page .fp-side{position:static;order:2}.feature-longread-page .fp-story-wrap{padding:35px 0 48px}}
+@media (max-width:560px){.feature-longread-page .fp-hero{padding:29px 0}.feature-longread-page .fp-hero h1{font-size:clamp(2.45rem,10vw,3.35rem)}.feature-longread-page .fp-facts-inner{grid-template-columns:1fr;gap:14px}.feature-longread-page .fp-fact{padding-left:12px}.feature-longread-page .fp-story .fp-lede{font-size:1.14rem}.feature-longread-page .fp-story p{font-size:1.02rem;line-height:1.69}.feature-longread-page .fp-story h2{margin-top:34px;font-size:1.75rem}.feature-longread-page .fp-story-wrap{padding-top:27px}.feature-longread-page .fp-timeline-row{grid-template-columns:73px 1fr;gap:10px}.feature-longread-page .fp-poster{min-height:210px;padding:20px}.feature-longread-page .fp-next .reader-panel{padding:20px}}
+
+/* Issue 17 illustrated hero, explicitly not documentary images */
+.feature-longread-page .fp-feature-art{margin:0;min-width:0;align-self:start}
+.feature-longread-page .fp-feature-art img{display:block;width:100%;height:auto;aspect-ratio:4 / 3;object-fit:cover;border:1px solid #d9c3a6;box-shadow:10px 12px 0 rgba(65,53,33,.12);background:#faf3e7}
+.feature-longread-page .fp-feature-art figcaption{color:#475b5c;font:normal .8rem/1.5 Arial,sans-serif;margin-top:16px;max-width:50ch}
+@media(max-width:820px){.feature-longread-page .fp-feature-art img{box-shadow:6px 7px 0 rgba(65,53,33,.12)}.feature-longread-page .fp-feature-art figcaption{font-size:.78rem;margin-top:12px}}

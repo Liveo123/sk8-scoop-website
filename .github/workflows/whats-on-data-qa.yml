@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'data/events.json'
+      - 'data/website-harvest.json'
+      - 'scripts/prune-expired-events.mjs'
+      - 'tests/prune-expired-events-fixtures.mjs'
       - 'scripts/check-events-data.mjs'
       - 'tests/check-events-data-fixtures.mjs'
       - 'assets/sk8-calendar-core.js'
@@ -34,3 +37,5 @@ jobs:
           node-version: '22'
       - run: node scripts/check-events-data.mjs
       - run: node tests/check-events-data-fixtures.mjs
+      - run: node tests/prune-expired-events-fixtures.mjs
+      - run: node scripts/prune-expired-events.mjs

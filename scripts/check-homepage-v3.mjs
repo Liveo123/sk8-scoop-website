@@ -54,7 +54,7 @@ requireText(v5, '.reader-proof{margin-top:0!important', 'tight proof spacing');
 
 // 3. Weekly picks have a proper editorial introduction.
 requireText(home, 'Know · Do · Discover', 'weekly-picks editorial framing');
-requireText(home, 'One useful change, one timely thing to do and one local detail worth knowing about.', 'current-picks explanation');
+requireText(home, 'An important local planning deadline, a free October outing and a hidden Cheadle story.', 'current-picks explanation');
 requireText(v4, '.home-worth-head', 'weekly-picks heading layout');
 
 // 4. Story cards are visually consistent and CTA-aligned.

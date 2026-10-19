@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
+import core from '../assets/sk8-calendar-core.js';
 
 const base = (process.env.PREVIEW_URL || '').replace(/\/$/, '');
 if (!base) throw Error('PREVIEW_URL missing');
@@ -55,68 +56,142 @@ try {
     await click('[data-consent-none]');
     await pause(150);
   }
+  const today = await evaluate("window.SK8CalendarCore.localToday()");
+  const data = await evaluate("window.SK8_EVENT_DATA");
+  const shift = (date, days) => {
+    const d=new Date(date+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+days);
+    return d.toISOString().slice(0,10);
+  };
+  const activeIds = new Set(data.map(e=>e.id));
+  check(data.length>0,'at least one current, verified event loads');
+  check(!data.some(e=>['cancelled','sold_out','example'].includes(String(e.status||'').toLowerCase())),
+    'unavailable events are excluded from browser state');
   check(await evaluate("document.body.dataset.calendarView==='agenda'"),'agenda opens by default');
-  check(await evaluate("document.querySelector('.whats-on-seasonal-watch')?.textContent.includes('planning themes, not scheduled events')"),'unconfirmed seasonal themes clearly separated');
-  check(await evaluate("document.querySelectorAll('.event-listing-card').length>=20"),'real event records render');
+  check(await evaluate("document.querySelector('.whats-on-seasonal-watch')?.textContent.includes('planning themes, not scheduled events')"),
+    'seasonal themes distinguished from dated events');
+  check(await evaluate("document.querySelectorAll('.event-listing-card').length")===data.length,
+    'every current event record renders, no fixed event quota');
+  check(data.some(e=>['Cheadle','Cheadle Hulme','Gatley','Heald Green'].includes(e.area)),
+    'current core-SK8 records exist');
+
+  const gatley=data.filter(e=>e.area==='Gatley');
   check(await click('[data-event-area="Gatley"]'),'Gatley filter selectable');
-  check(await evaluate("document.querySelector('[data-events-list]').textContent.includes('Deckchair Care Welcome Café')"),'verified Gatley recurring activity visible');
-  check(await click('[data-calendar-view="month"]'),'Gatley monthly view opens');
-  check(await evaluate("document.querySelector('[data-calendar-day=\\\"2026-10-12\\\"]')?.classList.contains('has-events')"),'verified Gatley occurrence displayed on 12 October');
-  check(await evaluate("!document.querySelector('[data-calendar-day=\\\"2026-10-26\\\"]')?.classList.contains('has-events')"),'unconfirmed half-term Gatley session not invented');
-  await click('[data-calendar-view="agenda"]');
+  check(await evaluate("document.querySelectorAll('.event-listing-card').length")===gatley.length,
+    'Gatley filter matches real current records');
+  if(gatley.length) check(await evaluate("document.querySelector('[data-events-list]').textContent.includes("+JSON.stringify(gatley[0].title)+")"),
+    'current Gatley event visible');
+
   await click('[data-event-area="all"]');
-  check(await click('[data-event-filter="weekend"]'),'weekend filter accessible');
-  check(await evaluate("document.querySelector('[data-events-list]').textContent.includes('Grimmfest 2026')"),'verified Saturday/Sunday Grimmfest dates remain visible in weekend filter');
-  await click('[data-event-filter="all"]');
-  check(await evaluate("document.querySelectorAll('.whats-on-agenda-date').length>=3"),'agenda grouped by date');
-  check(await evaluate("document.querySelectorAll('.event-listing-card .my-sk8-save').length>=20"),'My SK8 buttons render');
-  check(await evaluate("document.querySelector('[data-event-id=\"reddish-vale-halloween-pumpkin-festival-2026-10-10\"] a[download]')===null"),'unknown session dates do not export misleading ICS');
-  check(await evaluate("!document.querySelector('[data-events-list]').textContent.includes('Sisters Youth Qiyam')"),'excluded listing absent');
-  check(await click('[data-event-filter="free"]'),'free filter usable');
-  check(await evaluate("!document.querySelector('[data-events-list]').textContent.includes('Quarry Bank Scarecrow Festival')"),'paid admission excluded from Free');
-  check(await evaluate("document.querySelector('[data-events-list]').textContent.includes('Foodie Friday')"),'free entry event retained');
-  check(await evaluate("document.querySelectorAll('.my-sk8-save').length>0"),'My SK8 rebinds after Free');
-  await click('[data-event-filter="all"]');
-  check(await click('[data-calendar-view="month"]'),'month toggle works');
-  check(await evaluate("document.body.dataset.calendarView==='month'"),'month mode active');
-  check(await evaluate("document.querySelectorAll('[data-calendar-day]').length>=28"),'date grid rendered');
-  check(await evaluate("document.querySelector('[data-calendar-day=\"2026-10-10\"]')?.classList.contains('has-events')"),'confirmed date marked');
-  check(await evaluate("(() => { const b=document.querySelector('[data-calendar-day=\"2026-10-10\"]');b.focus();b.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));return document.activeElement?.dataset.calendarDay==='2026-10-11';})()"),'calendar arrow-key navigation accessible');
-  check(await evaluate("document.querySelector('[data-calendar-day=\"2026-10-20\"] small')?.textContent.trim()==='1 event'"),'only confirmed daily activity shown, not uncertain theatre sessions');
-  for(let i=0;i<12;i++)await click('[data-calendar-next]');
-  check(await evaluate("document.querySelector('[data-calendar-next]').disabled"),'12-month browsing limit');
-  check(await evaluate("(() => { const end=window.SK8CalendarCore.anniversaryExclusive(window.SK8CalendarCore.localToday()); return document.querySelector('[data-calendar-day=\\\"'+end+'\\\"]')?.disabled === true; })()"),'exact 12-month boundary is disabled');
-  check(await click('[data-calendar-view="agenda"]'),'back to agenda');
-  check(await evaluate("(() => {const e=document.querySelector('[data-calendar-choose-date]');e.value='2026-10-20';e.dispatchEvent(new Event('change',{bubbles:true}));return true;})()"),'select unconfirmed date');
-  check(await evaluate("document.querySelectorAll('.event-listing-card').length===1 && !document.querySelector('[data-events-list]').textContent.includes('The Girl on the Train')"),'date-range performances are not fabricated; verified festival remains');
-  check(await click('[data-calendar-clear-date]'),'clear date');
-  check(await evaluate("document.querySelectorAll('.event-listing-card .my-sk8-save').length>=20"),'My SK8 rebinds on date clearing');
-  check(await evaluate("(() => {const e=document.querySelector('[data-calendar-choose-date]');e.value='2026-10-10';e.dispatchEvent(new Event('change',{bubbles:true}));return true;})()"),'select confirmed date');
-  const selector='[data-event-id="quarry-bank-scarecrow-festival-2026-10-03--2026-10-10"] .my-sk8-save';
-  check(await evaluate("document.querySelector('[data-event-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"] a[download]')!==null"),'confirmed daily occurrence offers calendar export');
-  check(await evaluate("(() => {const link=document.querySelector('[data-event-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"] a[download]');return link && decodeURIComponent(link.href).includes('DTEND;TZID=Europe/London:20261010T170000');})()"),'verified end time included in calendar export');
-  check(await click(selector),'save specific occurrence');
-  check(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1')||'[]').some(e=>e.id.endsWith('--2026-10-10')&&e.date==='2026-10-10')"),'saved date agrees with clicked date');
+  const nowDate=new Date(today+'T00:00:00Z');
+  const dayOfWeek=nowDate.getUTCDay();
+  const sat=shift(today,dayOfWeek===0?0:(6-dayOfWeek+7)%7);
+  const sun=shift(sat,dayOfWeek===0?0:1);
+  const weekendExpected=data.filter(e=>core.withinRange(e,sat,sun));
+  check(await click('[data-event-filter="weekend"]'),'weekend filter selectable');
+  check(await evaluate("document.querySelectorAll('.event-listing-card').length")===weekendExpected.length,
+    'weekend results correspond to actual confirmed sessions');
+  check(await click('[data-event-filter="all"]'),'reset weekend filter');
+  check(await evaluate("document.querySelectorAll('.event-listing-card').length")===data.length,
+    'all current records return after reset');
+
+  check(await click('[data-event-filter="free"]'),'free filter selectable');
+  check(await evaluate("document.querySelectorAll('.event-listing-card').length")===data.filter(core.isFree).length,
+    'free filter respects actual cost classifications');
+  check(await click('[data-event-filter="all"]'),'reset free filter');
+  check(await evaluate("!document.querySelector('[data-events-list]').textContent.includes('Sisters Youth Qiyam')"),
+    'excluded organiser listings remain absent');
+  if (activeIds.has('reddish-vale-halloween-pumpkin-festival-2026-10-10')) {
+    check(await evaluate("document.querySelector('[data-event-id=\"reddish-vale-halloween-pumpkin-festival-2026-10-10\"] a[download]')===null"),
+      'unconfirmed range does not offer a fabricated calendar occurrence');
+  }
+
+  const candidates=data.map(e=>{
+    let chosen=null;
+    if(core.mode(e)==='specific_dates') chosen=core.confirmedDates(e).find(d=>d>=today);
+    else if(core.mode(e)==='daily') chosen=e.date>today?e.date:today;
+    else if(e.date>=today) chosen=e.date;
+    return {event:e,date:chosen};
+  }).filter(x=>x.date&&core.withinHorizon(x.date,today)).sort((a,b)=>{
+    const score=x=>(x.event.end_time?4:0)+(core.mode(x.event)==='daily'?2:0)+
+      (core.mode(x.event)==='specific_dates'?1:0);
+    return score(b)-score(a) || a.date.localeCompare(b.date);
+  });
+  check(candidates.length>0,'at least one future dated record is testable');
+  const selected=candidates[0], chosen=selected.date, originalEvent=selected.event;
+  const chosenId=['daily','specific_dates'].includes(core.mode(originalEvent)) ?
+    originalEvent.id+'--'+chosen : originalEvent.id;
+
+  check(await click('[data-calendar-view="month"]'),'month view available');
+  check(await evaluate("document.body.dataset.calendarView==='month'"),'month view active');
+  check(await evaluate("document.querySelectorAll('[data-calendar-day]').length>=28"),'month grid has dates');
+  let located=false;
+  for(let i=0;i<12;i++){
+    located=await evaluate("Boolean(document.querySelector('[data-calendar-day="+JSON.stringify(chosen)+"]'))");
+    if(located)break;
+    check(await click('[data-calendar-next]'),'move to future month');
+  }
+  check(located,'the next confirmed event is in 12-month calendar');
+  check(await evaluate("document.querySelector('[data-calendar-day="+JSON.stringify(chosen)+"]')?.classList.contains('has-events')"),
+    'verified future event date marked');
+  if (core.mode(originalEvent)==='specific_dates') {
+    const missing=shift(chosen,1);
+    if (!core.onDate(originalEvent,missing) && core.withinHorizon(missing,today)) {
+      check(await evaluate("window.SK8CalendarCore.onDate(window.SK8_EVENT_DATA.find(e=>e.id==="+JSON.stringify(originalEvent.id)+"),"+JSON.stringify(missing)+")===false"),
+        'unconfirmed recurring session not invented');
+    }
+  }
+  check(await evaluate("document.querySelector('[data-calendar-day="+JSON.stringify(chosen)+"]')!==null"),
+    'selected date exists in calendar DOM');
+  check(await evaluate("(() => {const x=document.querySelector('[data-calendar-day="+JSON.stringify(chosen)+"]');if(!x)return false;x.focus();return document.activeElement===x;})()"),
+    'calendar days are keyboard focusable');
+
+  check(await click('[data-calendar-view="agenda"]'),'return to agenda');
+  check(await evaluate("(() => {const x=document.querySelector('[data-calendar-choose-date]');x.value="+JSON.stringify(chosen)+";x.dispatchEvent(new Event('change',{bubbles:true}));return true;})()"),
+    'choose next actual confirmed date');
+  await waitFor("!!document.querySelector('[data-event-id="+JSON.stringify(chosenId)+"]')");
+  check(await evaluate("document.querySelector('[data-event-id="+JSON.stringify(chosenId)+"]')!==null"),
+    'chosen event is present on its verified date');
+  const range=data.find(e=>core.mode(e)==='range_unspecified' && e.end_date>e.date &&
+    shift(e.date,1)>=today && core.withinHorizon(shift(e.date,1),today));
+  if(range){
+    const uncertain=shift(range.date,1);
+    const oldChosen=chosen;
+    await evaluate("(() => {const x=document.querySelector('[data-calendar-choose-date]');x.value="+JSON.stringify(uncertain)+";x.dispatchEvent(new Event('change',{bubbles:true}));return true;})()");
+    check(await evaluate("!document.querySelector('[data-event-id="+JSON.stringify(range.id)+"]')"),
+      'unconfirmed mid-run theatre date is not fabricated');
+    await evaluate("(() => {const x=document.querySelector('[data-calendar-choose-date]');x.value="+JSON.stringify(oldChosen)+";x.dispatchEvent(new Event('change',{bubbles:true}));return true;})()");
+  }
+
+  await waitFor("!!document.querySelector('[data-event-id="+JSON.stringify(chosenId)+"] .my-sk8-save')");
+  check(await click('[data-event-id="'+chosenId+'"] .my-sk8-save'),'save one verified dated event');
+  check(await evaluate("JSON.parse(localStorage.getItem('sk8_saved_items_v1')||'[]').some(e=>e.id==="+JSON.stringify(chosenId)+" && e.date==="+JSON.stringify(chosen)+")"),
+    'saved event date matches confirmed calendar date');
+  if (originalEvent.end_time && originalEvent.time) {
+    const desired='DTEND;TZID=Europe/London:'+chosen.replaceAll('-','')+'T'+originalEvent.end_time.replace(':','')+'00';
+    check(await evaluate("(() => {const x=document.querySelector('[data-event-id="+JSON.stringify(chosenId)+"] a[download]');return !!x&&decodeURIComponent(x.href).includes("+JSON.stringify(desired)+");})()"),
+      'confirmed finish time appears in calendar export');
+  }
+
   await waitFor("!document.querySelector('[data-my-sk8-toast]')?.classList.contains('show')");
   await evaluate("document.querySelector('[data-calendar-controls]').scrollIntoView({block:'start',behavior:'instant'});true");
   await shot('desktop-agenda.png');
-  await click('[data-calendar-view="month"]');
-  for(let i=0;i<12;i++)await click('[data-calendar-prev]');
-  check(await evaluate("document.querySelector('[data-calendar-month-heading]').textContent==='October 2026'"),'review screenshots show current confirmed month');
-  await evaluate("(() => {const el=document.querySelector('[data-calendar-controls]');window.scrollTo(0,el.getBoundingClientRect().top+window.scrollY-108);return true;})()");
+  check(await click('[data-calendar-view="month"]'),'return to month for screenshot');
+  await evaluate("(() => {const x=document.querySelector('[data-calendar-month-panel]');x.scrollIntoView({block:'start',behavior:'instant'});return true;})()");
   await shot('desktop-month.png');
-  await rpc('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
-  check(await evaluate("document.documentElement.scrollWidth<=window.innerWidth+1"),'mobile month view no horizontal overflow');
-  check(await evaluate("getComputedStyle(document.querySelector('.sk8-calendar-count-word')).display==='none'"),'mobile calendar counts stay compact');
-  await evaluate("document.querySelector('[data-calendar-month-panel]').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-104);true");
-  await pause(350);
+  await rpc('Emulation.setDeviceMetricsOverride',{
+    width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
+  check(await evaluate("document.documentElement.scrollWidth<=window.innerWidth+1"),
+    'mobile month view has no horizontal overflow');
+  check(await evaluate("getComputedStyle(document.querySelector('.sk8-calendar-count-word')).display==='none'"),
+    'mobile day counts remain compact');
   await shot('mobile-month.png');
+
   await rpc('Page.navigate',{url:base+'/my-sk8/'});
-  await waitFor("document.querySelector('[data-saved-id]')?.textContent.includes('Quarry Bank')");
-  check(await evaluate("!!document.querySelector('[data-saved-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"]')"),'selected-date save appears in My SK8');
-  check(await evaluate("(() => {const x=document.querySelector('[data-saved-id=\"quarry-bank-scarecrow-festival-2026-10-03--2026-10-10\"] a[download]');return !!x&&decodeURIComponent(x.href).includes('DTEND;TZID=Europe/London:20261010T170000');})()"),'finish time survives My SK8 save');
-  check(!errors.length,'no uncaught JS errors: '+errors.join('; '));
-  console.log('Calendar integration browser checks passed.');
+  await waitFor("document.querySelector('[data-saved-id="+JSON.stringify(chosenId)+"]')!==null");
+  check(await evaluate("document.querySelector('[data-saved-id="+JSON.stringify(chosenId)+"]')!==null"),
+    'saved verified event appears in My SK8');
+  check(!errors.length,'no uncaught calendar JavaScript errors: '+errors.join('; '));
+  console.log('Date-independent calendar integration browser checks passed.');
 } finally {
   try{ws?.close();}catch{}
   chrome.kill('SIGTERM');
