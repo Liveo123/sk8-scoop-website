@@ -36,7 +36,7 @@ else{
  const cards=[...free.matchAll(/<article\b[^>]*>[\s\S]*?<\/article>/gi)].map(m=>m[0]);
  const uncertain=cards.filter(card=>/data-date-unconfirmed="true"/.test(card));
  if(!uncertain.length){failure=true;fail('GQ-03','Disputed date markers exist but are not attached to article cards');}
- else if(uncertain.some(card=>/data-event-date="\d{4}-\d{2}-\d{2}"/.test(card)) && !/article\.dataset\.dateUnconfirmed!==\\x27true\\x27/.test(free)){
+ else if(uncertain.some(card=>/data-event-date="\d{4}-\d{2}-\d{2}"/.test(card)) && !free.includes("article.dataset.dateUnconfirmed!=='true'")){
   failure=true;fail('GQ-03','Disputed event has fallback date without a guard excluding it from calendar/saved actions');
  } else add('GQ-03','PASS',uncertain.length+' visibly disputed Free & Cheap card(s) with calendar suppression guard','Fallback event dates exist for sorting and expiry only. Full browser/price-filter behaviour remains NOT VERIFIED.');
 }
