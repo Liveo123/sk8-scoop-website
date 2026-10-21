@@ -1,0 +1,44 @@
+name: Guide Factory Reliability QA
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/guide-reliability-core.mjs'
+      - 'scripts/check-guide-reliability.mjs'
+      - 'tests/guide-reliability-fixtures.mjs'
+      - 'docs/guide-factory-reliability.md'
+      - 'free-cheap-guide/**'
+      - 'halloween-half-term-guide/**'
+      - '52-adventures/**'
+      - 'docs/reviews/free-cheap-source-register-2026-10-08.json'
+      - '.github/workflows/guide-reliability-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/guide-reliability-core.mjs'
+      - 'scripts/check-guide-reliability.mjs'
+      - 'tests/guide-reliability-fixtures.mjs'
+      - 'docs/guide-factory-reliability.md'
+      - 'free-cheap-guide/**'
+      - 'halloween-half-term-guide/**'
+      - '52-adventures/**'
+      - 'docs/reviews/free-cheap-source-register-2026-10-08.json'
+      - '.github/workflows/guide-reliability-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Negative regression fixtures
+        run: node tests/guide-reliability-fixtures.mjs
+      - name: Audit three guides without claiming live/network checks
+        run: node scripts/check-guide-reliability.mjs
+      - name: Existing approved 52 Adventures image integrity
+        run: node scripts/check-52-adventures-images.mjs
+      - name: Existing Free & Cheap guide functional rules
+        run: node scripts/check-free-cheap-guide-ui.mjs
