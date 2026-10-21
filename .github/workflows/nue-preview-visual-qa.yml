@@ -36,6 +36,12 @@ jobs:
         run: |
           set -euo pipefail
           comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
+          commit_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}"
+          commit_payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" "$commit_api" || true)"
+          changed_content="$(printf '%s' "$commit_payload" | jq '[.files[]? | select((.filename | startswith(".github/workflows/")) | not)] | length' 2>/dev/null || echo 1)"
+          workflow_only=false
+          if [ "$changed_content" = "0" ]; then workflow_only=true; fi
           for attempt in $(seq 1 24); do
             payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" \
               -H "Accept: application/vnd.github+json" "$comments_api" || true)"
@@ -43,7 +49,7 @@ jobs:
             line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
             url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
             reported_sha="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
-            if [ -n "$url" ] && [ -n "$reported_sha" ] && [[ "$PREVIEW_SHA" == "$reported_sha"* ]]; then
+            if [ -n "$url" ] && [ -n "$reported_sha" ] && { [[ "$PREVIEW_SHA" == "$reported_sha"* ]] || [ "$workflow_only" = true ]; }; then
               code="$(curl -sSL --max-time 20 -o /dev/null -w '%{http_code}' "${url}/" || true)"
               if [ "$code" = "200" ]; then
                 echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
