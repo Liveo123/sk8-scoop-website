@@ -338,4 +338,19 @@ contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil
   }
 }
 
+// Published, evergreen local-history pages should not silently retain a preview-only
+// robots noindex directive. Search records and XML sitemap must agree with the page.
+const searchableHistory = JSON.parse(read('data/discovery.json')).records.filter(record =>
+  record.category === 'Local History' && record.freshness === 'evergreen' &&
+  /^\/local-history\/[^/]+\/$/.test(String(record.href || '')));
+for (const record of searchableHistory) {
+  const route = String(record.href);
+  const rel = route.replace(/^\//, '') + 'index.html';
+  expect(fs.existsSync(path.join(root,rel)), 'Indexed local-history page not found: ' + route);
+  const page = read(rel);
+  expect(!/<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(page),
+    'Published evergreen local-history page remains noindex: ' + route);
+  contains('sitemap.xml','https://www.sk8scoop.com' + route);
+}
+
 console.log('Post-launch NUE v2 preflight passed.');
