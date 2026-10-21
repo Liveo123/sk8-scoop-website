@@ -12,6 +12,11 @@ on:
       - 'assets/whats-on.js'
       - '.github/workflows/nue-preview-visual-qa.yml'
 
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
 jobs:
   visual-qa:
     runs-on: ubuntu-latest
@@ -20,6 +25,37 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Resolve PR-specific Cloudflare preview URL and revision
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
+          for attempt in $(seq 1 24); do
+            payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" "$comments_api" || true)"
+            body="$(printf '%s' "$payload" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // ""' 2>/dev/null || true)"
+            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
+            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
+            reported_sha="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
+            if [ -n "$url" ] && [ -n "$reported_sha" ] && [[ "$PREVIEW_SHA" == "$reported_sha"* ]]; then
+              code="$(curl -sSL --max-time 20 -o /dev/null -w '%{http_code}' "${url}/" || true)"
+              if [ "$code" = "200" ]; then
+                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
+                echo "Cloudflare URL verified for commit $reported_sha: $url"
+                exit 0
+              fi
+            fi
+            echo "Awaiting exact Cloudflare PR preview for ${PREVIEW_SHA}: attempt $attempt/24"
+            sleep 10
+          done
+          echo "FAILED: no Cloudflare PR preview with matching SHA and HTTP 200"
+          exit 1
 
       - name: Wait for exact Cloudflare preview
         shell: bash
