@@ -161,8 +161,6 @@
       card.style.display = '';
       if (story.expires) card.dataset.expireAfter = story.expires;
       else delete card.dataset.expireAfter;
-      const card = cards[index];
-      if (!card) return;
       const image = card.querySelector('.reader-story-image');
       let label = image && image.querySelector('span');
       const title = card.querySelector('h3');
