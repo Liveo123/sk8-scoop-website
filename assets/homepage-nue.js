@@ -108,9 +108,59 @@
     footerSignup.innerHTML = '<strong>Get the Scoop</strong><p>New issue every Friday.</p><a class="button small-button" href="/join/">Join free →</a>';
   };
 
+  // Expiry is evaluated in UK local time, including on the day of an event.
+  const ukToday = () => {
+    const fields = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(new Date()).map(part => [part.type, part.value]));
+    return `${fields.year}-${fields.month}-${fields.day}`;
+  };
+
+  const updateStoryCount = cards => {
+    const remaining = cards.filter(card => !card.hidden).length;
+    const section = document.querySelector('.reader-worth');
+    if (!section) return;
+    section.hidden = remaining === 0;
+    section.style.display = remaining === 0 ? 'none' : '';
+    if (remaining === cards.length) return;
+    const heading = section.querySelector('.section-head h2');
+    const intro = section.querySelector('.home-section-intro');
+    const kicker = section.querySelector('.home-section-kicker');
+    if (heading) heading.textContent = `${remaining} ${remaining === 1 ? 'thing' : 'things'} worth your attention now`;
+    if (intro) intro.textContent = 'Current local updates and discoveries worth a look.';
+    if (kicker) kicker.textContent = 'Still worth your attention';
+  };
+
+  const hideExpiredStaticStories = () => {
+    const today = ukToday();
+    const cards = [...document.querySelectorAll('[data-home-story]')];
+    cards.forEach(card => {
+      const expiry = String(card.dataset.expireAfter || '');
+      if (expiry && expiry < today) {
+        card.hidden = true;
+        card.style.display = 'none';
+      }
+    });
+    updateStoryCount(cards);
+  };
+
   const renderStories = data => {
     const cards = [...document.querySelectorAll('[data-home-story]')];
-    (data.stories || []).forEach((story, index) => {
+    const today = ukToday();
+    const stories = (Array.isArray(data.stories) ? data.stories : [])
+      .filter(story => story && (!story.expires || String(story.expires) >= today))
+      .slice(0, cards.length);
+    cards.forEach((card, index) => {
+      const story = stories[index];
+      if (!story) {
+        card.hidden = true;
+        card.style.display = 'none';
+        return;
+      }
+      card.hidden = false;
+      card.style.display = '';
+      if (story.expires) card.dataset.expireAfter = story.expires;
+      else delete card.dataset.expireAfter;
       const card = cards[index];
       if (!card) return;
       const image = card.querySelector('.reader-story-image');
@@ -156,6 +206,7 @@
         link.textContent = story.linkLabel || 'Read more →';
       }
     });
+    updateStoryCount(cards);
   };
 
   const renderExplore = data => {
@@ -332,5 +383,6 @@
   syncCurrentIssueLink();
   syncFreeCheapGuideLogo();
   applyHomepageV3();
+  hideExpiredStaticStories();
   loadHomepageData();
 })();
