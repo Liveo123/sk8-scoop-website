@@ -92,6 +92,7 @@
         tags: [story.mode || '', story.label || '', story.meta || ''].filter(Boolean),
         freshness: 'current',
         checked: updated,
+        expires: story.expires || '',
         source: 'homepage'
       };
     });
