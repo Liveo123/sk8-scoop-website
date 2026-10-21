@@ -62,7 +62,7 @@ try {
  const artwork=await evalJs("(()=>{const cards=[...document.querySelectorAll('.card')];return {cards:cards.length,unique:new Set(cards.map(c=>c.querySelector('img').src)).size,labels:cards.every(c=>c.querySelector('.checked').textContent.includes('21 Oct 2026')),pastPanel:document.querySelector('.visuals').textContent.includes('10–18'),moon:document.getElementById('event-26').closest('.card').querySelector('h3').textContent};})()");
  check('43 distinct card images and reviewed labels',artwork.cards===43&&artwork.unique===43&&artwork.labels&&!artwork.pastPanel);
  check('Only remaining Moon workshop recommended',artwork.moon.includes('Make Your Own Moon'));
- const newImages=await evalJs("Promise.all([47,48,49,50].map(async i=>{const img=document.querySelector('.card[data-event-index=\"'+i+'\"] img');await img.decode();return img.naturalWidth>0&&img.naturalHeight>0;}))");
+ const newImages=await evalJs("Promise.all([47,48,49,50].map(async i=>{const img=document.querySelector('.card[data-event-index=\"'+i+'\"] img');img.loading='eager';await img.decode();return img.naturalWidth>0&&img.naturalHeight>0;}))");
  check('Four replacement illustrations decode',newImages.every(Boolean));
  await mkdir('visual-qa/guide-expiry',{recursive:true});
  for(const [width,height,name] of [[390,844,'replacements-mobile'],[320,700,'replacements-small-phone'],[1440,1000,'replacements-desktop']]){
