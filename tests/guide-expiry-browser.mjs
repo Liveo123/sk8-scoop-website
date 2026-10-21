@@ -59,7 +59,7 @@ try {
  check('New cards have stable anchors and all four useful actions',replacements.anchors&&replacements.actions);
  check('All four ended entries hidden',replacements.ended);
  check('Sold-out listings removed and uncertain Afrocats not calendared',replacements.soldOut&&!replacements.uncertainCalendar);
- const artwork=await evalJs("(()=>{const cards=[...document.querySelectorAll('.card')];return {cards:cards.length,unique:new Set(cards.map(c=>c.querySelector('img').src)).size,labels:cards.every(c=>c.querySelector('.checked').textContent.includes('21 Oct 2026')),pastPanel:document.querySelector('.visuals').textContent.includes('10–18'),moon:document.querySelector('.card[data-event-index=26]').querySelector('h3').textContent};})()");
+ const artwork=await evalJs("(()=>{const cards=[...document.querySelectorAll('.card')];return {cards:cards.length,unique:new Set(cards.map(c=>c.querySelector('img').src)).size,labels:cards.every(c=>c.querySelector('.checked').textContent.includes('21 Oct 2026')),pastPanel:document.querySelector('.visuals').textContent.includes('10–18'),moon:document.getElementById('event-26').closest('.card').querySelector('h3').textContent};})()");
  check('43 distinct card images and reviewed labels',artwork.cards===43&&artwork.unique===43&&artwork.labels&&!artwork.pastPanel);
  check('Only remaining Moon workshop recommended',artwork.moon.includes('Make Your Own Moon'));
  const newImages=await evalJs("Promise.all([47,48,49,50].map(async i=>{const img=document.querySelector('.card[data-event-index=\"'+i+'\"] img');await img.decode();return img.naturalWidth>0&&img.naturalHeight>0;}))");
@@ -93,3 +93,4 @@ try {
  await writeFile('visual-qa/guide-expiry/finished-mobile.png',Buffer.from(screenshot.data,'base64'));
  console.log('GUIDE_EXPIRY_QA_PASS');
 } finally {if(ws)ws.close();chrome.kill('SIGTERM');}
+
