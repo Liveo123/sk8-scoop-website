@@ -159,9 +159,14 @@ try {
   const nearbyCandidates = e => currentEvents.filter(candidate =>
     candidate.id!==e.id && candidate.area===e.area && candidate.date>=today &&
     (candidate.end_date||candidate.date)>=today);
-  const primary = weekendEvents.find(e => coreAreas.includes(e.area) && nearbyCandidates(e).length>=2)
-    || weekendEvents.find(e => coreAreas.includes(e.area))
-    || weekendEvents[0];
+  // Five actions, including Add to calendar, are only expected for events with
+  // an individually confirmed dated occurrence. A multi-day event with unknown
+  // session dates intentionally has no calendar link and must stay that way.
+  const datedWeekendEvents = weekendEvents.filter(e =>
+    e.date>=today && (!e.end_date || e.end_date===e.date || e.series_id));
+  const primary = datedWeekendEvents.find(e => coreAreas.includes(e.area) && nearbyCandidates(e).length>=2)
+    || datedWeekendEvents.find(e => coreAreas.includes(e.area))
+    || datedWeekendEvents[0];
   const secondary = currentEvents.find(e =>
     e.id!==primary?.id && e.date<=tomorrowIso && (e.end_date||e.date)>=today && e.venue)
     || currentEvents.find(e => e.id!==primary?.id && e.venue);
