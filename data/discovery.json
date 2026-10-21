@@ -1066,6 +1066,32 @@
       "freshness": "dated",
       "checked": "2026-10-16",
       "expires": "2026-10-30"
+    },
+    {
+      "id": "cheadle-war-memorial-civilian-air-raids",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "The eight civilian names on Cheadle War Memorial",
+      "summary": "The rear plaque remembers eight civilians killed in fatal air raids during the night of 23/24 December 1940 and on 4 February 1941. Historic England and local casualty research connect the names to still-familiar Cheadle streets.",
+      "href": "/local-history/cheadle-war-memorial-air-raid-victims/",
+      "area": "Cheadle",
+      "tags": [
+        "cheadle war memorial",
+        "air raid victims",
+        "civilian names",
+        "air raids",
+        "christmas blitz",
+        "bulkeley road",
+        "wilmslow road",
+        "stockport road",
+        "1940",
+        "1941",
+        "history",
+        "world war two",
+        "ww2"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-09-18"
     }
   ]
 }
