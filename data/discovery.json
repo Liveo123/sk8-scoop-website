@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10",
+  "updated": "2026-10-21",
   "records": [
     {
       "id": "around-sk8",
@@ -961,6 +961,111 @@
       ],
       "freshness": "evergreen",
       "checked": "2026-10-10"
+    },
+    {
+      "id": "premier-cafe-cheadle",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "The Art Deco Premier Café hidden on Cheadle High Street",
+      "summary": "At 3 High Street, Cheadle, the former Premier Café had 1930s dining rooms with chrome, coloured glass and a circular rooflight. Historic England documents the building; the designer's identity and access to the upper rooms remain uncertain.",
+      "href": "/local-history/premier-cafe-cheadle/",
+      "area": "Cheadle",
+      "tags": [
+        "premier cafe",
+        "premier café",
+        "cheadle high street",
+        "3 high street",
+        "high street pharmacy",
+        "art deco",
+        "1930s",
+        "chrome",
+        "heritage",
+        "grade ii",
+        "historic england",
+        "local history"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-10-16"
+    },
+    {
+      "id": "carr-wood-cheadle-hulme-bramhall",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "Cheadle Hulme to Bramhall via Carr Wood: a 4 km walk",
+      "summary": "A roughly 4 km point-to-point route via Carr Wood, with a Slow Ways map, woodland section, narrow gate, slopes and mud warnings. Step-free suitability and the current status of the full route have not been confirmed.",
+      "href": "/outdoors/carr-wood-cheadle-hulme-bramhall/",
+      "area": "Cheadle Hulme",
+      "tags": [
+        "carr wood",
+        "cheadle hulme",
+        "bramhall",
+        "woodland walk",
+        "slow ways",
+        "walking route",
+        "4 km",
+        "2.5 miles",
+        "mud",
+        "terrain",
+        "gate",
+        "railway station",
+        "outdoors"
+      ],
+      "freshness": "current",
+      "checked": "2026-10-16"
+    },
+    {
+      "id": "chiverton-tap-cheadle-hulme",
+      "type": "Stories",
+      "category": "Food & Drink",
+      "title": "The Chiverton Tap: the old shop name beneath your feet",
+      "summary": "The Cheadle Hulme micropub at 8 Mellor Road keeps the mosaic name of former draper Arthur Chiverton at its entrance. A local history and venue feature; check the pub directly for current opening hours and drinks.",
+      "href": "/food-drink/chiverton-tap/",
+      "area": "Cheadle Hulme",
+      "tags": [
+        "chiverton tap",
+        "arthur chiverton",
+        "mellor road",
+        "micropub",
+        "pub",
+        "beer",
+        "draper",
+        "mosaic",
+        "local history",
+        "food drink"
+      ],
+      "freshness": "current",
+      "checked": "2026-10-16"
+    },
+    {
+      "id": "stockport-october-haf-2026",
+      "type": "Useful updates",
+      "category": "Kids & Family",
+      "title": "Stockport October 2026 HAF: half-term eligibility and booking codes",
+      "summary": "Practical help checking October half-term HAF-funded activities, means-tested free-school-meal eligibility, emailed booking codes and what to do if the code has not arrived. Funded places are not guaranteed.",
+      "href": "/kids-family/stockport-haf-october-half-term-2026/",
+      "area": "All areas",
+      "areas": [
+        "Cheadle",
+        "Cheadle Hulme",
+        "Gatley",
+        "Heald Green"
+      ],
+      "tags": [
+        "HAF",
+        "holiday activities and food",
+        "half term",
+        "october 2026",
+        "free school meals",
+        "booking code",
+        "holidayactivities",
+        "stockport council",
+        "kids",
+        "family",
+        "free activities"
+      ],
+      "freshness": "dated",
+      "checked": "2026-10-16",
+      "expires": "2026-10-30"
     }
   ]
 }
