@@ -66,8 +66,8 @@ export function eligibleForAction(claim, action) {
 
 export function extractTagAttribute(tag, name) {
   if (!/^[a-z][a-z0-9-]*$/i.test(name)) throw new Error('Invalid attribute name');
-  const m = String(tag).match(new RegExp('\\b' + name + '=["\\x27]([^"\\x27]*)["\\x27]', 'i'));
-  return m ? m[1] : null;
+  const m = String(tag).match(new RegExp('\\b' + name + '=("|\\x27)([\\s\\S]*?)\\1', 'i'));
+  return m ? m[2] : null;
 }
 
 export function audit52Finder(html) {
