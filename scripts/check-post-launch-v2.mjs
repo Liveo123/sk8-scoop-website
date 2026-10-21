@@ -314,6 +314,16 @@ contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil
     }
     if (item.disposition === 'existing_surface') {
       expect(String(item.route || '').startsWith('/'), `${item.id} existing_surface missing route`);
+      // An archived newsletter link is not a search/discovery handoff.
+      // Existing standalone articles in the reader categories must be discoverable as real pages.
+      const route = String(item.route || '');
+      if (/^\/(local-history|outdoors|food-drink|kids-family)\/[^/]+\/$/.test(route)) {
+        const rel = route.replace(/^\//,'') + 'index.html';
+        expect(fs.existsSync(path.join(root,rel)), `${item.id} existing article route missing: ${route}`);
+        expect(discoveryRecords.some(record => record.href === route),
+          `${item.id} existing article missing from on-site discovery: ${route}`);
+        contains('sitemap.xml',`https://www.sk8scoop.com${route}`);
+      }
     }
     if (item.disposition === 'whats_on' || item.disposition === 'whats_on_sold_out') {
       const event = events.find(record => record.id === item.event_id);
@@ -326,6 +336,21 @@ contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil
       expect(Boolean(item.reason), `${item.id} needs a reason for ${item.disposition}`);
     }
   }
+}
+
+// Published, evergreen local-history pages should not silently retain a preview-only
+// robots noindex directive. Search records and XML sitemap must agree with the page.
+const searchableHistory = JSON.parse(read('data/discovery.json')).records.filter(record =>
+  record.category === 'Local History' && record.freshness === 'evergreen' &&
+  /^\/local-history\/[^/]+\/$/.test(String(record.href || '')));
+for (const record of searchableHistory) {
+  const route = String(record.href);
+  const rel = route.replace(/^\//, '') + 'index.html';
+  expect(fs.existsSync(path.join(root,rel)), 'Indexed local-history page not found: ' + route);
+  const page = read(rel);
+  expect(!/<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(page),
+    'Published evergreen local-history page remains noindex: ' + route);
+  contains('sitemap.xml','https://www.sk8scoop.com' + route);
 }
 
 console.log('Post-launch NUE v2 preflight passed.');
