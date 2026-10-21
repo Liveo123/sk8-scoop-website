@@ -314,6 +314,16 @@ contains('assets/search.js','minimumMatches = terms.length === 1 ? 1 : Math.ceil
     }
     if (item.disposition === 'existing_surface') {
       expect(String(item.route || '').startsWith('/'), `${item.id} existing_surface missing route`);
+      // An archived newsletter link is not a search/discovery handoff.
+      // Existing standalone articles in the reader categories must be discoverable as real pages.
+      const route = String(item.route || '');
+      if (/^\/(local-history|outdoors|food-drink|kids-family)\/[^/]+\/$/.test(route)) {
+        const rel = route.replace(/^\//,'') + 'index.html';
+        expect(fs.existsSync(path.join(root,rel)), `${item.id} existing article route missing: ${route}`);
+        expect(discoveryRecords.some(record => record.href === route),
+          `${item.id} existing article missing from on-site discovery: ${route}`);
+        contains('sitemap.xml',`https://www.sk8scoop.com${route}`);
+      }
     }
     if (item.disposition === 'whats_on' || item.disposition === 'whats_on_sold_out') {
       const event = events.find(record => record.id === item.event_id);
