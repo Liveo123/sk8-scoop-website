@@ -49,6 +49,8 @@ assert.equal(eligibleForAction({...date,verification_status:'CONFLICT',caveat:'O
 assert.ok(validateClaim({...date,value:'31 Oct'}).some(x=>x.includes('ISO')));
 
 assert.deepEqual(gbpAmounts('Adults £6.50, children £3, booking £1.25'),[1.25,3,6.5]);
+// Apostrophes inside double-quoted attributes must not truncate quoted prices.
+assert.equal(audit52Finder('<script id="adventure-data" type="application/json">'+JSON.stringify(Object.fromEntries(Array.from({length:52},(_,i)=>[i+1,{num:i+1,kind:'walk',region:'stockport',meta:{Allow:'2 hours',Cost:"Rudyard\'s entry £5"}}])))+'</script>'+[1,2].map(()=>Array.from({length:52},(_,i)=>'<article class="finder-card" data-num="'+(i+1)+'" data-kind="walk" data-region="stockport" data-time="2 hours" data-cost="rudyard\'s entry £5"></article>').join('')).join('')).errors.length,0);
 assert.equal(resolveGuideLink('../guide/','/halloween-half-term-guide/success/'),'/halloween-half-term-guide/guide/');
 assert.equal(validateSuccessJourney('<a href="../guide/">Open full guide</a>','/halloween-half-term-guide/success/','/halloween-half-term-guide/guide/'),true);
 assert.equal(validateSuccessJourney('<a href="/">Homepage</a>','/halloween-half-term-guide/success/','/halloween-half-term-guide/guide/'),false);
