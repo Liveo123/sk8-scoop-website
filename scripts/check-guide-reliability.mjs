@@ -36,8 +36,9 @@ else{
  const cards=[...free.matchAll(/<article\b[^>]*>[\s\S]*?<\/article>/gi)].map(m=>m[0]);
  const uncertain=cards.filter(card=>/data-date-unconfirmed="true"/.test(card));
  if(!uncertain.length){failure=true;fail('GQ-03','Disputed date markers exist but are not attached to article cards');}
- else if(uncertain.some(card=>/data-event-date="\d{4}-\d{2}-\d{2}"/.test(card))){failure=true;fail('GQ-03','Disputed date is exposed as a confirmed dated event');}
- else add('GQ-03','PASS',uncertain.length+' Free & Cheap card(s) have disputed-date metadata without confirmed event dates','Full price-filter and live calendar behaviour still require browser test.');
+ else if(uncertain.some(card=>/data-event-date="\d{4}-\d{2}-\d{2}"/.test(card)) && !/article\.dataset\.dateUnconfirmed!==\\x27true\\x27/.test(free)){
+  failure=true;fail('GQ-03','Disputed event has fallback date without a guard excluding it from calendar/saved actions');
+ } else add('GQ-03','PASS',uncertain.length+' visibly disputed Free & Cheap card(s) with calendar suppression guard','Fallback event dates exist for sorting and expiry only. Full browser/price-filter behaviour remains NOT VERIFIED.');
 }
 const registry=JSON.parse(read('docs/reviews/free-cheap-source-register-2026-10-08.json'));
 const badEntries=(registry.entries||[]).filter(e=>e.fact_check_status==='SPECIFIC_CLAIMS_CHECKED'&&(!e.primary_claims_checked?.length||!e.claim_evidence_urls?.length||!e.claim_check_date));
