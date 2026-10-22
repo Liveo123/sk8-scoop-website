@@ -5,6 +5,8 @@ on:
     paths:
       - 'scripts/guide-hosted-core.mjs'
       - 'scripts/check-guide-hosted-assets-links.mjs'
+      - 'scripts/reconcile-guide-gq-evidence.mjs'
+      - 'docs/guide-factory-reliability.md'
       - 'tests/guide-hosted-fixtures.mjs'
       - 'tests/guide-reliability-browser.mjs'
       - '.github/workflows/guide-hosted-browser-qa.yml'
@@ -29,9 +31,11 @@ jobs:
         run: |
           node --check scripts/guide-hosted-core.mjs
           node --check scripts/check-guide-hosted-assets-links.mjs
+          node --check scripts/reconcile-guide-gq-evidence.mjs
           node --check tests/guide-hosted-fixtures.mjs
           node --check tests/guide-reliability-browser.mjs
       - name: Deterministic negative fixtures without external services
+        id: fixture-tests
         run: node tests/guide-hosted-fixtures.mjs
       - name: Find Chrome
         run: |
@@ -63,6 +67,12 @@ jobs:
         env:
           GUIDE_QA_BASE_URL: http://127.0.0.1:8769
         run: node tests/guide-reliability-browser.mjs
+      - name: Consolidate scoped GQ evidence with explicit unknowns
+        if: always()
+        env:
+          GUIDE_QA_FIXTURES_PASSED: ${{ steps.fixture-tests.outcome == 'success' && '1' || '0' }}
+          GUIDE_QA_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/reconcile-guide-gq-evidence.mjs
       - name: Save guide QA evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -87,6 +97,11 @@ jobs:
           GUIDE_QA_IMAGE_LIMIT: '6'
           GUIDE_QA_LINK_LIMIT: '4'
         run: node scripts/check-guide-hosted-assets-links.mjs
+      - name: Reconcile read-only live QA scope and missing evidence
+        if: always()
+        env:
+          GUIDE_QA_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/reconcile-guide-gq-evidence.mjs
       - name: Keep live evidence, including blocked/unverified results
         if: always()
         uses: actions/upload-artifact@v4
