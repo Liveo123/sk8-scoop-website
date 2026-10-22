@@ -57,7 +57,7 @@ try {
     await cmd('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:false,screenWidth:width,screenHeight:900});
     for(const [name,slug] of [['Halloween','halloween-half-term-guide'],['Free & Cheap','free-cheap-guide'],['52 Adventures','52-adventures']]){
       await navigate('/'+slug+'/guide/');
-      const s=await evaluate("({path:location.pathname,w:innerWidth,doc:document.documentElement.scrollWidth,h1:document.querySelectorAll('h1').length,body:document.body.textContent.length})");
+      const s=await evaluate("({path:location.pathname,w:innerWidth,doc:document.documentElement.scrollWidth,h1:[...document.querySelectorAll('h1')].filter(x=>x.getClientRects().length>0 && !x.closest('[hidden]')).length,body:document.body.textContent.length})");
       record(name+' direct access '+width+'px',s.path==='/'+slug+'/guide/' && s.h1===1 && s.body>500,JSON.stringify(s));
       record(name+' no horizontal overflow '+width+'px',s.doc<=width+2,JSON.stringify({viewport:width,document:s.doc}));
     }
