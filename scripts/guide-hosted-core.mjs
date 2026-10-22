@@ -5,7 +5,8 @@ export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const plain = value => String(value ?? '').replaceAll('&amp;', '&').trim();
 
 export function inventoryImages(html) {
-  const list = [...html.matchAll(/<img\b[^>]*\bsrc=(["'])(.*?)\1/gi)].map(m => plain(m[2]));
+  const staticMarkup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
+  const list = [...staticMarkup.matchAll(/<img\b[^>]*\bsrc=(["'])(.*?)\1/gi)].map(m => plain(m[2]));
   const data = html.match(/<script\b[^>]*id=["']image-data["'][^>]*>([\s\S]*?)<\/script>/i);
   if (data) {
     const images = JSON.parse(data[1]);
