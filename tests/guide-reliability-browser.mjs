@@ -63,7 +63,7 @@ try {
       if (width===390) {
         const decoded=await evaluate("(async()=>{const images=[...document.querySelectorAll('img[src]')].slice(0,3);"+
           "return await Promise.all(images.map(async img=>{"+
-          "try{await img.decode();return {ok:img.naturalWidth>0,width:img.naturalWidth,url:img.currentSrc}}"+
+          "try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('image decode timeout')),4500))]);return {ok:img.naturalWidth>0,width:img.naturalWidth,url:img.currentSrc}}"+
           "catch(e){return {ok:false,url:img.currentSrc,error:String(e)}}}));})()");
         record(name+' actual browser image decoding',decoded.length>0 && decoded.every(x=>x.ok),JSON.stringify(decoded));
       }
