@@ -4,6 +4,14 @@ import { classifyLinkProbe } from './guide-reliability-core.mjs';
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const plain = value => String(value ?? '').replaceAll('&amp;', '&').trim();
 
+export function halloweenEntries(html) {
+  const match=html.match(/const E=(\[[\s\S]*?\]);\s*function visualFor\(/);
+  if(!match) return [];
+  const entries=JSON.parse(match[1]);
+  if(!Array.isArray(entries)) throw Error('Halloween guide E is not an array');
+  return entries;
+}
+
 export function inventoryImages(html) {
   const staticMarkup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
   const list = [...staticMarkup.matchAll(/<img\b[^>]*\bsrc=(["'])(.*?)\1/gi)].map(m => plain(m[2]));
@@ -12,11 +20,12 @@ export function inventoryImages(html) {
     const images = JSON.parse(data[1]);
     for (const [key, url] of Object.entries(images)) if (key === 'brand' || /^a\d+$/.test(key)) list.push(plain(url));
   }
+  for(const entry of halloweenEntries(html)) if(Array.isArray(entry.visual) && typeof entry.visual[0]==='string') list.push(plain(entry.visual[0]));
   return [...new Set(list.filter(x => x && !x.startsWith('data:') && !x.startsWith('blob:')))];
 }
 export function inventoryLinks(html) {
   return [...new Set([...html.matchAll(/<a\b[^>]*\bhref=(["'])(.*?)\1/gi)]
-    .map(m => plain(m[2])).filter(x => /^https:\/\//i.test(x)))];
+    .map(m => plain(m[2])).concat(halloweenEntries(html).map(x => x.u)).filter(x => /^https:\/\//i.test(x)))];
 }
 
 export function chooseSpread(items, limit) {
