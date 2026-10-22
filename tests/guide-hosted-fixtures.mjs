@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
-import {inventoryImages,inventoryLinks,chooseSpread,safeUrl,imageSignature,probeImage,probeLink,sha256} from '../scripts/guide-hosted-core.mjs';
+import {inventoryImages,inventoryLinks,halloweenEntries,chooseSpread,safeUrl,imageSignature,probeImage,probeLink,sha256} from '../scripts/guide-hosted-core.mjs';
 
 const html='<img src="/guide/a.webp" alt="A"><img src="https://cdn.example.org/b.jpg">'+
   '<script id="image-data" type="application/json">'+JSON.stringify({brand:'/logo.webp',a1:'/guide/a.webp',a2:'https://cdn.example.org/b.jpg'})+'</script>'+
@@ -8,6 +8,10 @@ const html='<img src="/guide/a.webp" alt="A"><img src="https://cdn.example.org/b
 assert.deepEqual(inventoryImages(html),['/guide/a.webp','https://cdn.example.org/b.jpg','/logo.webp']);
 assert.deepEqual(inventoryImages('<script>var markup = "<img src=/bad.webp>";</script><img src="/good.webp">'),['/good.webp']);
 assert.deepEqual(inventoryLinks(html),['https://example.org/info']);
+const dynamic='<script>const E=[{"u":"https://halloween.example.org/tickets","visual":["assets/feature.webp","An illustration"]}];function visualFor(e){return e.visual}</script>';
+assert.equal(halloweenEntries(dynamic).length,1);
+assert.deepEqual(inventoryImages(dynamic),['assets/feature.webp']);
+assert.deepEqual(inventoryLinks(dynamic),['https://halloween.example.org/tickets']);
 assert.deepEqual(chooseSpread([1,2,3,4,5],3),[1,3,5]);
 assert.equal(safeUrl('javascript:alert(1)','https://www.sk8scoop.com/'),null);
 assert.equal(safeUrl('http://example.org/','https://www.sk8scoop.com/'),null);
