@@ -86,12 +86,15 @@ try {
     "input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));"+
     "return document.querySelectorAll('#view-finder .finder-card:not([hidden])').length;})()");
   record('Clearing Finder query restores results',filterReset>0,'visible='+filterReset);
+  const openedAdventure=await evaluate("document.querySelector('#view-finder .finder-card:not([hidden]) [data-open]')?.dataset.open || ''");
   record('Adventure dialog trigger available',await click('#view-finder .finder-card:not([hidden]) [data-open]'));
   record('Adventure dialog modal state',await evaluate("Boolean(document.querySelector('dialog.adventure-dialog')?.open)"));
   await cmd('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
   await cmd('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
   await sleep(300);
   record('Escape closes adventure dialog',!(await evaluate("Boolean(document.querySelector('dialog.adventure-dialog')?.open)")));
+  const restored=await evaluate("document.activeElement?.dataset?.open || ''");
+  record('Escape restores focus to previous adventure trigger',Boolean(openedAdventure) && restored===openedAdventure,'open='+openedAdventure+' focused='+restored);
   const screen=await cmd('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});
   await writeFile('visual-qa/guide-reliability/52-adventures-mobile-390.png',Buffer.from(screen.data,'base64'));
 
@@ -114,6 +117,12 @@ try {
   }
   record('Share/copy control remains available without clipboard',
     await evaluate("Boolean(document.querySelector('[data-guide-share]'))"));
+  await click('[data-view="saved"]');
+  await click('[data-share-saved]');
+  await sleep(450);
+  const promptFallback=dialogs.find(d=>d.type==='prompt' && /Copy this shortlist link/.test(d.message||''));
+  record('Clipboard-denied shortlist provides manual copy fallback',Boolean(promptFallback),
+    'prompt='+(promptFallback?.message||'none'));
 } catch(e) {
   record('Browser test infrastructure',false,String(e.stack||e));
 } finally {
