@@ -1,0 +1,97 @@
+name: Guide Hosted Assets and Browser QA
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/guide-hosted-core.mjs'
+      - 'scripts/check-guide-hosted-assets-links.mjs'
+      - 'tests/guide-hosted-fixtures.mjs'
+      - 'tests/guide-reliability-browser.mjs'
+      - '.github/workflows/guide-hosted-browser-qa.yml'
+      - 'halloween-half-term-guide/**'
+      - 'free-cheap-guide/**'
+      - '52-adventures/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-guide-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Node scripts compile
+        run: |
+          node --check scripts/guide-hosted-core.mjs
+          node --check scripts/check-guide-hosted-assets-links.mjs
+          node --check tests/guide-hosted-fixtures.mjs
+          node --check tests/guide-reliability-browser.mjs
+      - name: Deterministic negative fixtures without external services
+        run: node tests/guide-hosted-fixtures.mjs
+      - name: Find Chrome
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "No headless Chrome browser is available"
+            exit 1
+          fi
+      - name: Start isolated local guide server
+        run: |
+          python3 -m http.server 8769 --bind 127.0.0.1 >/tmp/sk8-guide-qa-server.log 2>&1 &
+          for i in $(seq 1 25); do
+            if curl -fsS --max-time 3 http://127.0.0.1:8769/52-adventures/guide/ -o /dev/null; then exit 0; fi
+            sleep 1
+          done
+          echo "Guide QA server could not start"
+          exit 1
+      - name: Check exact local HTML parity and sampled image bytes
+        env:
+          GUIDE_QA_BASE_URL: http://127.0.0.1:8769
+          GUIDE_QA_PARITY_STRICT: '1'
+          GUIDE_QA_IMAGE_LIMIT: '4'
+          GUIDE_QA_LINK_LIMIT: '0'
+        run: node scripts/check-guide-hosted-assets-links.mjs
+      - name: Real-browser guide access and failure states
+        env:
+          GUIDE_QA_BASE_URL: http://127.0.0.1:8769
+        run: node tests/guide-reliability-browser.mjs
+      - name: Save guide QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: guide-reliability-local-evidence
+          path: visual-qa/guide-reliability/
+          if-no-files-found: warn
+          retention-days: 14
+
+  read-only-live-sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Sample live hosted image bytes, guide routes and third-party link accessibility
+        env:
+          GUIDE_QA_BASE_URL: https://www.sk8scoop.com
+          GUIDE_QA_IMAGE_LIMIT: '6'
+          GUIDE_QA_LINK_LIMIT: '4'
+        run: node scripts/check-guide-hosted-assets-links.mjs
+      - name: Keep live evidence, including blocked/unverified results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: guide-reliability-live-sample
+          path: visual-qa/guide-reliability/hosted-audit.json
+          if-no-files-found: warn
+          retention-days: 14
