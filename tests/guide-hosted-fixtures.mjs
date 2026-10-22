@@ -6,6 +6,7 @@ const html='<img src="/guide/a.webp" alt="A"><img src="https://cdn.example.org/b
   '<script id="image-data" type="application/json">'+JSON.stringify({brand:'/logo.webp',a1:'/guide/a.webp',a2:'https://cdn.example.org/b.jpg'})+'</script>'+
   '<a href="https://example.org/info">Official</a><a href="mailto:private@example.org">Email</a>';
 assert.deepEqual(inventoryImages(html),['/guide/a.webp','https://cdn.example.org/b.jpg','/logo.webp']);
+assert.deepEqual(inventoryImages('<script>var markup = "<img src=/bad.webp>";</script><img src="/good.webp">'),['/good.webp']);
 assert.deepEqual(inventoryLinks(html),['https://example.org/info']);
 assert.deepEqual(chooseSpread([1,2,3,4,5],3),[1,3,5]);
 assert.equal(safeUrl('javascript:alert(1)','https://www.sk8scoop.com/'),null);
