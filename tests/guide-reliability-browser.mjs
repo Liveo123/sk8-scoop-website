@@ -61,7 +61,7 @@ try {
       record(name+' direct access '+width+'px',s.path==='/'+slug+'/guide/' && s.h1===1 && s.body>500,JSON.stringify(s));
       record(name+' no horizontal overflow '+width+'px',s.doc<=width+2,JSON.stringify({viewport:width,document:s.doc}));
       if (width===390) {
-        const decoded=await evaluate("(async()=>{const images=[...document.querySelectorAll('img[src]')].slice(0,3);"+
+        const decoded=await evaluate("(async()=>{const images=[...document.querySelectorAll('img[src]')].filter(img=>img.getAttribute('src')?.trim() && img.currentSrc).slice(0,3);"+
           "return await Promise.all(images.map(async img=>{"+
           "try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('image decode timeout')),4500))]);return {ok:img.naturalWidth>0,width:img.naturalWidth,url:img.currentSrc}}"+
           "catch(e){return {ok:false,url:img.currentSrc,error:String(e)}}}));})()");
