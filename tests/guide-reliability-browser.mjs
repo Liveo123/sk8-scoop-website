@@ -60,6 +60,13 @@ try {
       const s=await evaluate("({path:location.pathname,w:innerWidth,doc:document.documentElement.scrollWidth,h1:[...document.querySelectorAll('h1')].filter(x=>x.getClientRects().length>0 && !x.closest('[hidden]')).length,body:document.body.textContent.length})");
       record(name+' direct access '+width+'px',s.path==='/'+slug+'/guide/' && s.h1===1 && s.body>500,JSON.stringify(s));
       record(name+' no horizontal overflow '+width+'px',s.doc<=width+2,JSON.stringify({viewport:width,document:s.doc}));
+      if (width===390) {
+        const decoded=await evaluate("(async()=>{const images=[...document.querySelectorAll('img[src]')].slice(0,3);"+
+          "return await Promise.all(images.map(async img=>{"+
+          "try{await img.decode();return {ok:img.naturalWidth>0,width:img.naturalWidth,url:img.currentSrc}}"+
+          "catch(e){return {ok:false,url:img.currentSrc,error:String(e)}}}));})()");
+        record(name+' actual browser image decoding',decoded.length>0 && decoded.every(x=>x.ok),JSON.stringify(decoded));
+      }
     }
   }
   await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:900,deviceScaleFactor:1,mobile:false,screenWidth:390,screenHeight:900});
