@@ -82,7 +82,7 @@ jobs:
       - name: Wait for Cloudflare finder route and assets
         shell: bash
         env:
-          PREVIEW_URL: https://feature-october-holiday-club-finder-2026.previews.sk8scoop.com
+          PREVIEW_URL: https://feature-holiday-clubs-oct26-batch2.previews.sk8scoop.com
         run: |
           set -eu
           found=false
@@ -105,7 +105,7 @@ jobs:
           test -s /tmp/sk8-finder-site.js
       - name: Exercise hosted Cloudflare finder on desktop and phone
         env:
-          PREVIEW_URL: https://feature-october-holiday-club-finder-2026.previews.sk8scoop.com
+          PREVIEW_URL: https://feature-holiday-clubs-oct26-batch2.previews.sk8scoop.com
         run: node tests/holiday-club-finder-browser.mjs
       - name: Store hosted finder screenshots
         if: always()
