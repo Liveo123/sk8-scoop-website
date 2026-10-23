@@ -9,6 +9,7 @@ on:
       - 'assets/global-search.css'
       - 'assets/search.js'
       - 'assets/whats-on.js'
+      - 'assets/whats-on-compact.css'
       - 'search/index.html'
       - 'whats-on/index.html'
       - 'guides/index.html'
