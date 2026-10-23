@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17",
+  "updated": "2026-10-23",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
@@ -23,8 +23,8 @@
       "title": "Free Merseyday of the Dead on 24 October",
       "meta": "Saturday 24 October · Merseyway and Redrock",
       "summary": "Daytime Halloween activities followed by an early-evening Deadrock celebration. Check timings and availability.",
-      "href": "/issues/issue-17/",
-      "linkLabel": "Get the Merseyday details →",
+      "href": "/whats-on/?event=merseyday-of-the-dead-2026-10-24",
+      "linkLabel": "See dates, times and details →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
@@ -49,34 +49,6 @@
   ],
   "explore": [
     {
-      "title": "What’s On",
-      "description": "Events & things to do",
-      "href": "/whats-on/",
-      "status": "OPEN",
-      "visual": "photo",
-      "image": "/assets/images/nue/explore-whats-on.webp",
-      "position": "center"
-    },
-    {
-      "title": "Free & Cheap",
-      "description": "Make the most of local life for less",
-      "href": "/free-cheap-guide/",
-      "status": "OPEN",
-      "visual": "photo",
-      "image": "/assets/images/free-cheap-guide-logo.webp",
-      "fit": "contain",
-      "position": "center"
-    },
-    {
-      "title": "Food & Drink",
-      "description": "Local spots to eat & drink",
-      "href": "/food-drink/",
-      "status": "OPEN",
-      "visual": "photo",
-      "image": "/assets/images/nue/explore-food-drink.webp",
-      "position": "center"
-    },
-    {
       "title": "Kids & Family",
       "description": "Days out & activities",
       "href": "/kids-family/",
@@ -95,6 +67,24 @@
       "position": "center"
     },
     {
+      "title": "Food & Drink",
+      "description": "Local spots to eat & drink",
+      "href": "/food-drink/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-food-drink.webp",
+      "position": "center"
+    },
+    {
+      "title": "Useful Updates",
+      "description": "Roads, bins, travel & practical changes",
+      "href": "/updates/",
+      "status": "OPEN",
+      "visual": "photo",
+      "image": "/assets/images/nue/explore-updates.webp",
+      "position": "center"
+    },
+    {
       "title": "Local History",
       "description": "Stories from around here",
       "href": "/local-history/",
@@ -110,15 +100,6 @@
       "status": "OPEN",
       "visual": "photo",
       "image": "/assets/images/nue/explore-planning.webp",
-      "position": "center"
-    },
-    {
-      "title": "Useful Updates",
-      "description": "Roads, bins, travel & practical changes",
-      "href": "/updates/",
-      "status": "OPEN",
-      "visual": "photo",
-      "image": "/assets/images/nue/explore-updates.webp",
       "position": "center"
     }
   ]
