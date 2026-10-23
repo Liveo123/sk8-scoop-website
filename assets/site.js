@@ -7,7 +7,7 @@ if(!document.querySelector('link[data-sitewide-ux]')){
   sitewide.dataset.sitewideUx='true';
   document.head.appendChild(sitewide);
 }
-if(!document.querySelector('link[data-sk8-usability-pass]')){
+if(!document.querySelector('link[href*="usability-pass-20261023.css"]')){
   const usability=document.createElement('link');
   usability.rel='stylesheet';
   usability.href='/assets/usability-pass-20261023.css?v=1';
