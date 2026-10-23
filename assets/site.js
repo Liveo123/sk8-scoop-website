@@ -1,3 +1,13 @@
+// Reusable local-publication visual contract. Loaded on all site.js routes
+// so navigation, filter resets, accessibility and guide-help rules stay aligned.
+if(!document.querySelector('link[data-sitewide-ux]')){
+  const sitewide=document.createElement('link');
+  sitewide.rel='stylesheet';
+  sitewide.href='/assets/sitewide-ux.css';
+  sitewide.dataset.sitewideUx='true';
+  document.head.appendChild(sitewide);
+}
+
 const sk8Header=document.querySelector('.site-header');
 const sk8HeaderRow=sk8Header&&sk8Header.querySelector('.header-row');
 let nav=sk8HeaderRow&&sk8HeaderRow.querySelector('.nav');
