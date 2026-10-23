@@ -317,8 +317,31 @@ try {
   await screenshot('mobile-search-verified.png');
 
   await navigate('/whats-on/?filter=weekend&area=Gatley');
-  check('What’s On keeps one primary action and two useful mobile links',
-    await evaluate("document.querySelectorAll('.whats-on-page-hero .button-row .button').length===1 && document.querySelectorAll('.whats-on-page-hero .button-row .sitewide-hero-secondary').length===2"));
+  const compact=await evaluate(`(() => {
+    const hero=document.querySelector('.whats-on-compact-hero');
+    const filters=document.querySelector('.whats-on-filter-toolbar');
+    const h=hero.getBoundingClientRect(),f=filters.getBoundingClientRect();
+    return {
+      heroHeight:h.height,heroBottom:h.bottom,filtersTop:f.top,
+      imageInjected:!!document.querySelector('.whats-on-hero-visual, .whats-on-hero-grid'),
+      jumpToListings:!!document.querySelector('.whats-on-page-hero a[href="#current-listings"]'),
+      filterCount:document.querySelectorAll('[data-event-filter]').length,
+      links:[...document.querySelectorAll('.whats-on-header-links a')].map(a=>a.getAttribute('href')),
+      width:document.documentElement.scrollWidth,
+      viewport:document.documentElement.clientWidth
+    };
+  })()`);
+  check('What’s On has a compact task-first intro and filters on the first mobile screen',
+    compact.heroHeight<265 && compact.filtersTop<400 &&
+    compact.filtersTop>=compact.heroBottom-2 &&
+    !compact.imageInjected && !compact.jumpToListings &&
+    compact.filterCount>=6 && compact.width<=compact.viewport+2,
+    JSON.stringify(compact));
+  check('My SK8 and event submission remain available without a redundant jump button',
+    compact.links.includes('/my-sk8/') &&
+    (compact.links.includes('../submit-event/')||compact.links.includes('/submit-event/')) &&
+    compact.links.length===2);
+  await screenshot('mobile-whatson-compact.png');
   await waitFor("document.querySelector('[data-whats-on-clear-filters]') && !document.querySelector('[data-whats-on-clear-filters]').hidden",
     'active calendar filters');
   await evaluate("document.querySelector('[data-whats-on-clear-filters]').click();true");
@@ -339,6 +362,16 @@ try {
     JSON.stringify(desktop));
   await screenshot('desktop-guides-1200.png');
   await viewport(1366,900,false);
+  await navigate('/whats-on/');
+  const desktopEvents=await evaluate(`(() => ({
+    heroHeight:document.querySelector('.whats-on-compact-hero').getBoundingClientRect().height,
+    filtersTop:document.querySelector('.whats-on-filter-toolbar').getBoundingClientRect().top,
+    imageInjected:!!document.querySelector('.whats-on-hero-visual')
+  }))()`);
+  check('Desktop What’s On begins with useful filters rather than a big hero',
+    desktopEvents.heroHeight<200 && desktopEvents.filtersTop<350 &&
+    !desktopEvents.imageInjected,JSON.stringify(desktopEvents));
+  await screenshot('desktop-whatson-compact.png');
   await navigate('/search/?q=free');
   await screenshot('desktop-search-1366.png');
 
