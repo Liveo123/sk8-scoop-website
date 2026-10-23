@@ -79,7 +79,7 @@ assertIncludes(html, 'Get it free</button>', 'Benefit-led email signup');
 // Public numbers are interpolated by assets/homepage-nue.js, not typed into page HTML.
 assertIncludes(homepageJs, 'stats.subscriberProof || stats.subscriberCount', 'Subscriber proof source of truth');
 assertIncludes(html, 'data-experiment="homepage-utility-promise-v1"', 'Newsletter acquisition experiment retained');
-assertIncludes(css, 'filter:saturate(1.25) contrast(1.12) brightness(1.035)', 'Non-destructive image enhancement');
+assertIncludes(css, 'filter:saturate(1.20) contrast(1.10) brightness(1.025)', 'Non-destructive image enhancement');
 assertIncludes(css, 'reader-hero-shade', 'Text legibility overlay retained');
 assert.ok((html.match(/<section\b/g)||[]).length >= 6, 'Homepage must retain distinct useful sections');
 assert.equal((html.match(/reader-explore-tile/g)||[]).length,6, 'Six non-duplicated static discover routes');
