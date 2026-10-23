@@ -1,0 +1,165 @@
+/* SK8 Scoop homepage editorial finish, 23 October 2026.
+   Visual-only layer. No layout, routing, tracking or form changes.
+   Keep original media and logo assets; replace editorial imagery only after rights clearance. */
+body.reader-home {
+  --home-ink:#103d43;
+  --home-teal:#0f6470;
+  --home-cream:#fffaf0;
+  --home-line:#d7dfda;
+}
+body.reader-home .home-section-kicker {
+  color:#925018;
+  font-weight:850;
+  letter-spacing:.105em;
+  text-transform:uppercase;
+}
+body.reader-home .reader-first-intro h1,
+body.reader-home .reader-section-head h2,
+body.reader-home .reader-hero-copy h2 {
+  color:var(--home-ink);
+  letter-spacing:-.032em;
+  text-wrap:balance;
+}
+body.reader-home .reader-first-intro p,
+body.reader-home .home-section-intro,
+body.reader-home .reader-hero-lead {
+  line-height:1.6;
+}
+body.reader-home .reader-first-discovery {
+  background:linear-gradient(180deg,#fffdf8 0%,#f4f8f5 100%);
+}
+body.reader-home .reader-first-search {
+  box-shadow:0 8px 30px rgba(6,54,62,.055);
+}
+body.reader-home .reader-first-feed-head {
+  border-bottom:1px solid var(--home-line);
+  padding-bottom:12px;
+}
+body.reader-home .reader-hero-photo {
+  isolation:isolate;
+}
+body.reader-home .reader-hero-photo::before {
+  background-position:center 46%;
+  background-repeat:no-repeat;
+  background-size:cover;
+  filter:saturate(1.05) contrast(1.04);
+}
+body.reader-home .reader-hero-copy h2 {
+  font-weight:800;
+  line-height:1.08;
+}
+body.reader-home .reader-hero-copy .button,
+body.reader-home .reader-first-search .button,
+body.reader-home .home-resource-card .button {
+  background:#0b5661;
+  color:#fff;
+  border-color:#0b5661;
+  font-weight:800;
+}
+body.reader-home .reader-hero-copy .button:hover,
+body.reader-home .reader-first-search .button:hover,
+body.reader-home .home-resource-card .button:hover {
+  background:#073e48;
+  border-color:#073e48;
+}
+body.reader-home .reader-worth .reader-story {
+  overflow:hidden;
+  border:1px solid #dde5df;
+  background:#fffdfa;
+  box-shadow:0 6px 22px rgba(10,57,63,.055);
+  transition:box-shadow .18s ease,border-color .18s ease;
+}
+body.reader-home .reader-worth .reader-story:hover {
+  box-shadow:0 10px 29px rgba(10,57,63,.105);
+  border-color:#bbd1cb;
+}
+body.reader-home .reader-story-image {
+  overflow:hidden;
+  background:#eef4f0;
+}
+body.reader-home .reader-story-image img {
+  image-rendering:auto;
+  backface-visibility:hidden;
+}
+body.reader-home .reader-story-image .dicm-art {
+  object-position:center center;
+}
+body.reader-home .reader-story-body h3 {
+  color:#103d43;
+  letter-spacing:-.015em;
+  line-height:1.23;
+  text-wrap:balance;
+}
+body.reader-home .reader-story-body .reader-meta {
+  color:#596b64;
+  letter-spacing:.02em;
+}
+body.reader-home .reader-story-body p[data-story-summary] {
+  line-height:1.57;
+}
+body.reader-home .reader-explore-tile {
+  overflow:hidden;
+  border-color:#dce5df;
+}
+body.reader-home .reader-explore-photo {
+  background-position:center;
+  background-size:cover;
+  filter:saturate(.98) contrast(1.055);
+  transition:filter .2s ease;
+}
+body.reader-home .reader-explore-tile:hover .reader-explore-photo {
+  filter:saturate(1.07) contrast(1.06);
+}
+body.reader-home .reader-explore-copy strong {
+  letter-spacing:-.012em;
+}
+body.reader-home .reader-latest-cover {
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(143deg,#073f48 0%,#0f6470 63%,#13535c 100%);
+  border-bottom:4px solid #e57b32;
+}
+body.reader-home .reader-latest-cover::after {
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:36%;
+  background:linear-gradient(0deg,rgba(1,34,41,.18),transparent);
+  pointer-events:none;
+}
+body.reader-home .reader-latest-cover img {
+  position:relative;
+  z-index:1;
+  max-width:min(74%,195px);
+  height:auto;
+  object-fit:contain;
+  filter:none;
+}
+body.reader-home .reader-latest-cover span {
+  position:relative;
+  z-index:1;
+  color:#fff;
+  font-size:.79rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+body.reader-home .home-resource-card,
+body.reader-home .home-locality-strip {
+  border-color:#dae3de;
+}
+body.reader-home a:focus-visible,
+body.reader-home button:focus-visible,
+body.reader-home input:focus-visible {
+  outline:3px solid #e57b32;
+  outline-offset:3px;
+}
+@media(max-width:700px){
+ body.reader-home .reader-first-intro h1{letter-spacing:-.025em;}
+ body.reader-home .reader-hero-photo::before{background-position:60% center;}
+ body.reader-home .reader-story-image .dicm-art{object-position:center center;}
+ body.reader-home .reader-worth .reader-story{box-shadow:0 4px 14px rgba(10,57,63,.055);}
+}
+@media(prefers-reduced-motion:reduce){
+ body.reader-home .reader-worth .reader-story,
+ body.reader-home .reader-explore-photo{transition:none;}
+}
