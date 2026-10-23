@@ -42,7 +42,7 @@ const screenshot = async name => {
 };
 const goto = async () => {
   await rpc('Page.navigate', {url:BASE + '/kids-family/holiday-club-finder/'});
-  check(await ready("document.querySelectorAll('#club-list .club-card').length===28"), '28 club cards loaded');
+  check(await ready("document.querySelectorAll('#club-list .club-card').length===29"), '29 club cards loaded');
 };
 try {
   await mkdir('visual-qa/holiday-club-finder', {recursive:true});
@@ -76,7 +76,7 @@ try {
   await goto();
   check(await evalJS("document.title.includes('Holiday Clubs')"),'Correct page title');
   check(await evalJS("document.querySelector('meta[name=robots]')?.content==='noindex,follow'"),'Seasonal finder stays non-indexed');
-  check(await evalJS("document.querySelectorAll('#club-list .club-card a[href^=\"https://\"]').length===28"),'28 provider detail links, HTTPS');
+  check(await evalJS("document.querySelectorAll('#club-list .club-card a[href^=\"https://\"]').length===29"),'29 provider detail links, HTTPS');
   check(await evalJS("Boolean(document.getElementById('finder-join-free')) && document.getElementById('finder-join-free').getAttribute('href')==='/join/'"),'Optional newsletter continuation');
   check(await evalJS("document.querySelector('.finder-help')?.textContent.includes('HAF')"),'Official HAF guidance visible');
   check(await evalJS("document.documentElement.scrollWidth<=innerWidth+1"),'No desktop horizontal overflow');
@@ -88,18 +88,24 @@ try {
   check((await count())===3,'Gymnastics options filtered');
   await setFilter('type','');
   await setFilter('day','30');
-  check((await count())===20,'Friday programme options filtered');
+  check((await count())===21,'Friday programme options filtered');
   await setFilter('day','');
+  await setFilter('area','Heald Green');
+  check((await count())===2,'Two Heald Green options including source-qualified SportsCool');
+  check(await evalJS("Array.from(document.querySelectorAll('#club-list .club-card')).some(e=>e.textContent.includes('Confirm with organiser'))"),'Unverified SportsCool age remains explicitly unknown');
+  await setFilter('age','7');
+  check((await count())===1,'Age-filtered results exclude unverified SportsCool age');
+  await setFilter('age','');
   await setFilter('area','Gatley');
   await setFilter('age','3');
   check((await count())===0,'Impossible selection shows no results');
   check(await evalJS("document.getElementById('empty')?.hidden===false"),'Empty-result help visible');
   await setFilter('age','');
   await setFilter('area','');
-  check((await count())===28,'Clearing filters restores all listings');
+  check((await count())===29,'Clearing filters restores all listings');
   check(await evalJS("Array.from(document.querySelectorAll('.finder-filters label')).every(e=>document.getElementById(e.htmlFor))"),'Every filter has associated label');
   check(await evalJS("document.querySelectorAll('main a[href^=\"https://\"]').length>=19"),'Provider and council links available without signup');
-  check(await evalJS("document.querySelectorAll('#club-list .club-card').length===28"),'All 28 clubs available without email gate');
+  check(await evalJS("document.querySelectorAll('#club-list .club-card').length===29"),'All 29 clubs available without email gate');
   await evalJS("window.__finderSignals=[];window.sk8Track=(n,p)=>window.__finderSignals.push({n,p});true");
   await setFilter('area','Gatley');
   check(await evalJS("window.__finderSignals.some(x=>x.n==='holiday_club_filter_used'&&x.p.filter_type==='area'&&!Object.hasOwn(x.p,'age'))"),'Filter tracking does not expose child age');

@@ -29,7 +29,7 @@
 <div><label for="type">Activity</label><select id="type"><option value="">All types</option><option value="Multi-activity">Multi-activity</option><option value="Performing arts">Performing arts</option><option value="Sports">Sports</option><option value="Gymnastics">Gymnastics &amp; trampolining</option></select></div>
 </div>
 <div class="finder-meta"><strong id="count" aria-live="polite"></strong><span class="finder-note">Original entries reviewed 19 Oct; additions checked 23 Oct · Places not guaranteed · No paid positions</span></div>
-<p class="finder-note">Core SK8 choices come first, followed by nearby clubs. Different venues run by the same provider are shown separately because they offer different drop-off locations.</p><aside class="finder-help" id="expired" hidden role="status"><h2>October 2026 is over</h2><p>These October half-term listings have expired. Please don’t use the old dates or prices for a new school holiday. Browse <a class="finder-link" href="/kids-family/">current Kids &amp; Family information</a> instead.</p></aside>
+<p class="finder-note">Core SK8 choices come first, followed by nearby clubs. Different venues run by the same provider are shown separately because they offer different drop-off locations. Where a provider has not confirmed its age range, that entry will not appear when you select a child’s age.</p><aside class="finder-help" id="expired" hidden role="status"><h2>October 2026 is over</h2><p>These October half-term listings have expired. Please don’t use the old dates or prices for a new school holiday. Browse <a class="finder-link" href="/kids-family/">current Kids &amp; Family information</a> instead.</p></aside>
 <section id="club-list" class="finder-grid" aria-label="Holiday club results"></section><div id="empty" class="finder-empty" hidden>No clubs match all your filters. Try another area, age or day. Some clubs may require you to contact the organiser to confirm prices or places.</div>
 <section class="finder-help"><h2>Before you book</h2><p>Confirm available spaces, full session hours, drop-off and collection rules, prices, age restrictions and whether Tax-Free Childcare or childcare vouchers are accepted. SK8 Scoop links to organisers; we do not take bookings or independently inspect providers.</p><p><strong>Something missing or incorrect?</strong> <a class="finder-link" href="/contact/">Tell SK8 Scoop</a>. We will review corrections before updating the finder.</p><p class="finder-note">Inclusion is not a recommendation or safeguarding endorsement. Registration, insurance and staff checks should be confirmed directly with the provider where relevant.</p></section>
 <aside class="finder-signup" aria-labelledby="finder-newsletter-heading">
@@ -265,6 +265,26 @@ const clubs=[
   "detail": "Football camp with matches and coaching. Booking text says Reception–Year 6 but the online age-band label is wider; check school-year eligibility before paying.",
   "url": "https://elite-football-coaching.classforkids.io/camp/21",
   "source": "Elite Football Coaching October 2026 booking",
+  "checked": "23 October 2026"
+ },
+ {
+  "name": "SportsCool Cheshire · Etchells Primary",
+  "area": "Heald Green",
+  "type": "Multi-activity",
+  "ages": null,
+  "days": [
+   27,
+   28,
+   29,
+   30
+  ],
+  "date": "27–30 October (confirm with organiser)",
+  "venue": "Etchells Primary School, East Avenue · SK8 3DL",
+  "price": "Paid day listed £20; confirm at booking",
+  "hours": "Paid sessions listed 8.55am–3.25pm",
+  "detail": "Sports and activity holiday club. The organiser's indexed October 2026 listing gives Tuesday–Friday, 27–30 October, but an older cached page also appears online. Age eligibility and current vacancies are unconfirmed. Funded-place information is inconsistent; do not assume a free place.",
+  "url": "https://www.sportscoolcheshire.org/etchellshc",
+  "source": "SportsCool Cheshire October 2026 indexed organiser page (cached-page discrepancy noted)",
   "checked": "23 October 2026"
  },
  {
@@ -687,7 +707,7 @@ const clubs=[
 const sk8Areas=new Set(["Cheadle Hulme","Gatley","Heald Green"]);const area=document.getElementById("area"),age=document.getElementById("age"),day=document.getElementById("day"),type=document.getElementById("type"),list=document.getElementById("club-list");
 function el(tag,cl,t){const n=document.createElement(tag);if(cl)n.className=cl;if(t!==undefined)n.textContent=t;return n}
 function fact(dl,k,v){const box=el("div");box.append(el("dt","",k),el("dd","",v));dl.append(box)}
-function render(){if(Date.now()>=Date.UTC(2026,10,1)){list.replaceChildren();document.getElementById("count").textContent="October 2026 listings have expired";document.getElementById("empty").hidden=true;document.getElementById("expired").hidden=false;document.querySelector(".finder-filters").hidden=true;return;}const shown=clubs.filter(c=>(!area.value||c.area===area.value)&&(!age.value||(Number(age.value)>=c.ages[0]&&Number(age.value)<=c.ages[1]))&&(!day.value||c.days.includes(Number(day.value)))&&(!type.value||c.type===type.value));list.replaceChildren();shown.forEach(c=>{const card=el("article","club-card");card.append(el("span","club-area",(sk8Areas.has(c.area)?"SK8 · ":"Nearby · ")+c.area+" · "+c.type),el("h2","",c.name),el("p","",c.detail));const dl=el("dl","club-facts");fact(dl,"Dates",c.date);fact(dl,"Ages",c.ages[1]===99?c.ages[0]+"+":c.ages.join("–"));fact(dl,"Venue",c.venue);fact(dl,"Price",c.price);fact(dl,"Hours",c.hours);card.append(dl);const actions=el("div","club-actions");const a=el("a","","See current details →");a.href=c.url;a.target="_blank";a.rel="noopener noreferrer";a.setAttribute("aria-label","Check details for "+c.name+" on the provider or booking website");a.addEventListener("click",()=>{if(typeof window.sk8Track==="function")window.sk8Track("holiday_club_booking_click",{link_location:"finder_card",area:c.area});});actions.append(a);card.append(actions,el("p","finder-note","Source: "+c.source+" · Source checked "+(c.checked||"19 October 2026")));list.append(card)});document.getElementById("count").textContent=shown.length+" "+(shown.length===1?"option":"options")+" found";document.getElementById("empty").hidden=shown.length!==0}
+function render(){if(Date.now()>=Date.UTC(2026,10,1)){list.replaceChildren();document.getElementById("count").textContent="October 2026 listings have expired";document.getElementById("empty").hidden=true;document.getElementById("expired").hidden=false;document.querySelector(".finder-filters").hidden=true;return;}const shown=clubs.filter(c=>(!area.value||c.area===area.value)&&(!age.value||(Array.isArray(c.ages)&&Number(age.value)>=c.ages[0]&&Number(age.value)<=c.ages[1]))&&(!day.value||c.days.includes(Number(day.value)))&&(!type.value||c.type===type.value));list.replaceChildren();shown.forEach(c=>{const card=el("article","club-card");card.append(el("span","club-area",(sk8Areas.has(c.area)?"SK8 · ":"Nearby · ")+c.area+" · "+c.type),el("h2","",c.name),el("p","",c.detail));const dl=el("dl","club-facts");fact(dl,"Dates",c.date);fact(dl,"Ages",!Array.isArray(c.ages)?"Confirm with organiser":c.ages[1]===99?c.ages[0]+"+":c.ages.join("–"));fact(dl,"Venue",c.venue);fact(dl,"Price",c.price);fact(dl,"Hours",c.hours);card.append(dl);const actions=el("div","club-actions");const a=el("a","","See current details →");a.href=c.url;a.target="_blank";a.rel="noopener noreferrer";a.setAttribute("aria-label","Check details for "+c.name+" on the provider or booking website");a.addEventListener("click",()=>{if(typeof window.sk8Track==="function")window.sk8Track("holiday_club_booking_click",{link_location:"finder_card",area:c.area});});actions.append(a);card.append(actions,el("p","finder-note","Source: "+c.source+" · Source checked "+(c.checked||"19 October 2026")));list.append(card)});document.getElementById("count").textContent=shown.length+" "+(shown.length===1?"option":"options")+" found";document.getElementById("empty").hidden=shown.length!==0}
 [area,age,day,type].forEach(x=>x.addEventListener("change",()=>{render();if(typeof window.sk8Track==="function")window.sk8Track("holiday_club_filter_used",{filter_type:x.id});}));render();
 document.getElementById("finder-join-free").addEventListener("click",()=>{if(typeof window.sk8Track==="function")window.sk8Track("holiday_finder_join_click",{link_location:"finder_bottom"});});
 </script>
