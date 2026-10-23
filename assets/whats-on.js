@@ -238,7 +238,16 @@
     top.append(dateBlock, eyebrow);
 
     const heading = document.createElement('h3');
-    heading.textContent = String(event.title || '');
+    const leafSlug = String(event.seo?.slug || '').trim();
+    const leafHref = event.status === 'verified' && /^[a-z0-9-]+$/.test(leafSlug)
+      ? '/whats-on/events/' + leafSlug + '/' : '';
+    if (leafHref) {
+      const titleLink = document.createElement('a');
+      titleLink.href = leafHref;
+      titleLink.textContent = String(event.title || '');
+      titleLink.className = 'event-leaf-card-title';
+      heading.appendChild(titleLink);
+    } else heading.textContent = String(event.title || '');
 
     const facts = document.createElement('div');
     facts.className = 'event-facts';
@@ -269,9 +278,9 @@
     if (source) {
       const link = document.createElement('a');
       link.className = 'reader-link event-check-link';
-      link.href = source;
-      link.rel = 'noopener';
-      link.textContent = 'Check current details →';
+      link.href = leafHref || source;
+      if (!leafHref) link.rel = 'noopener';
+      link.textContent = leafHref ? 'See full checked event details →' : 'Check current details →';
       link.addEventListener('click', () => {
         if (typeof window.sk8Track === 'function') {
           window.sk8Track('event_detail_click', {
