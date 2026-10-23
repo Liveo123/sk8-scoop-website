@@ -50,7 +50,13 @@ contains('assets/whats-on.js','event_detail_click');
 
 // Homepage proposition experiment.
 contains('index.html','data-experiment="homepage-utility-promise-v1"');
-contains('index.html','Things to do, useful local updates and money-saving ideas');
+// Reader-first successor: utility and source-checked events precede the
+// email acquisition hero, while the weekly flagship remains available.
+contains('index.html','Find something to do around SK8');
+contains('index.html','Get our free Friday email');
+expect(read('index.html').indexOf('class="section reader-first-discovery"') <
+  read('index.html').indexOf('class="reader-hero reader-hero-photo"'),
+  'Reader-first discovery must precede the newsletter conversion hero');
 
 // Current visual-refresh contracts.
 contains('index.html','home-resource-adventures');
