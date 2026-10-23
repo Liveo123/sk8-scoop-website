@@ -381,39 +381,10 @@
     }));
   };
 
-  const syncEventSchema = () => {
-    document.getElementById('sk8-event-list-schema')?.remove();
-    const schema = document.createElement('script');
-    schema.type = 'application/ld+json';
-    schema.id = 'sk8-event-list-schema';
-    schema.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'Current checked events around SK8',
-      itemListElement: events.map((event, index) => {
-        const source = safeUrl(event.booking_url || event.source_url) || 'https://www.sk8scoop.com/whats-on/';
-        const startDate = `${event.date}${event.time ? `T${event.time}:00` : ''}`;
-        const item = {
-          '@type': 'Event',
-          name: String(event.title || ''),
-          startDate,
-          eventStatus: 'https://schema.org/EventScheduled',
-          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-          location: {
-            '@type': 'Place',
-            name: String(event.venue || event.area || 'SK8'),
-            address: String(event.area || '')
-          },
-          url: source,
-          description: String(event.description || '')
-        };
-        if (event.end_date) item.endDate = event.end_date;
-        if (isFree(event)) item.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: source, availability: 'https://schema.org/InStock' };
-        return { '@type': 'ListItem', position: index + 1, item };
-      })
-    });
-    document.head.appendChild(schema);
-  };
+  // The verified multi-event calendar is already correctly marked as a
+  // CollectionPage in source HTML. Do not inject Event objects with guessed
+  // address, start times or ticket availability into its head. Individual
+  // eligible event pages own their own accurate Event JSON-LD instead.
 
   const jumpToResults = () => {
     const target = document.getElementById('current-listings');
@@ -479,7 +450,6 @@
             : String(event.end_date || event.date) >= today && event.date < core.anniversaryExclusive(today)))
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
       window.SK8_EVENT_DATA = events;
-      syncEventSchema();
       window.dispatchEvent(new CustomEvent('sk8:events-loaded',{detail:{events}}));
       render();
     })
