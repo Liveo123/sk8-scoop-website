@@ -66,6 +66,10 @@ try{
  check(await evaluate("document.querySelector('[data-whats-on-selection]')?.textContent.includes('free & family-friendly')"),'Plain-language combined result label');
  check(await evaluate("new URL(location.href).searchParams.get('type')==='free-family'"),'Selection survives in sharable URL');
  await shot('whatson-desktop.png');
+ check(await click('[data-calendar-view="month"]'),'Month calendar available with active conditions');
+ check(await evaluate("document.querySelector('[data-event-filter=\"weekend\"]')?.getAttribute('aria-pressed')==='true'"),'Month view preserves weekend filter');
+ check(await evaluate("[...document.querySelectorAll('.sk8-calendar-day.has-events')].every(el=>[0,6].includes(new Date(el.dataset.calendarDay+'T00:00:00Z').getUTCDay()))"),'Month view does not highlight non-weekend dates for weekend-only results');
+ check(await click('[data-calendar-view="agenda"]'),'Return to agenda');
  check(await click('[data-event-filter="all"]'),'All dates available');
  check(await evaluate("['free','family'].every(k=>document.querySelector('[data-event-filter=\"'+k+'\"]')?.getAttribute('aria-pressed')==='false')"),'All dates also provides familiar reset');
  await navigate('/whats-on/?filter=free');
