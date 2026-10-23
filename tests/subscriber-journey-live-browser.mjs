@@ -13,26 +13,32 @@ const check = (label, ok, detail = '') => {
 
 await mkdir('visual-qa/subscriber-journey', { recursive: true });
 const chrome = spawn(CHROME, [
-  '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars',
+  '--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage',
+  '--no-first-run', '--disable-background-networking', '--hide-scrollbars',
   '--remote-debugging-port=9228',
   '--user-data-dir=/tmp/sk8-subscriber-journey-' + process.pid,
   '--window-size=1366,900', 'about:blank'
 ], { stdio: ['ignore', 'pipe', 'pipe'] });
+const chromeDiagnostics = [];
 chrome.stderr.on('data', chunk => {
   const str = String(chunk);
-  if (/FATAL|DevTools listening/.test(str)) process.stderr.write(str);
+  chromeDiagnostics.push(str.slice(0, 1500));
+  if (chromeDiagnostics.length > 20) chromeDiagnostics.shift();
+  if (/FATAL|ERROR|DevTools listening/.test(str)) process.stderr.write(str.slice(0, 1500));
 });
 let ws;
 try {
   let ready = false;
-  for (let attempt = 0; attempt < 100; attempt++) {
+  for (let attempt = 0; attempt < 150; attempt++) {
     try {
       const response = await fetch('http://127.0.0.1:9228/json/version');
       if (response.ok) { ready = true; break; }
     } catch {}
+    if (chrome.exitCode !== null) break;
     await sleep(200);
   }
-  if (!ready) throw new Error('Headless Chrome did not start');
+  if (!ready) throw new Error('Headless Chrome did not start; exit=' +
+    chrome.exitCode + '; recent diagnostics=' + chromeDiagnostics.join(' ').slice(-2000));
   const response = await fetch('http://127.0.0.1:9228/json/new?about:blank', { method: 'PUT' });
   const target = await response.json();
   ws = new WebSocket(target.webSocketDebuggerUrl);
