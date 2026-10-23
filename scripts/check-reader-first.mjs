@@ -10,6 +10,7 @@ const js = read('assets/reader-first-home.js');
 const events = JSON.parse(read('data/events.json'));
 const homepageData = JSON.parse(read('data/homepage.json'));
 const homepageJs = read('assets/homepage-nue.js');
+const releaseReview = read('docs/reader-first-ux-review-2026-10-23.md');
 const assertIncludes = (text, value, label) =>
   assert.ok(text.includes(value), label + ': missing ' + value);
 
@@ -107,6 +108,34 @@ for(const route of ['/kids-family/','/food-drink/','/local-history/','/planning/
 }
 assertIncludes(css,'@media(max-width:430px)','Phone-wide compact editorial-category layout');
 assertIncludes(css,'max-width:480px','Compact and balanced mobile consent choices');
+
+// The supporting review must stay internally consistent with the published draft.
+for(let n=1;n<=20;n++){
+  const id=String(n).padStart(2,'0');
+  assertIncludes(releaseReview, '| '+id+' |', 'Documented homepage criticism pass '+id);
+}
+for(const phrase of [
+  'Ten improvements implemented in this whole-homepage pass',
+  'JiveLoop Collective',
+  'NUE',
+  '774 active subscribers',
+  '750+',
+  'not a production release',
+  'human release gate',
+  'two checked mobile picks'
+]){
+  if(phrase==='human release gate'){
+    assert.ok(/human release gate/i.test(releaseReview), 'Owner release boundary must remain documented');
+  } else if(phrase==='two checked mobile picks'){
+    assertIncludes(releaseReview,'two checked mobile picks','Documented mobile results density');
+  } else {
+    assertIncludes(releaseReview,phrase,'Whole-homepage strategy/release QA');
+  }
+}
+const fallbackOrder=[...html.matchAll(/class="reader-explore-tile"[^>]*>.*?<strong>([^<]+)<\/strong>/g)].map(m=>m[1]);
+assert.deepEqual(fallbackOrder,[
+  'Kids &amp; Family','Outdoors','Food &amp; Drink','Useful Updates','Local History','Planning &amp; Development'
+], 'Static no-JavaScript category order matches the authoritative live data');
 
 console.log('PASS whole-homepage regression: 6 complementary categories, verified stories, direct NUE, known-reader guides, clear newsletter CTA, approved media and practical corrections.');
 
