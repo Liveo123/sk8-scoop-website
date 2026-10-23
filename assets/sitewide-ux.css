@@ -58,3 +58,19 @@
 @media(prefers-reduced-motion:reduce){
   .sitewide-guide-disclosure,.sitewide-clear-filters{transition:none!important}
 }
+
+/* Practical guides: only available routes occupy the main chooser.
+   Unreleased products remain discoverable, never promoted as available. */
+.sitewide-developing{grid-column:1/-1;background:#f4f8f6;border:1px solid #d5e3dc;border-radius:14px;overflow:hidden}
+.sitewide-developing summary{list-style-position:inside;cursor:pointer;min-height:49px;padding:13px 17px;font-weight:850;color:#174b53}
+.sitewide-developing summary span{font-size:.8rem;font-weight:550;color:#53686b;margin-left:10px}
+.sitewide-developing[open] summary{border-bottom:1px solid #d7e5df}
+.sitewide-developing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:17px}
+.sitewide-developing-grid .guide-card{margin:0;min-width:0}
+.sitewide-developing summary:focus-visible{
+  outline:3px solid var(--sk8-ux-focus)!important;outline-offset:-3px!important
+}
+@media(max-width:720px){
+  .sitewide-developing summary span{display:block;margin:4px 0 0}
+  .sitewide-developing-grid{grid-template-columns:1fr;padding:10px}
+}
