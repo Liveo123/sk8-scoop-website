@@ -47,6 +47,8 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   const activeHref=(()=>{
     if(currentPath==='/') return '/';
     if(currentPath.startsWith('/whats-on')) return '/whats-on/';
+    if(currentPath==='/around-sk8' || /^\\/(cheadle|cheadle-hulme|gatley|heald-green)(\\/|$)/.test(currentPath) ||
+      /^\\/(food-drink|kids-family|outdoors|local-history|planning|updates)(\\/|$)/.test(currentPath)) return '/around-sk8/';
     if(currentPath.startsWith('/guides')||currentPath.startsWith('/free-cheap-guide')||currentPath.startsWith('/52-adventures')||currentPath.startsWith('/halloween-half-term-guide')||currentPath.startsWith('/secret-trails')) return '/guides/';
     if(currentPath.startsWith('/my-sk8')) return '/my-sk8/';
     if(currentPath.startsWith('/start')) return '/start/';
@@ -62,6 +64,7 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   const items=[
     ['Home','/'],
     ['What’s On','/whats-on/'],
+    ['Explore SK8','/around-sk8/'],
     ['My SK8','/my-sk8/'],
     ['Guides','/guides/'],
     ['Where to start','/start/'],
