@@ -185,13 +185,13 @@ window.SK8_CONFIG = {
   if (!document.querySelector('link[data-sk8-global-search]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/assets/global-search.css?v=20261007-headerfix1';
+    link.href = '/assets/global-search.css?v=20261023-headerwidth1';
     link.dataset.sk8GlobalSearch = 'true';
     document.head.appendChild(link);
   }
   if (!document.querySelector('script[data-sk8-global-search]')) {
     const script = document.createElement('script');
-    script.src = '/assets/global-search.js?v=20261007-headerfix1';
+    script.src = '/assets/global-search.js?v=20261023-headerwidth1';
     script.defer = true;
     script.dataset.sk8GlobalSearch = 'true';
     document.head.appendChild(script);

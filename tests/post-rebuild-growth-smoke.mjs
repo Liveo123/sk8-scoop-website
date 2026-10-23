@@ -52,6 +52,11 @@ test('header mobile and desktop breakpoints agree at 1279/1280', () => {
   assert.match(globalSearch, /@media\(max-width:1279px\)/);
   assert.match(globalSearch, /@media\(min-width:1280px\)/);
   assert.match(globalSearch, /@media\(min-width:821px\) and \(max-width:1279px\)/);
+  assert.ok(read('assets/global-search.js').includes('max-width: 1279px'));
+  assert.ok(read('assets/config.js').includes('20261023-headerwidth1'));
+  assert.ok(read('assets/site.js').includes('20261023-headerwidth1'));
+  assert.ok(read('scripts/check-post-launch-v2.mjs').includes('max-width:1279px'));
+
   assert.ok(headerQA.includes('const widths = [1199, 1200, 1279, 1280, 1366, 1440];'));
   assert.ok(headerQA.includes('width < 1280') && headerQA.includes('width >= 1280'));
 });
