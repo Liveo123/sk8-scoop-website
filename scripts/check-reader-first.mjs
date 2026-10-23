@@ -29,7 +29,7 @@ assert.ok(html.indexOf('assets/sk8-calendar-core.js') < html.indexOf('assets/rea
 assertIncludes(html, 'id="reader-first-search-input"', 'Labelled finder search');
 assertIncludes(html, 'action="/search/"', 'Reuse existing publication-wide search');
 for (const slug of ['today','weekend','free','family']) {
-  assertIncludes(html, '/whats-on/?filter='+slug, 'Supported What's On filter '+slug);
+  assertIncludes(html, '/whats-on/?filter='+slug, "Supported What\'s On filter "+slug);
 }
 for (const area of ['Cheadle','Cheadle%20Hulme','Gatley','Heald%20Green']) {
   assertIncludes(html, '/whats-on/?area='+area, 'Core-local area route '+area);
