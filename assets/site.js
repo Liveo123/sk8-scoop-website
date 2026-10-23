@@ -7,6 +7,13 @@ if(!document.querySelector('link[data-sitewide-ux]')){
   sitewide.dataset.sitewideUx='true';
   document.head.appendChild(sitewide);
 }
+if(!document.querySelector('link[data-sk8-usability-pass]')){
+  const usability=document.createElement('link');
+  usability.rel='stylesheet';
+  usability.href='/assets/usability-pass-20261023.css?v=1';
+  usability.dataset.sk8UsabilityPass='true';
+  document.head.appendChild(usability);
+}
 
 const sk8Header=document.querySelector('.site-header');
 const sk8HeaderRow=sk8Header&&sk8Header.querySelector('.header-row');
@@ -60,14 +67,16 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     return '';
   })();
 
-  // Global reader navigation contract. Do not remove established routes to solve header crowding;
-  // use responsive layout/collapse rules instead.
+  // Keep every established route while putting reader discovery before
+  // publisher/admin tasks. Secondary routes remain accessible under More.
   const items=[
     ['Home','/'],
     ['What’s On','/whats-on/'],
     ['My SK8','/my-sk8/'],
     ['Guides','/guides/'],
-    ['Explore SK8','/around-sk8/'],
+    ['Explore SK8','/around-sk8/']
+  ];
+  const secondaryItems=[
     ['Where to start','/start/'],
     ['Submit','/submit/'],
     ['Contact','/contact/'],
@@ -122,6 +131,36 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   });
   updateMySk8NavCount();
   window.addEventListener('sk8:saved-items-changed',updateMySk8NavCount);
+
+  // Native disclosure supports keyboard, touch and screen readers.
+  const navMore=document.createElement('details');
+  navMore.className='nav-more';
+  const navMoreSummary=document.createElement('summary');
+  navMoreSummary.textContent='More';
+  navMoreSummary.setAttribute('aria-label','More SK8 Scoop pages');
+  if(secondaryItems.some(([label,href])=>href===activeHref)){
+    navMoreSummary.classList.add('active');
+  }
+  const navMoreMenu=document.createElement('div');
+  navMoreMenu.className='nav-more-menu';
+  secondaryItems.forEach(([label,href])=>{
+    const link=document.createElement('a');
+    link.href=href;
+    link.textContent=label;
+    if(activeHref===href){
+      link.classList.add('active');
+      link.setAttribute('aria-current','page');
+    }
+    navMoreMenu.appendChild(link);
+  });
+  navMore.append(navMoreSummary,navMoreMenu);
+  nav.appendChild(navMore);
+  document.addEventListener('pointerdown',event=>{
+    if(navMore.open&&!navMore.contains(event.target))navMore.open=false;
+  });
+  navMoreMenu.addEventListener('click',event=>{
+    if(event.target.closest('a'))navMore.open=false;
+  });
 
   const joinButton=document.createElement('a');
   joinButton.className='button nav-join reader-nav-join';
@@ -200,7 +239,21 @@ const ensureMySk8PageSaveAssets=()=>{
 ensureMySk8PageSaveAssets();
 
 const setMenuLabel=(open)=>{if(!menu)return;menu.setAttribute('aria-expanded',String(open));const label=menu.querySelector('span:last-child');if(label)label.textContent=open?'Close':'Menu';else menu.textContent=open?'Close':'Menu';};
-if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');setMenuLabel(open);});}
+if(menu&&nav){
+  menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');setMenuLabel(open);});
+  // Avoid trapping keyboard and mobile readers in an open menu.
+  document.addEventListener('keydown',event=>{
+    if(event.key!=='Escape')return;
+    const more=nav.querySelector('.nav-more');
+    if(more?.open){more.open=false;more.querySelector('summary')?.focus();return;}
+    if(nav.classList.contains('open')){nav.classList.remove('open');setMenuLabel(false);menu.focus();}
+  });
+  document.addEventListener('pointerdown',event=>{
+    if(nav.classList.contains('open')&&!sk8HeaderRow?.contains(event.target)){
+      nav.classList.remove('open');setMenuLabel(false);
+    }
+  });
+}
 document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
 
 const SK8_CONFIG=window.SK8_CONFIG||{};
