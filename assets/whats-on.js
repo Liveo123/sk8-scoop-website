@@ -458,6 +458,14 @@
             ? core.confirmedDates(event).some(date => core.withinHorizon(date, today))
             : String(event.end_date || event.date) >= today && event.date < core.anniversaryExclusive(today)))
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
+      // Static, crawlable spotlights are a useful fallback for visitors and
+      // search crawlers. After an event's date has passed, do not continue to
+      // recommend it even if the source feed has not yet been regenerated.
+      document.querySelectorAll('[data-event-spotlight-date]').forEach(node => {
+        if (String(node.dataset.eventSpotlightDate || '') < today) node.remove();
+      });
+      const spotlights = document.querySelector('.whats-on-pilot-pages');
+      if (spotlights && !spotlights.querySelector('li')) spotlights.remove();
       window.SK8_EVENT_DATA = events;
       window.dispatchEvent(new CustomEvent('sk8:events-loaded',{detail:{events}}));
       render();
