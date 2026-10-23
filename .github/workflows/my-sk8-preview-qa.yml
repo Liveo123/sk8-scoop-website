@@ -30,6 +30,7 @@ on:
       - 'planning/cheadle-eco-park/index.html'
       - 'local-history/heald-green-north-history-walk/index.html'
       - 'tests/my-sk8-browser.mjs'
+      - 'tests/signup-form-consent-preview-browser.mjs'
       - 'tests/my-sk8-email-actions-browser.mjs'
       - 'tests/subscriber-journey-live-browser.mjs'
       - 'assets/subscriber-access.js'
@@ -112,6 +113,12 @@ jobs:
           done
           echo "My SK8 preview files did not become available."
           exit 1
+
+      - name: Check signup consent and form impressions on preview
+        env:
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
+          CHROME: ${{ env.CHROME }}
+        run: node tests/signup-form-consent-preview-browser.mjs
 
       - name: Run real browser functional and mobile QA
         env:
