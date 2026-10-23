@@ -210,7 +210,7 @@ try {
   await evaluate("localStorage.setItem('sk8_subscriber_recognition_v1',JSON.stringify({version:1,recognised:true,savedAt:new Date().toISOString(),expiresAt:Date.now()+86400000}));true");
   await navigate('/?reader-full-preview=recognised');
   check('Recognised readers open useful guide content directly',
-    await evaluate("Boolean(document.querySelector('a.home-resource-guide, .home-resource-guide a[href="/free-cheap-guide/guide/"]')) && [...document.querySelectorAll('.home-resource-guide a[href]')].some(x=>x.getAttribute('href')==='/52-adventures/guide/')"));
+    await evaluate("['/free-cheap-guide/guide/','/52-adventures/guide/'].every(h => [...document.querySelectorAll('.home-resource-guide a[href]')].some(a => a.getAttribute('href') === h))"));
   await evaluate("localStorage.removeItem('sk8_subscriber_recognition_v1');true");
   await navigate('/');
   await waitFor("Boolean(document.querySelector('.reader-first-event h3 a'))",'first verified homepage event');
