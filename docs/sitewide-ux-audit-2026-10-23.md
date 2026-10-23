@@ -79,6 +79,18 @@ The first tested preview passed 49 dedicated sitewide browser assertions, but sc
 
 **Release remains draft** until the latest exact SHA checks, guide functions and preview screenshots are all green. Do not merge this second PR as part of the already-approved homepage release.
 
+## Owner screenshot feedback: What’s On should not have a giant hero
+
+**Decision, 23 October:** What’s On is a task-oriented calendar, not a sales landing page. Its former hero made the first meaningful controls harder to reach, duplicated the listing headline below, and forced a same-page “See current listings” click. The colourful collage was appealing but did not provide factual information about a specific event or venue. Keep that approved image asset in the library for a future editorially appropriate use; do not show it ahead of the calendar.
+
+**Preview change:** Replace the large two-column hero with one compact semantic H1 and a one-sentence location/verification promise. Place date, cost, family and place filters directly underneath. Move event freshness signals after filters and preserve calendar/agenda controls, relevant confirmed session data, My SK8 and event-submission access. Move the two seasonal/evergreen guide suggestions below the event results as contextual NUE continuations. Eliminate the redundant large second heading and same-page “See current listings” button.
+
+**Risk management:** Do not remove the verified event data or alter filter URL contracts, booking links or paid/editorial ranking. The former collage was injected in `assets/whats-on.js`; removing only that builder avoids a CSS-only hide and the associated layout shift. Dedicated `assets/whats-on-compact.css` loads in the page head, not after page scripting. Shared event empty-state rendering stays in place.
+
+**Visual acceptance tests:** at 390px the introduction should remain under 265px and filters should start above the 400px viewport coordinate; at 1366px it should remain under 200px with filters starting above 350px. A browser test also proves no image or same-page jump is injected, no horizontal overflow, both utility links work, and filter-reset and exact-event deep-links continue to work.
+
+**Empire and NUE:** reducing the time between arrival and a useful checked event should increase the website's habit value and make the same event-finding template easier to reuse for future local titles. That benefit is a hypothesis until tested with real visitors. The newsletter retains its distinct role in growing the owned relationship, while related guides remain a voluntary *next* useful experience rather than an obstacle to reaching the event.
+
 ## Site-wide NUE journeys
 
 | Reader arrival | First useful experience | Correct next action | Return/asset opportunity |
