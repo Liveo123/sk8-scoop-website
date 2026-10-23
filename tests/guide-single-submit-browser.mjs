@@ -41,7 +41,8 @@ try {
     "const method=String(opts.method||resource?.method||'GET').toUpperCase();",
     "if(url.includes('/api/signup-config'))return new Response(JSON.stringify({siteKey:'qa-fake-turnstile'}),{status:200,headers:{'content-type':'application/json'}});",
     "if(method==='POST'){window.__guideQaPosts.push({url,method});",
-    "return new Response(JSON.stringify({success:false,error:'QA intercepted. No subscriber was created.'}),{status:422,headers:{'content-type':'application/json'}});}",
+    "const success=window.__guideQaSuccessMode===true;",
+    "return new Response(JSON.stringify({success,error:success?undefined:'QA intercepted. No subscriber was created.'}),{status:success?200:422,headers:{'content-type':'application/json'}});}",
     "return originalFetch(resource,opts);};",
     "window.turnstile={render:function(host,options){options?.callback?.('qa-fake-token');return 1;},reset:function(){},remove:function(){}};"
   ].join('\n');
@@ -70,6 +71,24 @@ try {
     console.log('Simulated guide signup: '+JSON.stringify(summary));
     assert.equal(protectedPosts.length,1,name+' must POST to protected signup exactly once');
     assert.equal(otherPosts.length,0,name+' must not also POST to MailerLite or the page URL');
+    // Replay a simulated successful worker response to check the acquisition label.
+    // Suppress only the 350ms navigation timeout; never navigate or send a real email.
+    await evaluate("(()=>{"+
+      "window.__guideQaPosts=[];window.__guideQaSuccessMode=true;window.__guideQaTracks=[];"+
+      "window.sk8Track=(event,data)=>{window.__guideQaTracks.push({event,data})};"+
+      "const realSetTimeout=window.setTimeout.bind(window);"+
+      "window.setTimeout=(fn,ms,...args)=>ms===350?0:realSetTimeout(fn,ms,...args);"+
+      "const form=document.querySelector('[data-signup-form][data-signup-kind=\"guide\"]');"+
+      "form.querySelector('input[name=\"cf-turnstile-response\"]').value='qa-fake-token';"+
+      "form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));return true;})()");
+    await sleep(190);
+    const happy=await evaluate("({posts:window.__guideQaPosts.slice(),signups:window.__guideQaTracks.filter(x=>x.event==='sign_up')})");
+    const expectedSource={halloween:'halloween_guide','free-cheap':'free_cheap_guide','52-adventures':'52_adventures_guide'}[key];
+    console.log(name+' mocked success attribution: '+JSON.stringify(happy));
+    assert.equal(happy.posts.length,1,name+' success must also issue exactly one POST');
+    assert.equal(happy.posts[0].url,'/api/newsletter-signup');
+    assert.equal(happy.signups.length,1,name+' success must record one signup conversion');
+    assert.equal(happy.signups[0].data.signup_source,expectedSource,name+' signup attribution must match guide identity');
   }
   console.log('PASS: Three guide signup forms use one protected POST each. No emails were sent.');
 }finally{
