@@ -18,7 +18,8 @@ const rejectText = (source, text, label) => {
 
 // Baseline: homepage and current issue remain intact.
 requireText(home, 'data-page="home"', 'homepage identity');
-requireText(home, 'What’s good around SK8?', 'homepage headline');
+requireText(home, 'Good local ideas, every Friday', 'newsletter benefit heading');
+requireText(home, '<h1 id="reader-first-heading">Find something to do around SK8</h1>', 'task-first homepage heading');
 const countMatch = config.match(/subscriberCount:\s*"(\d+)\+"/);
 const proofMatch = config.match(/subscriberProof:\s*"(\d+)\+"/);
 if (!countMatch || !proofMatch || countMatch[1] !== proofMatch[1] || Number(countMatch[1]) < 600) {
@@ -54,7 +55,7 @@ requireText(v5, '.reader-proof{margin-top:0!important', 'tight proof spacing');
 
 // 3. Weekly picks have a proper editorial introduction.
 requireText(home, 'Know · Do · Discover', 'weekly-picks editorial framing');
-requireText(home, 'An important local planning deadline, a free October outing and a hidden Cheadle story.', 'current-picks explanation');
+requireText(home, 'A planning deadline, a free local outing and a piece of Cheadle history.', 'current-picks explanation');
 requireText(v4, '.home-worth-head', 'weekly-picks heading layout');
 
 // 4. Story cards are visually consistent and CTA-aligned.
@@ -73,7 +74,7 @@ rejectText(js, 'reader-explore-icon', 'generic Explore icon fallback class');
 
 // 6. Latest issue and guides are one balanced resource shelf.
 requireText(home, 'home-resource-grid', 'resource shelf');
-requireText(home, 'Three useful next stops', 'resource shelf heading');
+requireText(home, 'Keep discovering', 'guide and newsletter resource shelf heading');
 requireText(home, 'Free &amp; Cheap Guide', 'Free & Cheap resource');
 requireText(home, '52 Adventures', '52 Adventures resource');
 requireText(home, 'href="/52-adventures/"', '52 Adventures landing-page route');

@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SK8 Scoop | Useful local news, events and ideas around SK8</title>
-  <meta name="description" content="Useful local updates, events, guides and the free Friday SK8 Scoop newsletter for Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby SK8.">
+  <title>Things to do in Cheadle, Gatley &amp; Heald Green | SK8 Scoop</title>
+  <meta name="description" content="Find events, free activities, family days out, walks and local ideas in Cheadle, Cheadle Hulme, Gatley and Heald Green. Plus the free SK8 Scoop newsletter.">
   <link rel="canonical" href="https://www.sk8scoop.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SK8 Scoop">
-  <meta property="og:title" content="SK8 Scoop | Useful local news, events and ideas around SK8">
-  <meta property="og:description" content="Useful local updates, events, guides and the free Friday SK8 Scoop newsletter for Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby SK8.">
+  <meta property="og:title" content="Find things to do around SK8 | SK8 Scoop">
+  <meta property="og:description" content="Find local events, free activities, family days out and useful updates across Cheadle, Cheadle Hulme, Gatley and Heald Green.">
   <meta property="og:url" content="https://www.sk8scoop.com/">
   <meta property="og:image" content="https://www.sk8scoop.com/assets/images/sk8-miniature-hero-hires-v3.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SK8 Scoop | Useful local news, events and ideas around SK8">
-  <meta name="twitter:description" content="Useful local updates, events, guides and the free Friday SK8 Scoop newsletter for Cheadle, Cheadle Hulme, Gatley, Heald Green and nearby SK8.">
+  <meta name="twitter:title" content="Find things to do around SK8 | SK8 Scoop">
+  <meta name="twitter:description" content="Find local events, free activities, family days out and useful updates across Cheadle, Cheadle Hulme, Gatley and Heald Green.">
   <meta name="twitter:image" content="https://www.sk8scoop.com/assets/images/sk8-miniature-hero-hires-v3.png">
   <script id="sk8-site-schema" type="application/ld+json">
   {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.sk8scoop.com/#organization","name":"SK8 Scoop","url":"https://www.sk8scoop.com/","logo":{"@type":"ImageObject","url":"https://www.sk8scoop.com/assets/sk8-scoop-logo.webp"},"sameAs":["https://www.facebook.com/profile.php?id=61591008764200"]},{"@type":"WebSite","@id":"https://www.sk8scoop.com/#website","url":"https://www.sk8scoop.com/","name":"SK8 Scoop","publisher":{"@id":"https://www.sk8scoop.com/#organization"},"inLanguage":"en-GB"}]}
@@ -29,11 +29,12 @@
   <link rel="stylesheet" href="assets/nue.css">
   <link rel="stylesheet" href="assets/homepage-v4.css">
   <link rel="stylesheet" href="assets/homepage-search.css">
+  <link rel="stylesheet" href="assets/reader-first.css">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 </head>
-<body class="reader-home" data-page="home">
+<body class="reader-home reader-first-mode" data-page="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header reader-header">
@@ -47,16 +48,50 @@
   </header>
 
   <main id="main-content">
+    <section class="section reader-first-discovery" id="find-something" aria-labelledby="reader-first-heading" data-core-areas="Cheadle|Cheadle Hulme|Gatley|Heald Green" data-experiment="reader-first-finder-v1">
+      <div class="wrap">
+        <div class="reader-first-intro">
+          <div><div class="home-section-kicker">Your local activity finder</div><h1 id="reader-first-heading">Find something to do around SK8</h1><p>Local events, family days out and free ideas. Choose when or what you fancy. No sign-up needed to browse.</p></div>
+          <a class="reader-first-all" href="/whats-on/">See the full What’s On calendar →</a>
+        </div>
+        <form class="reader-first-search" role="search" action="/search/" method="get">
+          <label for="reader-first-search-input">What are you looking for?</label>
+          <div class="reader-first-search-row"><input type="search" id="reader-first-search-input" name="q" placeholder="Try ‘free kids’, ‘Gatley walk’ or ‘Halloween’" autocomplete="off"><button class="button" type="submit">Find ideas</button></div>
+        </form>
+        <nav class="reader-first-chips" aria-label="Find activities by need">
+          <a href="/whats-on/?filter=today">Today</a>
+          <a href="/whats-on/?filter=weekend">This weekend</a>
+          <a href="/whats-on/?filter=free">Free events</a>
+          <a href="/whats-on/?filter=family">With the kids</a>
+          <a href="/free-cheap-guide/">Free &amp; cheap ideas</a>
+          <a href="/kids-family/holiday-club-finder/">Holiday clubs</a>
+          <a href="/outdoors/">Walks &amp; outdoors</a>
+        </nav>
+        <div class="reader-first-local">
+          <span>Closer to home:</span>
+          <a href="/whats-on/?area=Cheadle">Cheadle</a>
+          <a href="/whats-on/?area=Cheadle%20Hulme">Cheadle Hulme</a>
+          <a href="/whats-on/?area=Gatley">Gatley</a>
+          <a href="/whats-on/?area=Heald%20Green">Heald Green</a>
+        </div>
+        <div class="reader-first-feed-head"><h3>Coming up around SK8</h3><span>Checked listings, not sponsored rankings</span></div>
+        <p class="reader-first-status" data-reader-first-status role="status" aria-live="polite">Loading checked local listings…</p>
+        <div data-reader-first-events><p>Loading upcoming local events…</p></div>
+        <div class="reader-first-after" data-experiment="reader-first-contextual-nue-v1"><a href="/whats-on/" data-nue-link data-nue-type="calendar" data-track-event="homepage_finder_browse_events" data-link-location="home-reader-first-continuation">Browse all upcoming events →</a><span>Found something you like? <a href="/my-sk8/" data-nue-link data-nue-type="saved-ideas" data-track-event="homepage_finder_saved_ideas" data-link-location="home-reader-first-continuation">Keep it in My SK8</a> for later.</span></div>
+      </div>
+    </section>
+
     <section class="reader-hero reader-hero-photo" data-experiment="homepage-utility-promise-v1">
       <div class="reader-hero-shade"></div>
       <div class="wrap reader-hero-overlay">
         <div class="reader-hero-copy">
-          <h1>What’s good around SK8?</h1>
-          <p class="reader-hero-lead">Things to do, useful local updates and money-saving ideas for Cheadle, Cheadle Hulme, Gatley and Heald Green. Free every Friday.</p>
+          <h2>Good local ideas, every Friday</h2>
+          <p class="reader-hero-lead">A free Friday email with local events, useful updates and fresh ideas for Cheadle, Cheadle Hulme, Gatley and Heald Green.</p>
+          <p class="home-newsletter-usefulness" aria-label="What you will receive">Events <span aria-hidden="true">·</span> Family ideas <span aria-hidden="true">·</span> Free things to do <span aria-hidden="true">·</span> Local updates</p>
           <form class="reader-signup" action="https://assets.mailerlite.com/jsonp/2462354/forms/193724501149615325/subscribe" method="post" data-signup-form data-form-position="hero">
             <label class="sr-only" for="home-email">Email address</label>
             <input id="home-email" type="email" name="fields[email]" autocomplete="email" placeholder="Enter your email address" required>
-            <button class="button" type="submit">Join free</button>
+            <button class="button" type="submit">Get it free</button>
           </form>
           <div class="reader-proof" aria-label="Newsletter details"><span><b aria-hidden="true">LOCAL</b></span><span><b aria-hidden="true">FRI</b> Every Friday</span><span><b aria-hidden="true">£0</b> Always free</span></div>
           <nav class="home-hero-subroutes" aria-label="Quick ways into SK8 Scoop">
@@ -68,32 +103,23 @@
       </div>
     </section>
 
-    <section class="section reader-worth" data-experiment="issue17-home-owned-continuation"><div class="wrap"><div class="section-head reader-section-head home-worth-head"><div><div class="home-section-kicker">Know · Do · Discover</div><h2>3 things worth your attention now</h2><p class="home-section-intro">An important local planning deadline, a free October outing and a hidden Cheadle story.</p></div><a class="reader-link home-section-link" href="/issues/issue-17/">Read Issue 17 →</a></div><div class="reader-card-grid">
+    <section class="section reader-worth" data-experiment="issue17-home-owned-continuation"><div class="wrap"><div class="section-head reader-section-head home-worth-head"><div><div class="home-section-kicker">Know · Do · Discover</div><h2>3 things worth your attention now</h2><p class="home-section-intro">A planning deadline, a free local outing and a piece of Cheadle history.</p></div><a class="reader-link home-section-link" href="/issues/issue-17/">Read Issue 17 →</a></div><div class="reader-card-grid">
 <article class="reader-story" data-home-story><div class="reader-story-image dicm-visual"><img class="dicm-art" src="/assets/images/editorial-20261010/SK8-01-planning.webp" alt="Conceptual neighbourhood planning illustration, not a proposal image" loading="eager"><span class="dicm-mode-label">KNOW THIS</span></div><div class="reader-story-body"><h3>Heald Green Local Plan consultation closes 8 November</h3><p class="reader-meta">Heald Green · Consultation · Deadline</p><p data-story-summary>The three proposed allocations total 1,672 homes. It is a consultation, not planning permission.</p><a class="reader-link" href="/planning/heald-green-local-plan-2026/">Read the Local Plan explainer →</a></div></article>
-<article class="reader-story" data-home-story data-expire-after="2026-10-24"><div class="reader-story-image dicm-visual"><img class="dicm-art" src="https://res.cloudinary.com/gocq00bt/image/upload/v1792169354/sk8-scoop/issue17/merseyday-lead-clean-no-cut-v16.jpg" alt="Illustrated Merseyday of the Dead poster title without an outdated date" loading="lazy"><span class="dicm-mode-label">DO THIS</span></div><div class="reader-story-body"><h3>Free Merseyday of the Dead on 24 October</h3><p class="reader-meta">Saturday 24 October · Merseyway and Redrock</p><p data-story-summary>Daytime Halloween activities followed by an early-evening Deadrock celebration. Check timings and availability.</p><a class="reader-link" href="/issues/issue-17/" data-track-event="homepage_story_click" data-link-location="home-three-picks">Get the Merseyday details →</a></div></article>
+<article class="reader-story" data-home-story data-expire-after="2026-10-24"><div class="reader-story-image dicm-visual"><img class="dicm-art" src="https://res.cloudinary.com/gocq00bt/image/upload/v1792169354/sk8-scoop/issue17/merseyday-lead-clean-no-cut-v16.jpg" alt="Illustrated Merseyday of the Dead poster title without an outdated date" loading="lazy"><span class="dicm-mode-label">DO THIS</span></div><div class="reader-story-body"><h3>Free Merseyday of the Dead on 24 October</h3><p class="reader-meta">Saturday 24 October · Merseyway and Redrock</p><p data-story-summary>Daytime Halloween activities followed by an early-evening Deadrock celebration. Check timings and availability.</p><a class="reader-link" href="/whats-on/?event=merseyday-of-the-dead-2026-10-24" data-track-event="homepage_story_click" data-link-location="home-three-picks" data-nue-link data-nue-type="verified-event-detail">See dates, times and details →</a></div></article>
 <article class="reader-story" data-home-story><div class="reader-story-image dicm-visual"><img class="dicm-art" src="https://res.cloudinary.com/gocq00bt/image/upload/v1791797710/sk8-scoop/issue17/premier-editorial-illustration.webp" alt="Original interpretive illustration of an Art Deco café" loading="lazy"><span class="dicm-mode-label orange-label">DISCOVER THIS</span></div><div class="reader-story-body"><h3>Cheadle's hidden Art Deco Premier Café story</h3><p class="reader-meta">3 High Street, Cheadle · Grade II listed</p><p data-story-summary>An ordinary shopfront once concealed dining rooms with chrome, coloured glass and a distinctive brass rooflight.</p><a class="reader-link" href="/local-history/premier-cafe-cheadle/" data-track-event="homepage_story_click" data-link-location="home-three-picks">Read the documented history →</a></div></article>
 </div></div></section>
 
 <section class="section reader-explore-section" id="explore-sk8">
       <div class="wrap">
         <div class="section-head reader-section-head home-explore-head">
-          <div><div class="home-section-kicker">Choose a route</div><h2>What do you need?</h2></div>
-          <span class="reader-muted-link">Events, cheaper ideas, food, family days out, walks, history and useful local changes.</span>
+          <div><div class="home-section-kicker">Explore further</div><h2>More ways to explore SK8</h2></div>
+          <span class="reader-muted-link">Food, family days out, walks, local history and what’s changing around here.</span>
         </div>
-        <nav class="home-quick-answers" aria-label="Quick answers around SK8" data-experiment="homepage-quick-answers-v1">
-          <div class="home-quick-answers-intro"><strong>Need a quick answer?</strong><span>Jump straight to the useful bit.</span></div>
-          <a href="/whats-on/?filter=today" data-track-event="homepage_quick_answer_click" data-quick-answer="today" data-link-location="home-quick-answers">Today <b aria-hidden="true">→</b></a>
-          <a href="/whats-on/?filter=weekend" data-track-event="homepage_quick_answer_click" data-quick-answer="weekend" data-link-location="home-quick-answers">This weekend <b aria-hidden="true">→</b></a>
-          <a href="/whats-on/?filter=free" data-track-event="homepage_quick_answer_click" data-quick-answer="free" data-link-location="home-quick-answers">Free now <b aria-hidden="true">→</b></a>
-          <a href="/whats-on/?filter=family" data-track-event="homepage_quick_answer_click" data-quick-answer="family" data-link-location="home-quick-answers">Family ideas <b aria-hidden="true">→</b></a>
-          <a href="/updates/" data-track-event="homepage_quick_answer_click" data-quick-answer="changed" data-link-location="home-quick-answers">What’s changed <b aria-hidden="true">→</b></a>
-          <a href="#your-area" data-track-event="homepage_quick_answer_click" data-quick-answer="area" data-link-location="home-quick-answers">Your area <b aria-hidden="true">→</b></a>
-        </nav>
         <div class="home-locality-strip" id="your-area" data-experiment="homepage-place-first-v1">
           <div class="home-locality-copy">
-            <div class="home-section-kicker">Start with your area</div>
-            <strong>Cheadle, Cheadle Hulme, Gatley or Heald Green?</strong>
-            <span>Jump straight to current events, useful changes, local history and nearby ideas for your bit of SK8.</span>
+            <div class="home-section-kicker">More than events</div>
+            <strong>Your part of SK8</strong>
+            <span>Explore local changes, history, places and useful ideas for your bit of SK8.</span>
           </div>
           <nav class="home-locality-links" aria-label="Browse SK8 by area">
             <a href="/cheadle/" data-nue-link data-nue-type="locality-hub" data-track-event="homepage_location_click" data-link-location="home-area-strip"><span>Cheadle</span><b aria-hidden="true">→</b></a>
@@ -102,25 +128,13 @@
             <a href="/heald-green/" data-nue-link data-nue-type="locality-hub" data-track-event="homepage_location_click" data-link-location="home-area-strip"><span>Heald Green</span><b aria-hidden="true">→</b></a>
           </nav>
         </div>
-        <div class="home-explore-search-shell" data-experiment="nue-search-entry-v2">
-          <form class="home-explore-search" action="/search/" method="get" role="search">
-            <label for="home-site-search">Find something around SK8</label>
-            <div class="home-explore-search-row">
-              <input id="home-site-search" name="q" type="search" enterkeyhint="search" placeholder="Try “Gatley walk”, “free kids” or “roadworks”">
-              <button class="button" type="submit">Search</button>
-            </div>
-            <p class="home-explore-search-hint">Search current events, guides, local stories and practical updates. Or use the routes below.</p>
-          </form>
-        </div>
         <div class="reader-explore reader-explore-six" data-explore-grid>
-          <a class="reader-explore-tile" href="/whats-on/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-whats-on.webp')"></span><span class="reader-explore-copy"><strong>What’s On</strong><small>Events &amp; things to do</small><em>Open →</em></span></a>
-          <a class="reader-explore-tile" href="/free-cheap-guide/"><span class="reader-explore-visual reader-explore-photo is-guide-logo" aria-hidden="true" style="background:#fff url('/assets/images/free-cheap-guide-logo.webp') center/contain no-repeat"></span><span class="reader-explore-copy"><strong>Free &amp; Cheap</strong><small>Make the most of local life for less</small><em>Open →</em></span></a>
-          <a class="reader-explore-tile" href="/food-drink/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-food-drink.webp')"></span><span class="reader-explore-copy"><strong>Food &amp; Drink</strong><small>Local spots to eat &amp; drink</small><em>Open →</em></span></a>
           <a class="reader-explore-tile" href="/kids-family/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-kids-family.webp')"></span><span class="reader-explore-copy"><strong>Kids &amp; Family</strong><small>Days out &amp; activities</small><em>Open →</em></span></a>
           <a class="reader-explore-tile" href="/outdoors/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-outdoors.webp')"></span><span class="reader-explore-copy"><strong>Outdoors</strong><small>Walks, parks &amp; fresh air</small><em>Open →</em></span></a>
+          <a class="reader-explore-tile" href="/food-drink/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-food-drink.webp')"></span><span class="reader-explore-copy"><strong>Food &amp; Drink</strong><small>Local spots to eat &amp; drink</small><em>Open →</em></span></a>
+          <a class="reader-explore-tile" href="/updates/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-updates.webp')"></span><span class="reader-explore-copy"><strong>Useful Updates</strong><small>Roads, bins, travel &amp; practical changes</small><em>Open →</em></span></a>
           <a class="reader-explore-tile" href="/local-history/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-local-history.webp')"></span><span class="reader-explore-copy"><strong>Local History</strong><small>Stories from around here</small><em>Open →</em></span></a>
           <a class="reader-explore-tile" href="/planning/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-planning.webp')"></span><span class="reader-explore-copy"><strong>Planning &amp; Development</strong><small>Changes, consultations &amp; what they mean</small><em>Open →</em></span></a>
-          <a class="reader-explore-tile" href="/updates/"><span class="reader-explore-visual reader-explore-photo" aria-hidden="true" style="background-image:url('/assets/images/nue/explore-updates.webp')"></span><span class="reader-explore-copy"><strong>Useful Updates</strong><small>Roads, bins, travel &amp; practical changes</small><em>Open →</em></span></a>
         </div>
       </div>
     </section>
@@ -128,13 +142,13 @@
     <section class="section home-resources-section">
       <div class="wrap">
         <div class="section-head reader-section-head home-resources-head">
-          <div><div class="home-section-kicker">Keep going</div><h2>Three useful next stops</h2></div>
+          <div><div class="home-section-kicker">Keep going</div><h2>Keep discovering</h2></div>
           <a class="reader-link home-section-link" href="guides/">See all guides →</a>
         </div>
         <div class="home-resource-grid">
           <article class="home-resource-card reader-latest-panel">
             <div class="reader-latest-cover"><img src="assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><span>ISSUE 17</span></div>
-            <div class="reader-latest-copy home-resource-copy"><div class="eyebrow">Latest issue</div><h2>Issue 17</h2><p>Free Merseyday of the Dead, Premier Café history, Carr Wood, HAF booking help and 46 half-term ideas.</p><a class="button" href="/issues/issue-17/">Read Issue 17 →</a><a class="reader-link reader-block-link" href="archive.html">Browse all issues</a></div>
+            <div class="reader-latest-copy home-resource-copy"><div class="eyebrow">Latest issue</div><h3>Issue 17</h3><p>Free Merseyday of the Dead, Premier Café history, Carr Wood, HAF booking help and 46 half-term ideas.</p><a class="button" href="/issues/issue-17/">Read Issue 17 →</a><a class="reader-link reader-block-link" href="archive.html">Browse all issues</a></div>
           </article>
           <article class="home-resource-card home-resource-guide home-resource-free-cheap">
             <div class="home-resource-visual is-contain"><img src="assets/images/free-cheap-guide-logo.webp" alt="SK8 Scoop Free & Cheap Guide logo" loading="lazy"></div>
@@ -153,8 +167,8 @@
         <div class="home-take-part-head"><div class="home-section-kicker">Take part</div><h2>Useful ways to get involved</h2></div>
         <div class="reader-actions reader-actions-strip">
           <article class="reader-action"><span class="reader-action-mark" aria-hidden="true">01</span><div><h3>Submit an event</h3><p>Send dates, prices, booking links and venue details for a local event.</p><a class="button small-button" href="submit-event/">Submit an event →</a></div></article>
-          <article class="reader-action"><span class="reader-action-mark" aria-hidden="true">02</span><div><h3>Submit something</h3><p>Competition answers, comments, tips, photos and useful local information.</p><a class="button small-button" href="submit/">Submit here →</a></div></article>
-          <article class="reader-action"><span class="reader-action-mark" aria-hidden="true">03</span><div><h3>Contact</h3><p>Got a question, correction or something that needs a proper reply?</p><a class="button small-button" href="contact/">Get in touch →</a></div></article>
+          <article class="reader-action"><span class="reader-action-mark" aria-hidden="true">02</span><div><h3>Share a local tip</h3><p>Tell us about a change, story, photo or useful local discovery.</p><a class="button small-button" href="submit/">Submit here →</a></div></article>
+          <article class="reader-action"><span class="reader-action-mark" aria-hidden="true">03</span><div><h3>Questions or corrections?</h3><p>Let us know what needs checking or a proper reply.</p><a class="button small-button" href="contact/">Contact SK8 Scoop →</a></div></article>
         </div>
       </div>
     </section>
@@ -184,5 +198,7 @@
   })();
 </script>
   <script src="assets/homepage-nue.js"></script>
+  <script src="assets/sk8-calendar-core.js"></script>
+  <script src="assets/reader-first-home.js"></script>
 </body>
 </html>

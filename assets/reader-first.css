@@ -1,0 +1,267 @@
+/* Reader-first homepage: editorial, responsive, and keyboard accessible. */
+.reader-first-discovery{background:#f4f8f6;padding:clamp(24px,4vw,48px) 0 42px;border-bottom:1px solid #d5e3df}
+.reader-first-discovery .wrap{max-width:1200px}
+.reader-first-intro{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
+.reader-first-intro h1{margin:0 0 7px;color:#073f48;font-family:Georgia,serif;font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.12}
+.reader-first-intro p{margin:0;color:#3b585b;line-height:1.5}
+.reader-first-all{color:#075a66;font-weight:800}
+.reader-first-search{padding:17px 19px;border:1px solid #c7dfd8;background:white;border-radius:18px}
+.reader-first-search label{display:block;margin-bottom:8px;color:#18383c;font-weight:800}
+.reader-first-search-row{display:flex;gap:10px}
+.reader-first-search input{width:100%;flex:1;min-width:0;min-height:50px;padding:11px 14px;border:2px solid #0f6470;border-radius:10px;background:#fff;color:#13383c;font:inherit;font-size:16px}
+.reader-first-search button{white-space:nowrap;min-height:50px}
+.reader-first-chips{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 14px}
+.reader-first-chips a{display:inline-flex;align-items:center;min-height:44px;padding:9px 14px;border-radius:999px;border:1px solid #bdd6d0;color:#0b5661;background:#fff;font-weight:750;text-decoration:none}
+.reader-first-chips a:first-child,.reader-first-chips a:nth-child(2){background:#073f48;border-color:#073f48;color:#fff}
+.reader-first-local{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:0 0 25px;color:#41585a}
+.reader-first-local span{font-weight:800}
+.reader-first-local a{color:#075a66;text-underline-offset:3px;font-weight:750;padding:6px 2px}
+.reader-first-feed-head{display:flex;justify-content:space-between;align-items:baseline;gap:15px;padding-top:23px;border-top:1px solid #cfddd8}
+.reader-first-feed-head h3{margin:0;color:#073f48;font-family:Georgia,serif;font-size:clamp(1.5rem,2.2vw,2rem)}
+.reader-first-feed-head span{font-size:.81rem;color:#4c6264}
+.reader-first-status{margin:9px 0 14px;color:#465e60;font-size:.9rem}
+.reader-first-event-grid{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0;padding:0}
+.reader-first-event{display:grid;grid-template-columns:90px minmax(0,1fr);gap:14px;padding:17px;border:1px solid #d1dfd9;border-radius:15px;background:#fff;box-shadow:0 4px 14px rgba(14,59,61,.04)}
+.reader-first-date{display:flex;align-items:center;justify-content:center;min-height:60px;padding:8px;border-radius:10px;background:#e7f1ef;color:#0d4e59;font-size:.88rem;font-weight:900;text-align:center;line-height:1.3}
+.reader-first-event-body{min-width:0;overflow-wrap:anywhere}
+.reader-first-event-time{margin:0 0 5px;color:#38565a;font-size:.86rem;font-weight:750}
+.reader-first-event-body h3{font-size:1.08rem;line-height:1.3;margin:0 0 7px;color:#123a3f}
+.reader-first-event-body h3 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+.reader-first-event-details{margin:0 0 5px;color:#4a6265;font-size:.85rem}
+.reader-first-event-price{margin:0 0 7px;color:#134f51;font-weight:800;font-size:.85rem;line-height:1.38}
+.reader-first-event-checked{display:block;color:#637576;font-size:.76rem}
+.reader-first-after{display:flex;flex-wrap:wrap;gap:14px 24px;margin-top:17px}
+.reader-first-after a,.reader-first-fallback+a{color:#075a66;font-weight:800}
+.reader-first-fallback{color:#26484c;line-height:1.6}
+.reader-first-discovery a:focus-visible,.reader-first-discovery button:focus-visible,.reader-first-discovery input:focus-visible{outline:3px solid #df731c;outline-offset:3px}
+@media(max-width:720px){.reader-first-intro,.reader-first-feed-head{display:block}.reader-first-all{display:inline-block;margin-top:12px}.reader-first-event-grid{grid-template-columns:1fr}.reader-first-feed-head span{display:block;margin-top:4px}.reader-first-chips{gap:8px}.reader-first-chips a{font-size:.87rem}}
+@media(max-width:430px){.reader-first-search{padding:13px}.reader-first-search-row{display:grid}.reader-first-search-row button{width:100%}.reader-first-event{grid-template-columns:78px minmax(0,1fr);gap:10px;padding:12px}.reader-first-date{font-size:.79rem}.reader-first-local{gap:6px}}
+@media(prefers-reduced-motion:reduce){.reader-first-discovery *{scroll-behavior:auto!important;transition:none!important}}
+
+/* Activity discovery is the landing purpose; subscription remains a distinct,
+   valuable weekly follow-on, not a 650px barrier before the first useful answer. */
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo,
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-overlay{min-height:0!important}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo{background:#fffaf0!important;border-top:1px solid #d6e6e0;border-bottom:1px solid #d6e6e0}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-copy{padding:22px 0 25px!important;max-width:610px!important}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero h2{max-width:620px;margin:0 0 10px;color:#073f48;font-family:Georgia,serif;font-weight:800;font-size:clamp(1.75rem,3vw,2.65rem);line-height:1.08;letter-spacing:-.025em}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-lead{margin:0;max-width:570px;color:#284b50;font-size:1rem;line-height:1.48}
+body.reader-home.homepage-v3.reader-first-mode .reader-signup{margin-top:15px}
+body.reader-home.homepage-v3.reader-first-mode .home-hero-eyebrow{margin-bottom:10px}
+body.reader-home.homepage-v3.reader-first-mode .home-hero-subroutes{display:none!important}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo::before{background-position:center 43%}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{background:linear-gradient(90deg,rgba(255,250,240,.99) 0%,rgba(255,250,240,.96) 45%,rgba(255,250,240,.58) 70%,rgba(255,250,240,.1) 100%)!important}
+@media(max-width:680px){
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo{min-height:0!important}
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-overlay{min-height:0!important;align-items:stretch}
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-copy{padding:25px 0 30px!important}
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo::before{inset:0!important;height:auto!important;background-position:center 55%;opacity:.13!important}
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{background:rgba(255,250,240,.91)!important}
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero h2{font-size:clamp(1.7rem,6vw,2.25rem)}
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-lead{font-size:.96rem}
+  body.reader-home.homepage-v3.reader-first-mode .reader-proof{display:none}
+}
+
+/* On first visits the privacy decision must remain genuine, but should not
+   cover most of the useful homepage. Give Allow and Reject equal prominence. */
+@media(max-width:480px){
+  body.reader-first-mode .privacy-choices{left:8px;right:8px;bottom:8px;padding:12px 13px;gap:9px;max-height:60vh;overflow-y:auto}
+  body.reader-first-mode .privacy-choices-copy strong{font-size:1.09rem;margin-bottom:3px}
+  body.reader-first-mode .privacy-choices-copy p{font-size:.81rem;line-height:1.34}
+  body.reader-first-mode .privacy-choices-actions{grid-template-columns:1fr 1fr;gap:7px}
+  body.reader-first-mode .privacy-choices-actions .privacy-button{min-height:48px;padding:7px 6px;font-size:.84rem}
+  body.reader-first-mode .privacy-choices-actions .privacy-text-button{grid-column:1/-1;min-height:40px;padding:5px;font-size:.85rem}
+  body.reader-first-mode .privacy-choices-settings{max-height:49vh;overflow-y:auto}
+}
+
+/* Whole-homepage editorial polish, Oct 2026. Scoped above the historical V3-V5
+   homepage styles so the newsroom sections remain consistent without
+   changing the global website navigation or other publication pages. */
+
+/* 1. Vivid local artwork, with text protection only where text actually sits. */
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo{overflow:hidden}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo::before{
+  filter:saturate(1.20) contrast(1.10) brightness(1.025);
+  background-position:center 46%;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{
+  background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.985) 27%,
+  rgba(255,250,240,.90) 42%,rgba(255,250,240,.58) 59%,
+  rgba(255,250,240,.16) 78%,rgba(255,250,240,0) 94%)!important;
+}
+
+/* 2. The newsletter offers a clear weekly benefit, not a second search entry. */
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-copy{padding:15px 0 18px!important}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero h2{font-size:clamp(1.8rem,2.65vw,2.5rem)}
+body.reader-home.homepage-v3.reader-first-mode .home-newsletter-usefulness{
+  display:flex;align-items:center;flex-wrap:wrap;gap:5px 10px;
+  margin:8px 0 0;color:#0a5360;font-size:.8rem;line-height:1.45;font-weight:850;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-newsletter-usefulness span{color:#b76313}
+body.reader-home.homepage-v3.reader-first-mode .reader-signup .button{
+  color:#fff!important;background:#0f6470!important;font-weight:850;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-signup .button:hover,
+body.reader-home.homepage-v3.reader-first-mode .reader-signup .button:focus-visible{
+  background:#0a4f59!important;color:#fff!important;
+}
+
+/* 3. First screen: stronger useful-action focus, no ornamental density. */
+body.reader-home.homepage-v3.reader-first-mode .reader-first-intro h1{
+  max-width:850px;letter-spacing:-.035em;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-search{
+  box-shadow:0 5px 18px rgba(7,63,72,.045);
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-chips a:hover{
+  border-color:#0f6470;text-decoration:underline;text-underline-offset:3px;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-event{
+  border-color:#c8dbd5;box-shadow:0 7px 20px rgba(13,58,63,.052);
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-event-body h3{
+  font-size:clamp(1.04rem,1.15vw,1.16rem);letter-spacing:-.015em;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-date{
+  background:#e6f0ed;border:1px solid #d2e4de;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-event-checked{
+  font-size:.77rem;color:#52676b;
+}
+
+/* 4. Sitewide continuity: category grids complement rather than duplicate
+   What's On and the guide shelf. Six focused editorial routes, 3 x 2 desktop. */
+body.reader-home.homepage-v3.reader-first-mode [data-explore-grid]{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:13px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-explore-tile{
+  min-height:172px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-explore-copy strong{
+  font-size:1rem;line-height:1.2;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-locality-strip{
+  box-shadow:none;margin-bottom:20px;
+}
+
+/* 5. News stays visibly independent of sponsorship; tidy reading rhythm. */
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story h3{
+  line-height:1.18;letter-spacing:-.02em;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story p[data-story-summary]{
+  line-height:1.5;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story .reader-link:focus-visible{
+  outline:3px solid #df731c;outline-offset:3px;
+}
+
+/* 6. Less wasted space in approved-guide artwork, no forced cropping or logo distortion. */
+body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-visual{
+  height:156px!important;min-height:156px!important;padding:10px 14px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-visual img{
+  max-height:132px!important;max-width:90%!important;object-fit:contain!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-resource-visual img{
+  max-width:75%!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-copy h3{
+  font-size:1.34rem;line-height:1.2;
+}
+
+/* 7. Contributions should be an easy, compact action, not another wall of cards. */
+body.reader-home.homepage-v3.reader-first-mode .reader-take-part{
+  padding-top:27px!important;padding-bottom:33px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-action{
+  min-height:0!important;padding:16px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-action p{
+  font-size:.86rem!important;
+}
+
+@media(max-width:900px){
+  body.reader-home.homepage-v3.reader-first-mode [data-explore-grid]{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:680px){
+  /* Keep the signup readable while revealing a real strip of the illustration,
+     rather than suppressing the picture almost completely on phones. */
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-copy{
+    padding:16px 0 96px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo::before{
+    inset:auto 0 0 0!important;height:90px!important;opacity:1!important;
+    background-position:center 54%!important;
+    filter:saturate(1.20) contrast(1.10) brightness(1.02);
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{
+    background:linear-gradient(180deg,#fffaf0 0%,#fffaf0 74%,
+      rgba(255,250,240,.8) 81%,rgba(255,250,240,.08) 96%)!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-newsletter-usefulness{
+    gap:3px 7px;font-size:.76rem;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-locality-links{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-locality-links a{
+    min-height:46px;padding:9px 10px;font-size:.8rem;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-visual{
+    height:132px!important;min-height:132px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-visual img{
+    max-height:115px!important;
+  }
+}
+@media(max-width:430px){
+  body.reader-home.homepage-v3.reader-first-mode [data-explore-grid]{
+    grid-template-columns:1fr!important;gap:10px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-tile{
+    display:grid!important;grid-template-columns:118px minmax(0,1fr)!important;
+    min-height:116px!important;align-items:stretch;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-visual{
+    width:118px!important;height:100%!important;min-height:116px!important;
+    flex-basis:auto!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-copy{
+    min-height:0!important;padding:13px 12px!important;align-self:stretch;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-copy small{
+    font-size:.77rem;line-height:1.36;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-first-intro h1{
+    font-size:clamp(1.85rem,8.7vw,2.35rem);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-tile,
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-card{
+    transition:none!important;transform:none!important;
+  }
+}
+
+/* Third editorial image was too small inside a large empty field. Let the
+   approved story artwork cover its deliberate frame, with a readable label. */
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story:nth-child(3) .dicm-visual{
+  display:block!important;position:relative!important;overflow:hidden!important;
+  height:224px!important;min-height:224px!important;padding:0!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story:nth-child(3) .dicm-art{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center 48%!important;
+  padding:0!important;background:#f7faf8!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story:nth-child(3) .dicm-mode-label{
+  position:absolute!important;left:13px!important;top:13px!important;
+  margin:0!important;z-index:2!important;
+}
+@media(max-width:680px){
+  body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story:nth-child(3) .dicm-visual{
+    height:205px!important;min-height:205px!important;
+  }
+}

@@ -69,8 +69,8 @@ jobs:
           set -eu
           for i in $(seq 1 18); do
             code=$(curl -sS -o /tmp/home.html -w '%{http_code}' "$PREVIEW_URL/" || true)
-            if [ "$code" = "200" ] && grep -q 'home-quick-answers' /tmp/home.html; then
-              echo "Preview is current and contains Quick Answers."
+            if [ "$code" = "200" ] && grep -q 'reader-first-discovery' /tmp/home.html; then
+              echo "Preview is current and contains reader-first finder."
               exit 0
             fi
             echo "Attempt $i: preview not current yet (HTTP $code)"
@@ -109,7 +109,7 @@ jobs:
           set -eu
           "$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=5000             --dump-dom "$PREVIEW_URL/" > visual-qa/home-rendered.html
           "$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=5000             --dump-dom "$PREVIEW_URL/whats-on/?filter=weekend#current-listings" > visual-qa/whats-on-weekend-rendered.html
-          grep -q 'home-quick-answers' visual-qa/home-rendered.html
+          grep -q 'reader-first-discovery' visual-qa/home-rendered.html
           grep -q 'aria-pressed="true">Weekend' visual-qa/whats-on-weekend-rendered.html
 
       - name: Upload visual QA artifact
