@@ -168,10 +168,8 @@
       selectedDate = '';
       window.dispatchEvent(new CustomEvent('sk8:calendar-day-selected', { detail: { date: '' } }));
     }
-    if (next === 'month' && ['today', 'week', 'weekend'].includes(activeFilter)) {
-      window.dispatchEvent(new CustomEvent('sk8:calendar-clear-date-shortcut'));
-      activeFilter = 'all';
-    }
+    // Preserve When and What kind across agenda/month switches.
+    // The month grid already uses these choices when computing day counts.
     syncUrl();
     render();
     track('whats_on_calendar_view', { calendar_view: view });
