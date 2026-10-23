@@ -379,3 +379,112 @@ body.reader-home.reader-first-mode input:focus-visible {
   body.reader-home.reader-first-mode .reader-worth .reader-story,
   body.reader-home.reader-first-mode .reader-explore-tile {transition:none;}
 }
+
+/* Image clarity and resource-art scale corrections, 23 October 2026.
+   Six category tiles use 1456x816 originals set directly in index.html.
+   Remove stylised filters and avoid interpolation of the old ~4-10KB thumbnails. */
+body.reader-home.reader-first-mode .reader-explore-photo{
+  background-size:cover!important;
+  background-position:center center!important;
+  filter:none!important;
+  image-rendering:auto;
+  transform:none;
+}
+body.reader-home.reader-first-mode .reader-explore-tile:hover .reader-explore-photo{
+  filter:none!important;
+  transform:none;
+}
+body.reader-home.reader-first-mode .reader-explore-visual {
+  height:180px!important;
+  flex-basis:180px!important;
+  min-height:180px!important;
+}
+body.reader-home.reader-first-mode .reader-explore-tile {
+  min-width:0;
+}
+/* Preserve the card UI, but let three guide artworks occupy their visual panels. */
+body.reader-home.reader-first-mode .home-resource-grid .home-resource-visual,
+body.reader-home.reader-first-mode .home-resource-grid .reader-latest-cover {
+  height:224px!important;
+  min-height:224px!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+body.reader-home.reader-first-mode .home-resource-free-cheap .home-resource-visual{
+  padding:8px!important;
+  background:#fffdfa!important;
+}
+body.reader-home.reader-first-mode .home-resource-free-cheap .home-resource-visual img{
+  display:block!important;
+  width:auto!important;
+  height:100%!important;
+  max-height:208px!important;
+  max-width:96%!important;
+  object-fit:contain!important;
+  padding:0!important;
+  margin:auto!important;
+  background:transparent!important;
+  filter:none!important;
+}
+/* The Adventures source is an editorial montage: fill the available space. */
+body.reader-home.reader-first-mode .home-resource-adventures .home-resource-visual{
+  background:#f5f7f0!important;
+}
+body.reader-home.reader-first-mode .home-resource-adventures .home-resource-visual img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  filter:none!important;
+}
+body.reader-home.reader-first-mode .reader-latest-cover{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:13px;
+}
+body.reader-home.reader-first-mode .reader-latest-cover img{
+  display:block!important;
+  width:min(75%,260px)!important;
+  max-width:260px!important;
+  height:auto!important;
+  max-height:100px!important;
+  object-fit:contain!important;
+  margin:0!important;
+}
+body.reader-home.reader-first-mode .reader-latest-cover span{
+  display:block!important;
+  margin:0!important;
+  font-size:1.12rem!important;
+  letter-spacing:.18em!important;
+}
+@media(max-width:900px){
+  body.reader-home.reader-first-mode .reader-explore-visual{
+    height:155px!important;
+    flex-basis:155px!important;
+    min-height:155px!important;
+  }
+}
+@media(max-width:680px){
+  body.reader-home.reader-first-mode .reader-explore-visual{
+    height:150px!important;
+    flex-basis:150px!important;
+    min-height:150px!important;
+  }
+  body.reader-home.reader-first-mode .home-resource-grid .home-resource-visual,
+  body.reader-home.reader-first-mode .home-resource-grid .reader-latest-cover{
+    height:205px!important;
+    min-height:205px!important;
+  }
+  body.reader-home.reader-first-mode .home-resource-free-cheap .home-resource-visual img{
+    max-height:192px!important;
+  }
+}
