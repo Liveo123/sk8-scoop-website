@@ -210,21 +210,21 @@
     "checked": "2026-10-13"
   },
   {
-    "id": "cheadle-hulme-con-club-iconic-2026-10-24",
-    "title": "Iconic drag show",
-    "date": "2026-10-24",
-    "time": "20:45",
-    "area": "Cheadle Hulme",
-    "venue": "Cheadle Hulme Conservative Club, Mellor Road, Cheadle Hulme SK8 5AT",
-    "cost": "Free for members · £5 non-members",
-    "category": "Music",
-    "description": "A live-singing drag tribute show built around songs from different music icons across the decades.",
-    "booking_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
-    "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
-    "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-10-06",
+    "id": "stockroom-dads-club-half-term-2026-10-24",
+    "title": "Stockport Dads Club: October Half Term",
     "status": "verified",
-    "cost_type": "members_only_free"
+    "date": "2026-10-24",
+    "time": "11:00",
+    "area": "Stockport",
+    "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PR",
+    "cost": "Free general event; under-2 sensory session £2",
+    "category": "Family / Community",
+    "description": "Half-term day for dads and father figures with children, including story time, den building, Lego, board games and table football. The under-2 sensory session costs £2 and includes a hot drink and barm.",
+    "booking_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
+    "source_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
+    "verification": "VENUE_PRIMARY_SOURCE",
+    "checked": "2026-10-08",
+    "cost_type": "free_optional_extras"
   },
   {
     "id": "merseyday-of-the-dead-2026-10-24",
@@ -248,21 +248,40 @@
     "status": "verified"
   },
   {
-    "id": "stockroom-dads-club-half-term-2026-10-24",
-    "title": "Stockport Dads Club: October Half Term",
-    "status": "verified",
+    "id": "cheadle-hulme-con-club-iconic-2026-10-24",
+    "title": "Iconic drag show",
     "date": "2026-10-24",
-    "time": "11:00",
-    "area": "Stockport",
-    "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PR",
-    "cost": "Free general event; under-2 sensory session £2",
-    "category": "Family / Community",
-    "description": "Half-term day for dads and father figures with children, including story time, den building, Lego, board games and table football. The under-2 sensory session costs £2 and includes a hot drink and barm.",
-    "booking_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
-    "source_url": "https://www.stockroomsk.co.uk/events/stockport-dads-club-october-half-term?date=2026-10-24",
+    "time": "20:45",
+    "area": "Cheadle Hulme",
+    "venue": "Cheadle Hulme Conservative Club, Mellor Road, Cheadle Hulme SK8 5AT",
+    "cost": "Free for members · £5 non-members",
+    "category": "Music",
+    "description": "A live-singing drag tribute show built around songs from different music icons across the decades.",
+    "booking_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
+    "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
     "verification": "VENUE_PRIMARY_SOURCE",
-    "checked": "2026-10-08",
-    "cost_type": "free_optional_extras"
+    "checked": "2026-10-06",
+    "status": "verified",
+    "cost_type": "members_only_free"
+  },
+  {
+    "id": "jodrell-october-half-term-2026-10-26",
+    "title": "October half term at Jodrell Bank",
+    "date": "2026-10-26",
+    "end_date": "2026-11-01",
+    "date_range": "26 Oct–1 Nov",
+    "time": "10:00",
+    "area": "Jodrell Bank",
+    "venue": "Jodrell Bank, Cheshire",
+    "cost": "Included in admission",
+    "category": "Family",
+    "description": "Jodrell Bank confirms its 2026 half-term programme from 26 October to 1 November, including the Curious Kids science show, a choice of Space Dome films and The North Revisited exhibition. General admission is required; individual show times and extra charges vary, so check the daily schedule before booking.",
+    "booking_url": "https://www.jodrellbank.net/events/october-half-term-at-jodrell-bank/",
+    "source_url": "https://www.jodrellbank.net/events/october-half-term-at-jodrell-bank/",
+    "verification": "VENUE_PRIMARY_2026_PROGRAMME",
+    "checked": "2026-10-21",
+    "status": "verified",
+    "cost_type": "admission_required"
   },
   {
     "id": "stockroom-bsl-signed-storytime-2026-10-26",
@@ -305,25 +324,6 @@
     "verification": "ORGANISER_PRIMARY_SCHEDULE_AND_REGISTRATION",
     "checked": "2026-10-21",
     "status": "verified"
-  },
-  {
-    "id": "jodrell-october-half-term-2026-10-26",
-    "title": "October half term at Jodrell Bank",
-    "date": "2026-10-26",
-    "end_date": "2026-11-01",
-    "date_range": "26 Oct–1 Nov",
-    "time": "10:00",
-    "area": "Jodrell Bank",
-    "venue": "Jodrell Bank, Cheshire",
-    "cost": "Included in admission",
-    "category": "Family",
-    "description": "Jodrell Bank confirms its 2026 half-term programme from 26 October to 1 November, including the Curious Kids science show, a choice of Space Dome films and The North Revisited exhibition. General admission is required; individual show times and extra charges vary, so check the daily schedule before booking.",
-    "booking_url": "https://www.jodrellbank.net/events/october-half-term-at-jodrell-bank/",
-    "source_url": "https://www.jodrellbank.net/events/october-half-term-at-jodrell-bank/",
-    "verification": "VENUE_PRIMARY_2026_PROGRAMME",
-    "checked": "2026-10-21",
-    "status": "verified",
-    "cost_type": "admission_required"
   },
   {
     "id": "stockroom-autumn-sensory-story-circle-2026-10-29",
@@ -384,23 +384,6 @@
     "cost_type": "optional_donation"
   },
   {
-    "id": "cheadle-soul-club-halloween-2026-10-31",
-    "title": "Cheadle Soul Club Halloween Special",
-    "date": "2026-10-31",
-    "time": "20:30",
-    "area": "Cheadle",
-    "venue": "Cheadle & Gatley Conservative Club, 24 Stockport Road, Cheadle SK8 2AA",
-    "cost": "£5 on the door",
-    "cost_type": "paid",
-    "category": "Music",
-    "description": "Northern soul, Motown and seventies soul for the Halloween special. The event listing says smart dress, no talc or drinks on the dancefloor, and no admission after 11pm. Check with the organiser before travelling.",
-    "booking_url": "https://www.soul-source.co.uk/events/event/92822-cheadle-soul-club-halloween-special-cheadle-con-club/",
-    "source_url": "https://www.soul-source.co.uk/events/event/92822-cheadle-soul-club-halloween-special-cheadle-con-club/",
-    "verification": "ORGANISER_SUBMITTED_EVENT_LISTING",
-    "checked": "2026-10-21",
-    "status": "verified"
-  },
-  {
     "id": "stockport-plaza-organ-coffee-morning-2026-10-31",
     "title": "Fundraising Organ Coffee Morning at the Plaza",
     "date": "2026-10-31",
@@ -437,6 +420,23 @@
     "cost_type": "free"
   },
   {
+    "id": "cheadle-soul-club-halloween-2026-10-31",
+    "title": "Cheadle Soul Club Halloween Special",
+    "date": "2026-10-31",
+    "time": "20:30",
+    "area": "Cheadle",
+    "venue": "Cheadle & Gatley Conservative Club, 24 Stockport Road, Cheadle SK8 2AA",
+    "cost": "£5 on the door",
+    "cost_type": "paid",
+    "category": "Music",
+    "description": "Northern soul, Motown and seventies soul for the Halloween special. The event listing says smart dress, no talc or drinks on the dancefloor, and no admission after 11pm. Check with the organiser before travelling.",
+    "booking_url": "https://www.soul-source.co.uk/events/event/92822-cheadle-soul-club-halloween-special-cheadle-con-club/",
+    "source_url": "https://www.soul-source.co.uk/events/event/92822-cheadle-soul-club-halloween-special-cheadle-con-club/",
+    "verification": "ORGANISER_SUBMITTED_EVENT_LISTING",
+    "checked": "2026-10-21",
+    "status": "verified"
+  },
+  {
     "id": "t-kay-soul-motown-cheadle-hulme-2026-10-31",
     "title": "T Kay: Soul and Motown",
     "date": "2026-10-31",
@@ -470,6 +470,40 @@
     "checked": "2026-10-01"
   },
   {
+    "id": "cheadle-library-christmas-craft-night-2026-11-12",
+    "title": "Christmas Craft Night at Cheadle Library",
+    "status": "verified",
+    "date": "2026-11-12",
+    "time": "17:30",
+    "end_time": "19:00",
+    "area": "Cheadle",
+    "venue": "Cheadle Library, 23 Ashfield Road, Cheadle, Stockport SK8 1BB",
+    "cost": "Free; booking required; ages 16 and over",
+    "cost_type": "free",
+    "category": "Creative workshops",
+    "description": "A free Christmas craft evening inspired by Agatha Christie and her connection to Cheadle. Make festive cards and decorations with a mystery, literary and Art Deco twist. The session is for ages 16 and over; book a place before travelling.",
+    "booking_url": "https://www.stockport.gov.uk/events/christmas-craft-night?date=2026-11-12",
+    "source_url": "https://www.stockport.gov.uk/events/christmas-craft-night?date=2026-11-12",
+    "verification": "Stockport Council's Christmas Craft Night listing, submitted by Cheadle Library, confirms Thursday 12 November 2026, 5:30pm to 7pm, a free event for ages 16+, and a Book a place action.",
+    "checked": "2026-10-23",
+    "seo": {
+      "slug": "cheadle-library-christmas-craft-night-2026",
+      "venue_name": "Cheadle Library",
+      "address": {
+        "streetAddress": "23 Ashfield Road",
+        "addressLocality": "Cheadle",
+        "postalCode": "SK8 1BB",
+        "addressCountry": "GB"
+      },
+      "organizer": {
+        "name": "Cheadle Library",
+        "url": "https://www.stockport.gov.uk/events/christmas-craft-night?date=2026-11-12"
+      },
+      "access": "For ages 16 and over. Booking is required even though the event is free.",
+      "image_basis": "TEXT-ONLY"
+    }
+  },
+  {
     "id": "jodrell-dark-side-une-2026-11-12",
     "title": "Journey to the Dark Side of the UNE",
     "status": "verified",
@@ -497,11 +531,27 @@
     "cost_type": "free",
     "category": "Schools / Family",
     "description": "Families considering nursery or reception places for September 2027 can look around Lum Head Primary School and meet staff. The school asks visitors to book a tour by calling 0161 428 7992 or emailing its school office.",
-    "source_url": "https://www.lumhead.stockport.sch.uk/?page_id=63",
+    "source_url": "https://www.stockport.gov.uk/events/nursery-and-reception-open-day-nov?date=2026-11-19",
     "booking_url": "https://www.stockport.gov.uk/events/nursery-and-reception-open-day-nov?date=2026-11-19",
-    "verification": "SCHOOL_PRIMARY_SOURCE_AND_COUNCIL_ORGANISER_SUBMISSION",
+    "verification": "Stockport Council event listing (submitted by Lum Head Primary School) confirms Thursday 19 November 2026, 2pm to 3pm, free; school website requests advance booking through the office.",
     "status": "verified",
-    "checked": "2026-10-13"
+    "checked": "2026-10-23",
+    "seo": {
+      "slug": "lum-head-gatley-nursery-reception-open-day-2026",
+      "venue_name": "Lum Head Primary School",
+      "address": {
+        "streetAddress": "Troutbeck Road",
+        "addressLocality": "Gatley",
+        "postalCode": "SK8 4RR",
+        "addressCountry": "GB"
+      },
+      "organizer": {
+        "name": "Lum Head Primary School",
+        "url": "https://www.lumhead.stockport.sch.uk/"
+      },
+      "access": "Public open day for families considering nursery or reception in September 2027. Book a place with the school before visiting.",
+      "image_basis": "TEXT-ONLY"
+    }
   },
   {
     "id": "liam-gallagher-tribute-cheadle-hulme-2026-11-21",
