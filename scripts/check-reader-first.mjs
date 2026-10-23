@@ -8,6 +8,8 @@ const html = read('index.html');
 const css = read('assets/reader-first.css');
 const js = read('assets/reader-first-home.js');
 const events = JSON.parse(read('data/events.json'));
+const homepageData = JSON.parse(read('data/homepage.json'));
+const homepageJs = read('assets/homepage-nue.js');
 const assertIncludes = (text, value, label) =>
   assert.ok(text.includes(value), label + ': missing ' + value);
 
@@ -70,4 +72,42 @@ assertIncludes(css, '@media(max-width:720px)', 'Single-column phone card layout'
 assertIncludes(css, ':focus-visible', 'Keyboard focus styling');
 assertIncludes(css, 'prefers-reduced-motion', 'Reduced-motion support');
 assertIncludes(css, 'reader-first-mode', 'Homepage hero inversion is styled');
+// Whole-page editorial/NUE consistency beyond the top-of-page finder.
+assertIncludes(html, '<h2>Good local ideas, every Friday</h2>', 'Newsletter purpose differs from the event H1');
+assertIncludes(html, 'home-newsletter-usefulness', 'Concrete newsletter benefit summary');
+assertIncludes(html, 'Get it free</button>', 'Benefit-led email signup');
+// Public numbers are interpolated by assets/homepage-nue.js, not typed into page HTML.
+assertIncludes(homepageJs, 'stats.subscriberProof || stats.subscriberCount', 'Subscriber proof source of truth');
+assertIncludes(html, 'data-experiment="homepage-utility-promise-v1"', 'Newsletter acquisition experiment retained');
+assertIncludes(css, 'filter:saturate(1.25) contrast(1.12) brightness(1.035)', 'Non-destructive image enhancement');
+assertIncludes(css, 'reader-hero-shade', 'Text legibility overlay retained');
+assert.ok((html.match(/<section\b/g)||[]).length >= 6, 'Homepage must retain distinct useful sections');
+assert.equal((html.match(/reader-explore-tile/g)||[]).length,6, 'Six non-duplicated static discover routes');
+const priority=['Kids & Family','Outdoors','Food & Drink','Useful Updates','Local History','Planning & Development'];
+assert.deepEqual(homepageData.explore.map(x=>x.title), priority,
+  'Six useful non-duplicated categories match reader intent and live fallback');
+assert.ok(homepageData.explore.every(x=>x.status==='OPEN' && x.href && !x.href.includes('coming-soon')),
+  'Category navigation must use live available pages');
+const featured=homepageData.stories.find(x=>x.title.includes('Merseyday'));
+assert.equal(featured?.href,'/whats-on/?event=merseyday-of-the-dead-2026-10-24',
+  'Featured event must land on its own checked listing, not general issue archive');
+assertIncludes(html,featured.href,'Fallback story URL matches live dynamic source');
+assertIncludes(html,'data-nue-type="verified-event-detail"','Featured event is a useful continuation');
+assertIncludes(homepageJs,"'/free-cheap-guide/': '/free-cheap-guide/guide/'",
+  'Returning subscribers get the full free/cheap guide');
+assertIncludes(homepageJs,"'/52-adventures/': '/52-adventures/guide/'",
+  'Returning subscribers get the full adventure guide');
+assert.ok(!homepageJs.includes('<svg') && !homepageJs.includes('storyGraphicSvg'),
+  'Legacy generic inline SVG illustrations are not a permitted SK8 visual fallback');
+assertIncludes(html,'<h3>Issue 17</h3>','Card title is subordinate to resources section heading');
+assertIncludes(html,'Share a local tip','Visitor contribution route remains useful and explicit');
+assertIncludes(html,'Questions or corrections?','Correction route remains easy to find');
+for(const route of ['/kids-family/','/food-drink/','/local-history/','/planning/','/updates/']){
+  assert.ok(fs.existsSync(path.join('.',route,'index.html')), 'An editorial card must point to a present route: '+route);
+}
+assertIncludes(css,'@media(max-width:430px)','Phone-wide compact editorial-category layout');
+assertIncludes(css,'max-width:480px','Compact and balanced mobile consent choices');
+
+console.log('PASS whole-homepage regression: 6 complementary categories, verified stories, direct NUE, known-reader guides, clear newsletter CTA, approved media and practical corrections.');
+
 console.log('PASS reader-first structural/NUE checks: first-screen order, unique H1, routes, source facts, safe links, 4 filters, 4 areas, UK dates and responsive CSS.');
