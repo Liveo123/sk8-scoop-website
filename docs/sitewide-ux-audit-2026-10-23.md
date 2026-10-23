@@ -66,6 +66,19 @@ Each pass names the issue and the decision. PASS means existing source already r
 
 All changed routes and shared code must pass checks; these are preparations on a preview branch, not live claims.
 
+### Screenshot-led refinements after the first full browser review
+
+The first tested preview passed 49 dedicated sitewide browser assertions, but screenshots exposed avoidable first-screen friction:
+
+- **Guides:** its large mobile headline pushed usable guide choices below the first screen. Changed to “Find a useful local guide.” and lowered the responsive font size.
+- **Guide finder:** a prominent shortcut led to an unreleased “50 Secrets” card inside a collapsed section. Replaced it with a functioning Kids & Family route. Unreleased products remain clearly marked in the optional future shelf.
+- **Optional consent:** the mobile notice covered too much of the reader's first task across search, guides and events. Use a more compact notice with equally available Allow and Reject choices and a distinct granular-controls path. This does not change the consent logic or enable tracking without permission.
+- **What’s On:** three full-width buttons initially appeared equally important. Retained “See current listings” as the only primary action and converted My SK8 and Submit an event into distinct, accessible secondary links, keeping actual button text white.
+- **Navigation:** the first ordering inserted Explore SK8 between What’s On and My SK8, violating the existing saved-ideas continuity contract. Reordered to preserve What’s On → My SK8 adjacency, with Explore SK8 still directly discoverable.
+- **Integrity:** source and browser regression assertions cover all the refinements. Do not describe any static label/link change as measured behaviour improvement before a visitor test.
+
+**Release remains draft** until the latest exact SHA checks, guide functions and preview screenshots are all green. Do not merge this second PR as part of the already-approved homepage release.
+
 ## Site-wide NUE journeys
 
 | Reader arrival | First useful experience | Correct next action | Return/asset opportunity |
