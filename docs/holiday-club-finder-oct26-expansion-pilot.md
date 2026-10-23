@@ -38,3 +38,30 @@ Research checked 23 October 2026. Existing public finder: 18 venue/programme lis
 
 ## Suggested outcome review
 Measure actual reader visits and consent-limited organiser-detail clicks, MailerLite confirmed subscriber additions, reported corrections and manual upkeep time. This staged improvement is a 10-entry pilot, not a commitment to build a 100-entry database.
+
+## Primary-source follow-up (23 October 2026)
+
+- 10 new candidate locations were cross-checked with organiser/booking sources, including source-specific 2026 dates for Elite, JWC, GymForce, Progressive Sports St Anne's, 8BY8 Vernon, LSC Moss Hey, Broadstone Hall and St Winifred's, Football Fun Factory Didsbury, and Rocket CHS South. Some web retrieval systems serve older cached 2025/summer pages for Rocket and LSC; targeted current-indexed first-party results explicitly carry the 2026 October schedules. Final parent-facing links must still be opened in a normal browser before publication.
+- Rocket CHS South: live current 2026-27 provider result and Enrolmy booking directory both explicitly list 26–30 Oct 2026. Source https://enrolmy.com/rocket-holiday-camps .
+- LSC St Winifred: current first-party result explicitly lists 26–30 Oct 2026; generic page's older indexed view only showed summer, so a stale cache is not itself a cancellation. Source https://wearelsc.co.uk/holiday-clubs/st-winifreds-primary-school/
+- JWC Warren Wood: venue entrance is the *top gate on Turnstone Road (Nursery Entrance)*, not a guarantee that other school entrances are open. Source https://jwc-sports-coaching.classforkids.io/camp/49
+- New lead deliberately **not** added: Kids Go Wild Forest School appears at Abney Scout and Guide Centre in an older Stockport Council directory, but the organiser's current site instead names Denton and Heaton Moor holiday club venues. Do not claim the Abney Cheadle location is still a live option without organiser confirmation. https://www.kidsgowildforestschool.com/holidayclubs
+- Important original evidence: Lum Head school confirms a recurring October holiday club, but current *2026* specific sessions, outsider access and fees still need direct confirmation; do not substitute the 2025 flyer that shows 27–31 October (that date sequence is 2025). https://www.lumhead.stockport.sch.uk/extended-school/
+- All ten additions remain non-sponsored directory entries. This research alone grants no provider image rights, safety endorsement, price guarantee or live booking availability.
+
+## Ten-cycle critique/fix completion on staged October expansion
+1. **Purpose/viability:** 28 compared options serve parents now, rather than promise 100. PASS; stop the pilot here and measure actual use.
+2. **Local coverage:** Only one extra venue is in core SK8, giving 10 core and 18 nearby. DEFECT ACKNOWLEDGED: follow-on discovery must target Cheadle, Gatley and Heald Green before larger geographic expansion; this batch makes no claim to resolve the local gap.
+3. **Selection/deduplication:** One record per distinctive organiser/venue/programme, 28 unique venue labels, no session-by-session multiplication. PASS.
+4. **Verification/freshness:** Current October 2026 primary bookings/schedules used; stale indexed 2025 pages and conflicting provider facts flagged, separate source dates maintained. PASS WITH CAVEAT: actual checkout availability is unknowable for certain external systems.
+5. **Practical utility:** Ages, sessions, hours, price status, full URL and extra charges where supported; unconfirmed final checkout values are qualified. PASS WITH CAVEAT: childcare quality, open places and eligibility not independently inspected.
+6. **Structure/navigation:** Core first; four existing filters retained; six new area options; day count changes checked by automated suite. PASS.
+7. **Writing/next useful experience:** Source-specific practical descriptions without generic hype; free finder, optional newsletter continuation. PASS.
+8. **Mobile/accessibility/rights:** No new visual assets or third-party photos. Existing responsive design/labels unchanged; dedicated local and hosted phone browser tests pass. PASS FOR AUTOMATED CHECKS, pending any requested owner visual review.
+9. **Maintainability/commercial separation:** Existing 1 November auto-expiry and noindex remain; no database, advertisers or paid sorting added. PASS.
+10. **Sceptical parent/release:** A parent should not infer 28 guaranteed places or 28 businesses. Exact provider age eligibility, stock and fees require provider check. PASS WITH CAVEATS. No publication without owner approval.
+
+## Evidence and stop conditions
+- Confirmed directory-result count and mobile tests are necessary, not evidence of new customers. MailerLite-confirmed subscriptions and consenting outbound provider clicks are the primary pilot metrics, with manual correction/maintenance hours.
+- Keep the October pilot to this batch; do not build a 100-record directory or further interface modules before real usage warrants the effort.
+- If a source link stops supporting the declared week, remove that one record or replace the reference with a legitimate 2026 official booking source *before publication*, not after.
