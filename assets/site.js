@@ -65,8 +65,8 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   const items=[
     ['Home','/'],
     ['What’s On','/whats-on/'],
-    ['Explore SK8','/around-sk8/'],
     ['My SK8','/my-sk8/'],
+    ['Explore SK8','/around-sk8/'],
     ['Guides','/guides/'],
     ['Where to start','/start/'],
     ['Submit','/submit/'],
