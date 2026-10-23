@@ -389,8 +389,9 @@
     if (status) status.textContent = visible.length
       ? `${visible.length} ${visible.length === 1 ? 'result' : 'results'} shown${filterLabel()}`
       : `No checked listings match this view${filterLabel()}.`;
-    if (clearFilters) clearFilters.hidden =
-      activeFilter === 'all' && activeAudience === 'all' && activeArea === 'all' && !selectedDate;
+    const unfiltered = activeFilter === 'all' && activeAudience === 'all' && activeArea === 'all' && !selectedDate;
+    if (clearFilters) clearFilters.hidden = unfiltered;
+    if (emptyClear) emptyClear.hidden = unfiltered;
     if (selectionSummary) {
       selectionSummary.textContent = visible.length + ' checked ' +
         (visible.length === 1 ? 'event' : 'events') + ' found' +
