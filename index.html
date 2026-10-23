@@ -34,6 +34,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="assets/homepage-editorial-polish.css?v=20261023c">
+  <link rel="stylesheet" href="assets/usability-pass-20261023.css?v=1" data-sk8-usability-pass>
 </head>
 <body class="reader-home reader-first-mode" data-page="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -57,16 +58,23 @@
         </div>
         <form class="reader-first-search" role="search" action="/search/" method="get">
           <label for="reader-first-search-input">What are you looking for?</label>
-          <div class="reader-first-search-row"><input type="search" id="reader-first-search-input" name="q" placeholder="Try ‘free kids’, ‘Gatley walk’ or ‘Halloween’" autocomplete="off"><button class="button" type="submit">Find ideas</button></div>
+          <div class="reader-first-search-row"><input type="search" id="reader-first-search-input" name="q" placeholder="Try ‘free kids’, ‘Gatley walk’ or ‘Halloween’" autocomplete="off" aria-describedby="reader-first-search-help"><button class="button" type="submit">Find ideas</button></div>
+          <p class="reader-first-search-help" id="reader-first-search-help">Search events, guides and local stories. Use the date shortcuts below for current events.</p>
         </form>
-        <nav class="reader-first-chips" aria-label="Find activities by need">
+        <nav class="reader-first-chips" aria-label="Popular ways to find local ideas">
           <a href="/whats-on/?filter=today">Today</a>
           <a href="/whats-on/?filter=weekend">This weekend</a>
-          <a href="/whats-on/?filter=free">Free events</a>
+          <a href="/whats-on/?filter=weekend&amp;type=free">Free this weekend</a>
           <a href="/whats-on/?filter=family">With the kids</a>
-          <a href="/free-cheap-guide/">Free &amp; cheap ideas</a>
-          <a href="/kids-family/holiday-club-finder/">Holiday clubs</a>
-          <a href="/outdoors/">Walks &amp; outdoors</a>
+          <details class="reader-first-other-ideas">
+            <summary>More ways to browse</summary>
+            <div class="reader-first-extra-links">
+              <a href="/whats-on/?filter=free">All free events</a>
+              <a href="/free-cheap-guide/">Free &amp; cheap ideas</a>
+              <a href="/kids-family/holiday-club-finder/">Holiday clubs</a>
+              <a href="/outdoors/">Walks &amp; outdoors</a>
+            </div>
+          </details>
         </nav>
         <div class="reader-first-local">
           <span>Closer to home:</span>
