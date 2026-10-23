@@ -69,8 +69,11 @@ assert.ok(eventJs.includes("params.get('event')") &&
 assert.ok(!eventJs.includes("sk8-event-list-schema") &&
   !eventJs.includes("'@type': 'Event'"),
   'Collection page must never inject pretend individual Event entries into an ItemList');
-assert.ok(review.includes('unique URL') && review.includes('PROPOSED, NOT IMPLEMENTED'),
-  'Event leaf pages must stay approval-gated until source and content criteria are met');
+assert.ok(review.includes('unique URL') && review.includes('IMPLEMENTED IN UNMERGED PREVIEW') &&
+  review.includes('owner approval') && review.includes('Google Rich Results Test'),
+  'Source-checked SEO pilots must be documented as unmerged and not Google-validated');
+assert.ok(read('scripts/build-event-leaf-pages.mjs').includes('Expired event leaf still in approved source'),
+  'Event page generator must block stale dates before release');
 assert.ok(review.includes('GSC Wizard connector refuses reads'),
   'Do not claim unverified Google indexing or SEO traffic measurements');
 
