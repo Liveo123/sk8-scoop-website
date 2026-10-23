@@ -87,10 +87,10 @@
   const requestedFilter = String(params.get('filter') || '').toLowerCase();
   // Preserve old links (/whats-on/?filter=free) while allowing combinations
   // such as ?filter=weekend&type=free.
-  if (['free', 'family'].includes(requestedFilter)) activeAudience = requestedFilter;
+  if (['free', 'family', 'free-family'].includes(requestedFilter)) activeAudience = requestedFilter;
   else if (allowedFilters.has(requestedFilter)) activeFilter = requestedFilter;
   const requestedAudience = String(params.get('type') || '').toLowerCase();
-  if (['free', 'family'].includes(requestedAudience)) activeAudience = requestedAudience;
+  if (['free', 'family', 'free-family'].includes(requestedAudience)) activeAudience = requestedAudience;
 
   const requestedEvent = String(params.get('event') || '').trim();
   let selectedDate = !requestedEvent && core.withinHorizon(params.get('date')) ? params.get('date') : '';
@@ -193,8 +193,8 @@
     if (activeFilter === 'weekend' && !isWeekend(event)) return false;
     if (activeFilter === 'today' && !isToday(event)) return false;
     if (activeFilter === 'week' && !isNextSevenDays(event)) return false;
-    if (activeAudience === 'free' && !isFree(event)) return false;
-    if (activeAudience === 'family' && !isFamily(event)) return false;
+    if (activeAudience.includes('free') && !isFree(event)) return false;
+    if (activeAudience.includes('family') && !isFamily(event)) return false;
     return true;
   };
 
@@ -317,7 +317,8 @@
     const labels = { today: 'today', week: 'next 7 days', weekend: 'weekend' };
     const parts = [];
     if (activeFilter !== 'all') parts.push(labels[activeFilter] || activeFilter);
-    if (activeAudience !== 'all') parts.push(activeAudience === 'family' ? 'family-friendly' : 'free');
+    if (activeAudience !== 'all') parts.push(activeAudience === 'free-family' ? 'free & family-friendly' :
+      activeAudience === 'family' ? 'family-friendly' : 'free');
     if (activeArea !== 'all') parts.push(activeArea);
     if (selectedDate) parts.push(prettyCheckedDate(selectedDate));
     return parts.length ? ' · ' + parts.join(' · ') : '';
@@ -404,7 +405,7 @@
       button.setAttribute('aria-pressed', String(selected));
     });
     audienceFilters.forEach(button => {
-      const selected = button.dataset.eventAudience === activeAudience;
+      const selected = activeAudience.split('-').includes(button.dataset.eventAudience);
       button.setAttribute('aria-pressed', String(selected));
     });
     areaFilters.forEach(button => {
@@ -470,7 +471,12 @@
     if (button.dataset.eventJump === 'results') window.requestAnimationFrame(jumpToResults);
   }));
   audienceFilters.forEach(button => button.addEventListener('click', () => {
-    activeAudience = button.dataset.eventAudience || 'all';
+    const value = button.dataset.eventAudience || 'all';
+    const selections = new Set(activeAudience === 'all' ? [] : activeAudience.split('-'));
+    if (selections.has(value)) selections.delete(value);
+    else selections.add(value);
+    activeAudience = selections.has('free') && selections.has('family') ? 'free-family' :
+      selections.has('free') ? 'free' : selections.has('family') ? 'family' : 'all';
     syncViewParams();
     render();
     if (typeof window.sk8Track === 'function') {
