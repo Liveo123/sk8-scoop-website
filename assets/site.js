@@ -696,6 +696,9 @@ const sk8TrackCurrentPage=()=>{const name=sk8PageEventName();if(name)sk8Track(na
   document.addEventListener('submit',async event=>{
     const form=event.target.closest&&event.target.closest('[data-signup-form]');
     if(!form)return;
+    // Canonical guide/Turnstile handler lives in signup-protection.js.
+    // It is registered after this legacy handler, so prevent a second POST here.
+    if(form.dataset.signupKind==='guide'||form.querySelector('input[name="sk8_started_at"]'))return;
     event.preventDefault();
     form.removeAttribute('target');
     if(!form.reportValidity())return;

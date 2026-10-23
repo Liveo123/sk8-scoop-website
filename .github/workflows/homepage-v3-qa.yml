@@ -5,6 +5,8 @@ on:
     paths:
       - 'assets/homepage-v3.css'
       - 'assets/homepage-nue.js'
+      - 'assets/search.js'
+      - 'tests/homepage-expiry-fixtures.mjs'
       - 'index.html'
       - 'assets/config.js'
       - 'scripts/check-homepage-v3.mjs'
@@ -17,6 +19,8 @@ on:
     paths:
       - 'assets/homepage-v3.css'
       - 'assets/homepage-nue.js'
+      - 'assets/search.js'
+      - 'tests/homepage-expiry-fixtures.mjs'
       - 'index.html'
       - 'assets/config.js'
       - 'scripts/check-homepage-v3.mjs'
@@ -42,6 +46,8 @@ jobs:
         run: node scripts/check-current-content.mjs
       - name: Check homepage V3 contract
         run: node scripts/check-homepage-v3.mjs
+      - name: Verify homepage and site-search expiry regressions
+        run: node tests/homepage-expiry-fixtures.mjs
 
   preview-smoke:
     if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/improve/homepage-v3')
