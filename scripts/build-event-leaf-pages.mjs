@@ -58,7 +58,7 @@ function renderPage(event) {
    organizer:{"@type":"Organization",name:organizer.name,url:organizer.url},
    ...(event.cost_type==="free"?{offers:{"@type":"Offer",price:0,priceCurrency:"GBP",url:official}}:{})
  };
- const title=event.title+" | "+prettyDate(event.date).replace(/^[A-Za-z]+,\s*/,"")+" | SK8 Scoop";
+ const title=event.seo.search_title || (event.title+" | "+prettyDate(event.date).replace(/^[A-Za-z]+,\s*/,"")+" | SK8 Scoop");
  const sourceDate=prettyDate(event.checked).replace(/^[A-Za-z]+,\s*/,"");
  const words=event.seo.access||"Check current details with the organiser before travelling.";
  const eventJson={id:event.id,title:event.title,date:event.date,time:event.time,end_time:event.end_time,area:event.area,venue:event.venue,cost:event.cost,category:event.category,description:event.description,booking_url:event.booking_url,source_url:event.source_url,checked:event.checked};
