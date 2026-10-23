@@ -92,3 +92,32 @@ body[data-page="whats-on"] .whats-on-more-ideas a:focus-visible{
     padding:9px 11px!important;
   }
 }
+
+/* Source-checked event leaf page continuations. Added after the useful
+   filtered agenda, not as another hero or an assumed advert recommendation. */
+body[data-page="whats-on"] .whats-on-pilot-pages{
+  margin:20px 0 6px;padding:16px 18px;background:#f4faf7;
+  border:1px solid #d1e3da;border-radius:13px;
+}
+body[data-page="whats-on"] .whats-on-pilot-top .eyebrow{font-size:.69rem}
+body[data-page="whats-on"] .whats-on-pilot-top h2{
+  font-size:1.25rem;line-height:1.3;margin:3px 0 11px;color:#083f48;
+}
+body[data-page="whats-on"] .whats-on-pilot-links{
+  list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
+}
+body[data-page="whats-on"] .whats-on-pilot-links li{
+  display:flex;flex-direction:column;gap:2px;padding:11px 12px;
+  background:#fff;border:1px solid #dcebe4;border-radius:9px;min-width:0;
+}
+body[data-page="whats-on"] .whats-on-pilot-links a{
+  font-size:.92rem;font-weight:850;color:#0c5561;line-height:1.35;
+  text-underline-offset:3px;
+}
+body[data-page="whats-on"] .whats-on-pilot-links time{
+  font-size:.78rem;color:#4f6669;
+}
+@media(max-width:600px){
+  body[data-page="whats-on"] .whats-on-pilot-pages{padding:13px 11px}
+  body[data-page="whats-on"] .whats-on-pilot-links{grid-template-columns:1fr}
+}
