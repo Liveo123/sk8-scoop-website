@@ -34,3 +34,24 @@ body.event-leaf-page{background:#f8f6ef}
 @media(max-width:780px){.event-leaf-grid{grid-template-columns:1fr}.event-leaf-actions{padding:17px 20px}.event-leaf-heading h1{font-size:clamp(1.9rem,6.5vw,2.6rem)!important}}
 @media(max-width:520px){.event-leaf-container{padding-top:13px}.event-leaf-crumb{gap:6px;font-size:.77rem}.event-leaf-heading h1{font-size:clamp(1.9rem,8vw,2.35rem)!important}.event-leaf-opening{font-size:.96rem}.event-leaf-facts,.event-leaf-before{padding:17px 15px}.event-leaf-facts dl>div{grid-template-columns:1fr;gap:3px;padding:10px 0}.event-leaf-actions{padding:17px 15px}.event-leaf-primary-link{width:100%;font-size:.9rem;text-align:center}}
 @media(prefers-reduced-motion:reduce){.event-leaf-page *{scroll-behavior:auto!important}}
+
+/* Source-verified static event SEO pilot: fact-first single-column leafs.
+   This extension supports the existing My SK8 event presentation too. */
+body.event-leaf-page .event-leaf-layout{max-width:950px;padding-top:22px;padding-bottom:60px}
+body.event-leaf-page .event-leaf-layout>.event-leaf-crumb{margin-bottom:23px}
+body.event-leaf-page .event-leaf-layout>h1{font-size:clamp(1.9rem,4vw,3.2rem);line-height:1.1;letter-spacing:-.03em;color:#073f48;margin:0 0 13px;max-width:900px}
+body.event-leaf-page .event-leaf-intro{font-size:1.08rem;line-height:1.54;max-width:760px;color:#365459;margin:0 0 21px}
+body.event-leaf-page dl.event-leaf-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 25px;padding:0!important;border:0!important;background:transparent!important}
+body.event-leaf-page dl.event-leaf-facts>div{display:block;padding:16px 18px;background:#f2f8f5;border:1px solid #d1e1da;border-radius:11px}
+body.event-leaf-page dl.event-leaf-facts dt{font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;font-weight:850;color:#3f5d63;margin-bottom:6px}
+body.event-leaf-page dl.event-leaf-facts dd{font-size:1rem;font-weight:750;line-height:1.48;margin:0;color:#163b42}
+body.event-leaf-page .event-leaf-detail{max-width:760px;margin-bottom:26px}
+body.event-leaf-page .event-leaf-detail h2,body.event-leaf-page .event-leaf-source h2,body.event-leaf-page section.event-leaf-next h2{color:#073f48;font-size:1.43rem;line-height:1.3;margin:19px 0 10px}
+body.event-leaf-page .event-leaf-detail p,body.event-leaf-page .event-leaf-source p,body.event-leaf-page section.event-leaf-next p{font-size:1rem;line-height:1.65;color:#365459}
+body.event-leaf-page a.event-leaf-primary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border-radius:8px;text-align:center;background:#0f6470!important;color:#fff!important;text-decoration:none;font-weight:850}
+body.event-leaf-page a.event-leaf-primary:hover{background:#094b55!important;color:#fff!important}
+body.event-leaf-page section.event-leaf-source{max-width:760px;border-top:1px solid #d5e3df;padding-top:9px}
+body.event-leaf-page section.event-leaf-source p{font-size:.9rem}
+body.event-leaf-page section.event-leaf-next{display:block;max-width:760px;background:#edf5f1;border:0;border-radius:12px;padding:17px 19px;margin:27px 0 0}
+body.event-leaf-page section.event-leaf-next h2{margin-top:0}
+@media(max-width:680px){body.event-leaf-page dl.event-leaf-facts{grid-template-columns:1fr;gap:7px}body.event-leaf-page dl.event-leaf-facts>div{padding:13px}body.event-leaf-page a.event-leaf-primary{width:100%}body.event-leaf-page .event-leaf-layout{padding-top:15px;padding-bottom:42px}}
