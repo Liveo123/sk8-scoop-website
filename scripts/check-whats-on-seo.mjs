@@ -44,6 +44,14 @@ assert.ok(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(head),
   'Canonical What’s On calendar must not be accidentally noindexed');
 assert.ok(!robots.includes('Disallow: /whats-on/'),"Canonical What’s On route blocked by robots");
 assert.ok(sitemap.includes('<loc>'+canonicalUrl+'</loc>'),'Canonical calendar absent from sitemap');
+const leafEvents=JSON.parse(read('data/events.json')).filter(e=>e.seo);
+assert.equal(leafEvents.length,2,'Exactly two fact-checked leaf pilots until release review');
+for(const e of leafEvents){
+  const leaf='https://www.sk8scoop.com/whats-on/events/'+e.seo.slug+'/';
+  assert.ok(sitemap.includes('<loc>'+leaf+'</loc>'),'Source-checked event leaf missing from sitemap: '+e.id);
+  assert.ok(html.includes('href="/whats-on/events/'+e.seo.slug+'/"'),'Calendar must contain crawlable event link: '+e.id);
+}
+
 assert.equal((html.match(/<h1\b/g)||[]).length,1,'Exactly one H1 expected');
 assert.ok(html.includes('<h1>What’s on around SK8?</h1>'),'Visible on-page H1 should remain accurate');
 assert.ok(!html.includes('See current listings</a>'),'No SEO-motivated reversion to a big decorative hero');
