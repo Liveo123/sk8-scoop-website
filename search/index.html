@@ -81,6 +81,7 @@
         </div>
 
         <div class="search-status-row">
+          <button type="button" class="sitewide-clear-filters" data-search-clear-filters hidden>Clear filters</button>
           <p class="search-status" data-search-status aria-live="polite">Loading useful places to start…</p>
           <p class="search-freshness" data-search-freshness></p>
         </div>
@@ -91,8 +92,8 @@
 
         <div class="reader-panel search-empty" data-search-empty hidden>
           <div class="eyebrow">Nothing useful matched</div>
-          <h2>Better an honest blank than a pile of weak results.</h2>
-          <p>Try a shorter search, clear a filter, or use one of these routes.</p>
+          <h2>No checked results for this search.</h2>
+          <p>Try a shorter phrase or clear the filters, then choose a useful route below.</p>
           <div class="search-empty-routes">
             <a class="button" href="/whats-on/">What’s On</a>
             <a class="button secondary" href="/free-cheap-guide/">Free &amp; Cheap</a>
@@ -124,6 +125,7 @@
 
   <script src="../assets/config.js"></script>
   <script src="../assets/site.js"></script>
+  <script src="../assets/sk8-calendar-core.js"></script>
   <script src="../assets/search.js"></script>
   <script src="../assets/search-insights-client.js"></script>
 </body>

@@ -25,19 +25,9 @@
         document.head.appendChild(link);
       }
     });
-    const nav = document.querySelector('#main-nav');
-    if (nav) {
-      const active = pageIdentity[path] || '';
-      const links = [
-        ['whats-on','/whats-on/','What’s On'],
-        ['around-sk8','/around-sk8/','Around SK8'],
-        ['guides','/guides/','Guides'],
-        ['latest-issue','/latest','Latest'],
-        ['submit','/submit/','Submit'],
-        ['advertise','/advertise.html','Advertise']
-      ];
-      nav.innerHTML = links.map(([key,href,label]) => `<a${active===key?' class="active" aria-current="page"':''} href="${href}">${label}</a>`).join('') + `<a class="button nav-join reader-nav-join${active==='join'?' active':''}" href="/join/">Join free</a>`;
-    }
+    // assets/site.js owns the one authoritative sitewide navigation.
+    // Do not paint an alternate menu here and then replace it on load.
+
   }
 })();
 

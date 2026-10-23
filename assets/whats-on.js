@@ -7,6 +7,7 @@
   const checked = document.querySelector('[data-events-checked]');
   const filters = [...document.querySelectorAll('[data-event-filter]')];
   const areaFilters = [...document.querySelectorAll('[data-event-area]')];
+  const clearFilters = document.querySelector('[data-whats-on-clear-filters]');
   if (!list) return;
   const core = window.SK8CalendarCore;
   if (!core) return;
@@ -29,30 +30,8 @@
     .replace(/^-+|-+$/g, '') || 'local-event';
 
   const addPageVisuals = () => {
-    const heroWrap = document.querySelector('.page-hero > .wrap');
-    if (heroWrap && !heroWrap.classList.contains('whats-on-hero-grid')) {
-      const copy = document.createElement('div');
-      copy.className = 'whats-on-hero-copy';
-      [...heroWrap.childNodes].forEach(node => copy.appendChild(node));
-
-      const visual = document.createElement('figure');
-      visual.className = 'whats-on-hero-visual';
-      const image = document.createElement('img');
-      image.src = '/assets/images/nue/whats-on-hero.webp';
-      image.alt = 'Editorial collage of a local events map, tickets, calendar and stage lights';
-      const caption = document.createElement('figcaption');
-      caption.className = 'whats-on-hero-caption';
-      const badge = document.createElement('span');
-      badge.textContent = 'What’s On';
-      const strong = document.createElement('strong');
-      strong.textContent = 'Local events, useful filters and things actually worth leaving the house for.';
-      caption.append(badge, strong);
-      visual.append(image, caption);
-
-      heroWrap.classList.add('whats-on-hero-grid');
-      heroWrap.append(copy, visual);
-    }
-
+    // What’s On is a task-first calendar. Keep the informative HTML heading
+    // and filters visible without dynamically inserting an oversized image.
     const filterGrid = document.querySelector('button[data-event-filter="weekend"]')?.closest('.reader-card-grid');
     if (filterGrid && !filterGrid.classList.contains('whats-on-filter-grid')) {
       filterGrid.classList.add('whats-on-filter-grid');
@@ -259,7 +238,16 @@
     top.append(dateBlock, eyebrow);
 
     const heading = document.createElement('h3');
-    heading.textContent = String(event.title || '');
+    const leafSlug = String(event.seo?.slug || '').trim();
+    const leafHref = event.status === 'verified' && /^[a-z0-9-]+$/.test(leafSlug)
+      ? '/whats-on/events/' + leafSlug + '/' : '';
+    if (leafHref) {
+      const titleLink = document.createElement('a');
+      titleLink.href = leafHref;
+      titleLink.textContent = String(event.title || '');
+      titleLink.className = 'event-leaf-card-title';
+      heading.appendChild(titleLink);
+    } else heading.textContent = String(event.title || '');
 
     const facts = document.createElement('div');
     facts.className = 'event-facts';
@@ -290,9 +278,9 @@
     if (source) {
       const link = document.createElement('a');
       link.className = 'reader-link event-check-link';
-      link.href = source;
-      link.rel = 'noopener';
-      link.textContent = 'Check current details →';
+      link.href = leafHref || source;
+      if (!leafHref) link.rel = 'noopener';
+      link.textContent = leafHref ? 'See full checked event details →' : 'Check current details →';
       link.addEventListener('click', () => {
         if (typeof window.sk8Track === 'function') {
           window.sk8Track('event_detail_click', {
@@ -383,6 +371,7 @@
     if (status) status.textContent = visible.length
       ? `${visible.length} ${visible.length === 1 ? 'result' : 'results'} shown${filterLabel()}`
       : `No checked listings match this view${filterLabel()}.`;
+    if (clearFilters) clearFilters.hidden = activeFilter === 'all' && activeArea === 'all' && !selectedDate;
     updateFreshness(visible);
     jumpToRequestedEvent();
     filters.forEach(button => {
@@ -401,39 +390,10 @@
     }));
   };
 
-  const syncEventSchema = () => {
-    document.getElementById('sk8-event-list-schema')?.remove();
-    const schema = document.createElement('script');
-    schema.type = 'application/ld+json';
-    schema.id = 'sk8-event-list-schema';
-    schema.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'Current checked events around SK8',
-      itemListElement: events.map((event, index) => {
-        const source = safeUrl(event.booking_url || event.source_url) || 'https://www.sk8scoop.com/whats-on/';
-        const startDate = `${event.date}${event.time ? `T${event.time}:00` : ''}`;
-        const item = {
-          '@type': 'Event',
-          name: String(event.title || ''),
-          startDate,
-          eventStatus: 'https://schema.org/EventScheduled',
-          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-          location: {
-            '@type': 'Place',
-            name: String(event.venue || event.area || 'SK8'),
-            address: String(event.area || '')
-          },
-          url: source,
-          description: String(event.description || '')
-        };
-        if (event.end_date) item.endDate = event.end_date;
-        if (isFree(event)) item.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: source, availability: 'https://schema.org/InStock' };
-        return { '@type': 'ListItem', position: index + 1, item };
-      })
-    });
-    document.head.appendChild(schema);
-  };
+  // The verified multi-event calendar is already correctly marked as a
+  // CollectionPage in source HTML. Do not inject Event objects with guessed
+  // address, start times or ticket availability into its head. Individual
+  // eligible event pages own their own accurate Event JSON-LD instead.
 
   const jumpToResults = () => {
     const target = document.getElementById('current-listings');
@@ -454,6 +414,17 @@
     syncViewParams();
     render();
   });
+  clearFilters?.addEventListener('click', () => {
+    activeFilter = 'all';
+    activeArea = 'all';
+    selectedDate = '';
+    syncViewParams();
+    render();
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('whats_on_filters_cleared', { source: 'reader_filters' });
+    }
+  });
+
   filters.forEach(button => button.addEventListener('click', () => {
     activeFilter = button.dataset.eventFilter || 'all';
     selectedDate = '';
@@ -487,8 +458,15 @@
             ? core.confirmedDates(event).some(date => core.withinHorizon(date, today))
             : String(event.end_date || event.date) >= today && event.date < core.anniversaryExclusive(today)))
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
+      // Static, crawlable spotlights are a useful fallback for visitors and
+      // search crawlers. After an event's date has passed, do not continue to
+      // recommend it even if the source feed has not yet been regenerated.
+      document.querySelectorAll('[data-event-spotlight-date]').forEach(node => {
+        if (String(node.dataset.eventSpotlightDate || '') < today) node.remove();
+      });
+      const spotlights = document.querySelector('.whats-on-pilot-pages');
+      if (spotlights && !spotlights.querySelector('li')) spotlights.remove();
       window.SK8_EVENT_DATA = events;
-      syncEventSchema();
       window.dispatchEvent(new CustomEvent('sk8:events-loaded',{detail:{events}}));
       render();
     })

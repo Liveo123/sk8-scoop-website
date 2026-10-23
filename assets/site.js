@@ -1,3 +1,13 @@
+// Reusable local-publication visual contract. Loaded on all site.js routes
+// so navigation, filter resets, accessibility and guide-help rules stay aligned.
+if(!document.querySelector('link[data-sitewide-ux]')){
+  const sitewide=document.createElement('link');
+  sitewide.rel='stylesheet';
+  sitewide.href='/assets/sitewide-ux.css';
+  sitewide.dataset.sitewideUx='true';
+  document.head.appendChild(sitewide);
+}
+
 const sk8Header=document.querySelector('.site-header');
 const sk8HeaderRow=sk8Header&&sk8Header.querySelector('.header-row');
 let nav=sk8HeaderRow&&sk8HeaderRow.querySelector('.nav');
@@ -37,6 +47,9 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
   const activeHref=(()=>{
     if(currentPath==='/') return '/';
     if(currentPath.startsWith('/whats-on')) return '/whats-on/';
+    const explorePaths=['/around-sk8','/cheadle','/cheadle-hulme','/gatley','/heald-green',
+      '/food-drink','/kids-family','/outdoors','/local-history','/planning','/updates'];
+    if(explorePaths.some(prefix=>currentPath===prefix||currentPath.startsWith(prefix+'/'))) return '/around-sk8/';
     if(currentPath.startsWith('/guides')||currentPath.startsWith('/free-cheap-guide')||currentPath.startsWith('/52-adventures')||currentPath.startsWith('/halloween-half-term-guide')||currentPath.startsWith('/secret-trails')) return '/guides/';
     if(currentPath.startsWith('/my-sk8')) return '/my-sk8/';
     if(currentPath.startsWith('/start')) return '/start/';
@@ -54,6 +67,7 @@ if(sk8HeaderRow&&nav&&!location.pathname.startsWith('/admin/')){
     ['What’s On','/whats-on/'],
     ['My SK8','/my-sk8/'],
     ['Guides','/guides/'],
+    ['Explore SK8','/around-sk8/'],
     ['Where to start','/start/'],
     ['Submit','/submit/'],
     ['Contact','/contact/'],

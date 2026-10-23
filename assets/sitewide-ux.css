@@ -1,0 +1,107 @@
+/* SK8 Scoop connected-site UX, 23 Oct 2026.
+   Task-led, accessible, local, editorially independent and transferable as a
+   pattern (NOT as unverified geography, subscriber stats or content).
+   Scope is deliberately low-risk: do not override individual guide microsites. */
+:root{--sk8-ux-ink:#173f46;--sk8-ux-teal:#0f6470;--sk8-ux-focus:#dc7318;--sk8-ux-line:#cedfd9}
+.sitewide-clear-filters{
+  appearance:none;display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;border:2px solid var(--sk8-ux-teal);border-radius:9px;
+  background:#fff;color:#084e59;font:inherit;font-weight:850;
+  font-size:.89rem;padding:9px 15px;cursor:pointer;text-decoration:underline;
+  text-underline-offset:3px
+}
+.sitewide-clear-filters:hover{background:#ecf6f2;border-color:#0a4852}
+.sitewide-clear-filters[hidden]{display:none!important}
+.sitewide-filter-action{margin:12px 0 4px}
+.search-status-row{display:flex;flex-wrap:wrap;align-items:center;gap:9px 14px}
+.search-status-row .sitewide-clear-filters{flex:0 0 auto}
+.sitewide-guide-help{padding:8px 0!important;background:#f7faf8!important}
+.sitewide-guide-disclosure{
+  border:1px solid var(--sk8-ux-line);border-radius:12px;
+  background:#fff;max-width:1120px;margin:auto;color:#244b51;
+}
+.sitewide-guide-disclosure summary{
+  cursor:pointer;padding:13px 18px;min-height:48px;
+  font-size:.91rem;font-weight:850;line-height:1.45
+}
+.sitewide-guide-disclosure summary span{
+  display:inline;color:#53676a;font-size:.81rem;font-weight:550;
+  margin-left:9px
+}
+.sitewide-guide-disclosure[open] summary{border-bottom:1px solid #e1ebe7}
+.sitewide-guide-disclosure .subscriber-access-card{
+  max-width:none;margin:0;border:0!important;border-radius:0 0 11px 11px;
+  box-shadow:none!important;padding:16px 20px!important
+}
+.sitewide-guide-disclosure .subscriber-access-card h3{
+  margin-top:0;font-size:1.1rem;line-height:1.35
+}
+/* Distinguishable keyboard focus, without modifying navigation order. */
+.sitewide-clear-filters:focus-visible,
+.sitewide-guide-disclosure summary:focus-visible,
+.site-header .nav a:focus-visible,
+.site-header .global-search-toggle:focus-visible,
+.site-header .global-search-submit:focus-visible,
+.reader-page main a:focus-visible,
+.reader-page main button:focus-visible,
+.reader-page main select:focus-visible,
+.reader-page main input:focus-visible{
+  outline:3px solid var(--sk8-ux-focus)!important;outline-offset:3px!important
+}
+@media(max-width:720px){
+  .sitewide-guide-disclosure summary{padding:12px 13px;font-size:.86rem}
+  .sitewide-guide-disclosure summary span{display:block;margin:3px 0 0}
+  .sitewide-guide-disclosure .subscriber-access-card{padding:14px!important}
+  .sitewide-filter-action{margin:10px 0 8px}
+  .sitewide-clear-filters{min-height:46px}
+}
+@media(prefers-reduced-motion:reduce){
+  .sitewide-guide-disclosure,.sitewide-clear-filters{transition:none!important}
+}
+
+/* Practical guides: only available routes occupy the main chooser.
+   Unreleased products remain discoverable, never promoted as available. */
+.sitewide-developing{grid-column:1/-1;background:#f4f8f6;border:1px solid #d5e3dc;border-radius:14px;overflow:hidden}
+.sitewide-developing summary{list-style-position:inside;cursor:pointer;min-height:49px;padding:13px 17px;font-weight:850;color:#174b53}
+.sitewide-developing summary span{font-size:.8rem;font-weight:550;color:#53686b;margin-left:10px}
+.sitewide-developing[open] summary{border-bottom:1px solid #d7e5df}
+.sitewide-developing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:17px}
+.sitewide-developing-grid .guide-card{margin:0;min-width:0}
+.sitewide-developing summary:focus-visible{
+  outline:3px solid var(--sk8-ux-focus)!important;outline-offset:-3px!important
+}
+@media(max-width:720px){
+  .sitewide-developing summary span{display:block;margin:4px 0 0}
+  .sitewide-developing-grid{grid-template-columns:1fr;padding:10px}
+}
+
+/* Sitewide small-screen privacy choices must not hide the reader's first
+   useful answer. Preserve genuine equal Allow/Reject options and separate choice. */
+@media(max-width:480px){
+  body:not(.reader-first-mode) .privacy-choices{
+    left:8px;right:8px;bottom:8px;padding:12px 13px;gap:9px;
+    max-height:60vh;overflow-y:auto
+  }
+  body:not(.reader-first-mode) .privacy-choices-copy strong{font-size:1.09rem;margin-bottom:3px}
+  body:not(.reader-first-mode) .privacy-choices-copy p{font-size:.81rem;line-height:1.34}
+  body:not(.reader-first-mode) .privacy-choices-actions{grid-template-columns:1fr 1fr;gap:7px}
+  body:not(.reader-first-mode) .privacy-choices-actions .privacy-button{
+    min-height:48px;padding:7px 6px;font-size:.84rem
+  }
+  body:not(.reader-first-mode) .privacy-choices-actions .privacy-text-button{
+    grid-column:1/-1;min-height:40px;padding:5px;font-size:.85rem
+  }
+  body:not(.reader-first-mode) .privacy-choices-settings{max-height:49vh;overflow-y:auto}
+}
+/* What’s On has a dedicated compact heading stylesheet, so it no longer
+   needs the now-removed hero button layout or conflicting mobile overrides. */
+/* Don't bury useful guide options beneath oversized type on smaller phones. */
+@media(max-width:680px){
+  body[data-page="guides"] .page-hero h1{
+    max-width:780px;font-size:clamp(1.85rem,7vw,2.6rem)!important;
+    letter-spacing:-.03em;line-height:1.09
+  }
+  body[data-page="guides"] .page-hero{
+    padding-top:24px!important;padding-bottom:24px!important
+  }
+}

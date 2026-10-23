@@ -148,7 +148,7 @@ try {
       v.newsletterPresent && v.heroHeight>100 && v.heroHeight<(mobile ? 560 : 420),
       'height='+v.heroHeight);
     check(width + 'px: checked feed has working direct event links or explicit fallback',
-      (v.cards>0 && v.primaryLinks.every(x=>/^\/whats-on\/\?event=/.test(x))) ||
+      (v.cards>0 && v.primaryLinks.every(x=>/^\/whats-on\/(?:\?event=|events\/[a-z0-9-]+\/)/.test(x))) ||
       (v.cards===0 && v.fallback), 'cards='+v.cards);
     if (!v.fallback) {
       const expected = width <= 720 ? 2 : 4;

@@ -1,0 +1,149 @@
+name: Sitewide NUE and JiveLoop UX QA
+on:
+  pull_request:
+    paths:
+      - 'assets/site.js'
+      - 'assets/config.js'
+      - 'assets/sitewide-ux.css'
+      - 'assets/global-search.js'
+      - 'assets/global-search.css'
+      - 'assets/search.js'
+      - 'assets/whats-on.js'
+      - 'assets/whats-on-compact.css'
+      - 'assets/event-leaf.css'
+      - 'data/events.json'
+      - 'whats-on/events/**'
+      - 'scripts/build-event-leaf-pages.mjs'
+      - 'search/index.html'
+      - 'whats-on/index.html'
+      - 'guides/index.html'
+      - 'sitemap.xml'
+      - 'docs/sitewide-ux-audit-2026-10-23.md'
+      - 'docs/whats-on-seo-review-2026-10-23.md'
+      - 'scripts/check-sitewide-nue.mjs'
+      - 'scripts/check-whats-on-seo.mjs'
+      - 'tests/sitewide-ux-preview-browser.mjs'
+      - 'tests/sitewide-url-audit.mjs'
+      - '.github/workflows/sitewide-nue-qa.yml'
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+concurrency:
+  group: sitewide-nue-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  static-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate shared code, UX integrity and release rules
+        run: |
+          for file in assets/site.js assets/config.js assets/search.js assets/global-search.js assets/whats-on.js scripts/check-whats-on-seo.mjs tests/sitewide-ux-preview-browser.mjs; do
+            node --check "$file"
+          done
+          node --check scripts/build-event-leaf-pages.mjs
+          node scripts/build-event-leaf-pages.mjs --check
+          node scripts/check-sitewide-nue.mjs
+          node scripts/check-whats-on-seo.mjs
+          node scripts/check-current-content.mjs
+          node scripts/check-homepage-v3.mjs
+          node scripts/check-post-launch-v2.mjs
+  approved-homepage-production-observation:
+    # This is a read-only check of the homepage release already approved and
+    # merged as #240. It does NOT deploy site-wide changes from this PR.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify public homepage and changed route HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 8); do
+            code="$(curl -L -sS --max-time 20 -D /tmp/sk8-live-headers -o /tmp/sk8-live-home -w '%{http_code}' 'https://www.sk8scoop.com/' || true)"
+            if [ "$code" = 200 ] &&
+              grep -Fq 'reader-first-discovery' /tmp/sk8-live-home &&
+              grep -Fq 'Good local ideas, every Friday' /tmp/sk8-live-home; then
+              echo "Live www.sk8scoop.com serves the approved homepage release #240"
+              for route in whats-on/ guides/ search/; do
+                status="$(curl -L -sS --max-time 20 -o /tmp/sk8-live-route -w '%{http_code}' "https://www.sk8scoop.com/$route" || true)"
+                [ "$status" = 200 ] || { echo "Live $route returned $status"; exit 1; }
+                echo "PASS public route $route HTTP 200"
+              done
+              echo "### Approved homepage live-source check" >> "$GITHUB_STEP_SUMMARY"
+              echo "Public hostname serves activity-first homepage and the approved Friday offer; key routes load. Cloudflare active-version/traffic allocation still needs provider-console verification." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "Homepage not yet verified (HTTP=$code; attempt $attempt/8)"
+            sleep 10
+          done
+          echo "Public production still not verified for the approved homepage change" >&2
+          exit 1
+
+  browser-qa:
+    needs: static-qa
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve exact Cloudflare preview commit
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
+          short_sha="${PREVIEW_SHA:0:7}"
+          for n in $(seq 1 30); do
+            response="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "$api" || true)"
+            body="$(printf '%s' "$response" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // ""' 2>/dev/null || true)"
+            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
+            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
+            sha="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
+            if [ "$sha" = "$short_sha" ] && [ -n "$url" ]; then
+              code="$(curl -sSL --max-time 20 -o /tmp/sk8-sitewide-preview.html -w '%{http_code}' "$url/" || true)"
+              css="$(curl -sSL --max-time 20 -o /tmp/sk8-sitewide-ux.css -w '%{http_code}' "$url/assets/sitewide-ux.css" || true)"
+              if [ "$code" = 200 ] && [ "$css" = 200 ] && grep -Fq 'sitewide-clear-filters' /tmp/sk8-sitewide-ux.css; then
+                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
+                echo "Validated exact preview SHA $sha: $url"
+                exit 0
+              fi
+            fi
+            echo "Waiting for exact sitewide preview $short_sha ($n/30)"
+            sleep 10
+          done
+          echo "No matching preview revision was verified"
+          exit 1
+      - name: Select available Chrome browser
+        shell: bash
+        run: |
+          set -eu
+          for name in google-chrome google-chrome-stable chromium; do
+            if command -v "$name" >/dev/null 2>&1; then
+              echo "CHROME=$(command -v "$name")" >> "$GITHUB_ENV"
+              exit 0
+            fi
+          done
+          exit 1
+      - name: Verify major page templates, search, guides and filter recovery
+        env:
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
+          CHROME: ${{ env.CHROME }}
+        run: node tests/sitewide-ux-preview-browser.mjs
+      - name: Scan all 66 sitemap pages in exact release preview
+        env:
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
+        run: node tests/sitewide-url-audit.mjs
+      - name: Preserve page screenshots and QA decisions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sitewide-nue-preview-qa
+          path: visual-qa/sitewide/
+          retention-days: 14

@@ -8,6 +8,8 @@
   const typeButtons = [...document.querySelectorAll('[data-search-type]')];
   const areaButtons = [...document.querySelectorAll('[data-search-area]')];
   const exampleButtons = [...document.querySelectorAll('[data-search-example]')];
+  const clearFilters = document.querySelector('[data-search-clear-filters]');
+  const eventCore = window.SK8CalendarCore;
   if (!form || !input || !resultsRoot) return;
 
   let records = [];
@@ -100,25 +102,50 @@
 
   const transformEvents = data => {
     const today = localToday();
+    // Match the canonical What's On status/date contract; unverified and
+    // expired/cancelled records must not gain a second life in search.
     return (Array.isArray(data) ? data : [])
-      .filter(event => event && event.status !== 'example')
-      .filter(event => /^\d{4}-\d{2}-\d{2}$/.test(String(event.date || '')) && String(event.end_date || event.date) >= today)
-      .map(event => ({
-        id: `event-${event.id || event.title}`,
-        type: 'Events',
-        category: event.category || 'Local event',
-        title: event.title || '',
-        summary: event.description || '',
-        href: event.booking_url || event.source_url || '/whats-on/',
-        area: ['Cheadle', 'Cheadle Hulme', 'Gatley', 'Heald Green'].includes(event.area) ? event.area : 'Nearby',
-        areas: [],
-        tags: [event.category || '', event.venue || '', event.cost || '', 'event', 'things to do'],
-        freshness: 'dated',
-        checked: event.checked || '',
-        date: event.date || '',
-        cost: event.cost || '',
-        source: 'events'
-      }));
+      .filter(event => event && event.status === 'verified' && eventCore && eventCore.validDate(event.date))
+      .map(event => {
+        const mode = eventCore.mode(event);
+        let nextDate = '';
+        if (mode === 'specific_dates') {
+          nextDate = eventCore.confirmedDates(event).find(date => eventCore.withinHorizon(date,today)) || '';
+        } else if (mode === 'daily') {
+          const candidate = String(event.date) > today ? String(event.date) : today;
+          if (String(event.end_date || event.date) >= candidate && eventCore.withinHorizon(candidate,today)) {
+            nextDate = candidate;
+          }
+        } else if (event.date >= today && eventCore.withinHorizon(event.date,today)) {
+          nextDate = event.date;
+        } else if (mode === 'range_unspecified' && String(event.end_date || '') >= today) {
+          // Ongoing dates may be useful, but are NOT evidence of a session today.
+          nextDate = '';
+        } else return null;
+        if (mode !== 'range_unspecified' && !nextDate) return null;
+        const id = String(event.id || '').trim();
+        if (!id) return null;
+        return {
+          id: 'event-' + id,
+          type: 'Events',
+          category: event.category || 'Local event',
+          title: event.title || '',
+          summary: event.description || '',
+          // An exact SK8 detail with checked dates, costs and booking source is
+          // a safer first step than dropping the reader at an unexplained URL.
+          href: event.seo && /^[a-z0-9-]+$/.test(String(event.seo.slug || ''))
+            ? '/whats-on/events/' + event.seo.slug + '/'
+            : '/whats-on/?event=' + encodeURIComponent(id),
+          area: ['Cheadle', 'Cheadle Hulme', 'Gatley', 'Heald Green'].includes(event.area) ? event.area : 'Nearby',
+          areas: [],
+          tags: [event.category || '', event.venue || '', event.cost || '', 'event', 'things to do'],
+          freshness: 'dated',
+          checked: event.checked || '',
+          date: nextDate,
+          cost: event.cost || '',
+          source: 'events'
+        };
+      }).filter(Boolean);
   };
 
   const isCurrent = record => !record.expires || String(record.expires) >= localToday();
@@ -234,7 +261,7 @@
     const link = document.createElement('a');
     link.className = 'reader-link';
     link.href = record.href;
-    link.textContent = record.type === 'Events' && !internalHref(record.href) ? 'Check current details →' : 'Open →';
+    link.textContent = record.type === 'Events' ? 'See checked event details →' : 'Open →';
     link.addEventListener('click', () => {
       if (typeof window.sk8Track === 'function') {
         window.sk8Track('search_result_click', {
@@ -280,6 +307,7 @@
 
     typeButtons.forEach(button => button.setAttribute('aria-pressed', String((button.dataset.searchType || 'all') === activeType)));
     areaButtons.forEach(button => button.setAttribute('aria-pressed', String((button.dataset.searchArea || 'all') === activeArea)));
+    if (clearFilters) clearFilters.hidden = activeType === 'all' && activeArea === 'all';
 
     if (isQuery && found.length === 0) {
       const zeroKey = `${normalise(query)}|${activeType}|${activeArea}`;
@@ -318,6 +346,15 @@
     input.value = button.dataset.searchExample || button.textContent.trim();
     form.requestSubmit();
   }));
+
+  clearFilters?.addEventListener('click', () => {
+    activeType = 'all';
+    activeArea = 'all';
+    render();
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('search_filters_cleared', { search_surface: 'site_search' });
+    }
+  });
 
   typeButtons.forEach(button => button.addEventListener('click', () => {
     activeType = button.dataset.searchType || 'all';
