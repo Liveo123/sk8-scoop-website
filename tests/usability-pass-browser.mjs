@@ -56,7 +56,7 @@ try{
  check(await evaluate("Boolean(document.querySelector('input[aria-describedby=\"reader-first-search-help\"]'))"),'Search scope accessible');
  await shot('homepage-desktop.png');
  await navigate('/whats-on/?filter=weekend&type=free-family&area=Cheadle');
- await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-status]").textContent.includes("shown")');
+ await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  if(await evaluate("Boolean(document.querySelector('[data-consent-none]'))&&!document.querySelector('.privacy-choices')?.hidden")){
   await click('[data-consent-none]');await sleep(180);
  }
@@ -73,7 +73,7 @@ try{
  check(await click('[data-event-filter="all"]'),'All dates available');
  check(await evaluate("['free','family'].every(k=>document.querySelector('[data-event-filter=\"'+k+'\"]')?.getAttribute('aria-pressed')==='false')"),'All dates also provides familiar reset');
  await navigate('/whats-on/?filter=free');
- await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-status]").textContent.includes("shown")');
+ await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  check(await evaluate("document.querySelector('[data-event-filter=\"free\"]')?.getAttribute('aria-pressed')==='true'"),'Old free preset works');
  check(await evaluate("document.querySelectorAll('.event-listing-card').length===window.SK8_EVENT_DATA.filter(window.SK8CalendarCore.isFree).length"),'Old free preset results correct');
  await viewport(390,844);
@@ -90,7 +90,7 @@ try{
  check(await evaluate("!document.querySelector('.site-header .nav').classList.contains('open')"),'Escape closes mobile navigation');
  await shot('homepage-mobile.png');
  await navigate('/whats-on/?filter=weekend&type=free-family');
- await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-status]").textContent.includes("shown")');
+ await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),"What's On has no mobile horizontal overflow");
  check(await evaluate("[...document.querySelectorAll('.whats-on-filter-buttons button')].every(el=>el.getBoundingClientRect().height>=43)"),'All mobile filters meet practical touch-target size');
  await shot('whatson-mobile.png');
