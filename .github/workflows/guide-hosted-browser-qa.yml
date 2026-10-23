@@ -9,6 +9,9 @@ on:
       - 'docs/guide-factory-reliability.md'
       - 'tests/guide-hosted-fixtures.mjs'
       - 'tests/guide-reliability-browser.mjs'
+      - 'tests/guide-single-submit-browser.mjs'
+      - 'assets/site.js'
+      - 'assets/signup-protection.js'
       - '.github/workflows/guide-hosted-browser-qa.yml'
       - 'halloween-half-term-guide/**'
       - 'free-cheap-guide/**'
@@ -34,6 +37,7 @@ jobs:
           node --check scripts/reconcile-guide-gq-evidence.mjs
           node --check tests/guide-hosted-fixtures.mjs
           node --check tests/guide-reliability-browser.mjs
+          node --check tests/guide-single-submit-browser.mjs
       - name: Deterministic negative fixtures without external services
         id: fixture-tests
         run: node tests/guide-hosted-fixtures.mjs
@@ -63,6 +67,10 @@ jobs:
           GUIDE_QA_IMAGE_LIMIT: '4'
           GUIDE_QA_LINK_LIMIT: '0'
         run: node scripts/check-guide-hosted-assets-links.mjs
+      - name: Prove single protected guide signup per submit without sending mail
+        env:
+          GUIDE_QA_BASE_URL: http://127.0.0.1:8769
+        run: node tests/guide-single-submit-browser.mjs
       - name: Real-browser guide access and failure states
         env:
           GUIDE_QA_BASE_URL: http://127.0.0.1:8769
