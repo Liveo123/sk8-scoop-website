@@ -32,7 +32,7 @@ Basis: current GitHub `main` and source for `/`, `/whats-on/`, `/search/`, `/gui
 
 ## High-value user journeys
 
-1. **Free family ideas this weekend in Cheadle:** Choose Weekend + Free + Family-friendly + Cheadle. Results must be the intersection, not a union. Link state should be shareable.
+1. **Free family ideas this weekend in Cheadle:** Choose Weekend + Free + Family-friendly + Cheadle. Results must be the intersection, not a union. Changing All dates keeps Free and Family; Clear all filters resets everything. Link state should be shareable.
 2. **Already saw a link to `?filter=free`:** Existing link must still select free listings and show accurate counts.
 3. **Nothing matches:** One action resets all conditions and returns to available checked events.
 4. **On a phone:** Menu > More reveals Submit, Contact and Advertise; Escape closes without trapping navigation.
