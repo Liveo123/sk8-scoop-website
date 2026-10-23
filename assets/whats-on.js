@@ -460,8 +460,7 @@
 
   filters.forEach(button => button.addEventListener('click', () => {
     activeFilter = button.dataset.eventFilter || 'all';
-    // "All dates" is also the familiar one-tap reset from earlier What’s On.
-    if (activeFilter === 'all') activeAudience = 'all';
+    // Change only the date dimension. "Clear all event filters" resets all.
     selectedDate = '';
     syncViewParams();
     render();
