@@ -10,6 +10,10 @@ on:
       - 'assets/search.js'
       - 'assets/whats-on.js'
       - 'assets/whats-on-compact.css'
+      - 'assets/event-leaf.css'
+      - 'data/events.json'
+      - 'whats-on/events/**'
+      - 'scripts/build-event-leaf-pages.mjs'
       - 'search/index.html'
       - 'whats-on/index.html'
       - 'guides/index.html'
@@ -41,6 +45,8 @@ jobs:
           for file in assets/site.js assets/config.js assets/search.js assets/global-search.js assets/whats-on.js scripts/check-whats-on-seo.mjs tests/sitewide-ux-preview-browser.mjs; do
             node --check "$file"
           done
+          node --check scripts/build-event-leaf-pages.mjs
+          node scripts/build-event-leaf-pages.mjs --check
           node scripts/check-sitewide-nue.mjs
           node scripts/check-whats-on-seo.mjs
           node scripts/check-current-content.mjs
