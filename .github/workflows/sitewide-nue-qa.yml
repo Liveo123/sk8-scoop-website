@@ -41,6 +41,36 @@ jobs:
           node scripts/check-current-content.mjs
           node scripts/check-homepage-v3.mjs
           node scripts/check-post-launch-v2.mjs
+  approved-homepage-production-observation:
+    # This is a read-only check of the homepage release already approved and
+    # merged as #240. It does NOT deploy site-wide changes from this PR.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify public homepage and changed route HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 8); do
+            code="$(curl -L -sS --max-time 20 -D /tmp/sk8-live-headers -o /tmp/sk8-live-home -w '%{http_code}' 'https://www.sk8scoop.com/' || true)"
+            if [ "$code" = 200 ] &&
+              grep -Fq 'reader-first-discovery' /tmp/sk8-live-home &&
+              grep -Fq 'Good local ideas, every Friday' /tmp/sk8-live-home; then
+              echo "Live www.sk8scoop.com serves the approved homepage release #240"
+              for route in whats-on/ guides/ search/; do
+                status="$(curl -L -sS --max-time 20 -o /tmp/sk8-live-route -w '%{http_code}' "https://www.sk8scoop.com/$route" || true)"
+                [ "$status" = 200 ] || { echo "Live $route returned $status"; exit 1; }
+                echo "PASS public route $route HTTP 200"
+              done
+              echo "### Approved homepage live-source check" >> "$GITHUB_STEP_SUMMARY"
+              echo "Public hostname serves activity-first homepage and the approved Friday offer; key routes load. Cloudflare active-version/traffic allocation still needs provider-console verification." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "Homepage not yet verified (HTTP=$code; attempt $attempt/8)"
+            sleep 10
+          done
+          echo "Public production still not verified for the approved homepage change" >&2
+          exit 1
+
   browser-qa:
     needs: static-qa
     runs-on: ubuntu-latest
