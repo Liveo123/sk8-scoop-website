@@ -129,18 +129,25 @@
         .sort((a, b) => a.session.localeCompare(b.session) ||
           Number(coreAreas.has(b.event.area)) - Number(coreAreas.has(a.event.area)) ||
           String(a.event.title).localeCompare(String(b.event.title)));
-      const picks = eligible.slice(0, 4);
-      if (!picks.length) {
-        fallback('No upcoming events have enough confirmed information to show here yet.');
-        return;
-      }
-      const grid = document.createElement('ul');
-      grid.className = 'reader-first-event-grid';
-      picks.forEach(item => grid.appendChild(renderCard(item)));
-      list.replaceChildren(grid);
-      if (status) status.textContent = 'Showing ' + picks.length +
-        ' checked upcoming ' + (picks.length === 1 ? 'listing' : 'listings') +
-        '. Times, costs and availability can change.';
+      // Phones show two useful first picks so the regular newsletter remains
+      // within a reasonable scroll; tablets/desktops retain four. Full agenda is one tap away.
+      const mobile = window.matchMedia('(max-width: 720px)');
+      const renderPicks = () => {
+        const picks = eligible.slice(0, mobile.matches ? 2 : 4);
+        if (!picks.length) {
+          fallback('No upcoming events have enough confirmed information to show here yet.');
+          return;
+        }
+        const grid = document.createElement('ul');
+        grid.className = 'reader-first-event-grid';
+        picks.forEach(item => grid.appendChild(renderCard(item)));
+        list.replaceChildren(grid);
+        if (status) status.textContent = 'Showing ' + picks.length +
+          ' checked upcoming ' + (picks.length === 1 ? 'listing' : 'listings') +
+          '. Times, costs and availability can change.';
+      };
+      renderPicks();
+      if (typeof mobile.addEventListener === 'function') mobile.addEventListener('change', renderPicks);
     })
     .catch(() => fallback('We cannot load the checked events list at the moment.'));
 })();
