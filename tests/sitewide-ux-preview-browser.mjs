@@ -265,6 +265,10 @@ try {
   await navigate('/guides/');
   const guide=await evaluate(`(() => ({
     subscriberHelp:!!document.querySelector('.sitewide-guide-disclosure:not([open])'),
+    guideTitle:document.querySelector('.page-hero h1')?.textContent.trim(),
+    familyRoute:!!document.querySelector('.guide-finder-board a.guide-finder-cell[href="/kids-family/"]'),
+    consentHeight:document.querySelector('.privacy-choices:not([hidden])')?.getBoundingClientRect().height||0,
+    equalConsent:!!document.querySelector('.privacy-choices [data-consent-all]') && !!document.querySelector('.privacy-choices [data-consent-none]'),
     futureClosed:!!document.querySelector('.sitewide-developing:not([open])'),
     available:document.querySelectorAll('.guide-grid > article.guide-card').length,
     status:document.querySelector('main')?.textContent.includes('Updated 17 October 2026'),
@@ -273,6 +277,13 @@ try {
   check('Guides prioritises four usable resources before optional future items',
     guide.subscriberHelp && guide.futureClosed && guide.available===4 &&
     guide.status && guide.countRemoved,JSON.stringify(guide));
+  check('Guide finder links to live family ideas rather than unfinished content',
+    guide.guideTitle==='Find a useful local guide.' && guide.familyRoute);
+  if (guide.consentHeight) {
+    check('Guide consent on phones is compact with equal decision choices',
+      guide.consentHeight<300 && guide.equalConsent,
+      JSON.stringify({height:guide.consentHeight,allowAndReject:guide.equalConsent}));
+  }
   await evaluate("document.querySelector('.sitewide-developing summary').click(); true");
   check('Planned guides can still be found without false live promises',
     await evaluate("document.querySelector('.sitewide-developing').open && document.querySelectorAll('.sitewide-developing .guide-card').length===2"));
@@ -306,6 +317,8 @@ try {
   await screenshot('mobile-search-verified.png');
 
   await navigate('/whats-on/?filter=weekend&area=Gatley');
+  check('What’s On keeps one primary action and two useful mobile links',
+    await evaluate("document.querySelectorAll('.whats-on-page-hero .button-row .button').length===1 && document.querySelectorAll('.whats-on-page-hero .button-row .sitewide-hero-secondary').length===2"));
   await waitFor("document.querySelector('[data-whats-on-clear-filters]') && !document.querySelector('[data-whats-on-clear-filters]').hidden",
     'active calendar filters');
   await evaluate("document.querySelector('[data-whats-on-clear-filters]').click();true");
