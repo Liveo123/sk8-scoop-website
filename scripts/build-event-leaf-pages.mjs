@@ -46,7 +46,7 @@ function renderPage(event) {
  const official=event.booking_url||source;
  const when=prettyDate(event.date)+", "+event.time+"–"+event.end_time;
  const mapWords=event.seo.venue_name+", "+address.streetAddress+", "+address.addressLocality+", "+address.postalCode;
- const meta=event.description.length>155?event.description.slice(0,154).replace(/\s+\S*$/,"").trim()+"…":event.description;
+ const meta=event.seo.meta_description || (event.description.length>155?event.description.slice(0,154).replace(/\s+\S*$/,"").trim()+"…":event.description);
  const schema={
    "@context":"https://schema.org","@type":"Event",
    name:event.title,url:canonical,description:event.description,
