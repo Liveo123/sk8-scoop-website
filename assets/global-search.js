@@ -26,7 +26,9 @@
   const track = (name, params = {}) => {
     if (typeof window.sk8Track === 'function') window.sk8Track(name, params);
   };
-  const iconMarkup = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg>';
+  // A CSS magnifier gives the same discoverable control without prohibited
+  // reader-facing inline SVG assets. Button labels remain accessible.
+  const iconMarkup = '<span class="sk8-search-glass" aria-hidden="true"></span>';
 
   const makeForm = (surface, inputId, compact = false) => {
     const form = document.createElement('form');
