@@ -101,6 +101,12 @@ The first tested preview passed 49 dedicated sitewide browser assertions, but sc
 
 Required after-production proof: privacy-safe measurement, comparison window, owner time cost, failed searches and honest adoption/change/stop decision. No fabricated conversions or projected empire value.
 
+## Canonical whole-site route census
+
+A separate read-only source/host check requests every canonical URL declared in the 66-entry sitemap **from the exact current Cloudflare preview**, without running forms, injecting tracking or changing data. It records the HTTP response, target route, title, H1, canonical element, response time and any inaccessible pages. Missing titles/H1/canonicals are documented warnings for editorial review; HTTP errors and pages not served as HTML block site-wide release.
+
+This complements the ten **browser-tested representative templates** (which verify navigation, click interactions, form/consent visuals, filter state, guide opening and mobile layout). A 66-page route census is not a claim that every interactive component on every page received manual user testing; expand checks for materially different future products before publishing.
+
 ## Preview QA checklist and remaining boundaries
 
 - Public production build from homepage PR #240 is *merged* at `0897e2c`. Independent Cloudflare live version/traffic checks are required before calling it verified live; stale search-index snapshots are not proof.
