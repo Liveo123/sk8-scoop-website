@@ -88,6 +88,15 @@ try {
     });
     await writeFile('visual-qa/reader-first/'+filename,Buffer.from(shot.data,'base64'));
   };
+  const fullScreenshot = async filename => {
+    const metrics = await command('Page.getLayoutMetrics');
+    const size = metrics.cssContentSize || metrics.contentSize;
+    const shot = await command('Page.captureScreenshot',{
+      format:'png',fromSurface:true,captureBeyondViewport:true,
+      clip:{x:0,y:0,width:size.width,height:Math.min(size.height,10000),scale:1}
+    });
+    await writeFile('visual-qa/reader-first/'+filename,Buffer.from(shot.data,'base64'));
+  };
   await command('Page.enable');
   await command('Runtime.enable');
   await command('Network.enable');
@@ -154,9 +163,55 @@ try {
         v.heroTop<1700, 'heroTop='+v.heroTop);
     }
     await screenshot('homepage-' + width + '.png');
+    if(width===390 || width===1366) await fullScreenshot('homepage-full-' + width + '.png');
     console.log('METRICS '+width+' '+JSON.stringify(v));
   }
   await viewport(390,844,true);
+  await navigate('/');
+  await waitFor("document.querySelectorAll('[data-explore-grid] .reader-explore-tile').length === 6",
+    'six refreshed editorial categories');
+  await waitFor("document.querySelector('.reader-worth .reader-story:nth-child(2) .reader-link')?.href.includes('merseyday-of-the-dead')",
+    'specific Merseyday story event continuation');
+  const homeState=await evaluate(`(() => {
+    const card=document.querySelector('.reader-worth .reader-story:nth-child(3)');
+    const frame=card?.querySelector('.dicm-visual');
+    const art=frame?.querySelector('.dicm-art');
+    const visual=getComputedStyle(document.querySelector('.reader-hero-photo'),'::before');
+    return {
+      categoryNames:[...document.querySelectorAll('[data-explore-grid] .reader-explore-copy strong')]
+        .map(x=>x.textContent.trim()),
+      headline:document.querySelector('.reader-hero h2')?.textContent.trim(),
+      newsletterButton:document.querySelector('.reader-signup button')?.textContent.trim(),
+      usefulLine:document.querySelector('.home-newsletter-usefulness')?.textContent.trim(),
+      featuredHref:document.querySelector('.reader-worth .reader-story:nth-child(2) .reader-link')?.getAttribute('href'),
+      imageGrade:visual.filter,illustrationSource:visual.backgroundImage,
+      thirdArtWidth:art?.getBoundingClientRect().width,
+      thirdFrameWidth:frame?.getBoundingClientRect().width,
+      thirdArtFit:art && getComputedStyle(art).objectFit,
+      articleSvgCount:document.querySelectorAll('.reader-worth .reader-story svg').length
+    };
+  })()`);
+  check('Whole-page category index is complementary, ordered and not duplicated',
+    homeState.categoryNames.join('|')==='Kids & Family|Outdoors|Food & Drink|Useful Updates|Local History|Planning & Development',
+    JSON.stringify(homeState.categoryNames));
+  check('Newsletter has a distinct concrete weekly offer',
+    homeState.headline==='Good local ideas, every Friday' &&
+    homeState.newsletterButton==='Get it free' &&
+    homeState.usefulLine.includes('Free things to do'));
+  check('Dynamic featured story directs to the verified event',
+    homeState.featuredHref==='/whats-on/?event=merseyday-of-the-dead-2026-10-24');
+  check('Hero uses the current source artwork with non-destructive vivid contrast',
+    homeState.imageGrade.includes('saturate(1.2)') &&
+    homeState.illustrationSource.includes('sk8-miniature-hero-hires-v3.png'));
+  check('Editorial art fills its intended media frame without generic SVG fallback',
+    homeState.thirdArtFit==='cover' &&
+    homeState.thirdArtWidth >= homeState.thirdFrameWidth-2 &&
+    homeState.articleSvgCount===0);
+  await evaluate("localStorage.setItem('sk8_subscriber_recognition_v1',JSON.stringify({version:1,recognised:true,savedAt:new Date().toISOString(),expiresAt:Date.now()+86400000}));true");
+  await navigate('/?reader-full-preview=recognised');
+  check('Recognised readers open useful guide content directly',
+    await evaluate("Boolean(document.querySelector('a.home-resource-guide, .home-resource-guide a[href="/free-cheap-guide/guide/"]')) && [...document.querySelectorAll('.home-resource-guide a[href]')].some(x=>x.getAttribute('href')==='/52-adventures/guide/')"));
+  await evaluate("localStorage.removeItem('sk8_subscriber_recognition_v1');true");
   await navigate('/');
   await waitFor("Boolean(document.querySelector('.reader-first-event h3 a'))",'first verified homepage event');
   const detailHref=await evaluate("document.querySelector('.reader-first-event h3 a')?.getAttribute('href')");
