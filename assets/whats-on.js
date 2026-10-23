@@ -5,9 +5,12 @@
   const status = document.querySelector('[data-events-status]');
   const count = document.querySelector('[data-events-count]');
   const checked = document.querySelector('[data-events-checked]');
-  const filters = [...document.querySelectorAll('[data-event-filter]')];
+  const filters = [...document.querySelectorAll('[data-event-filter]')].filter(button => !button.hasAttribute('data-event-audience'));
+  const audienceFilters = [...document.querySelectorAll('[data-event-audience]')];
   const areaFilters = [...document.querySelectorAll('[data-event-area]')];
   const clearFilters = document.querySelector('[data-whats-on-clear-filters]');
+  const emptyClear = document.querySelector('[data-events-empty-clear]');
+  const selectionSummary = document.querySelector('[data-whats-on-selection]');
   if (!list) return;
   const core = window.SK8CalendarCore;
   if (!core) return;
@@ -76,12 +79,18 @@
 
   let events = [];
   let activeFilter = 'all';
+  let activeAudience = 'all';
   let activeArea = 'all';
 
   const allowedFilters = new Set(['all', 'today', 'week', 'weekend', 'free', 'family']);
   const params = new URLSearchParams(window.location.search);
   const requestedFilter = String(params.get('filter') || '').toLowerCase();
-  if (allowedFilters.has(requestedFilter)) activeFilter = requestedFilter;
+  // Preserve old links (/whats-on/?filter=free) while allowing combinations
+  // such as ?filter=weekend&type=free.
+  if (['free', 'family'].includes(requestedFilter)) activeAudience = requestedFilter;
+  else if (allowedFilters.has(requestedFilter)) activeFilter = requestedFilter;
+  const requestedAudience = String(params.get('type') || '').toLowerCase();
+  if (['free', 'family'].includes(requestedAudience)) activeAudience = requestedAudience;
 
   const requestedEvent = String(params.get('event') || '').trim();
   let selectedDate = !requestedEvent && core.withinHorizon(params.get('date')) ? params.get('date') : '';
@@ -97,8 +106,15 @@
 
   const syncViewParams = () => {
     const url = new URL(window.location.href);
-    if (activeFilter === 'all') url.searchParams.delete('filter');
-    else url.searchParams.set('filter', activeFilter);
+    if (activeFilter === 'all' && activeAudience !== 'all') {
+      url.searchParams.set('filter', activeAudience);
+      url.searchParams.delete('type');
+    } else {
+      if (activeFilter === 'all') url.searchParams.delete('filter');
+      else url.searchParams.set('filter', activeFilter);
+      if (activeAudience === 'all') url.searchParams.delete('type');
+      else url.searchParams.set('type', activeAudience);
+    }
     if (activeArea === 'all') url.searchParams.delete('area');
     else url.searchParams.set('area', activeArea);
     if (selectedDate) url.searchParams.set('date', selectedDate);
@@ -174,11 +190,11 @@
 
   const matchesNeed = event => {
     if (selectedDate && !core.onDate(event, selectedDate)) return false;
-    if (activeFilter === 'free') return isFree(event);
-    if (activeFilter === 'family') return isFamily(event);
-    if (activeFilter === 'weekend') return isWeekend(event);
-    if (activeFilter === 'today') return isToday(event);
-    if (activeFilter === 'week') return isNextSevenDays(event);
+    if (activeFilter === 'weekend' && !isWeekend(event)) return false;
+    if (activeFilter === 'today' && !isToday(event)) return false;
+    if (activeFilter === 'week' && !isNextSevenDays(event)) return false;
+    if (activeAudience === 'free' && !isFree(event)) return false;
+    if (activeAudience === 'family' && !isFamily(event)) return false;
     return true;
   };
 
@@ -298,11 +314,13 @@
   };
 
   const filterLabel = () => {
-    const labels = { all: 'all', today: 'today', week: 'next 7 days', weekend: 'weekend', free: 'free', family: 'family' };
-    const need = labels[activeFilter] || activeFilter;
-    const dateLabel = selectedDate ? ' · ' + prettyCheckedDate(selectedDate) : '';
-    if (activeArea === 'all') return (need === 'all' ? '' : ' · ' + need) + dateLabel;
-    return ' · ' + activeArea + (need === 'all' ? '' : ' · ' + need) + dateLabel;
+    const labels = { today: 'today', week: 'next 7 days', weekend: 'weekend' };
+    const parts = [];
+    if (activeFilter !== 'all') parts.push(labels[activeFilter] || activeFilter);
+    if (activeAudience !== 'all') parts.push(activeAudience === 'family' ? 'family-friendly' : 'free');
+    if (activeArea !== 'all') parts.push(activeArea);
+    if (selectedDate) parts.push(prettyCheckedDate(selectedDate));
+    return parts.length ? ' · ' + parts.join(' · ') : '';
   };
 
   const updateFreshness = visible => {
@@ -371,11 +389,21 @@
     if (status) status.textContent = visible.length
       ? `${visible.length} ${visible.length === 1 ? 'result' : 'results'} shown${filterLabel()}`
       : `No checked listings match this view${filterLabel()}.`;
-    if (clearFilters) clearFilters.hidden = activeFilter === 'all' && activeArea === 'all' && !selectedDate;
+    if (clearFilters) clearFilters.hidden =
+      activeFilter === 'all' && activeAudience === 'all' && activeArea === 'all' && !selectedDate;
+    if (selectionSummary) {
+      selectionSummary.textContent = visible.length + ' checked ' +
+        (visible.length === 1 ? 'event' : 'events') + ' found' +
+        filterLabel() + '. Choose different filters to refine the list.';
+    }
     updateFreshness(visible);
     jumpToRequestedEvent();
     filters.forEach(button => {
       const selected = button.dataset.eventFilter === activeFilter;
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    audienceFilters.forEach(button => {
+      const selected = button.dataset.eventAudience === activeAudience;
       button.setAttribute('aria-pressed', String(selected));
     });
     areaFilters.forEach(button => {
@@ -383,7 +411,7 @@
       button.setAttribute('aria-pressed', String(selected));
     });
     window.dispatchEvent(new CustomEvent('sk8:whatson-state', {
-      detail: { filter: activeFilter, area: activeArea, date: selectedDate }
+      detail: { filter: activeFilter, audience: activeAudience, area: activeArea, date: selectedDate }
     }));
     window.dispatchEvent(new CustomEvent('sk8:events-rendered', {
       detail: { cardEvents: cards.map(item => item.event) }
@@ -414,26 +442,39 @@
     syncViewParams();
     render();
   });
-  clearFilters?.addEventListener('click', () => {
+  const clearAllFilters = source => {
     activeFilter = 'all';
+    activeAudience = 'all';
     activeArea = 'all';
     selectedDate = '';
     syncViewParams();
     render();
     if (typeof window.sk8Track === 'function') {
-      window.sk8Track('whats_on_filters_cleared', { source: 'reader_filters' });
+      window.sk8Track('whats_on_filters_cleared', { source });
     }
-  });
+  };
+  clearFilters?.addEventListener('click', () => clearAllFilters('reader_filters'));
+  emptyClear?.addEventListener('click', () => clearAllFilters('no_results'));
 
   filters.forEach(button => button.addEventListener('click', () => {
     activeFilter = button.dataset.eventFilter || 'all';
+    // "All dates" is also the familiar one-tap reset from earlier What’s On.
+    if (activeFilter === 'all') activeAudience = 'all';
     selectedDate = '';
     syncViewParams();
     render();
     if (typeof window.sk8Track === 'function') {
-      window.sk8Track('whats_on_filter', { filter: activeFilter, area: activeArea, view: document.body.dataset.calendarView || 'agenda' });
+      window.sk8Track('whats_on_filter', { filter: activeFilter, audience: activeAudience, area: activeArea, view: document.body.dataset.calendarView || 'agenda' });
     }
     if (button.dataset.eventJump === 'results') window.requestAnimationFrame(jumpToResults);
+  }));
+  audienceFilters.forEach(button => button.addEventListener('click', () => {
+    activeAudience = button.dataset.eventAudience || 'all';
+    syncViewParams();
+    render();
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('whats_on_audience_filter', { audience: activeAudience, filter: activeFilter, area: activeArea, view: document.body.dataset.calendarView || 'agenda' });
+    }
   }));
   areaFilters.forEach(button => button.addEventListener('click', () => {
     activeArea = button.dataset.eventArea || 'all';
