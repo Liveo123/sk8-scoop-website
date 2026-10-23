@@ -7,7 +7,7 @@
   if (!list) return;
   // Track only broad actions, never the visitor's search text or identity.
   const finder = document.querySelector('.reader-first-discovery');
-  finder?.querySelectorAll('nav a, .reader-first-after a').forEach(link => {
+  finder?.querySelectorAll('nav a, .reader-first-local a, .reader-first-all, .reader-first-after a').forEach(link => {
     link.dataset.trackEvent = 'homepage_finder_route_click';
     link.dataset.linkLocation = 'home-reader-first-discovery';
     link.dataset.nueLink = '';
