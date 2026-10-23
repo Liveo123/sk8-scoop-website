@@ -30,30 +30,8 @@
     .replace(/^-+|-+$/g, '') || 'local-event';
 
   const addPageVisuals = () => {
-    const heroWrap = document.querySelector('.page-hero > .wrap');
-    if (heroWrap && !heroWrap.classList.contains('whats-on-hero-grid')) {
-      const copy = document.createElement('div');
-      copy.className = 'whats-on-hero-copy';
-      [...heroWrap.childNodes].forEach(node => copy.appendChild(node));
-
-      const visual = document.createElement('figure');
-      visual.className = 'whats-on-hero-visual';
-      const image = document.createElement('img');
-      image.src = '/assets/images/nue/whats-on-hero.webp';
-      image.alt = 'Editorial collage of a local events map, tickets, calendar and stage lights';
-      const caption = document.createElement('figcaption');
-      caption.className = 'whats-on-hero-caption';
-      const badge = document.createElement('span');
-      badge.textContent = 'What’s On';
-      const strong = document.createElement('strong');
-      strong.textContent = 'Local events, useful filters and things actually worth leaving the house for.';
-      caption.append(badge, strong);
-      visual.append(image, caption);
-
-      heroWrap.classList.add('whats-on-hero-grid');
-      heroWrap.append(copy, visual);
-    }
-
+    // What’s On is a task-first calendar. Keep the informative HTML heading
+    // and filters visible without dynamically inserting an oversized image.
     const filterGrid = document.querySelector('button[data-event-filter="weekend"]')?.closest('.reader-card-grid');
     if (filterGrid && !filterGrid.classList.contains('whats-on-filter-grid')) {
       filterGrid.classList.add('whats-on-filter-grid');
