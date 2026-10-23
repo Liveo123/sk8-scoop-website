@@ -1,5 +1,19 @@
 # Reader-first SK8 Scoop UX release review, 23 October 2026
 
+## Current whole-homepage decision and evidence
+
+**Status: prepared preview, not a production release.** The owner approved the critique methodology and continued redesign work. This was not an explicit instruction to merge the latest material change to the public website.
+
+- **Empire / JiveLoop Collective: PASS at technical/design level.** The site preserves its weekly newsletter, independent editorial, verified shared event data, reusable locality/category configuration and measurable reader journeys. Real subscriber uplift, advertiser revenue, repeat visits, time saved and future-title transfer are **not proven** by visual QA.
+- **NUE: PASS at technical/design level.** The activity finder gives an answer first, checked event cards route to the matching full record, the October editorial event links directly to its listing, recognised readers can use actual guide content, and correct empty/no-match pathways remain. Genuine visitor success and continuation still need observation.
+- **Public claims checked:** MailerLite reported **774 active subscribers** on 23 October 2026. The public website uses the conservative, rounded **750+** claim with a 23 October source-check date; this is not an advertiser performance result. Current published issue remains Issue 17.
+- **Visual rights:** the newsletter hero remains the previously used original/source asset. Its brighter treatment is a reversible CSS colour grade and gradient, not a newly generated documentary image or new licensed asset. Master logo and all existing story/guide artworks are preserved.
+- **Human release gate:** PR #240 remains a draft. A separately approved production merge, post-deployment smoke check and rollback plan are still required.
+- **Document QA scope:** this review covers the current PR's changed homepage, associated event/guide data, source JavaScript/CSS, automation checks, PR documentation and the current brand/company/website manuals used as governing sources. It does not assert that every historical document in the business has been inspected or corrected.
+
+**Baseline and after-release learning:** compare first useful homepage action, reached event/guide detail, meaningful SK8-owned continuation, confirmed email signups, returning use and maintenance time. Change one major variable at a time where practical. Do not attribute organic seasonal changes automatically to a visual improvement.
+
+
 ## Strategic amendment: two mandatory decision gates (23 October 2026)
 
 **Applies to this redesign and subsequent SK8 Scoop website/UI proposals.** The earlier 30-point audit below is preserved as historical evidence; the new 30-pass protocol below is the repeatable method from now on. This draft release methodology is not itself a change to the Company Operating Manual.
@@ -149,7 +163,7 @@ Owner approved continuing with the reader-first JiveLoop Collective / NUE method
 
 **Hard acceptance gates:** Cloudflare build and exact preview SHA; source/route/JS syntax; browser checks including narrow viewport overflow and content hierarchy; no material failed CI job; manual visual judgement; correct editor/NUE classification; no unsupported claims; owner-controlled live deployment. When a browser QA test is flaky, diagnose the specific cause rather than waiving it.
 
-**Current release classification at this checkpoint:** Empire: **RETEST**; NUE: **RETEST**; production: **NOT AUTHORISED BY THIS TECHNICAL REVIEW**. Update this paragraph after the latest CI and browser evidence.
+**Earlier checkpoint before the full-page polish (historical):** Empire and NUE were marked RETEST. The current conditional technical pass and remaining proof requirements are recorded at the top of this document. Production remains approval-gated.
 
 ## Whole-homepage critique and refinement: twenty distinct passes, 23 October 2026
 
