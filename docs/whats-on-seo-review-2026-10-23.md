@@ -21,6 +21,17 @@ Official references:
 - https://developers.google.com/search/docs/appearance/snippet
 - https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 
+## Implemented preview pilot: two event-specific pages
+
+The latest preview now contains **two source-verified standalone event pages**, rendered as actual HTML (not just `?event=` client-side states):
+
+1. [Christmas Craft Night at Cheadle Library](https://preview-sitewide-nue-ux-2026-10-23.previews.sk8scoop.com/whats-on/events/cheadle-library-christmas-craft-night-2026/), Thursday 12 November 2026, 17:30–19:00, free with advance booking, ages 16+. The council's official event listing confirms the organiser, venue, timetable and conditions.
+2. [Lum Head Primary School nursery/reception open day](https://preview-sitewide-nue-ux-2026-10-23.previews.sk8scoop.com/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/), Thursday 19 November 2026, 14:00–15:00, free with booking, for families investigating September 2027 entry. The official council source confirms the event details.
+
+Both use the existing single source `data/events.json` (including `seo.slug`, checked venue/address and access rules), a shared human-readable leaf template, separate self-referencing canonicals, one relevant `Event` JSON-LD object with verified physical address and UK winter-time offset, actual visible matching details and official organiser URLs. Relevant What’s On and search result cards now link straight to those pages. The two pilot URLs are included in the **68-URL** sitemap; the other 23 events retain working checked-calendar detail links and are not bulk-marked-up as unique events.
+
+This is **PREVIEW IMPLEMENTATION, NOT APPROVED PRODUCTION PUBLICATION**. Source verification on 23 October establishes the organiser's published plan, not guaranteed availability on arrival. The planned automation/regression must verify that changing or cancelling either event updates the leaf page, listing source, visible content and eventStatus. Run Google's public Rich Results Test and then Search Console indexing inspection **after** a separately approved launch; passing static HTML and schema checks does not guarantee rich-result display.
+
 ## Priorities, impact and guardrails
 
 | Order | Improvement | Implementation and proof | Approval/state |
