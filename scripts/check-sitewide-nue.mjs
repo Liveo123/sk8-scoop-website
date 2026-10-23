@@ -13,6 +13,7 @@ const files = {
   icon:read('assets/global-search.js'),
   iconCss:read('assets/global-search.css'),
   css:read('assets/sitewide-ux.css'),
+  whatsOnCompactCss:read('assets/whats-on-compact.css'),
   sitemap:read('sitemap.xml'),
   review:read('docs/sitewide-ux-audit-2026-10-23.md')
 };
@@ -65,10 +66,27 @@ assert.ok(!files.guide.includes('class="guide-finder-cell is-development"'),
   'No dead-end shortcut to a collapsed unreleased guide');
 contains(files.css,'body:not(.reader-first-mode) .privacy-choices-actions',
   'Compact balanced consent choices on the rest of the website');
+// A tool page must show its filters, not a photo or a jump-to-content CTA.
+contains(files.whatsonPage,'whats-on-compact-hero','Task-first small What’s On heading');
+contains(files.whatsonPage,'assets/whats-on-compact.css','Styles available before scripts load');
+contains(files.whatsonPage,'whats-on-header-links','Saved items and submit routes remain visible');
 contains(files.whatsonPage,'reader-link sitewide-hero-secondary',
-  'Secondary events actions are links, not competing primary buttons');
-contains(files.css,'sitewide-hero-secondary',
-  'Mobile secondary actions remain readable with keyboard focus');
+  'Other event tools remain secondary, accessible text links');
+assert.ok(!files.whatsonPage.includes('See current listings</a>'),
+  'Do not force a jump past an oversized hero to the calendar');
+assert.ok(!files.events.includes('whats-on-hero-visual') &&
+  !files.events.includes('whats-on-hero-grid') &&
+  !files.events.includes('whats-on-hero.webp'),
+  'JavaScript must not re-inject a decorative image or tall two-column hero');
+assert.ok(files.whatsonPage.indexOf('class="whats-on-filter-toolbar"') <
+  files.whatsonPage.indexOf('class="whats-on-freshness"'),
+  'Functional filters appear before secondary freshness/explanation');
+contains(files.whatsOnCompactCss,'whats-on-compact-hero','Compact first-screen page treatment');
+contains(files.whatsOnCompactCss,'whats-on-listings-section','Direct transition to filters');
+contains(files.whatsOnCompactCss,'whats-on-visually-hidden','Calendar section still has an accessible H2');
+contains(files.whatsOnCompactCss,'whats-on-more-ideas','Additional NUE guide links moved after results');
+assert.equal((files.whatsonPage.match(/<h1\b/g)||[]).length,1,
+  'What’s On keeps one semantic page H1');
 
 contains(files.guide,'sitewide-developing','Future-only resources must not dilute live shelf');
 contains(files.guide,'Evergreen guide · Updated 17 October 2026','Match source guide updated date');
