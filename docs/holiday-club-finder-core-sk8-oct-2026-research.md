@@ -48,3 +48,17 @@ Current verified live website has 28 venue/programme entries, of which 10 are co
 
 ## Final release gate
 This PR is intentionally a **draft**. Even with green CI, do not mark publish-ready until organiser's real browser page and age eligibility/October dates can be reconciled. Publication would also require fresh explicit Paul approval. When not verifiable in time for 26 October, keep 28 live listings and carry the Etchells venue into a season-independent research register for February/Easter.
+
+## 23 October 2026 — approved editorial fact-check enquiries sent
+
+Paul approved three limited factual verification emails, following a mailbox search for correspondence and opt-outs. All three were sent through the connected SK8 Scoop Gmail account. This is **not** authorisation for advertiser follow-ups, new sales approaches or immediate listing publication.
+
+| Provider | Recipient | Subject | Gmail sent message ID | Status |
+| --- | --- | --- | --- | --- |
+| SportsCool Cheshire, Etchells | bookings@sportscoolcheshire.org | SK8 Scoop fact-check: Etchells holiday club, 27–30 October | 1a168116ed60e573 | SENT, reply pending |
+| LSC, Lum Head | info@wearelsc.co.uk | SK8 Scoop fact-check: Lum Head, Gatley, October half-term | 1a168117f053d38a | SENT, reply pending |
+| Barney's Breakout, Lady Barn House | holidayclub@ladybarnhouse.org | SK8 Scoop fact-check: Barney's Breakout, October half-term | 1a1681192d23c6f0 | SENT, reply pending |
+
+**Duplicate-contact safeguards:** earlier unanswered SportsCool advertising emails were sent on 14 and 21 October; LSC advertiser approaches on 23 September and 2 October; Lady Barn House has a separate 16 October nursery advertising email and a still-unsent marketing follow-up draft at info@ladybarnhouse.org. The new messages explicitly identify themselves as independent editorial accuracy checks and make no advertising offer. No matching opt-out surfaced in the Gmail searches. Do not send reminder emails on these editorial enquiries without a new appropriate gate; do not send the existing Lady Barn marketing draft as part of this task.
+
+**Reply action:** check written provider confirmation against October 2026 dates, eligible ages, attendance by external pupils, session times, fees, public/funded availability rules and booking URLs. Change only evidence-supported fields. If replies are incomplete or contradictory, retain HOLD and the 28-entry production listing count. The date-sensitive October page expires on 1 November 2026 regardless of response timing.
