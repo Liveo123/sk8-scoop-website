@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="../assets/whats-on-empty-fix.css">
   <link rel="stylesheet" href="../assets/my-sk8.css">
   <link rel="stylesheet" href="../assets/whats-on-calendar.css">
+  <link rel="stylesheet" href="../assets/whats-on-compact.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -36,28 +37,23 @@
   </header>
 
   <main id="main-content">
-    <section class="page-hero whats-on-page-hero" data-experiment="whats-on-local-filters-v2">
-      <div class="wrap">
-        <div class="eyebrow">Checked local listings</div>
-        <h1>What’s on around SK8?</h1>
-        <p class="hero-lead">A practical calendar of local events, activities and things worth doing around Cheadle, Cheadle Hulme, Gatley, Heald Green and selected nearby places. Dates are only shown when confirmed.</p>
-        <div class="button-row"><a class="button" href="#current-listings">See current listings</a><a class="reader-link sitewide-hero-secondary" href="/my-sk8/">My SK8 <span class="my-sk8-count-badge" data-my-sk8-count hidden>0</span></a><a class="reader-link sitewide-hero-secondary" href="../submit-event/">Submit an event</a></div>
+    <section class="page-hero whats-on-page-hero whats-on-compact-hero" data-experiment="whats-on-local-filters-v2">
+      <div class="wrap whats-on-compact-layout">
+        <div class="whats-on-compact-copy">
+          <div class="eyebrow">Checked local listings</div>
+          <h1>What’s on around SK8?</h1>
+          <p class="hero-lead">Find checked events in Cheadle, Cheadle Hulme, Gatley, Heald Green and selected nearby places. Choose when and where below.</p>
+        </div>
+        <nav class="whats-on-header-links" aria-label="Other event tools">
+          <a class="reader-link sitewide-hero-secondary" href="/my-sk8/">My SK8 <span class="my-sk8-count-badge" data-my-sk8-count hidden>0</span></a>
+          <a class="reader-link sitewide-hero-secondary" href="../submit-event/">Submit an event</a>
+        </nav>
       </div>
     </section>
 
     <section class="section whats-on-listings-section" id="current-listings" data-experiment="issue13-harvested-whats-on">
       <div class="wrap">
-        <div class="section-head reader-section-head whats-on-listings-head">
-          <div><div class="eyebrow">Current listings</div><h2>Checked things to do</h2></div>
-          <div><p class="whats-on-listings-intro">Find an activity for this week or choose a date up to 12 months ahead. Filters update the agenda and calendar.</p><p><a class="reader-link" href="/halloween-half-term-guide/" data-nue-link data-nue-type="guide" data-track-event="whats_on_halloween_guide_click">Planning October half-term? Explore the half-term guide →</a></p><a class="reader-link" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Prefer evergreen cheaper ideas? Open Free &amp; Cheap →</a></div>
-        </div>
-
-        <div class="whats-on-freshness" aria-live="polite">
-          <strong data-events-count>Loading listings...</strong>
-          <span data-events-checked>Checking source dates...</span>
-          <span>Past events hide automatically</span>
-        </div>
-
+        <h2 class="whats-on-visually-hidden">Browse checked local events</h2>
         <div class="whats-on-filter-toolbar" aria-label="Filter checked events">
           <div class="whats-on-filter-group">
             <span class="whats-on-filter-label">Show me</span>
@@ -84,6 +80,11 @@
 
         <p class="sitewide-filter-action"><button type="button" class="sitewide-clear-filters" data-whats-on-clear-filters hidden>Clear all event filters</button></p>
         <p class="reader-muted-link whats-on-filter-note">Place filters focus on the core SK8 patch. Nearby highlights remain available under All areas.</p>
+        <div class="whats-on-freshness" aria-live="polite">
+          <strong data-events-count>Loading listings...</strong>
+          <span data-events-checked>Checking source dates...</span>
+          <span>Past events hide automatically</span>
+        </div>
         <div class="whats-on-calendar-ui" data-calendar-controls data-experiment="calendar-agenda-vs-month">
           <div class="sk8-calendar-toolbar">
             <div class="sk8-calendar-choices" role="group" aria-label="View events as an agenda or a month">
@@ -118,6 +119,10 @@
           <h2>No checked listings match this view yet.</h2>
           <p>Rather than pad the page with stale or uncertain events, try another filter, the latest Scoop or the Free &amp; Cheap Guide.</p>
           <div class="button-row"><a class="button" href="/latest" data-nue-link data-nue-type="latest">See current ideas in the latest Scoop</a><a class="button secondary" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Open Free &amp; Cheap</a></div>
+        </div>
+        <div class="whats-on-more-ideas" aria-label="Other things to do">
+          <a class="reader-link" href="/halloween-half-term-guide/" data-nue-link data-nue-type="guide" data-track-event="whats_on_halloween_guide_click">Planning October half-term? Explore the guide →</a>
+          <a class="reader-link" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Want cheaper evergreen ideas? Open Free &amp; Cheap →</a>
         </div>
         <aside class="whats-on-seasonal-watch" aria-labelledby="whats-on-seasonal-title">
           <div class="eyebrow">Longer-range planning · not confirmed events</div>
