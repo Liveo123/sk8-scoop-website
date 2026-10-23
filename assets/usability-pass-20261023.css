@@ -197,3 +197,8 @@ body.reader-home.reader-first-mode .reader-first-other-ideas>summary:focus-visib
     grid-template-columns:1fr;
   }
 }
+
+body[data-page="whats-on"] .whats-on-filter-label small{
+  display:inline-block;margin-left:7px;color:#4f6463;
+  font-size:.76rem;font-weight:600;letter-spacing:0;
+}
