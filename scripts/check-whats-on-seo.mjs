@@ -58,6 +58,9 @@ assert.ok(entries.every(x=>x['@type']!=='Event'),
 assert.ok(eventJs.includes("params.get('event')") &&
   eventJs.includes("const DATA_URL = '/data/events.json'"),
   'Actual events still use checked source and reader-facing event detail continuations');
+assert.ok(!eventJs.includes("sk8-event-list-schema") &&
+  !eventJs.includes("'@type': 'Event'"),
+  'Collection page must never inject pretend individual Event entries into an ItemList');
 assert.ok(review.includes('unique URL') && review.includes('PROPOSED, NOT IMPLEMENTED'),
   'Event leaf pages must stay approval-gated until source and content criteria are met');
 assert.ok(review.includes('GSC Wizard connector refuses reads'),
