@@ -63,8 +63,8 @@
   };
   function matchingForCalendar(event, date) {
     if (activeArea !== 'all' && String(event.area || '').toLowerCase() !== activeArea.toLowerCase()) return false;
-    if (activeAudience === 'free' && !core.isFree(event)) return false;
-    if (activeAudience === 'family' && !core.isFamily(event)) return false;
+    if (activeAudience.includes('free') && !core.isFree(event)) return false;
+    if (activeAudience.includes('family') && !core.isFamily(event)) return false;
     if (activeFilter === 'today' && date !== now) return false;
     if (activeFilter === 'week' && (date < now || date > datePlusDays(now, 6))) return false;
     if (activeFilter === 'weekend') {
