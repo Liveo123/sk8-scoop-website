@@ -47,7 +47,7 @@
     return;
   }
   const today = core.localToday();
-  const coreAreas = new Set(['Cheadle', 'Cheadle Hulme', 'Gatley', 'Heald Green']);
+  const coreAreas = new Set(String(finder?.dataset.coreAreas || '').split('|').map(x => x.trim()).filter(Boolean));
   const nextDate = event => {
     const kind = core.mode(event);
     if (kind === 'specific_dates') return core.confirmedDates(event).find(date => date >= today) || '';
@@ -60,13 +60,17 @@
     weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC'
   }).format(new Date(value + 'T00:00:00Z'));
   const eventPrice = event => {
+    // The organiser's checked wording can carry essential booking conditions,
+    // member limits and optional extra charges that a generic price badge hides.
+    const stated = String(event.cost || '').trim();
+    if (stated) return stated;
     const type = String(event.cost_type || '');
     if (type === 'free') return 'Free';
     if (type === 'free_optional_extras') return 'Free entry; extras may cost';
     if (type === 'optional_donation') return 'Optional donation';
     if (type === 'admission_required') return 'Admission required';
     if (type === 'members_only_free') return 'Member conditions apply';
-    return String(event.cost || 'Check organiser for cost').trim();
+    return 'Check organiser for cost';
   };
   const renderCard = ({ event, session }) => {
     const item = document.createElement('li');
@@ -91,13 +95,21 @@
     const place = String(event.area || 'Nearby').trim();
     const venue = String(event.venue || '').trim();
     details.textContent = [place, venue && venue !== place ? venue : ''].filter(Boolean).join(' · ');
+    const chosenOccurrence = Array.isArray(event.occurrences) ?
+      event.occurrences.find(item => item && typeof item === 'object' && item.date === session) : null;
+    const eventTime = String(chosenOccurrence?.time || event.time || '').trim();
+    const time = document.createElement('p');
+    time.className = 'reader-first-event-time';
+    if (eventTime) time.textContent = 'Time: ' + eventTime;
     const price = document.createElement('p');
     price.className = 'reader-first-event-price';
-    price.textContent = eventPrice(event);
+    price.textContent = 'Cost: ' + eventPrice(event);
     const checked = document.createElement('span');
     checked.className = 'reader-first-event-checked';
     checked.textContent = 'Details checked · confirm with organiser';
-    body.append(title, details, price, checked);
+    body.append(title, details);
+    if (eventTime) body.appendChild(time);
+    body.append(price, checked);
     item.append(date, body);
     return item;
   };
