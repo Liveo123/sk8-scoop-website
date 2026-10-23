@@ -44,7 +44,8 @@ contains('whats-on/index.html','data-event-area="Heald Green"');
 contains('whats-on/index.html','data-event-filter="today"');
 contains('whats-on/index.html','data-event-filter="week"');
 contains('whats-on/index.html','"@type":"CollectionPage"');
-contains('assets/whats-on.js','sk8-event-list-schema');
+excludes('assets/whats-on.js', "sk8-event-list-schema");
+excludes('assets/whats-on.js', "'@type': 'Event'");
 contains('assets/whats-on.js','activeArea');
 contains('assets/whats-on.js','event_detail_click');
 
