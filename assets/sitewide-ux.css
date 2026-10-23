@@ -74,3 +74,48 @@
   .sitewide-developing summary span{display:block;margin:4px 0 0}
   .sitewide-developing-grid{grid-template-columns:1fr;padding:10px}
 }
+
+/* Sitewide small-screen privacy choices must not hide the reader's first
+   useful answer. Preserve genuine equal Allow/Reject options and separate choice. */
+@media(max-width:480px){
+  body:not(.reader-first-mode) .privacy-choices{
+    left:8px;right:8px;bottom:8px;padding:12px 13px;gap:9px;
+    max-height:60vh;overflow-y:auto
+  }
+  body:not(.reader-first-mode) .privacy-choices-copy strong{font-size:1.09rem;margin-bottom:3px}
+  body:not(.reader-first-mode) .privacy-choices-copy p{font-size:.81rem;line-height:1.34}
+  body:not(.reader-first-mode) .privacy-choices-actions{grid-template-columns:1fr 1fr;gap:7px}
+  body:not(.reader-first-mode) .privacy-choices-actions .privacy-button{
+    min-height:48px;padding:7px 6px;font-size:.84rem
+  }
+  body:not(.reader-first-mode) .privacy-choices-actions .privacy-text-button{
+    grid-column:1/-1;min-height:40px;padding:5px;font-size:.85rem
+  }
+  body:not(.reader-first-mode) .privacy-choices-settings{max-height:49vh;overflow-y:auto}
+}
+/* Events: primary result action first, compact optional save and submission
+   routes on phones instead of three equal full-width primary buttons. */
+@media(max-width:680px){
+  body[data-page="whats-on"] .whats-on-page-hero .button-row{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px!important
+  }
+  body[data-page="whats-on"] .whats-on-page-hero .button-row>a:first-child{
+    grid-column:1/-1;min-height:46px!important
+  }
+  body[data-page="whats-on"] .whats-on-page-hero .button-row>a:nth-child(n+2){
+    min-width:0;min-height:46px!important;padding:10px 8px!important;
+    font-size:.82rem!important;line-height:1.25!important;
+    background:#fff!important;color:#0c5260!important;
+    border:2px solid #0f6470!important;text-align:center
+  }
+}
+/* Don't bury useful guide options beneath oversized type on smaller phones. */
+@media(max-width:680px){
+  body[data-page="guides"] .page-hero h1{
+    max-width:780px;font-size:clamp(1.85rem,7vw,2.6rem)!important;
+    letter-spacing:-.03em;line-height:1.09
+  }
+  body[data-page="guides"] .page-hero{
+    padding-top:24px!important;padding-bottom:24px!important
+  }
+}
