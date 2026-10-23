@@ -80,7 +80,7 @@ contains('privacy.html','rel="canonical" href="https://www.sk8scoop.com/privacy"
 contains('terms.html','rel="canonical" href="https://www.sk8scoop.com/terms"');
 contains('sitemap.xml','https://www.sk8scoop.com/52-adventures/</loc><lastmod>2026-09-26</lastmod>');
 contains('sitemap.xml','https://www.sk8scoop.com/free-cheap-guide/</loc><lastmod>2026-09-30</lastmod>');
-contains('sitemap.xml','https://www.sk8scoop.com/guides/</loc><lastmod>2026-10-01</lastmod>');
+contains('sitemap.xml','https://www.sk8scoop.com/guides/</loc><lastmod>2026-10-23</lastmod>');
 const publishedIssueMatch = read('assets/config.js').match(/issuesPublished:\s*(\d+)/);
 expect(Boolean(publishedIssueMatch), 'assets/config.js is missing the published issue count');
 const publishedIssueCount = Number(publishedIssueMatch?.[1] || 0);
