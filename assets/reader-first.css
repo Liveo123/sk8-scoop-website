@@ -43,7 +43,7 @@
 body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo,
 body.reader-home.homepage-v3.reader-first-mode .reader-hero-overlay{min-height:0!important}
 body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo{background:#fffaf0!important;border-top:1px solid #d6e6e0;border-bottom:1px solid #d6e6e0}
-body.reader-home.homepage-v3.reader-first-mode .reader-hero-copy{padding:31px 0 35px!important;max-width:610px!important}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-copy{padding:22px 0 25px!important;max-width:610px!important}
 body.reader-home.homepage-v3.reader-first-mode .reader-hero h2{max-width:620px;margin:0 0 10px;color:#073f48;font-family:Georgia,serif;font-weight:800;font-size:clamp(1.75rem,3vw,2.65rem);line-height:1.08;letter-spacing:-.025em}
 body.reader-home.homepage-v3.reader-first-mode .reader-hero-lead{margin:0;max-width:570px;color:#284b50;font-size:1rem;line-height:1.48}
 body.reader-home.homepage-v3.reader-first-mode .reader-signup{margin-top:15px}
@@ -60,4 +60,16 @@ body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{background:lin
   body.reader-home.homepage-v3.reader-first-mode .reader-hero h2{font-size:clamp(1.7rem,6vw,2.25rem)}
   body.reader-home.homepage-v3.reader-first-mode .reader-hero-lead{font-size:.96rem}
   body.reader-home.homepage-v3.reader-first-mode .reader-proof{display:none}
+}
+
+/* On first visits the privacy decision must remain genuine, but should not
+   cover most of the useful homepage. Give Allow and Reject equal prominence. */
+@media(max-width:480px){
+  body.reader-first-mode .privacy-choices{left:8px;right:8px;bottom:8px;padding:12px 13px;gap:9px;max-height:60vh;overflow-y:auto}
+  body.reader-first-mode .privacy-choices-copy strong{font-size:1.09rem;margin-bottom:3px}
+  body.reader-first-mode .privacy-choices-copy p{font-size:.81rem;line-height:1.34}
+  body.reader-first-mode .privacy-choices-actions{grid-template-columns:1fr 1fr;gap:7px}
+  body.reader-first-mode .privacy-choices-actions .privacy-button{min-height:48px;padding:7px 6px;font-size:.84rem}
+  body.reader-first-mode .privacy-choices-actions .privacy-text-button{grid-column:1/-1;min-height:40px;padding:5px;font-size:.85rem}
+  body.reader-first-mode .privacy-choices-settings{max-height:49vh;overflow-y:auto}
 }
