@@ -1,0 +1,490 @@
+/* SK8 Scoop | Homepage magazine polish v2 | 23 October 2026
+   A deliberate visual change to the EXISTING homepage UI.
+   Scoped to homepage, with no navigation, form, tracking or route changes.
+   Conceptual illustrations: SK8 Scoop originals; not documentary photography. */
+body.reader-home.reader-first-mode {
+  --sk8-editorial-ink:#103b43;
+  --sk8-editorial-teal:#0b5661;
+  --sk8-editorial-orange:#a95010;
+  --sk8-editorial-cream:#fffaf0;
+  --sk8-editorial-line:#d2e0d8;
+}
+body.reader-home.reader-first-mode .home-section-kicker {
+  color:#a45212;
+  font-weight:900;
+  font-size:.74rem;
+  letter-spacing:.14em;
+  line-height:1.5;
+  text-transform:uppercase;
+}
+body.reader-home.reader-first-mode .reader-first-discovery {
+  position:relative;
+  border-top:5px solid #cf6821;
+  border-bottom:1px solid #ccdcd5;
+  background-color:#fffaf0;
+  background-image:
+    linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.99) 35%,rgba(255,250,240,.89) 53%,rgba(255,250,240,.53) 77%,rgba(255,250,240,.28) 100%),
+    url('/assets/images/editorial-20261010/SK8-06-cheadle-hulme-overview.webp');
+  background-size:cover,clamp(470px,50vw,760px) auto;
+  background-position:center,right 2% top 24px;
+  background-repeat:no-repeat;
+}
+body.reader-home.reader-first-mode .reader-first-intro {
+  position:relative;
+}
+body.reader-home.reader-first-mode .reader-first-intro h1 {
+  max-width:790px;
+  margin:0 0 11px;
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(2.2rem,3.8vw,3.5rem);
+  font-weight:800;
+  line-height:1.07;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+  color:var(--sk8-editorial-ink);
+}
+body.reader-home.reader-first-mode .reader-first-intro p {
+  max-width:770px;
+  font-size:clamp(.98rem,1.1vw,1.08rem);
+  line-height:1.62;
+  color:#254e50;
+}
+body.reader-home.reader-first-mode .reader-first-all {
+  flex-shrink:0;
+  display:inline-flex;
+  padding:10px 13px;
+  border:1px solid #b6d4cb;
+  border-radius:10px;
+  background:rgba(255,253,247,.95);
+  color:#07545e;
+  text-decoration:none;
+  box-shadow:0 6px 18px rgba(12,59,59,.08);
+  font-weight:850;
+}
+body.reader-home.reader-first-mode .reader-first-all:hover {
+  background:#fff;
+  text-decoration:underline;
+}
+body.reader-home.reader-first-mode .reader-first-search {
+  position:relative;
+  padding:19px 21px;
+  background:#fffefa;
+  border:1px solid #bbd1c9;
+  border-left:6px solid #bb5e20;
+  border-radius:14px;
+  box-shadow:0 14px 34px rgba(9,54,57,.12);
+}
+body.reader-home.reader-first-mode .reader-first-search label {
+  font-size:.99rem;
+  color:#143d42;
+}
+body.reader-home.reader-first-mode .reader-first-search input {
+  border-color:#8caaa6;
+  background:#fff;
+}
+body.reader-home.reader-first-mode .reader-first-search button,
+body.reader-home.reader-first-mode .reader-hero-copy .button,
+body.reader-home.reader-first-mode .home-resource-card .button {
+  color:#fff!important;
+  background:#0b5661!important;
+  border-color:#0b5661!important;
+  font-weight:850;
+}
+body.reader-home.reader-first-mode .reader-first-search button:hover,
+body.reader-home.reader-first-mode .reader-hero-copy .button:hover,
+body.reader-home.reader-first-mode .home-resource-card .button:hover {
+  color:#fff!important;
+  background:#073d46!important;
+  border-color:#073d46!important;
+}
+body.reader-home.reader-first-mode .reader-first-chips a {
+  border-color:#a9c9bf;
+  box-shadow:0 2px 9px rgba(10,51,56,.035);
+}
+body.reader-home.reader-first-mode .reader-first-chips a:hover {
+  border-color:#0f6470;
+  background:#e9f4f0;
+}
+body.reader-home.reader-first-mode .reader-first-feed-head {
+  border-top:2px solid #bdd4cc;
+  padding-top:24px;
+}
+body.reader-home.reader-first-mode .reader-first-feed-head h3 {
+  font-family:Georgia,'Times New Roman',serif;
+  font-weight:800;
+  font-size:clamp(1.65rem,2.35vw,2.2rem);
+  letter-spacing:-.03em;
+  color:#103b43;
+}
+body.reader-home.reader-first-mode .reader-first-event {
+  border-color:#cbdcd4;
+  background:#fffefa;
+  box-shadow:0 7px 20px rgba(9,54,57,.06);
+}
+body.reader-home.reader-first-mode .reader-first-date {
+  background:#0b5661;
+  color:#fff;
+  border:1px solid #0b5661;
+  font-weight:900;
+}
+body.reader-home.reader-first-mode .reader-first-event-body h3 {
+  letter-spacing:-.012em;
+  font-size:1.13rem;
+}
+body.reader-home.reader-first-mode .reader-hero-photo {
+  position:relative;
+  overflow:hidden;
+  min-height:390px;
+  background-color:#fffaf0;
+  background-image:url('/assets/images/editorial-20261010/SK8-05-cheadle-overview.webp')!important;
+  background-position:center 44%!important;
+  background-repeat:no-repeat;
+  background-size:cover!important;
+  border-top:4px solid #e4b17f;
+  border-bottom:4px solid #0b5661;
+}
+body.reader-home.reader-first-mode .reader-hero-shade {
+  background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.99) 35%,rgba(255,250,240,.89) 50%,rgba(255,250,240,.31) 76%,rgba(255,250,240,.03) 100%)!important;
+}
+body.reader-home.reader-first-mode .reader-hero-photo::after {
+  content:'SK8 Scoop illustration · imagined local scene';
+  position:absolute;
+  bottom:13px;
+  right:18px;
+  z-index:2;
+  padding:6px 10px;
+  border-radius:5px;
+  background:rgba(5,46,53,.85);
+  color:#fff;
+  font-size:.69rem;
+  line-height:1.3;
+  letter-spacing:.015em;
+  pointer-events:none;
+}
+body.reader-home.reader-first-mode .reader-hero-copy h2 {
+  max-width:590px;
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(2.05rem,3vw,2.75rem);
+  line-height:1.09;
+  letter-spacing:-.04em;
+  color:#083c43;
+  text-wrap:balance;
+}
+body.reader-home.reader-first-mode .reader-hero-lead {
+  max-width:560px;
+  font-size:1.05rem;
+  line-height:1.62;
+  color:#26464a;
+}
+body.reader-home.reader-first-mode .home-newsletter-usefulness {
+  margin:10px 0 0;
+  color:#0c4e5a;
+  font-size:.84rem;
+  font-weight:850;
+  letter-spacing:.012em;
+}
+body.reader-home.reader-first-mode .home-newsletter-usefulness span {
+  color:#ad5613;
+  padding:0 5px;
+}
+body.reader-home.reader-first-mode .reader-signup {
+  box-shadow:0 12px 30px rgba(8,52,57,.15);
+}
+body.reader-home.reader-first-mode .reader-section-head h2,
+body.reader-home.reader-first-mode .home-take-part-head h2 {
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(1.9rem,2.65vw,2.4rem)!important;
+  line-height:1.1;
+  letter-spacing:-.034em;
+  color:#103b43;
+  text-wrap:balance;
+}
+body.reader-home.reader-first-mode .reader-worth {
+  background:#fffefa;
+}
+body.reader-home.reader-first-mode .reader-worth .reader-story {
+  background:#fff;
+  border:1px solid #cbdcd5;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 9px 25px rgba(10,52,59,.09);
+  transition:box-shadow .18s ease,border-color .18s ease;
+}
+body.reader-home.reader-first-mode .reader-worth .reader-story:hover {
+  border-color:#9fbbb4;
+  box-shadow:0 16px 35px rgba(10,52,59,.15);
+}
+body.reader-home.reader-first-mode .reader-story-body h3 {
+  color:#103b43;
+  font-weight:850;
+  line-height:1.2;
+  letter-spacing:-.02em;
+  text-wrap:balance;
+}
+body.reader-home.reader-first-mode .reader-story-body .reader-meta {
+  color:#49615e!important;
+}
+body.reader-home.reader-first-mode .reader-story-body p[data-story-summary] {
+  line-height:1.58;
+  color:#435b5e;
+}
+body.reader-home.reader-first-mode .reader-worth .dicm-visual {
+  border-bottom:1px solid #dfebe5;
+}
+body.reader-home.reader-first-mode .reader-worth .dicm-mode-label {
+  background:#0b5661;
+  color:#fff;
+  font-weight:900;
+  letter-spacing:.09em;
+}
+body.reader-home.reader-first-mode .reader-explore-section {
+  background:#f2f7f3;
+  border-top:1px solid #d4e2db;
+  border-bottom:1px solid #d4e2db;
+}
+body.reader-home.reader-first-mode .reader-explore-tile {
+  border:1px solid #c7d9d0;
+  border-radius:14px;
+  box-shadow:0 9px 24px rgba(12,62,67,.07);
+  background:#fff;
+  overflow:hidden;
+}
+body.reader-home.reader-first-mode .reader-explore-visual {
+  height:150px;
+  flex:0 0 150px;
+  border-bottom:3px solid #d1e1da;
+}
+body.reader-home.reader-first-mode .reader-explore-photo {
+  background-color:#e9eee4!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  filter:saturate(1.07) contrast(1.055);
+}
+body.reader-home.reader-first-mode .reader-explore-tile:nth-child(3n+2) .reader-explore-visual {
+  border-bottom-color:#df9b58;
+}
+body.reader-home.reader-first-mode .reader-explore-copy {
+  padding:14px 16px 17px;
+}
+body.reader-home.reader-first-mode .reader-explore-copy strong {
+  color:#103b43;
+  font-size:1.03rem;
+  letter-spacing:-.015em;
+}
+body.reader-home.reader-first-mode .reader-explore-copy small {
+  color:#3d5658;
+}
+body.reader-home.reader-first-mode .home-locality-strip {
+  border:1px solid #c6d9cf;
+  background:linear-gradient(120deg,#e8f2eb 0%,#fff9ed 100%);
+  border-radius:16px;
+  padding:19px 21px;
+}
+body.reader-home.reader-first-mode .home-locality-links a {
+  color:#0b5661;
+  font-weight:850;
+}
+body.reader-home.reader-first-mode .home-resource-card {
+  border:1px solid #ccdcd4;
+  background:#fffefa;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(10,52,59,.075);
+  overflow:hidden;
+}
+body.reader-home.reader-first-mode .reader-latest-cover {
+  position:relative;
+  overflow:hidden;
+  border:1px solid #c9d9d0;
+  background-color:#063f48;
+  background-image:
+    linear-gradient(0deg,rgba(4,46,53,.87),rgba(4,46,53,.17) 80%),
+    url('https://res.cloudinary.com/gocq00bt/image/upload/v1791797710/sk8-scoop/issue17/premier-editorial-illustration.webp');
+  background-size:cover,cover;
+  background-position:center,center;
+  border-bottom:4px solid #bd6428;
+  box-shadow:0 8px 22px rgba(6,48,54,.18);
+}
+body.reader-home.reader-first-mode .reader-latest-cover img {
+  position:relative;
+  z-index:1;
+  max-width:180px;
+  height:auto;
+  padding:6px;
+  border-radius:5px;
+  background:rgba(255,253,248,.97);
+}
+body.reader-home.reader-first-mode .reader-latest-cover span {
+  position:relative;
+  z-index:1;
+  font-weight:950;
+  color:#fff;
+  letter-spacing:.14em;
+  text-shadow:0 2px 4px rgba(0,0,0,.45);
+}
+body.reader-home.reader-first-mode a:focus-visible,
+body.reader-home.reader-first-mode button:focus-visible,
+body.reader-home.reader-first-mode input:focus-visible {
+  outline:3px solid #b35813;
+  outline-offset:3px;
+}
+@media(max-width:900px) {
+  body.reader-home.reader-first-mode .reader-first-discovery {
+    background-image:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.95) 54%,rgba(255,250,240,.7) 100%),url('/assets/images/editorial-20261010/SK8-06-cheadle-hulme-overview.webp');
+    background-size:cover,520px auto;
+    background-position:center,right top 14px;
+  }
+  body.reader-home.reader-first-mode .reader-hero-shade {
+    background:linear-gradient(90deg,rgba(255,250,240,.99) 0%,rgba(255,250,240,.94) 55%,rgba(255,250,240,.25) 100%)!important;
+  }
+  body.reader-home.reader-first-mode .reader-explore-visual {height:132px;flex-basis:132px;}
+}
+@media(max-width:680px) {
+  body.reader-home.reader-first-mode .reader-first-discovery {
+    background:#fffaf0;
+    border-top-width:4px;
+  }
+  body.reader-home.reader-first-mode .reader-first-intro h1 {
+    font-size:clamp(2.08rem,8.7vw,2.65rem);
+    line-height:1.09;
+  }
+  body.reader-home.reader-first-mode .reader-first-all {padding:8px 11px;}
+  body.reader-home.reader-first-mode .reader-first-search {padding:14px;border-left-width:5px;}
+  body.reader-home.reader-first-mode .reader-first-feed-head h3 {font-size:1.8rem;}
+  body.reader-home.reader-first-mode .reader-hero-photo {
+    min-height:530px;
+    background-position:61% bottom!important;
+  }
+  body.reader-home.reader-first-mode .reader-hero-shade {
+    background:linear-gradient(180deg,#fffaf0 0%,rgba(255,250,240,.99) 51%,rgba(255,250,240,.85) 68%,rgba(255,250,240,.15) 96%)!important;
+  }
+  body.reader-home.reader-first-mode .reader-hero-copy {
+    padding-top:28px;
+    padding-bottom:115px;
+  }
+  body.reader-home.reader-first-mode .reader-hero-copy h2 {font-size:clamp(2rem,8vw,2.45rem);}
+  body.reader-home.reader-first-mode .reader-hero-photo::after {
+    right:9px;
+    bottom:8px;
+    max-width:58%;
+    font-size:.61rem;
+  }
+  body.reader-home.reader-first-mode .reader-signup {box-shadow:none;}
+  body.reader-home.reader-first-mode .reader-explore-visual {height:118px;flex-basis:118px;}
+  body.reader-home.reader-first-mode .reader-explore-copy {padding:12px 13px 14px;}
+  body.reader-home.reader-first-mode .reader-explore-copy strong {font-size:.95rem;}
+  body.reader-home.reader-first-mode .reader-section-head h2 {font-size:1.95rem!important;}
+}
+@media(prefers-reduced-motion:reduce) {
+  body.reader-home.reader-first-mode .reader-worth .reader-story,
+  body.reader-home.reader-first-mode .reader-explore-tile {transition:none;}
+}
+
+/* Image clarity and resource-art scale corrections, 23 October 2026.
+   Six category tiles use 1456x816 originals set directly in index.html.
+   Remove stylised filters and avoid interpolation of the old ~4-10KB thumbnails. */
+body.reader-home.reader-first-mode .reader-explore-photo{
+  background-size:cover!important;
+  background-position:center center!important;
+  filter:none!important;
+  image-rendering:auto;
+  transform:none;
+}
+body.reader-home.reader-first-mode .reader-explore-tile:hover .reader-explore-photo{
+  filter:none!important;
+  transform:none;
+}
+body.reader-home.reader-first-mode .reader-explore-visual {
+  height:180px!important;
+  flex-basis:180px!important;
+  min-height:180px!important;
+}
+body.reader-home.reader-first-mode .reader-explore-tile {
+  min-width:0;
+}
+/* Preserve the card UI, but let three guide artworks occupy their visual panels. */
+body.reader-home.reader-first-mode .home-resource-grid .home-resource-visual,
+body.reader-home.reader-first-mode .home-resource-grid .reader-latest-cover {
+  height:224px!important;
+  min-height:224px!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+body.reader-home.reader-first-mode .home-resource-free-cheap .home-resource-visual{
+  padding:8px!important;
+  background:#fffdfa!important;
+}
+body.reader-home.reader-first-mode .home-resource-free-cheap .home-resource-visual img{
+  display:block!important;
+  width:auto!important;
+  height:100%!important;
+  max-height:208px!important;
+  max-width:96%!important;
+  object-fit:contain!important;
+  padding:0!important;
+  margin:auto!important;
+  background:transparent!important;
+  filter:none!important;
+}
+/* The Adventures source is an editorial montage: fill the available space. */
+body.reader-home.reader-first-mode .home-resource-adventures .home-resource-visual{
+  background:#f5f7f0!important;
+}
+body.reader-home.reader-first-mode .home-resource-adventures .home-resource-visual img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  filter:none!important;
+}
+body.reader-home.reader-first-mode .reader-latest-cover{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:13px;
+}
+body.reader-home.reader-first-mode .reader-latest-cover img{
+  display:block!important;
+  width:min(75%,260px)!important;
+  max-width:260px!important;
+  height:auto!important;
+  max-height:100px!important;
+  object-fit:contain!important;
+  margin:0!important;
+}
+body.reader-home.reader-first-mode .reader-latest-cover span{
+  display:block!important;
+  margin:0!important;
+  font-size:1.12rem!important;
+  letter-spacing:.18em!important;
+}
+@media(max-width:900px){
+  body.reader-home.reader-first-mode .reader-explore-visual{
+    height:155px!important;
+    flex-basis:155px!important;
+    min-height:155px!important;
+  }
+}
+@media(max-width:680px){
+  body.reader-home.reader-first-mode .reader-explore-visual{
+    height:150px!important;
+    flex-basis:150px!important;
+    min-height:150px!important;
+  }
+  body.reader-home.reader-first-mode .home-resource-grid .home-resource-visual,
+  body.reader-home.reader-first-mode .home-resource-grid .reader-latest-cover{
+    height:205px!important;
+    min-height:205px!important;
+  }
+  body.reader-home.reader-first-mode .home-resource-free-cheap .home-resource-visual img{
+    max-height:192px!important;
+  }
+}
