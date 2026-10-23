@@ -42,7 +42,7 @@ assert.ok(description.includes('free')&&description.includes('family')&&
   description.includes('weekend'), 'Description must accurately summarise useful filters');
 assert.ok(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(head),
   'Canonical What’s On calendar must not be accidentally noindexed');
-assert.ok(!robots.includes('Disallow: /whats-on/'),'Canonical What's On route blocked by robots');
+assert.ok(!robots.includes('Disallow: /whats-on/'),"Canonical What’s On route blocked by robots");
 assert.ok(sitemap.includes('<loc>'+canonicalUrl+'</loc>'),'Canonical calendar absent from sitemap');
 assert.equal((html.match(/<h1\b/g)||[]).length,1,'Exactly one H1 expected');
 assert.ok(html.includes('<h1>What’s on around SK8?</h1>'),'Visible on-page H1 should remain accurate');
