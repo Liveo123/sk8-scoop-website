@@ -71,7 +71,9 @@ try{
  check(await evaluate("[...document.querySelectorAll('.sk8-calendar-day.has-events')].every(el=>[0,6].includes(new Date(el.dataset.calendarDay+'T00:00:00Z').getUTCDay()))"),'Month view does not highlight non-weekend dates for weekend-only results');
  check(await click('[data-calendar-view="agenda"]'),'Return to agenda');
  check(await click('[data-event-filter="all"]'),'All dates available');
- check(await evaluate("['free','family'].every(k=>document.querySelector('[data-event-filter=\"'+k+'\"]')?.getAttribute('aria-pressed')==='false')"),'All dates also provides familiar reset');
+ check(await evaluate("['free','family'].every(k=>document.querySelector('[data-event-filter=\"'+k+'\"]')?.getAttribute('aria-pressed')==='true')"),'All dates preserves Free and Family');
+ check(await click('[data-whats-on-clear-filters]'),'Explicit clear all works');
+ check(await evaluate("['free','family'].every(k=>document.querySelector('[data-event-filter=\"'+k+'\"]')?.getAttribute('aria-pressed')==='false')"),'Clear all resets all refinements');
  await navigate('/whats-on/?filter=free');
  await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  check(await evaluate("document.querySelector('[data-event-filter=\"free\"]')?.getAttribute('aria-pressed')==='true'"),'Old free preset works');
