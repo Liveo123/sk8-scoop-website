@@ -314,7 +314,7 @@
       const signupSource = kind === 'qr'
         ? 'local_qr'
         : kind === 'guide'
-          ? (guideKey === '52-adventures' ? '52_adventures_guide' : 'free_cheap_guide')
+          ? ({ '52-adventures': '52_adventures_guide', 'free-cheap': 'free_cheap_guide', halloween: 'halloween_guide' }[guideKey] || 'unknown_guide')
           : 'website';
       if (typeof window.sk8Track === 'function') {
         window.sk8Track('sign_up', {

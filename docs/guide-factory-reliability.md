@@ -40,3 +40,16 @@ Evidence must be interpreted narrowly:
 - Opening a full guide without a cookie does not verify MailerLite subscription, group placement, welcome email delivery or cross-device entitlement. Use a properly authorised test subscriber, not a production send.
 - Keep GQ-04, GQ-06, GQ-07, GQ-08, GQ-09 and GQ-10 dimensions not actually executed marked NOT VERIFIED. Passing individual technical checks is not a blanket release pass.
 - This second stage remains proposed QA code pending owner approval of its pull request; it is not yet a new production rule or a live guide/content modification.
+
+
+## GQ-08 subscriber signup single-submit regression (23 October 2026 review branch)
+
+Investigated the three landing-page forms and the corresponding MailerLite automations. The canonical guide signup route is the protected website POST to /api/newsletter-signup from assets/signup-protection.js, which validates a Turnstile token and maps each guide key to its own subscriber group plus the main SK8 audience group in worker-protected.js. The old assets/site.js listener, loaded first on the three guide landing pages, was also attempting a POST on the same submit event before signup-protection.js could stop propagation. For Free & Cheap and 52 Adventures it would use a legacy MailerLite JSONP form action; Halloween has no legacy action, so the prior path would attempt a POST to the page itself. Two attempts with competing status messages are unacceptable even if one ultimately succeeds. The correct implementation is to let the legacy handler return without action for guide forms or those initialised by the protected script.
+
+A separate tracking bug labelled Halloween guide signups as free_cheap_guide. The protected handler must produce guide-specific signup_source values for Halloween, Free & Cheap and 52 Adventures, without changing subscriber group consent or retention.
+
+A new Chrome regression test simulates each landing signup, intercepts every outbound POST, uses a fake Turnstile token and a reserved fictional address, and requires exactly one /api/newsletter-signup request and zero legacy requests. This test never makes a real MailerLite API request or subscriber record, and must be run for new guide signup implementations. Do not confuse this simulated browser pass with actual email delivery or consent-confirmation evidence.
+
+Read-only MailerLite inspection on 23 October found the three guide-delivery automations active and individually triggered by their matching guide groups. A safe dry-run showed a designed email step in each, with no configuration warnings; it did not verify the email body/link, acceptance, inbox delivery or subscriber action. The embedded form resources reported inactive, but their status is not a definitive guide signup failure because the production landing pages use the protected site API instead of direct form posting when the canonical handler operates.
+
+**Remaining owner-gated check:** use an approved, dedicated test inbox and a real controlled test subscriber to prove verification, group assignment, exactly one welcome email, correct full-guide URL and an already-subscribed direct guide journey. Do not send test emails or modify live automations based solely on this document.
