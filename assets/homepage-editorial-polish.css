@@ -163,3 +163,20 @@ body.reader-home input:focus-visible {
  body.reader-home .reader-worth .reader-story,
  body.reader-home .reader-explore-photo{transition:none;}
 }
+
+/* An existing Issue 17 illustration supplies a real editorial cover,
+   instead of the old logo-only block; the SK8 masthead remains original. */
+body.reader-home .reader-latest-cover {
+  background-image:
+    linear-gradient(90deg,rgba(3,45,52,.90) 0%,rgba(3,45,52,.68) 53%,rgba(3,45,52,.24) 100%),
+    url("https://res.cloudinary.com/gocq00bt/image/upload/v1791797710/sk8-scoop/issue17/premier-editorial-illustration.webp");
+  background-position:center,center 38%;
+  background-size:cover,cover;
+}
+body.reader-home .reader-latest-cover img {
+  background:rgba(255,253,247,.96);
+  box-shadow:0 6px 22px rgba(0,20,25,.22);
+}
+body.reader-home .reader-latest-cover span {
+  text-shadow:0 1px 5px rgba(0,0,0,.48);
+}
