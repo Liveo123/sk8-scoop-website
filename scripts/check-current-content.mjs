@@ -68,7 +68,7 @@ for (const story of homepage.stories || []) {
 }
 
 assert(indexComparable.includes(`ISSUE ${issue.number}`), `Homepage latest panel must show ISSUE ${issue.number}.`);
-assert(indexComparable.includes(`<h2>Issue ${issue.number}</h2>`), `Homepage latest panel heading must show Issue ${issue.number}.`);
+assert(indexComparable.includes(`<h3>Issue ${issue.number}</h3>`), `Homepage latest panel heading must show Issue ${issue.number}.`);
 assert(indexComparable.includes(issue.summary), 'Homepage latest panel must contain the current issue summary.');
 assert(indexComparable.includes(issue.url), 'Homepage latest panel must link directly to the current issue.');
 assert(indexText.includes(`config.js?v=issue${issue.number}`), `Homepage must version assets/config.js with current Issue ${issue.number}.`);
