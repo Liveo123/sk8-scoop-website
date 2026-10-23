@@ -1,0 +1,94 @@
+/* What’s On compact utility header, 23 October 2026.
+   The checked calendar is the product; an illustration is not an entry gate.
+   Load before page JS so nothing jumps when listings arrive. */
+body[data-page="whats-on"] .whats-on-page-hero.whats-on-compact-hero{
+  padding:22px 0 18px!important;
+  background:linear-gradient(100deg,#fffaf0 0%,#fff 65%,#eef7f4 100%)!important;
+  border-bottom:1px solid #d6e5df;
+}
+body[data-page="whats-on"] .whats-on-compact-layout{
+  display:flex;align-items:center;justify-content:space-between;gap:16px 28px;
+}
+body[data-page="whats-on"] .whats-on-compact-copy{
+  min-width:0;max-width:770px;
+}
+body[data-page="whats-on"] .whats-on-compact-hero .eyebrow{
+  margin:0 0 5px;color:#0e5963;
+  font-size:.68rem;line-height:1.4;letter-spacing:.14em;
+}
+body[data-page="whats-on"] .whats-on-compact-hero h1{
+  max-width:none!important;margin:0 0 7px!important;
+  color:#073f48;font-family:Arial,Inter,sans-serif;
+  font-size:clamp(2rem,3.15vw,2.8rem)!important;
+  font-weight:850;line-height:1.1!important;letter-spacing:-.035em!important;
+}
+body[data-page="whats-on"] .whats-on-compact-hero .hero-lead{
+  max-width:720px!important;margin:0!important;
+  color:#3e585c;font-size:.94rem!important;line-height:1.47!important;
+}
+body[data-page="whats-on"] .whats-on-header-links{
+  display:flex;flex:0 0 auto;align-items:center;flex-wrap:wrap;gap:4px 16px;
+}
+body[data-page="whats-on"] .whats-on-header-links a{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+  min-height:44px;padding:8px 2px;color:#0b5660!important;
+  font-size:.86rem;font-weight:800;text-decoration:underline;text-underline-offset:3px;
+}
+body[data-page="whats-on"] .whats-on-header-links a:hover{color:#083e48!important}
+body[data-page="whats-on"] .whats-on-header-links a:focus-visible{
+  outline:3px solid #dc7318;outline-offset:3px;border-radius:4px;
+}
+body[data-page="whats-on"] .whats-on-listings-section{
+  padding-top:18px!important;
+}
+body[data-page="whats-on"] .whats-on-visually-hidden{
+  position:absolute!important;width:1px!important;height:1px!important;
+  overflow:hidden!important;clip-path:inset(50%)!important;
+  white-space:nowrap!important;margin:0!important;border:0!important;
+  padding:0!important;
+}
+body[data-page="whats-on"] .whats-on-filter-toolbar{
+  margin-top:0!important;margin-bottom:9px!important;
+}
+body[data-page="whats-on"] .whats-on-freshness{
+  margin:10px 0 13px!important;
+}
+body[data-page="whats-on"] .whats-on-more-ideas{
+  display:flex;flex-wrap:wrap;gap:10px 24px;
+  margin:19px 0 14px;padding:12px 0;
+  border-top:1px solid #d7e5df;
+}
+body[data-page="whats-on"] .whats-on-more-ideas a{
+  color:#0b5660;font-size:.87rem;font-weight:800;line-height:1.4;
+}
+body[data-page="whats-on"] .whats-on-more-ideas a:focus-visible{
+  outline:3px solid #dc7318;outline-offset:3px;
+}
+@media(max-width:760px){
+  body[data-page="whats-on"] .whats-on-page-hero.whats-on-compact-hero{
+    padding:17px 0 10px!important;
+  }
+  body[data-page="whats-on"] .whats-on-compact-layout{
+    display:block;
+  }
+  body[data-page="whats-on"] .whats-on-compact-hero h1{
+    font-size:clamp(1.88rem,7vw,2.25rem)!important;
+    line-height:1.08!important;
+    margin-bottom:6px!important;
+  }
+  body[data-page="whats-on"] .whats-on-compact-hero .hero-lead{
+    font-size:.86rem!important;line-height:1.43!important;
+  }
+  body[data-page="whats-on"] .whats-on-header-links{
+    gap:4px 18px;margin-top:5px;
+  }
+  body[data-page="whats-on"] .whats-on-header-links a{
+    min-height:40px;font-size:.8rem;padding:6px 0;
+  }
+  body[data-page="whats-on"] .whats-on-listings-section{
+    padding-top:12px!important;
+  }
+  body[data-page="whats-on"] .whats-on-freshness{
+    padding:9px 11px!important;
+  }
+}
