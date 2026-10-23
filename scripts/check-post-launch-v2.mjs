@@ -53,7 +53,9 @@ contains('index.html','data-experiment="homepage-utility-promise-v1"');
 // Reader-first successor: utility and source-checked events precede the
 // email acquisition hero, while the weekly flagship remains available.
 contains('index.html','Find something to do around SK8');
-contains('index.html','Get our free Friday email');
+contains('index.html','Good local ideas, every Friday');
+contains('index.html','A free Friday email with local events, useful updates');
+contains('index.html','Get it free');
 expect(read('index.html').indexOf('class="section reader-first-discovery"') <
   read('index.html').indexOf('class="reader-hero reader-hero-photo"'),
   'Reader-first discovery must precede the newsletter conversion hero');
