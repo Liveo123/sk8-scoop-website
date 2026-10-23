@@ -97,7 +97,7 @@ Every pass must log **problem or PASS → evidence → correction (if material) 
 | Holiday club finder | Help with current school-break planning | Reusable seasonal verified-data workflow | **PASS concept:** check destination and expiry |
 | Outdoors | Discover practical walks and days out | Durable evergreen site content | **PASS concept:** route-specific BEFORE YOU GO facts where verified |
 | Core-area shortcuts | Prioritise immediate local relevance | Geographic model that can later be configured per title | **RETEST:** core-area list now comes from homepage content metadata rather than hardcoded JavaScript; ranking still needs reader research |
-| Four checked upcoming event cards | Display a real answer and a detail page | Shared events feed for site, newsletters and guides | **PASS concept:** now strengthen continuation tracking and cost/location QA |
+| Two phone / four wider-screen checked upcoming event cards | Display a real answer and a detail page | Shared events feed for site, newsletters and guides | **PASS concept:** now strengthen continuation tracking and cost/location QA |
 | Empty/error fallback and saved routes | Avoid dead ends, enable future return | Reliable UX and owned return habit | **RETEST:** equal-weight continuation links were reduced and the error fallback now opens the direct full guide route |
 
 These are **conceptual reviews, not validated improvements**. No claim of audience growth, return visits or advertiser uplift follows until real testing.
@@ -115,7 +115,7 @@ These are **conceptual reviews, not validated improvements**. No claim of audien
 | Feed unavailable / no eligible events | Direct evergreen Free & Cheap content | What’s On only as secondary option | SK8-owned / LIVE in source | Do not link only to another broken feed |
 | Newsletter acquisition | Existing hero or join route | Latest Scoop and useful guides for recognised readers | SK8-owned / LIVE in source | Offer value before coercive signup; no fake scarcity |
 
-**Outstanding acceptance gaps:** (a) first-screen prominence is now implemented but needs real browser validation; (b) core-area configuration is portable, yet this is not a verified second-title design system; (c) return use, source-to-subscriber conversion and advertiser outcomes remain hypotheses; (d) no observed visitor test has established that the finder beats the current public page; (e) seven activity chips need mobile usability validation.
+**Outstanding acceptance gaps:** (a) device-preview checks verify first-screen ordering, but comparative usability with real visitors remains unmeasured; (b) core-area configuration is not proof of portability to another publication; (c) return use, source-to-subscriber conversion and advertiser outcomes remain hypotheses; (d) no observed visitor test has established improvement over the public control; (e) seven activity chips and the full-page mobile reading journey still need ordinary user feedback.
 
 ### Release metrics relevant to BOTH ambitions
 
@@ -151,6 +151,62 @@ Owner approved continuing with the reader-first JiveLoop Collective / NUE method
 
 **Current release classification at this checkpoint:** Empire: **RETEST**; NUE: **RETEST**; production: **NOT AUTHORISED BY THIS TECHNICAL REVIEW**. Update this paragraph after the latest CI and browser evidence.
 
+## Whole-homepage critique and refinement: twenty distinct passes, 23 October 2026
+
+**Scope:** the *entire* home page, not just its illustration: top discovery, events, newsletter, editorial, localities, six category routes, weekly issue/guides, contribution prompts, footer, mobile layouts, accessibility, ethics, and business/NUE performance. Reviewed against the screenshot supplied by the owner, the current PR's source and browser-preview evidence. A visual preference is not evidence of higher conversions.
+
+| Pass | Lens and specific criticism | Correction or clear PASS | Business/NUE outcome sought |
+| --- | --- | --- | --- |
+| 01 | Does the homepage answer “what can I do?” before selling an email? | **PASS:** reader-first finder remains above signup | First useful action before audience capture |
+| 02 | Are search, date filters and local-area choices understandable? | Keep search and purpose-based chips; distinguish event-area filters from lower editorial-area hubs | Useful routing, not click bait |
+| 03 | Do seven discovery chips overwhelm visitors? | Retain functioning routes; use consistent short labels and improved spacing rather than a speculative new filtering engine | Lower task friction without maintenance |
+| 04 | Does the homepage display real results with dated evidence? | **PASS:** cards use checked events, actual date rules, full time/cost caveats and direct links | Content/data trust asset |
+| 05 | Does the event preview bury the rest of the site on phones? | **PASS:** two checked mobile picks; four on wider screens; obvious full-calendar route | Balance immediate utility and weekly flagship |
+| 06 | Can a reader accidentally interpret editorial ordering as sponsored? | **PASS:** descriptive line explicitly separates checked editorial choices from paid ranking | Commercial/editorial trust |
+| 07 | Is the townscape image too pale and washed out? | Increase image saturation and local contrast non-destructively with CSS; retain existing approved illustration | Stronger distinctiveness without replacing rights-cleared artwork |
+| 08 | Does reducing haze make text unreadable? | Shift pale gradient to protect the copy region while showing richer right-hand brick, greenery and activity | Readability is a hard gate |
+| 09 | Does mobile hide the hero illustration almost completely? | Replace a barely visible tinted image with a compact, richer mobile image strip after real text | Attractive but short, not a 650px billboard |
+| 10 | Does the email section repeat the activity finder headline? | Replace with **“Good local ideas, every Friday”** and concise, practical benefit copy | Owned audience after useful experience |
+| 11 | Is the signup action generic? | Use **“Get it free”** with an explicit email field and meaningful event/family/free/update context | Clear voluntary acquisition |
+| 12 | Are trust numbers and claims safe? | Keep dynamically sourced rounded subscriber and issue counts; do not invent fresh totals, outcomes or popularity claims | Integrity of owned audience evidence |
+| 13 | Does a featured 24 October event lead to its actual details? | Fix static and dynamic Merseyday links to its specific verified What's On record | High-quality **NUE**, no issue-archive detour |
+| 14 | Does editorial feel like another marketing grid? | Maintain three distinctive story images and concise, accurate local summaries; improve spacing and headings | Local publication voice, no advert masquerade |
+| 15 | Do lower sections simply repeat What's On and Free & Cheap? | Remove those two duplicate category cards, while keeping their high-priority top/guide routes | Shorter page and less content cannibalisation |
+| 16 | Are the remaining categories ordered by practical reader needs? | Prioritise Kids & Family, Outdoors, Food & Drink, Useful Updates, Local History, Planning & Development | Faster useful choices and reusable topic system |
+| 17 | Does mobile render six huge identical cards in a long stack? | Use compact image-left/text-right editorial routes on narrow phones; three-by-two grid on desktop | Less excessive scrolling |
+| 18 | Do the guide tiles waste space around small branding? | Shorten media panels while preserving full, unmodified artwork, and use subordinate heading hierarchy for Issue 17 | Editorial polish and accessibility |
+| 19 | Are recognised readers being sent back to email gates? | Redirect recognised browsers straight to full Free & Cheap and 52 Adventures content where eligible | Reader trust and **NUE** continuation |
+| 20 | Are return, contributions, visual rules, consent and commercial independence sustained? | Make tips/corrections clearer; remove unused SVG fallback; preserve consent choices; add whole-page regression and browser QA | Trustworthy, maintainable, repeatable publication asset |
+
+### Ten improvements implemented in this whole-homepage pass
+
+1. **Richer illustrated hero**: saturation, contrast, right-hand image detail and a mobile-specific visible art strip without changing the original source asset.
+2. **Benefit-led newsletter**: distinct weekly-ideas heading, concise copy, “Get it free” button and an accessible four-topic usefulness line. The main finder retains the only H1.
+3. **Clearer discovery affordances**: restrained contrast, search focus, distinct date/price/family/location routes and consistent event-card hierarchy.
+4. **Stronger event preview presentation**: improved checked-detail legibility, existing real cost/time semantics, and two mobile versus four wider-screen previews.
+5. **A genuinely direct story continuation**: Merseyday links now open that specific event's verified listing, both as static fallback and dynamic story data.
+6. **Six non-duplicated editorial discovery topics**: remove redundant lower What's On/Free & Cheap cards and prioritise practical category needs.
+7. **Less exhausting mobile navigation**: horizontal topic-image rows, two-column area choices, and a shorter continuous scroll.
+8. **More purposeful guide journeys**: less unused logo space and direct full-guide URLs for recognised subscribers.
+9. **Clearer community contribution prompts**: “Share a local tip” and “Questions or corrections?” rather than two vague submission labels.
+10. **Release discipline**: media-empire and NUE gates retained independently; remove the unused generic SVG fallback, align current-issue/social metadata and add structural, brand and browser regression checks.
+
+### Full-page NUE and Empire Asset Map updates
+
+| Reader moment | Immediately useful experience | Optional next step or STOP | Media-group contribution |
+| --- | --- | --- | --- |
+| Search or activity/date/location need | Real verified event or accurate no-results answer | Actual event page, organiser destination or full guide | Reusable structured editorial data; repeat discovery |
+| Reader sees free October event in Know · Do · Discover | Exact event with times, venue and checked cost conditions | Organiser/booking or other relevant event, not a broad previous issue | More meaningful event-detail engagement |
+| Reader wants local journalism | Current accurate explainer, history or useful update | Related publication story only if it adds real information | Durable original local editorial value |
+| Reader wants family/outdoor/food ideas | Matching live category hub or guide section | One genuinely related experience or STOP | Reusable topic collection and subscriptions through earned trust |
+| Already-recognised subscriber chooses a guide | Full guide content instead of a second capture landing | Save or explore another useful SK8 owned experience | Retention and connected assets |
+| Reader has enjoyed a useful answer | Free weekly issue invitation, clearly optional | Subscribe, or simply leave with the answer | Owned email growth without forced capture |
+| Resident has information or a correction | Submission or contact destination | STOP after successful submission | Reader contribution and quality maintenance |
+
+**Measurement reminder:** a stronger visual and faster path are hypotheses, not established growth. Judge usefulness (completed event/detail/guide actions), continuation/return, verified subscriber growth and maintenance burden together. Do not count redundant click loops or inflated ad impressions as success. Paid visibility remains separate from editorial. Portability to another JiveLoop Collective title is a reusable-pattern hypothesis, not an expansion authorisation.
+
+**Release limitation:** technical QA cannot replace observation of real visitors or guarantee that changed wording raises email conversion. Maintain a rollback path and controlled tests after a separately approved production release.
+
 ## Research and design basis
 - Nielsen Norman Group: homepage clarity, information scent, visible actions and scanning.
 - Baymard Institute: category navigation, search, and reducing choices.
@@ -162,7 +218,7 @@ These are pattern references, not user testing or a claim that SK8 matches those
 ## 30 criticism passes: risk and corresponding correction
 1. Newsletter-first hero could overwhelm task seekers: corrected in the approved follow-through by placing the finder **before** the signup hero; dedicated browser QA now checks first-screen ordering.
 2. Too many gateways: consolidate entry to core event calendar, existing guides and search.
-3. Visitors need an immediate answer: display four current checked listings.
+3. Visitors need an immediate answer: display two checked mobile previews or four on larger screens.
 4. Content can be sparse: provide helpful guide fallback.
 5. Dates can be wrong for UK viewers abroad: use Europe/London via shared calendar core.
 6. Ongoing range is not proof of daily sessions: do not expand ambiguous dates.
@@ -181,7 +237,7 @@ These are pattern references, not user testing or a claim that SK8 matches those
 19. Event data might be unavailable: show navigable fallback rather than empty shell.
 20. Remote source data must not inject HTML: use textContent to create cards.
 21. Dynamic content should be announced: use polite live status.
-22. Many cards cause visual fatigue: show only four then link to complete calendar.
+22. Many cards cause visual fatigue: show two on small phones or four on wider viewports, then link to complete calendar.
 23. Event details can be hard to locate: link via stable event query parameter.
 24. Small mobile controls: ensure 44px chips and 50px search controls.
 25. Narrow screens could overflow: stack grid and search at responsive breakpoints.
