@@ -9,7 +9,10 @@ on:
       - 'assets/sk8-calendar-core.js'
       - 'data/events.json'
       - 'scripts/check-reader-first.mjs'
+      - 'scripts/check-post-launch-v2.mjs'
       - 'tests/reader-first-preview-browser.mjs'
+      - 'tests/subscriber-journey-live-browser.mjs'
+      - 'docs/reader-first-ux-review-2026-10-23.md'
       - '.github/workflows/reader-first-qa.yml'
 
 permissions:
