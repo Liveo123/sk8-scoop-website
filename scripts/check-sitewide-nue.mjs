@@ -58,6 +58,18 @@ contains(files.events,"activeArea = 'all'","Area reset");
 contains(files.events,"selectedDate = ''","Date reset");
 
 contains(files.guide,'sitewide-guide-disclosure','Concise optional explanation of subscriber access');
+contains(files.guide,'<h1>Find a useful local guide.</h1>','Phone-first guide heading');
+contains(files.guide,'class="guide-finder-cell" href="/kids-family/"',
+  'Guide chooser should favour a working family route over future-only projects');
+assert.ok(!files.guide.includes('class="guide-finder-cell is-development"'),
+  'No dead-end shortcut to a collapsed unreleased guide');
+contains(files.css,'body:not(.reader-first-mode) .privacy-choices-actions',
+  'Compact balanced consent choices on the rest of the website');
+contains(files.whatsonPage,'reader-link sitewide-hero-secondary',
+  'Secondary events actions are links, not competing primary buttons');
+contains(files.css,'sitewide-hero-secondary',
+  'Mobile secondary actions remain readable with keyboard focus');
+
 contains(files.guide,'sitewide-developing','Future-only resources must not dilute live shelf');
 contains(files.guide,'Evergreen guide · Updated 17 October 2026','Match source guide updated date');
 assert.ok(!files.guide.includes('Evergreen guide · Updated 30 September 2026'),
