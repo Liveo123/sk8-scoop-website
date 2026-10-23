@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="assets/nue.css">
   <link rel="stylesheet" href="assets/homepage-v4.css">
   <link rel="stylesheet" href="assets/homepage-search.css">
+  <link rel="stylesheet" href="assets/reader-first.css">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -65,6 +66,39 @@
             <a href="/free-cheap-guide/">Free &amp; Cheap →</a>
           </nav>
         </div>
+      </div>
+    </section>
+
+    <section class="section reader-first-discovery" id="find-something" aria-labelledby="reader-first-heading" data-experiment="reader-first-finder-v1">
+      <div class="wrap">
+        <div class="reader-first-intro">
+          <div><div class="home-section-kicker">Your local activity finder</div><h2 id="reader-first-heading">Find something worth doing</h2><p>Start with when, how much or who’s coming. No sign-up needed to browse checked events.</p></div>
+          <a class="reader-first-all" href="/whats-on/">See the full What’s On calendar →</a>
+        </div>
+        <form class="reader-first-search" role="search" action="/search/" method="get">
+          <label for="reader-first-search-input">What are you looking for?</label>
+          <div class="reader-first-search-row"><input type="search" id="reader-first-search-input" name="q" placeholder="Try ‘free kids’, ‘Gatley walk’ or ‘Halloween’" autocomplete="off"><button class="button" type="submit">Find ideas</button></div>
+        </form>
+        <nav class="reader-first-chips" aria-label="Find activities by need">
+          <a href="/whats-on/?filter=today">Today</a>
+          <a href="/whats-on/?filter=weekend">This weekend</a>
+          <a href="/whats-on/?filter=free">Free events</a>
+          <a href="/whats-on/?filter=family">With the kids</a>
+          <a href="/free-cheap-guide/">Free &amp; cheap ideas</a>
+          <a href="/kids-family/holiday-club-finder/">Holiday clubs</a>
+          <a href="/outdoors/">Walks &amp; outdoors</a>
+        </nav>
+        <div class="reader-first-local">
+          <span>Closer to home:</span>
+          <a href="/whats-on/?area=Cheadle">Cheadle</a>
+          <a href="/whats-on/?area=Cheadle%20Hulme">Cheadle Hulme</a>
+          <a href="/whats-on/?area=Gatley">Gatley</a>
+          <a href="/whats-on/?area=Heald%20Green">Heald Green</a>
+        </div>
+        <div class="reader-first-feed-head"><h3>Coming up around SK8</h3><span>Checked listings, not sponsored rankings</span></div>
+        <p class="reader-first-status" data-reader-first-status role="status" aria-live="polite">Loading checked local listings…</p>
+        <div data-reader-first-events><p>Loading upcoming local events…</p></div>
+        <div class="reader-first-after"><a href="/whats-on/">Browse all upcoming events →</a><a href="/52-adventures/guide/">Explore 52 Adventures →</a><a href="/my-sk8/">Open your saved ideas →</a></div>
       </div>
     </section>
 
@@ -184,5 +218,7 @@
   })();
 </script>
   <script src="assets/homepage-nue.js"></script>
+  <script src="assets/sk8-calendar-core.js"></script>
+  <script src="assets/reader-first-home.js"></script>
 </body>
 </html>
