@@ -48,7 +48,8 @@ contains(files.searchPage,'No checked results for this search','Honest no-result
 contains(files.search,"event.status === 'verified'",'Only verified events enter search');
 contains(files.search,"eventCore.confirmedDates(event)",'Recurring sessions are never invented');
 contains(files.search,"mode === 'range_unspecified'",'Unconfirmed date ranges handled separately');
-contains(files.search,"'/whats-on/?event=' + encodeURIComponent(id)",'Exact checked event detail first');
+contains(files.search,"'/whats-on/?event=' + encodeURIComponent(id)",'Existing non-pilot event detail fallback');
+contains(files.search,"'/whats-on/events/' + event.seo.slug",'Eligible verified event pages override category deep links');
 assert.ok(!files.search.includes('href: event.booking_url || event.source_url'),'No blind external jump in search result');
 contains(files.search,'search_filters_cleared','Aggregate no-PII recovery measurement');
 contains(files.search,'clearFilters.hidden','Clear control represents active state');
@@ -107,7 +108,7 @@ for(const route of ['/','/guides/','/whats-on/']){
   contains(files.sitemap,'<loc>https://www.sk8scoop.com'+route+'</loc><lastmod>2026-10-23</lastmod>',
     'Sitemap dates follow actual changed routes');
 }
-assert.equal((files.sitemap.match(/<url>/g)||[]).length,66,
+assert.equal((files.sitemap.match(/<url>/g)||[]).length,68,
   'Do not silently drop indexable pages during sitewide UX work');
 const holiday = read('kids-family/holiday-club-finder/index.html');
 contains(holiday,'name="robots" content="noindex,follow"','Respect intentionally noindex seasonal tool');
