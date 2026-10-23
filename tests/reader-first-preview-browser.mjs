@@ -120,7 +120,10 @@ try {
         fallback:!!document.querySelector('.reader-first-fallback'),
         doubleSearch:document.querySelectorAll('#reader-first-search-input').length,
         primaryLinks:[...document.querySelectorAll('.reader-first-event h3 a')].map(x=>x.getAttribute('href')),
-        newsletterPresent:!!document.querySelector('.reader-hero form.reader-signup')
+        newsletterPresent:!!document.querySelector('.reader-hero form.reader-signup'),
+        consentHeight:document.querySelector('.privacy-choices:not([hidden])')?.getBoundingClientRect().height || 0,
+        consentRejectPresent:!!document.querySelector('.privacy-choices [data-consent-none]'),
+        consentAllowPresent:!!document.querySelector('.privacy-choices [data-consent-all]')
       };
     })()`);
     check(width + 'px: first-screen finder before newsletter',
@@ -138,10 +141,30 @@ try {
     check(width + 'px: checked feed has working direct event links or explicit fallback',
       (v.cards>0 && v.primaryLinks.every(x=>/^\/whats-on\/\?event=/.test(x))) ||
       (v.cards===0 && v.fallback), 'cards='+v.cards);
+    if (!v.fallback) {
+      const expected = width <= 720 ? 2 : 4;
+      check(width + 'px: appropriate number of immediately useful highlights',
+        v.cards===expected, 'expected '+expected+', found '+v.cards);
+    }
+    if(width===390 && v.consentHeight) {
+      check('Mobile consent does not cover most of the first screen',
+        v.consentHeight<300 && v.consentRejectPresent && v.consentAllowPresent,
+        'height='+v.consentHeight);
+      check('Newsletter is not buried below four full mobile cards',
+        v.heroTop<1700, 'heroTop='+v.heroTop);
+    }
     await screenshot('homepage-' + width + '.png');
     console.log('METRICS '+width+' '+JSON.stringify(v));
   }
   await viewport(390,844,true);
+  await navigate('/');
+  await waitFor("Boolean(document.querySelector('.reader-first-event h3 a'))",'first verified homepage event');
+  const detailHref=await evaluate("document.querySelector('.reader-first-event h3 a')?.getAttribute('href')");
+  const detailId=new URL(BASE+detailHref).searchParams.get('event');
+  const detailMatches="Boolean([...document.querySelectorAll('[data-event-id]')].find(x=>x.dataset.eventId==="+JSON.stringify(detailId)+"||x.dataset.seriesId==="+JSON.stringify(detailId)+"))";
+  await navigate(detailHref);
+  await waitFor(detailMatches,'homepage event has an actual calendar detail card');
+  check('NUE event continuation reaches the corresponding full event detail', await evaluate(detailMatches));
   await navigate('/whats-on/?filter=weekend');
   await waitFor(
     "document.querySelector('button[data-event-filter=weekend]')?.getAttribute('aria-pressed') === 'true'",
