@@ -7,6 +7,7 @@
   const checked = document.querySelector('[data-events-checked]');
   const filters = [...document.querySelectorAll('[data-event-filter]')];
   const areaFilters = [...document.querySelectorAll('[data-event-area]')];
+  const clearFilters = document.querySelector('[data-whats-on-clear-filters]');
   if (!list) return;
   const core = window.SK8CalendarCore;
   if (!core) return;
@@ -383,6 +384,7 @@
     if (status) status.textContent = visible.length
       ? `${visible.length} ${visible.length === 1 ? 'result' : 'results'} shown${filterLabel()}`
       : `No checked listings match this view${filterLabel()}.`;
+    if (clearFilters) clearFilters.hidden = activeFilter === 'all' && activeArea === 'all' && !selectedDate;
     updateFreshness(visible);
     jumpToRequestedEvent();
     filters.forEach(button => {
@@ -454,6 +456,17 @@
     syncViewParams();
     render();
   });
+  clearFilters?.addEventListener('click', () => {
+    activeFilter = 'all';
+    activeArea = 'all';
+    selectedDate = '';
+    syncViewParams();
+    render();
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('whats_on_filters_cleared', { source: 'reader_filters' });
+    }
+  });
+
   filters.forEach(button => button.addEventListener('click', () => {
     activeFilter = button.dataset.eventFilter || 'all';
     selectedDate = '';
