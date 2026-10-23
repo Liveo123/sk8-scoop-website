@@ -1,0 +1,106 @@
+name: Reader-first discovery and NUE QA
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'assets/reader-first.css'
+      - 'assets/reader-first-home.js'
+      - 'assets/sk8-calendar-core.js'
+      - 'data/events.json'
+      - 'scripts/check-reader-first.mjs'
+      - 'tests/reader-first-preview-browser.mjs'
+      - '.github/workflows/reader-first-qa.yml'
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+concurrency:
+  group: reader-first-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax and source-level reader journeys
+        run: |
+          node --check assets/reader-first-home.js
+          node --check tests/reader-first-preview-browser.mjs
+          node scripts/check-reader-first.mjs
+      - name: Recheck freshness, verified events and homepage contracts
+        run: |
+          node scripts/check-events-data.mjs
+          node scripts/check-homepage-v3.mjs
+          node scripts/check-current-content.mjs
+
+  browser-qa:
+    needs: static-qa
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve matching Cloudflare branch-preview deployment
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
+          short_sha="$(printf '%s' "${PREVIEW_SHA}" | cut -c1-7)"
+          for attempt in $(seq 1 30); do
+            payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" "$comments_api" || true)"
+            body="$(printf '%s' "$payload" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // ""' 2>/dev/null || true)"
+            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
+            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
+            reported="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
+            if [ "$reported" = "$short_sha" ] && [ -n "$url" ]; then
+              code="$(curl -sSL --max-time 20 -o /tmp/sk8-reader-first-preview.html -w '%{http_code}' "${url}/" || true)"
+              if [ "$code" = "200" ] && grep -Fq 'reader-first-mode' /tmp/sk8-reader-first-preview.html; then
+                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
+                echo "Verified exact matching preview SHA ${reported}: $url"
+                exit 0
+              fi
+            fi
+            echo "Waiting for exact preview ${short_sha} (attempt $attempt/30)"
+            sleep 10
+          done
+          echo "No validated preview for current commit; refusing to test stale revision"
+          exit 1
+
+      - name: Select Chrome or Chromium
+        shell: bash
+        run: |
+          set -eu
+          for bin in google-chrome google-chrome-stable chromium; do
+            if command -v "$bin" >/dev/null 2>&1; then
+              echo "CHROME=$(command -v "$bin")" >> "$GITHUB_ENV"
+              exit 0
+            fi
+          done
+          echo "No browser available"
+          exit 1
+      - name: Test real first screen, mobile cards and calendar links
+        env:
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
+          CHROME: ${{ env.CHROME }}
+        run: node tests/reader-first-preview-browser.mjs
+
+      - name: Keep viewport screenshots and machine-readable results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reader-first-preview-qa
+          path: visual-qa/reader-first/
+          retention-days: 14
