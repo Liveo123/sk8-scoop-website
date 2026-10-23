@@ -123,4 +123,4 @@ contains(files.review,'Ten concrete site-wide change packages implemented','Impl
 contains(files.review,'NUE (Next Useful Experience)','Independent NUE release gate');
 contains(files.review,'JiveLoop Collective / media group','Independent publisher asset gate');
 contains(files.review,'production release not authorised','Do not accidentally publish next preview');
-console.log('PASS sitewide UX source checks: navigation, verified events, direct NUE, filter resets, guides, SVG, accessibility, 66 sitemap routes and 20-pass review.');
+console.log('PASS sitewide UX source checks: navigation, verified events, direct NUE, filter resets, guides, SVG, accessibility, 68 sitemap routes and 20-pass review.');
