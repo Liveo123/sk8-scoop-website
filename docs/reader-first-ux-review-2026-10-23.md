@@ -89,16 +89,16 @@ Every pass must log **problem or PASS → evidence → correction (if material) 
 
 | Implemented change | Immediate reader benefit / NUE | Enduring SK8 / Collective asset | Gate and required proof |
 | --- | --- | --- | --- |
-| Discovery section near top | Start with tasks rather than menu structure | Better first useful action / entry to owned SK8 | **REVISE:** still below the newsletter signup hero; test first-screen placement |
+| Discovery section near top | Start with tasks rather than menu structure | Better first useful action / entry to owned SK8 | **RETEST:** finder now comes before the newsletter signup hero; verify its real first-screen prominence across devices |
 | Homepage search | Straight to relevant site results | Reusable discovery pattern | **PASS concept, measurement pending:** verify search outcomes |
 | Today / Weekend routes | Relevant events, then details | Recurring weekly visits | **PASS concept:** instrument and compare return usefulness |
 | Free-event and Free & Cheap paths | Match today's free event vs durable low-cost option | Evergreen guide + verified events feeding separate intents | **PASS concept:** avoid unnecessary guide signup for entitled readers |
 | Family events | Filter checked events | Repeat family discovery | **PASS concept:** check inventory and empty state |
 | Holiday club finder | Help with current school-break planning | Reusable seasonal verified-data workflow | **PASS concept:** check destination and expiry |
 | Outdoors | Discover practical walks and days out | Durable evergreen site content | **PASS concept:** route-specific BEFORE YOU GO facts where verified |
-| Core-area shortcuts | Prioritise immediate local relevance | Geographic model that can later be configured per title | **REVISE:** geography is currently hardcoded, local-first ranking not fully tested |
+| Core-area shortcuts | Prioritise immediate local relevance | Geographic model that can later be configured per title | **RETEST:** core-area list now comes from homepage content metadata rather than hardcoded JavaScript; ranking still needs reader research |
 | Four checked upcoming event cards | Display a real answer and a detail page | Shared events feed for site, newsletters and guides | **PASS concept:** now strengthen continuation tracking and cost/location QA |
-| Empty/error fallback and saved routes | Avoid dead ends, enable future return | Reliable UX and owned return habit | **REVISE:** simplify competing CTAs and prefer a direct useful guide destination |
+| Empty/error fallback and saved routes | Avoid dead ends, enable future return | Reliable UX and owned return habit | **RETEST:** equal-weight continuation links were reduced and the error fallback now opens the direct full guide route |
 
 These are **conceptual reviews, not validated improvements**. No claim of audience growth, return visits or advertiser uplift follows until real testing.
 
@@ -115,7 +115,7 @@ These are **conceptual reviews, not validated improvements**. No claim of audien
 | Feed unavailable / no eligible events | Direct evergreen Free & Cheap content | What’s On only as secondary option | SK8-owned / LIVE in source | Do not link only to another broken feed |
 | Newsletter acquisition | Existing hero or join route | Latest Scoop and useful guides for recognised readers | SK8-owned / LIVE in source | Offer value before coercive signup; no fake scarcity |
 
-**Outstanding acceptance gaps:** (a) hero/signup is still the first screen for many users; (b) reader-first routes are SK8-specific and have not yet been abstracted into a portable component; (c) return use, source-to-subscriber conversion and advertiser outcomes are hypotheses; (d) no observed user testing has established that the new finder beats the current page; (e) the number of discovery choices needs mobile usability testing.
+**Outstanding acceptance gaps:** (a) first-screen prominence is now implemented but needs real browser validation; (b) core-area configuration is portable, yet this is not a verified second-title design system; (c) return use, source-to-subscriber conversion and advertiser outcomes remain hypotheses; (d) no observed visitor test has established that the finder beats the current public page; (e) seven activity chips need mobile usability validation.
 
 ### Release metrics relevant to BOTH ambitions
 
@@ -126,6 +126,31 @@ These are **conceptual reviews, not validated improvements**. No claim of audien
 - **Replicability:** measured reuse of code/content-schema and time saved in SK8; ability to transfer the pattern is a future hypothesis until a bounded second-title pilot is approved.
 
 
+## Approved implementation follow-through: first-screen and release evidence
+
+Owner approved continuing with the reader-first JiveLoop Collective / NUE methodology. This is **approval for preparing, testing and improving the draft**; it does not silently authorise merging or deploying incomplete production changes.
+
+**Implemented after that approval:**
+- Put the finder before the subscription hero. Keep one H1, relevant search and event/filter shortcuts high on the page; retain newsletter acquisition as a second-stage invitation.
+- Compress the image-led signup band on desktop and mobile while preserving the SK8 master logo and free Friday proposition.
+- Remove the second homepage search and duplicated quick-answer strip; keep a distinct lower 'More than events' set of area hubs for editorial, history and practical updates.
+- Display the organiser's verified cost/booking caveats and session times on the current checked event cards rather than reducing meaningful restrictions to a misleading cost badge.
+- Read the four core localities from publication content configuration, not hardcoded JavaScript, so the feature can eventually be adapted to other titles without making a second publication prematurely.
+- Correct the preview visual QA marker to recognise the approved new homepage entry point.
+- Provide a dedicated source-level regression test and a real preview browser test across 390, 768 and 1366px, plus direct filters and failure-state checks. The browser test must run against a Cloudflare preview whose exact commit matches the PR head.
+- Improve diagnostics for an existing production subscriber smoke test that intermittently failed to start Chrome; do not suppress or reinterpret failed real-world assertions as success.
+
+**Pre-registered experiment hypotheses (not demonstrated results):**
+1. *First useful action*: a homepage which leads with an activity finder rather than a 650px mobile signup hero should increase useful finder/search/event-entry actions per first-time homepage visit. Compare against an established baseline, preserving privacy and noting any seasonality differences.
+2. *Useful event detail*: checked upcoming event cards that include honest cost/booking restrictions and time should improve the proportion of visitors who reach a relevant full event detail or actual organiser link, rather than merely increasing generic clicks.
+3. *NUE and relationship*: a small contextual Save in My SK8 continuation and direct evergreen error fallback should improve meaningful SK8-owned continuation and later return usefulness, without reducing genuine event success or pressuring newsletter signup.
+
+**Owner-time/asset hypothesis:** one shared checked event schema and calendar logic should save maintenance effort compared with hand-maintained duplicate homepage listings. The effect on owner hours and subscriber growth must be measured, not assumed. A JiveLoop Collective pattern is considered portable *only* if a future bounded title pilot proves the transfer saves time while retaining local relevance.
+
+**Hard acceptance gates:** Cloudflare build and exact preview SHA; source/route/JS syntax; browser checks including narrow viewport overflow and content hierarchy; no material failed CI job; manual visual judgement; correct editor/NUE classification; no unsupported claims; owner-controlled live deployment. When a browser QA test is flaky, diagnose the specific cause rather than waiving it.
+
+**Current release classification at this checkpoint:** Empire: **RETEST**; NUE: **RETEST**; production: **NOT AUTHORISED BY THIS TECHNICAL REVIEW**. Update this paragraph after the latest CI and browser evidence.
+
 ## Research and design basis
 - Nielsen Norman Group: homepage clarity, information scent, visible actions and scanning.
 - Baymard Institute: category navigation, search, and reducing choices.
@@ -135,7 +160,7 @@ These are **conceptual reviews, not validated improvements**. No claim of audien
 These are pattern references, not user testing or a claim that SK8 matches those publishers' inventory.
 
 ## 30 criticism passes: risk and corresponding correction
-1. Newsletter-first hero could overwhelm task seekers: put activity finder directly after hero; final goal should test moving it above signup.
+1. Newsletter-first hero could overwhelm task seekers: corrected in the approved follow-through by placing the finder **before** the signup hero; dedicated browser QA now checks first-screen ordering.
 2. Too many gateways: consolidate entry to core event calendar, existing guides and search.
 3. Visitors need an immediate answer: display four current checked listings.
 4. Content can be sparse: provide helpful guide fallback.
@@ -167,7 +192,7 @@ These are pattern references, not user testing or a claim that SK8 matches those
 30. Release could fail without QA: isolate on branch, open draft PR; require CI and actual browser checks before live approval.
 
 ## Ten implemented changes
-1. Task-first finder immediately after the homepage hero.
+1. Task-first finder before the homepage newsletter signup hero (revised after approval).
 2. Full-site search at the discovery entry point.
 3. Immediate Today and Weekend shortcuts using tested calendar parameters.
 4. Free-events route, distinct from evergreen Free & Cheap guide.
