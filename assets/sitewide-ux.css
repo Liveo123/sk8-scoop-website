@@ -102,11 +102,14 @@
   body[data-page="whats-on"] .whats-on-page-hero .button-row>a:first-child{
     grid-column:1/-1;min-height:46px!important
   }
-  body[data-page="whats-on"] .whats-on-page-hero .button-row>a:nth-child(n+2){
+  body[data-page="whats-on"] .whats-on-page-hero .button-row>a.sitewide-hero-secondary{
+    display:inline-flex;align-items:center;justify-content:center;
     min-width:0;min-height:46px!important;padding:10px 8px!important;
     font-size:.82rem!important;line-height:1.25!important;
-    background:#fff!important;color:#0c5260!important;
-    border:2px solid #0f6470!important;text-align:center
+    background:transparent!important;color:#0c5260!important;
+    border:1px solid #b9d0c9!important;border-radius:9px!important;
+    text-decoration:underline;text-underline-offset:3px;
+    text-align:center
   }
 }
 /* Don't bury useful guide options beneath oversized type on smaller phones. */
