@@ -5,6 +5,19 @@
   const list = document.querySelector('[data-reader-first-events]');
   const status = document.querySelector('[data-reader-first-status]');
   if (!list) return;
+  // Track only broad actions, never the visitor's search text or identity.
+  const finder = document.querySelector('.reader-first-discovery');
+  finder?.querySelectorAll('nav a, .reader-first-after a').forEach(link => {
+    link.dataset.trackEvent = 'homepage_finder_route_click';
+    link.dataset.linkLocation = 'home-reader-first-discovery';
+    link.dataset.nueLink = '';
+    link.dataset.nueType = 'reader-discovery';
+  });
+  finder?.querySelector('form.reader-first-search')?.addEventListener('submit', () => {
+    if (typeof window.sk8Track === 'function') {
+      window.sk8Track('homepage_finder_search_submit', { link_location: 'home-reader-first-discovery' });
+    }
+  });
   const core = window.SK8CalendarCore;
   const fallback = (message) => {
     list.replaceChildren();
@@ -16,9 +29,16 @@
     calendar.href = '/whats-on/';
     calendar.textContent = "Check What's On";
     const guide = document.createElement('a');
-    guide.href = '/free-cheap-guide/';
-    guide.textContent = 'Browse Free & Cheap';
-    links.append(calendar, document.createTextNode(' · '), guide);
+    // A working guide is a more useful fallback than another view of the same failed event feed.
+    guide.href = '/free-cheap-guide/guide/';
+    guide.textContent = 'Browse free and cheap local ideas';
+    guide.dataset.nueLink = '';
+    guide.dataset.nueType = 'direct-guide';
+    guide.dataset.trackEvent = 'homepage_finder_fallback_guide_click';
+    guide.dataset.linkLocation = 'home-reader-first-empty';
+    calendar.dataset.trackEvent = 'homepage_finder_fallback_calendar_click';
+    calendar.dataset.linkLocation = 'home-reader-first-empty';
+    links.append(guide, document.createTextNode(' · '), calendar);
     list.append(note, links);
     if (status) status.textContent = 'Useful alternatives are available below.';
   };
@@ -61,6 +81,10 @@
     const link = document.createElement('a');
     link.href = '/whats-on/?event=' + encodeURIComponent(event.id);
     link.textContent = String(event.title || '');
+    link.dataset.nueLink = '';
+    link.dataset.nueType = 'verified-event-detail';
+    link.dataset.trackEvent = 'homepage_finder_event_detail_click';
+    link.dataset.linkLocation = 'home-reader-first-event-card';
     title.appendChild(link);
     const details = document.createElement('p');
     details.className = 'reader-first-event-details';
