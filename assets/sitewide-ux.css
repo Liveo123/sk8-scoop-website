@@ -93,25 +93,8 @@
   }
   body:not(.reader-first-mode) .privacy-choices-settings{max-height:49vh;overflow-y:auto}
 }
-/* Events: primary result action first, compact optional save and submission
-   routes on phones instead of three equal full-width primary buttons. */
-@media(max-width:680px){
-  body[data-page="whats-on"] .whats-on-page-hero .button-row{
-    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px!important
-  }
-  body[data-page="whats-on"] .whats-on-page-hero .button-row>a:first-child{
-    grid-column:1/-1;min-height:46px!important
-  }
-  body[data-page="whats-on"] .whats-on-page-hero .button-row>a.sitewide-hero-secondary{
-    display:inline-flex;align-items:center;justify-content:center;
-    min-width:0;min-height:46px!important;padding:10px 8px!important;
-    font-size:.82rem!important;line-height:1.25!important;
-    background:transparent!important;color:#0c5260!important;
-    border:1px solid #b9d0c9!important;border-radius:9px!important;
-    text-decoration:underline;text-underline-offset:3px;
-    text-align:center
-  }
-}
+/* What’s On has a dedicated compact heading stylesheet, so it no longer
+   needs the now-removed hero button layout or conflicting mobile overrides. */
 /* Don't bury useful guide options beneath oversized type on smaller phones. */
 @media(max-width:680px){
   body[data-page="guides"] .page-hero h1{
