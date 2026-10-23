@@ -6,7 +6,7 @@ State: DRAFT / PREVIEW / production release not authorised
 
 This extends the approved homepage methodology to the connected SK8 Scoop site. It is a **site-wide UX programme**, not a claim that every historical or external microsite has been edited. Canonical production source: `Liveo123/sk8-scoop-website`, `main` after the approved PR #240 merge, commit `0897e2c`. The new changes are confined to a separate preview branch.
 
-Site surfaces reviewed in source: homepage; global navigation and search; What’s On agenda/calendar; search; Guides and Free & Cheap; Kids & Family/holiday-club finder; Around SK8 and the four core area hubs; My SK8; latest/archive; public submission/contact; advertiser and policy routes; sitemap. The sitemap contains **66 declared URLs**, including the main guides and local article pages. Some tools and independently hosted guides have their own design systems and are not silently modified by shared CSS.
+Site surfaces reviewed in source: homepage; global navigation and search; What’s On agenda/calendar; search; Guides and Free & Cheap; Kids & Family/holiday-club finder; Around SK8 and the four core area hubs; My SK8; latest/archive; public submission/contact; advertiser and policy routes; sitemap. The sitemap contains **68 declared URLs** (including the two SEO pilot event leaf pages), including the main guides and local article pages. Some tools and independently hosted guides have their own design systems and are not silently modified by shared CSS.
 
 Authority: latest explicit owner direction; current 01 Company Operating Manual, 02 Brand Manual, 03 Website & Digital Estate Manual; actual GitHub source; current owned event/guide source; tested preview. Search-engine cached versions are not evidence of today's live build.
 
@@ -113,11 +113,21 @@ The first tested preview passed 49 dedicated sitewide browser assertions, but sc
 
 Required after-production proof: privacy-safe measurement, comparison window, owner time cost, failed searches and honest adoption/change/stop decision. No fabricated conversions or projected empire value.
 
+## Source-first event SEO pilot, 23 October 2026
+
+**What changed:** Existing What’s On calendar metadata stays deliberately collection-focused. A previously overlooked JavaScript-generated `ItemList` was attaching simplified `Event` markup to all listings, including fictional ticket availability and insufficient address fields. That has been removed: no `Event` rich-result claims belong on the collection page.
+
+Two **actual** single-event static pages are now generated from the same checked `data/events.json` feed: Christmas Craft Night at Cheadle Library (12 November), and Lum Head's nursery/reception open day (19 November). Each uses a separately verified Stockport Council event listing, real UK time offsets, unique canonical and `Event` JSON-LD with validated venue address; no guessed imagery, ticket-stock or recurring dates. They are joined by crawlable What’s On links, organic site search, reader-first homepage routes and dated sitemap URLs. Other events keep the working existing What's On detail query.
+
+**Anti-staleness controls:** Source `seo` metadata contains only the approved venue facts and stable URL slug. `scripts/build-event-leaf-pages.mjs --check` compares the committed HTML byte-for-byte with current checked records and fails if an event page has already expired. The template also gives past-event visitors a clear notice and removes rendered event structured data while the next approved refresh removes/updates stale sitemap entries. Browser-side expiry alone does not guarantee deindexing, so owner-controlled content harvest and CI remain mandatory.
+
+**Release scope:** This does **not** authorise production deployment of PR #242. It does not prove Google indexing, organic traffic, new subscribers or event-rich-result placement. Search Console access is blocked by the inactive GSC Wizard subscription. See `docs/whats-on-seo-review-2026-10-23.md` for source evidence, eligibility tests, constraints and post-release measurement design.
+
 ## Canonical whole-site route census
 
-A separate read-only source/host check requests every canonical URL declared in the 66-entry sitemap **from the exact current Cloudflare preview**, without running forms, injecting tracking or changing data. It records the HTTP response, target route, title, H1, canonical element, response time and any inaccessible pages. Missing titles/H1/canonicals are documented warnings for editorial review; HTTP errors and pages not served as HTML block site-wide release.
+A separate read-only source/host check requests every canonical URL declared in the 68-entry sitemap **from the exact current Cloudflare preview**, without running forms, injecting tracking or changing data. It records the HTTP response, target route, title, H1, canonical element, response time and any inaccessible pages. Missing titles/H1/canonicals are documented warnings for editorial review; HTTP errors and pages not served as HTML block site-wide release.
 
-This complements the ten **browser-tested representative templates** (which verify navigation, click interactions, form/consent visuals, filter state, guide opening and mobile layout). A 66-page route census is not a claim that every interactive component on every page received manual user testing; expand checks for materially different future products before publishing.
+This complements the ten **browser-tested representative templates** (which verify navigation, click interactions, form/consent visuals, filter state, guide opening and mobile layout). A 68-page route census is not a claim that every interactive component on every page received manual user testing; expand checks for materially different future products before publishing.
 
 ## Preview QA checklist and remaining boundaries
 
