@@ -73,3 +73,174 @@ body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{background:lin
   body.reader-first-mode .privacy-choices-actions .privacy-text-button{grid-column:1/-1;min-height:40px;padding:5px;font-size:.85rem}
   body.reader-first-mode .privacy-choices-settings{max-height:49vh;overflow-y:auto}
 }
+
+/* Whole-homepage editorial polish, Oct 2026. Scoped above the historical V3-V5
+   homepage styles so the newsroom sections remain consistent without
+   changing the global website navigation or other publication pages. */
+
+/* 1. Vivid local artwork, with text protection only where text actually sits. */
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo{overflow:hidden}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo::before{
+  filter:saturate(1.25) contrast(1.12) brightness(1.035);
+  background-position:center 46%;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{
+  background:linear-gradient(90deg,#fffaf0 0%,rgba(255,250,240,.985) 27%,
+  rgba(255,250,240,.90) 42%,rgba(255,250,240,.58) 59%,
+  rgba(255,250,240,.16) 78%,rgba(255,250,240,0) 94%)!important;
+}
+
+/* 2. The newsletter offers a clear weekly benefit, not a second search entry. */
+body.reader-home.homepage-v3.reader-first-mode .reader-hero-copy{padding:15px 0 18px!important}
+body.reader-home.homepage-v3.reader-first-mode .reader-hero h2{font-size:clamp(1.8rem,2.65vw,2.5rem)}
+body.reader-home.homepage-v3.reader-first-mode .home-newsletter-usefulness{
+  display:flex;align-items:center;flex-wrap:wrap;gap:5px 10px;
+  margin:8px 0 0;color:#0a5360;font-size:.8rem;line-height:1.45;font-weight:850;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-newsletter-usefulness span{color:#b76313}
+body.reader-home.homepage-v3.reader-first-mode .reader-signup .button{
+  color:#fff!important;background:#0f6470!important;font-weight:850;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-signup .button:hover,
+body.reader-home.homepage-v3.reader-first-mode .reader-signup .button:focus-visible{
+  background:#0a4f59!important;color:#fff!important;
+}
+
+/* 3. First screen: stronger useful-action focus, no ornamental density. */
+body.reader-home.homepage-v3.reader-first-mode .reader-first-intro h1{
+  max-width:850px;letter-spacing:-.035em;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-search{
+  box-shadow:0 5px 18px rgba(7,63,72,.045);
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-chips a:hover{
+  border-color:#0f6470;text-decoration:underline;text-underline-offset:3px;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-event{
+  border-color:#c8dbd5;box-shadow:0 7px 20px rgba(13,58,63,.052);
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-event-body h3{
+  font-size:clamp(1.04rem,1.15vw,1.16rem);letter-spacing:-.015em;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-date{
+  background:#e6f0ed;border:1px solid #d2e4de;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-first-event-checked{
+  font-size:.77rem;color:#52676b;
+}
+
+/* 4. Sitewide continuity: category grids complement rather than duplicate
+   What's On and the guide shelf. Six focused editorial routes, 3 x 2 desktop. */
+body.reader-home.homepage-v3.reader-first-mode [data-explore-grid]{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:13px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-explore-tile{
+  min-height:172px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-explore-copy strong{
+  font-size:1rem;line-height:1.2;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-locality-strip{
+  box-shadow:none;margin-bottom:20px;
+}
+
+/* 5. News stays visibly independent of sponsorship; tidy reading rhythm. */
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story h3{
+  line-height:1.18;letter-spacing:-.02em;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story p[data-story-summary]{
+  line-height:1.5;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story .reader-link:focus-visible{
+  outline:3px solid #df731c;outline-offset:3px;
+}
+
+/* 6. Less wasted space in approved-guide artwork, no forced cropping or logo distortion. */
+body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-visual{
+  height:156px!important;min-height:156px!important;padding:10px 14px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-visual img{
+  max-height:132px!important;max-width:90%!important;object-fit:contain!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-resource-visual img{
+  max-width:75%!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-copy h3{
+  font-size:1.34rem;line-height:1.2;
+}
+
+/* 7. Contributions should be an easy, compact action, not another wall of cards. */
+body.reader-home.homepage-v3.reader-first-mode .reader-take-part{
+  padding-top:27px!important;padding-bottom:33px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-action{
+  min-height:0!important;padding:16px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-action p{
+  font-size:.86rem!important;
+}
+
+@media(max-width:900px){
+  body.reader-home.homepage-v3.reader-first-mode [data-explore-grid]{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:680px){
+  /* Keep the signup readable while revealing a real strip of the illustration,
+     rather than suppressing the picture almost completely on phones. */
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-copy{
+    padding:16px 0 96px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo::before{
+    inset:auto 0 0 0!important;height:90px!important;opacity:1!important;
+    background-position:center 54%!important;
+    filter:saturate(1.26) contrast(1.13) brightness(1.02);
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{
+    background:linear-gradient(180deg,#fffaf0 0%,#fffaf0 74%,
+      rgba(255,250,240,.8) 81%,rgba(255,250,240,.08) 96%)!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-newsletter-usefulness{
+    gap:3px 7px;font-size:.76rem;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-locality-links{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-locality-links a{
+    min-height:46px;padding:9px 10px;font-size:.8rem;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-visual{
+    height:132px!important;min-height:132px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-visual img{
+    max-height:115px!important;
+  }
+}
+@media(max-width:430px){
+  body.reader-home.homepage-v3.reader-first-mode [data-explore-grid]{
+    grid-template-columns:1fr!important;gap:10px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-tile{
+    display:grid!important;grid-template-columns:118px minmax(0,1fr)!important;
+    min-height:116px!important;align-items:stretch;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-visual{
+    width:118px!important;height:100%!important;min-height:116px!important;
+    flex-basis:auto!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-copy{
+    min-height:0!important;padding:13px 12px!important;align-self:stretch;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-copy small{
+    font-size:.77rem;line-height:1.36;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-first-intro h1{
+    font-size:clamp(1.85rem,8.7vw,2.35rem);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body.reader-home.homepage-v3.reader-first-mode .reader-explore-tile,
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-card{
+    transition:none!important;transform:none!important;
+  }
+}
