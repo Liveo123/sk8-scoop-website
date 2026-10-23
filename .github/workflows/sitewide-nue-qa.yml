@@ -15,7 +15,9 @@ on:
       - 'guides/index.html'
       - 'sitemap.xml'
       - 'docs/sitewide-ux-audit-2026-10-23.md'
+      - 'docs/whats-on-seo-review-2026-10-23.md'
       - 'scripts/check-sitewide-nue.mjs'
+      - 'scripts/check-whats-on-seo.mjs'
       - 'tests/sitewide-ux-preview-browser.mjs'
       - 'tests/sitewide-url-audit.mjs'
       - '.github/workflows/sitewide-nue-qa.yml'
@@ -40,6 +42,7 @@ jobs:
             node --check "$file"
           done
           node scripts/check-sitewide-nue.mjs
+          node scripts/check-whats-on-seo.mjs
           node scripts/check-current-content.mjs
           node scripts/check-homepage-v3.mjs
           node scripts/check-post-launch-v2.mjs
