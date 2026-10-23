@@ -16,6 +16,7 @@ on:
       - 'docs/sitewide-ux-audit-2026-10-23.md'
       - 'scripts/check-sitewide-nue.mjs'
       - 'tests/sitewide-ux-preview-browser.mjs'
+      - 'tests/sitewide-url-audit.mjs'
       - '.github/workflows/sitewide-nue-qa.yml'
 permissions:
   contents: read
@@ -125,6 +126,10 @@ jobs:
           PREVIEW_URL: ${{ env.PREVIEW_URL }}
           CHROME: ${{ env.CHROME }}
         run: node tests/sitewide-ux-preview-browser.mjs
+      - name: Scan all 66 sitemap pages in exact release preview
+        env:
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
+        run: node tests/sitewide-url-audit.mjs
       - name: Preserve page screenshots and QA decisions
         if: always()
         uses: actions/upload-artifact@v4
