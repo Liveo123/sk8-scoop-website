@@ -1,7 +1,7 @@
 {
   "project": "SK8 Scoop 52 Adventures",
   "date": "2026-10-23",
-  "status": "OWNER_SELECTIONS_RECORDED_NOT_PUBLISHED",
+  "status": "ALL_SIX_SELECTIONS_VISIBLE_IN_REVIEW__FULL_RES_PENDING",
   "objective": "Use exact owner-supplied Midjourney artwork on chapter/adventure cards; do not replace original supplied images with new generated approximations.",
   "editorial_rule": "All AI imagery that could be mistaken for real venues or geography must be labelled editorial illustration, not documentary photography.",
   "guide_branch": "preview/52-adventures-image-review-2026-10-23",
@@ -12,9 +12,15 @@
       "source": "User's first image in 23 October five-image message",
       "description": "Brick mill courtyard looking upwards towards tall industrial chimney against turquoise sky",
       "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
-      "status": "SOURCE_IMAGE_NOT_YET_MOUNTED_IN_WEBSITE_ASSETS",
+      "status": "PROOF_THUMBNAIL_STAGED_IN_REVIEW_ONLY",
       "alt": "Editorial illustration of old brick industrial buildings and a mill chimney beneath a bright sky; not a documentary photograph of Hat Works.",
-      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork)."
+      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork).",
+      "preview_image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792775437/sk8-scoop/52-adventures/review-only-2026-10-23/owner-hat-works-preview-thumb-only.png",
+      "canva_asset_id": "MAHY2PLz4u8",
+      "source_import_status": "ORIGINAL_STORED_IN_CANVA",
+      "preview_width": 199,
+      "preview_height": 150,
+      "production_ready": false
     },
     {
       "placement": "Adventure 06",
@@ -23,7 +29,8 @@
       "description": "Theatrically illuminated chess pieces",
       "basis": "ORIGINAL - SK8 Scoop",
       "status": "STAGED_IN_PR_241",
-      "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792152710/sk8-scoop/issue17/chess-editorial-original-v7.png"
+      "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792152710/sk8-scoop/issue17/chess-editorial-original-v7.png",
+      "production_ready": true
     },
     {
       "placement": "Adventure 10",
@@ -31,9 +38,15 @@
       "source": "User's second image in 23 October five-image message",
       "description": "Dramatic black vintage multi-prop aircraft at golden hour",
       "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
-      "status": "SOURCE_IMAGE_NOT_YET_MOUNTED_IN_WEBSITE_ASSETS",
+      "status": "PROOF_THUMBNAIL_STAGED_IN_REVIEW_ONLY",
       "alt": "Dramatic editorial illustration of a vintage propeller aircraft at sunset; not a verified museum exhibit.",
-      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork)."
+      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork).",
+      "preview_image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792775210/sk8-scoop/52-adventures/review-only-2026-10-23/owner-avro-preview-thumb-only.png",
+      "canva_asset_id": "MAHY2FQ28oI",
+      "source_import_status": "ORIGINAL_STORED_IN_CANVA",
+      "preview_width": 199,
+      "preview_height": 150,
+      "production_ready": false
     },
     {
       "placement": "Adventure 32",
@@ -41,9 +54,15 @@
       "source": "User's fifth image in 23 October five-image message",
       "description": "Flower-lined curved garden path, visitors, warm low sun",
       "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
-      "status": "SOURCE_IMAGE_NOT_YET_MOUNTED_IN_WEBSITE_ASSETS",
+      "status": "PROOF_THUMBNAIL_STAGED_IN_REVIEW_ONLY",
       "alt": "Editorial illustration of a curving path through colourful garden flowers at sunset; not documentary photography of RHS Bridgewater.",
-      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork)."
+      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork).",
+      "preview_image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792775296/sk8-scoop/52-adventures/review-only-2026-10-23/owner-rhs-flower-walk-preview-thumb-only.png",
+      "canva_asset_id": "MAHY2FZuVl4",
+      "source_import_status": "ORIGINAL_STORED_IN_CANVA",
+      "preview_width": 199,
+      "preview_height": 150,
+      "production_ready": false
     },
     {
       "placement": "Chapter 01",
@@ -51,10 +70,16 @@
       "source": "User's fourth image in 23 October five-image message",
       "description": "Atmospheric historic street with vintage car and layered archival-paper collage",
       "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
-      "status": "CHAPTER_ASSIGNED_SOURCE_IMAGE_NOT_YET_MOUNTED",
+      "status": "PROOF_THUMBNAIL_STAGED_IN_REVIEW_ONLY",
       "alt": "Illustrated historic street with old brick architecture, a vintage vehicle and layered archival-paper textures; an imagined scene.",
       "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork).",
-      "reason": "Strongest match for tunnels, old buildings, hidden history and heritage rather than current cultural outings."
+      "reason": "Strongest match for tunnels, old buildings, hidden history and heritage rather than current cultural outings.",
+      "preview_image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792775287/sk8-scoop/52-adventures/review-only-2026-10-23/owner-heritage-street-preview-thumb-only.png",
+      "canva_asset_id": "MAHY2NKNPlc",
+      "source_import_status": "ORIGINAL_STORED_IN_CANVA",
+      "preview_width": 199,
+      "preview_height": 150,
+      "production_ready": false
     },
     {
       "placement": "Chapter 03",
@@ -62,10 +87,16 @@
       "source": "User's third image in 23 October five-image message",
       "description": "Mountain lake and stone footpath layered with old maps and worn paper",
       "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
-      "status": "CHAPTER_ASSIGNED_SOURCE_IMAGE_NOT_YET_MOUNTED",
+      "status": "PROOF_THUMBNAIL_STAGED_IN_REVIEW_ONLY",
       "alt": "Stylised editorial collage of a footpath leading to a mountain lake, layered with faded maps; imaginary landscape, not a walking route.",
       "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork).",
-      "reason": "Best match for countryside, ridges, waterways and walking adventures."
+      "reason": "Best match for countryside, ridges, waterways and walking adventures.",
+      "preview_image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792775292/sk8-scoop/52-adventures/review-only-2026-10-23/owner-outdoors-mountain-preview-thumb-only.png",
+      "canva_asset_id": "MAHY2NrBdtU",
+      "source_import_status": "ORIGINAL_STORED_IN_CANVA",
+      "preview_width": 199,
+      "preview_height": 150,
+      "production_ready": false
     }
   ],
   "guardrails": {
@@ -78,5 +109,9 @@
     "Copy five exact chat-uploaded Midjourney images into a website-accessible asset store (not possible with current connected upload tools)",
     "Use independent chapter-only keys/URLs for Chapter 01 and 03, keeping adventure photos unchanged",
     "Complete final rights register rows, desktop/mobile crops and visual QA before requesting separate publication approval"
-  ]
+  ],
+  "updated_at": "2026-10-23",
+  "current_preview": "/52-adventures/image-review-2026-10-23/",
+  "production_ready": false,
+  "notes": "Five user originals imported to Canva successfully (1232x928). Five durable Cloudinary thumbnail proofs (199x150) used ONLY in image-selection page. The Issue 17 Plaza original is staged in full-guide branch. Do not publish thumbnail proofs. Existing guide photos continue for remaining items."
 }
