@@ -38,7 +38,7 @@ jobs:
           node-version: '22'
       - name: Validate shared code, UX integrity and release rules
         run: |
-          for file in assets/site.js assets/config.js assets/search.js assets/global-search.js assets/whats-on.js tests/sitewide-ux-preview-browser.mjs; do
+          for file in assets/site.js assets/config.js assets/search.js assets/global-search.js assets/whats-on.js scripts/check-whats-on-seo.mjs tests/sitewide-ux-preview-browser.mjs; do
             node --check "$file"
           done
           node scripts/check-sitewide-nue.mjs
