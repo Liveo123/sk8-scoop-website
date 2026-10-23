@@ -69,6 +69,16 @@
   const applySubscriberState = () => {
     if (!readSubscriber()) return;
     document.body.dataset.recognisedSubscriber = 'true';
+    // An existing reader should reach the useful guide itself, not another
+    // newsletter-unlock landing page. New readers retain the current entry path.
+    const directGuides = {
+      '/free-cheap-guide/': '/free-cheap-guide/guide/',
+      '/52-adventures/': '/52-adventures/guide/'
+    };
+    document.querySelectorAll('main a[href]').forEach(link => {
+      const direct = directGuides[link.getAttribute('href')];
+      if (direct) link.setAttribute('href', direct);
+    });
 
     const heroForm = document.querySelector('.reader-hero .reader-signup');
     if (heroForm) {
