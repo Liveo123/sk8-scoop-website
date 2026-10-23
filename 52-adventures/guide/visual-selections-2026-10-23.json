@@ -1,0 +1,82 @@
+{
+  "project": "SK8 Scoop 52 Adventures",
+  "date": "2026-10-23",
+  "status": "OWNER_SELECTIONS_RECORDED_NOT_PUBLISHED",
+  "objective": "Use exact owner-supplied Midjourney artwork on chapter/adventure cards; do not replace original supplied images with new generated approximations.",
+  "editorial_rule": "All AI imagery that could be mistaken for real venues or geography must be labelled editorial illustration, not documentary photography.",
+  "guide_branch": "preview/52-adventures-image-review-2026-10-23",
+  "image_selections": [
+    {
+      "placement": "Adventure 02",
+      "name": "Hat Works",
+      "source": "User's first image in 23 October five-image message",
+      "description": "Brick mill courtyard looking upwards towards tall industrial chimney against turquoise sky",
+      "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
+      "status": "SOURCE_IMAGE_NOT_YET_MOUNTED_IN_WEBSITE_ASSETS",
+      "alt": "Editorial illustration of old brick industrial buildings and a mill chimney beneath a bright sky; not a documentary photograph of Hat Works.",
+      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork)."
+    },
+    {
+      "placement": "Adventure 06",
+      "name": "Stockport Plaza",
+      "source": "Earlier Issue 17 CHESS editorial illustration",
+      "description": "Theatrically illuminated chess pieces",
+      "basis": "ORIGINAL - SK8 Scoop",
+      "status": "STAGED_IN_PR_241",
+      "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792152710/sk8-scoop/issue17/chess-editorial-original-v7.png"
+    },
+    {
+      "placement": "Adventure 10",
+      "name": "Avro Heritage Museum",
+      "source": "User's second image in 23 October five-image message",
+      "description": "Dramatic black vintage multi-prop aircraft at golden hour",
+      "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
+      "status": "SOURCE_IMAGE_NOT_YET_MOUNTED_IN_WEBSITE_ASSETS",
+      "alt": "Dramatic editorial illustration of a vintage propeller aircraft at sunset; not a verified museum exhibit.",
+      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork)."
+    },
+    {
+      "placement": "Adventure 32",
+      "name": "RHS Garden Bridgewater",
+      "source": "User's fifth image in 23 October five-image message",
+      "description": "Flower-lined curved garden path, visitors, warm low sun",
+      "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
+      "status": "SOURCE_IMAGE_NOT_YET_MOUNTED_IN_WEBSITE_ASSETS",
+      "alt": "Editorial illustration of a curving path through colourful garden flowers at sunset; not documentary photography of RHS Bridgewater.",
+      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork)."
+    },
+    {
+      "placement": "Chapter 01",
+      "name": "Secret staircases & old walls",
+      "source": "User's fourth image in 23 October five-image message",
+      "description": "Atmospheric historic street with vintage car and layered archival-paper collage",
+      "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
+      "status": "CHAPTER_ASSIGNED_SOURCE_IMAGE_NOT_YET_MOUNTED",
+      "alt": "Illustrated historic street with old brick architecture, a vintage vehicle and layered archival-paper textures; an imagined scene.",
+      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork).",
+      "reason": "Strongest match for tunnels, old buildings, hidden history and heritage rather than current cultural outings."
+    },
+    {
+      "placement": "Chapter 03",
+      "name": "Canals, ridges & muddy boots",
+      "source": "User's third image in 23 October five-image message",
+      "description": "Mountain lake and stone footpath layered with old maps and worn paper",
+      "basis": "ORIGINAL - owner-supplied Midjourney illustration; underlying owner rights to confirm",
+      "status": "CHAPTER_ASSIGNED_SOURCE_IMAGE_NOT_YET_MOUNTED",
+      "alt": "Stylised editorial collage of a footpath leading to a mountain lake, layered with faded maps; imaginary landscape, not a walking route.",
+      "credit": "Illustration: SK8 Scoop (owner-supplied AI artwork).",
+      "reason": "Best match for countryside, ridges, waterways and walking adventures."
+    }
+  ],
+  "guardrails": {
+    "do_not_merge": true,
+    "do_not_publish": true,
+    "other_selected_images_unchanged": true,
+    "avoid_replacing_adventure_12_marple_or_adventure_21_little_moreton_hall_through_shared_image_keys": true
+  },
+  "next_steps": [
+    "Copy five exact chat-uploaded Midjourney images into a website-accessible asset store (not possible with current connected upload tools)",
+    "Use independent chapter-only keys/URLs for Chapter 01 and 03, keeping adventure photos unchanged",
+    "Complete final rights register rows, desktop/mobile crops and visual QA before requesting separate publication approval"
+  ]
+}
