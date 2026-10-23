@@ -81,7 +81,7 @@ body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{background:lin
 /* 1. Vivid local artwork, with text protection only where text actually sits. */
 body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo{overflow:hidden}
 body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo::before{
-  filter:saturate(1.25) contrast(1.12) brightness(1.035);
+  filter:saturate(1.20) contrast(1.10) brightness(1.025);
   background-position:center 46%;
 }
 body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{
@@ -194,7 +194,7 @@ body.reader-home.homepage-v3.reader-first-mode .reader-action p{
   body.reader-home.homepage-v3.reader-first-mode .reader-hero-photo::before{
     inset:auto 0 0 0!important;height:90px!important;opacity:1!important;
     background-position:center 54%!important;
-    filter:saturate(1.26) contrast(1.13) brightness(1.02);
+    filter:saturate(1.20) contrast(1.10) brightness(1.02);
   }
   body.reader-home.homepage-v3.reader-first-mode .reader-hero-shade{
     background:linear-gradient(180deg,#fffaf0 0%,#fffaf0 74%,
@@ -242,5 +242,26 @@ body.reader-home.homepage-v3.reader-first-mode .reader-action p{
   body.reader-home.homepage-v3.reader-first-mode .reader-explore-tile,
   body.reader-home.homepage-v3.reader-first-mode .home-resource-card{
     transition:none!important;transform:none!important;
+  }
+}
+
+/* Third editorial image was too small inside a large empty field. Let the
+   approved story artwork cover its deliberate frame, with a readable label. */
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story:nth-child(3) .dicm-visual{
+  display:block!important;position:relative!important;overflow:hidden!important;
+  height:224px!important;min-height:224px!important;padding:0!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story:nth-child(3) .dicm-art{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center 48%!important;
+  padding:0!important;background:#f7faf8!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story:nth-child(3) .dicm-mode-label{
+  position:absolute!important;left:13px!important;top:13px!important;
+  margin:0!important;z-index:2!important;
+}
+@media(max-width:680px){
+  body.reader-home.homepage-v3.reader-first-mode .reader-worth .reader-story:nth-child(3) .dicm-visual{
+    height:205px!important;min-height:205px!important;
   }
 }
