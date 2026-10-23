@@ -133,7 +133,9 @@
           summary: event.description || '',
           // An exact SK8 detail with checked dates, costs and booking source is
           // a safer first step than dropping the reader at an unexplained URL.
-          href: '/whats-on/?event=' + encodeURIComponent(id),
+          href: event.seo && /^[a-z0-9-]+$/.test(String(event.seo.slug || ''))
+            ? '/whats-on/events/' + event.seo.slug + '/'
+            : '/whats-on/?event=' + encodeURIComponent(id),
           area: ['Cheadle', 'Cheadle Hulme', 'Gatley', 'Heald Green'].includes(event.area) ? event.area : 'Nearby',
           areas: [],
           tags: [event.category || '', event.venue || '', event.cost || '', 'event', 'things to do'],
