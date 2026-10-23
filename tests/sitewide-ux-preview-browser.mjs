@@ -316,6 +316,65 @@ try {
     await evaluate("Boolean([...document.querySelectorAll('.search-result-card a')].find(a=>a.getAttribute('href')==="+exactLink+"))"));
   await screenshot('mobile-search-verified.png');
 
+  // Validate real static event leaf pages against the same checked event feed.
+  // No external booking, email submission or payment is triggered by this QA.
+  const pilotEvents=[
+    ['cheadle-library-christmas-craft-night-2026-11-12',
+      '/whats-on/events/cheadle-library-christmas-craft-night-2026/'],
+    ['lum-head-2027-intake-open-day-2026-11-19',
+      '/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/']
+  ];
+  for (const [eventId,route] of pilotEvents) {
+    await navigate(route);
+    await waitFor("Boolean(document.querySelector('[data-sk8-event-actions] .my-sk8-save'))",
+      'local save and plan controls on '+route);
+    const pageInfo=await evaluate(`(async()=>{
+      const source=await fetch('/data/events.json',{cache:'no-store'}).then(r=>r.json());
+      const event=source.find(e=>e.id===${JSON.stringify(eventId)});
+      const schema=JSON.parse(document.querySelector('#sk8-single-event-schema')?.textContent||'{}');
+      const article=document.querySelector('.event-leaf-article');
+      return {
+        sourcePresent:!!event,bodyId:document.body.dataset.sk8EventId,
+        title:document.querySelector('h1')?.textContent.trim(),
+        titleCount:document.querySelectorAll('h1').length,
+        schemaType:schema['@type'],schemaName:schema.name,
+        date:schema.startDate,dateSource:event?.date,
+        venue:schema.location?.name,address:schema.location?.address,
+        ownCanonical:document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
+        sourceVisible:article?.textContent.includes(event?.cost),
+        officialHref:document.querySelector('[data-event-primary]')?.getAttribute('href'),
+        actions:document.querySelectorAll('[data-sk8-event-actions] .my-sk8-action').length,
+        sourceActions:window.SK8_EVENT_DATA?.length,
+        eventArtwork:article?.querySelectorAll('img').length,
+        viewport:document.documentElement.clientWidth,
+        scrollWidth:document.documentElement.scrollWidth
+      };
+    })()`);
+    check('Full verified event leaf content, address and self-canonical: '+eventId,
+      pageInfo.sourcePresent && pageInfo.bodyId===eventId &&
+      pageInfo.titleCount===1 && pageInfo.title===pageInfo.schemaName &&
+      pageInfo.schemaType==='Event' &&
+      pageInfo.date?.startsWith(pageInfo.dateSource+'T') &&
+      pageInfo.address?.addressCountry==='GB' &&
+      Boolean(pageInfo.address?.streetAddress)&&Boolean(pageInfo.address?.postalCode) &&
+      pageInfo.ownCanonical==='https://www.sk8scoop.com'+route &&
+      pageInfo.sourceVisible && pageInfo.officialHref?.startsWith('https://www.stockport.gov.uk/events/') &&
+      pageInfo.actions>=4 && pageInfo.sourceActions===1 &&
+      pageInfo.eventArtwork===0 && pageInfo.scrollWidth<=pageInfo.viewport+2,
+      JSON.stringify(pageInfo));
+    await screenshot('mobile-event-'+eventId+'.png');
+  }
+  await navigate('/search/?q=Christmas+Craft+Night');
+  await waitFor("Boolean(document.querySelector('.search-result-card a[href*=christmas-craft-night]'))",
+    'source-checked event page appears in search');
+  check('Search links directly to the new eligible event page',
+    await evaluate("Boolean(document.querySelector('.search-result-card a[href=\"/whats-on/events/cheadle-library-christmas-craft-night-2026/\"]'))"));
+  await navigate('/whats-on/');
+  await waitFor("document.querySelectorAll('.whats-on-pilot-links li').length===2",
+    'two dated static event links at the end of calendar');
+  check('What’s On contains two crawlable pilot routes',
+    await evaluate("['/whats-on/events/cheadle-library-christmas-craft-night-2026/','/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/'].every(h=>Boolean(document.querySelector('.whats-on-pilot-pages a[href=\"'+h+'\"]')))"));
+
   await navigate('/whats-on/?filter=weekend&area=Gatley');
   const compact=await evaluate(`(() => {
     const hero=document.querySelector('.whats-on-compact-hero');
