@@ -83,7 +83,10 @@
     body.className = 'reader-first-event-body';
     const title = document.createElement('h3');
     const link = document.createElement('a');
-    link.href = '/whats-on/?event=' + encodeURIComponent(event.id);
+    const slug = String(event.seo?.slug || '');
+    link.href = /^[a-z0-9-]+$/.test(slug)
+      ? '/whats-on/events/' + slug + '/'
+      : '/whats-on/?event=' + encodeURIComponent(event.id);
     link.textContent = String(event.title || '');
     link.dataset.nueLink = '';
     link.dataset.nueType = 'verified-event-detail';
