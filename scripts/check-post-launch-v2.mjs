@@ -46,6 +46,7 @@ contains('whats-on/index.html','data-event-filter="week"');
 contains('whats-on/index.html','"@type":"CollectionPage"');
 excludes('assets/whats-on.js', "sk8-event-list-schema");
 excludes('assets/whats-on.js', "'@type': 'Event'");
+contains('whats-on/index.html','whats-on-pilot-pages');
 contains('assets/whats-on.js','activeArea');
 contains('assets/whats-on.js','event_detail_click');
 
