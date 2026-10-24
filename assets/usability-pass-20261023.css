@@ -380,3 +380,22 @@ body[data-page="whats-on"] .whats-on-header-links a.whats-on-holiday-quicklink:f
     min-height:50px!important;
   }
 }
+
+
+/* Home placement: after the newsletter hero and before current editorial picks.
+   Expiry removes the whole section, so no empty spacer remains in November. */
+body.reader-home.reader-first-mode .holiday-club-home-section{
+  background:#fffaf0;
+  padding:11px 0 12px;
+}
+body.reader-home.reader-first-mode .holiday-club-home-section .holiday-club-spotlight{
+  margin:5px 0!important;
+}
+@media(max-width:600px){
+  body.reader-home.reader-first-mode .holiday-club-home-section{
+    padding:9px 0;
+  }
+  body.reader-home.reader-first-mode .holiday-club-home-section .holiday-club-spotlight{
+    margin:0!important;
+  }
+}
