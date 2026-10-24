@@ -53,7 +53,7 @@ window.SK8_CONFIG = {
     dateDisplay: "Friday 23 October 2026",
     title: "Issue 18 · Friday 23 October 2026",
     headline: "Anson steam weekend, a boxing kangaroo and Gatley path closures",
-    summary: "Anson Museum steam weekend, Reda\'s boxing-kangaroo recollection, Gatley footpath changes, holiday clubs and useful half-term ideas.",
+    summary: "Anson Museum steam weekend, Reda's boxing-kangaroo recollection, Gatley footpath changes, holiday clubs and useful half-term ideas.",
     url: "/issues/issue-18/"
   },
   stripeLinks: {
