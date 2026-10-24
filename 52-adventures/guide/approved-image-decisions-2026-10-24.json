@@ -1,0 +1,180 @@
+{
+  "version": "2026-10-24",
+  "status": "OWNER_APPROVED_VISUAL_CHOICES__REUSE_RIGHTS_NOT_YET_CLEARED",
+  "guide": "SK8 Scoop 52 Adventures",
+  "branch": "preview/52-adventures-image-review-2026-10-23",
+  "draft_pr": 241,
+  "approval_scope": "Option selection for unpublished review ONLY; no approval to publish or copy unlicensed third-party images",
+  "selected": [
+    {
+      "order": 1,
+      "adventure": 5,
+      "name": "Underbanks",
+      "choice": "A · lively street",
+      "photo": "https://images.ctfassets.net/ii3xdrqc6nfw/4YsTWmg0DQ2gA24VHOjMh1/c079837a74bf78434fe53edb5b1b0c9d/modern-1.jpg?fm=webp&q=89",
+      "source": "https://www.stockport.gov.uk/visit-the-underbanks",
+      "publisher": "Stockport Council",
+      "basis": "PERMISSION REQUIRED",
+      "status": "SELECTED · RIGHTS PENDING",
+      "description": "Real Underbanks scene with pedestrians, street stalls and bunting; authentic, but no reusable licence located.",
+      "alt": "Crowds, outdoor market stalls and bunting along Little Underbank, Stockport."
+    },
+    {
+      "order": 2,
+      "adventure": 3,
+      "name": "Staircase House",
+      "choice": "B · furnished historic interior",
+      "photo": "https://manchester.newmindmedia.com/wsimgs/staircase%20house%281%29.jpg",
+      "source": "https://www.visitmanchester.com/listing/staircase-house/8540101/",
+      "publisher": "Visit Manchester",
+      "basis": "PERMISSION REQUIRED",
+      "status": "SELECTED · RIGHTS PENDING",
+      "description": "Period-furnished interior photographed at Staircase House. Better than the façade; not cleared for SK8 reuse.",
+      "alt": "Historically furnished room with wooden furniture and ceiling beams at Staircase House."
+    },
+    {
+      "order": 3,
+      "adventure": 1,
+      "name": "Stockport Air Raid Shelters",
+      "choice": "B · recreated wartime kitchen",
+      "photo": "https://media-cdn.tripadvisor.com/media/photo-s/1a/d4/f6/a0/20200115-105834-largejpg.jpg",
+      "source": "https://www.tripadvisor.co.uk/Attraction_Review-g528793-d565875-Reviews-Stockport_Air_Raid_Shelters-Stockport_Greater_Manchester_England.html",
+      "publisher": "Visitor photograph hosted by Tripadvisor",
+      "basis": "RIGHTS UNCLEAR",
+      "status": "SELECTED · PHOTOGRAPHER PERMISSION NEEDED",
+      "description": "The recreated wartime kitchen inside the sandstone tunnel. Tripadvisor hosting does not convey permission.",
+      "alt": "Replica wartime kitchen with enamel crockery, tiled sink and display furniture inside the air raid shelters."
+    },
+    {
+      "order": 4,
+      "adventure": 7,
+      "name": "Foodie Friday",
+      "choice": "A · actual night market",
+      "photo": "https://images.ctfassets.net/ii3xdrqc6nfw/kJxn9KnMAANGwaLtIQ2PR/db580dfd195f16726d8237ed582685e0/Foodie_Friday_in_Stockport_Maret_Place_at_night.jpg?fm=webp&q=89",
+      "source": "https://www.stockport.gov.uk/regular-events",
+      "publisher": "Stockport Council",
+      "basis": "PERMISSION REQUIRED",
+      "status": "SELECTED · RIGHTS PENDING",
+      "description": "Real evening crowd and food stalls at Foodie Friday. Preferred main image; the illustrated food market is a secondary artwork, not a substitute documentary photograph.",
+      "alt": "Food stalls and visitors in Stockport Market Place at Foodie Friday after dark."
+    },
+    {
+      "order": 6,
+      "adventure": 2,
+      "name": "Hat Works",
+      "choice": "A · real hat machinery",
+      "photo": "https://images.ctfassets.net/ii3xdrqc6nfw/6CmkPo7I45lKvIMZ5LIwap/50244c7f6f901e9d3c340648edd955da/machinery-.jpg?fm=webp&q=89",
+      "source": "https://www.stockport.gov.uk/exploring-the-museum",
+      "publisher": "Stockport Council",
+      "basis": "PERMISSION REQUIRED",
+      "status": "SELECTED · RIGHTS PENDING",
+      "description": "Real hat-making machinery at Hat Works. Keep the existing approved chimney illustration until the preferred picture is cleared.",
+      "alt": "Large historic hat-forming machine, wheel and mechanism inside Hat Works."
+    },
+    {
+      "order": 7,
+      "adventure": 23,
+      "name": "Paradise Mill",
+      "choice": "A · original loom hall",
+      "photo": "https://www.creativetourist.com/app/uploads/2021/03/ae815ed0d8f4032276c2b7a41442c3ef-623x438.jpg",
+      "source": "https://www.creativetourist.com/venue/paradise-mill/",
+      "publisher": "Creative Tourist",
+      "basis": "PERMISSION REQUIRED",
+      "status": "SELECTED · RIGHTS PENDING",
+      "description": "Jacquard looms in the actual mill interior, more useful than a brick exterior.",
+      "alt": "Long weaving room with historic silk looms and spools inside Paradise Mill."
+    },
+    {
+      "order": 8,
+      "adventure": 41,
+      "name": "Museum of Transport",
+      "choice": "A · historic double-deckers",
+      "photo": "https://assets.simpleviewinc.com/simpleview/image/upload/c_limit%2Ch_1200%2Cq_75%2Cw_1200/v1/clients/manchester/museum2_web_1__222c0415-1280-4813-a475-6bf37ca26218.jpg",
+      "source": "https://www.visitmanchester.com/ideas-and-inspiration/blog/post/museum-of-transport-greater-manchester-announces-reopening-plans/",
+      "publisher": "Visit Manchester",
+      "basis": "PERMISSION REQUIRED",
+      "status": "SELECTED SUBJECT · SOURCE-SHOT MATCH TO CONFIRM",
+      "description": "Actual restored double-deckers inside the museum. This is a matching real-venue example of your chosen visual treatment; the previous image A's precise photographer has not yet been established.",
+      "alt": "Restored red-and-cream double-decker buses on display at the Museum of Transport Greater Manchester."
+    },
+    {
+      "order": 9,
+      "adventure": 36,
+      "name": "Science and Industry Museum",
+      "choice": "A · textiles demonstration",
+      "photo": "https://www.scienceandindustrymuseum.org.uk/sites/default/files/styles/carousel/public/2023-08/textiles-demo-aug-2023-2.jpg?itok=1YoTNbid",
+      "source": "https://www.scienceandindustrymuseum.org.uk/whats-on/textiles-demonstration",
+      "publisher": "Science and Industry Museum",
+      "basis": "PERMISSION REQUIRED",
+      "status": "SELECTED · RIGHTS PENDING",
+      "description": "Actual demonstrator working with textile machinery. Museum-hosted image not licensed for third-party publication by default.",
+      "alt": "Museum technician demonstrating historic textile machinery inside the Science and Industry Museum."
+    },
+    {
+      "order": 10,
+      "adventure": 27,
+      "name": "Goyt Valley",
+      "choice": "B · genuine landscape",
+      "photo": "https://goytvalley.org.uk/content/main-pages/about/DXF22-0143-2630.jpg",
+      "source": "https://goytvalley.org.uk/content/main-pages/about/about.html",
+      "publisher": "Goyt Valley website",
+      "basis": "PERMISSION REQUIRED",
+      "status": "SELECTED SUBJECT · SOURCE-SHOT MATCH TO CONFIRM",
+      "description": "Genuine Goyt Valley reservoir landscape rather than imagined mountain scenery. The source photo's individual reuse licence remains unverified.",
+      "alt": "Path, moorland hills and reservoir landscape in the Goyt Valley."
+    }
+  ],
+  "owner_midjourney_choices": [
+    {
+      "code": "A",
+      "placement": "Underbanks supplementary editorial illustration",
+      "name": "Your atmospheric old-town street",
+      "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792855942/sk8-scoop/52-adventures/review-only-2026-10-24/oldtown-owner-1200x904.png",
+      "description": "Imagined brick street and warm shopfronts, explicitly an illustration, not an authentic Underbanks photograph.",
+      "basis": "ORIGINAL · COMMERCIAL ACCOUNT RIGHTS TO CONFIRM",
+      "asset": "Canva MAHY78K0JzQ"
+    },
+    {
+      "code": "C",
+      "placement": "Chapter 01 artwork (already staged)",
+      "name": "Your historic-street collage",
+      "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792785180/sk8-scoop/52-adventures/review-only-2026-10-23/heritage-owner-1200x904.png",
+      "description": "Already installed in Chapter 01; keep unchanged.",
+      "basis": "ORIGINAL · COMMERCIAL ACCOUNT RIGHTS TO CONFIRM",
+      "asset": "Canva MAHY2NKNPlc"
+    },
+    {
+      "code": "D",
+      "placement": "Foodie Friday supplementary editorial illustration",
+      "name": "Your colourful food-market scene",
+      "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792855947/sk8-scoop/52-adventures/review-only-2026-10-24/foodie-owner-1200x904.png",
+      "description": "Imaginary food market, clearly labelled illustration; do not imply it depicts an actual Foodie Friday event.",
+      "basis": "ORIGINAL · COMMERCIAL ACCOUNT RIGHTS TO CONFIRM",
+      "asset": "Canva MAHY79EwtfU"
+    }
+  ],
+  "licensed_alternatives_not_selected": [
+    {
+      "for": 6,
+      "title": "Hat-making machinery, licensed alternative",
+      "url": "https://commons.wikimedia.org/wiki/File:Hat_museum_Shaping_and_Blocking_Machinery_machinery_6493.JPG",
+      "rights": "LICENCE · CC BY 3.0 · Clem Rutter; attribution and modification note required."
+    },
+    {
+      "for": 8,
+      "title": "Buses inside the actual museum, licensed alternative",
+      "url": "https://commons.wikimedia.org/wiki/File:Inside_the_Museum_of_Transport,_Greater_Manchester_-_geograph.org.uk_-_8399090.jpg",
+      "rights": "LICENCE · CC BY-SA 2.0 · DS Pugh; attribution and ShareAlike conditions apply to adaptations."
+    },
+    {
+      "for": 10,
+      "title": "Errwood Hall walking trail, licensed alternative",
+      "url": "https://commons.wikimedia.org/wiki/File:Walking_trails_near_Errwood_Hall,_Goyt_Valley_01.jpg",
+      "rights": "LICENCE · CC BY-SA 4.0 · Tpguy825; attribution and ShareAlike conditions apply to adaptations."
+    }
+  ],
+  "keep_existing_guide_photography_until_cleared": true,
+  "no_publication_without_owner_approval": true,
+  "rights_register_update_required": true,
+  "checks": "Before any replacement verify exact asset licence or written permission, person/venue authenticity, exact crop, mobile loading and alt/credit. Reconfirm owner's Midjourney commercial creation rights."
+}
