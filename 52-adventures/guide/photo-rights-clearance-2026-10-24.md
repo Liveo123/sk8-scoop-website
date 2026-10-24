@@ -45,3 +45,15 @@ Do not send on Paul's behalf without approval. No contact names or email address
 - Verify actual image decoding and crops at 320/390px, rights links, no SVG and editorial illustration labelling. Source-first historic visual sweep is APPLICABLE_COMPLETED for Underbanks, Staircase House, Hat Works, Paradise Mill and Museum of Transport in this preliminary source scan; each still needs per-asset clearance for selected images.
 - Add the chosen *production* assets to the central **Image Rights Register** with attribution when finalised. This markdown file is only the proposed update.
 - **Explicit publication approval remains necessary.** Do not merge or deploy to production.
+
+## Additional draft-only design improvement: Chapter 04 (not owner-approved)
+
+The earlier Chapter 04 **Get stuck in** card was a nearly empty burnt-orange typography panel with the words CLIMB / PADDLE / SKI / RIDE, and the chapter opener was a matching orange “09 adventures” panel. Paul had supplied an original Midjourney action-sports collage featuring a cyclist, snowy mountains, an orange sun and a kayaker. The original owner file was recovered from conversation uploads, retained in Canva (asset `MAHY8GfgazA`, 1232 × 928) and faithfully reconstructed in four quadrants to a 1200 × 904 raster:
+
+**[Direct proposed Chapter 04 illustration](https://res.cloudinary.com/gocq00bt/image/upload/v1792858842/sk8-scoop/52-adventures/review-only-2026-10-24/chapter04-adventure-sports-owner-1200x904.png).**
+
+This new picture has been staged in the **unpublished** guide only, with **separate unique key** `chapter04-sports-illustration-proposed` on both the chapter card and opener, marked **“Proposed editorial illustration”**; it portrays an imaginary scene, not a real local route, ski resort or provider. The artwork is **not within Paul's ten confirmed image selections** and requires a distinct final visual approval, in addition to confirmation of the creator's Midjourney commercial-use entitlement. Proposed basis `ORIGINAL` still conditional.
+
+The matching Chapter 04 lead used a generic “FIELD NOTE” panel. It has been replaced in the unpublished draft with the **existing, individually licensed** adventure #14 Middlewood Way local photograph, with rights from the current 7 October 2026 central register: **Peter McDermott, CC BY-SA 2.0**, original [Commons source](https://commons.wikimedia.org/wiki/File:Middlewood_Way_-_geograph.org.uk_-_3798981.jpg). The guide reuses existing local photo key `a14` and includes creator/source/licence links and adaptation note. No third-party image ownership was assumed and no selected A/B venue photographs were replaced.
+
+**Release gates remain:** register final asset rows, owner approval of Chapter 04 concept, rights confirmation for user-made Midjourney artwork, manual phone/desktop review and separate production publishing approval. No merge or production deploy.
