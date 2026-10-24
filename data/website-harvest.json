@@ -106,10 +106,9 @@
     {
       "id": "holiday-clubs",
       "title": "October Holiday Club Finder",
-      "disposition": "existing_surface",
-      "route": "/kids-family/holiday-club-finder/",
+      "disposition": "no_web_add",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Already-promoted seasonal Holiday Club Finder is deliberately noindex, so do not add it to permanent search or sitemap; existing homepage and Kids & Family links preserved."
     },
     {
       "id": "pointing-dog",
