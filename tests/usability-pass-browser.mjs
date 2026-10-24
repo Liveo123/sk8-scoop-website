@@ -55,6 +55,16 @@ try{
  check(await evaluate("document.querySelectorAll('.reader-first-chips > a').length===4"),'Four immediate task shortcuts');
  check(await evaluate("Boolean(document.querySelector('input[aria-describedby=\"reader-first-search-help\"]'))"),'Search scope accessible');
  await shot('homepage-desktop.png');
+
+ await waitFor("document.querySelectorAll('[data-explore-grid] .reader-explore-tile').length===6");
+ check(await evaluate("(() => {const tiles=[...document.querySelectorAll('.home-locality-links a')];return tiles.length===4&&tiles.every(x=>x.getBoundingClientRect().height>=100&&getComputedStyle(x).backgroundImage.includes('gradient'))})()"),'Four colourful area tiles remain large enough to use');
+ check(await evaluate("(() => {const banners=[...document.querySelectorAll('[data-explore-grid] .reader-explore-photo')];return banners.length===6&&banners.every(x=>getComputedStyle(x).backgroundImage.includes('gradient')&&!getComputedStyle(x).backgroundImage.includes('url(')&&getComputedStyle(x,'::before').content!=='none')})()"),'Six category covers replace blurred file thumbnails with scalable artwork');
+ check(await evaluate("(() => {const grid=document.querySelector('.home-resource-grid');const issue=grid.querySelector('.reader-latest-panel');const guide=grid.querySelector('.home-resource-free-cheap');return grid.children.length===3&&issue.getBoundingClientRect().height>guide.getBoundingClientRect().height&&document.querySelectorAll('.home-resource-visual .home-poster').length===2})()"),'One featured issue and two clear guide posters create visual hierarchy');
+ check(await evaluate("(() => [...document.querySelectorAll('.home-resource-guide .home-resource-visual img')].every(x=>getComputedStyle(x).display==='none'))()"),'Old floating guide thumbnails are hidden');
+ await evaluate("document.querySelector('#your-area').scrollIntoView({block:'start',behavior:'instant'});true");
+ await sleep(100);await shot('home-places-categories-desktop.png');
+ await evaluate("document.querySelector('.home-resources-section').scrollIntoView({block:'start',behavior:'instant'});true");
+ await sleep(100);await shot('home-resource-selector-desktop.png');
  await navigate('/whats-on/?filter=weekend&type=free-family&area=Cheadle');
  await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  if(await evaluate("Boolean(document.querySelector('[data-consent-none]'))&&!document.querySelector('.privacy-choices')?.hidden")){
@@ -91,6 +101,13 @@ try{
  await evaluate("document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));true");
  check(await evaluate("!document.querySelector('.site-header .nav').classList.contains('open')"),'Escape closes mobile navigation');
  await shot('homepage-mobile.png');
+
+ check(await evaluate("(() => {const els=[...document.querySelectorAll('.home-locality-links a')];return els.length===4&&els.every(x=>x.getBoundingClientRect().width>=130)})()"),'Local area tiles remain readable on a phone');
+ check(await evaluate("(() => {const issue=document.querySelector('.reader-latest-panel');const guide=document.querySelector('.home-resource-free-cheap');return issue.getBoundingClientRect().width<=innerWidth&&guide.getBoundingClientRect().width<=innerWidth})()"),'Featured issue and guides fit a mobile screen');
+ await evaluate("document.querySelector('#your-area').scrollIntoView({block:'start',behavior:'instant'});true");
+ await sleep(100);await shot('home-places-categories-mobile.png');
+ await evaluate("document.querySelector('.home-resources-section').scrollIntoView({block:'start',behavior:'instant'});true");
+ await sleep(100);await shot('home-resource-selector-mobile.png');
  await navigate('/whats-on/?filter=weekend&type=free-family');
  await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),"What's On has no mobile horizontal overflow");
