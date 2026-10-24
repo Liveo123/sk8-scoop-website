@@ -323,3 +323,60 @@ body[data-page="whats-on"] .holiday-club-spotlight-cta.button:focus-visible{
     font-size:.84rem!important;
   }
 }
+
+
+/* What’s On: give the October club tool a distinctive header action, not a
+   second full-height banner that pushes date filters below the first screen. */
+body[data-page="whats-on"] .whats-on-header-links a.whats-on-holiday-quicklink{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:3px!important;
+  min-width:208px;max-width:100%;
+  min-height:62px!important;
+  padding:10px 15px!important;
+  background:#084e59!important;
+  border:2px solid #cb783d!important;
+  border-radius:10px!important;
+  color:#fff!important;
+  text-decoration:none!important;
+  box-shadow:0 5px 13px rgba(6,69,78,.14);
+}
+body[data-page="whats-on"] .whats-on-header-links a.whats-on-holiday-quicklink .whats-on-holiday-date{
+  color:#ffdb9c!important;
+  font-size:.64rem!important;
+  line-height:1.3!important;
+  letter-spacing:.08em!important;
+  font-weight:900!important;
+  text-transform:uppercase;
+}
+body[data-page="whats-on"] .whats-on-header-links a.whats-on-holiday-quicklink strong{
+  color:#fff!important;
+  font-size:.84rem!important;
+  line-height:1.3!important;
+  font-weight:900!important;
+  white-space:normal;
+}
+body[data-page="whats-on"] .whats-on-header-links a.whats-on-holiday-quicklink:hover{
+  background:#043b44!important;border-color:#b96429!important;
+}
+body[data-page="whats-on"] .whats-on-header-links a.whats-on-holiday-quicklink:focus-visible{
+  outline:3px solid #bf6218!important;outline-offset:3px!important;
+}
+@media(max-width:760px){
+  body[data-page="whats-on"] .whats-on-header-links{
+    align-items:center!important;gap:5px 14px!important;
+  }
+  body[data-page="whats-on"] .whats-on-header-links a.whats-on-holiday-quicklink{
+    min-height:52px!important;
+    min-width:0;
+    padding:7px 12px!important;
+  }
+}
+@media(max-width:430px){
+  body[data-page="whats-on"] .whats-on-header-links a.whats-on-holiday-quicklink{
+    flex:1 1 100%;
+    min-height:50px!important;
+  }
+}
