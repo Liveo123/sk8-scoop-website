@@ -54,10 +54,12 @@ try{
  check(await evaluate("document.querySelectorAll('.site-header .nav>a:not(.button)').length===5"),'Five primary reader routes');
  check(await evaluate("document.querySelectorAll('.reader-first-chips > a').length===4"),'Four immediate task shortcuts');
  check(await evaluate("Boolean(document.querySelector('input[aria-describedby=\"reader-first-search-help\"]'))"),'Search scope accessible');
+  check(await evaluate("fetch('/kids-family/holiday-club-finder/',{cache:'no-store'}).then(r=>r.ok&&r.text().then(t=>t.includes('Holiday clubs, without the 14 open tabs.')))"),'Planner page is available from the deployed preview, not just a valid-looking link');
  check(await evaluate("(() => {const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));const current=p.year+'-'+p.month+'-'+p.day;const active=current<='2026-10-30';const feature=document.querySelector('.holiday-club-spotlight-home');return active?Boolean(feature&&document.querySelector('.holiday-club-spotlight-home a')?.pathname==='/kids-family/holiday-club-finder/'&&feature.getBoundingClientRect().height>=70):!feature})()"),'Holiday club shortcut appears before expiry and disappears once the October sessions are over');
  if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-home'))")){
    check(await evaluate("document.querySelector('.holiday-club-spotlight-home').compareDocumentPosition(document.querySelector('.reader-first-feed-head'))&4"),'Holiday club planner sits ahead of current listings');
-   await evaluate("document.querySelector('.holiday-club-spotlight-home').scrollIntoView({block:'start',behavior:'instant'});true");
+   await evaluate("document.querySelector('.holiday-club-spotlight-home').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-135);true");
+    check(await evaluate("(() => {const r=document.querySelector('.holiday-club-spotlight-home').getBoundingClientRect();return r.top>=75&&r.bottom<innerHeight;})()"),'Planner card fits fully below the sticky header in review screenshot');
    await sleep(80);await shot('holiday-club-home-desktop.png');
    check(await evaluate("getComputedStyle(document.querySelector('.holiday-club-spotlight-cta')).color==='rgb(255, 255, 255)'"),'Holiday club CTA retains white button text');
  }
@@ -81,7 +83,8 @@ try{
  check(await evaluate('window.SK8_EVENT_DATA.length>0'),'Checked event feed loads');
  check(await evaluate("(() => {const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));const current=p.year+'-'+p.month+'-'+p.day;const feature=document.querySelector('.whats-on-holiday-quicklink');return current<='2026-10-30'?Boolean(feature&&feature.pathname==='/kids-family/holiday-club-finder/'&&feature.getBoundingClientRect().height>=44):!feature})()"),'What’s On displays the holiday club planner above event filters during the relevant half-term only');
  if(await evaluate("Boolean(document.querySelector('.whats-on-holiday-quicklink'))")){
-   await evaluate("document.querySelector('.whats-on-holiday-quicklink').scrollIntoView({block:'start',behavior:'instant'});true");
+   await evaluate("document.querySelector('.whats-on-holiday-quicklink').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-135);true");
+    check(await evaluate("(() => {const r=document.querySelector('.whats-on-holiday-quicklink').getBoundingClientRect();return r.top>=75&&r.bottom<innerHeight;})()"),'Planner card fits fully below the sticky header in review screenshot');
    await sleep(80);await shot('holiday-club-whats-on-desktop.png');
  }
 
@@ -108,7 +111,8 @@ try{
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),'Homepage has no mobile horizontal overflow');
  if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-home'))")){
    check(await evaluate("(() => {const f=document.querySelector('.holiday-club-spotlight-home'),c=f.querySelector('.holiday-club-spotlight-cta');return f.getBoundingClientRect().right<=innerWidth+2&&c.getBoundingClientRect().height>=44&&c.getBoundingClientRect().width>=180})()"),'Holiday club planner fits narrow mobile width with an accessible full-size action');
-   await evaluate("document.querySelector('.holiday-club-spotlight-home').scrollIntoView({block:'start',behavior:'instant'});true");
+   await evaluate("document.querySelector('.holiday-club-spotlight-home').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-135);true");
+    check(await evaluate("(() => {const r=document.querySelector('.holiday-club-spotlight-home').getBoundingClientRect();return r.top>=75&&r.bottom<innerHeight;})()"),'Planner card fits fully below the sticky header in review screenshot');
    await sleep(80);await shot('holiday-club-home-mobile.png');
  }
 
@@ -133,7 +137,8 @@ try{
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),"What's On has no mobile horizontal overflow");
  if(await evaluate("Boolean(document.querySelector('.whats-on-holiday-quicklink'))")){
    check(await evaluate("(() => {const c=document.querySelector('.whats-on-holiday-quicklink');return c.getBoundingClientRect().right<=innerWidth+2&&c.getBoundingClientRect().height>=44&&c.getBoundingClientRect().width>=180})()"),'Holiday club shortcut on What’s On stays readable and tappable on mobile');
-   await evaluate("document.querySelector('.whats-on-holiday-quicklink').scrollIntoView({block:'start',behavior:'instant'});true");
+   await evaluate("document.querySelector('.whats-on-holiday-quicklink').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy(0,-135);true");
+    check(await evaluate("(() => {const r=document.querySelector('.whats-on-holiday-quicklink').getBoundingClientRect();return r.top>=75&&r.bottom<innerHeight;})()"),'Planner card fits fully below the sticky header in review screenshot');
    await sleep(80);await shot('holiday-club-whats-on-mobile.png');
  }
 
