@@ -71,6 +71,61 @@ try {
   }
   await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:900,deviceScaleFactor:1,mobile:false,screenWidth:390,screenHeight:900});
   await navigate('/52-adventures/guide/');
+  const illustrationSourceAudit=await evaluate("(()=>{const data=JSON.parse(document.querySelector('#image-data').textContent);"+
+    "const adventureData=JSON.parse(document.querySelector('#adventure-data').textContent);"+
+    "const keys=['a2','a10','a32-illustration','chapter01-illustration','chapter03-illustration'];"+
+    "return {sources:keys.map(key=>({key,src:data[key]||null,sharp:Boolean(data[key]&&data[key].includes('owner-1200x904'))})),"+
+    "plazaOriginal:Boolean(data.a6&&data.a6.includes('issue17/chess-editorial-original-v7')),"+
+    "originalRhsPhoto:data.a32,"+
+    "rhsSelectedKey:adventureData[32].imgKey,"+
+    "chapterCards:[...document.querySelectorAll('.chapter-card-image[data-editorial-cover]')].map(fig=>({alt:fig.querySelector('img')?.alt||'',label:fig.querySelector('figcaption')?.textContent||''}))};})()");
+  record('52 Adventures: five selected owner illustrations use sharp source files',
+    illustrationSourceAudit.sources.length===5 &&
+    illustrationSourceAudit.sources.every(x=>x.sharp),JSON.stringify(illustrationSourceAudit.sources));
+  record('52 Adventures: Plaza art and licensed RHS photo kept distinct',
+    illustrationSourceAudit.plazaOriginal &&
+    illustrationSourceAudit.originalRhsPhoto==='/52-adventures/guide/assets/adventure-32.webp' &&
+    illustrationSourceAudit.rhsSelectedKey==='a32-illustration',
+    JSON.stringify({plazaOriginal:illustrationSourceAudit.plazaOriginal,
+      rhsOriginal:illustrationSourceAudit.originalRhsPhoto,
+      rhsSelected:illustrationSourceAudit.rhsSelectedKey}));
+  record('52 Adventures: both chapter illustrations have reader-visible labels',
+    illustrationSourceAudit.chapterCards.length===2 &&
+    illustrationSourceAudit.chapterCards.every(x=>/illustration/i.test(x.label) && x.alt.length>30),
+    JSON.stringify(illustrationSourceAudit.chapterCards));
+
+  // Test the actual browser-decoded image resolution, not just URLs or metadata.
+  const chapterRender=await evaluate("(async()=>{"+
+    "const keys=['chapter01-illustration','a10','chapter03-illustration'];"+
+    "const out=[];for(const key of keys){"+
+    "const img=[...document.querySelectorAll('.chapter-card-image img')].find(x=>x.dataset.imgkey===key);"+
+    "if(!img){out.push({key,found:false});continue;}"+
+    "img.loading='eager';img.scrollIntoView({block:'nearest'});"+
+    "try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('decode timeout')),12000))]);}"+
+    "catch(e){out.push({key,found:true,width:img.naturalWidth,height:img.naturalHeight,error:String(e)});continue;}"+
+    "out.push({key,found:true,width:img.naturalWidth,height:img.naturalHeight,label:img.closest('figure')?.querySelector('figcaption')?.textContent});"+
+    "}return out;})()");
+  record('52 Adventures: actual mobile chapter-card images decode at 900px+ width',
+    chapterRender.length===3 &&
+    chapterRender.every(x=>x.found && x.width>=900 && x.height>=650 && /illustration/i.test(x.label||'')),
+    JSON.stringify(chapterRender));
+
+  await evaluate("document.querySelector('.chapter-cards')?.scrollIntoView({block:'start'})");
+  await sleep(350);
+  const mobileArtScreenshot=await cmd('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});
+  await writeFile('visual-qa/guide-reliability/52-adventures-chapters-mobile-390.png',
+    Buffer.from(mobileArtScreenshot.data,'base64'));
+  await cmd('Emulation.setDeviceMetricsOverride',
+    {width:1280,height:900,deviceScaleFactor:1,mobile:false,screenWidth:1280,screenHeight:900});
+  await navigate('/52-adventures/guide/');
+  await evaluate("document.querySelector('.chapter-cards')?.scrollIntoView({block:'start'})");
+  await sleep(350);
+  const desktopArtScreenshot=await cmd('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});
+  await writeFile('visual-qa/guide-reliability/52-adventures-chapters-desktop-1280.png',
+    Buffer.from(desktopArtScreenshot.data,'base64'));
+  await cmd('Emulation.setDeviceMetricsOverride',
+    {width:390,height:900,deviceScaleFactor:1,mobile:false,screenWidth:390,screenHeight:900});
+  await navigate('/52-adventures/guide/');
   record('Finder view opens',await click('[data-view="finder"]'));
   const searchResult=await evaluate("(()=>{"+
     "const p=document.querySelector('#view-finder .finder-panel');if(!p)return {error:'finder panel missing'};"+
