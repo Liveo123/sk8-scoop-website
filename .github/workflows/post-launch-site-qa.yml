@@ -314,6 +314,7 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Wait for Cloudflare and verify changed public routes
         shell: bash
         run: |
@@ -335,6 +336,13 @@ jobs:
             return 1
           }
           check_page 'https://www.sk8scoop.com/' 'homepage-utility-promise-v1'
+
+          # Compare the live HTML with the issue checked out at this exact commit.
+          # A successful HTTP 200 on an older Cloudflare version is not a release.
+          current_issue="$(node -e 'const fs=require("fs"); const s=fs.readFileSync("assets/config.js","utf8"); const m=s.match(/currentIssue:\\s*\\{\\s*number:\\s*(\\d+)/); if(!m)process.exit(2); process.stdout.write(m[1]);')"
+          check_page 'https://www.sk8scoop.com/' "data-current-issue-number>${current_issue}</strong>"
+          check_page "https://www.sk8scoop.com/issues/issue-${current_issue}/" "SK8 Scoop Issue ${current_issue}"
+          check_page 'https://www.sk8scoop.com/assets/config.js' "number: ${current_issue},"
           check_page 'https://www.sk8scoop.com/whats-on/' 'data-event-area="Cheadle"'
           check_page 'https://www.sk8scoop.com/guides/' 'data-page="guides"'
           check_page 'https://www.sk8scoop.com/guides/' 'Halloween &amp; Half-Term Family Guide 2026'
