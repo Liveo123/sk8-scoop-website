@@ -20,8 +20,8 @@ const sk8HeaderRow=sk8Header&&sk8Header.querySelector('.header-row');
 let nav=sk8HeaderRow&&sk8HeaderRow.querySelector('.nav');
 let menu=sk8HeaderRow&&sk8HeaderRow.querySelector('.menu-btn');
 const sk8GlobalSearchCss=document.querySelector('link[data-sk8-global-search]');
-if(sk8GlobalSearchCss&&!sk8GlobalSearchCss.href.includes('20261007-headerfix1')){
-  sk8GlobalSearchCss.href='/assets/global-search.css?v=20261007-headerfix1';
+if(sk8GlobalSearchCss&&!sk8GlobalSearchCss.href.includes('20261023-headerwidth2')){
+  sk8GlobalSearchCss.href='/assets/global-search.css?v=20261023-headerwidth2';
 }
 
 const sk8NormalisePath=value=>{
