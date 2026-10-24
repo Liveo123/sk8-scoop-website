@@ -30,6 +30,29 @@ const shot=async name=>{
  const r=await rpc('Page.captureScreenshot',{format:'png',captureBeyondViewport:false,fromSurface:true});
  await writeFile('visual-qa/usability/'+name,Buffer.from(r.data,'base64'));
 };
+
+const checkPaleDateContrast=async viewportName=>{
+ const result=await evaluate(`(() => {
+   const host=document.querySelector('.reader-first-discovery');
+   if(!host)return {found:false};
+   const probe=document.createElement('time');
+   probe.className='reader-first-date';
+   probe.textContent='Sat 24 Oct';
+   probe.style.position='absolute';
+   probe.style.left='-10000px';
+   host.append(probe);
+   const style=getComputedStyle(probe);
+   const colour=style.color, background=style.backgroundColor;
+   const actual=[...document.querySelectorAll('.reader-first-event .reader-first-date')]
+     .every(x=>getComputedStyle(x).color===colour&&getComputedStyle(x).backgroundColor===background);
+   probe.remove();
+   return {found:true,colour,background,actual};
+ })()`);
+ check(result?.found&&result.colour==='rgb(16, 72, 80)'&&
+   result.background==='rgb(230, 240, 237)'&&result.actual,
+   'Pale homepage date tiles have dark teal text and AA contrast at '+viewportName);
+};
+
 try{
  await mkdir('visual-qa/usability',{recursive:true});
  let ready=false;
@@ -54,6 +77,7 @@ try{
  check(await evaluate("document.querySelectorAll('.site-header .nav>a:not(.button)').length===5"),'Five primary reader routes');
  check(await evaluate("document.querySelectorAll('.reader-first-chips > a').length===4"),'Four immediate task shortcuts');
  check(await evaluate("Boolean(document.querySelector('input[aria-describedby=\"reader-first-search-help\"]'))"),'Search scope accessible');
+ await checkPaleDateContrast('desktop');
   check(await evaluate("fetch('/kids-family/holiday-club-finder/',{cache:'no-store'}).then(r=>r.ok&&r.text().then(t=>t.includes('Holiday clubs, without the 14 open tabs.')))"),'Planner page is available from the deployed preview, not just a valid-looking link');
  check(await evaluate("(() => {const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));const current=p.year+'-'+p.month+'-'+p.day;const active=current<='2026-10-30';const feature=document.querySelector('.holiday-club-spotlight-home');return active?Boolean(feature&&document.querySelector('.holiday-club-spotlight-home a')?.pathname==='/kids-family/holiday-club-finder/'&&feature.getBoundingClientRect().height>=70):!feature})()"),'Holiday club shortcut appears before expiry and disappears once the October sessions are over');
  if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-home'))")){
@@ -114,6 +138,7 @@ try{
  await navigate('/');
  await waitFor('Boolean(document.querySelector(".site-header .nav-more"))');
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),'Homepage has no mobile horizontal overflow');
+ await checkPaleDateContrast('mobile');
  if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-home'))")){
    check(await evaluate("(() => {const f=document.querySelector('.holiday-club-spotlight-home'),c=f.querySelector('.holiday-club-spotlight-cta');return f.getBoundingClientRect().right<=innerWidth+2&&c.getBoundingClientRect().height>=44&&c.getBoundingClientRect().width>=180})()"),'Holiday club planner fits narrow mobile width with an accessible full-size action');
    await evaluate("document.querySelector('.holiday-club-spotlight-home').scrollIntoView({block:'start',behavior:'instant'});window.scrollBy({top:-160,behavior:'instant'});true");

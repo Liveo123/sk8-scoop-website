@@ -123,7 +123,10 @@ body.reader-home.homepage-v3.reader-first-mode .reader-first-event-body h3{
   font-size:clamp(1.04rem,1.15vw,1.16rem);letter-spacing:-.015em;
 }
 body.reader-home.homepage-v3.reader-first-mode .reader-first-date{
-  background:#e6f0ed;border:1px solid #d2e4de;
+  background:#e6f0ed;
+  border:1px solid #d2e4de;
+  color:#104850;
+  font-weight:900;
 }
 body.reader-home.homepage-v3.reader-first-mode .reader-first-event-checked{
   font-size:.77rem;color:#52676b;

@@ -143,3 +143,6 @@ assert.deepEqual(fallbackOrder,[
 console.log('PASS whole-homepage regression: 6 complementary categories, verified stories, direct NUE, known-reader guides, clear newsletter CTA, approved media and practical corrections.');
 
 console.log('PASS reader-first structural/NUE checks: first-screen order, unique H1, routes, source facts, safe links, 4 filters, 4 areas, UK dates and responsive CSS.');
+
+assert.match(css, /body\.reader-home\.homepage-v3\.reader-first-mode \.reader-first-date\s*\{[^}]*color:#104850;[^}]*font-weight:900;/s,
+  'Pale homepage date badges must use dark teal, not inherited white text');
