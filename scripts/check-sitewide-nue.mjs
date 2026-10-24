@@ -108,8 +108,8 @@ for(const route of ['/','/guides/','/whats-on/']){
   contains(files.sitemap,'<loc>https://www.sk8scoop.com'+route+'</loc><lastmod>2026-10-23</lastmod>',
     'Sitemap dates follow actual changed routes');
 }
-assert.equal((files.sitemap.match(/<url>/g)||[]).length,68,
-  'Do not silently drop indexable pages during sitewide UX work');
+assert.ok((files.sitemap.match(/<url>/g)||[]).length>=68,
+  'Keep all baseline indexable pages; approved new permanent articles may increase the number');
 const holiday = read('kids-family/holiday-club-finder/index.html');
 contains(holiday,'name="robots" content="noindex,follow"','Respect intentionally noindex seasonal tool');
 assert.ok(!files.sitemap.includes('https://www.sk8scoop.com/kids-family/holiday-club-finder/'),

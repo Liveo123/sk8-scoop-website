@@ -89,18 +89,21 @@ assert.deepEqual(homepageData.explore.map(x=>x.title), priority,
   'Six useful non-duplicated categories match reader intent and live fallback');
 assert.ok(homepageData.explore.every(x=>x.status==='OPEN' && x.href && !x.href.includes('coming-soon')),
   'Category navigation must use live available pages');
-const featured=homepageData.stories.find(x=>x.title.includes('Merseyday'));
-assert.equal(featured?.href,'/whats-on/?event=merseyday-of-the-dead-2026-10-24',
-  'Featured event must land on its own checked listing, not general issue archive');
+const featured=homepageData.stories.find(x=>x.mode==='DO' && x.title.includes('Woodford Bonfire'));
+assert.ok(featured, 'Current checked, time-bound event must be in authoritative homepage data');
+assert.equal(featured?.href,'/whats-on/?event=woodford-community-bonfire-2026-11-05',
+  'Featured event must link to the checked event listing, not the newsletter archive');
 assertIncludes(html,featured.href,'Fallback story URL matches live dynamic source');
-assertIncludes(html,'data-nue-type="verified-event-detail"','Featured event is a useful continuation');
+assertIncludes(html,'data-nue-type="verified-event-detail"','Featured event is a useful, checkable continuation');
 assertIncludes(homepageJs,"'/free-cheap-guide/': '/free-cheap-guide/guide/'",
   'Returning subscribers get the full free/cheap guide');
 assertIncludes(homepageJs,"'/52-adventures/': '/52-adventures/guide/'",
   'Returning subscribers get the full adventure guide');
 assert.ok(!homepageJs.includes('<svg') && !homepageJs.includes('storyGraphicSvg'),
   'Legacy generic inline SVG illustrations are not a permitted SK8 visual fallback');
-assertIncludes(html,'<h3>Issue 17</h3>','Card title is subordinate to resources section heading');
+const issueNumber=Number((read('assets/config.js').match(/currentIssue:\\s*\\{\\s*number:\\s*(\\d+)/)||[])[1]);
+assert.ok(issueNumber > 0, 'Current issue is configured');
+assertIncludes(html,`<h3>Issue ${issueNumber}</h3>`,'Card title is subordinate to resources section heading');
 assertIncludes(html,'Share a local tip','Visitor contribution route remains useful and explicit');
 assertIncludes(html,'Questions or corrections?','Correction route remains easy to find');
 for(const route of ['/kids-family/','/food-drink/','/local-history/','/planning/','/updates/']){
