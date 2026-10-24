@@ -77,6 +77,8 @@ try{
  await sleep(100);await shot('home-places-categories-desktop.png');
  await evaluate("document.querySelector('.home-resources-section').scrollIntoView({block:'start',behavior:'instant'});true");
  await sleep(100);await shot('home-resource-selector-desktop.png');
+ await evaluate("document.querySelector('.home-resource-adventures').scrollIntoView({block:'center',behavior:'instant'});true");
+ await sleep(100);await shot('52-adventures-card-desktop.png');
  await navigate('/whats-on/?filter=weekend&type=free-family&area=Cheadle');
  await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  if(await evaluate("Boolean(document.querySelector('[data-consent-none]'))&&!document.querySelector('.privacy-choices')?.hidden")){
@@ -134,6 +136,8 @@ try{
  await sleep(100);await shot('home-places-categories-mobile.png');
  await evaluate("document.querySelector('.home-resources-section').scrollIntoView({block:'start',behavior:'instant'});true");
  await sleep(100);await shot('home-resource-selector-mobile.png');
+ await evaluate("document.querySelector('.home-resource-adventures').scrollIntoView({block:'center',behavior:'instant'});true");
+ await sleep(100);await shot('52-adventures-card-mobile.png');
  await navigate('/whats-on/?filter=weekend&type=free-family');
  await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),"What's On has no mobile horizontal overflow");
