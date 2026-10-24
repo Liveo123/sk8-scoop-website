@@ -185,8 +185,8 @@ try {
     "out.push({width:img.naturalWidth,height:img.naturalHeight,src:img.currentSrc});}"+
     "return {photos:out,chosen:document.querySelectorAll('.card:not(.licensed-card):not(.proposal-card)').length,"+
     "rights:[...document.querySelectorAll('.licensed-card .rights')].map(x=>x.textContent)};})()");
-  record('Owner selected-image board keeps nine original choices and five licensed alternatives',
-    licensedReview.chosen===12 && licensedReview.photos.length===5 &&
+  record('Owner selected-image board keeps nine original choices and six licensed alternatives',
+    licensedReview.chosen===12 && licensedReview.photos.length===6 &&
     licensedReview.photos.every(x=>x.width>=1200 && x.height>=800) &&
     licensedReview.rights.every(x=>/licensed/i.test(x)),
     JSON.stringify({chosen:licensedReview.chosen,photos:licensedReview.photos,rights:licensedReview.rights}));
