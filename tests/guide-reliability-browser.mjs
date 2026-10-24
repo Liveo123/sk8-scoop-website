@@ -158,6 +158,53 @@ try {
   await writeFile('visual-qa/guide-reliability/52-adventures-comparison-mobile-390.png',
     Buffer.from(comparisonMobileScreenshot.data,'base64'));
 
+  // Owner's 24 October image choices: five alternative photos have individually
+  // licensed source files and two owner illustrations appear in adventure modals.
+  await navigate('/52-adventures/image-selections-2026-10-24/');
+  const licensedReview=await evaluate("(async()=>{"+
+    "const imgs=[...document.querySelectorAll('.licensed-card img')];const out=[];"+
+    "for(const img of imgs){img.loading='eager';img.scrollIntoView({block:'nearest'});"+
+    "try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('decode timeout')),12000))]);}"+
+    "catch(e){out.push({width:img.naturalWidth,error:String(e)});continue;}"+
+    "out.push({width:img.naturalWidth,height:img.naturalHeight,src:img.currentSrc});}"+
+    "return {photos:out,chosen:document.querySelectorAll('.card:not(.licensed-card)').length,"+
+    "rights:[...document.querySelectorAll('.licensed-card .rights')].map(x=>x.textContent)};})()");
+  record('Owner selected-image board keeps nine original choices and five licensed alternatives',
+    licensedReview.chosen===12 && licensedReview.photos.length===5 &&
+    licensedReview.photos.every(x=>x.width>=1200 && x.height>=800) &&
+    licensedReview.rights.every(x=>/licensed/i.test(x)),
+    JSON.stringify({chosen:licensedReview.chosen,photos:licensedReview.photos,rights:licensedReview.rights}));
+  await evaluate("document.querySelector('#licenced-alternatives')?.scrollIntoView({block:'start'})");
+  await sleep(350);
+  const rightsScreenshot=await cmd('Page.captureScreenshot',
+    {format:'png',fromSurface:true,captureBeyondViewport:false});
+  await writeFile('visual-qa/guide-reliability/52-adventures-licensed-alternatives-mobile.png',
+    Buffer.from(rightsScreenshot.data,'base64'));
+  await navigate('/52-adventures/guide/');
+  for(const [num,key] of [[5,'underbanks-editorial-illustration'],[7,'foodie-friday-editorial-illustration']]){
+    const insetResult=await evaluate("(async()=>{"+
+      "const btn=document.querySelector('[data-open=\\""+num+"\\"]');"+
+      "if(!btn)return {error:'button missing'};btn.click();"+
+      "const dlg=document.querySelector('#adventure-dialog'),img=dlg?.querySelector('.guide-editorial-inset img');"+
+      "if(!img)return {opened:dlg?.open,error:'inset missing'};"+
+      "img.loading='eager';img.scrollIntoView({block:'nearest'});"+
+      "try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('decode timeout')),12000))]);}"+
+      "catch(e){return{opened:dlg.open,key:img.dataset.imgkey,error:String(e)}};"+
+      "return {opened:dlg.open,key:img.dataset.imgkey,width:img.naturalWidth,"+
+      "height:img.naturalHeight,caption:img.closest('figure')?.querySelector('figcaption')?.textContent};})()");
+    record('Owner Midjourney illustration '+num+' opens, decodes sharply, and is labelled',
+      insetResult.opened===true && insetResult.key===key &&
+      insetResult.width>=1000 && insetResult.height>=750 &&
+      /illustration/i.test(insetResult.caption||''),
+      JSON.stringify(insetResult));
+    if(num===5){
+      const insetShot=await cmd('Page.captureScreenshot',
+        {format:'png',fromSurface:true,captureBeyondViewport:false});
+      await writeFile('visual-qa/guide-reliability/52-adventures-underbanks-illustration-mobile.png',
+        Buffer.from(insetShot.data,'base64'));
+    }
+    await evaluate("document.querySelector('#adventure-dialog')?.close()");
+  }
   await navigate('/52-adventures/guide/');
   record('Finder view opens',await click('[data-view="finder"]'));
   const searchResult=await evaluate("(()=>{"+
