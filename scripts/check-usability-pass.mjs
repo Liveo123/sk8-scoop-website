@@ -24,10 +24,10 @@ pass(home.indexOf('holiday-club-spotlight-home') > home.indexOf('reader-first-ch
   home.indexOf('holiday-club-spotlight-home') < home.indexOf('reader-first-feed-head') &&
   home.includes('data-track-event="homepage_holiday_club_planner_click"'),
   'Seasonal holiday club planner prominently displayed before homepage event feed');
-pass(whatson.indexOf('holiday-club-spotlight-whats-on') > whatson.indexOf('whats-on-listings-section') &&
-  whatson.indexOf('holiday-club-spotlight-whats-on') < whatson.indexOf('whats-on-filter-toolbar') &&
+pass(whatson.indexOf('whats-on-holiday-quicklink') > whatson.indexOf('whats-on-header-links') &&
+  whatson.indexOf('whats-on-holiday-quicklink') < whatson.indexOf('whats-on-listings-section') &&
   whatson.includes('data-track-event="whats_on_holiday_club_planner_click"'),
-  'Holiday club planner featured ahead of What’s On filters');
+  'Holiday club planner featured inside compact What’s On header ahead of event filters');
 pass([home,whatson].every(page=>page.includes('data-expire-after="2026-10-30"') &&
   page.includes('href="/kids-family/holiday-club-finder/"')),
   'Both seasonal promotions link directly to the planner and expire after 30 October');
