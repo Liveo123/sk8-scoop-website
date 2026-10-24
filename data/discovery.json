@@ -1,6 +1,88 @@
 {
-  "updated": "2026-10-21",
+  "updated": "2026-10-24",
   "records": [
+    {
+      "id": "issue-18-october-23-2026",
+      "type": "Stories",
+      "category": "Newsletter",
+      "title": "SK8 Scoop Issue 18: steam weekend, Reda’s and Gatley closures",
+      "summary": "The 23 October issue with verified half-term listings, Gatley footpath notices, Reda's local history and practical local links.",
+      "href": "/issues/issue-18/",
+      "area": "All areas",
+      "tags": [
+        "issue 18",
+        "newsletter",
+        "anson",
+        "reda's",
+        "gatley closures",
+        "half term",
+        "woodford"
+      ],
+      "freshness": "current",
+      "checked": "2026-10-24"
+    },
+    {
+      "id": "redas-boxing-kangaroo-heald-green",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Reda’s, Pat Phoenix and Heald Green’s boxing kangaroo",
+      "summary": "A former electrical shop at 225–229 Finney Lane, a 1963 reopening and residents’ memories of a boxing kangaroo. Recollections are distinguished from established records.",
+      "href": "/local-history/redas-boxing-kangaroo-heald-green/",
+      "area": "Heald Green",
+      "tags": [
+        "redas",
+        "finney lane",
+        "boxing kangaroo",
+        "pat phoenix",
+        "redaroo",
+        "1963",
+        "heald green history"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-10-24"
+    },
+    {
+      "id": "gatley-footpath-closures-october-2026",
+      "type": "Useful updates",
+      "category": "Travel & Closures",
+      "title": "Gatley footpaths 48 and 51: closures from 26 October",
+      "summary": "Affected sections between Yew Tree Grove, Grasmere Road and Motcombe Grove; temporary closure order allows up to six months, with no official diversion.",
+      "href": "/updates/gatley-footpath-closures-october-2026/",
+      "area": "Gatley",
+      "tags": [
+        "footpath 48",
+        "footpath 51",
+        "gatley",
+        "motcombe grove",
+        "grasmere road",
+        "yew tree grove",
+        "closures",
+        "walking"
+      ],
+      "freshness": "current",
+      "checked": "2026-10-24"
+    },
+    {
+      "id": "quarry-bank-southern-woods-walk",
+      "type": "Guides",
+      "category": "Outdoors",
+      "title": "Southern Woods at Quarry Bank: short and full mapped walks",
+      "summary": "National Trust purple-waymarked woodland walk with one-mile or 1.5-mile route, slopes and access cautions, from the Mill Yard.",
+      "href": "/outdoors/quarry-bank-southern-woods-walk/",
+      "area": "Styal",
+      "tags": [
+        "quarry bank",
+        "southern woods",
+        "national trust",
+        "styal",
+        "woodland walk",
+        "1.5 miles",
+        "purple trail",
+        "walking"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-10-24"
+    },
     {
       "id": "around-sk8",
       "type": "Stories",
