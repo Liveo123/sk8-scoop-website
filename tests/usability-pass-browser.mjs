@@ -79,9 +79,9 @@ try{
   await click('[data-consent-none]');await sleep(180);
  }
  check(await evaluate('window.SK8_EVENT_DATA.length>0'),'Checked event feed loads');
- check(await evaluate("(() => {const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));const current=p.year+'-'+p.month+'-'+p.day;const feature=document.querySelector('.holiday-club-spotlight-whats-on');return current<='2026-10-30'?Boolean(feature&&feature.querySelector('a')?.pathname==='/kids-family/holiday-club-finder/'&&feature.getBoundingClientRect().height>=70):!feature})()"),'What’s On displays the holiday club planner above event filters during the relevant half-term only');
- if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-whats-on'))")){
-   await evaluate("document.querySelector('.holiday-club-spotlight-whats-on').scrollIntoView({block:'start',behavior:'instant'});true");
+ check(await evaluate("(() => {const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));const current=p.year+'-'+p.month+'-'+p.day;const feature=document.querySelector('.whats-on-holiday-quicklink');return current<='2026-10-30'?Boolean(feature&&feature.pathname==='/kids-family/holiday-club-finder/'&&feature.getBoundingClientRect().height>=44):!feature})()"),'What’s On displays the holiday club planner above event filters during the relevant half-term only');
+ if(await evaluate("Boolean(document.querySelector('.whats-on-holiday-quicklink'))")){
+   await evaluate("document.querySelector('.whats-on-holiday-quicklink').scrollIntoView({block:'start',behavior:'instant'});true");
    await sleep(80);await shot('holiday-club-whats-on-desktop.png');
  }
 
@@ -131,9 +131,9 @@ try{
  await navigate('/whats-on/?filter=weekend&type=free-family');
  await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),"What's On has no mobile horizontal overflow");
- if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-whats-on'))")){
-   check(await evaluate("(() => {const f=document.querySelector('.holiday-club-spotlight-whats-on'),c=f.querySelector('.holiday-club-spotlight-cta');return f.getBoundingClientRect().right<=innerWidth+2&&c.getBoundingClientRect().height>=44&&c.getBoundingClientRect().width>=180})()"),'Holiday club shortcut on What’s On stays readable and tappable on mobile');
-   await evaluate("document.querySelector('.holiday-club-spotlight-whats-on').scrollIntoView({block:'start',behavior:'instant'});true");
+ if(await evaluate("Boolean(document.querySelector('.whats-on-holiday-quicklink'))")){
+   check(await evaluate("(() => {const c=document.querySelector('.whats-on-holiday-quicklink');return c.getBoundingClientRect().right<=innerWidth+2&&c.getBoundingClientRect().height>=44&&c.getBoundingClientRect().width>=180})()"),'Holiday club shortcut on What’s On stays readable and tappable on mobile');
+   await evaluate("document.querySelector('.whats-on-holiday-quicklink').scrollIntoView({block:'start',behavior:'instant'});true");
    await sleep(80);await shot('holiday-club-whats-on-mobile.png');
  }
 
