@@ -255,6 +255,27 @@
       ]
     },
     {
+      "for_choice": 7,
+      "adventure": 23,
+      "subject": "Silk bobbins inside Paradise Mill Macclesfield",
+      "status": "LICENSE_VERIFIED_ALTERNATIVE_NOT_SAME_PHOTO",
+      "rights_basis": "LICENCE",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "creator": "Neil Theasby",
+      "date_captured": "2016-08-16",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Silk_bobbins_in_Paradise_Mill,_Macclesfield_-_geograph.org.uk_-_5077537.jpg",
+      "asset_url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792859342/sk8-scoop/52-adventures/licensed-alternatives-2026-10-24/paradise-mill-silk-bobbins-neil-theasby-cc-by-sa-2.jpg",
+      "alt": "Silk bobbins and weaving materials photographed inside Paradise Mill, Macclesfield.",
+      "credit": "Silk bobbins in Paradise Mill © Neil Theasby / Geograph, CC BY-SA 2.0; resized for review; source and licence linked.",
+      "rights_notes": "Not a full loom hall or working demonstration; photo 2016. Attribution and CC BY-SA terms apply to adapted images.",
+      "quality": "good factual interior, less immersive than selected full loom room",
+      "dimensions": [
+        1280,
+        970
+      ]
+    },
+    {
       "for_choice": 8,
       "adventure": 41,
       "subject": "Museum of Transport restored buses interior",
@@ -319,7 +340,7 @@
     }
   ],
   "image_rights_register_status": "DRAFT_ROWS_IN_PR_ONLY__CENTRAL_GOOGLE_DOC_NOT_MODIFIED",
-  "critical_notes": "All 9 real selections remain on owner shortlist and NONE have an independently cleared licence. Separate alternative Commons files have individually verified commercial-usable CC licences, but are NOT the same shots and are not automatically substituted. User original A (Underbanks), C (Chapter 01), D (Foodie Friday) illustrations staged as clearly labelled supplemental, with account rights pending.",
+  "critical_notes": "All 9 real selections remain on owner shortlist and NONE have an independently cleared licence. Separate alternative Commons files have individually verified commercial-usable CC licences, but are NOT the same shots and are not automatically substituted. User original A (Underbanks), C (Chapter 01), D (Foodie Friday) illustrations staged as clearly labelled supplemental, with account rights pending. A sixth CC BY-SA 2.0 exact verified 2016 photo of silk bobbins inside Paradise Mill (Neil Theasby) is a distinct licensed alternative, not the approved full loom-hall photograph.",
   "additional_illustration_proposal_not_yet_owner_approved": {
     "placement": "Chapter 04 Get stuck in chapter card and opener",
     "previous_visual": "Burnt-orange rectangle with only CLIMB PADDLE SKI RIDE words and nine adventures",
