@@ -62,3 +62,21 @@ These are decisions from the prior editorial review, not claims of full current 
 7. Until approved, existing labelled live imagery remains in place and **no production file or source mapping changes are authorised by this review**.
 
 **Editorial next choice:** Premier Cafe → seek actual 1933 room images 640/641 first. Heald Green → show a genuine Heald Green Hotel or Marthe McKenna document/photo where rights allow; use the uploaded radio still life as labelled in-story symbolic art only if authentic evidence cannot be cleared and the user-provided original is available for upload.
+
+## 24 October, 15:00 UK-side owner visual feedback: layout revisions (PREVIEW ONLY)
+
+Owner-supplied screenshots of Cloudflare draft #248 identified three faults: Plaza art too large, wartime desk both too small in article and thumbnail comparison, and modern Cheadle Pharmacy view an unconvincing visual for the Premier Cafe.
+
+Corrections made in this draft:
+- **Plaza**: preserve the exact original 1536×1024 SK8 Scoop chess/theatre art from prior 52 Adventures PR #241. Constrain to 640 px wide maximum, 16:9 editorial crop, natural mobile width and proper illustration label. Never portray it as an actual theatre photograph.
+- **Heald Green**: Paul supplied original 1456×816 wartime desk illustration in chat; it was imported into Canva as `MAHY66l_zZ0` (original dimension metadata confirmed), but the website-facing hosted copy is only 200×112. Replaced tiny 200 px centred render with a Cloudinary 800×448 scale+sharpen preview, set responsive display max 690 px on the article and full-bleed in the review-card area, with existing illustration disclaimers retained. **Derived size is not true recovered original resolution**. Further work still needed to move the original 1456×816 binary onto controlled website storage; do not approve production based solely on the upscale.
+- **Premier Cafe**: no new licence-cleared original found to replace Dave Dunford's valid 3000×4000 Commons 2025 photo of the actual 3 High Street frontage (CC BY-SA 4.0). Changed the review's card into a documentary layout with an upper-storey-focused crop and live cream/teal typographic note. The licensed photograph is real, the crop is editorial, and its on-page source/credit and share-alike link are retained. This **reframes the same licensed image**, rather than falsely claiming a newly discovered photograph. Prefer authentic 1933 interior images 640/641 or 1935 exterior 147 once express re-use permission is secured. No clearance is assumed.
+
+Cloudinary enlarged wartime preview (original remains 200×112): `https://res.cloudinary.com/gocq00bt/image/upload/c_scale,w_800/e_sharpen:70/v1792843282/sk8-scoop/local-history/preview-20261024/heald-green-desk-canva-thumbnail-temporary.png`.
+
+Review pages:
+- `/local-history/image-review/`
+- `/local-history/stockport-plaza-behind-the-scenes/`
+- `/local-history/heald-green-spy-dambuster/`
+
+Release block: obtain the source 1456×816 wartime file to prevent enlarged-thumbnail blur; verify real mobile/desktop crops; confirm rights of owner's generative inputs, linked current licences and archived Premier photos. Production untouched.
