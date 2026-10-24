@@ -71,6 +71,8 @@ assert.equal(calendar.onDate(series,later),false,
 assert.equal(calendar.onDate(series,third),true, 'Declared occurrences remain discoverable');
 assertIncludes(css, '@media(max-width:720px)', 'Single-column phone card layout');
 assertIncludes(css, ':focus-visible', 'Keyboard focus styling');
+assert.match(css, /body\.reader-home\.homepage-v3\.reader-first-mode \.reader-first-date\s*\{[^}]*color:#104850;[^}]*font-weight:900;/s,
+  'Pale homepage date badges must use dark teal, not inherited white text');
 assertIncludes(css, 'prefers-reduced-motion', 'Reduced-motion support');
 assertIncludes(css, 'reader-first-mode', 'Homepage hero inversion is styled');
 // Whole-page editorial/NUE consistency beyond the top-of-page finder.
