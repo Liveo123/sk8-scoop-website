@@ -1,6 +1,6 @@
 {
   "version": "2026-10-24",
-  "status": "OWNER_APPROVED_VISUAL_CHOICES__REUSE_RIGHTS_NOT_YET_CLEARED",
+  "status": "SELECTED_PHOTOS_NOT_RIGHTS_CLEARED__FIVE_DRAFT_LICENCED_ALTERNATIVES_VERIFIED__A_C_D_ILLUSTRATIONS_STAGED",
   "guide": "SK8 Scoop 52 Adventures",
   "branch": "preview/52-adventures-image-review-2026-10-23",
   "draft_pr": 241,
@@ -17,7 +17,10 @@
       "basis": "PERMISSION REQUIRED",
       "status": "SELECTED · RIGHTS PENDING",
       "description": "Real Underbanks scene with pedestrians, street stalls and bunting; authentic, but no reusable licence located.",
-      "alt": "Crowds, outdoor market stalls and bunting along Little Underbank, Stockport."
+      "alt": "Crowds, outdoor market stalls and bunting along Little Underbank, Stockport.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "PERMISSION_OR_EXACT_LICENCE_NOT_YET_ESTABLISHED"
     },
     {
       "order": 2,
@@ -30,7 +33,10 @@
       "basis": "PERMISSION REQUIRED",
       "status": "SELECTED · RIGHTS PENDING",
       "description": "Period-furnished interior photographed at Staircase House. Better than the façade; not cleared for SK8 reuse.",
-      "alt": "Historically furnished room with wooden furniture and ceiling beams at Staircase House."
+      "alt": "Historically furnished room with wooden furniture and ceiling beams at Staircase House.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "PERMISSION_OR_EXACT_LICENCE_NOT_YET_ESTABLISHED"
     },
     {
       "order": 3,
@@ -43,7 +49,10 @@
       "basis": "RIGHTS UNCLEAR",
       "status": "SELECTED · PHOTOGRAPHER PERMISSION NEEDED",
       "description": "The recreated wartime kitchen inside the sandstone tunnel. Tripadvisor hosting does not convey permission.",
-      "alt": "Replica wartime kitchen with enamel crockery, tiled sink and display furniture inside the air raid shelters."
+      "alt": "Replica wartime kitchen with enamel crockery, tiled sink and display furniture inside the air raid shelters.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "UNVERIFIED_PERMISSION_PENDING"
     },
     {
       "order": 4,
@@ -56,7 +65,10 @@
       "basis": "PERMISSION REQUIRED",
       "status": "SELECTED · RIGHTS PENDING",
       "description": "Real evening crowd and food stalls at Foodie Friday. Preferred main image; the illustrated food market is a secondary artwork, not a substitute documentary photograph.",
-      "alt": "Food stalls and visitors in Stockport Market Place at Foodie Friday after dark."
+      "alt": "Food stalls and visitors in Stockport Market Place at Foodie Friday after dark.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "PERMISSION_OR_EXACT_LICENCE_NOT_YET_ESTABLISHED"
     },
     {
       "order": 6,
@@ -69,7 +81,10 @@
       "basis": "PERMISSION REQUIRED",
       "status": "SELECTED · RIGHTS PENDING",
       "description": "Real hat-making machinery at Hat Works. Keep the existing approved chimney illustration until the preferred picture is cleared.",
-      "alt": "Large historic hat-forming machine, wheel and mechanism inside Hat Works."
+      "alt": "Large historic hat-forming machine, wheel and mechanism inside Hat Works.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "PERMISSION_OR_EXACT_LICENCE_NOT_YET_ESTABLISHED"
     },
     {
       "order": 7,
@@ -82,7 +97,10 @@
       "basis": "PERMISSION REQUIRED",
       "status": "SELECTED · RIGHTS PENDING",
       "description": "Jacquard looms in the actual mill interior, more useful than a brick exterior.",
-      "alt": "Long weaving room with historic silk looms and spools inside Paradise Mill."
+      "alt": "Long weaving room with historic silk looms and spools inside Paradise Mill.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "PERMISSION_OR_EXACT_LICENCE_NOT_YET_ESTABLISHED"
     },
     {
       "order": 8,
@@ -95,7 +113,10 @@
       "basis": "PERMISSION REQUIRED",
       "status": "SELECTED SUBJECT · SOURCE-SHOT MATCH TO CONFIRM",
       "description": "Actual restored double-deckers inside the museum. This is a matching real-venue example of your chosen visual treatment; the previous image A's precise photographer has not yet been established.",
-      "alt": "Restored red-and-cream double-decker buses on display at the Museum of Transport Greater Manchester."
+      "alt": "Restored red-and-cream double-decker buses on display at the Museum of Transport Greater Manchester.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "PERMISSION_OR_EXACT_LICENCE_NOT_YET_ESTABLISHED"
     },
     {
       "order": 9,
@@ -108,7 +129,10 @@
       "basis": "PERMISSION REQUIRED",
       "status": "SELECTED · RIGHTS PENDING",
       "description": "Actual demonstrator working with textile machinery. Museum-hosted image not licensed for third-party publication by default.",
-      "alt": "Museum technician demonstrating historic textile machinery inside the Science and Industry Museum."
+      "alt": "Museum technician demonstrating historic textile machinery inside the Science and Industry Museum.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "PERMISSION_OR_EXACT_LICENCE_NOT_YET_ESTABLISHED"
     },
     {
       "order": 10,
@@ -121,7 +145,10 @@
       "basis": "PERMISSION REQUIRED",
       "status": "SELECTED SUBJECT · SOURCE-SHOT MATCH TO CONFIRM",
       "description": "Genuine Goyt Valley reservoir landscape rather than imagined mountain scenery. The source photo's individual reuse licence remains unverified.",
-      "alt": "Path, moorland hills and reservoir landscape in the Goyt Valley."
+      "alt": "Path, moorland hills and reservoir landscape in the Goyt Valley.",
+      "publication_ready": false,
+      "editorial_selection_approved": true,
+      "rights_status": "PERMISSION_OR_EXACT_LICENCE_NOT_YET_ESTABLISHED"
     }
   ],
   "owner_midjourney_choices": [
@@ -132,7 +159,9 @@
       "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792855942/sk8-scoop/52-adventures/review-only-2026-10-24/oldtown-owner-1200x904.png",
       "description": "Imagined brick street and warm shopfronts, explicitly an illustration, not an authentic Underbanks photograph.",
       "basis": "ORIGINAL · COMMERCIAL ACCOUNT RIGHTS TO CONFIRM",
-      "asset": "Canva MAHY78K0JzQ"
+      "asset": "Canva MAHY78K0JzQ",
+      "placement_staged_in_draft_guide": true,
+      "commercial_usage_owner_confirmation_pending": true
     },
     {
       "code": "C",
@@ -141,7 +170,9 @@
       "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792785180/sk8-scoop/52-adventures/review-only-2026-10-23/heritage-owner-1200x904.png",
       "description": "Already installed in Chapter 01; keep unchanged.",
       "basis": "ORIGINAL · COMMERCIAL ACCOUNT RIGHTS TO CONFIRM",
-      "asset": "Canva MAHY2NKNPlc"
+      "asset": "Canva MAHY2NKNPlc",
+      "placement_staged_in_draft_guide": true,
+      "commercial_usage_owner_confirmation_pending": true
     },
     {
       "code": "D",
@@ -150,7 +181,9 @@
       "url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792855947/sk8-scoop/52-adventures/review-only-2026-10-24/foodie-owner-1200x904.png",
       "description": "Imaginary food market, clearly labelled illustration; do not imply it depicts an actual Foodie Friday event.",
       "basis": "ORIGINAL · COMMERCIAL ACCOUNT RIGHTS TO CONFIRM",
-      "asset": "Canva MAHY79EwtfU"
+      "asset": "Canva MAHY79EwtfU",
+      "placement_staged_in_draft_guide": true,
+      "commercial_usage_owner_confirmation_pending": true
     }
   ],
   "licensed_alternatives_not_selected": [
@@ -176,5 +209,115 @@
   "keep_existing_guide_photography_until_cleared": true,
   "no_publication_without_owner_approval": true,
   "rights_register_update_required": true,
-  "checks": "Before any replacement verify exact asset licence or written permission, person/venue authenticity, exact crop, mobile loading and alt/credit. Reconfirm owner's Midjourney commercial creation rights."
+  "checks": "Before any replacement verify exact asset licence or written permission, person/venue authenticity, exact crop, mobile loading and alt/credit. Reconfirm owner's Midjourney commercial creation rights.",
+  "last_updated": "2026-10-24",
+  "licensed_alternatives_verified": [
+    {
+      "for_choice": 1,
+      "adventure": 5,
+      "subject": "Underbanks modern street",
+      "status": "LICENSE_VERIFIED_ALTERNATIVE_NOT_SAME_PHOTO",
+      "rights_basis": "LICENCE",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "creator": "Stephen McKay",
+      "date_captured": "2025-11-15",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Great_Underbank,_Stockport_-_geograph.org.uk_-_8197701.jpg",
+      "asset_url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792857883/sk8-scoop/52-adventures/licensed-alternatives-2026-10-24/great-underbank-stephen-mckay-cc-by-sa-2.jpg",
+      "alt": "Street-level photograph of Great Underbank in Stockport, with cafés and older town-centre buildings.",
+      "credit": "Great Underbank, Stockport © Stephen McKay / Geograph, CC BY-SA 2.0; resized for review. Source and licence linked.",
+      "rights_notes": "Downscaled to 1280x960 for review. If cropped/modified, indicate changes and comply with CC BY-SA compatible licence on adaptations.",
+      "quality": "real but quieter than selected lively council photo",
+      "dimensions": [
+        1280,
+        960
+      ]
+    },
+    {
+      "for_choice": 6,
+      "adventure": 2,
+      "subject": "Hat Works historical machinery",
+      "status": "LICENSE_VERIFIED_ALTERNATIVE_NOT_SAME_PHOTO",
+      "rights_basis": "LICENCE",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "creator": "Clem Rutter, Rochester, Kent",
+      "date_captured": "2013-10-22",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Hat_museum_Shaping_and_Blocking_Machinery_machinery_6493.JPG",
+      "asset_url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792857820/sk8-scoop/52-adventures/licensed-alternatives-2026-10-24/hat-machinery-clemrutter-cc-by3.jpg",
+      "alt": "An original hat-shaping machine inside the Hat Works museum in Stockport.",
+      "credit": "Hat Works shaping and blocking machinery © Clem Rutter, CC BY 3.0; resized for review. Source and licence linked.",
+      "rights_notes": "Resized for review. Credit name, exact original source, licence, indication of modifications.",
+      "quality": "excellent match for selected machinery photo",
+      "dimensions": [
+        1280,
+        960
+      ]
+    },
+    {
+      "for_choice": 8,
+      "adventure": 41,
+      "subject": "Museum of Transport restored buses interior",
+      "status": "LICENSE_VERIFIED_ALTERNATIVE_NOT_SAME_PHOTO",
+      "rights_basis": "LICENCE",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "creator": "DS Pugh",
+      "date_captured": "2026-08-12",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Inside_the_Museum_of_Transport,_Greater_Manchester_-_geograph.org.uk_-_8399090.jpg",
+      "asset_url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792857889/sk8-scoop/52-adventures/licensed-alternatives-2026-10-24/museum-transport-ds-pugh-cc-by-sa-2.jpg",
+      "alt": "Restored vintage buses in the exhibition hall of the Museum of Transport Greater Manchester.",
+      "credit": "Inside Museum of Transport Greater Manchester © DS Pugh / Geograph, CC BY-SA 2.0; resized for review. Source and licence linked.",
+      "rights_notes": "Resized for review. Preserve CC BY-SA licence if adapted.",
+      "quality": "excellent real museum interior and visually close to selected buses",
+      "dimensions": [
+        1280,
+        855
+      ]
+    },
+    {
+      "for_choice": 9,
+      "adventure": 36,
+      "subject": "Science and Industry Museum working-loom collection",
+      "status": "LICENSE_VERIFIED_ALTERNATIVE_NOT_SAME_PHOTO",
+      "rights_basis": "LICENCE",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "creator": "Clem Rutter, Rochester, Kent",
+      "date_captured": "2013-10-19",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Shorrocks_Lancashire_Loom_with_a_weft_stop_MOSI_6407.JPG",
+      "asset_url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792857900/sk8-scoop/52-adventures/licensed-alternatives-2026-10-24/science-museum-loom-clem-rutter-cc-by-3.jpg",
+      "alt": "Historic Lancashire power loom on display inside Manchester's Science and Industry Museum.",
+      "credit": "Lancashire loom at Science and Industry Museum © Clem Rutter, CC BY 3.0; resized for review. Source and licence linked.",
+      "rights_notes": "Shows machine but not the person demonstrating in selected A. Do not imply demonstrations are currently available based on 2013 photo.",
+      "quality": "good machinery authenticity, less human-interest than selected live demo",
+      "dimensions": [
+        1280,
+        960
+      ]
+    },
+    {
+      "for_choice": 10,
+      "adventure": 27,
+      "subject": "Goyt Valley walking trail",
+      "status": "LICENSE_VERIFIED_ALTERNATIVE_NOT_SAME_PHOTO",
+      "rights_basis": "LICENCE",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "creator": "Tpguy825",
+      "date_captured": "2025-07-24",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Walking_trails_near_Errwood_Hall,_Goyt_Valley_01.jpg",
+      "asset_url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792857894/sk8-scoop/52-adventures/licensed-alternatives-2026-10-24/goyt-errwood-walk-tpguy825-cc-by-sa-4.jpg",
+      "alt": "A winding walking trail near Errwood Hall ruins, framed by greenery and hills in the Goyt Valley.",
+      "credit": "Walking trail near Errwood Hall © Tpguy825, CC BY-SA 4.0; resized for review. Source and licence linked.",
+      "rights_notes": "Photo of real landscape, not same reservoir viewpoint as selected B. If modified, licence ShareAlike.",
+      "quality": "good real walking illustration, not selected reservoir view",
+      "dimensions": [
+        1280,
+        961
+      ]
+    }
+  ],
+  "image_rights_register_status": "DRAFT_ROWS_IN_PR_ONLY__CENTRAL_GOOGLE_DOC_NOT_MODIFIED",
+  "critical_notes": "All 9 real selections remain on owner shortlist and NONE have an independently cleared licence. Separate alternative Commons files have individually verified commercial-usable CC licences, but are NOT the same shots and are not automatically substituted. User original A (Underbanks), C (Chapter 01), D (Foodie Friday) illustrations staged as clearly labelled supplemental, with account rights pending."
 }
