@@ -101,7 +101,7 @@ assertIncludes(homepageJs,"'/52-adventures/': '/52-adventures/guide/'",
   'Returning subscribers get the full adventure guide');
 assert.ok(!homepageJs.includes('<svg') && !homepageJs.includes('storyGraphicSvg'),
   'Legacy generic inline SVG illustrations are not a permitted SK8 visual fallback');
-const issueNumber=Number((read('assets/config.js').match(/currentIssue:\\s*\\{\\s*number:\\s*(\\d+)/)||[])[1]);
+const issueNumber=Number((read('assets/config.js').match(/currentIssue:\s*\{\s*number:\s*(\d+)/)||[])[1]);
 assert.ok(issueNumber > 0, 'Current issue is configured');
 assertIncludes(html,`<h3>Issue ${issueNumber}</h3>`,'Card title is subordinate to resources section heading');
 assertIncludes(html,'Share a local tip','Visitor contribution route remains useful and explicit');
