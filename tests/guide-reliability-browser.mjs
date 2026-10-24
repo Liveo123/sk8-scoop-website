@@ -183,7 +183,7 @@ try {
   await navigate('/52-adventures/guide/');
   for(const [num,key] of [[5,'underbanks-editorial-illustration'],[7,'foodie-friday-editorial-illustration']]){
     const insetResult=await evaluate("(async()=>{"+
-      "const btn=document.querySelector('[data-open=\\""+num+"\\"]');"+
+      "const btn=[...document.querySelectorAll('[data-open]')].find(x=>Number(x.dataset.open)==="+num+");"+
       "if(!btn)return {error:'button missing'};btn.click();"+
       "const dlg=document.querySelector('#adventure-dialog'),img=dlg?.querySelector('.guide-editorial-inset img');"+
       "if(!img)return {opened:dlg?.open,error:'inset missing'};"+
