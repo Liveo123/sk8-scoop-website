@@ -319,5 +319,27 @@
     }
   ],
   "image_rights_register_status": "DRAFT_ROWS_IN_PR_ONLY__CENTRAL_GOOGLE_DOC_NOT_MODIFIED",
-  "critical_notes": "All 9 real selections remain on owner shortlist and NONE have an independently cleared licence. Separate alternative Commons files have individually verified commercial-usable CC licences, but are NOT the same shots and are not automatically substituted. User original A (Underbanks), C (Chapter 01), D (Foodie Friday) illustrations staged as clearly labelled supplemental, with account rights pending."
+  "critical_notes": "All 9 real selections remain on owner shortlist and NONE have an independently cleared licence. Separate alternative Commons files have individually verified commercial-usable CC licences, but are NOT the same shots and are not automatically substituted. User original A (Underbanks), C (Chapter 01), D (Foodie Friday) illustrations staged as clearly labelled supplemental, with account rights pending.",
+  "additional_illustration_proposal_not_yet_owner_approved": {
+    "placement": "Chapter 04 Get stuck in chapter card and opener",
+    "previous_visual": "Burnt-orange rectangle with only CLIMB PADDLE SKI RIDE words and nine adventures",
+    "new_visual": "Owner uploaded orange sun/mountain bike/kayak/snowy ridges Midjourney collage; stylised and not a factual local route",
+    "source_canva_asset_id": "MAHY8GfgazA",
+    "image_key": "chapter04-sports-illustration-proposed",
+    "preview_image_url": "https://res.cloudinary.com/gocq00bt/image/upload/v1792858842/sk8-scoop/52-adventures/review-only-2026-10-24/chapter04-adventure-sports-owner-1200x904.png",
+    "source_original": [
+      1232,
+      928
+    ],
+    "staged_image": [
+      1200,
+      904
+    ],
+    "status": "STAGED_IN_UNPUBLISHED_DRAFT_FOR_EDITOR_REVIEW_NOT_PART_OF_TEN_APPROVED_CHOICES",
+    "rights_basis": "ORIGINAL_PROVISIONAL__MIDJOURNEY_CREATOR_ACCOUNT_CONFIRMATION_NEEDED",
+    "alt": "Editorial illustration of a cyclist leaping above snowy mountains, a kayaker on a river, and a large orange sun; an imagined outdoor scene.",
+    "credit": "Illustration: SK8 Scoop (owner-supplied Midjourney artwork); imaginary setting, not a real route or venue.",
+    "approval": false,
+    "production_ready": false
+  }
 }
