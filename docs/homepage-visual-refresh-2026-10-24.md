@@ -32,3 +32,12 @@ These rows are staged here, **not yet written to the shared Image Rights Registe
 - Latest issue number and title update from the canonical issue config while headings satisfy source QA.
 - Existing navigation, What’s On filters, MailerLite signup and ads untouched.
 - PR remains **draft / review-only** until Paul explicitly approves this visual version. Never assume prior homepage approval extends to this design.
+
+## Supplied MidJourney backgrounds | 24 October 2026
+- Paul supplied three candidate images in chat. Image 1 is a sepia illustration of two people walking past cafés and local shops; its bottom edge contains unwanted AI-generated pseudo-lettering. The currently hosted 133 × 200 thumbnail is used **only as a faint background** behind independent editable live text, where the low-resolution source cannot be mistaken for a sharp standalone photograph. Direct hosted preview asset: https://res.cloudinary.com/gocq00bt/image/upload/v1792838787/sk8-scoop/homepage/free-guide-bg-user-20261024.png
+- Image 2 is a blue/cyan collage of a traveller with backpack in front of an artistic map. It has been recovered to Canva as asset `MAHY6scP3R4`, but a durable production-ready URL or original image file is not yet available. Do **not** use an expiring Canva thumbnail as a production stylesheet URL. The 52 Adventures card therefore retains a low-contrast original CSS background and the high-contrast text change while this image remains blocked.
+- Image 3 is an architectural still life with a table and vases; not used because it doesn't represent either guide.
+- Both guide poster texts now use dark teal `#104850`, with font-weight enhancements. The 52 Adventures panel has been changed from cream-on-deep-teal to teal-on-pale-aqua to match Paul's latest text-colour instruction.
+- Rights: Paul directly supplied the MidJourney outputs for these SK8 card backgrounds, but record generator, creator/account, permitted use and any model-specific restrictions before final release. Treat both as **illustration only**, not documentary evidence of a real SK8 place. No false place labels should be inferred from the image.
+- Accessibility: decorative backgrounds live in CSS; poster words remain in HTML (aria-hidden because the card's heading and copy provide the accessible name). All buttons retain white on dark SK8 teal.
+- Release: preview only, never merge before the user reviews the exact appearance and the missing image is resolved. The rights register still requires a final row for the actually used image.
