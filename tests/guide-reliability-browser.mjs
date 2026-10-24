@@ -123,8 +123,41 @@ try {
   const desktopArtScreenshot=await cmd('Page.captureScreenshot',{format:'png',fromSurface:true,captureBeyondViewport:false});
   await writeFile('visual-qa/guide-reliability/52-adventures-chapters-desktop-1280.png',
     Buffer.from(desktopArtScreenshot.data,'base64'));
+
+  // The image-review page previously fell back to fuzzy 199px proofs.
+  // Check its rendered pixels separately from the full guide so it cannot silently regress.
+  await navigate('/52-adventures/image-review-2026-10-23/');
+  const comparisonImages=await evaluate("(async()=>{"+
+    "const imgs=[...document.querySelectorAll('.card img')];"+
+    "const out=[];for(const [i,img] of imgs.entries()){img.loading='eager';"+
+    "img.scrollIntoView({block:'nearest'});"+
+    "try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('decode timeout')),12000))]);}"+
+    "catch(e){out.push({index:i,alt:img.alt,width:img.naturalWidth,error:String(e)});continue;}"+
+    "out.push({index:i,alt:img.alt,width:img.naturalWidth,height:img.naturalHeight,"+
+    "fallback:img.currentSrc.startsWith('data:'),source:img.currentSrc.slice(0,130)});"+
+    "}return out;})()");
+  record('52 Adventures: comparison page displays all five sharp images, plus Plaza',
+    comparisonImages.length===6 &&
+    comparisonImages.every((x,i)=>i===1?x.width>=700:
+      x.width>=1000 && x.height>=750 && x.fallback===false),
+    JSON.stringify(comparisonImages));
+
+  await evaluate("document.querySelector('.grid')?.scrollIntoView({block:'start'})");
+  await sleep(350);
+  const comparisonDesktopScreenshot=await cmd('Page.captureScreenshot',
+    {format:'png',fromSurface:true,captureBeyondViewport:false});
+  await writeFile('visual-qa/guide-reliability/52-adventures-comparison-desktop-1280.png',
+    Buffer.from(comparisonDesktopScreenshot.data,'base64'));
   await cmd('Emulation.setDeviceMetricsOverride',
     {width:390,height:900,deviceScaleFactor:1,mobile:false,screenWidth:390,screenHeight:900});
+  await navigate('/52-adventures/image-review-2026-10-23/');
+  await evaluate("document.querySelector('.grid')?.scrollIntoView({block:'start'})");
+  await sleep(350);
+  const comparisonMobileScreenshot=await cmd('Page.captureScreenshot',
+    {format:'png',fromSurface:true,captureBeyondViewport:false});
+  await writeFile('visual-qa/guide-reliability/52-adventures-comparison-mobile-390.png',
+    Buffer.from(comparisonMobileScreenshot.data,'base64'));
+
   await navigate('/52-adventures/guide/');
   record('Finder view opens',await click('[data-view="finder"]'));
   const searchResult=await evaluate("(()=>{"+
