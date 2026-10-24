@@ -36,25 +36,25 @@ window.SK8_CONFIG = {
   metaPixelId: "4649116095416763",
   formsparkContactEndpoint: "https://submit-form.com/X3MWnWHXI",
   publicStats: {
-    subscriberCount: "750+",
-    subscriberProof: "750+",
-    issuesPublished: 17,
-    checkedDate: "23 October 2026",
-    latestMainSendRecipients: 721,
+    subscriberCount: "780+",
+    subscriberProof: "780+",
+    issuesPublished: 18,
+    checkedDate: "24 October 2026",
+    latestMainSendRecipients: 774,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "16 October 2026",
+    latestIssueDate: "23 October 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 17,
-    dateIso: "2026-10-16",
-    dateDisplay: "Friday 16 October 2026",
-    title: "Issue 17 · Friday 16 October 2026",
-    headline: "FREE Merseyday of the Dead + Cheadle's Art Deco secret",
-    summary: "Free Merseyday of the Dead, Premier Café history, Carr Wood, HAF booking help and 46 half-term ideas.",
-    url: "/issues/issue-17/"
+    number: 18,
+    dateIso: "2026-10-23",
+    dateDisplay: "Friday 23 October 2026",
+    title: "Issue 18 · Friday 23 October 2026",
+    headline: "Anson steam weekend, a boxing kangaroo and Gatley path closures",
+    summary: "Anson Museum steam weekend, Reda\'s boxing-kangaroo recollection, Gatley footpath changes, holiday clubs and useful half-term ideas.",
+    url: "/issues/issue-18/"
   },
   stripeLinks: {
     local_spotlight: "",
