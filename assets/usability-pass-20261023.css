@@ -290,8 +290,8 @@ body[data-page="whats-on"] .holiday-club-spotlight-cta.button:focus-visible{
 @media(max-width:600px){
   body.reader-home.reader-first-mode .holiday-club-spotlight,
   body[data-page="whats-on"] .holiday-club-spotlight{
-    margin:7px 0 9px!important;
-    padding:11px 13px 12px!important;
+    margin:3px 0 3px!important;
+    padding:9px 13px 10px!important;
     gap:7px!important;
     box-shadow:none!important;
     border-left-width:5px!important;
