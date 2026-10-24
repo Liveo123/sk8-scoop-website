@@ -18,7 +18,7 @@ assert.ok(html.includes('The Heald Green spy and future Dambuster'), 'Heald Gree
 assert.ok(html.includes('local-history-magazine.css?v=20261024a'), 'New CSS linked after prior styles');
 const ids=['history-archive-stories','heyhead-feature','history-then-now','history-visual-gallery','history-visit','air-raid-shelters','52-adventures-heritage','free-cheap-old-town','st-marys-cheadle'];
 for(const id of ids)assert.equal((html.match(new RegExp('id="'+id+'"','g'))||[]).length,1,'Unique anchor: '+id);
-for(const expected of ['267','1871','1866','1950','1964','22 heritage stops','11th-century cross','two fatal air raids','Mercury','Historic England'])assert.ok(html.includes(expected),'Missing evidence detail '+expected);
+for(const expected of ['267','1871','1866','1950','1964','22 heritage stops','11th-century cross','Two fatal air raids','Mercury','Historic England'])assert.ok(html.includes(expected),'Missing evidence detail '+expected);
 const gallery = getSection('history-visual-gallery').split('</section>')[0];
 assert.equal((gallery.match(/class="history-gallery-card/g)||[]).length,6,'Six image-led stories');
 assert.equal((gallery.match(/<img /g)||[]).length,6,'Gallery image for each story');
