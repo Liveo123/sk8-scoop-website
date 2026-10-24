@@ -28,6 +28,20 @@ if (!countMatch || !proofMatch || countMatch[1] !== proofMatch[1] || Number(coun
 requireText(config, 'currentIssue: {', 'current issue config');
 requireText(home, 'assets/homepage-v4.css', 'homepage V4 stylesheet');
 
+// Protect the visible latest-issue card even before JavaScript runs. The static
+// number, label and headline must match the central publication config.
+const latestIssueMatch = config.match(/currentIssue:\s*\{\s*number:\s*(\d+)/);
+if (!latestIssueMatch) {
+  failures.push('latest issue: missing currentIssue.number in central config');
+} else {
+  const n = latestIssueMatch[1];
+  requireText(home, `<span class="home-issue-label">ISSUE ${n}</span>`, 'latest-issue cover label');
+  requireText(home, `data-current-issue-number>${n}</strong>`, 'latest-issue large cover number');
+  requireText(home, `<h3>Issue ${n}</h3>`, 'latest-issue visible heading');
+  requireText(home, `href="/issues/issue-${n}/"`, 'latest-issue destination');
+}
+
+
 // 1. Homepage desktop header exposes the same full menu as the rest of the site.
 requireText(home, 'href="start/">Where to start</a>', 'homepage Where to start navigation');
 requireText(home, 'href="join/">Join</a>', 'homepage Join navigation');
