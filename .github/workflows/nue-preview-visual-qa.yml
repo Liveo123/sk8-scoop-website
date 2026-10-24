@@ -21,46 +21,33 @@ jobs:
   visual-qa:
     runs-on: ubuntu-latest
     env:
-      PREVIEW_URL: https://preview-nue-quick-answers-freshness-v1-rebased.previews.sk8scoop.com
+      PREVIEW_URL: ''
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Resolve PR-specific Cloudflare preview URL and revision
-        if: github.event_name == 'pull_request'
+      - name: Resolve current Cloudflare preview branch
         shell: bash
         env:
-          GH_TOKEN: ${{ github.token }}
-          PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_REF: ${{ github.head_ref || github.ref_name }}
         run: |
           set -euo pipefail
-          comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
-          commit_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}"
-          commit_payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" "$commit_api" || true)"
-          changed_content="$(printf '%s' "$commit_payload" | jq '[.files[]? | select((.filename | startswith(".github/workflows/")) | not)] | length' 2>/dev/null || echo 1)"
-          workflow_only=false
-          if [ "$changed_content" = "0" ]; then workflow_only=true; fi
+          ref="$HEAD_REF"
+          slug="$(printf '%s' "$ref" | sed 's#[^A-Za-z0-9-]#-#g')"
+          base="https://${slug}.previews.sk8scoop.com"
           for attempt in $(seq 1 24); do
-            payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" \
-              -H "Accept: application/vnd.github+json" "$comments_api" || true)"
-            body="$(printf '%s' "$payload" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // ""' 2>/dev/null || true)"
-            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
-            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
-            reported_sha="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
-            if [ -n "$url" ] && [ -n "$reported_sha" ] && { [[ "$PREVIEW_SHA" == "$reported_sha"* ]] || [ "$workflow_only" = true ]; }; then
-              code="$(curl -sSL --max-time 20 -o /dev/null -w '%{http_code}' "${url}/" || true)"
-              if [ "$code" = "200" ]; then
-                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
-                echo "Cloudflare URL verified for commit $reported_sha: $url"
-                exit 0
-              fi
+            if curl -fsSL --max-time 20 "$base/" -o /tmp/sk8-nue-home.html 2>/dev/null &&
+               curl -fsSL --max-time 20 "$base/assets/site.js" -o /tmp/sk8-nue-site.js 2>/dev/null &&
+               cmp -s assets/site.js /tmp/sk8-nue-site.js &&
+               grep -Fq 'reader-first-discovery' /tmp/sk8-nue-home.html; then
+              echo "PREVIEW_URL=$base" >> "$GITHUB_ENV"
+              echo "Verified branch preview and exact shared site script: $base"
+              exit 0
             fi
-            echo "Awaiting exact Cloudflare PR preview for ${PREVIEW_SHA}: attempt $attempt/24"
+            echo "Waiting for matching preview of $ref (attempt $attempt/24)"
             sleep 10
           done
-          echo "FAILED: no Cloudflare PR preview with matching SHA and HTTP 200"
+          echo "FAILED: branch preview did not match source"
           exit 1
 
       - name: Wait for exact Cloudflare preview
