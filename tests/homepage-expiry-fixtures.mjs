@@ -21,7 +21,7 @@ function runAt(iso, shouldLoad) {
   const cards = Array.from({ length: 3 }, () => ({
     dataset: {}, style: { display: '' }, hidden: false, querySelector: () => null
   }));
-  cards[1].dataset.expireAfter = '2026-10-24';
+  cards[1].dataset.expireAfter = data.stories[1].expires;
   const heading = { textContent: '3 things worth your attention now' };
   const intro = { textContent: 'A free October outing' };
   const kicker = { textContent: 'Know · Do · Discover' };
@@ -48,42 +48,41 @@ function runAt(iso, shouldLoad) {
   return { cards, wrap, heading, intro, kicker, staticHidden, localDay: helpers.ukToday() };
 }
 
-// 24 Oct in the UK: the Saturday outing remains discoverable through that day.
+// 24 October in the UK: the current Woodford booking prompt has not expired.
 const before = runAt('2026-10-24T22:30:00Z', true);
 assert.equal(before.localDay, '2026-10-24');
 assert.equal(before.staticHidden, 0);
 assert.equal(before.cards.filter(card => !card.hidden).length, 3);
 
-// 23:30 UTC is 00:30 on Sunday 25 Oct in Britain, before clocks go back.
-const after = runAt('2026-10-24T23:30:00Z', true);
-assert.equal(after.localDay, '2026-10-25');
+// At UK midnight on 6 November, the 5 November bonfire prompt disappears.
+const after = runAt('2026-11-06T00:30:00Z', true);
+assert.equal(after.localDay, '2026-11-06');
 assert.equal(after.staticHidden, 1);
 assert.equal(after.cards.filter(card => !card.hidden).length, 2);
 assert.equal(after.cards[1].dataset.expireAfter, undefined,
-  'A surviving evergreen card must not inherit the expired event marker');
+  'The surviving evergreen card must not inherit an expired event marker');
 assert.match(after.heading.textContent, /^2 things worth/);
 
-// If the homepage JSON request fails, the dated static fallback is still hidden.
-const fallback = runAt('2026-10-25T09:30:00Z', false);
+// If the homepage JSON request fails, the static fallback still hides the dated card.
+const fallback = runAt('2026-11-06T09:30:00Z', false);
 assert.equal(fallback.cards[1].hidden, true);
 assert.equal(fallback.cards[1].style.display, 'none');
 assert.equal(fallback.cards.filter(card => !card.hidden).length, 2);
 
-// The search transformer must preserve expiry for its existing isCurrent filter.
+// Search honours the same structured expiry date as the homepage.
 const transformSnippet = section(search, '  const transformHomepage = data => {',
   '  const transformEvents = data => {');
 const transformHomepage = new Function('inferArea', transformSnippet +
   '\nreturn transformHomepage;')(() => 'All areas');
 const transformed = transformHomepage(data);
-const merseyday = transformed.find(record => record.title.includes('Merseyday'));
-assert.ok(merseyday, 'Merseyday homepage search record missing');
-assert.equal(merseyday.expires, '2026-10-24');
+const bonfire = transformed.find(record => record.title.includes('Woodford Bonfire'));
+assert.ok(bonfire, 'Current bonfire homepage search record missing');
+assert.equal(bonfire.expires, '2026-11-05');
 const filterSnippet = section(search, '  const isCurrent = record => ',
   '\n\n  const areaMatches = event =>'.replace('event =>', 'record =>'));
-// Confirm we are testing the real filter used by the rendered search results.
 const isCurrent = new Function('localToday', filterSnippet + '\nreturn isCurrent;');
-assert.equal(isCurrent(() => '2026-10-24')(merseyday), true);
-assert.equal(isCurrent(() => '2026-10-25')(merseyday), false);
-assert.match(html, /data-home-story data-expire-after="2026-10-24"/);
+assert.equal(isCurrent(() => '2026-11-05')(bonfire), true);
+assert.equal(isCurrent(() => '2026-11-06')(bonfire), false);
+assert.match(html, /data-home-story data-expire-after="2026-11-05"/);
 
 console.log('PASS homepage search + static and dynamic event expiry (Europe/London).');

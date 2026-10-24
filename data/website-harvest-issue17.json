@@ -1,0 +1,187 @@
+{
+  "issue": 17,
+  "issue_date": "2026-10-16",
+  "final_issue_checked": true,
+  "checked_date": "2026-10-21",
+  "source": "Published public Issue 17 web edition https://www.sk8scoop.com/issues/issue-17/ and its linked existing website routes; reconciliation17October2026. No private mailbox material is included.",
+  "scope": "Issue 17 content-destination reconciliation: distinguish evergreen article, dated archive, What's On verified event record and homepage feature. Calendar additions are PREVIEW ONLY pending approval; event availability can change.",
+  "previous_harvest": "data/website-harvest-issue16.json",
+  "items": [
+    {
+      "id": "merseyday-of-the-dead",
+      "title": "Merseyday of the Dead",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Lead story and official programme links already appear in the published web edition.",
+      "destination_status": "STAGED_CALENDAR",
+      "calendar_note": "Verified 2026-10-21 and staged in preview events dataset; not published live"
+    },
+    {
+      "id": "chess-at-stockport-plaza",
+      "title": "CHESS at Stockport Plaza",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "The web edition contains show summary and organiser route; availability is explicitly not guaranteed.",
+      "destination_status": "STAGED_CALENDAR",
+      "calendar_note": "Verified 2026-10-21 and staged in preview events dataset; not published live"
+    },
+    {
+      "id": "premier-cafe-cheadle",
+      "title": "Premier Café history",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/local-history/premier-cafe-cheadle/",
+      "checked": "2026-10-17",
+      "reason": "Already-published standalone researched page; preserve its historical attribution and access caveats.",
+      "destination_status": "STANDALONE_ARTICLE_EXISTS"
+    },
+    {
+      "id": "carr-wood",
+      "title": "Carr Wood walking idea",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/outdoors/carr-wood-cheadle-hulme-bramhall/",
+      "checked": "2026-10-17",
+      "reason": "Already-published standalone route page; preserve current-access caveats.",
+      "destination_status": "STANDALONE_ARTICLE_EXISTS"
+    },
+    {
+      "id": "chiverton-tap",
+      "title": "Chiverton Tap history",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/food-drink/chiverton-tap/",
+      "checked": "2026-10-17",
+      "reason": "Already-published standalone venue/history page.",
+      "destination_status": "STANDALONE_ARTICLE_EXISTS"
+    },
+    {
+      "id": "october-haf",
+      "title": "October HAF eligibility/codes",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/kids-family/stockport-haf-october-half-term-2026/",
+      "checked": "2026-10-17",
+      "reason": "Already-published standalone practical page, not a guarantee of places.",
+      "destination_status": "STANDALONE_ARTICLE_EXISTS"
+    },
+    {
+      "id": "halloween-guide",
+      "title": "October half-term guide",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/halloween-half-term-guide/guide/",
+      "checked": "2026-10-17",
+      "reason": "Existing guide carries the detailed programme and expiry handling.",
+      "destination_status": "EXISTING_ROUTE"
+    },
+    {
+      "id": "bramall-witch-potion",
+      "title": "Bramall Hall Witch's Potion Trail",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web edition includes dated programme, adult admission caveat and official link.",
+      "destination_status": "CALENDAR_ALREADY_PRESENT_DATES_FIXED_IN_PREVIEW"
+    },
+    {
+      "id": "foodie-friday",
+      "title": "Halloween Foodie Friday",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web edition includes date, hours, free-entry/purchases-extra distinction and programme link.",
+      "destination_status": "CALENDAR_ALREADY_PRESENT"
+    },
+    {
+      "id": "cheadle-soul-halloween",
+      "title": "Cheadle Soul Club Halloween Special",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web edition and owner-approved guide staging already cover this; do not create another page.",
+      "destination_status": "STAGED_CALENDAR",
+      "calendar_note": "Verified 2026-10-21 and staged in preview events dataset; not published live"
+    },
+    {
+      "id": "roadworks",
+      "title": "Outwood Road / High Grove Road / Manchester Road works",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web edition links to primary council notices and qualifies expected dates/changes.",
+      "destination_status": "ARCHIVE_ONLY_OR_EVENT_UNASSESSED"
+    },
+    {
+      "id": "chris-woakes",
+      "title": "Chris Woakes in Heald Green",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Already mentioned as a dated diary note, explicitly not a live availability guarantee.",
+      "destination_status": "EXPIRED_ARCHIVE_ONLY"
+    },
+    {
+      "id": "station-house-birthday",
+      "title": "Station House first birthday",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web diary note; also an event in data/events.json. No new promotion or availability claim.",
+      "destination_status": "EXPIRED_ARCHIVE_ONLY"
+    },
+    {
+      "id": "woodford-model-railways",
+      "title": "Model railways in Woodford",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web diary note; avoid inferring a verified current ticket offer.",
+      "destination_status": "CALENDAR_ALREADY_PRESENT"
+    },
+    {
+      "id": "plant-sale",
+      "title": "Cheadle Hulme plant sale",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web diary note and event record; do not extend past its actual date.",
+      "destination_status": "EXPIRED_ARCHIVE_ONLY"
+    },
+    {
+      "id": "digital-help",
+      "title": "Free digital help at Cheadle Library",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web diary note; check current primary details before future promotion.",
+      "destination_status": "STAGED_CALENDAR",
+      "calendar_note": "Verified 2026-10-21 and staged in preview events dataset; not published live"
+    },
+    {
+      "id": "memory-lane",
+      "title": "Memory Lane at Cheadle Hulme Methodist Church",
+      "classification": "WEBSITE / MULTI-USE",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-17/",
+      "checked": "2026-10-17",
+      "reason": "Existing web diary note; no new Free & Cheap inclusion proposed.",
+      "destination_status": "STAGED_CALENDAR",
+      "calendar_note": "Verified 2026-10-21 and staged in preview events dataset; not published live"
+    }
+  ],
+  "reconciliation_note": "2026-10-21 PREVIEW: archive appearance is not proof of event-calendar distribution. Track each destination separately; additions in audit/issue17-calendar-parity-20261021 are not live until approved and deployed."
+}

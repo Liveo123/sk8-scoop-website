@@ -170,8 +170,8 @@ try {
   await navigate('/');
   await waitFor("document.querySelectorAll('[data-explore-grid] .reader-explore-tile').length === 6",
     'six refreshed editorial categories');
-  await waitFor("document.querySelector('.reader-worth .reader-story:nth-child(2) .reader-link')?.href.includes('merseyday-of-the-dead')",
-    'specific Merseyday story event continuation');
+  await waitFor("document.querySelector('.reader-worth .reader-story:nth-child(2) .reader-link')?.href.includes('woodford-community-bonfire-2026-11-05')",
+    'current Woodford bonfire event continuation');
   const homeState=await evaluate(`(() => {
     const card=document.querySelector('.reader-worth .reader-story:nth-child(3)');
     const frame=card?.querySelector('.dicm-visual');
@@ -199,7 +199,7 @@ try {
     homeState.newsletterButton==='Get it free' &&
     homeState.usefulLine.includes('Free things to do'));
   check('Dynamic featured story directs to the verified event',
-    homeState.featuredHref==='/whats-on/?event=merseyday-of-the-dead-2026-10-24');
+    homeState.featuredHref==='/whats-on/?event=woodford-community-bonfire-2026-11-05');
   check('Hero uses the current source artwork with non-destructive vivid contrast',
     homeState.imageGrade.includes('saturate(1.2)') &&
     homeState.illustrationSource.includes('sk8-miniature-hero-hires-v3.png'));
