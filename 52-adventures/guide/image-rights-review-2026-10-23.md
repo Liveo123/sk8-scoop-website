@@ -1,0 +1,44 @@
+# 52 Adventures — Image Rights and Asset QA (23 October 2026)
+
+**Status:** unpublished GitHub PR #241. Paul approved the image choices and chapter placement, **not publication**. These are original owner-supplied Midjourney illustrations, or a reused original SK8 Scoop editorial illustration. No claim is made that an imagined scene is an actual attraction photograph.
+
+## Proposed central Image Rights Register rows
+
+| Placement | Intended visual | Provisional basis and source | Direct usable asset | Credit and alt-text instruction | Guide image key | Remaining gate |
+|---|---|---|---|---|---|---|
+| 02 Hat Works | Red-brick mill chimney and courtyard | **ORIGINAL (provisional)** · MAHY2PLz4u8 | [Open sharp image](https://res.cloudinary.com/gocq00bt/image/upload/v1792785015/sk8-scoop/52-adventures/review-only-2026-10-23/hat-works-owner-1200x904.png) | Credit: Illustration: SK8 Scoop. Alt: Editorial illustration of a red-brick industrial mill chimney and courtyard, not a photograph of Stockport Hat Works. | `a2` | Confirm Midjourney licence/account entitlement and mobile crop |
+| 06 Stockport Plaza | Theatrical chess artwork previously used in Issue 17 | **ORIGINAL (provisional)** · SK8 original: sk8-scoop/issue17/chess-editorial-original-v7.png | [Open sharp image](https://res.cloudinary.com/gocq00bt/image/upload/v1792152710/sk8-scoop/issue17/chess-editorial-original-v7.png) | Credit: Illustration: SK8 Scoop. Alt: Original SK8 Scoop theatrical illustration showing dramatically lit chess pieces on a stage; not a photo of Stockport Plaza. | `a6` | Confirm existing reuse record and crop |
+| 10 Avro Heritage Museum | Vintage propeller aircraft at sunset | **ORIGINAL (provisional)** · MAHY2FQ28oI | [Open sharp image](https://res.cloudinary.com/gocq00bt/image/upload/v1792784903/sk8-scoop/52-adventures/review-only-2026-10-23/avro-owner-1200x904-no-seam.png) | Credit: Illustration: SK8 Scoop. Alt: Editorial illustration of vintage propeller aircraft at sunset, not a verified museum exhibit. | `a10` | Confirm Midjourney licence/account entitlement and mobile crop |
+| 32 RHS Bridgewater | Flower-lined garden path at sunset | **ORIGINAL (provisional)** · MAHY2FZuVl4 | [Open sharp image](https://res.cloudinary.com/gocq00bt/image/upload/v1792785102/sk8-scoop/52-adventures/review-only-2026-10-23/rhs-owner-1200x904.png) | Credit: Illustration: SK8 Scoop. Alt: Editorial illustration of a flower-lined garden path at sunset; not a photograph of RHS Garden Bridgewater. | `a32-illustration` | Confirm Midjourney licence/account entitlement and mobile crop |
+| Chapter 01 | Historic street, vintage car and archival-paper collage | **ORIGINAL (provisional)** · MAHY2NKNPlc | [Open sharp image](https://res.cloudinary.com/gocq00bt/image/upload/v1792785180/sk8-scoop/52-adventures/review-only-2026-10-23/heritage-owner-1200x904.png) | Credit: Illustration: SK8 Scoop. Alt: Illustration of an imagined historic street with a vintage vehicle and archival collage fragments. | `chapter01-illustration` | Confirm Midjourney licence/account entitlement and mobile crop |
+| Chapter 03 | Mountain lake, stone path and faded-map collage | **ORIGINAL (provisional)** · MAHY2NrBdtU | [Open sharp image](https://res.cloudinary.com/gocq00bt/image/upload/v1792785251/sk8-scoop/52-adventures/review-only-2026-10-23/outdoors-owner-1200x904.png) | Credit: Illustration: SK8 Scoop. Alt: Illustration of an imagined mountain lake and walking trail with map textures; not a real local route. | `chapter03-illustration` | Confirm Midjourney licence/account entitlement and mobile crop |
+
+## Midjourney commercial-use verification, checked 23 October 2026
+
+Midjourney's current [Terms of Service (effective 27 May 2026)](https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service) and [official guidance on commercial usage](https://docs.midjourney.com/hc/en-us/articles/27870375276557-Using-Images-Commercially) say that subscribers generally retain commercial usage rights to assets **they personally create**, including after cancellation. Two important exceptions apply: other users' upscaled assets remain theirs, and companies grossing **over US $1 million per year** must use a **Pro or Mega** plan for ownership. The user's images were uploaded as owner-supplied, but their actual generation-account provenance/subscription circumstances have not been independently verified here. Accordingly, `ORIGINAL` should remain **provisional** in the central SK8 Scoop rights register until Paul confirms that he or an authorised creator made each asset under a plan permitting this commercial use. The illustrated artworks contain imaginary places, so they must never imply a faithful photograph of the venue or route.
+
+## Remaining other-image decisions
+
+**03 Staircase House C:** owner chose to keep the prior image; do not replace from this artwork set. Verify that the staged picture is indeed the exact previously selected asset and its rights record.
+
+**07 Foodie Friday A:** genuine event photographs identified at [Stockport Council](https://www.stockport.gov.uk/news/why-everyones-going-out-in-stockport-town-centre-now), [Stockport Foodie Friday organiser](https://skfoodiefriday.co.uk/) and [Confidential Guides](https://confidentialguides.com/things-to-do/attractions/festivals/foodie-friday-stockport-event/), but none of these sources explicitly grants reuse. **Not licensed.** Keep existing credited Market Hall image; label as architecture only. A current event photograph needs a rights-cleared source or express written permission, not automatic reuse of organiser/council images.
+
+**48 Speedwell Cavern A:** genuine boat-in-tunnel imagery can be found in the [Wikimedia Commons Speedwell Cavern category](https://commons.wikimedia.org/wiki/Category:Speedwell_Cavern). Photo `Speedwell Cavern 2015 03.jpg` appears to show the tour-boat bow entering the flooded passage, but the individual file's precise licence statement was not independently retrievable in this review; do **not** mark it cleared on the assumption that the 2015 series shares the same CC BY-SA 4.0 licence. Keep existing credited cavern image until exact alternative permission/licence is verified.
+
+**No automated contact** to organisers or rightsholders and no live publishing has been carried out.
+
+## Recovery evidence
+
+The five previously missing illustrations were imported from the **exact user chat uploads** into Canva at **1232 × 928 px**. To bypass the Canva thumbnail export limit, each image was shown as four 600 × 452 px quadrants of the original image and then recomposed into a **1200 × 904 px raster**, retaining near-original source detail. **These are not AI-upscaled 199 px thumbnails.** Perceptual-hash comparison against the original supplied thumbnail found Hamming distances of 2–8 across 64 bits (identity confidence, not a substitute for human visual QA). The original untouched Canva copies remain available under the asset IDs above. The Plaza source is an existing 1536 × 1024 px Issue 17 original.
+
+All five reconstructed asset URLs are in the SK8 Cloudinary **review-only** folder; they are readable by the draft guide at `/52-adventures/guide/` on branch `preview/52-adventures-image-review-2026-10-23`. The selected collages use independent `chapter01-illustration` and `chapter03-illustration` image keys. The existing verified photograph on `a32` is retained to preserve its original Commons credit, rights record and SHA-256 integrity test; the illustrated RHS card uses `a32-illustration`.
+
+## Remaining release conditions
+
+1. Confirm Midjourney commercial-usage entitlement/provenance for the exact owner-supplied images and record it under **ORIGINAL** in the live central Image Rights Register. These draft rows are **not** yet central-register entries.
+2. Inspect actual rendering of desktop and mobile gallery, guide chapter cover and modal images. Ensure the 1200 px reconstruction has no visible seams or edge artefacts and avoid cropping off focal points.
+3. Check all images are explicitly described as **editorial illustrations**, not actual museum exhibits, garden layouts, the Plaza building, historic local streets or a verified Peak District route.
+4. Keep the approved unrelated image decisions for 03 Staircase House, 07 Foodie Friday and 48 Speedwell Cavern separate. Do not represent an unlicensed real-event photo as cleared.
+5. Obtain Paul's specific approval for **production publication** after visual QA. Never merge, publish, email, spend or schedule from the image-selection approval alone.
+
+**Direct review links:** draft image comparison `/52-adventures/image-review-2026-10-23/`; full staged guide `/52-adventures/guide/` under the branch preview hostname.
