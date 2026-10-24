@@ -37,4 +37,4 @@ assert.ok(css.includes('focus-visible'), 'Keyboard focus');
 assert.ok(css.includes('object-fit:cover'), 'Image crop treatment');
 assert.ok(css.includes('history-gallery-card--hero'), 'Magazine lead visual treatment');
 assert.ok(!html.includes('St. Mary\'s fake'), 'No fabricated St Mary archive');
-console.log('PASS Local History magazine: strong original lead intact, unique sections, 6 visual stories, 2 credited local photos, image assets, story links, accessibility and mobile CSS.');
+console.log('PASS Local History magazine: strong original lead intact, unique sections, 6 visual stories, 3 credited local photos, image assets, story links, accessibility and mobile CSS.');
