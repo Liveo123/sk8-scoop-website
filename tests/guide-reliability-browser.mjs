@@ -89,14 +89,14 @@ try {
     JSON.stringify({plazaOriginal:illustrationSourceAudit.plazaOriginal,
       rhsOriginal:illustrationSourceAudit.originalRhsPhoto,
       rhsSelected:illustrationSourceAudit.rhsSelectedKey}));
-  record('52 Adventures: both chapter illustrations have reader-visible labels',
-    illustrationSourceAudit.chapterCards.length===2 &&
+  record('52 Adventures: three chapter illustrations have reader-visible labels',
+    illustrationSourceAudit.chapterCards.length===3 &&
     illustrationSourceAudit.chapterCards.every(x=>/illustration/i.test(x.label) && x.alt.length>30),
     JSON.stringify(illustrationSourceAudit.chapterCards));
 
   // Test the actual browser-decoded image resolution, not just URLs or metadata.
   const chapterRender=await evaluate("(async()=>{"+
-    "const keys=['chapter01-illustration','a10','chapter03-illustration'];"+
+    "const keys=['chapter01-illustration','a10','chapter03-illustration','chapter04-sports-illustration-proposed'];"+
     "const out=[];for(const key of keys){"+
     "const img=[...document.querySelectorAll('.chapter-card-image img')].find(x=>x.dataset.imgkey===key);"+
     "if(!img){out.push({key,found:false});continue;}"+
@@ -106,9 +106,25 @@ try {
     "out.push({key,found:true,width:img.naturalWidth,height:img.naturalHeight,label:img.closest('figure')?.querySelector('figcaption')?.textContent});"+
     "}return out;})()");
   record('52 Adventures: actual mobile chapter-card images decode at 900px+ width',
-    chapterRender.length===3 &&
+    chapterRender.length===4 &&
     chapterRender.every(x=>x.found && x.width>=900 && x.height>=650 && /illustration/i.test(x.label||'')),
     JSON.stringify(chapterRender));
+
+  const chapter04Proposal=await evaluate("(()=>{"+
+    "const card=document.querySelector('.chapter-card[data-view=active] .chapter-card-image[data-owner-status=proposed-not-approved]');"+
+    "const hero=document.querySelector('#view-active .chapter-hero-image[data-owner-status=proposed-not-approved]');"+
+    "const key='chapter04-sports-illustration-proposed';"+
+    "return {card:Boolean(card),hero:Boolean(hero),cardKey:card?.querySelector('img')?.dataset.imgkey,"+
+    "heroKey:hero?.querySelector('img')?.dataset.imgkey,"+
+    "cardLabel:card?.querySelector('figcaption')?.textContent,"+
+    "heroLabel:hero?.querySelector('figcaption')?.textContent};})()");
+  record('52 Adventures: proposed Chapter 04 artwork used for card and hero with honest labels',
+    chapter04Proposal.card && chapter04Proposal.hero &&
+    chapter04Proposal.cardKey==='chapter04-sports-illustration-proposed' &&
+    chapter04Proposal.heroKey==='chapter04-sports-illustration-proposed' &&
+    /proposed editorial illustration/i.test(chapter04Proposal.cardLabel||'') &&
+    /not a photograph/i.test(chapter04Proposal.heroLabel||''),
+    JSON.stringify(chapter04Proposal));
 
   await evaluate("document.querySelector('.chapter-cards')?.scrollIntoView({block:'start'})");
   await sleep(350);
