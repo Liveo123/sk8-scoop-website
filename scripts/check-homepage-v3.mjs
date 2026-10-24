@@ -74,7 +74,7 @@ rejectText(js, 'reader-explore-icon', 'generic Explore icon fallback class');
 
 // 6. Latest issue and guides are one balanced resource shelf.
 requireText(home, 'home-resource-grid', 'resource shelf');
-requireText(home, 'Keep discovering', 'guide and newsletter resource shelf heading');
+requireText(home, 'What would be useful today?', 'reader-intent guide and newsletter resource shelf heading');
 requireText(home, 'Free &amp; Cheap Guide', 'Free & Cheap resource');
 requireText(home, '52 Adventures', '52 Adventures resource');
 requireText(home, 'href="/52-adventures/"', '52 Adventures landing-page route');
