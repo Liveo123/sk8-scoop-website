@@ -1,0 +1,2 @@
+// Hide only date-expired temporary website promotions; never rewrite the newsletter archive.
+(()=>{const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const x=Object.fromEntries(parts.map(v=>[v.type,v.value]));const today=x.year+'-'+x.month+'-'+x.day;for(const el of document.querySelectorAll('[data-expire-after]')){if(/^\d{4}-\d{2}-\d{2}$/.test(el.dataset.expireAfter)&&today>el.dataset.expireAfter)el.remove();}})();
