@@ -1,0 +1,25 @@
+/* 52 Adventures selected MidJourney artwork, versioned in Cloudinary.
+   Strongly faded decorative background, legible live teal text. */
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-resource-visual::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background-image:linear-gradient(rgba(231,244,240,.67),rgba(214,235,230,.80)),url("https://res.cloudinary.com/gocq00bt/image/upload/v1792839378/sk8-scoop/homepage/52-adventures-user-artwork-fallback-20261024.png");
+  background-size:cover;
+  background-position:center 54%;
+  background-repeat:no-repeat;
+  opacity:1;
+  pointer-events:none;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster {
+  position:relative;
+  z-index:1;
+  color:#104850;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-headline,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-series,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-foot {
+  color:#104850;
+  text-shadow:none;
+}
