@@ -630,3 +630,62 @@ body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resourc
     transform:none!important;
   }
 }
+
+
+/* User-selected MidJourney backgrounds and high-contrast teal live lettering.
+   Source art deliberately serves only as a faint decorative layer. */
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-resource-visual{
+  background:#faedcf!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-resource-visual::before{
+  content:""!important;position:absolute!important;inset:0!important;
+  width:auto!important;height:auto!important;border:0!important;border-radius:0!important;
+  background-image:linear-gradient(rgba(255,244,217,.63),rgba(255,244,217,.77)),url("https://res.cloudinary.com/gocq00bt/image/upload/v1792838787/sk8-scoop/homepage/free-guide-bg-user-20261024.png")!important;
+  background-size:cover!important;
+  background-position:center 44%!important;
+  opacity:1!important;
+  pointer-events:none;
+  z-index:0;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster{
+  color:#104850!important;
+  text-shadow:none!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-headline{
+  color:#104850!important;
+  font-weight:950!important;
+  transform:none!important;
+  line-height:.94!important;
+  letter-spacing:-.065em!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-series,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-foot,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-series,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-foot{
+  color:#104850!important;
+  text-shadow:none!important;
+  font-weight:900!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-resource-visual{
+  color:#104850!important;
+  background:linear-gradient(135deg,#e7f2ed,#c5dbd4)!important;
+}
+/* Original teal-and-map visual retained until the supplied second file is
+   available at a durable URL. Do not use an expiring Canva thumbnail URL. */
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-resource-visual::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(36deg,transparent 0 26px,rgba(16,72,80,.07) 27px 28px,transparent 29px 53px),
+    radial-gradient(ellipse at 120% 50%,rgba(8,75,85,.08) 0 45%,transparent 46%);
+  pointer-events:none;z-index:0;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-headline{
+  color:#104850!important;
+  font-weight:950!important;
+  letter-spacing:-.07em!important;
+  text-shadow:none!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-foot{
+  border-color:rgba(16,72,80,.42)!important;
+}
