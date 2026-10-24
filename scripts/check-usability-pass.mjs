@@ -20,6 +20,23 @@ pass(home.includes('/whats-on/?filter=weekend&amp;type=free'),
   'Popular free weekend route leads into combinable filters');
 pass(home.includes('reader-first-other-ideas') && home.includes('/whats-on/?filter=free'),
   'Less-used ideas disclosed and original free preset retained');
+pass(home.indexOf('holiday-club-spotlight-home') > home.indexOf('reader-first-chips') &&
+  home.indexOf('holiday-club-spotlight-home') < home.indexOf('reader-first-feed-head') &&
+  home.includes('data-track-event="homepage_holiday_club_planner_click"'),
+  'Seasonal holiday club planner prominently displayed before homepage event feed');
+pass(whatson.indexOf('holiday-club-spotlight-whats-on') > whatson.indexOf('whats-on-listings-section') &&
+  whatson.indexOf('holiday-club-spotlight-whats-on') < whatson.indexOf('whats-on-filter-toolbar') &&
+  whatson.includes('data-track-event="whats_on_holiday_club_planner_click"'),
+  'Holiday club planner featured ahead of What’s On filters');
+pass([home,whatson].every(page=>page.includes('data-expire-after="2026-10-30"') &&
+  page.includes('href="/kids-family/holiday-club-finder/"')),
+  'Both seasonal promotions link directly to the planner and expire after 30 October');
+pass(whatson.includes("timeZone:'Europe/London'") &&
+  whatson.includes('today > node.dataset.expireAfter'),
+  'What’s On seasonal promotions are removed based on UK local date');
+pass(css.includes('.holiday-club-spotlight-cta.button') &&
+  css.includes('background:#084e59!important;color:#fff!important'),
+  'Holiday planner CTA uses accessible white text on dark teal');
 pass(nav.includes("const secondaryItems=[") && nav.includes("['Advertise','/advertise.html']") &&
   nav.includes("['Contact','/contact/']") && nav.includes("navMore.className='nav-more'"),
   'All publisher routes retained behind keyboard-accessible More');
