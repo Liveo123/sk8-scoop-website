@@ -62,7 +62,8 @@ jobs:
         shell: bash
         run: |
           set -eu
-          for asset in             /assets/images/editorial-20261010/SK8-08-heald-green-overview.webp             /assets/images/editorial-20261010/SK8-14-cheadle-former-station.webp             /assets/images/editorial-20261010/SK8-18-gatley-shouter.webp             /assets/images/editorial-20261010/SK8-19-heald-green-mercury.webp             /assets/images/editorial-20261010/SK8-20-heald-green-wartime.webp             /52-adventures/guide/assets/adventure-04.webp             /52-adventures/guide/assets/adventure-05.webp; do
+          for asset in             /assets/images/editorial-20261010/SK8-08-heald-green-overview.webp             /assets/images/editorial-20261010/SK8-14-cheadle-former-station.webp             /assets/images/editorial-20261010/SK8-18-gatley-shouter.webp             /assets/images/editorial-20261010/SK8-19-heald-green-mercury.webp             /assets/images/editorial-20261010/SK8-20-heald-green-wartime.webp             /52-adventures/guide/assets/adventure-04.webp             /52-adventures/guide/assets/adventure-05.webp \
+            /52-adventures/guide/assets/adventure-07.webp; do
             target="$PREVIEW_URL$asset"
             content_type="$(curl -fsSLI --max-time 20 "$target" | tr -d '\r' | grep -i '^content-type:' | head -1)"
             case "$content_type" in
