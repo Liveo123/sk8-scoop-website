@@ -84,7 +84,7 @@ window.SK8_CONFIG = {
     const latest = document.querySelector('.reader-latest-panel');
     if (latest) {
       const cover = latest.querySelector('.reader-latest-cover span');
-      const heading = latest.querySelector('.reader-latest-copy h2');
+      const heading = latest.querySelector('.reader-latest-copy h3, .reader-latest-copy h2');
       const text = latest.querySelector('.reader-latest-copy p');
       const button = latest.querySelector('.reader-latest-copy .button');
       if (cover) cover.textContent = `ISSUE ${issue.number}`;

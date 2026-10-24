@@ -396,10 +396,11 @@ try {
     !compact.imageInjected && !compact.jumpToListings &&
     compact.filterCount>=6 && compact.width<=compact.viewport+2,
     JSON.stringify(compact));
-  check('My SK8 and event submission remain available without a redundant jump button',
+  check('My SK8, seasonal club planner and event submission remain reachable without an extra jump button',
     compact.links.includes('/my-sk8/') &&
     (compact.links.includes('../submit-event/')||compact.links.includes('/submit-event/')) &&
-    compact.links.length===2);
+    compact.links.every(href=>['/my-sk8/','../submit-event/','/submit-event/','/kids-family/holiday-club-finder/'].includes(href)) &&
+    compact.links.length>=2 && compact.links.length<=3);
   await screenshot('mobile-whatson-compact.png');
   await waitFor("document.querySelector('[data-whats-on-clear-filters]') && !document.querySelector('[data-whats-on-clear-filters]').hidden",
     'active calendar filters');

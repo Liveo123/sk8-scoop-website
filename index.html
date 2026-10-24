@@ -34,6 +34,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="assets/homepage-editorial-polish.css?v=20261023c">
+  <link rel="stylesheet" href="assets/usability-pass-20261023.css?v=1" data-sk8-usability-pass>
+  <link rel="stylesheet" href="assets/homepage-visual-refresh-20261024.css?v=1">
+  <link rel="stylesheet" href="assets/homepage-52-adventures-image.css?v=1">
 </head>
 <body class="reader-home reader-first-mode" data-page="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -57,16 +60,22 @@
         </div>
         <form class="reader-first-search" role="search" action="/search/" method="get">
           <label for="reader-first-search-input">What are you looking for?</label>
-          <div class="reader-first-search-row"><input type="search" id="reader-first-search-input" name="q" placeholder="Try ‘free kids’, ‘Gatley walk’ or ‘Halloween’" autocomplete="off"><button class="button" type="submit">Find ideas</button></div>
+          <div class="reader-first-search-row"><input type="search" id="reader-first-search-input" name="q" placeholder="Try ‘free kids’, ‘Gatley walk’ or ‘Halloween’" autocomplete="off" aria-describedby="reader-first-search-help"><button class="button" type="submit">Find ideas</button></div>
+          <p class="reader-first-search-help" id="reader-first-search-help">Search events, guides and local stories. Use the date shortcuts below for current events.</p>
         </form>
-        <nav class="reader-first-chips" aria-label="Find activities by need">
+        <nav class="reader-first-chips" aria-label="Popular ways to find local ideas">
           <a href="/whats-on/?filter=today">Today</a>
           <a href="/whats-on/?filter=weekend">This weekend</a>
-          <a href="/whats-on/?filter=free">Free events</a>
+          <a href="/whats-on/?filter=weekend&amp;type=free">Free this weekend</a>
           <a href="/whats-on/?filter=family">With the kids</a>
-          <a href="/free-cheap-guide/">Free &amp; cheap ideas</a>
-          <a href="/kids-family/holiday-club-finder/">Holiday clubs</a>
-          <a href="/outdoors/">Walks &amp; outdoors</a>
+          <details class="reader-first-other-ideas">
+            <summary>More ways to browse</summary>
+            <div class="reader-first-extra-links">
+              <a href="/whats-on/?filter=free">All free events</a>
+              <a href="/free-cheap-guide/">Free &amp; cheap ideas</a>
+              <a href="/outdoors/">Walks &amp; outdoors</a>
+            </div>
+          </details>
         </nav>
         <div class="reader-first-local">
           <span>Closer to home:</span>
@@ -101,6 +110,19 @@
             <a href="/free-cheap-guide/">Free &amp; Cheap →</a>
           </nav>
         </div>
+      </div>
+    </section>
+
+    <section class="holiday-club-home-section" aria-label="October half-term holiday club planning" data-expire-after="2026-10-30">
+      <div class="wrap">
+        <aside class="holiday-club-spotlight holiday-club-spotlight-home" aria-labelledby="home-holiday-club-title">
+          <div class="holiday-club-spotlight-info">
+            <span class="holiday-club-spotlight-kicker">October half-term · 26–30 October</span>
+            <h2 id="home-holiday-club-title">Need a holiday club?</h2>
+            <p>Compare clubs by day, age and area, then check availability with the organiser before booking.</p>
+          </div>
+          <a class="button holiday-club-spotlight-cta" href="/kids-family/holiday-club-finder/" data-nue-link data-nue-type="family-planner" data-track-event="homepage_holiday_club_planner_click" data-link-location="home-top-finder">Find a holiday club <span aria-hidden="true">→</span></a>
+        </aside>
       </div>
     </section>
 
@@ -143,20 +165,20 @@
     <section class="section home-resources-section">
       <div class="wrap">
         <div class="section-head reader-section-head home-resources-head">
-          <div><div class="home-section-kicker">Keep going</div><h2>Keep discovering</h2></div>
+          <div><div class="home-section-kicker">Keep going</div><h2>What would be useful today?</h2></div>
           <a class="reader-link home-section-link" href="guides/">See all guides →</a>
         </div>
         <div class="home-resource-grid">
           <article class="home-resource-card reader-latest-panel">
-            <div class="reader-latest-cover"><img src="assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><span>ISSUE 17</span></div>
+            <div class="reader-latest-cover"><img src="assets/sk8-scoop-logo.webp" alt="SK8 Scoop"><span class="home-issue-label">ISSUE 17</span><strong class="home-issue-number" aria-hidden="true" data-current-issue-number>17</strong><small class="home-issue-motto" aria-hidden="true">THE WEEK<br>IN SK8</small></div>
             <div class="reader-latest-copy home-resource-copy"><div class="eyebrow">Latest issue</div><h3>Issue 17</h3><p>Free Merseyday of the Dead, Premier Café history, Carr Wood, HAF booking help and 46 half-term ideas.</p><a class="button" href="/issues/issue-17/">Read Issue 17 →</a><a class="reader-link reader-block-link" href="archive.html">Browse all issues</a></div>
           </article>
           <article class="home-resource-card home-resource-guide home-resource-free-cheap">
-            <div class="home-resource-visual is-contain"><img src="assets/images/free-cheap-guide-logo.webp" alt="SK8 Scoop Free & Cheap Guide logo" loading="lazy"></div>
+            <div class="home-resource-visual is-contain"><img src="assets/images/free-cheap-guide-logo.webp" alt="SK8 Scoop Free & Cheap Guide logo" loading="lazy" aria-hidden="true"><div class="home-poster" aria-hidden="true"><span class="home-poster-series">SK8 SCOOP · POCKET GUIDE</span><strong class="home-poster-headline">MORE.<br>LESS.</strong><span class="home-poster-foot">DO MORE · SPEND LESS</span></div></div>
             <div class="home-resource-copy"><div class="eyebrow">Spend less locally</div><h3>Free &amp; Cheap Guide</h3><p>Days out, treats and useful ideas around SK8 that cost little or nothing.</p><a class="button" href="/free-cheap-guide/">Open Free &amp; Cheap →</a></div>
           </article>
           <article class="home-resource-card home-resource-guide home-resource-adventures">
-            <div class="home-resource-visual"><img src="https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto,w_900/v1791279264/sk8-scoop/52-adventures/52-adventures-guide-logo-official.png" alt="SK8 Scoop 52 Adventures collage showing local outings, events, food, outdoors and discovery ideas" loading="lazy" decoding="async"></div>
+            <div class="home-resource-visual"><img src="https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto,w_900/v1791279264/sk8-scoop/52-adventures/52-adventures-guide-logo-official.png" alt="SK8 Scoop 52 Adventures collage showing local outings, events, food, outdoors and discovery ideas" loading="lazy" decoding="async" aria-hidden="true"><div class="home-poster" aria-hidden="true"><span class="home-poster-series">SK8 SCOOP · ADVENTURE PASSPORT</span><strong class="home-poster-headline">52</strong><span class="home-poster-foot">PICK · SAVE · GO</span></div></div>
             <div class="home-resource-copy"><div class="eyebrow">One for every week</div><h3>52 Adventures</h3><p>Proper outings and experiences around SK8, Stockport and nearby, with a Finder, Saved list, Surprise Me and Adventure Passport.</p><a class="button secondary" href="/52-adventures/">Open 52 Adventures →</a></div>
           </article>
         </div>

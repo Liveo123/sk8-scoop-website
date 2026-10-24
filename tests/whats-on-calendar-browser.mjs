@@ -97,7 +97,8 @@ try {
   check(await click('[data-event-filter="free"]'),'free filter selectable');
   check(await evaluate("document.querySelectorAll('.event-listing-card').length")===data.filter(core.isFree).length,
     'free filter respects actual cost classifications');
-  check(await click('[data-event-filter="all"]'),'reset free filter');
+  check(await click('[data-event-filter="all"]'),'all dates preserves free choice');
+  check(await click('[data-event-filter="free"]'),'toggle free off');
   check(await evaluate("!document.querySelector('[data-events-list]').textContent.includes('Sisters Youth Qiyam')"),
     'excluded organiser listings remain absent');
   if (activeIds.has('reddish-vale-halloween-pumpkin-festival-2026-10-10')) {

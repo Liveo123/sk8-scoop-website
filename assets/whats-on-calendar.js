@@ -29,6 +29,7 @@
   let view = params.get('view') === 'month' && !params.get('event') && !params.get('my_action') ? 'month' : 'agenda';
   let selectedDate = core.withinHorizon(params.get('date'), now) ? params.get('date') : '';
   let activeFilter = 'all';
+  let activeAudience = 'all';
   let activeArea = 'all';
   let events = [];
   const datePretty = date => new Intl.DateTimeFormat('en-GB', {
@@ -53,10 +54,25 @@
     history.replaceState({}, '', url);
   }
 
-  function matchingForCalendar(event) {
+  // Keep the month grid aligned with the visible agenda. A "free weekend"
+  // selection must not mark paid weekday dates as matching.
+  const datePlusDays = (iso, days) => {
+    const date = new Date(iso + 'T00:00:00Z');
+    date.setUTCDate(date.getUTCDate() + days);
+    return date.toISOString().slice(0, 10);
+  };
+  function matchingForCalendar(event, date) {
     if (activeArea !== 'all' && String(event.area || '').toLowerCase() !== activeArea.toLowerCase()) return false;
-    if (activeFilter === 'free' && !core.isFree(event)) return false;
-    if (activeFilter === 'family' && !core.isFamily(event)) return false;
+    if (activeAudience.includes('free') && !core.isFree(event)) return false;
+    if (activeAudience.includes('family') && !core.isFamily(event)) return false;
+    if (activeFilter === 'today' && date !== now) return false;
+    if (activeFilter === 'week' && (date < now || date > datePlusDays(now, 6))) return false;
+    if (activeFilter === 'weekend') {
+      const weekday = new Date(now + 'T00:00:00Z').getUTCDay();
+      const saturday = weekday === 0 ? now : datePlusDays(now, (6 - weekday + 7) % 7);
+      const sunday = weekday === 0 ? now : datePlusDays(saturday, 1);
+      if (date < saturday || date > sunday) return false;
+    }
     return true;
   }
 
@@ -97,7 +113,7 @@
     for (let d = 1; d <= days; d++) {
       const date = isoDate(y, m, d);
       const available = core.withinHorizon(date, now);
-      const matches = available ? events.filter(event => matchingForCalendar(event) && core.onDate(event, date)) : [];
+      const matches = available ? events.filter(event => matchingForCalendar(event, date) && core.onDate(event, date)) : [];
       if (matches.length) totalDays++;
       const button = document.createElement('button');
       button.type = 'button';
@@ -152,10 +168,8 @@
       selectedDate = '';
       window.dispatchEvent(new CustomEvent('sk8:calendar-day-selected', { detail: { date: '' } }));
     }
-    if (next === 'month' && ['today', 'week', 'weekend'].includes(activeFilter)) {
-      window.dispatchEvent(new CustomEvent('sk8:calendar-clear-date-shortcut'));
-      activeFilter = 'all';
-    }
+    // Preserve When and What kind across agenda/month switches.
+    // The month grid already uses these choices when computing day counts.
     syncUrl();
     render();
     track('whats_on_calendar_view', { calendar_view: view });
@@ -212,6 +226,7 @@
   window.addEventListener('sk8:whatson-state', event => {
     activeArea = event.detail?.area || 'all';
     activeFilter = event.detail?.filter || 'all';
+    activeAudience = event.detail?.audience || 'all';
     selectedDate = event.detail?.date || '';
     if (view === 'month') renderMonth();
     if (chosenInput) chosenInput.value = selectedDate;

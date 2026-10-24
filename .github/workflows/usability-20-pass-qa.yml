@@ -1,0 +1,105 @@
+name: Usability 20-pass preview QA
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'whats-on/index.html'
+      - 'assets/site.js'
+      - 'assets/whats-on.js'
+      - 'assets/whats-on-calendar.js'
+      - 'assets/usability-pass-20261023.css'
+      - 'assets/homepage-visual-refresh-20261024.css'
+      - 'assets/homepage-52-adventures-image.css'
+      - 'scripts/check-usability-pass.mjs'
+      - 'tests/usability-pass-browser.mjs'
+      - '.github/workflows/usability-20-pass-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: usability-20-pass-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax and usability regression checks
+        run: |
+          node --check assets/site.js
+          node --check assets/whats-on.js
+          node --check assets/whats-on-calendar.js
+          node --check tests/usability-pass-browser.mjs
+          node scripts/check-usability-pass.mjs
+          node scripts/check-sitewide-nue.mjs
+          node scripts/check-reader-first.mjs
+          node scripts/check-post-launch-v2.mjs
+  preview-browser:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    needs: source-qa
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve exact preview by file hashes, not stale bot comments
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          base="https://${slug}.previews.sk8scoop.com"
+          for attempt in $(seq 1 24); do
+            if curl -fsSL --max-time 25 "$base/" -o /tmp/sk8-ux-home.html 2>/dev/null &&
+               curl -fsSL --max-time 25 "$base/whats-on/" -o /tmp/sk8-ux-whatson.html 2>/dev/null &&
+               curl -fsSL --max-time 25 "$base/assets/site.js" -o /tmp/sk8-ux-site.js 2>/dev/null &&
+               curl -fsSL --max-time 25 "$base/assets/whats-on.js" -o /tmp/sk8-ux-whatson.js 2>/dev/null &&
+               curl -fsSL --max-time 25 "$base/assets/usability-pass-20261023.css" -o /tmp/sk8-ux-polish.css 2>/dev/null &&
+               curl -fsSL --max-time 25 "$base/assets/homepage-visual-refresh-20261024.css" -o /tmp/sk8-ux-refresh.css 2>/dev/null &&
+               curl -fsSL --max-time 25 "$base/assets/homepage-52-adventures-image.css" -o /tmp/sk8-ux-adventure.css 2>/dev/null &&
+               curl -fsSL --max-time 25 "$base/data/events.json" -o /tmp/sk8-ux-events.json 2>/dev/null &&
+               cmp -s assets/site.js /tmp/sk8-ux-site.js &&
+               cmp -s assets/whats-on.js /tmp/sk8-ux-whatson.js &&
+               cmp -s assets/usability-pass-20261023.css /tmp/sk8-ux-polish.css &&
+               cmp -s assets/homepage-visual-refresh-20261024.css /tmp/sk8-ux-refresh.css &&
+               cmp -s assets/homepage-52-adventures-image.css /tmp/sk8-ux-adventure.css &&
+               cmp -s data/events.json /tmp/sk8-ux-events.json &&
+               grep -Fq 'reader-first-other-ideas' /tmp/sk8-ux-home.html &&
+               grep -Fq 'home-issue-number' /tmp/sk8-ux-home.html &&
+               grep -Fq 'homepage-52-adventures-image.css' /tmp/sk8-ux-home.html &&
+               grep -Fq 'data-event-audience="family"' /tmp/sk8-ux-whatson.html; then
+              echo "PREVIEW_URL=$base" >> "$GITHUB_ENV"
+              echo "Verified preview exact JS/CSS bytes: $base/"
+              exit 0
+            fi
+            echo "Preview not yet at checked-out source revision (attempt $attempt/24)"
+            sleep 12
+          done
+          echo "Preview not proven to match revision; failing safely."
+          exit 1
+      - name: Pick Chromium
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "CHROME=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "CHROME=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "No Chromium available"; exit 1
+          fi
+      - name: Verify real reader journeys and capture desktop/mobile
+        run: node tests/usability-pass-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sk8-usability-20-pass-review
+          path: visual-qa/usability/
+          retention-days: 14

@@ -1,0 +1,691 @@
+/* SK8 Scoop, 24 October 2026
+   A source-first, original HTML/CSS editorial treatment for home discovery.
+   No external photos, AI documentary imagery, SVGs, extra requests or assets.
+   All original SK8 logo and reader destinations remain unchanged. */
+
+/* AREA TILES: Four places, four distinct visual invitations.
+   Colour is for wayfinding, not an unsupported claim about each location. */
+body.reader-home.reader-first-mode .home-locality-links{
+  gap:11px!important;
+}
+body.reader-home.reader-first-mode .home-locality-links a{
+  --tile-ink:#0a414b;
+  position:relative;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  isolation:isolate;
+  overflow:hidden;
+  min-width:0;
+  min-height:112px!important;
+  padding:19px 16px 15px!important;
+  border:1px solid rgba(11,86,97,.19)!important;
+  border-radius:15px!important;
+  color:var(--tile-ink)!important;
+  box-shadow:0 8px 16px rgba(14,65,72,.07)!important;
+  transform:translateY(0);
+  text-decoration:none!important;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+body.reader-home.reader-first-mode .home-locality-links a:nth-child(1){
+  background:linear-gradient(135deg,#ffedda 0%,#ffdbbb 100%)!important;
+}
+body.reader-home.reader-first-mode .home-locality-links a:nth-child(2){
+  background:linear-gradient(135deg,#dff4e9 0%,#bfe7d8 100%)!important;
+}
+body.reader-home.reader-first-mode .home-locality-links a:nth-child(3){
+  background:linear-gradient(135deg,#e1f0fb 0%,#c1e0f0 100%)!important;
+}
+body.reader-home.reader-first-mode .home-locality-links a:nth-child(4){
+  background:linear-gradient(135deg,#fff3ce 0%,#f4dfa8 100%)!important;
+}
+body.reader-home.reader-first-mode .home-locality-links a::before{
+  content:"";
+  position:absolute;
+  right:-26px;bottom:-52px;
+  width:128px;height:128px;
+  border:22px solid currentColor;
+  border-radius:50%;
+  opacity:.065;
+  z-index:-1;
+}
+body.reader-home.reader-first-mode .home-locality-links a:nth-child(2)::before{
+  border-radius:44% 56% 57% 43%;
+  transform:rotate(-23deg);
+}
+body.reader-home.reader-first-mode .home-locality-links a:nth-child(3)::before{
+  width:150px;height:150px;right:-54px;
+  border-radius:36% 64% 48% 52%;
+}
+body.reader-home.reader-first-mode .home-locality-links a:nth-child(4)::before{
+  border-radius:64% 36% 53% 47%;
+  transform:rotate(26deg);
+}
+body.reader-home.reader-first-mode .home-locality-links a span{
+  position:relative;z-index:2;display:block;
+  max-width:calc(100% - 40px);
+  color:#113b43!important;
+  font-size:clamp(.89rem,1.1vw,1.04rem)!important;
+  font-weight:900!important;
+  line-height:1.17;
+  letter-spacing:-.016em;
+}
+body.reader-home.reader-first-mode .home-locality-links a span::after{
+  content:"Explore this area";
+  display:block;margin-top:9px;
+  color:#3b5358;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:.70rem;font-weight:650;letter-spacing:0;
+  line-height:1.25;
+}
+body.reader-home.reader-first-mode .home-locality-links a b{
+  display:grid;place-items:center;
+  flex:0 0 33px;
+  width:33px;height:33px;
+  margin:-5px -3px 0 5px;
+  border:1px solid rgba(255,255,255,.38);
+  border-radius:50%;
+  background:#0b5661;
+  color:white!important;
+  font-family:Arial,sans-serif;
+  font-size:1.07rem!important;
+  line-height:1;
+  transform:translateX(0);
+  transition:transform .2s ease;
+}
+body.reader-home.reader-first-mode .home-locality-links a:hover{
+  transform:translateY(-3px)!important;
+  border-color:#719c9a!important;
+  box-shadow:0 12px 25px rgba(14,65,72,.14)!important;
+}
+body.reader-home.reader-first-mode .home-locality-links a:hover b{transform:translateX(3px)}
+body.reader-home.reader-first-mode .home-locality-links a:focus-visible{
+  outline:3px solid #bf6218!important;outline-offset:3px!important;
+}
+
+/* SIX ORIGINAL EDITORIAL COVERS.
+   Fine-detail thumbnails are deliberately replaced by crisp, scalable
+   type-led poster art. No photographic/documentary implication. */
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile{
+  border-radius:16px!important;
+  border:1px solid #cbddd5!important;
+  background:#fffefa!important;
+  box-shadow:0 9px 23px rgba(13,53,59,.075)!important;
+  overflow:hidden;
+  transition:transform .18s ease,box-shadow .18s ease!important;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:hover{
+  transform:translateY(-3px);
+  box-shadow:0 17px 29px rgba(13,53,59,.15)!important;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo{
+  --poster-ink:#063f47;
+  position:relative!important;
+  isolation:isolate;
+  height:190px!important;
+  flex:0 0 190px!important;
+  min-height:190px!important;
+  padding:0!important;
+  overflow:hidden;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  filter:none!important;
+  transform:none!important;
+  border-bottom:4px solid rgba(255,255,255,.32);
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo::before{
+  position:absolute;z-index:1;
+  left:19px;bottom:12px;right:10px;
+  color:var(--poster-ink);
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(3rem,4.5vw,4.5rem);
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-.072em;
+  text-shadow:none;
+  white-space:nowrap;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo::after{
+  position:absolute;z-index:1;
+  top:16px;left:18px;
+  color:var(--poster-ink);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:.69rem;font-weight:950;
+  letter-spacing:.105em;line-height:1.3;
+  text-transform:uppercase;
+  padding:6px 9px;
+  border:1px solid currentColor;
+  border-radius:3px;
+  background:rgba(255,255,255,.19);
+}
+/* 1: editorial theatre/playbill with warm paper and ink-red ink */
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(1) .reader-explore-visual{
+  --poster-ink:#4a2928;
+  background-image:
+    radial-gradient(ellipse 150px 160px at 91% 105%,rgba(202,62,44,.75) 0%,rgba(202,62,44,.75) 48%,transparent 49%),
+    repeating-linear-gradient(102deg,transparent 0 30px,rgba(90,66,42,.09) 31px 32px,transparent 33px 63px),
+    linear-gradient(110deg,#ffe6a0,#f1bb7e)!important;
+  border-bottom-color:#cf6749;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(1) .reader-explore-visual::before{content:"PLAY"}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(1) .reader-explore-visual::after{content:"DAYS OUT · FAMILY"}
+/* 2: outdoors, a deep green field-guide cover and winding hills */
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(2) .reader-explore-visual{
+  --poster-ink:#fff8df;
+  background-image:
+    radial-gradient(ellipse 80% 90% at 105% 122%,#83b9a2 0 59%,transparent 60%),
+    radial-gradient(ellipse 65% 88% at 15% 125%,#216f6f 0 62%,transparent 63%),
+    repeating-linear-gradient(97deg,transparent 0 17px,rgba(255,255,255,.07) 18px 19px,transparent 20px 42px),
+    linear-gradient(135deg,#12565d,#0b3d45)!important;
+  border-bottom-color:#a6c5a6;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(2) .reader-explore-visual::before{content:"ROAM"}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(2) .reader-explore-visual::after{content:"WALKS · FRESH AIR"}
+/* 3: a bold vintage menu front with warm food-shop colours */
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(3) .reader-explore-visual{
+  --poster-ink:#562f27;
+  background-image:
+    radial-gradient(circle 105px at 90% 74%,#fff0d0 0 48%,#bc6951 49% 57%,transparent 58%),
+    repeating-linear-gradient(0deg,transparent 0 24px,rgba(79,37,27,.08) 25px 26px,transparent 27px 51px),
+    linear-gradient(128deg,#ffd2a7,#ef9478)!important;
+  border-bottom-color:#c45e41;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(3) .reader-explore-visual::before{content:"TASTE"}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(3) .reader-explore-visual::after{content:"FOOD · LOCAL TABLES"}
+/* 4: civic notice / utility desk */
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(4) .reader-explore-visual{
+  --poster-ink:#fff8e4;
+  background-image:
+    repeating-linear-gradient(-45deg,rgba(251,172,80,.2) 0 11px,transparent 11px 34px),
+    linear-gradient(135deg,transparent 0 74%,rgba(255,255,255,.14) 74% 77%,transparent 77%),
+    linear-gradient(110deg,#0b5561,#092e3b)!important;
+  border-bottom-color:#e8ac6a;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(4) .reader-explore-visual::before{content:"KNOW"}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(4) .reader-explore-visual::after{content:"THE USEFUL STUFF"}
+/* 5: vintage local-history scrapbook */
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(5) .reader-explore-visual{
+  --poster-ink:#463f30;
+  background-image:
+    radial-gradient(ellipse 100px 140px at 90% 95%,rgba(98,119,99,.25) 0 60%,transparent 61%),
+    repeating-linear-gradient(0deg,transparent 0 18px,rgba(80,61,37,.115) 19px 20px,transparent 21px 40px),
+    linear-gradient(126deg,#ead9af,#c7b38c)!important;
+  border-bottom-color:#89774f;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(5) .reader-explore-visual::before{content:"THEN"}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(5) .reader-explore-visual::after{content:"STORIES FROM BEFORE"}
+/* 6: urban blueprint / what is changing */
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(6) .reader-explore-visual{
+  --poster-ink:#0a4654;
+  background-image:
+    radial-gradient(ellipse 155px 160px at 106% 20%,rgba(255,255,255,.5) 0 58%,transparent 59%),
+    linear-gradient(90deg,rgba(24,93,112,.12) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(24,93,112,.12) 1px,transparent 1px),
+    linear-gradient(125deg,#dceff0,#a3d3dd)!important;
+  background-size:cover,27px 27px,27px 27px,cover!important;
+  border-bottom-color:#62a8b6;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(6) .reader-explore-visual::before{content:"NEXT"}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:nth-child(6) .reader-explore-visual::after{content:"WHAT'S CHANGING"}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-copy{
+  padding:15px 17px 17px!important;
+  background:#fffefa;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-copy strong{
+  font-size:1.08rem!important;line-height:1.2!important;color:#0c3c47;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-copy small{
+  font-size:.83rem!important;color:#4b6466;
+}
+body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-copy em{
+  margin-top:11px;font-size:.72rem;letter-spacing:.08em;
+}
+
+/* RESOURCE SELECTOR: One substantial issue feature + two short paths.
+   Dedicated typography replaces tiny, floating guide-cover images. */
+body.reader-home.homepage-v3.reader-first-mode .home-resources-head h2{
+  text-wrap:balance;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;
+  grid-template-rows:repeat(2,minmax(238px,auto));
+  gap:16px!important;
+  align-items:stretch;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-card{
+  min-width:0!important;max-width:none!important;
+  border:1px solid #c8dcd5!important;
+  border-radius:18px!important;
+  background:#fffefa!important;
+  overflow:hidden;
+  box-shadow:0 12px 30px rgba(10,54,60,.09)!important;
+  transition:transform .2s ease,box-shadow .2s ease!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 17px 34px rgba(10,54,60,.15)!important;
+}
+/* Issue feature: real master logo placed as editorial masthead, not a giant sticker. */
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-panel{
+  grid-column:1;grid-row:1/3;
+  display:flex!important;flex-direction:column;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover{
+  position:relative;
+  isolation:isolate;
+  display:block!important;
+  width:100%!important;
+  height:295px!important;
+  min-height:295px!important;
+  padding:26px 25px!important;
+  text-align:left;
+  border:0!important;
+  border-bottom:5px solid #eaa168!important;
+  border-radius:0!important;
+  background-color:#074b53!important;
+  background-image:
+    radial-gradient(ellipse 255px 285px at 106% 82%,rgba(242,146,77,.62),transparent 73%),
+    repeating-linear-gradient(100deg,transparent 0 33px,rgba(255,255,255,.045) 34px 35px,transparent 36px 60px),
+    linear-gradient(130deg,#073e48,#0e6470)!important;
+  background-position:center!important;
+  background-size:cover!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover::after{
+  content:"";
+  position:absolute;right:-44px;bottom:-72px;
+  width:260px;height:260px;
+  border:34px solid rgba(255,252,226,.16);
+  border-radius:50%;
+  pointer-events:none;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover img{
+  position:absolute!important;
+  z-index:2;
+  left:26px;top:25px;
+  width:208px!important;max-width:208px!important;
+  height:auto!important;max-height:none!important;
+  padding:7px!important;
+  margin:0!important;
+  border-radius:5px;
+  box-shadow:0 5px 20px rgba(1,31,35,.2);
+  filter:none!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover .home-issue-label{
+  position:absolute!important;
+  left:28px;bottom:26px;
+  font-size:.8rem!important;
+  color:#fff8dd!important;
+  font-weight:950!important;
+  text-shadow:none!important;
+  text-transform:uppercase;
+  letter-spacing:.17em!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover .home-issue-number{
+  display:block;
+  position:absolute;
+  right:18px;top:68px;
+  font-family:Georgia,'Times New Roman',serif;
+  color:#fff7e7;
+  font-size:clamp(8.2rem,12vw,12rem);
+  font-weight:900;
+  letter-spacing:-.09em;
+  line-height:1;
+  text-shadow:0 4px 18px rgba(0,25,30,.18);
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover .home-issue-motto{
+  position:absolute;top:26px;right:23px;
+  color:#fff9df!important;
+  font-size:.69rem!important;line-height:1.3!important;
+  font-weight:850!important;text-transform:uppercase;
+  letter-spacing:.1em!important;
+  text-shadow:none!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-copy{
+  padding:26px 27px 28px!important;
+  display:flex!important;flex-direction:column;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-copy h3{
+  font-size:clamp(1.8rem,2.5vw,2.2rem)!important;
+  font-family:Georgia,serif;
+  letter-spacing:-.034em;
+}
+body.reader-home.homepage-v3.reader-first-mode .reader-latest-copy p{
+  max-width:520px;
+  font-size:1rem!important;line-height:1.56!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide{
+  grid-column:2;display:grid!important;
+  grid-template-columns:41% minmax(0,1fr);
+  grid-template-rows:minmax(0,1fr);
+  min-height:230px!important;
+  align-items:stretch;
+}
+/* Guide art is original HTML/CSS, not an image with large blank margins. */
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide .home-resource-visual{
+  position:relative;
+  isolation:isolate;
+  display:block!important;
+  width:auto!important;
+  height:auto!important;min-height:100%!important;max-height:none!important;
+  margin:0!important;padding:0!important;
+  border-right:3px solid rgba(0,0,0,.08);
+  overflow:hidden;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide .home-resource-visual img{
+  display:none!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide .home-resource-copy{
+  min-width:0;padding:23px 23px 21px!important;
+  display:flex;flex-direction:column;align-items:flex-start;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-copy h3{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(1.48rem,1.85vw,1.8rem)!important;
+  line-height:1.13!important;letter-spacing:-.034em!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-copy p{
+  font-size:.88rem!important;line-height:1.47!important;
+  margin-bottom:14px!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-card .button{
+  display:inline-flex!important;
+  min-height:44px;
+  justify-content:center;
+  align-items:center;
+  font-size:.85rem!important;
+  padding:10px 13px!important;
+  background:#084f5a!important;
+  color:#fff!important;
+  border-color:#084f5a!important;
+  border-radius:8px!important;
+  text-align:center;
+  text-decoration:none!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-card .button:hover{
+  background:#053c45!important;
+  border-color:#053c45!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide .home-resource-copy .eyebrow{
+  font-size:.67rem!important;letter-spacing:.095em;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-resource-visual{
+  color:#523a21;
+  background:
+    repeating-linear-gradient(-38deg,transparent 0 20px,rgba(146,77,33,.07) 21px 22px,transparent 23px 44px),
+    linear-gradient(145deg,#ffe7b8,#f4ca88)!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-resource-visual::before{
+  content:"";
+  position:absolute;right:-51px;top:-51px;
+  width:145px;height:145px;
+  border:19px solid rgba(171,85,26,.15);
+  border-radius:50%;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster{
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+  padding:23px 17px 21px;height:100%;
+  min-height:240px;position:relative;z-index:1;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-poster-series{
+  color:inherit;font-size:.67rem;line-height:1.3;
+  letter-spacing:.12em;text-transform:uppercase;
+  font-weight:900;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-headline{
+  font-family:Georgia,serif;
+  font-size:clamp(2.05rem,3vw,3.2rem);
+  line-height:.94;
+  letter-spacing:-.08em;
+  transform:rotate(-2deg);
+}
+body.reader-home.homepage-v3.reader-first-mode .home-poster-foot{
+  padding-top:8px;
+  border-top:1px solid currentColor;
+  font-size:.63rem;line-height:1.4;
+  font-weight:900;letter-spacing:.09em;text-transform:uppercase;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-resource-visual{
+  color:#fef8d3;
+  background:
+    radial-gradient(ellipse 95px 135px at 102% 82%,rgba(248,168,81,.42) 0 65%,transparent 66%),
+    repeating-linear-gradient(45deg,transparent 0 34px,rgba(255,255,255,.06) 35px 37px,transparent 38px 62px),
+    linear-gradient(135deg,#095967,#073c46)!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster{
+  display:flex;flex-direction:column;
+  justify-content:space-between;align-items:flex-start;
+  height:100%;min-height:240px;
+  padding:20px 18px 18px;position:relative;z-index:1;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-headline{
+  font-family:Georgia,serif;
+  font-size:clamp(6rem,9vw,8.8rem);
+  font-weight:900;letter-spacing:-.09em;
+  line-height:.85;color:#fff7d9;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-foot{
+  border-color:rgba(255,255,255,.5);
+  color:#fff7d9;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-card a:focus-visible{
+  outline:3px solid #bb5e16!important;outline-offset:4px!important;
+}
+
+/* One column / two cards at tablet widths, a full readable stack on phones. */
+@media(max-width:1090px){
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:auto auto!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-panel{
+    grid-column:1/-1!important;
+    grid-row:auto!important;
+    display:grid!important;
+    grid-template-columns:45% minmax(0,1fr);
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover{
+    height:auto!important;min-height:300px!important;
+    border:0!important;border-right:5px solid #eaa168!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide{
+    grid-column:auto!important;
+    display:flex!important;flex-direction:column!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide .home-resource-visual{
+    height:200px!important;min-height:200px!important;width:100%!important;
+    border-right:0;border-bottom:3px solid rgba(0,0,0,.08);
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-poster{
+    min-height:200px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-poster-headline{
+    font-size:clamp(2.6rem,4vw,4rem)!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-headline{
+    font-size:7rem!important;
+  }
+}
+@media(max-width:700px){
+  body.reader-home.reader-first-mode .home-locality-links{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.reader-home.reader-first-mode .home-locality-links a{
+    min-height:113px!important;
+    padding:16px 11px 12px!important;
+  }
+  body.reader-home.reader-first-mode .home-locality-links a b{
+    width:30px;height:30px;flex-basis:30px;
+  }
+  body.reader-home.reader-first-mode .home-locality-links a span{font-size:.91rem!important;}
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo{
+    height:152px!important;flex-basis:152px!important;min-height:152px!important;
+  }
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo::before{
+    font-size:clamp(2.5rem,8vw,3.6rem);left:14px;bottom:12px;
+  }
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo::after{
+    font-size:.62rem;left:13px;top:13px;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid{
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto!important;
+    gap:15px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-panel{
+    grid-column:auto!important;
+    display:flex!important;flex-direction:column!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover{
+    width:100%!important;height:225px!important;min-height:225px!important;
+    border-right:0!important;border-bottom:5px solid #eaa168!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover .home-issue-number{
+    font-size:8.9rem!important;right:15px;top:48px;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover img{
+    width:168px!important;max-width:168px!important;
+    left:18px;top:21px;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover .home-issue-label{left:19px;bottom:19px;}
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-cover .home-issue-motto{right:15px;top:16px;font-size:.6rem!important;}
+  body.reader-home.homepage-v3.reader-first-mode .reader-latest-copy{padding:22px!important;}
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide{
+    display:grid!important;grid-template-columns:40% minmax(0,1fr);
+    min-height:240px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide .home-resource-visual{
+    height:auto!important;min-height:100%!important;
+    border-right:2px solid rgba(0,0,0,.08);border-bottom:0;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-poster{
+    min-height:240px!important;
+    padding:20px 12px 15px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-headline{
+    font-size:clamp(1.78rem,6vw,2.55rem)!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-headline{
+    font-size:clamp(4.5rem,18vw,6rem)!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide .home-resource-copy{
+    padding:17px 14px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-resource-copy h3{
+    font-size:1.39rem!important;
+  }
+}
+@media(max-width:430px){
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile{
+    display:grid!important;grid-template-columns:130px minmax(0,1fr)!important;
+    min-height:132px!important;
+  }
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo{
+    height:100%!important;min-height:132px!important;
+    width:130px!important;flex-basis:130px!important;
+  }
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo::before{
+    font-size:2.13rem!important;left:9px;bottom:29px;
+  }
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-visual.reader-explore-photo::after{
+    left:9px;top:9px;font-size:.48rem!important;padding:4px!important;
+    letter-spacing:.07em!important;white-space:normal;max-width:113px;
+  }
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-copy{
+    padding:12px 11px!important;
+  }
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-copy strong{
+    font-size:.98rem!important;
+  }
+  body.reader-home.reader-first-mode .home-locality-links a{min-height:114px!important}
+  body.reader-home.reader-first-mode .home-locality-links a span{font-size:.86rem!important}
+  body.reader-home.reader-first-mode .home-locality-links a span::after{font-size:.64rem;}
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide{
+    display:flex!important;flex-direction:column!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-guide .home-resource-visual{
+    width:100%!important;
+    height:158px!important;min-height:158px!important;
+    border-right:0;border-bottom:2px solid rgba(0,0,0,.08);
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-guide .home-poster{
+    min-height:158px!important;
+    padding:15px 18px 12px!important;
+  }
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-headline{font-size:2.8rem!important}
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-headline{font-size:6.6rem!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.reader-home.reader-first-mode .home-locality-links a,
+  body.reader-home.reader-first-mode .home-locality-links a b,
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile,
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-card{
+    transition:none!important;
+  }
+  body.reader-home.reader-first-mode .home-locality-links a:hover,
+  body.reader-home.reader-first-mode [data-explore-grid] .reader-explore-tile:hover,
+  body.reader-home.homepage-v3.reader-first-mode .home-resource-grid .home-resource-card:hover{
+    transform:none!important;
+  }
+}
+
+
+/* User-selected MidJourney backgrounds and high-contrast teal live lettering.
+   Source art deliberately serves only as a faint decorative layer. */
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-resource-visual{
+  background:#faedcf!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-resource-visual::before{
+  content:""!important;position:absolute!important;inset:0!important;
+  width:auto!important;height:auto!important;border:0!important;border-radius:0!important;
+  background-image:linear-gradient(rgba(255,244,217,.63),rgba(255,244,217,.77)),url("https://res.cloudinary.com/gocq00bt/image/upload/v1792838787/sk8-scoop/homepage/free-guide-bg-user-20261024.png")!important;
+  background-size:cover!important;
+  background-position:center 44%!important;
+  opacity:1!important;
+  pointer-events:none;
+  z-index:0;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster{
+  color:#104850!important;
+  text-shadow:none!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-headline{
+  color:#104850!important;
+  font-weight:950!important;
+  transform:none!important;
+  line-height:.94!important;
+  letter-spacing:-.065em!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-series,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-free-cheap .home-poster-foot,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-series,
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-foot{
+  color:#104850!important;
+  text-shadow:none!important;
+  font-weight:900!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-resource-visual{
+  color:#104850!important;
+  background:linear-gradient(135deg,#e7f2ed,#c5dbd4)!important;
+}
+/* Original teal-and-map visual retained until the supplied second file is
+   available at a durable URL. Do not use an expiring Canva thumbnail URL. */
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-resource-visual::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(36deg,transparent 0 26px,rgba(16,72,80,.07) 27px 28px,transparent 29px 53px),
+    radial-gradient(ellipse at 120% 50%,rgba(8,75,85,.08) 0 45%,transparent 46%);
+  pointer-events:none;z-index:0;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-headline{
+  color:#104850!important;
+  font-weight:950!important;
+  letter-spacing:-.07em!important;
+  text-shadow:none!important;
+}
+body.reader-home.homepage-v3.reader-first-mode .home-resource-adventures .home-poster-foot{
+  border-color:rgba(16,72,80,.42)!important;
+}

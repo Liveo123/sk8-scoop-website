@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="../assets/my-sk8.css">
   <link rel="stylesheet" href="../assets/whats-on-calendar.css">
   <link rel="stylesheet" href="../assets/whats-on-compact.css">
+  <link rel="stylesheet" href="../assets/usability-pass-20261023.css?v=1" data-sk8-usability-pass>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -47,7 +48,10 @@
           <h1>What’s on around SK8?</h1>
           <p class="hero-lead">Find checked events in Cheadle, Cheadle Hulme, Gatley, Heald Green and selected nearby places. Choose when and where below.</p>
         </div>
-        <nav class="whats-on-header-links" aria-label="Other event tools">
+        <nav class="whats-on-header-links" aria-label="Event and holiday planning tools">
+          <a class="whats-on-holiday-quicklink" href="/kids-family/holiday-club-finder/" data-expire-after="2026-10-30" data-nue-link data-nue-type="family-planner" data-track-event="whats_on_holiday_club_planner_click" data-link-location="whats-on-top-finder">
+            <span class="whats-on-holiday-date">26–30 Oct · Half-term</span><strong>Holiday Club Planner <span aria-hidden="true">→</span></strong>
+          </a>
           <a class="reader-link sitewide-hero-secondary" href="/my-sk8/">My SK8 <span class="my-sk8-count-badge" data-my-sk8-count hidden>0</span></a>
           <a class="reader-link sitewide-hero-secondary" href="../submit-event/">Submit an event</a>
         </nav>
@@ -57,21 +61,26 @@
     <section class="section whats-on-listings-section" id="current-listings" data-experiment="issue13-harvested-whats-on">
       <div class="wrap">
         <h2 class="whats-on-visually-hidden">Browse checked local events</h2>
-        <div class="whats-on-filter-toolbar" aria-label="Filter checked events">
-          <div class="whats-on-filter-group">
-            <span class="whats-on-filter-label">Show me</span>
-            <div class="whats-on-filter-buttons">
-              <button class="button secondary small-button" type="button" data-event-filter="all" aria-pressed="true">All</button>
+        <div class="whats-on-filter-toolbar" aria-label="Find checked local events">
+          <div class="whats-on-filter-group whats-on-filter-when">
+            <span class="whats-on-filter-label">When?</span>
+            <div class="whats-on-filter-buttons" role="group" aria-label="Choose an event date range">
+              <button class="button secondary small-button" type="button" data-event-filter="all" aria-pressed="true">All dates</button>
               <button class="button secondary small-button" type="button" data-event-filter="today" aria-pressed="false">Today</button>
               <button class="button secondary small-button" type="button" data-event-filter="week" aria-pressed="false">Next 7 days</button>
               <button class="button secondary small-button" type="button" data-event-filter="weekend" aria-pressed="false">Weekend</button>
-              <button class="button secondary small-button" type="button" data-event-filter="free" aria-pressed="false">Free</button>
-              <button class="button secondary small-button" type="button" data-event-filter="family" aria-pressed="false">Family</button>
             </div>
           </div>
-          <div class="whats-on-filter-group">
-            <span class="whats-on-filter-label">Where</span>
-            <div class="whats-on-filter-buttons" aria-label="Filter events by local area">
+          <div class="whats-on-filter-group whats-on-filter-audience">
+            <span class="whats-on-filter-label">What kind? <small>Choose either or both</small></span>
+            <div class="whats-on-filter-buttons" role="group" aria-label="Refine by free and family-friendly events; choose either or both">
+              <button class="button secondary small-button" type="button" data-event-filter="free" data-event-audience="free" aria-pressed="false">Free</button>
+              <button class="button secondary small-button" type="button" data-event-filter="family" data-event-audience="family" aria-pressed="false">Family-friendly</button>
+            </div>
+          </div>
+          <div class="whats-on-filter-group whats-on-filter-area">
+            <span class="whats-on-filter-label">Where?</span>
+            <div class="whats-on-filter-buttons" role="group" aria-label="Filter events by local area">
               <button class="button secondary small-button" type="button" data-event-area="all" aria-pressed="true">All areas</button>
               <button class="button secondary small-button" type="button" data-event-area="Cheadle" aria-pressed="false">Cheadle</button>
               <button class="button secondary small-button" type="button" data-event-area="Cheadle Hulme" aria-pressed="false">Cheadle Hulme</button>
@@ -80,7 +89,7 @@
             </div>
           </div>
         </div>
-
+        <p class="whats-on-selection-summary" data-whats-on-selection aria-live="polite">Showing all checked events in all areas.</p>
         <p class="sitewide-filter-action"><button type="button" class="sitewide-clear-filters" data-whats-on-clear-filters hidden>Clear all event filters</button></p>
         <p class="reader-muted-link whats-on-filter-note">Place filters focus on the core SK8 patch. Nearby highlights remain available under All areas.</p>
         <div class="whats-on-freshness" aria-live="polite">
@@ -121,7 +130,7 @@
           <div class="eyebrow">Nothing stale just to fill the page</div>
           <h2>No checked listings match this view yet.</h2>
           <p>Rather than pad the page with stale or uncertain events, try another filter, the latest Scoop or the Free &amp; Cheap Guide.</p>
-          <div class="button-row"><a class="button" href="/latest" data-nue-link data-nue-type="latest">See current ideas in the latest Scoop</a><a class="button secondary" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Open Free &amp; Cheap</a></div>
+          <div class="button-row"><button class="button" type="button" data-events-empty-clear>Show all checked events</button><a class="button secondary" href="/latest" data-nue-link data-nue-type="latest">See the latest Scoop</a><a class="button secondary" href="/free-cheap-guide/" data-nue-link data-nue-type="guide">Open Free &amp; Cheap</a></div>
         </div>
         <section class="whats-on-pilot-pages" aria-labelledby="whats-on-detailed-title">
           <div class="whats-on-pilot-top"><div class="eyebrow">More detail, less digging</div><h2 id="whats-on-detailed-title">Plan a local event</h2></div>
@@ -178,6 +187,16 @@
       <div class="footer-links"><strong>Trust</strong><a href="../editorial-policy.html">Editorial policy</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><span>© <span data-year></span> SK8 Scoop</span></div>
     </div>
   </footer>
+  <script>
+  (() => {
+    const parts = new Intl.DateTimeFormat('en-GB', {timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+    const values = Object.fromEntries(parts.map(part => [part.type,part.value]));
+    const today = `${values.year}-${values.month}-${values.day}`;
+    document.querySelectorAll('[data-expire-after]').forEach(node => {
+      if (today > node.dataset.expireAfter) node.remove();
+    });
+  })();
+  </script>
   <script src="../assets/config.js"></script>
   <script src="../assets/site.js?v=20261007-navfix4"></script>
   <script src="../assets/sk8-calendar-core.js"></script>
