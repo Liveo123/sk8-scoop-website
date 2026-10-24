@@ -20,10 +20,11 @@ pass(home.includes('/whats-on/?filter=weekend&amp;type=free'),
   'Popular free weekend route leads into combinable filters');
 pass(home.includes('reader-first-other-ideas') && home.includes('/whats-on/?filter=free'),
   'Less-used ideas disclosed and original free preset retained');
-pass(home.indexOf('holiday-club-spotlight-home') > home.indexOf('reader-first-chips') &&
-  home.indexOf('holiday-club-spotlight-home') < home.indexOf('reader-first-feed-head') &&
-  home.includes('data-track-event="homepage_holiday_club_planner_click"'),
-  'Seasonal holiday club planner prominently displayed before homepage event feed');
+pass(home.indexOf('holiday-club-home-section') > home.indexOf('reader-hero reader-hero-photo') &&
+  home.indexOf('holiday-club-home-section') < home.indexOf('section reader-worth') &&
+  home.includes('data-track-event="homepage_holiday_club_planner_click"') &&
+  home.includes('class="holiday-club-home-section" aria-label="October half-term holiday club planning" data-expire-after="2026-10-30"'),
+  'Holiday club banner follows newsletter hero and its entire section expires after half-term');
 pass(whatson.indexOf('whats-on-holiday-quicklink') > whatson.indexOf('whats-on-header-links') &&
   whatson.indexOf('whats-on-holiday-quicklink') < whatson.indexOf('whats-on-listings-section') &&
   whatson.includes('data-track-event="whats_on_holiday_club_planner_click"'),
