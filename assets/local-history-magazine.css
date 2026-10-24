@@ -141,3 +141,13 @@ body[data-page="local-history"] #st-marys-cheadle .history-document-evidence a{f
   body[data-page="local-history"] .history-gallery-card img{transition:none}
   body[data-page="local-history"] .history-gallery-card>a:hover img{transform:none}
 }
+
+/* Documentary Old Town chapter break: reusable licensed photograph and true credit. */
+body[data-page="local-history"] .history-visit-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,.83fr);gap:26px;align-items:center}
+body[data-page="local-history"] .history-visit-intro-copy{align-self:center}
+body[data-page="local-history"] .history-visit-intro-copy p{max-width:52ch;margin:17px 0 0;color:#416065;font-size:.96rem;line-height:1.6}
+body[data-page="local-history"] .history-visit-intro-photo{margin:0;min-width:0;background:#173b40;border-radius:15px;overflow:hidden;box-shadow:0 10px 25px rgba(22,50,50,.1)}
+body[data-page="local-history"] .history-visit-intro-photo img{display:block;width:100%;height:240px;object-fit:cover;object-position:center}
+body[data-page="local-history"] .history-visit-intro-photo figcaption{padding:9px 12px 10px;background:#143e47;color:#fff;font-size:.73rem;line-height:1.45}
+body[data-page="local-history"] .history-visit-intro-photo a{color:#fff0c1}
+@media(max-width:760px){body[data-page="local-history"] .history-visit-intro{grid-template-columns:1fr}body[data-page="local-history"] .history-visit-intro-photo img{height:215px}}
