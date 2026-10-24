@@ -57,6 +57,14 @@
 
     <section class="section whats-on-listings-section" id="current-listings" data-experiment="issue13-harvested-whats-on">
       <div class="wrap">
+        <aside class="holiday-club-spotlight holiday-club-spotlight-whats-on" data-expire-after="2026-10-30" aria-labelledby="whatson-holiday-club-title">
+          <div class="holiday-club-spotlight-info">
+            <span class="holiday-club-spotlight-kicker">School holiday planning · 26–30 October</span>
+            <h2 id="whatson-holiday-club-title">Looking for an October holiday club?</h2>
+            <p>Use the separate club finder to compare days, ages and locations. Club places aren't part of the confirmed-events calendar.</p>
+          </div>
+          <a class="button holiday-club-spotlight-cta" href="/kids-family/holiday-club-finder/" data-nue-link data-nue-type="family-planner" data-track-event="whats_on_holiday_club_planner_click" data-link-location="whats-on-top-finder">Compare holiday clubs <span aria-hidden="true">→</span></a>
+        </aside>
         <h2 class="whats-on-visually-hidden">Browse checked local events</h2>
         <div class="whats-on-filter-toolbar" aria-label="Find checked local events">
           <div class="whats-on-filter-group whats-on-filter-when">
@@ -184,6 +192,16 @@
       <div class="footer-links"><strong>Trust</strong><a href="../editorial-policy.html">Editorial policy</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><span>© <span data-year></span> SK8 Scoop</span></div>
     </div>
   </footer>
+  <script>
+  (() => {
+    const parts = new Intl.DateTimeFormat('en-GB', {timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+    const values = Object.fromEntries(parts.map(part => [part.type,part.value]));
+    const today = `${values.year}-${values.month}-${values.day}`;
+    document.querySelectorAll('[data-expire-after]').forEach(node => {
+      if (today > node.dataset.expireAfter) node.remove();
+    });
+  })();
+  </script>
   <script src="../assets/config.js"></script>
   <script src="../assets/site.js?v=20261007-navfix4"></script>
   <script src="../assets/sk8-calendar-core.js"></script>
