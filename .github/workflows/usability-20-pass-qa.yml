@@ -10,6 +10,7 @@ on:
       - 'assets/whats-on-calendar.js'
       - 'assets/usability-pass-20261023.css'
       - 'assets/homepage-visual-refresh-20261024.css'
+      - 'assets/homepage-52-adventures-image.css'
       - 'scripts/check-usability-pass.mjs'
       - 'tests/usability-pass-browser.mjs'
       - '.github/workflows/usability-20-pass-qa.yml'
@@ -64,14 +65,17 @@ jobs:
                curl -fsSL --max-time 25 "$base/assets/whats-on.js" -o /tmp/sk8-ux-whatson.js 2>/dev/null &&
                curl -fsSL --max-time 25 "$base/assets/usability-pass-20261023.css" -o /tmp/sk8-ux-polish.css 2>/dev/null &&
                curl -fsSL --max-time 25 "$base/assets/homepage-visual-refresh-20261024.css" -o /tmp/sk8-ux-refresh.css 2>/dev/null &&
+               curl -fsSL --max-time 25 "$base/assets/homepage-52-adventures-image.css" -o /tmp/sk8-ux-adventure.css 2>/dev/null &&
                curl -fsSL --max-time 25 "$base/data/events.json" -o /tmp/sk8-ux-events.json 2>/dev/null &&
                cmp -s assets/site.js /tmp/sk8-ux-site.js &&
                cmp -s assets/whats-on.js /tmp/sk8-ux-whatson.js &&
                cmp -s assets/usability-pass-20261023.css /tmp/sk8-ux-polish.css &&
                cmp -s assets/homepage-visual-refresh-20261024.css /tmp/sk8-ux-refresh.css &&
+               cmp -s assets/homepage-52-adventures-image.css /tmp/sk8-ux-adventure.css &&
                cmp -s data/events.json /tmp/sk8-ux-events.json &&
                grep -Fq 'reader-first-other-ideas' /tmp/sk8-ux-home.html &&
                grep -Fq 'home-issue-number' /tmp/sk8-ux-home.html &&
+               grep -Fq 'homepage-52-adventures-image.css' /tmp/sk8-ux-home.html &&
                grep -Fq 'data-event-audience="family"' /tmp/sk8-ux-whatson.html; then
               echo "PREVIEW_URL=$base" >> "$GITHUB_ENV"
               echo "Verified preview exact JS/CSS bytes: $base/"
