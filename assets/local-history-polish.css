@@ -89,3 +89,22 @@ body.history-article-page .history-article-next{padding:34px 0 48px;background:#
 @media(max-width:900px){body[data-page="local-history"] .category-hero-grid,body.history-article-page .history-article-hero,body.history-article-page .history-article-layout{grid-template-columns:1fr}body[data-page="local-history"] .category-hero-visual{max-width:560px;justify-self:start}body[data-page="local-history"] .history-caseboard-grid,body.history-article-page .history-file-grid{grid-template-columns:1fr}}
 @media(max-width:760px){body[data-page="local-history"] .history-evidence-note{grid-template-columns:1fr;gap:14px}body[data-page="local-history"] .history-evidence-label{padding-right:0;padding-bottom:14px;border-right:0;border-bottom:1px solid rgba(15,100,112,.17)}}
 @media(max-width:680px){body[data-page="local-history"] .page-hero{padding:26px 0 22px}body[data-page="local-history"] .page-hero h1{font-size:clamp(2.5rem,12vw,3.15rem)}body[data-page="local-history"] .history-feature-top{min-height:194px;grid-template-rows:30px 92px 30px;padding:20px}body.history-article-page .history-file-head{display:block}body.history-article-page .history-file-tag{display:inline-flex;margin-top:12px}}
+
+/* Local History documentary imagery: sharp, source-labelled, proportionate at all widths. */
+body.history-article-page .history-feature-photo-band{padding:22px 0 24px;background:#f7f4ed}
+body.history-article-page .history-documentary-figure{margin:0 auto;width:100%}
+body.history-article-page .history-documentary-figure--wartime{max-width:690px}
+body.history-article-page .history-documentary-figure--plaza{max-width:640px}
+body.history-article-page .history-documentary-figure img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:13px}
+body.history-article-page .history-documentary-figure--plaza img{object-position:50% 50%}
+body.history-article-page .history-documentary-figure figcaption,body[data-page="local-history"] .history-hub-image-strip figcaption,body[data-page="local-history"] .history-premier-art figcaption,body[data-page="local-history"] .history-hub-plaza-art figcaption{padding:9px 0 0;color:#33575b;font-size:.76rem;line-height:1.5}
+body[data-page="local-history"] .history-premier-teaser{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:24px;align-items:center}
+body[data-page="local-history"] .history-premier-art{width:100%;margin:0}
+body[data-page="local-history"] .history-premier-art img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center;border-radius:12px}
+body[data-page="local-history"] .history-hub-image-strip{max-width:520px;width:100%;margin:0 0 20px}
+body[data-page="local-history"] .history-hub-image-strip img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:12px}
+body[data-page="local-history"] .history-hub-plaza-card{display:grid;grid-template-columns:minmax(165px,220px) minmax(0,1fr);gap:0;align-items:center}
+body[data-page="local-history"] .history-hub-plaza-art{margin:0 0 0 16px}
+body[data-page="local-history"] .history-hub-plaza-art img{width:100%;height:auto;aspect-ratio:16/11;object-fit:cover;display:block;border-radius:9px}
+body[data-page="local-history"] .history-hub-plaza-art figcaption{font-size:.68rem}
+@media(max-width:720px){body[data-page="local-history"] .history-premier-teaser,body[data-page="local-history"] .history-hub-plaza-card{grid-template-columns:1fr}body[data-page="local-history"] .history-premier-art{max-width:520px}body[data-page="local-history"] .history-hub-plaza-art{margin:14px 14px 0}body[data-page="local-history"] .history-hub-plaza-art img{max-height:250px;aspect-ratio:16/9}}
