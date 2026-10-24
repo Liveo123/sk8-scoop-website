@@ -8,10 +8,15 @@ const nav = read('assets/site.js');
 const filters = read('assets/whats-on.js');
 const month = read('assets/whats-on-calendar.js');
 const css = read('assets/usability-pass-20261023.css');
+const artwork = read('assets/homepage-52-adventures-image.css');
 const pass = (test, message) => {
   assert.ok(test, message);
   console.log('PASS ' + message);
 };
+pass(home.includes('assets/homepage-52-adventures-image.css?v=1') &&
+  artwork.includes('52-adventures-user-artwork-fallback-20261024.png') &&
+  artwork.includes('color:#104850'),
+  'Permanent 52 Adventures illustration loaded as faint backdrop behind sharp dark teal type');
 pass(home.indexOf('reader-first-discovery') < home.indexOf('reader-hero reader-hero-photo'),
   'Usefulness-first homepage hierarchy retained');
 pass(home.includes('reader-first-search-help') && home.includes('aria-describedby="reader-first-search-help"'),
