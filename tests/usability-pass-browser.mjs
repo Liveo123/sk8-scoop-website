@@ -54,6 +54,14 @@ try{
  check(await evaluate("document.querySelectorAll('.site-header .nav>a:not(.button)').length===5"),'Five primary reader routes');
  check(await evaluate("document.querySelectorAll('.reader-first-chips > a').length===4"),'Four immediate task shortcuts');
  check(await evaluate("Boolean(document.querySelector('input[aria-describedby=\"reader-first-search-help\"]'))"),'Search scope accessible');
+ check(await evaluate("(() => {const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));const current=p.year+'-'+p.month+'-'+p.day;const active=current<='2026-10-30';const feature=document.querySelector('.holiday-club-spotlight-home');return active?Boolean(feature&&document.querySelector('.holiday-club-spotlight-home a')?.pathname==='/kids-family/holiday-club-finder/'&&feature.getBoundingClientRect().height>=70):!feature})()"),'Holiday club shortcut appears before expiry and disappears once the October sessions are over');
+ if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-home'))")){
+   check(await evaluate("document.querySelector('.holiday-club-spotlight-home').compareDocumentPosition(document.querySelector('.reader-first-feed-head'))&4"),'Holiday club planner sits ahead of current listings');
+   await evaluate("document.querySelector('.holiday-club-spotlight-home').scrollIntoView({block:'start',behavior:'instant'});true");
+   await sleep(80);await shot('holiday-club-home-desktop.png');
+   check(await evaluate("getComputedStyle(document.querySelector('.holiday-club-spotlight-cta')).color==='rgb(255, 255, 255)'"),'Holiday club CTA retains white button text');
+ }
+
  await shot('homepage-desktop.png');
 
  await waitFor("document.querySelectorAll('[data-explore-grid] .reader-explore-tile').length===6");
@@ -71,6 +79,12 @@ try{
   await click('[data-consent-none]');await sleep(180);
  }
  check(await evaluate('window.SK8_EVENT_DATA.length>0'),'Checked event feed loads');
+ check(await evaluate("(() => {const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));const current=p.year+'-'+p.month+'-'+p.day;const feature=document.querySelector('.holiday-club-spotlight-whats-on');return current<='2026-10-30'?Boolean(feature&&feature.querySelector('a')?.pathname==='/kids-family/holiday-club-finder/'&&feature.getBoundingClientRect().height>=70):!feature})()"),'What’s On displays the holiday club planner above event filters during the relevant half-term only');
+ if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-whats-on'))")){
+   await evaluate("document.querySelector('.holiday-club-spotlight-whats-on').scrollIntoView({block:'start',behavior:'instant'});true");
+   await sleep(80);await shot('holiday-club-whats-on-desktop.png');
+ }
+
  check(await evaluate("(() => {const core=window.SK8CalendarCore;const now=core.localToday();const day=new Date(now+'T00:00:00Z').getUTCDay();const add=(s,n)=>{const d=new Date(s+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);};const sat=day===0?now:add(now,(6-day+7)%7);const sun=day===0?now:add(sat,1);const wanted=window.SK8_EVENT_DATA.filter(e=>e.area==='Cheadle'&&core.isFree(e)&&core.isFamily(e)&&core.withinRange(e,sat,sun)).length;return wanted===document.querySelectorAll('.event-listing-card').length;})()"),'Weekend, Free, Family and Cheadle filters combine correctly');
  check(await evaluate("['weekend','free','family'].every(k=>document.querySelector('[data-event-filter=\"'+k+'\"]')?.getAttribute('aria-pressed')==='true')"),'Combined selections visible to screen readers');
  check(await evaluate("document.querySelector('[data-whats-on-selection]')?.textContent.includes('free & family-friendly')"),'Plain-language combined result label');
@@ -92,6 +106,12 @@ try{
  await navigate('/');
  await waitFor('Boolean(document.querySelector(".site-header .nav-more"))');
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),'Homepage has no mobile horizontal overflow');
+ if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-home'))")){
+   check(await evaluate("(() => {const f=document.querySelector('.holiday-club-spotlight-home'),c=f.querySelector('.holiday-club-spotlight-cta');return f.getBoundingClientRect().right<=innerWidth+2&&c.getBoundingClientRect().height>=44&&c.getBoundingClientRect().width>=180})()"),'Holiday club planner fits narrow mobile width with an accessible full-size action');
+   await evaluate("document.querySelector('.holiday-club-spotlight-home').scrollIntoView({block:'start',behavior:'instant'});true");
+   await sleep(80);await shot('holiday-club-home-mobile.png');
+ }
+
  check(await click('.site-header .menu-btn'),'Mobile menu opens');
  check(await evaluate("document.querySelector('.site-header .nav').classList.contains('open')"),'Mobile menu visible');
  check(await click('.site-header .nav-more summary'),'Mobile More disclosure opens');
@@ -111,6 +131,12 @@ try{
  await navigate('/whats-on/?filter=weekend&type=free-family');
  await waitFor('window.SK8_EVENT_DATA && document.querySelector("[data-events-count]")?.textContent.includes("current checked")');
  check(await evaluate('document.documentElement.scrollWidth<=window.innerWidth+3'),"What's On has no mobile horizontal overflow");
+ if(await evaluate("Boolean(document.querySelector('.holiday-club-spotlight-whats-on'))")){
+   check(await evaluate("(() => {const f=document.querySelector('.holiday-club-spotlight-whats-on'),c=f.querySelector('.holiday-club-spotlight-cta');return f.getBoundingClientRect().right<=innerWidth+2&&c.getBoundingClientRect().height>=44&&c.getBoundingClientRect().width>=180})()"),'Holiday club shortcut on What’s On stays readable and tappable on mobile');
+   await evaluate("document.querySelector('.holiday-club-spotlight-whats-on').scrollIntoView({block:'start',behavior:'instant'});true");
+   await sleep(80);await shot('holiday-club-whats-on-mobile.png');
+ }
+
  check(await evaluate("[...document.querySelectorAll('.whats-on-filter-buttons button')].every(el=>el.getBoundingClientRect().height>=43)"),'All mobile filters meet practical touch-target size');
  await shot('whatson-mobile.png');
  console.log('PASS 20-pass usability browser QA completed');
