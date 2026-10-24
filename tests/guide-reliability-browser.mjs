@@ -183,13 +183,26 @@ try {
     "try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('decode timeout')),12000))]);}"+
     "catch(e){out.push({width:img.naturalWidth,error:String(e)});continue;}"+
     "out.push({width:img.naturalWidth,height:img.naturalHeight,src:img.currentSrc});}"+
-    "return {photos:out,chosen:document.querySelectorAll('.card:not(.licensed-card)').length,"+
+    "return {photos:out,chosen:document.querySelectorAll('.card:not(.licensed-card):not(.proposal-card)').length,"+
     "rights:[...document.querySelectorAll('.licensed-card .rights')].map(x=>x.textContent)};})()");
   record('Owner selected-image board keeps nine original choices and five licensed alternatives',
     licensedReview.chosen===12 && licensedReview.photos.length===5 &&
     licensedReview.photos.every(x=>x.width>=1200 && x.height>=800) &&
     licensedReview.rights.every(x=>/licensed/i.test(x)),
     JSON.stringify({chosen:licensedReview.chosen,photos:licensedReview.photos,rights:licensedReview.rights}));
+  const proposedPreview=await evaluate("(async()=>{"+
+    "const panel=document.querySelector('#sports-chapter-proposal'),"+
+    "img=document.querySelector('.proposal-card img');"+
+    "if(!img)return {panel:Boolean(panel),missing:true};"+
+    "img.loading='eager';img.scrollIntoView({block:'nearest'});"+
+    "try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('decode timeout')),12000))]);}"+
+    "catch(e){return {panel:Boolean(panel),error:String(e)}};"+
+    "return {panel:Boolean(panel),w:img.naturalWidth,h:img.naturalHeight,"+
+    "label:document.querySelector('.proposal-card .kicker')?.textContent};})()");
+  record('Owner sports collage preview is high-res and explicitly proposal only',
+    proposedPreview.panel && proposedPreview.w>=1000 && proposedPreview.h>=750 &&
+    /proposed only/i.test(proposedPreview.label||''),
+    JSON.stringify(proposedPreview));
   await evaluate("document.querySelector('#licenced-alternatives')?.scrollIntoView({block:'start'})");
   await sleep(350);
   const rightsScreenshot=await cmd('Page.captureScreenshot',
