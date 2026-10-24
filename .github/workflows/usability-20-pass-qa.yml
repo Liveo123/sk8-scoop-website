@@ -58,7 +58,7 @@ jobs:
           set -euo pipefail
           slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
           base="https://${slug}.previews.sk8scoop.com"
-          for attempt in $(seq 1 24); do
+          for attempt in $(seq 1 8); do
             if curl -fsSL --max-time 25 "$base/" -o /tmp/sk8-ux-home.html 2>/dev/null &&
                curl -fsSL --max-time 25 "$base/whats-on/" -o /tmp/sk8-ux-whatson.html 2>/dev/null &&
                curl -fsSL --max-time 25 "$base/assets/site.js" -o /tmp/sk8-ux-site.js 2>/dev/null &&
@@ -81,7 +81,24 @@ jobs:
               echo "Verified preview exact JS/CSS bytes: $base/"
               exit 0
             fi
-            echo "Preview not yet at checked-out source revision (attempt $attempt/24)"
+            if [ "$attempt" -eq 2 ]; then
+              echo "Preview exact-byte diagnostic, local versus CDN:"
+              for pair in "assets/site.js:/tmp/sk8-ux-site.js" "assets/whats-on.js:/tmp/sk8-ux-whatson.js" "assets/usability-pass-20261023.css:/tmp/sk8-ux-polish.css" "assets/homepage-visual-refresh-20261024.css:/tmp/sk8-ux-refresh.css" "assets/homepage-52-adventures-image.css:/tmp/sk8-ux-adventure.css" "data/events.json:/tmp/sk8-ux-events.json"; do
+                local_path="${pair%%:*}"
+                fetched_path="${pair#*:}"
+                if [ -f "$fetched_path" ]; then
+                  printf '%s expected=' "$local_path"
+                  sha256sum "$local_path" | cut -d' ' -f1
+                  printf '%s received=' "$local_path"
+                  sha256sum "$fetched_path" | cut -d' ' -f1
+                else
+                  echo "MISSING HTTP asset: $local_path"
+                fi
+              done
+              grep -Fq 'reader-first-other-ideas' /tmp/sk8-ux-home.html && echo "Homepage discovery marker: yes" || echo "Homepage discovery marker: missing"
+              grep -Fq 'data-event-audience="family"' /tmp/sk8-ux-whatson.html && echo "What’s On family marker: yes" || echo "What’s On family marker: missing"
+            fi
+            echo "Preview not yet at checked-out source revision (attempt $attempt/8)"
             sleep 12
           done
           echo "Preview not proven to match revision; failing safely."
