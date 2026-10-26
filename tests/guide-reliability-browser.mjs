@@ -74,7 +74,7 @@ try {
   const illustrationSourceAudit=await evaluate("(()=>{const data=JSON.parse(document.querySelector('#image-data').textContent);"+
     "const adventureData=JSON.parse(document.querySelector('#adventure-data').textContent);"+
     "const keys=['a2','a10','a32-illustration','chapter01-illustration','chapter03-illustration'];"+
-    "return {sources:keys.map(key=>({key,src:data[key]||null,sharp:Boolean(data[key] && (data[key].includes('owner-1200x904') || (key==='a2' && data[key]==='/52-adventures/guide/assets/review-only-26oct/02-hatworks-illustration-REVIEW.png')))})),"+
+    "return {sources:keys.map(key=>({key,src:data[key]||null,sharp:Boolean(data[key] && (data[key].includes('owner-1200x904') || (key==='a2' && data[key].includes('/review-only-2026-10-26/hatworks-imagined-interior-1445-original-review.png'))))})),"+
     "plazaOriginal:Boolean(data.a6&&data.a6.includes('issue17/chess-editorial-original-v7')),"+
     "originalRhsPhoto:data.a32,"+
     "rhsSelectedKey:adventureData[32].imgKey,"+
