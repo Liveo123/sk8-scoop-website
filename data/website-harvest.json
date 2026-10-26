@@ -34,10 +34,10 @@
     {
       "id": "anson",
       "title": "Anson steam weekend",
-      "disposition": "whats_on",
+      "disposition": "whats_on_expired",
       "event_id": "anson-engine-museum-steam-closing-weekend-2026-10-24",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-10-26; preserved as Issue 18 historical editorial handoff.]"
     },
     {
       "id": "nixon",
@@ -58,10 +58,10 @@
     {
       "id": "market",
       "title": "Stockport Alternative Market",
-      "disposition": "whats_on",
+      "disposition": "whats_on_expired",
       "event_id": "stockport-halloween-alternative-market-2026-10-25",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-10-26; preserved as Issue 18 historical editorial handoff.]"
     },
     {
       "id": "lego",
