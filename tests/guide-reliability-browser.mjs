@@ -74,7 +74,7 @@ try {
   const illustrationSourceAudit=await evaluate("(()=>{const data=JSON.parse(document.querySelector('#image-data').textContent);"+
     "const adventureData=JSON.parse(document.querySelector('#adventure-data').textContent);"+
     "const keys=['a2','a10','a32-illustration','chapter01-illustration','chapter03-illustration'];"+
-    "return {sources:keys.map(key=>({key,src:data[key]||null,sharp:Boolean(data[key]&&data[key].includes('owner-1200x904'))})),"+
+    "return {sources:keys.map(key=>({key,src:data[key]||null,sharp:Boolean(data[key] && (data[key].includes('owner-1200x904') || (key==='a2' && data[key]==='/52-adventures/guide/assets/review-only-26oct/02-hatworks-illustration-REVIEW.png')))})),"+
     "plazaOriginal:Boolean(data.a6&&data.a6.includes('issue17/chess-editorial-original-v7')),"+
     "originalRhsPhoto:data.a32,"+
     "rhsSelectedKey:adventureData[32].imgKey,"+
@@ -82,6 +82,26 @@ try {
   record('52 Adventures: five selected owner illustrations use sharp source files',
     illustrationSourceAudit.sources.length===5 &&
     illustrationSourceAudit.sources.every(x=>x.sharp),JSON.stringify(illustrationSourceAudit.sources));
+  // Verify the real browser decodes each selected image, including local raster assets.
+  // URI-only checks would not detect a missing or fuzzy uploaded file.
+  const refreshedIllustrationDecodes=await evaluate("(async()=>{"+
+    "const imgs=JSON.parse(document.querySelector('#image-data').textContent);"+
+    "const entries=JSON.parse(document.querySelector('#adventure-data').textContent);"+
+    "const out=[];for(const n of [1,2,3,17,23]){"+
+    "const a=entries[n],url=imgs[a?.imgKey],img=new Image();"+
+    "if(!url){out.push({n,ok:false,reason:'missing image key'});continue;}"+
+    "img.src=url;try{await Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('decode timeout')),12000))]);"+
+    "out.push({n,ok:img.naturalWidth>=900 && img.naturalHeight>=650 && a.img.isIllustration===true && /illustration/i.test(a.img.cap||''),width:img.naturalWidth,height:img.naturalHeight,illustration:a.img.isIllustration});}"+
+    "catch(error){out.push({n,ok:false,error:String(error)});}"+
+    "}return out;})()");
+  record('52 Adventures: five draft image replacements decode at full resolution and are labelled as illustrations',
+    refreshedIllustrationDecodes.length===5 && refreshedIllustrationDecodes.every(x=>x.ok),
+    JSON.stringify(refreshedIllustrationDecodes));
+  const realStreetAudit=await evaluate("(()=>{const imgs=JSON.parse(document.querySelector('#image-data').textContent);const data=JSON.parse(document.querySelector('#adventure-data').textContent);return {url:imgs[data[5].imgKey],isIllustration:Boolean(data[5].img?.isIllustration),hasFictionalMoodboard:Object.values(imgs).some(u=>typeof u==='string'&&u.includes('underbanks-MOODBOARD'))};})()");
+  record('52 Adventures: Underbanks uses real-licensed photograph rather than fictional moodboard',
+    realStreetAudit.url.includes('great-underbank-stephen-mckay') && !realStreetAudit.isIllustration && !realStreetAudit.hasFictionalMoodboard,
+    JSON.stringify(realStreetAudit));
+
   record('52 Adventures: Plaza art and licensed RHS photo kept distinct',
     illustrationSourceAudit.plazaOriginal &&
     illustrationSourceAudit.originalRhsPhoto==='/52-adventures/guide/assets/adventure-32.webp' &&
