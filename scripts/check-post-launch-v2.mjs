@@ -188,7 +188,7 @@ contains('assets/site.js',"joinButton.textContent='Join free'");
 excludes('assets/site.js',"['Join','/join/']");
 contains('assets/styles.css','.nav .reader-nav-latest{');
 contains('assets/styles.css','.nav .reader-nav-join{');
-contains('assets/styles.css','@media(max-width:1199px){');
+contains('assets/styles.css','@media(max-width:1359px){');
 contains('assets/styles.css','background:#f8791b!important');
 
 // Global navigation contract: adding My SK8 must not silently remove established reader routes.
@@ -272,17 +272,17 @@ expect(fs.existsSync(path.join(root,'assets/global-search.js')), 'assets/global-
 expect(fs.existsSync(path.join(root,'assets/global-search.css')), 'assets/global-search.css is missing');
 contains('assets/config.js','/assets/global-search.css');
 contains('assets/config.js','/assets/global-search.js');
-contains('assets/config.js','20261007-headerfix1');
-contains('assets/site.js','20261007-headerfix1');
+contains('assets/config.js','20261026-headerwidth1');
+contains('assets/site.js','20261026-headerwidth1');
 contains('assets/global-search.js',"form.action = '/search/'");
 contains('assets/global-search.js','header_search_open');
 contains('assets/global-search.js','header_search_submit');
 contains('assets/global-search.js','query_length: queryLength');
 contains('assets/global-search.js',"event.key !== '/'");
-contains('assets/global-search.js',"window.matchMedia('(min-width: 1450px), (min-width: 821px) and (max-width: 1199px)')");
-contains('assets/global-search.css','@media(min-width:1200px)');
+contains('assets/global-search.js',"window.matchMedia('(min-width: 1450px), (min-width: 821px) and (max-width: 1359px)')");
+contains('assets/global-search.css','@media(min-width:1360px)');
 contains('assets/global-search.css','@media(min-width:1450px)');
-contains('assets/global-search.css','@media(min-width:821px) and (max-width:1199px)');
+contains('assets/global-search.css','@media(min-width:821px) and (max-width:1359px)');
 contains('assets/global-search.css','@media(max-width:820px)');
 contains('assets/global-search.css','width:min(1340px,calc(100% - 16px))');
 contains('assets/global-search.css','.global-search-form:focus-within');
