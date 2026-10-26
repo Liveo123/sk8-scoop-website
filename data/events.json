@@ -1,30 +1,5 @@
 [
   {
-    "id": "anson-engine-museum-steam-closing-weekend-2026-10-24",
-    "title": "Anson Engine Museum closing steam weekend",
-    "date": "2026-10-24",
-    "end_date": "2026-10-25",
-    "date_mode": "specific_dates",
-    "occurrences": [
-      "2026-10-24",
-      "2026-10-25"
-    ],
-    "date_range": "Saturday 24 and Sunday 25 October",
-    "time": "10:00",
-    "end_time": "16:00",
-    "area": "Poynton",
-    "venue": "Anson Engine Museum, Anson Road, Poynton SK12 1TD",
-    "cost": "£10 adults; £2.50 ages 13–16; under-13s free",
-    "cost_type": "paid",
-    "category": "Family / History",
-    "description": "Final two special steam operation days of the 2026 season. Museum highlights include large engines and traditional craft demonstrations; operating engines vary. Check the official programme before travelling.",
-    "source_url": "https://enginemuseum.org/events",
-    "booking_url": "https://enginemuseum.org/visitor-information",
-    "verification": "MUSEUM_PRIMARY_EVENTS_AND_VISITOR_INFORMATION",
-    "checked": "2026-10-24",
-    "status": "verified"
-  },
-  {
     "id": "nixons-halloween-play-special-heald-green-2026-10-31",
     "title": "Nixon’s £5 Halloween Play Special",
     "date": "2026-10-31",
@@ -39,24 +14,6 @@
     "booking_url": "https://www.nixonsfarmshop.co.uk/service-page/halloween-play-special",
     "source_url": "https://www.nixonsfarmshop.co.uk/service-page/halloween-play-special",
     "verification": "ORGANISER_PRIMARY_EVENT_AND_BOOKING_PAGE",
-    "checked": "2026-10-24",
-    "status": "verified"
-  },
-  {
-    "id": "stockport-halloween-alternative-market-2026-10-25",
-    "title": "Stockport Alternative Halloween Market",
-    "date": "2026-10-25",
-    "time": "16:00",
-    "end_time": "20:00",
-    "area": "Stockport",
-    "venue": "Stockport Masonic Guildhall, 169–171 Wellington Road South, Stockport SK1 3UA",
-    "cost": "Free general entry; 3–4pm quiet hour needs a free ticket",
-    "cost_type": "free",
-    "category": "Market / Culture",
-    "description": "Independent traders, crafts, artwork and curiosities across two floors. General entry is free 4–8pm. A quieter accessible 3–4pm hour needs a separate free ticket. All ages welcome.",
-    "booking_url": "https://www.stockport.gov.uk/events/stockport-alternative-market-halloween?date=2026-10-25",
-    "source_url": "https://www.stockport.gov.uk/events/stockport-alternative-market-halloween?date=2026-10-25",
-    "verification": "COUNCIL_PUBLISHED_ORGANISER_SUBMISSION",
     "checked": "2026-10-24",
     "status": "verified"
   },
@@ -220,38 +177,6 @@
       "2026-11-01"
     ],
     "end_time": "15:30"
-  },
-  {
-    "id": "hazel-grove-model-railway-exhibition-2026-10-24",
-    "title": "Hazel Grove Model Railway Exhibition",
-    "date": "2026-10-24",
-    "end_date": "2026-10-25",
-    "date_mode": "specific_dates",
-    "date_range": "24–25 Oct; Sat 10am–5pm, Sun 10am–4pm",
-    "occurrences": [
-      {
-        "date": "2026-10-24",
-        "time": "10:00",
-        "end_time": "17:00"
-      },
-      {
-        "date": "2026-10-25",
-        "time": "10:00",
-        "end_time": "16:00"
-      }
-    ],
-    "time": "10:00",
-    "area": "Woodford",
-    "venue": "Woodford War Memorial Community Centre, Chester Road, Woodford SK7 1PS",
-    "cost": "Adults £9; up to two accompanied under-16s free per paying adult (£4 otherwise)",
-    "cost_type": "paid",
-    "category": "Family / Exhibition",
-    "description": "Two days of working model railway layouts, traders and demonstrations. Free parking and a courtesy bus from Hazel Grove station. Earlier mobility access from 9.30am on Sunday; Sunday closes at 4pm.",
-    "source_url": "https://www.hgdmrs.org.uk/exhibition.html",
-    "booking_url": "https://www.hgdmrs.org.uk/exhibition.html",
-    "verification": "ORGANISER_PRIMARY_SOURCE",
-    "status": "verified",
-    "checked": "2026-10-13"
   },
   {
     "id": "jodrell-october-half-term-2026-10-26",
