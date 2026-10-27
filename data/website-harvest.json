@@ -90,10 +90,10 @@
     {
       "id": "stockroom-bsl",
       "title": "Stockroom BSL Storytime",
-      "disposition": "whats_on",
+      "disposition": "whats_on_expired",
       "event_id": "stockroom-bsl-signed-storytime-2026-10-26",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-10-27; preserved as Issue 18 historical editorial handoff.]"
     },
     {
       "id": "half-term-guide",

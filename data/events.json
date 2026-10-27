@@ -198,22 +198,6 @@
     "cost_type": "admission_required"
   },
   {
-    "id": "stockroom-bsl-signed-storytime-2026-10-26",
-    "title": "BSL Signed Storytime",
-    "status": "verified",
-    "date": "2026-10-26",
-    "time": "11:00",
-    "area": "Stockport",
-    "venue": "Stockroom Studios, Merseyway Shopping Centre, Stockport SK1 1PR",
-    "cost": "Free",
-    "category": "Family / Accessibility",
-    "description": "Inclusive British Sign Language signed storytime for under-5s and families, delivered with the National Deaf Children's Society. Particularly suitable for children who are deaf, have hearing loss or additional communication needs.",
-    "booking_url": "https://www.stockrm.org/events/bsl-signed-storytime?date=2026-10-26",
-    "source_url": "https://www.stockrm.org/events/bsl-signed-storytime?date=2026-10-26",
-    "verification": "VENUE_PRIMARY_2026_EVENT_PAGE",
-    "checked": "2026-10-24"
-  },
-  {
     "id": "cheadle-hulme-memory-lane-autumn-2026",
     "title": "Memory Lane at Cheadle Hulme Methodist Church",
     "date": "2026-10-26",
