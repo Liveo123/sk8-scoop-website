@@ -1,6 +1,6 @@
 import siteWorker from './worker-protected.js';
 import { handleRadarSignup } from './radar-signup-api.js';
-import { requestReferralCode, confirmReferral, awardReferral } from './radar-referral-service.js';
+import { requestReferralCode, confirmReferral, awardReferral, purgeOldRadarReferralRecords } from './radar-referral-service.js';
 
 const CONTACT_INBOX = 'contact@sk8scoop.com';
 const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
@@ -45,6 +45,12 @@ export default {
   async scheduled(_controller, env) {
     if (!env.DB) throw Error('Editorial retention cleanup requires the D1 database binding');
     await purgeExpiredEditorialRecords(env.DB);
+    try {
+      await purgeOldRadarReferralRecords(env);
+    } catch {
+      // A referral pilot cleanup error must not break unrelated editorial retention.
+      console.error('radar_referral_retention_failed');
+    }
   }
 };
 
