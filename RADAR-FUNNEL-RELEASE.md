@@ -1,12 +1,12 @@
 # South Manchester Radar signup funnel | release checklist | 28 October 2026
 
 ## State
-- **DRAFT ONLY. Not merged, deployed or switched on.**
-- Draft PR: https://github.com/Liveo123/sk8-scoop-website/pull/262
+- **OWNER-APPROVED CONTROLLED LAUNCH: PR ready for review, NOT MERGED or deployed. Cloudflare build for b8b0bb9f failed; do not merge until a fresh build and preview checks pass.**
+- Launch PR: https://github.com/Liveo123/sk8-scoop-website/pull/262
 - Existing Cloudflare Worker and MailerLite account reused. No new subscription, service or MailerLite form-editor work.
 - Temporary Radar signup home: \`https://www.sk8scoop.com/radar/\` after owner-approved deployment. Its host is SK8's existing infrastructure, not a new independent Radar domain.
 - Existing MailerLite Radar subscribers group: \`202394374779176114\`. SK8's group is never passed to the Radar API.
-- Existing inactive Radar welcome automation: \`202394608790930821\`.
+- Existing active Radar welcome automation (confirmed via MailerLite on 28 October): \`202394608790930821\`.
 - Existing MailerLite embedded Radar forms remain inactive and incomplete **by design**; this implementation does not depend on them.
 
 ## Implemented
@@ -16,22 +16,22 @@
 4. \`radar/success/index.html\`: confirms Radar-only subscription and offers a separate SK8 Scoop signup.
 5. \`radar/privacy/index.html\`: Radar-specific explanation and contact details.
 6. Five SK8 signup success pages now offer an optional, **separate** Radar signup. No SK8 subscriber is moved.
-7. \`wrangler.toml\` includes \`RADAR_SIGNUP_ENABLED = "false"\` to keep the live endpoint disabled even if the draft is merged prematurely.
+7. \`wrangler.toml\` includes \`RADAR_SIGNUP_ENABLED = "true"\` on the unmerged approved launch branch; the production website remains unchanged until merge and successful deployment.
 8. \`tests/radar-signup-qa.mjs\`: offline-only tests. No subscriber writes or live messages.
 
 ## Current verified MailerLite configuration
 - Radar group has zero subscribers as at 28 October 2026.
 - Main and SK8 invitation embedded forms are single-opt-in and inactive, and are not needed for the custom page.
-- Radar welcome workflow: inactive. Two designed welcome emails, with Radar sender, contact@sk8scoop.com, the supplied Stockport postal address, unsubscribe links and optional SK8 invitation.
-- Dry run: all three steps (welcome, delay, follow-up) would execute, zero warnings. This is not a real-inbox test.
+- Radar welcome workflow: active (verified via MailerLite; no public website signup is deployed yet). Two designed welcome emails, with Radar sender, contact@sk8scoop.com, the supplied Stockport postal address, unsubscribe links and optional SK8 invitation.
+- Dry run: all three steps (welcome, delay, follow-up) executed without warnings. Prior controlled inbox tests were reported as delivered; a genuine new signup from the public page still needs checking.
 
-## Must happen before launch (owner approval required)
+## Remaining checks before approved launch
 1. **Subscription preferences:** Review shared MailerLite account unsubscribe behaviour. The native email unsubscribe may stop **both** publications. The Radar privacy notice explicitly warns of this and gives an email-based publication-specific preference route. Group-specific self-service preferences should be enabled before broad promotion if practical.
 2. **Visual QA:** Check pages at 320, 390, 768, 1440px, keyboard/focus and Turnstile widget. Review branding and privacy text; production Turnstile key must cover \`www.sk8scoop.com\`.
 3. **Consent QA:** Confirm the public form uses no unrelated trackers. The Radar group must remain the only group assigned by its endpoint.
-4. **Launch coordination:** Confirm Radar welcome sender/footers and unsubscribe links. Activate \`Radar Welcome + Optional SK8 Discovery\` only when ready for a controlled test. Change \`RADAR_SIGNUP_ENABLED\` from false to true in this branch *as part of an owner-approved launch*, then approve/merge PR. Never flip the flag on a schedule or automatically.
+4. **Launch coordination:** Owner approved the controlled launch. Welcome automation is active; the launch flag is true on the unmerged branch. PR is ready for review. Do not merge until Cloudflare Workers Builds and preview-smoke pass on the current head, then verify deployment before a real signup.
 5. **Real inbox test** with an explicitly authorised test address, after owner approval: submit to public form, verify membership and no SK8 group assignment; verify welcome delivery, correct sender/footer/links, unsubscribe and cross-signup invitation. Use a separate address already in SK8 to confirm existing membership is preserved. Remove or label tests before counting growth.
-6. **Final owner approval** to make the public route and links live. No campaign sends or publishing in this PR.
+6. **Final status:** Controlled launch approval was provided. No campaign sends are included; the public route remains unpublished pending a green build and merge.
 
 ## Known edge cases and constraints
 - A contact that has unsubscribed from the shared MailerLite account cannot automatically join Radar via this API. The endpoint refuses reactivation and directs them to contact the publisher for the supported MailerLite re-subscribe route.
