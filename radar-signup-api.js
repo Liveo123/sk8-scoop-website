@@ -1,3 +1,4 @@
+import { registerRadarMember, recordRadarReferral } from './radar-referral-service.js';
 // South Manchester Radar: isolated, single-opt-in MailerLite signup.
 // Served on the existing Cloudflare Worker with an existing, private API key.
 // IMPORTANT: never add Radar readers to an SK8 Scoop group.
@@ -83,7 +84,9 @@ export async function handleRadarSignup(request, env) {
   if (body.getAll('referral_code').length > 1) {
     return reply({ error: 'Only one referral code may be submitted.' }, 400);
   }
-  const claimedCode = String(body.get('referral_code') || '').trim().toUpperCase();
+  // Radar remains single opt-in. Referral eligibility has a SEPARATE optional inbox-confirmation step.
+  const referralEnabled = env.RADAR_REFERRAL_ENABLED === 'true';
+  const claimedCode = referralEnabled ? String(body.get('referral_code') || '').trim().toUpperCase() : '';
   if (claimedCode && !REFERRAL_CODE_PATTERN.test(claimedCode)) {
     return reply({ error: 'Check the referral code, or leave it blank.' }, 400);
   }
@@ -146,13 +149,13 @@ export async function handleRadarSignup(request, env) {
       return reply({ error: 'You cannot use your own referral code.' }, 400);
     }
     const ownCode = REFERRAL_CODE_PATTERN.test(priorCode) ? priorCode : newReferralCode();
-    const fields = { radar_referral_code: ownCode };
+    const fields = referralEnabled ? { radar_referral_code: ownCode } : null;
     // A claimed referral never modifies an existing SK8 membership or generic
     // subscriber fields. Existing attribution is not overwritten.
     if (claimedCode && !existing?.fields?.radar_referred_by) {
       fields.radar_referred_by = claimedCode;
     }
-    const payload = { email, groups: [RADAR_GROUP], fields, resubscribe: false };
+    const payload = { email, groups: [RADAR_GROUP], ...(fields ? { fields } : {}), resubscribe: false };
     if (!existing) {
       payload.status = 'active';
       payload.opted_in_at = new Date().toISOString().replace('T', ' ').slice(0, 19);
@@ -171,6 +174,25 @@ export async function handleRadarSignup(request, env) {
     const created = await added.json();
     if (!created || !created.data || String(created.data.status) !== 'active') {
       return reply({ error: 'Subscription could not be verified. Please contact us.' }, 502);
+    }
+    // An optional claimed code is NOT a reward. Register the new member's
+    // code in D1; only an independently confirmed mailbox can earn credit.
+    // Any referral failure must not undo an otherwise valid Radar signup.
+    if (referralEnabled) {
+      try {
+        const registered = await registerRadarMember(env, {
+          id: String(created.data.id),
+          fields: { radar_referral_code: ownCode }
+        });
+        if (claimedCode && registered.ready) {
+          await recordRadarReferral(env, {
+            referee: { id: String(created.data.id), email },
+            claimedCode, existingRadar: false
+          });
+        }
+      } catch {
+        console.error('radar_referral_recording_unavailable');
+      }
     }
     const source = body.get('source') === 'sk8_invite' ? 'sk8_invite' : 'radar_main';
     // Aggregate channel only. Never log email, consent data or IP.
