@@ -129,7 +129,7 @@ await test('routes and both-way optional invitations are present', () => {
   assert.match(form, /name="consent" value="yes" required/);
   assert.match(form, /name="cf-turnstile-response"/);
   assert.match(text('radar/signup.js'), /action: 'newsletter_signup'/);
-  assert.match(text('radar/success/index.html'), /\/join\/\?utm_source=radar/);
+  assert.match(text('radar/success/index.html'), /South Manchester Radar only/);
   for (const path of ['signup-success/index.html', 'qr-success/index.html',
                       'free-cheap-guide/success/index.html', '52-adventures/success/index.html',
                       'halloween-half-term-guide/success/index.html']) {
