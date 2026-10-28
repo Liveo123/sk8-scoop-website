@@ -281,6 +281,10 @@ jobs:
 
 
       # Fictional advert exists only in this browser tab; nothing is inserted or sold.
+      - name: Check out pull-request source for £39 gallery QA
+        if: github.event_name == 'pull_request' && github.head_ref == 'preview/52-adventures-premium-main-2026-10-28'
+        uses: actions/checkout@v4
+
       - name: Browser-test £39 gallery on the Cloudflare preview only
         if: github.event_name == 'pull_request' && github.head_ref == 'preview/52-adventures-premium-main-2026-10-28'
         shell: bash
