@@ -5,7 +5,7 @@ keep_vars = true
 
 # Owner approval gate. Leave false on the draft PR; turn on only for launch.
 [vars]
-RADAR_SIGNUP_ENABLED = "false"
+RADAR_SIGNUP_ENABLED = "true"
 
 # Worker Previews base. Preview deployments do not inherit production secrets or D1.
 previews = { }
