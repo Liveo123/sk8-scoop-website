@@ -6,11 +6,20 @@ keep_vars = true
 # Owner approval gate. Leave false on the draft PR; turn on only for launch.
 [vars]
 RADAR_SIGNUP_ENABLED = "true"
+# One-referral pilot and reward fulfilment remain separately disabled.
+RADAR_REFERRAL_ENABLED = "false"
+RADAR_REFERRAL_REWARD_ENABLED = "false"
+RADAR_GUIDE_WEB_URL = ""
+RADAR_GUIDE_PDF_URL = ""
 
 # Worker Previews do not inherit production secrets or D1. Keep signups safely off.
 # Explicit nested block prevents a stray 'previews' production var in TOML.
 [previews.vars]
 RADAR_SIGNUP_ENABLED = "false"
+RADAR_REFERRAL_ENABLED = "false"
+RADAR_REFERRAL_REWARD_ENABLED = "false"
+RADAR_GUIDE_WEB_URL = ""
+RADAR_GUIDE_PDF_URL = ""
 
 [triggers]
 # Daily UTC cleanup of expired first-party editorial search / Trail feedback records.
