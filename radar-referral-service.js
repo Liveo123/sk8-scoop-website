@@ -34,7 +34,7 @@ async function ensure(db){
   await db.prepare(`CREATE INDEX IF NOT EXISTS idx_radar_referral_claims_referrer ON radar_referral_claims(referrer_id,status)` ).run();
   await db.prepare(`CREATE TABLE IF NOT EXISTS radar_referral_rewards (
     referrer_id TEXT PRIMARY KEY, referee_id TEXT NOT NULL UNIQUE, status TEXT NOT NULL,
-    claimed_at TEXT NOT NULL DEFAULT (datetime('now')), sent_at TEXT, last_error TEXT)` ).run();
+    claimed_at TEXT NOT NULL DEFAULT (datetime('now')), group_assigned_at TEXT, last_error TEXT)` ).run();
 }
 async function mailer(env,path,options={}){
   const res=await fetch(API+path,{...options,headers:{accept:'application/json',authorization:'Bearer '+String(env.MAILERLITE_API_TOKEN||''),...(options.body?{'content-type':'application/json'}:{})}});
@@ -156,7 +156,19 @@ export async function awardReferral(request,env){
     await env.DB.prepare("UPDATE radar_referral_rewards SET status='failed',last_error='mailer_assignment_failed' WHERE referrer_id=?").bind(row.referrer_id).run();
     return json({error:'Could not assign reward group; safe to retry.'},502);
   }
-  await env.DB.prepare("UPDATE radar_referral_rewards SET status='assigned',sent_at=datetime('now'),last_error=NULL WHERE referrer_id=?").bind(row.referrer_id).run();
+  await env.DB.prepare("UPDATE radar_referral_rewards SET status='assigned',group_assigned_at=datetime('now'),last_error=NULL WHERE referrer_id=?").bind(row.referrer_id).run();
   await env.DB.prepare("UPDATE radar_referral_claims SET status='rewarded' WHERE referee_id=?").bind(row.referee_id).run();
   return json({ok:true,group_assigned:true,delivery_verified:false,message:'Reward group assignment completed. Automation delivery must be checked separately.'});
+}
+// Existing daily Worker cron may call this after the pilot is enabled.
+// Expired pending claims are removed; reward audit rows expire after one year.
+export async function purgeOldRadarReferralRecords(env) {
+  if (env.RADAR_REFERRAL_ENABLED !== 'true' || !env.DB) return {skipped:true};
+  await ensure(env.DB);
+  const oldClaims = await env.DB.prepare(`DELETE FROM radar_referral_claims
+    WHERE (status='pending' AND datetime(expires_at) < datetime('now','-7 days'))
+       OR datetime(claimed_at) < datetime('now','-365 days')`).run();
+  const oldRewards = await env.DB.prepare(`DELETE FROM radar_referral_rewards
+    WHERE datetime(claimed_at) < datetime('now','-365 days')`).run();
+  return {claims_removed:oldClaims?.meta?.changes||0, rewards_removed:oldRewards?.meta?.changes||0};
 }
