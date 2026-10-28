@@ -34,11 +34,11 @@
   if (!Array.isArray(cfg.photos) || cfg.photos.length < 2 || cfg.photos.length > 5) return;
   const allowedRights = new Set(['PAUL', 'PERMISSION', 'LICENCE']);
   const images = cfg.photos.map(p => ({
-    src: safeUrl(p && p.src), alt: clean(p && p.alt), credit: clean(p && p.credit),
+    src: safeUrl(p && p.src), alt: clean(p && p.alt), caption: clean(p && p.caption), credit: clean(p && p.credit),
     rightsBasis: clean(p && p.rightsBasis)
   }));
   // Every image must be cleared. Never silently skip a photo with missing rights.
-  if (images.some(p => !p.src || !p.alt || !allowedRights.has(p.rightsBasis))) return;
+  if (images.some(p => !p.src || !p.alt || !p.caption || !p.credit || !allowedRights.has(p.rightsBasis))) return;
   const actionUrl = safeUrl(cfg.actionUrl);
   if (!actionUrl || !clean(cfg.businessName) || !clean(cfg.headline) || !clean(cfg.description) ||
       !clean(cfg.placementId) || !clean(cfg.actionLabel) || images.length < 2) return;
@@ -64,7 +64,8 @@
   const count = text('span', 'sk8-premium-photo-count', '1 / ' + images.length); count.setAttribute('aria-live', 'polite');
   const label = text('span', 'sk8-premium-image-label', images[0].credit ? 'Image: ' + images[0].credit : 'Advertiser-supplied photograph');
   stage.append(img, prev, next, label, count);
-  const thumbs = text('div', 'sk8-premium-thumbs', ''); thumbs.setAttribute('role', 'group'); thumbs.setAttribute('aria-label', 'Choose a photograph');
+  const thumbs = text('div', 'sk8-premium-thumbs', ''); thumbs.setAttribute('role', 'group'); thumbs.setAttribute('aria-label', 'Choose a photograph'); thumbs.setAttribute('data-count', String(images.length));
+  const caption = text('p', 'sk8-premium-photo-caption', images[0].caption);
   let active = 0;
   function track(event, data={}) {
     if (typeof window.sk8Track === 'function') window.sk8Track(event, { guide_name:'52-adventures', placement_id: clean(cfg.placementId), advertiser:clean(cfg.businessName), paid_placement:true, ...data });
@@ -84,6 +85,7 @@
     img.src = images[idx].src; img.alt = images[idx].alt;
     label.textContent = images[idx].credit ? 'Image: ' + images[idx].credit : 'Advertiser-supplied photograph';
     count.textContent = (idx+1) + ' / ' + images.length;
+    caption.textContent = images[idx].caption;
     buttons.forEach((b,j)=> b.setAttribute('aria-pressed',String(j===idx)));
     track('guide_advertiser_gallery', {image_index:idx+1});
   }
@@ -94,10 +96,10 @@
     if (e.key === 'ArrowLeft') {e.preventDefault();show(active-1);}
   });
   stage.tabIndex=0;
-  photos.append(stage, thumbs);
+  photos.append(stage, thumbs, caption);
   const info = text('div','sk8-premium-details','');
   const title = text('h2','',cfg.headline); title.id = 'sk8-premium-title';
-  info.append(text('p','sk8-premium-eyebrow',cfg.businessName + ' · Sponsored adventure'),title,text('p','sk8-premium-description',cfg.description));
+  info.append(text('p','sk8-premium-eyebrow',cfg.businessName + ' · Paid gallery placement'),title,text('p','sk8-premium-description',cfg.description));
   const facts = text('dl','sk8-premium-facts','');
   const fields = [['Where',cfg.location],['Allow',cfg.duration],['Suitable for',cfg.suitableFor],['Price',cfg.priceFrom]];
   fields.forEach(([k,v])=>{if (!clean(v)) return;const d=document.createElement('div');d.append(text('dt','',k),text('dd','',v));facts.append(d)});
