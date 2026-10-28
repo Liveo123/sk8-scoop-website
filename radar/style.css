@@ -27,8 +27,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 .signup-panel h2{font:700 clamp(2rem,3vw,2.7rem)/1.12 Georgia,serif;letter-spacing:-.035em;margin:0 0 12px}
 .signup-panel p{margin-top:0}
 .field-label{font-size:.94rem;font-weight:800;display:block;margin:20px 0 7px}
-input[type=email]{background:#fff;width:100%;border:1px solid #7f9595;border-radius:7px;font:inherit;padding:14px 13px;min-height:54px;color:var(--ink)}
-input[type=email]:focus{border-color:var(--teal)}
+input[type=email],input#referral-code{background:#fff;width:100%;border:1px solid #7f9595;border-radius:7px;font:inherit;padding:14px 13px;min-height:54px;color:var(--ink)}
+input[type=email]:focus,input#referral-code:focus{border-color:var(--teal)}
 .consent{display:flex;gap:12px;align-items:flex-start;font-size:.91rem;line-height:1.45;margin-top:19px;cursor:pointer}
 .consent input{width:21px;height:21px;flex:0 0 21px;margin:2px 0 0;accent-color:var(--teal)}
 .challenge{margin:18px 0 11px;min-height:66px}
@@ -78,3 +78,9 @@ button:disabled{cursor:progress;opacity:.7}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
 }
 
+
+/* Optional reader-owned referral codes. Hidden completely until the pilot is enabled. */
+#radar-referral-field:not([hidden]){margin:17px 0;padding:14px 16px;border:1px solid #afc8c4;background:#eef6f2;border-radius:9px}
+#radar-referral-field .field-label{margin-top:0}
+#radar-referral-field .small-print{margin:10px 0 0;font-size:.88rem}
+#referral-intro:not([hidden]){margin-top:22px;margin-bottom:15px;padding:14px 20px;border-left:5px solid #a64519;background:#fffdfa}
