@@ -36,6 +36,10 @@ export async function handleRadarSignup(request, env) {
   if (!PRODUCTION_HOSTS.has(url.hostname)) {
     return reply({ error: 'Preview mode: real signups are disabled.' }, 503);
   }
+  // Keep real subscriptions blocked until the owner approves the launch.
+  if (env.RADAR_SIGNUP_ENABLED !== 'true') {
+    return reply({ error: 'Radar signups are not live yet.' }, 503);
+  }
   const origin = request.headers.get('origin');
   const fetchSite = request.headers.get('sec-fetch-site');
   if ((origin && origin !== url.origin) || (fetchSite && !['same-origin', 'none'].includes(fetchSite))) {
