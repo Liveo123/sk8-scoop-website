@@ -7,8 +7,10 @@ keep_vars = true
 [vars]
 RADAR_SIGNUP_ENABLED = "true"
 
-# Worker Previews base. Preview deployments do not inherit production secrets or D1.
-previews = { }
+# Worker Previews do not inherit production secrets or D1. Keep signups safely off.
+# Explicit nested block prevents a stray 'previews' production var in TOML.
+[previews.vars]
+RADAR_SIGNUP_ENABLED = "false"
 
 [triggers]
 # Daily UTC cleanup of expired first-party editorial search / Trail feedback records.
