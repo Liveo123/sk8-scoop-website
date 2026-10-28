@@ -135,7 +135,7 @@ try {
     const c=details.querySelector('.sk8-premium-action').getBoundingClientRect();
     return{detailsTop:a.top,ctaTop:c.top,ctaBottom:c.bottom};
   }
-  for(const width of [390,740,900,1440]){
+  for(const width of [320,390,740,900,1440]){
     await viewport(width);await sleep(450);
     const m=await evaluate('('+measureInPage.toString()+')()');
     assert.equal(m.thumbs,setup.photoCount,'Thumbnail count '+width);
@@ -147,7 +147,7 @@ try {
     assert.ok(m.labelTop>=65&&m.labelTop<240,'Sponsored label is not visible at '+width+': '+JSON.stringify(m));
     assert.ok(m.stageHeight>=180,'Photograph stage collapsed at '+width+': '+JSON.stringify(m));
     await sleep(350);await screenshot(width);
-    if(width===390||width===740){
+    if(width===320||width===390||width===740){
       const detail=await evaluate('('+scrollToDetailsInPage.toString()+')()');
       assert.ok(detail.detailsTop>=55&&detail.detailsTop<200,'Cannot inspect mobile advert text '+width+': '+JSON.stringify(detail));
       assert.ok(detail.ctaTop>=0&&detail.ctaBottom<950,'Mobile CTA not visible in detail screenshot '+width+': '+JSON.stringify(detail));
