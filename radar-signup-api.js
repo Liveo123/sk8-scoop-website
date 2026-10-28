@@ -120,13 +120,14 @@ export async function handleRadarSignup(request, env) {
       }
     }
 
-    const payload = { email, groups: [RADAR_GROUP] };
+    const payload = { email, groups: [RADAR_GROUP], resubscribe: false };
     if (!existing) {
       payload.status = 'active';
       payload.opted_in_at = new Date().toISOString().replace('T', ' ').slice(0, 19);
       if (ip) payload.optin_ip = ip;
     }
-    if (ip) payload.ip_address = ip;
+    // Preserve any existing SK8 subscriber's original account-level IP metadata.
+    if (ip && !existing) payload.ip_address = ip;
     const added = await mailerLiteRequest(env, '/subscribers', {
       method: 'POST',
       body: JSON.stringify(payload)
