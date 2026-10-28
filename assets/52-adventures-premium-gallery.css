@@ -20,6 +20,10 @@
 .sk8-premium-thumbs button{appearance:none;display:block;position:relative;aspect-ratio:1.45;border:3px solid transparent;border-radius:0;padding:0;background:#e7e1d7;cursor:pointer;min-width:0}
 .sk8-premium-thumbs button[aria-pressed="true"]{border-color:#ffb877}
 .sk8-premium-thumbs img{display:block;width:100%;height:100%;object-fit:cover}
+.sk8-premium-thumbs[data-count="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sk8-premium-thumbs[data-count="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sk8-premium-thumbs[data-count="4"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sk8-premium-photo-caption{margin:0;padding:7px 12px 12px;color:#fff;background:#103d40;font:500 12px/1.5 Aptos,"Segoe UI",Arial,sans-serif;overflow-wrap:anywhere}
 .sk8-premium-details{padding:clamp(20px,3vw,38px);min-width:0;display:flex;flex-direction:column;justify-content:center}
 .sk8-premium-eyebrow{font:850 11px/1.4 Aptos,"Segoe UI",Arial,sans-serif;text-transform:uppercase;letter-spacing:.16em;color:#9c4500;margin:0 0 12px}
 .sk8-premium-details h2{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:500;line-height:1.04;letter-spacing:-.025em;color:#172321;margin:0 0 18px}
