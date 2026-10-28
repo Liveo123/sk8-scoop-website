@@ -11,7 +11,17 @@
 <div class="notice"><strong>Fancy something closer to Cheadle?</strong><p>Our separate newsletter <strong>SK8 Scoop</strong> covers Cheadle, Cheadle Hulme, Gatley and Heald Green, with useful local updates, things to do and the mildly nosy bits.</p>
 <a class="cta" href="/join/?utm_source=radar&amp;utm_medium=welcome_page&amp;utm_campaign=radar_to_sk8">Discover SK8 Scoop (optional)</a>
 <p style="font-size:.85rem;margin:13px 0 0">A separate sign-up. You won't receive SK8 Scoop unless you choose to join.</p></div>
+<div class="notice" id="referral-success-info" hidden>
+<strong>Your optional Radar referral reward</strong>
+<p>To get your personal code, <a href="/radar/referral/">request it privately by email</a>.
+When one genuinely new Radar subscriber enters your code and confirms their email, you can earn the four-adventure guide.</p>
+<p><small>If you entered someone else's code during signup, a separate confirmation email will arrive. This does not affect your newsletter subscription.</small></p>
+</div>
 <div class="cta-row"><a class="cta secondary" href="/radar/">Back to Radar</a></div>
 </div></main>
 <footer class="site-footer"><div class="wrap footer-inner"><span>South Manchester Radar · JiveLoop Collective</span><span><a href="/radar/privacy/">Privacy</a> · <a href="mailto:contact@sk8scoop.com">Contact</a></span></div></footer>
-</body></html>
+<script>
+fetch('/api/radar-referral-status',{cache:'no-store'}).then(r=>r.json()).then(x=>{
+  if(x.enabled===true)document.getElementById('referral-success-info').hidden=false;
+}).catch(()=>{});
+</script></body></html>
