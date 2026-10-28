@@ -38,8 +38,8 @@ const base = {
   description: 'Illustrative test; not bookable.', actionLabel: 'Test booking',
   actionUrl: 'https://example.com/book', startDate: '2026-10-01', endDate: '2026-10-30',
   photos: [
-    { src: 'https://example.com/a.jpg', alt: 'A woodland', rightsBasis: 'PERMISSION' },
-    { src: 'https://example.com/b.jpg', alt: 'A stream', rightsBasis: 'LICENCE' }
+    { src: 'https://example.com/a.jpg', alt: 'A woodland', caption: 'Woods test image', credit: 'QA photograph', rightsBasis: 'PERMISSION' },
+    { src: 'https://example.com/b.jpg', alt: 'A stream', caption: 'Stream test image', credit: 'QA photograph', rightsBasis: 'LICENCE' }
   ]
 };
 function render(patch = {}, allowObserver = true) {
@@ -80,6 +80,8 @@ check('Disabled without rights clearance', render({ imageRightsCleared: false })
 check('Reject invalid image rights', render({ photos: [base.photos[0], { ...base.photos[1], rightsBasis: 'test-only' }] }).slot.hidden);
 check('Reject missing image description', render({ photos: [base.photos[0], { ...base.photos[1], alt: '' }] }).slot.hidden);
 check('Reject one-photo galleries', render({ photos: [base.photos[0]] }).slot.hidden);
+check('Reject absent image credit', render({ photos: [base.photos[0], {...base.photos[1], credit: ''}] }).slot.hidden);
+check('Reject absent caption', render({ photos: [base.photos[0], {...base.photos[1], caption: ''}] }).slot.hidden);
 check('Reject six-photo galleries', render({ photos: [...base.photos, ...base.photos, ...base.photos] }).slot.hidden);
 check('Reject executable booking links', render({ actionUrl: 'javascript:alert(1)' }).slot.hidden);
 check('Reject insecure booking links', render({ actionUrl: 'http://example.com/book' }).slot.hidden);
@@ -96,6 +98,7 @@ const thumbs = card.children[1].children[0].children[1];
 stage.children[2].events.click();
 check('Next arrow changes photo', stage.children[0].alt === 'A stream');
 check('Selected thumbnail updates', thumbs.children[1].attrs['aria-pressed'] === 'true');
+check('Photo caption changes with selection', card.children[1].children[0].children[2].textContent === 'Stream test image');
 const link = card.children[1].children[1].children.find(el => el.tag === 'a');
 link.events.click();
 check('One commercial click event per click', ready.events.filter(e => e.name === 'guide_advertiser_click').length === 1);
