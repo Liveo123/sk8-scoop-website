@@ -102,6 +102,34 @@ try {
     realStreetAudit.url.includes('great-underbank-stephen-mckay') && !realStreetAudit.isIllustration && !realStreetAudit.hasFictionalMoodboard,
     JSON.stringify(realStreetAudit));
 
+  // All 52 illustrated adventures must display media on both Finder cards.
+  // Previously 37 adventures had valid image-data but were rendered as blank green Finder panels.
+  const finderVisualParity=await evaluate("(()=>{"+
+    "const adventures=JSON.parse(document.querySelector('#adventure-data').textContent);"+
+    "const cards=[...document.querySelectorAll('.finder-card')];const per={};const errors=[];"+
+    "for(const card of cards){const n=Number(card.dataset.num),a=adventures[n],img=card.querySelector('img[data-imgkey]');"+
+    "per[n]=(per[n]||0)+1;if(!a||!a.img||!card.classList.contains('has-img')||!img||img.dataset.imgkey!==a.imgKey||!img.alt){errors.push(n);}}"+
+    "return {count:cards.length,unique:Object.keys(per).length,repeated:Object.values(per).every(x=>x===2),errors};})()");
+  record('52 Adventures: all 104 Finder cards show the matching adventure image',
+    finderVisualParity.count===104&&finderVisualParity.unique===52&&finderVisualParity.repeated&&finderVisualParity.errors.length===0,
+    JSON.stringify(finderVisualParity));
+
+  // Six individual Commons files were checked for their exact CC licences.
+  // Three represent the activity elsewhere, so their visible captions must say so.
+  const newLicensedPhotoAudit=await evaluate("(async()=>{"+
+    "const imgs=JSON.parse(document.querySelector('#image-data').textContent),data=JSON.parse(document.querySelector('#adventure-data').textContent);"+
+    "const out=[];for(const n of [16,24,43,44,45,51]){const a=data[n],src=imgs[a?.imgKey];"+
+    "if(!src){out.push({n,ok:false,reason:'no image source'});continue;}"+
+    "const sample=new Image();sample.src=src;try{await Promise.race([sample.decode(),new Promise((_,bad)=>setTimeout(()=>bad(Error('decode timeout')),12000))]);}catch(e){out.push({n,ok:false,reason:String(e)});continue;}"+
+    "const representative=[16,43,45].includes(n),caption=a.img?.cap||'',credit=a.img?.credit||'';"+
+    "const ok=sample.naturalWidth>=900&&sample.naturalHeight>=380&&a.img.isIllustration===false&&"+
+    "src.includes('licensed-candidates-2026-10-28/')&&credit.includes('creativecommons.org/licenses/')&&"+
+    "(!representative||/representative/i.test(caption));"+
+    "out.push({n,ok,width:sample.naturalWidth,height:sample.naturalHeight,representative});}return out;})()");
+  record('52 Adventures: six licensed photographs decode and representative captions are explicit',
+    newLicensedPhotoAudit.length===6&&newLicensedPhotoAudit.every(x=>x.ok),
+    JSON.stringify(newLicensedPhotoAudit));
+
   record('52 Adventures: Plaza art and licensed RHS photo kept distinct',
     illustrationSourceAudit.plazaOriginal &&
     illustrationSourceAudit.originalRhsPhoto==='/52-adventures/guide/assets/adventure-32.webp' &&
