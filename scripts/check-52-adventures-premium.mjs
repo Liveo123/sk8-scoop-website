@@ -27,8 +27,9 @@ class ClockDate extends Date {
 class El {
   constructor(tag) { this.tag = tag; this.children = []; this.dataset = {}; this.events = {}; this.attrs = {}; this.hidden = false; this.textContent = ''; }
   append(...items) { this.children.push(...items); }
-  setAttribute(key, value) { this.attrs[key] = value; }
+  setAttribute(key, value) { this.attrs[key] = value; this[key] = value; }
   getAttribute(key) { return this.attrs[key]; }
+  removeAttribute(key) { delete this.attrs[key]; delete this[key]; }
   addEventListener(type, fn) { this.events[type] = fn; }
 }
 const base = {
@@ -122,6 +123,10 @@ check('Scrolling away cancels pending impression', scrolledAway.timeouts.length 
 instant = '2026-10-31T12:00:00Z';
 ready.intervals[0]();
 check('Long-running tab auto expires', ready.slot.hidden);
+check('Expired tab disables booking link', !link.href);
+let expiredClickPrevented = false;
+link.events.click({ preventDefault() { expiredClickPrevented = true; } });
+check('Expired tab click is blocked', expiredClickPrevented);
 instant = '2026-10-16T23:50:00Z'; // Local UK date is already 17 October (BST).
 check('Uses UK date, not UTC date', !render({ startDate: '2026-10-17', endDate: '2026-11-15' }).slot.hidden);
 instant = '2026-10-16T12:00:00Z';
