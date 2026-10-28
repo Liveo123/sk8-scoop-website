@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#19343b">
+<meta name="description" content="South Manchester Radar. A free weekend-first newsletter for good things to do in Chorlton, Didsbury and South Manchester, this weekend and beyond.">
+<link rel="canonical" href="https://www.sk8scoop.com/radar/">
+<link rel="stylesheet" href="/radar/style.css">
+<title>South Manchester Radar | Good things to do, this weekend and beyond</title>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead wrap">
+  <a class="wordmark" href="/radar/" aria-label="South Manchester Radar home">
+    <small>SOUTH MANCHESTER</small><strong>RA<span>D</span>AR</strong>
+  </a>
+  <span class="mast-note">WEEKENDS &amp; WORTHWHILE DETOURS</span>
+</header>
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="overline">A FREE LOCAL DISCOVERY NEWSLETTER</p>
+        <h1>Make something <em>of your weekend.</em></h1>
+        <p class="lead">Good things to do in Chorlton, Didsbury and South Manchester, this weekend and beyond. A short, useful shortlist of outings, unusual experiences and places worth discovering.</p>
+        <div class="chips" aria-label="What Radar covers">
+          <span>THIS WEEKEND</span><span>BOOK AHEAD</span><span>ANYTIME</span>
+        </div>
+        <p class="hero-small">For the curious, the plan-makers and anyone who's said, “We should really do something this weekend.”</p>
+      </div>
+      <div class="signup-panel" id="join">
+        <p class="panel-overline">GET RADAR FREE</p>
+        <h2>A better weekend starts with a good tip.</h2>
+        <p>One curated email each week. No endless scroll, no padded event listings.</p>
+        <form id="radar-signup" method="post" action="/api/radar-signup" novalidate>
+          <label class="field-label" for="email">Your email address</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254" required>
+          <label class="consent">
+            <input type="checkbox" name="consent" value="yes" required>
+            <span>Yes, send me South Manchester Radar's free weekly newsletter. I understand this is separate from SK8 Scoop and I can unsubscribe at any time.</span>
+          </label>
+          <div class="trap" aria-hidden="true"><label>Leave blank<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+          <input type="hidden" name="source" id="source" value="radar_main">
+          <input type="hidden" name="started_at" id="started-at">
+          <input type="hidden" name="cf-turnstile-response" id="turnstile-token">
+          <div class="challenge" id="turnstile-container" aria-label="Human verification"></div>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          <button id="join-button" type="submit" disabled>Join Radar free</button>
+        </form>
+        <p class="small-print">Only Radar emails. No automatic subscription to our other publications. Read our <a href="/radar/privacy/">privacy notice</a>.</p>
+        <noscript><p class="form-message">JavaScript is needed for the secure human verification on this form.</p></noscript>
+      </div>
+    </div>
+  </section>
+  <section class="what wrap" aria-labelledby="what-title">
+    <p class="overline">YOUR NEXT GOOD IDEA</p>
+    <h2 id="what-title">A useful shortlist, not another feed.</h2>
+    <div class="three">
+      <article><span class="chapter">01 / THIS WEEKEND</span><h3>Actually worth going out for</h3><p>Gigs, film, culture, inexpensive outings and offbeat plans, with the details you need to decide.</p></article>
+      <article><span class="chapter">02 / BOOK AHEAD</span><h3>Don't miss the good ones</h3><p>Tickets, reservations and experiences that reward a little forward planning.</p></article>
+      <article><span class="chapter">03 / ANYTIME</span><h3>Keep an adventure in your pocket</h3><p>Walks, discoveries and places to explore when the calendar has a little breathing room.</p></article>
+    </div>
+    <p class="location-note">Chorlton · West Didsbury · Didsbury · Withington · Burnage and nearby, when the outing earns the trip.</p>
+  </section>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><span>South Manchester Radar · An independent JiveLoop Collective publication</span><span><a href="/radar/privacy/">Privacy</a> · <a href="mailto:contact@sk8scoop.com">Contact</a></span></div></footer>
+<script src="/radar/signup.js" defer></script>
+</body>
+</html>
