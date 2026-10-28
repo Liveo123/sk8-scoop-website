@@ -1,0 +1,39 @@
+name: Radar Referral QA
+on:
+  pull_request:
+    paths:
+      - 'radar/**'
+      - 'radar-referral-service.js'
+      - 'radar-signup-api.js'
+      - 'worker-business-v2.js'
+      - 'wrangler.toml'
+      - 'tests/referral-service.test.mjs'
+      - 'tests/radar-signup-qa.mjs'
+      - '.github/workflows/radar-referral-qa.yml'
+  workflow_dispatch:
+jobs:
+  referral-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript modules
+        run: |
+          node --check radar-referral-service.js
+          node --check radar-signup-api.js
+          node --check worker-business-v2.js
+          node --check radar/signup.js
+          node --check radar/referral/request.js
+          node --check radar/referral/confirm.js
+      - name: Test existing Radar signup isolation
+        run: node --test tests/radar-signup-qa.mjs
+      - name: Test one-referral eligibility and idempotency
+        run: node --test tests/referral-service.test.mjs
+      - name: Require pilot flags disabled in source
+        run: |
+          grep -F 'RADAR_REFERRAL_ENABLED = "false"' wrangler.toml
+          grep -F 'RADAR_REFERRAL_REWARD_ENABLED = "false"' wrangler.toml
