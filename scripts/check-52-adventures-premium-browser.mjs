@@ -100,7 +100,7 @@ try {
       priceFrom:'Not a real booking',actionLabel:'Example link',
       actionUrl:'https://example.org/',startDate,endDate,
       photos:unique.map(photo=>({src:photo.src,alt:photo.alt,
-        credit:'Existing guide photo used only in test',rightsBasis:'LICENCE'}))
+        credit:'Existing guide photo used only in test',caption:'QA TEST IMAGE — not advertiser material',rightsBasis:'LICENCE'}))
     };
     return{ok:true,photoCount:unique.length};
   }
