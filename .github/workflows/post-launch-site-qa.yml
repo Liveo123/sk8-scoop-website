@@ -280,6 +280,31 @@ jobs:
           echo "OK Preview isolation: STRIPE_WEBHOOK_SECRET is not inherited"
 
 
+      # Fictional advert exists only in this browser tab; nothing is inserted or sold.
+      - name: Browser-test £39 gallery on the Cloudflare preview only
+        if: github.event_name == 'pull_request' && github.head_ref == 'preview/52-adventures-premium-main-2026-10-28'
+        shell: bash
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            export CHROME="$(command -v google-chrome)"
+          elif command -v google-chrome-stable >/dev/null 2>&1; then
+            export CHROME="$(command -v google-chrome-stable)"
+          elif command -v chromium >/dev/null 2>&1; then
+            export CHROME="$(command -v chromium)"
+          else
+            echo "Chrome not found for premium gallery QA"
+            exit 1
+          fi
+          node scripts/check-52-adventures-premium-browser.mjs
+
+      - name: Retain £39 gallery QA screenshots (7 days)
+        if: always() && github.event_name == 'pull_request' && github.head_ref == 'preview/52-adventures-premium-main-2026-10-28'
+        uses: actions/upload-artifact@v4
+        with:
+          name: premium-gallery-mobile-desktop-qa
+          path: visual-qa/52-premium-gallery/
+          retention-days: 7
+
       - name: Check out Free & Cheap guide QA scripts
         if: (startsWith(github.head_ref, 'free-cheap-') || startsWith(github.head_ref, 'maintenance/free-cheap-'))
         uses: actions/checkout@v4
