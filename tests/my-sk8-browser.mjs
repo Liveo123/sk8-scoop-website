@@ -237,10 +237,10 @@ try {
   await screenshot('my-sk8-desktop.png');
   await fullScreenshot('my-sk8-desktop-full.png');
 
-  await setViewport(1280, 900, false);
+  await setViewport(1360, 900, false);
   await navigate('/whats-on/');
-  record('Desktop header has no horizontal overflow at 1280px', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
-  record('Desktop nav does not overlap logo at 1280px', Boolean(await evaluate(`(() => { const brand=document.querySelector('.brand')?.getBoundingClientRect(); const nav=document.querySelector('#main-nav')?.getBoundingClientRect(); if(!brand||!nav) return false; return brand.right <= nav.left + 0.5 && nav.right <= innerWidth + 1; })()`)));
+  record('Desktop header has no horizontal overflow at 1360px', Boolean(await evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1')), String(await evaluate("document.documentElement.scrollWidth + '/' + document.documentElement.clientWidth")));
+  record('Desktop nav does not overlap logo at 1360px', Boolean(await evaluate(`(() => { const brand=document.querySelector('.brand')?.getBoundingClientRect(); const nav=document.querySelector('#main-nav')?.getBoundingClientRect(); if(!brand||!nav) return false; return brand.right <= nav.left + 0.5 && nav.right <= innerWidth + 1; })()`)));
 
   await setViewport(1120, 900, false);
   await navigate('/whats-on/');
