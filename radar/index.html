@@ -19,7 +19,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="masthead container" id="top">
   <a class="brand" href="/radar/" aria-label="South Manchester Radar home">
-    <img src="/radar/assets/radar-masthead.webp" width="860" height="320" alt="South Manchester Radar" decoding="async">
+    <img src="/radar/assets/radar-logo-supplied.png" width="2048" height="792" alt="South Manchester Radar" decoding="async">
   </a>
   <div class="header-side"><span>GOOD THINGS TO DO.<br>THIS WEEKEND AND BEYOND.</span><a href="#join" class="mini-cta">Join free</a></div>
 </header>
@@ -47,11 +47,12 @@
           <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" maxlength="254" aria-describedby="email-help" required>
           <p id="email-help" class="field-help">Only used for Radar unless you separately choose another newsletter.</p>
           <div id="radar-referral-field" hidden>
-            <label class="field-label" for="referral-code">Referral code (optional)</label>
+            <label class="field-label" for="referral-code">Have a Radar reader's code? (optional)</label>
+            <p class="small-print" id="referral-code-help">Paste it here. No code? Leave this blank; you can still join Radar free.</p>
             <input id="referral-code" name="referral_code" type="text" maxlength="13"
-              pattern="R[A-HJ-NP-Z2-9]{12}" autocomplete="off"
-              placeholder="Enter a Radar subscriber's code">
-            <p class="small-print">A new reader's separate email confirmation is needed before the existing reader qualifies for the free four-adventure Atlas. Your newsletter signup is not conditional on this. <a href="/radar/referral/terms/">Programme terms</a>.</p>
+              pattern="R[A-HJ-NP-Z2-9]{12}" autocomplete="off" aria-describedby="referral-code-help"
+              placeholder="Paste the personal referral code">
+            <p class="small-print">After you subscribe, we'll email a separate link to confirm the referral. This does not affect your newsletter subscription. If you confirm, the existing reader may qualify for the four-adventure Atlas. <a href="/radar/referral/terms/">Programme terms</a>.</p>
           </div>
           <label class="consent">
             <input type="checkbox" name="consent" value="yes" required>
