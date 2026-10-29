@@ -207,8 +207,20 @@ export async function requestReferralCode(request,env){
   const record=await registerRadarMember(env,user);
   if(record.ready){
     const code=record.code;
-    const sent=await send(env,email,'Your South Manchester Radar referral code',
-      'Your personal Radar referral code is '+code+'.\n\nWhen one genuinely new Radar reader voluntarily enters that code when joining the newsletter and confirms their own email address, you can unlock the South Manchester Adventure Atlas (four outings).\n\nThe programme is optional. Please do not provide other people’s contact details to Radar. Terms: https://www.sk8scoop.com/radar/referral/terms/').catch(()=>false);
+    const signupUrl='https://www.sk8scoop.com/radar/?ref='+encodeURIComponent(code)+'#join';
+    const emailText=[
+      'Your personal Radar referral code is '+code+'.',
+      '',
+      'How to use it:',
+      '1. Send one genuinely new reader this signup link. Your code is already filled in: '+signupUrl,
+      '2. They enter their own email address, tick the Radar newsletter box, complete the human check and choose “Get Radar free”.',
+      '3. They open the separate referral confirmation email and click its link within 48 hours.',
+      '',
+      'A reader already subscribed to Radar, or a signup using your own mailbox, does not qualify. You never need to send us anyone else’s email address. The four-adventure Atlas is an optional reward; the weekly Radar newsletter remains free.',
+      '',
+      'Terms: https://www.sk8scoop.com/radar/referral/terms/'
+    ].join('\\n');
+    const sent=await send(env,email,'Your South Manchester Radar referral code',emailText).catch(()=>false);
     if(sent)await env.DB.prepare("UPDATE radar_referral_codes SET last_sent_at=datetime('now') WHERE subscriber_id=?").bind(String(user.id)).run();
   }
   return json({ok:true,message:'If this address is subscribed to Radar, a code will arrive by email.'});
