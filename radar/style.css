@@ -138,3 +138,7 @@ input[type=email]{width:100%;min-height:51px;padding:11px 12px;font:inherit;colo
 .cta:hover{background:var(--deep);color:#fff}.cta.secondary{background:transparent;color:var(--teal);border:1px solid var(--teal)}.cta-row{margin-top:22px}
 .site-footer{border-top:1px solid var(--line);padding-block:18px}.footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.9rem}
 @media(max-width:650px){.simple-card{padding:24px 20px}.simple-card h1{font-size:clamp(2.3rem,12vw,3.4rem)}.footer-inner{display:grid;gap:6px}}
+
+
+/* Supplied South Manchester Radar masthead for signup and referral journey pages. */
+.brand img{display:block;width:100%;height:auto}
