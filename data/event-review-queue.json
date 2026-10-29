@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-13",
+  "updated": "2026-10-28",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -216,6 +216,40 @@
       "status": "needs_check",
       "discovered": "2026-10-08",
       "checked": "2026-10-08"
+    },
+    {
+      "id": "hannah-louise-cheadle-hulme-2026-11-14-review",
+      "title": "Hannah Louise live music",
+      "status": "needs_check",
+      "date": "2026-11-14",
+      "time": "20:45",
+      "area": "Cheadle Hulme",
+      "venue": "Cheadle Hulme Conservative Club, Mellor Road, Cheadle Hulme SK8 5AT",
+      "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
+      "discovered": "2026-10-26",
+      "checked": "2026-10-26",
+      "reason": "Organiser's 14 November diary row says free for members and £5 for non-members but also appends 'Free Entry', so the current non-member cost is internally contradictory. Do not promote until the organiser resolves it.",
+      "missing": [
+        "confirm actual non-member entry charge and visitor admission with club"
+      ]
+    },
+    {
+      "id": "heald-green-scouts-bonfire-2026-11-07-review",
+      "title": "2nd Heald Green Scouts bonfire and fireworks",
+      "status": "needs_check",
+      "date": "2026-11-07",
+      "time": "19:00",
+      "area": "Heald Green",
+      "venue": "2nd Heald Green Scout Hut, behind Methodist Church, Brown Lane SK8 3RR",
+      "source_url": "https://2ndhealdgreen.org.uk/",
+      "discovered": "2026-10-26",
+      "checked": "2026-10-26",
+      "reason": "Scout group's 2026 headline and Stockport Council calendar say Saturday 7 November, but the group's own teaser body wrongly says 1 November 2026. Ticket prices and gate/advance booking are from third-party summaries, not unambiguously current primary ticket information. Hold until reconciled.",
+      "missing": [
+        "resolve organiser headline/body date discrepancy",
+        "verify 2026 adult/child/family prices from organiser",
+        "confirm on-gate versus advance booking and current availability"
+      ]
     }
   ]
 }
