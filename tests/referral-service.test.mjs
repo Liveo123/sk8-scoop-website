@@ -37,6 +37,35 @@ test('one-referral pilot: audited integration behaviours',async t=>{
   assert.equal((await recordRadarReferral(env,{referee:friend,claimedCode:'RZZZZZZZZZZZZ',existingRadar:false})).pending,false);
   const self={...friend,id:owner.id,email:owner.email};assert.equal((await recordRadarReferral(env,{referee:self,claimedCode:code,existingRadar:false})).pending,false);
  });
+ await t.test('Gmail plus aliases and dotted variants cannot create a genuine referral or reward',async()=>{
+  const trial=makeEnv();
+  const samePerson={...owner,email:'same.reader+first@gmail.com'};
+  const alias={...friend,email:'samereader+second@googlemail.com'};
+  recipients=[samePerson,alias];
+  try{
+    const ownCode=(await registerRadarMember(trial,samePerson)).code;
+    const beforeConfirm=calls.filter(x=>x.url.includes('api.resend.com')).length;
+    const claimed=await recordRadarReferral(trial,{referee:alias,claimedCode:ownCode,existingRadar:false});
+    assert.equal(claimed.pending,false);
+    assert.equal(claimed.reason,'same_mailbox');
+    assert.equal(calls.filter(x=>x.url.includes('api.resend.com')).length,beforeConfirm);
+    // Defense in depth: even if an earlier version had a confirmed claim,
+    // a reward must not be sent to two aliases of the same Gmail inbox.
+    await trial.DB.prepare(`INSERT INTO radar_referral_claims
+      (referee_id,referrer_id,code,token_hash,status,expires_at,confirmed_at)
+      VALUES(?,?,?,'synthetic-hash','confirmed',datetime('now','+1 hour'),datetime('now'))`
+    ).bind(alias.id,samePerson.id,ownCode).run();
+    trial.RADAR_REFERRAL_REWARD_ENABLED='true';
+    const award=await awardReferral(
+      request('/api/admin/radar-referral-award',{referee_id:alias.id},{auth:'Bearer admin'}),trial
+    );
+    assert.equal(award.status,409);
+    assert.match((await award.json()).error,/independent mailboxes/);
+    assert.equal(calls.filter(x=>x.url.includes('api.resend.com')).length,beforeConfirm);
+  }finally{
+    recipients=[structuredClone(owner),structuredClone(friend)];
+  }
+ });
  await t.test('do not attribute previously subscribed Radar readers',async()=>{
   assert.equal((await recordRadarReferral(env,{referee:friend,claimedCode:code,existingRadar:true})).pending,false);
  });

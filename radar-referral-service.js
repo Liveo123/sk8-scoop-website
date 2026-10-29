@@ -12,6 +12,16 @@ const json = (value, status=200) => new Response(JSON.stringify(value), {status,
 const validId = id => /^\d{7,22}$/.test(String(id||''));
 const validCode = code => CODE_RE.test(String(code||''));
 const normalizeEmail = email => String(email||'').trim().toLowerCase();
+// Gmail and Googlemail plus aliases (and dots) address the same mailbox.
+// Distinct subscriber IDs alone are not proof of independent referrals.
+function mailboxIdentity(email){
+  const value=normalizeEmail(email),at=value.lastIndexOf('@');
+  if(at<1)return value;
+  const domain=value.slice(at+1);
+  if(domain!=='gmail.com'&&domain!=='googlemail.com')return value;
+  const local=value.slice(0,at).split('+')[0].replace(/\./g,'');
+  return local+'@gmail.com';
+}
 const isMember = user => !!user && user.status === 'active' && (user.groups||[]).some(g => String(g.id)===RADAR_GROUP);
 const makeCode = () => { const r=crypto.getRandomValues(new Uint8Array(12));return 'R'+Array.from(r,b=>ALPHABET[b&31]).join(''); };
 const tokenString = () => btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(32)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
@@ -77,6 +87,8 @@ async function deliverConfirmedReward(env,refereeId){
   const [referrer,referee]=await Promise.all([lookup(env,claim.referrer_id),lookup(env,claim.referee_id)]);
   if(!isMember(referrer)||!isMember(referee))
     return {ok:false,status:409,error:'Both readers must still be active Radar subscribers.'};
+  if(!referrer.email||!referee.email||mailboxIdentity(referrer.email)===mailboxIdentity(referee.email))
+    return {ok:false,status:409,error:'Referrer and new reader must use independent mailboxes.'};
   if(previous?.status==='processing')
     return {ok:false,status:409,error:'Reward requires delivery reconciliation.'};
   if(!previous){
@@ -157,6 +169,8 @@ export async function recordRadarReferral(env,{referee,claimedCode,existingRadar
   if(!owner?.subscriber_id||owner.subscriber_id===String(referee.id))return {pending:false,reason:'unrecognised_or_self'};
   const member=await lookup(env,owner.subscriber_id);
   if(!isMember(member))return {pending:false,reason:'referrer_inactive'};
+  if(!referee?.email||!member.email||mailboxIdentity(member.email)===mailboxIdentity(referee.email))
+    return {pending:false,reason:'same_mailbox'};
   const old=await env.DB.prepare('SELECT status FROM radar_referral_claims WHERE referee_id=?').bind(String(referee.id)).first();
   if(old)return {pending:old.status==='pending',reason:'existing_claim'};
   const token=tokenString(),digest=await hash(token);
