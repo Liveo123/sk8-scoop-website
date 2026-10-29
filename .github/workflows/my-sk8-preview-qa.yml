@@ -1,5 +1,10 @@
 name: My SK8 Preview QA
 
+# Discard obsolete preview checks when a new commit replaces the PR head.
+concurrency:
+  group: my-sk8-preview-qa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   checks: read
@@ -43,7 +48,7 @@ jobs:
   browser-qa:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Locate Chrome
         shell: bash
@@ -138,9 +143,22 @@ jobs:
           CHROME: ${{ env.CHROME }}
         run: node tests/my-sk8-email-actions-browser.mjs
 
+      - name: Preserve browser QA failure context
+        if: failure()
+        shell: bash
+        env:
+          EXPECTED_PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          mkdir -p visual-qa/my-sk8
+          {
+            echo "Browser QA did not complete successfully; inspect the preceding failed step."
+            echo "Expected PR head: ${EXPECTED_PREVIEW_SHA:-unknown}"
+            echo "Resolved preview: ${PREVIEW_URL:-unresolved}"
+            echo "GitHub ref: ${GITHUB_REF}"
+          } > visual-qa/my-sk8/failure-context.txt
       - name: Upload screenshots and results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: my-sk8-preview-qa
           path: visual-qa/my-sk8/
@@ -150,9 +168,9 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
       - name: Find Chrome
@@ -173,7 +191,7 @@ jobs:
         run: node tests/subscriber-journey-live-browser.mjs
       - name: Keep browser screenshots and checks
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: subscriber-journey-live-qa
           path: visual-qa/subscriber-journey/
