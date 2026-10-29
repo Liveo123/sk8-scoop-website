@@ -219,7 +219,7 @@ export async function requestReferralCode(request,env){
       'A reader already subscribed to Radar, or a signup using your own mailbox, does not qualify. You never need to send us anyone else’s email address. The four-adventure Atlas is an optional reward; the weekly Radar newsletter remains free.',
       '',
       'Terms: https://www.sk8scoop.com/radar/referral/terms/'
-    ].join('\\n');
+    ].join('\n');
     const sent=await send(env,email,'Your South Manchester Radar referral code',emailText).catch(()=>false);
     if(sent)await env.DB.prepare("UPDATE radar_referral_codes SET last_sent_at=datetime('now') WHERE subscriber_id=?").bind(String(user.id)).run();
   }
