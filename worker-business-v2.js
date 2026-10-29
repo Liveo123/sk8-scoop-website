@@ -1,4 +1,5 @@
 import siteWorker from './worker-protected.js';
+import { handleRadarSignup } from './radar-signup-api.js';
 
 const CONTACT_INBOX = 'contact@sk8scoop.com';
 const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
@@ -6,6 +7,10 @@ const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (url.pathname === '/api/radar-signup' && request.method === 'POST') {
+      return secureResponse(await handleRadarSignup(request, env), url);
+    }
 
     if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') {
       return secureResponse(await handleAdvertiserEnquiryWithNotification(request, env, ctx), url);
