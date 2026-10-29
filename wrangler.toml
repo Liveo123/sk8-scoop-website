@@ -5,8 +5,8 @@ keep_vars = true
 
 [vars]
 RADAR_SIGNUP_ENABLED = "true"
-RADAR_REFERRAL_ENABLED = "false"
-RADAR_REFERRAL_REWARD_ENABLED = "false"
+RADAR_REFERRAL_ENABLED = "true"
+RADAR_REFERRAL_REWARD_ENABLED = "true"
 RADAR_GUIDE_WEB_URL = "https://www.sk8scoop.com/radar/adventure-atlas/"
 RADAR_GUIDE_PDF_URL = "https://www.sk8scoop.com/radar/adventure-atlas/download.pdf"
 
