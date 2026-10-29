@@ -9,8 +9,8 @@ RADAR_SIGNUP_ENABLED = "true"
 # One-referral pilot and reward fulfilment remain separately disabled.
 RADAR_REFERRAL_ENABLED = "false"
 RADAR_REFERRAL_REWARD_ENABLED = "false"
-RADAR_GUIDE_WEB_URL = ""
-RADAR_GUIDE_PDF_URL = ""
+RADAR_GUIDE_WEB_URL = "https://www.sk8scoop.com/radar/adventure-atlas/"
+RADAR_GUIDE_PDF_URL = "https://www.sk8scoop.com/radar/adventure-atlas/download.pdf"
 
 # Worker Previews do not inherit production secrets or D1. Keep signups safely off.
 # Explicit nested block prevents a stray 'previews' production var in TOML.
@@ -18,8 +18,8 @@ RADAR_GUIDE_PDF_URL = ""
 RADAR_SIGNUP_ENABLED = "false"
 RADAR_REFERRAL_ENABLED = "false"
 RADAR_REFERRAL_REWARD_ENABLED = "false"
-RADAR_GUIDE_WEB_URL = ""
-RADAR_GUIDE_PDF_URL = ""
+RADAR_GUIDE_WEB_URL = "https://www.sk8scoop.com/radar/adventure-atlas/"
+RADAR_GUIDE_PDF_URL = "https://www.sk8scoop.com/radar/adventure-atlas/download.pdf"
 
 [triggers]
 # Daily UTC cleanup of expired first-party editorial search / Trail feedback records.
