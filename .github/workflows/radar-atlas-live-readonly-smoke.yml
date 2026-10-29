@@ -50,7 +50,7 @@ jobs:
           assert state.get('enabled') is expected, f'Live referral enabled={state.get("enabled")!r} does not match production base config {expected!r}'
           page=Path('/tmp/radar-referral-page.html').read_text()
           landing=Path('/tmp/radar-landing.html').read_text()
-          assert 'Email me my code' in page, 'Referral page missing'
+          assert 'Your Radar referral code' in page, 'Referral page missing'
           assert 'Your Radar email address' in page, 'Referral request instructions missing'
           assert 'radar-signup' in landing, 'Newsletter signup form missing'
           assert 'radar-referral-field' in landing, 'Referral field not integrated into latest Radar design'
