@@ -43,7 +43,7 @@ jobs:
           assert state.get('enabled') is False, 'STOP: production referral signup is unexpectedly enabled'
           page=Path('/tmp/radar-referral-page.html').read_text()
           landing=Path('/tmp/radar-landing.html').read_text()
-          assert 'Email me my code' in page, 'Referral page missing'
+          assert 'Send my code' in page, 'Referral page missing'
           assert 'referral-code-form' in page, 'Referral request form missing'
           assert 'radar-signup' in landing, 'Newsletter signup form missing'
           assert 'radar-referral-field' in landing, 'Referral field not integrated into latest Radar design'
