@@ -175,6 +175,23 @@ export async function handleRadarSignup(request, env) {
     if (!created || !created.data || String(created.data.status) !== 'active') {
       return reply({ error: 'Subscription could not be verified. Please contact us.' }, 502);
     }
+    // A successful upsert is not enough: only claim success after MailerLite
+    // confirms that this active subscriber is actually in the Radar group.
+    const verifiedResponse = await mailerLiteRequest(
+      env, '/subscribers/' + encodeURIComponent(String(created.data.id))
+    );
+    if (!verifiedResponse.ok) {
+      console.error('radar_signup_membership_verification_error', verifiedResponse.status);
+      return reply({ error: 'We could not confirm your Radar signup. Please try again later or email contact@sk8scoop.com.' }, 502);
+    }
+    const verifiedPayload = await verifiedResponse.json();
+    const verifiedSubscriber = verifiedPayload && verifiedPayload.data;
+    const inRadarGroup = (verifiedSubscriber?.groups || [])
+      .some(group => String(group.id) === RADAR_GROUP);
+    if (!verifiedSubscriber || verifiedSubscriber.status !== 'active' || !inRadarGroup) {
+      console.error('radar_signup_membership_not_verified');
+      return reply({ error: 'We could not confirm your Radar signup. Please email contact@sk8scoop.com before trying again.' }, 502);
+    }
     // An optional claimed code is NOT a reward. Register the new member's
     // code in D1; only an independently confirmed mailbox can earn credit.
     // Any referral failure must not undo an otherwise valid Radar signup.
