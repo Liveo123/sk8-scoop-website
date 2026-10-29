@@ -96,7 +96,7 @@ test('one-referral pilot: audited integration behaviours',async t=>{
   const started=await recordRadarReferral(fresh,{referee:friend,claimedCode:code,existingRadar:false});
   assert.equal(started.pending,true);
   const mail=calls.slice(count).find(x=>x.url.includes('api.resend.com')&&String(x.body).includes('Confirm your Radar referral'));
-  const token=JSON.parse(mail.body).text.match(/token=([^\\s]+)/)[1];
+  const token=JSON.parse(mail.body).text.match(/token=([^\s]+)/)[1];
   const before=calls.filter(x=>x.url.includes('api.resend.com')&&String(x.body).includes('four South Manchester adventures are ready')).length;
   const confirmed=await confirmReferral(request('/api/radar-referral-confirm',{token}),fresh);
   assert.equal(confirmed.status,200);
@@ -113,7 +113,7 @@ test('one-referral pilot: audited integration behaviours',async t=>{
   const start=calls.length;
   await recordRadarReferral(fresh,{referee:friend,claimedCode:code,existingRadar:false});
   const msg=calls.slice(start).find(x=>x.url.includes('api.resend.com')&&String(x.body).includes('Confirm your Radar referral'));
-  const token=JSON.parse(msg.body).text.match(/token=([^\\s]+)/)[1];
+  const token=JSON.parse(msg.body).text.match(/token=([^\s]+)/)[1];
   fresh.RADAR_REFERRAL_REWARD_ENABLED='true';
   failResend=true;
   assert.equal((await confirmReferral(request('/api/radar-referral-confirm',{token}),fresh)).status,200);
