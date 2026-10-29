@@ -98,7 +98,7 @@
       started.value = String(Date.now());
     } finally {
       button.disabled = false;
-      button.textContent = 'Join Radar free';
+      button.textContent = 'Get Radar free';
     }
   });
 
