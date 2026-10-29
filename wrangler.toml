@@ -3,12 +3,11 @@ main = "worker-business-v2.js"
 compatibility_date = "2026-07-24"
 keep_vars = true
 
-# Owner approval gate. Leave false on the draft PR; turn on only for launch.
+# Temporary production enable for Paul's authorised referral test only.
 [vars]
 RADAR_SIGNUP_ENABLED = "true"
-# One-referral pilot and reward fulfilment remain separately disabled.
-RADAR_REFERRAL_ENABLED = "false"
-RADAR_REFERRAL_REWARD_ENABLED = "false"
+RADAR_REFERRAL_ENABLED = "true"
+RADAR_REFERRAL_REWARD_ENABLED = "true"
 RADAR_GUIDE_WEB_URL = "https://www.sk8scoop.com/radar/adventure-atlas/"
 RADAR_GUIDE_PDF_URL = "https://www.sk8scoop.com/radar/adventure-atlas/download.pdf"
 
@@ -49,4 +48,3 @@ enabled = false
 # Cloudflare will provision and bind a D1 database for this Worker.
 [[d1_databases]]
 binding = "DB"
-
