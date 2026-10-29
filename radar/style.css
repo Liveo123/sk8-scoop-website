@@ -113,3 +113,12 @@ input[type=email]{width:100%;min-height:51px;padding:11px 12px;font:inherit;colo
 .faq summary::marker{color:var(--leaf)}
 @media(max-width:650px){.discovery-rows p{flex-direction:column;gap:4px;padding:14px 14px 15px}.three article{padding:20px}.three article:before{width:100px;height:100px;right:-32px;top:-55px}}
 @media(prefers-reduced-motion:reduce){.three article,.discovery-rows p,.faq details{transition:none}}
+
+/* Optional Radar referral programme: hidden until explicitly enabled. */
+#radar-referral-field:not([hidden]){margin:16px 0;padding:16px 17px;border:1px solid #b4c9c9;border-radius:10px;background:#eef6f2}
+#radar-referral-field label{display:block;margin:0 0 8px;font-weight:750}
+#radar-referral-field input#referral-code{width:100%;min-height:50px;padding:12px 13px;border:1px solid #789198;border-radius:7px;background:#fff;color:var(--ink);font:inherit;letter-spacing:.04em}
+#radar-referral-field input#referral-code:focus-visible{outline:3px solid #d88354;outline-offset:2px}
+#radar-referral-field .small-print{font-size:.82rem;line-height:1.5;margin:10px 0 0}
+#referral-intro:not([hidden]){margin-top:18px;margin-bottom:18px;padding:16px 21px;border-left:5px solid var(--teal);background:var(--paper)}
+#referral-intro p{margin:0;max-width:74ch;line-height:1.5}

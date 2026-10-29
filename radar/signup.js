@@ -11,6 +11,22 @@
   const query = new URLSearchParams(location.search);
   source.value = query.get('via') === 'sk8' ? 'sk8_invite' : 'radar_main';
   started.value = String(Date.now());
+  // The code field and programme are invisible while the referral feature flag is off.
+  (async () => {
+    const holder = document.getElementById('radar-referral-field');
+    const nav = document.getElementById('referral-intro');
+    const field = document.getElementById('referral-code');
+    try {
+      const res = await fetch('/api/radar-referral-status', { cache: 'no-store' });
+      const config = await res.json();
+      if (!res.ok || config.enabled !== true) return;
+      holder.hidden = false; nav.hidden = false;
+      const code = String(query.get('ref') || '').trim().toUpperCase();
+      if (/^R[A-HJ-NP-Z2-9]{12}$/.test(code)) field.value = code;
+    } catch {
+      // Referral extras are optional; failed configuration must never block Radar signup.
+    }
+  })();
   let widgetId = null;
 
   function message(text, good = false) {

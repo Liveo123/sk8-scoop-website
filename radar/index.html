@@ -46,6 +46,13 @@
           <label class="field-label" for="email">Your email address</label>
           <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" maxlength="254" aria-describedby="email-help" required>
           <p id="email-help" class="field-help">Only used for Radar unless you separately choose another newsletter.</p>
+          <div id="radar-referral-field" hidden>
+            <label class="field-label" for="referral-code">Referral code (optional)</label>
+            <input id="referral-code" name="referral_code" type="text" maxlength="13"
+              pattern="R[A-HJ-NP-Z2-9]{12}" autocomplete="off"
+              placeholder="Enter a Radar subscriber's code">
+            <p class="small-print">A new reader's separate email confirmation is needed before the existing reader qualifies for the free four-adventure Atlas. Your newsletter signup is not conditional on this. <a href="/radar/referral/terms/">Programme terms</a>.</p>
+          </div>
           <label class="consent">
             <input type="checkbox" name="consent" value="yes" required>
             <span>Yes, send me South Manchester Radar's free weekly newsletter. It is separate from SK8 Scoop and I can unsubscribe at any time.</span>
@@ -67,6 +74,10 @@
         <noscript><p class="form-message">JavaScript is required for the secure human verification.</p></noscript>
       </aside>
     </div>
+  </section>
+  <section class="container" id="referral-intro" hidden aria-label="Optional Radar referral reward">
+    <p>Already a Radar reader? <a href="/radar/referral/">Request your personal referral code</a>.
+      One genuinely new confirmed reader can unlock our four-adventure digital guide.</p>
   </section>
   <section class="what container" aria-labelledby="what-heading">
     <div class="section-head">

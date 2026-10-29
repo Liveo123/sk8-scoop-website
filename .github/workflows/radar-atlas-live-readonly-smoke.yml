@@ -1,0 +1,39 @@
+name: Radar Atlas live URLs (read-only)
+on:
+  pull_request:
+    paths:
+      - 'radar/**'
+      - 'radar-referral-service.js'
+      - 'wrangler.toml'
+      - '.github/workflows/radar-atlas-live-readonly-smoke.yml'
+  workflow_dispatch:
+jobs:
+  verify-live-atlas:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Download published guide without subscribing anyone
+        run: |
+          set -eu
+          curl -fsSL --retry 3 --retry-delay 2 --max-time 45 \
+            https://www.sk8scoop.com/radar/adventure-atlas/ \
+            -o /tmp/radar-atlas.html
+          curl -fsSL --retry 3 --retry-delay 2 --max-time 45 \
+            https://www.sk8scoop.com/radar/adventure-atlas/download.pdf \
+            -o /tmp/radar-atlas.pdf
+      - name: Validate exact publication content
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          html=Path('/tmp/radar-atlas.html').read_text(encoding='utf-8')
+          pdf=Path('/tmp/radar-atlas.pdf').read_bytes()
+          expected=['Creepy Carnival','Mad Hatter','velodrome','Mersey']
+          for term in expected:
+              assert term.lower() in html.lower(), f'Missing adventure: {term}'
+          assert '<title>The Unordinary Four' in html, 'Wrong HTML route or title'
+          assert 'noindex' in html.lower(), 'Guide should not be indexed'
+          assert pdf.startswith(b'%PDF-'), 'Download URL does not return a PDF'
+          assert len(pdf)>500_000, 'Truncated PDF'
+          print(f'PASS: live HTML {len(html):,} bytes; PDF {len(pdf):,} bytes; four adventures found')
+          PY

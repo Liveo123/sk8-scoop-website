@@ -1,5 +1,6 @@
 import siteWorker from './worker-protected.js';
 import { handleRadarSignup } from './radar-signup-api.js';
+import { requestReferralCode, confirmReferral, awardReferral, purgeOldRadarReferralRecords } from './radar-referral-service.js';
 
 const CONTACT_INBOX = 'contact@sk8scoop.com';
 const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
@@ -10,6 +11,21 @@ export default {
 
     if (url.pathname === '/api/radar-signup' && request.method === 'POST') {
       return secureResponse(await handleRadarSignup(request, env), url);
+    }
+    // Do not expose a reward until the independent Radar referral pilot is enabled.
+    if (url.pathname === '/api/radar-referral-status' && request.method === 'GET') {
+      return secureResponse(new Response(JSON.stringify({
+        enabled: env.RADAR_REFERRAL_ENABLED === 'true'
+      }), { headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } }), url);
+    }
+    if (url.pathname === '/api/radar-referral-code' && request.method === 'POST') {
+      return secureResponse(await requestReferralCode(request, env), url);
+    }
+    if (url.pathname === '/api/radar-referral-confirm' && request.method === 'POST') {
+      return secureResponse(await confirmReferral(request, env), url);
+    }
+    if (url.pathname === '/api/admin/radar-referral-award' && request.method === 'POST') {
+      return secureResponse(await awardReferral(request, env), url);
     }
 
     if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') {
@@ -29,6 +45,12 @@ export default {
   async scheduled(_controller, env) {
     if (!env.DB) throw Error('Editorial retention cleanup requires the D1 database binding');
     await purgeExpiredEditorialRecords(env.DB);
+    try {
+      await purgeOldRadarReferralRecords(env);
+    } catch {
+      // A referral pilot cleanup error must not break unrelated editorial retention.
+      console.error('radar_referral_retention_failed');
+    }
   }
 };
 
