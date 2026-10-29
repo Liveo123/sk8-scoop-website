@@ -2,7 +2,6 @@
 // Independent referral confirmation is NOT the newsletter opt-in mechanism.
 // All mutations are disabled unless RADAR_REFERRAL_ENABLED is explicitly true.
 const RADAR_GROUP = '202394374779176114';
-const REWARD_GROUP = '202479259529250472';
 const CODE_RE = /^R[A-HJ-NP-Z2-9]{12}$/;
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const API = 'https://connect.mailerlite.com/api';
@@ -34,7 +33,7 @@ async function ensure(db){
   await db.prepare(`CREATE INDEX IF NOT EXISTS idx_radar_referral_claims_referrer ON radar_referral_claims(referrer_id,status)` ).run();
   await db.prepare(`CREATE TABLE IF NOT EXISTS radar_referral_rewards (
     referrer_id TEXT PRIMARY KEY, referee_id TEXT NOT NULL UNIQUE, status TEXT NOT NULL,
-    claimed_at TEXT NOT NULL DEFAULT (datetime('now')), group_assigned_at TEXT, last_error TEXT)` ).run();
+    claimed_at TEXT NOT NULL DEFAULT (datetime('now')), accepted_at TEXT, last_error TEXT)` ).run();
 }
 async function mailer(env,path,options={}){
   const res=await fetch(API+path,{...options,headers:{accept:'application/json',authorization:'Bearer '+String(env.MAILERLITE_API_TOKEN||''),...(options.body?{'content-type':'application/json'}:{})}});
@@ -42,10 +41,91 @@ async function mailer(env,path,options={}){
   return (await res.json().catch(()=>null))?.data||null;
 }
 async function lookup(env,id){return mailer(env,'/subscribers/'+encodeURIComponent(id));}
-async function send(env,to,subject,text){
+async function send(env,to,subject,text,idempotencyKey=''){
   if(!env.RESEND_API_KEY)return false;
-  const res=await fetch('https://api.resend.com/emails',{method:'POST',headers:{authorization:'Bearer '+env.RESEND_API_KEY,'content-type':'application/json'},body:JSON.stringify({from:SENDER,to:[to],subject,text,reply_to:'contact@sk8scoop.com'})});
+  const headers={authorization:'Bearer '+env.RESEND_API_KEY,'content-type':'application/json'};
+  if(idempotencyKey)headers['Idempotency-Key']=idempotencyKey;
+  const res=await fetch('https://api.resend.com/emails',{method:'POST',headers,
+    body:JSON.stringify({from:SENDER,to:[to],subject,text,reply_to:'contact@sk8scoop.com'})});
   return res.ok;
+}
+function validGuideUrl(value){
+  try{const url=new URL(String(value||''));return url.protocol==='https:'&&!url.username&&!url.password}
+  catch{return false}
+}
+// One verified, independent referral. Email fulfilment uses the already configured
+// transactional sender, NOT the broken MailerLite MCP or a reward automation.
+// Resend accepts an idempotency key; the durable D1 row prevents future re-awards.
+async function deliverConfirmedReward(env,refereeId){
+  if(env.RADAR_REFERRAL_ENABLED!=='true'||env.RADAR_REFERRAL_REWARD_ENABLED!=='true')
+    return {ok:false,status:503,error:'Reward fulfilment is disabled.'};
+  if(!env.DB||!env.MAILERLITE_API_TOKEN||!env.RESEND_API_KEY||
+    !validGuideUrl(env.RADAR_GUIDE_WEB_URL)||!validGuideUrl(env.RADAR_GUIDE_PDF_URL))
+    return {ok:false,status:503,error:'Reward fulfilment is not configured.'};
+  await ensure(env.DB);
+  const claim=await env.DB.prepare(
+    'SELECT referee_id,referrer_id,status,confirmed_at FROM radar_referral_claims WHERE referee_id=?'
+  ).bind(String(refereeId)).first();
+  if(!claim)return {ok:false,status:409,error:'A confirmed referral is required.'};
+  const previous=await env.DB.prepare('SELECT status FROM radar_referral_rewards WHERE referrer_id=?')
+    .bind(claim.referrer_id).first();
+  if(previous?.status==='accepted')return {ok:true,already_awarded:true,delivery_accepted:true,delivery_verified:false};
+  if(claim.status!=='confirmed'||!claim.confirmed_at)
+    return {ok:false,status:409,error:'Independent email confirmation is required.'};
+  if(claim.referee_id===claim.referrer_id)
+    return {ok:false,status:409,error:'Self-referrals do not qualify.'};
+  const [referrer,referee]=await Promise.all([lookup(env,claim.referrer_id),lookup(env,claim.referee_id)]);
+  if(!isMember(referrer)||!isMember(referee))
+    return {ok:false,status:409,error:'Both readers must still be active Radar subscribers.'};
+  if(previous?.status==='processing')
+    return {ok:false,status:409,error:'Reward requires delivery reconciliation.'};
+  if(!previous){
+    const created=await env.DB.prepare(
+      "INSERT OR IGNORE INTO radar_referral_rewards(referrer_id,referee_id,status) VALUES(?,?,'processing')"
+    ).bind(claim.referrer_id,claim.referee_id).run();
+    if(!created?.meta?.changes)
+      return {ok:false,status:409,error:'This reward was already claimed.'};
+  }else{
+    const changed=await env.DB.prepare(
+      "UPDATE radar_referral_rewards SET status='processing',last_error=NULL WHERE referrer_id=? AND status='failed'"
+    ).bind(claim.referrer_id).run();
+    if(!changed?.meta?.changes)
+      return {ok:false,status:409,error:'Reward needs manual review.'};
+  }
+  const text=[
+    'Your South Manchester Adventure Atlas is ready.',
+    '',
+    'One new reader has independently confirmed their Radar referral, so you have earned the four-adventure edition.',
+    '',
+    'Open the illustrated web guide: '+env.RADAR_GUIDE_WEB_URL,
+    'Download the dated PDF: '+env.RADAR_GUIDE_PDF_URL,
+    '',
+    'Inside: Creepy Carnival, Mission: Mad Hatter, a flying lap at the velodrome, and a seasonal Mersey kayaking adventure.',
+    'Mersey kayaking normally operates April to September; river conditions and individual bookings can change.',
+    'Check current provider prices, age rules and availability before travelling. The activities themselves may cost money.',
+    '',
+    'This is the digital guide reward you earned, not a new newsletter signup.',
+    'Questions? contact@sk8scoop.com'
+  ].join('\n');
+  let accepted=false;
+  try{
+    accepted=await send(env,referrer.email,'Your four South Manchester adventures are ready',text,
+      'radar-atlas-four-'+claim.referrer_id);
+  }catch{accepted=false}
+  if(!accepted){
+    await env.DB.prepare(
+      "UPDATE radar_referral_rewards SET status='failed',last_error='transactional_email_not_accepted' WHERE referrer_id=? AND status='processing'"
+    ).bind(claim.referrer_id).run();
+    return {ok:false,status:502,error:'Reward email was not accepted; safe to review before retry.'};
+  }
+  await env.DB.prepare(
+    "UPDATE radar_referral_rewards SET status='accepted',accepted_at=datetime('now'),last_error=NULL WHERE referrer_id=? AND status='processing'"
+  ).bind(claim.referrer_id).run();
+  await env.DB.prepare(
+    "UPDATE radar_referral_claims SET status='rewarded' WHERE referee_id=? AND status='confirmed'"
+  ).bind(claim.referee_id).run();
+  return {ok:true,delivery_accepted:true,delivery_verified:false,
+    message:'Reward email accepted by the transactional provider; delivery not yet confirmed.'};
 }
 async function turnstile(req,env,token){
   if(!env.TURNSTILE_SECRET_KEY||!token)return false;
@@ -127,38 +207,29 @@ export async function confirmReferral(request,env){
   if(!isMember(user))return json({error:'This Radar membership is not active.'},409);
   const result=await env.DB.prepare("UPDATE radar_referral_claims SET status='confirmed',confirmed_at=datetime('now') WHERE token_hash=? AND status='pending'").bind(digest).run();
   if(!result?.meta?.changes)return json({error:'Already confirmed.'},409);
+  // Reward processing is independent of newsletter opt-in, and the flag
+  // remains OFF until the owner signs off live guide URLs and tests.
+  if(env.RADAR_REFERRAL_REWARD_ENABLED==='true'){
+    try{
+      const delivery=await deliverConfirmedReward(env,claim.referee_id);
+      if(!delivery.ok)console.error('radar_reward_requires_manual_review',delivery.status);
+    }catch{console.error('radar_reward_requires_manual_review',502)}
+  }
   return json({ok:true,message:'Your email is confirmed for the referral reward. No other action is needed.'});
 }
 // Intentionally ADMIN-ONLY and OFF until a real reward URL/email is verified.
+// Admin-only fallback for reconciling a failed transactional reward.
+// Never bypass independent email confirmation or award twice.
 export async function awardReferral(request,env){
-  if(request.method!=='POST'||!PROD_HOSTS.has(new URL(request.url).hostname))return json({error:'Not found.'},404);
-  if(!env.ADMIN_TOKEN||request.headers.get('authorization')!=='Bearer '+env.ADMIN_TOKEN)return json({error:'Unauthorised.'},401);
-  if(env.RADAR_REFERRAL_ENABLED!=='true'||env.RADAR_REFERRAL_REWARD_ENABLED!=='true'||!env.RADAR_GUIDE_WEB_URL||!env.RADAR_GUIDE_PDF_URL)
-    return json({error:'Reward delivery is disabled pending the live guide and email checks.'},503);
-  if(!env.DB||!env.MAILERLITE_API_TOKEN)return json({error:'Service unavailable.'},503);
-  let d;try{d=await request.json()}catch{return json({error:'Invalid request.'},400)};
-  if(!validId(d?.referee_id))return json({error:'Invalid identifier.'},400);
-  await ensure(env.DB);
-  const row=await env.DB.prepare("SELECT referee_id,referrer_id,status FROM radar_referral_claims WHERE referee_id=?").bind(String(d.referee_id)).first();
-  if(!row||row.status!=='confirmed')return json({error:'A confirmed referral is required.'},409);
-  if(row.referee_id===row.referrer_id)return json({error:'Self referral not eligible.'},409);
-  const [referrer,referee]=await Promise.all([lookup(env,row.referrer_id),lookup(env,row.referee_id)]);
-  if(!isMember(referrer)||!isMember(referee))return json({error:'Both readers must be active Radar subscribers.'},409);
-  const reward=await env.DB.prepare('SELECT status FROM radar_referral_rewards WHERE referrer_id=?').bind(row.referrer_id).first();
-  if(reward?.status==='assigned')return json({ok:true,already_awarded:true});
-  if(reward?.status==='processing')return json({error:'Reward is being processed.'},409);
-  if(!reward){
-    const created=await env.DB.prepare("INSERT OR IGNORE INTO radar_referral_rewards(referrer_id,referee_id,status) VALUES(?,?,'processing')").bind(row.referrer_id,row.referee_id).run();
-    if(!created?.meta?.changes)return json({error:'Reward already exists for this reader or referee.'},409);
-  }else await env.DB.prepare("UPDATE radar_referral_rewards SET status='processing' WHERE referrer_id=? AND status='failed'").bind(row.referrer_id).run();
-  const assign=await fetch(API+'/subscribers/'+encodeURIComponent(row.referrer_id)+'/groups/'+REWARD_GROUP,{method:'POST',headers:{authorization:'Bearer '+env.MAILERLITE_API_TOKEN,accept:'application/json'}}).catch(()=>null);
-  if(!assign||!assign.ok){
-    await env.DB.prepare("UPDATE radar_referral_rewards SET status='failed',last_error='mailer_assignment_failed' WHERE referrer_id=?").bind(row.referrer_id).run();
-    return json({error:'Could not assign reward group; safe to retry.'},502);
-  }
-  await env.DB.prepare("UPDATE radar_referral_rewards SET status='assigned',group_assigned_at=datetime('now'),last_error=NULL WHERE referrer_id=?").bind(row.referrer_id).run();
-  await env.DB.prepare("UPDATE radar_referral_claims SET status='rewarded' WHERE referee_id=?").bind(row.referee_id).run();
-  return json({ok:true,group_assigned:true,delivery_verified:false,message:'Reward group assignment completed. Automation delivery must be checked separately.'});
+  if(request.method!=='POST'||!PROD_HOSTS.has(new URL(request.url).hostname))
+    return json({error:'Not found.'},404);
+  if(!env.ADMIN_TOKEN||request.headers.get('authorization')!=='Bearer '+env.ADMIN_TOKEN)
+    return json({error:'Unauthorised.'},401);
+  let body;try{body=await request.json()}catch{return json({error:'Invalid request.'},400)}
+  if(!validId(body?.referee_id))return json({error:'Invalid identifier.'},400);
+  const award=await deliverConfirmedReward(env,String(body.referee_id));
+  const {status,ok,...rest}=award;
+  return json({ok,...rest},status||200);
 }
 // Existing daily Worker cron may call this after the pilot is enabled.
 // Expired pending claims are removed; reward audit rows expire after one year.
