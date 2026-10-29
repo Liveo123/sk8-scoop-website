@@ -13,6 +13,11 @@ jobs:
     permissions:
       contents: read
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          sparse-checkout: wrangler.toml
+          sparse-checkout-cone-mode: false
       - name: Download published guide without subscribing anyone
         run: |
           set -eu
@@ -34,21 +39,23 @@ jobs:
           curl -fsSL --retry 3 --retry-delay 2 --max-time 45 \
             https://www.sk8scoop.com/radar/ \
             -o /tmp/radar-landing.html
-      - name: Assert production referral stays disabled during controlled testing
+      - name: Assert live referral state matches production config before release
         run: |
           python3 - <<'PY'
-          import json
+          import json, tomllib
           from pathlib import Path
           state=json.loads(Path('/tmp/radar-referral-status.json').read_text())
-          assert state.get('enabled') is False, 'STOP: production referral signup is unexpectedly enabled'
+          config=tomllib.loads(Path('wrangler.toml').read_text())
+          expected=config.get('vars',{}).get('RADAR_REFERRAL_ENABLED') == 'true'
+          assert state.get('enabled') is expected, f'Live referral enabled={state.get("enabled")!r} does not match production base config {expected!r}'
           page=Path('/tmp/radar-referral-page.html').read_text()
           landing=Path('/tmp/radar-landing.html').read_text()
-          assert 'Send my code' in page, 'Referral page missing'
-          assert 'referral-code-form' in page, 'Referral request form missing'
+          assert 'Email me my code' in page, 'Referral page missing'
+          assert 'Your Radar email address' in page, 'Referral request instructions missing'
           assert 'radar-signup' in landing, 'Newsletter signup form missing'
           assert 'radar-referral-field' in landing, 'Referral field not integrated into latest Radar design'
           assert 'hidden' in landing[landing.index('id="radar-referral-field"')-80:landing.index('id="radar-referral-field"')+40], 'Referral field must default hidden'
-          print('PASS: deployed production referral is OFF; signup and referral pages exist; no POST requests or emails sent')
+          print(f'PASS: live referral state matches production config ({expected}); pages exist; no POST requests or emails sent')
           PY
       - name: Validate exact publication content
         run: |
