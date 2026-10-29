@@ -89,7 +89,11 @@
       });
       const result = await res.json().catch(() => ({}));
       if (!res.ok || result.success !== true) throw Error(result.error || 'The sign-up did not complete.');
-      message('Subscription saved. Opening your welcome page…', true);
+      if (result.already_subscribed === true) {
+        message('This address is already on the Radar list. No changes were made. A referral code can only be used by a genuinely new Radar reader during signup.', true);
+        return;
+      }
+      message('Your Radar subscription is confirmed. Opening your welcome page…', true);
       location.assign('/radar/success/');
     } catch (error) {
       message(error && error.message ? error.message : 'Please try again.');

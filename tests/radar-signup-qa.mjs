@@ -37,12 +37,21 @@ async function simulate({ host = 'www.sk8scoop.com', origin, fetchSite = 'same-o
     requests.push({ url: u, method: opts.method || 'GET', payload });
     if (u.includes('siteverify')) return new Response(JSON.stringify(turnstile), { status: 200 });
     if (u.includes('/subscribers/')) {
+      const previousWrite = requests.find(req => req.url.endsWith('/subscribers') && req.method === 'POST');
+      if (previousWrite) {
+        const savedGroups = [...new Set([...(existing === 'active' ? groups : []), ...(previousWrite.payload.groups || [])])];
+        return new Response(JSON.stringify({ data: {
+          id: '12345678901234567', status: 'active', groups: savedGroups.map(id => ({ id }))
+        } }));
+      }
       if (lookupError) return new Response('', { status: lookupError });
       if (existing === 'missing') return new Response('', { status: 404 });
       return new Response(JSON.stringify({ data: { status: existing, groups: groups.map(id => ({ id })) } }));
     }
     if (u.endsWith('/subscribers') && opts.method === 'POST') {
-      return new Response(JSON.stringify({ data: { status: saveStatus === 200 ? 'active' : 'junk' } }), { status: saveStatus });
+      return new Response(JSON.stringify({ data: {
+        id: '12345678901234567', status: saveStatus === 200 ? 'active' : 'junk'
+      } }), { status: saveStatus });
     }
     throw Error('Unexpected network call ' + u);
   };

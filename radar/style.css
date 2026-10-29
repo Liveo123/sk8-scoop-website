@@ -122,3 +122,19 @@ input[type=email]{width:100%;min-height:51px;padding:11px 12px;font:inherit;colo
 #radar-referral-field .small-print{font-size:.82rem;line-height:1.5;margin:10px 0 0}
 #referral-intro:not([hidden]){margin-top:18px;margin-bottom:18px;padding:16px 21px;border-left:5px solid var(--teal);background:var(--paper)}
 #referral-intro p{margin:0;max-width:74ch;line-height:1.5}
+
+
+/* Shared layout for compact Radar utility and confirmation pages. */
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(18px,4vw,32px)}
+.wordmark{display:inline-flex;align-items:baseline;gap:4px;color:var(--teal);text-decoration:none;font-weight:800;letter-spacing:.02em}
+.wordmark small{font-size:.68rem;letter-spacing:.08em}.wordmark strong{font-size:1.1rem}.wordmark span{color:var(--orange-dark)}
+.simple-page{min-height:68vh;padding-block:clamp(22px,6vh,70px) 56px}
+.simple-card{max-width:780px;margin:0 auto;padding:clamp(24px,5vw,54px);background:var(--cream);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 34px rgba(29,44,55,.07)}
+.simple-card .overline{margin:0 0 12px;color:var(--orange-dark);font-size:.78rem;font-weight:850;letter-spacing:.12em}
+.simple-card h1{max-width:14ch;font-size:clamp(2.35rem,6vw,4.35rem);line-height:1.04;margin:0 0 18px}
+.notice{margin:22px 0;padding:18px 21px;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:5px 10px 10px 5px}
+.notice>strong{display:block;margin-bottom:6px}.notice p{margin:8px 0}
+.cta{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 18px;border-radius:5px;background:var(--teal);color:#fff;font-weight:750;text-decoration:none}
+.cta:hover{background:var(--deep);color:#fff}.cta.secondary{background:transparent;color:var(--teal);border:1px solid var(--teal)}.cta-row{margin-top:22px}
+.site-footer{border-top:1px solid var(--line);padding-block:18px}.footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.9rem}
+@media(max-width:650px){.simple-card{padding:24px 20px}.simple-card h1{font-size:clamp(2.3rem,12vw,3.4rem)}.footer-inner{display:grid;gap:6px}}
