@@ -181,8 +181,14 @@ export async function requestReferralCode(request,env){
   const user=await lookup(env,email);
   // Same response for registered and unknown accounts; no address enumeration.
   if(!isMember(user))return json({ok:true,message:'If this address is subscribed to Radar, a code will arrive by email.'});
-  const current=await env.DB.prepare('SELECT code,last_sent_at FROM radar_referral_codes WHERE subscriber_id=?').bind(String(user.id)).first();
-  if(current?.last_sent_at && Date.now()-Date.parse(current.last_sent_at.replace(' ','T')+'Z')<12*3600000)
+  // Use the same database clock that records last_sent_at, avoiding timezone
+  // parsing differences between Cloudflare runtimes and SQLite.
+  const current=await env.DB.prepare(`SELECT code,last_sent_at,
+    CASE WHEN last_sent_at IS NOT NULL
+           AND datetime(last_sent_at)>datetime('now','-12 hours')
+         THEN 1 ELSE 0 END AS sent_recently
+    FROM radar_referral_codes WHERE subscriber_id=?`).bind(String(user.id)).first();
+  if(Number(current?.sent_recently)===1)
     return json({ok:true,message:'If this address is subscribed to Radar, a code will arrive by email.'});
   const record=await registerRadarMember(env,user);
   if(record.ready){
