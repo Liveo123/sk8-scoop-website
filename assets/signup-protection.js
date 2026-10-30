@@ -300,6 +300,11 @@
       status.className = 'signup-status show';
       status.textContent = kind === 'guide' ? 'Getting your guide ready…' : 'Adding you to SK8 Scoop…';
 
+      // Refresh form attribution immediately before collecting FormData.
+      if (typeof window.SK8ApplyAttributionToForm === 'function') {
+        window.SK8ApplyAttributionToForm(form);
+      }
+
       const response = await fetch('/api/newsletter-signup', {
         method: 'POST',
         headers: { accept: 'application/json' },
