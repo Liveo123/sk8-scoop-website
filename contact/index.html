@@ -87,6 +87,16 @@
             </select>
           </label>
 
+          <div class="contact-image-field">
+            <label for="contact-image">Add an image (optional)</label>
+            <input id="contact-image" type="file" accept="image/jpeg,image/png,image/webp,image/gif" aria-describedby="contact-image-hint">
+            <p id="contact-image-hint" class="contact-form-tip">JPG, PNG, WebP or GIF, up to 5 MB. Your image uploads before the message is sent. Please avoid including private documents or other people’s personal information.</p>
+            <input type="hidden" name="image_url" id="contact-image-url">
+            <p class="contact-form-tip" id="contact-image-status" role="status" aria-live="polite"></p>
+            <label for="contact-image-link">Or paste a link to an existing image</label>
+            <input id="contact-image-link" type="url" name="image_link" maxlength="1000" placeholder="https://...">
+          </div>
+
           <label>Message<textarea name="message" maxlength="5000" placeholder="Tell us what you need help with..." required></textarea></label>
 
           <p class="contact-form-tip"><strong>Useful detail helps.</strong> For a correction, include the page or story and what is wrong. For a newsletter problem, include the email address affected. For a partnership, explain the useful outcome you have in mind.</p>
