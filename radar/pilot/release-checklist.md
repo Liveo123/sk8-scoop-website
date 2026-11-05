@@ -11,6 +11,7 @@ Status: DRAFT ONLY. Isolated GitHub branch. Not a public site, functioning publi
 ## Before public release
 - [ ] Confirm a separate working Radar reply email and sender identity
 - [ ] Check any previous contact, objections, exclusions and current CRM suppression list
+- [x] Sent Gmail cross-check flagged the Carlton Club, contacted around Radar Issue 001; removed it from the 25-candidate cold-outreach list and replaced with The Edge Theatre (no matching sent email found at check time). This does not clear all remaining recipients.
 - [ ] Verify recipient corporate subscriber status, or individual subscriber consent / qualifying soft opt-in; unknown means HOLD
 - [ ] Verify every event hook and official recipient contact route immediately before sending
 - [ ] Verify Tally data/privacy settings, form operation and owner notification; do not publish without approval
