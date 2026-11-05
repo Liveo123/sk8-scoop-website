@@ -191,13 +191,25 @@ Hi,\n\nDo you have a local class or gathering coming up that Radar could help sh
 
 ---
 
-### 19 The Carlton Club | 78/100
-**Subject:** A quick one about your next event
-**Verification:** SECONDARY_ACTIVITY_ONLY | VERIFY_OFFICIAL_SITE_AND_CONTACT
-**Email:** NOT VERIFIED
-**Source:** https://manchestertonight.co.uk/south-manchester
+### 19 The Edge Theatre & Arts Centre | 95/100
+**Subject:** A notice for The Final Whistle?
+**Verification:** PRIMARY_EVENT_PLUS_CHARITY_CONTACT_VERIFIED | CHARITY_FREE_ONLY_AND_VERIFY_SUPPRESSION
+**Email:** info@edgetheatre.co.uk
+**Sources:** https://www.ticketsource.com/edgetheatre/the-final-whistle/e-rpmqkx ; https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5001079/contact-information?_uk_gov_ccew_onereg_charitydetails_web_portlet_CharityDetailsPortlet_organisationNumber=5001079
 
-Hi,\n\nI noticed the Carlton Club's quiz and open-mic nights.\n\nI'm putting together South Manchester Radar's local things-to-do noticeboard. We're inviting organisers to share a short notice, free for at least the next month.\n\nCould you reply with a link to your next activity? I'll write the notice and send it for you to check.\n\nAfter the trial, business notices are optional at £10/month, only if you choose to continue.\n\nThanks,\nPaul\nSouth Manchester Radar\n\nIf you'd rather not hear from us again, just reply 'no thanks'.
+Hi,
+
+I saw The Final Whistle opens at The Edge on 11 November. It looks just right for people choosing a local night out.
+
+We're putting together South Manchester Radar's community noticeboard. Could you reply with the best link to use? I'll write a short notice and send it for you to check.
+
+It's free for the pilot, and charity/community notices can remain free.
+
+Thanks,
+Paul
+South Manchester Radar
+
+If you'd rather not hear from us again, just reply 'no thanks'.
 
 ---
 
