@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 
 const BASE_URL = (process.env.HEADER_QA_BASE_URL || 'https://www.sk8scoop.com').replace(/\/$/, '');
 const CHROME = process.env.CHROME || 'google-chrome';
-const widths = [1199, 1200, 1280, 1366, 1440];
+const widths = [1199, 1200, 1279, 1280, 1359, 1360, 1366, 1440];
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 await mkdir('visual-qa/header-layout', { recursive: true });
@@ -132,7 +132,7 @@ try {
       fail(width + 'px: subscriber header actions did not render');
     }
 
-    if (width < 1200) {
+    if (width < 1360) {
       await evaluate("document.querySelector('.menu-btn')?.click(); true");
       if (!await waitFor("document.querySelector('.nav')?.classList.contains('open')")) {
         fail(width + 'px: compact menu did not open');
@@ -176,7 +176,7 @@ try {
       }
     }
 
-    if (width >= 1200) {
+    if (width >= 1360) {
       if (state.navDisplay === 'none') fail(width + 'px: desktop navigation is hidden');
       if (state.navDirection === 'column') fail(width + 'px: desktop navigation collapsed vertically');
       if (state.menuDisplay !== 'none') fail(width + 'px: desktop menu button should be hidden');
