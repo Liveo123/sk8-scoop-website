@@ -32,7 +32,7 @@
       <div>
         <div class="eyebrow">Get in touch</div>
         <h1>Need a reply from SK8 Scoop?</h1>
-        <p class="hero-lead">Questions, corrections, newsletter problems, partnerships, privacy or anything else that genuinely needs an answer rather than a public submission.</p>
+        <p class="hero-lead">Questions, corrections, newsletter problems, reader photographs, partnerships, privacy or anything else that genuinely needs an answer.</p>
       </div>
       <aside class="contact-hero-board" aria-label="What to use Contact for">
         <div class="eyebrow">Use Contact for</div>
@@ -83,11 +83,17 @@
               <option value="advertising">Advertising</option>
               <option value="partnership">Partnership</option>
               <option value="privacy">Privacy or data</option>
+              <option value="reader_photo">Share reader photographs</option>
               <option value="other">Something else</option>
             </select>
           </label>
 
           <label>Message<textarea name="message" maxlength="5000" placeholder="Tell us what you need help with..." required></textarea></label>
+          <label>Photo-sharing link (optional)
+            <input type="url" name="photo_url" maxlength="1000" inputmode="url" placeholder="https://example.com/my-photo">
+            <small>Use a link to photographs you own or have permission to share. Please only send links that you are comfortable sharing privately with the editorial team. We will ask you before publishing anything.</small>
+          </label>
+          <p class="contact-form-tip"><strong>Want to attach a photo instead?</strong> <a href="mailto:contact@sk8scoop.com?subject=Photos%20for%20SK8%20Scoop">Email the pictures directly</a>. This contact form accepts photo links, not file attachments.</p>
 
           <p class="contact-form-tip"><strong>Useful detail helps.</strong> For a correction, include the page or story and what is wrong. For a newsletter problem, include the email address affected. For a partnership, explain the useful outcome you have in mind.</p>
 
