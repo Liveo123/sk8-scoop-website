@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-13",
+  "updated": "2026-11-09",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -216,6 +216,103 @@
       "status": "needs_check",
       "discovered": "2026-10-08",
       "checked": "2026-10-08"
+    },
+    {
+      "id": "cheadle-hulme-library-storytime-2026-11-13",
+      "title": "Storytime at Cheadle Hulme Library",
+      "status": "needs_check",
+      "date": "2026-11-13",
+      "time": "14:00",
+      "area": "Cheadle Hulme",
+      "venue": "Cheadle Hulme Library, Mellor Road, Cheadle Hulme SK8 5AU",
+      "category": "Family / Library",
+      "source_url": "https://www.stockport.gov.uk/events?page=1&pageSize=60&tag=Storytime",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Council events calendar confirms date, time and venue, but cost and any booking requirement must be confirmed on the individual event page before promotion. Do not extrapolate further weekly dates.",
+      "missing": [
+        "explicit cost",
+        "booking requirement",
+        "individual occurrence detail"
+      ]
+    },
+    {
+      "id": "heald-green-library-storytime-2026-11-14",
+      "title": "Storytime at Heald Green Library",
+      "status": "needs_check",
+      "date": "2026-11-14",
+      "time": "11:00",
+      "area": "Heald Green",
+      "venue": "Heald Green Library, Finney Lane, Heald Green SK8 3JB",
+      "category": "Family / Library",
+      "source_url": "https://www.stockport.gov.uk/events?page=1&pageSize=60&tag=Storytime",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Council calendar confirms occurrence, but no explicit cost or individual session booking requirement seen. Must verify before promotion; no future recurrence inferred.",
+      "missing": [
+        "explicit cost",
+        "booking requirement"
+      ]
+    },
+    {
+      "id": "cheadle-light-cafe-2026-11-11",
+      "title": "The Light Café",
+      "status": "needs_check",
+      "date": "2026-11-11",
+      "time": "09:00",
+      "area": "Cheadle",
+      "venue": "All Hallows Church, Councillor Lane, Cheadle SK8 2JG",
+      "category": "Community / Café",
+      "source_url": "https://www.stockport.gov.uk/events?category=seasonal&page=1&pageSize=60",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Council listing confirms date, start and venue; cost, end time, any attendance restrictions and whether future sessions are running require organiser verification.",
+      "missing": [
+        "cost",
+        "end time",
+        "attendance / booking rules",
+        "future session dates"
+      ]
+    },
+    {
+      "id": "cheadle-hulme-jai-yoga-2026-11-10",
+      "title": "Beginners and progressive yoga at Jai Yoga Studio",
+      "status": "needs_check",
+      "date": "2026-11-10",
+      "time": "18:15",
+      "area": "Cheadle Hulme",
+      "venue": "Jai Yoga Studio, Floor 4, Metropolitan House, Station Road, Cheadle Hulme SK8 7AZ",
+      "category": "Fitness / Yoga",
+      "source_url": "https://www.stockport.gov.uk/events?datefrom=25%2F10%2F2026+00%3A00%3A00&page=1&pageSize=60",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Stockport Council listing confirms class and 10 Nov time/venue; check current organiser timetable, price, booking and available places before any publication.",
+      "missing": [
+        "price",
+        "booking URL and availability",
+        "session length",
+        "organiser confirmation"
+      ]
+    },
+    {
+      "id": "stockroom-climate-nature-summit-2026-11-18",
+      "title": "Stockport Climate and Nature Summit",
+      "status": "needs_check",
+      "date": "2026-11-18",
+      "time": "10:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PR",
+      "cost": "Free",
+      "category": "Community / Talks",
+      "source_url": "https://www.stockroomsk.co.uk/events/stockport-climate-and-nature-summit?date=2026-11-18",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom page confirms date, start and free admission. Check booking destination, end time and capacity before moving to ready. Wider-area inclusion justified by substantive community talks and hands-on family sessions.",
+      "missing": [
+        "booking destination",
+        "end time / session selection",
+        "availability"
+      ]
     }
   ]
 }
