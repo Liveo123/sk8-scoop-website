@@ -1174,6 +1174,116 @@
       ],
       "freshness": "evergreen",
       "checked": "2026-09-18"
+    },
+    {
+      "id": "issue-19-october-30-2026",
+      "type": "Stories",
+      "category": "Newsletter",
+      "title": "SK8 Scoop Issue 19: Gatley Carrs, autumn ideas and local updates",
+      "summary": "Historical index of stories in the 30 October issue, with expired events clearly distinguished.",
+      "href": "/issues/issue-19/",
+      "area": "All areas",
+      "tags": [
+        "issue 19",
+        "newsletter",
+        "gatley carrs",
+        "bramall hall"
+      ],
+      "freshness": "archive",
+      "checked": "2026-11-09"
+    },
+    {
+      "id": "issue-20-november-6-2026",
+      "type": "Stories",
+      "category": "Newsletter",
+      "title": "SK8 Scoop Issue 20: street theatre, Cheadle Green and Bruntwood Park",
+      "summary": "Historical index of the 6 November issue's local stories and useful links, including several permanent articles.",
+      "href": "/issues/issue-20/",
+      "area": "All areas",
+      "tags": [
+        "issue 20",
+        "newsletter",
+        "street theatre",
+        "cheadle green",
+        "orienteering"
+      ],
+      "freshness": "archive",
+      "checked": "2026-11-09"
+    },
+    {
+      "id": "cheadle-green-hall-archaeology",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "What lies beneath Cheadle Green?",
+      "summary": "The former Cheadle Hall, its 2010 archaeological excavation and how the historic site changed.",
+      "href": "/local-history/cheadle-green-hall-archaeology/",
+      "area": "Cheadle",
+      "tags": [
+        "cheadle green",
+        "cheadle hall",
+        "archaeology",
+        "history",
+        "2010",
+        "hall"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-09"
+    },
+    {
+      "id": "st-marys-cheadle-medieval-crosses",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "The medieval crosses at St Mary's, Cheadle",
+      "summary": "Historic England records two medieval churchyard crosses, including one later converted to a sundial.",
+      "href": "/local-history/st-marys-cheadle-medieval-crosses/",
+      "area": "Cheadle",
+      "tags": [
+        "st mary's",
+        "medieval",
+        "sundial",
+        "cross",
+        "heritage"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-09"
+    },
+    {
+      "id": "bruntwood-park-orienteering",
+      "type": "Places",
+      "category": "Outdoors",
+      "title": "Try Bruntwood Park orienteering",
+      "summary": "How to get a £1.50 map for self-guided orienteering courses around Bruntwood Park in Cheadle.",
+      "href": "/outdoors/bruntwood-park-orienteering/",
+      "area": "Cheadle",
+      "tags": [
+        "bruntwood park",
+        "orienteering",
+        "walking",
+        "maps",
+        "kids",
+        "outdoors"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-09"
+    },
+    {
+      "id": "stockport-spectacular-sunday-2026",
+      "type": "Events",
+      "category": "Events",
+      "title": "Stockport's Spectacular Sunday, 15 November 2026",
+      "summary": "Free town-centre street theatre, 50+ shows and the Christmas lights switch-on; check latest programme.",
+      "href": "/whats-on/events/stockport-spectacular-sunday-2026/",
+      "area": "Stockport",
+      "tags": [
+        "street theatre",
+        "free",
+        "spectacular sunday",
+        "snow lion",
+        "christmas"
+      ],
+      "freshness": "dated",
+      "checked": "2026-11-09",
+      "expires": "2026-11-15"
     }
   ]
 }
