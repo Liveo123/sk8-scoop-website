@@ -596,6 +596,8 @@ window.SK8AttributionDebug={
   readStoredAttribution,
   conversionPageLabel
 };
+// Refresh attribution again at submission, including for dynamically inserted signup forms.
+window.SK8ApplyAttributionToForm=applyAttributionToForm;
 document.querySelectorAll('[data-signup-form]').forEach(form=>applyAttributionToForm(form));
 
 const sk8PageEventName=()=>{

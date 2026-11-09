@@ -38,5 +38,5 @@ test('sitemap preserves approved pages without adding private/noindex routes',()
   assert.equal(new Set(loc).size,loc.length);
   for(const path of ['/whats-on/events/cheadle-library-christmas-craft-night-2026/','/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/','/join/'])assert.ok(loc.includes('https://www.sk8scoop.com'+path));
   for(const path of ['/search/','/my-sk8/','/kids-family/holiday-club-finder/'])assert.ok(!loc.includes('https://www.sk8scoop.com'+path));
-  assert.match(sitemap,/<loc>https:\/\/www\.sk8scoop\.com\/join\/<\/loc><lastmod>2026-10-26<\/lastmod>/);
+  assert.match(sitemap,/<loc>https:\/\/www\.sk8scoop\.com\/join\/<\/loc><lastmod>2026-11-09<\/lastmod>/);
 });

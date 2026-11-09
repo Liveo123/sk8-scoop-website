@@ -74,10 +74,10 @@
     {
       "id": "ghost",
       "title": "Stockport Museum ghost puppets",
-      "disposition": "whats_on",
+      "disposition": "whats_on_expired",
       "event_id": "stockport-museum-ghost-puppets-2026-10-30",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-10-31; preserved as Issue 18 historical editorial handoff.]"
     },
     {
       "id": "crafts",

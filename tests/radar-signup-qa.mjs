@@ -2,14 +2,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
-const file = new URL('../radar-signup-api.js', import.meta.url);
-const source = readFileSync(file, 'utf8');
-const moduleUrl = 'data:text/javascript;base64,' + Buffer.from(source).toString('base64');
-const { handleRadarSignup } = await import(moduleUrl);
+// Direct file import now resolves the gated referral service module.
+const { handleRadarSignup } = await import(new URL('../radar-signup-api.js', import.meta.url));
 
 const RADAR = '202394374779176114';
 const SK8 = '190964754190174086';
-const ENV = { MAILERLITE_API_TOKEN: 'fake', TURNSTILE_SECRET_KEY: 'fake', RADAR_SIGNUP_ENABLED: 'true' };
+const ENV = { MAILERLITE_API_TOKEN: 'fake', TURNSTILE_SECRET_KEY: 'fake', RADAR_SIGNUP_ENABLED: 'true', RADAR_REFERRAL_ENABLED: 'false' };
 const turnstileOK = { success: true, action: 'newsletter_signup', hostname: 'www.sk8scoop.com' };
 
 async function simulate({ host = 'www.sk8scoop.com', origin, fetchSite = 'same-origin', data = {},
@@ -39,12 +37,21 @@ async function simulate({ host = 'www.sk8scoop.com', origin, fetchSite = 'same-o
     requests.push({ url: u, method: opts.method || 'GET', payload });
     if (u.includes('siteverify')) return new Response(JSON.stringify(turnstile), { status: 200 });
     if (u.includes('/subscribers/')) {
+      const previousWrite = requests.find(req => req.url.endsWith('/subscribers') && req.method === 'POST');
+      if (previousWrite) {
+        const savedGroups = [...new Set([...(existing === 'active' ? groups : []), ...(previousWrite.payload.groups || [])])];
+        return new Response(JSON.stringify({ data: {
+          id: '12345678901234567', status: 'active', groups: savedGroups.map(id => ({ id }))
+        } }));
+      }
       if (lookupError) return new Response('', { status: lookupError });
       if (existing === 'missing') return new Response('', { status: 404 });
       return new Response(JSON.stringify({ data: { status: existing, groups: groups.map(id => ({ id })) } }));
     }
     if (u.endsWith('/subscribers') && opts.method === 'POST') {
-      return new Response(JSON.stringify({ data: { status: saveStatus === 200 ? 'active' : 'junk' } }), { status: saveStatus });
+      return new Response(JSON.stringify({ data: {
+        id: '12345678901234567', status: saveStatus === 200 ? 'active' : 'junk'
+      } }), { status: saveStatus });
     }
     throw Error('Unexpected network call ' + u);
   };
@@ -129,6 +136,9 @@ await test('routes and both-way optional invitations are present', () => {
   assert.match(form, /name="consent" value="yes" required/);
   assert.match(form, /name="cf-turnstile-response"/);
   assert.match(text('radar/signup.js'), /action: 'newsletter_signup'/);
+  assert.match(text('radar/signup.js'), /radar-referral-status/);
+  assert.match(text('radar/index.html'), /name="referral_code"/);
+  assert.match(text('wrangler.toml'), /RADAR_REFERRAL_ENABLED = "false"/);
   assert.match(text('radar/success/index.html'), /\/join\/\?utm_source=radar/);
   for (const path of ['signup-success/index.html', 'qr-success/index.html',
                       'free-cheap-guide/success/index.html', '52-adventures/success/index.html',
