@@ -1,5 +1,10 @@
 import { createHash } from 'node:crypto';
+import { createRequire } from 'node:module';
 import { classifyLinkProbe } from './guide-reliability-core.mjs';
+
+// Use the same date/expiry rules as the published guide, rather than a test-only calendar.
+const require = createRequire(import.meta.url);
+const guideExpiry = require('../assets/guide-expiry.js');
 
 export const sha256 = value => createHash('sha256').update(value).digest('hex');
 const plain = value => String(value ?? '').replaceAll('&amp;', '&').trim();
@@ -26,6 +31,18 @@ export function inventoryImages(html) {
 export function inventoryLinks(html) {
   return [...new Set([...html.matchAll(/<a\b[^>]*\bhref=(["'])(.*?)\1/gi)]
     .map(m => plain(m[2])).concat(halloweenEntries(html).map(x => x.u)).filter(x => /^https:\/\//i.test(x)))];
+}
+
+// This inventories links a reader can actually follow today on the Halloween guide.
+// Historical dated links remain in inventoryLinks() and the source for editorial audit.
+// 'needs-review' entries are deliberately included until separately reviewed.
+export function inventoryCurrentLinks(html, today = guideExpiry.ukToday()) {
+  const staticMarkup = html.replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, '');
+  const staticLinks = [...staticMarkup.matchAll(/<a\\b[^>]*\\bhref=(["'])(.*?)\\1/gi)].map(m => plain(m[2]));
+  const activeEntries = halloweenEntries(html).filter(entry =>
+    !entry.retired && guideExpiry.status(entry.schedule, today) !== 'expired');
+  return [...new Set([...staticLinks, ...activeEntries.map(entry => plain(entry.u))]
+    .filter(url => /^https:\\/\\//i.test(url)))];
 }
 
 export function chooseSpread(items, limit) {
