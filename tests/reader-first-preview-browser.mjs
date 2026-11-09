@@ -148,7 +148,7 @@ try {
       v.newsletterPresent && v.heroHeight>100 && v.heroHeight<(mobile ? 560 : 420),
       'height='+v.heroHeight);
     check(width + 'px: checked feed has working direct event links or explicit fallback',
-      (v.cards>0 && v.primaryLinks.every(x=>/^\/whats-on\/(?:\?event=|events\/[a-z0-9-]+\/)/.test(x))) ||
+      (v.cards>0 && v.primaryLinks.length===v.cards && v.primaryLinks.every(x=>/^\/whats-on\/(?:\?event=[^&?#]+|events\/[a-z0-9-]+\/)$/.test(x))) ||
       (v.cards===0 && v.fallback), 'cards='+v.cards);
     if (!v.fallback) {
       const expected = width <= 720 ? 2 : 4;
@@ -170,8 +170,8 @@ try {
   await navigate('/');
   await waitFor("document.querySelectorAll('[data-explore-grid] .reader-explore-tile').length === 6",
     'six refreshed editorial categories');
-  await waitFor("document.querySelector('.reader-worth .reader-story:nth-child(2) .reader-link')?.href.includes('woodford-community-bonfire-2026-11-05')",
-    'current Woodford bonfire event continuation');
+  await waitFor("document.querySelector('.reader-worth .reader-story:nth-child(2) .reader-link')?.href.includes('/whats-on/?filter=weekend')",
+    'current weekend finder continuation');
   const homeState=await evaluate(`(() => {
     const card=document.querySelector('.reader-worth .reader-story:nth-child(3)');
     const frame=card?.querySelector('.dicm-visual');
@@ -198,8 +198,8 @@ try {
     homeState.headline==='Good local ideas, every Friday' &&
     homeState.newsletterButton==='Get it free' &&
     homeState.usefulLine.includes('Free things to do'));
-  check('Dynamic featured story directs to the verified event',
-    homeState.featuredHref==='/whats-on/?event=woodford-community-bonfire-2026-11-05');
+  check('Dynamic featured story routes into the current weekend finder',
+    homeState.featuredHref==='/whats-on/?filter=weekend');
   check('Hero uses the current source artwork with non-destructive vivid contrast',
     homeState.imageGrade.includes('saturate(1.2)') &&
     homeState.illustrationSource.includes('sk8-miniature-hero-hires-v3.png'));
