@@ -120,22 +120,27 @@ try{
   await screenshot('email-action-320-mobile.png');
   // Every filtered Halloween Guide link used in Issue 16 must remain direct, active and useful.
   await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
+  const guideSeasonEnded=Boolean(await evaluate("typeof SK8GuideExpiry==='object' && SK8GuideExpiry.ukToday()>'2026-11-01'"));
   const guideFilters=['local','free','under10','under5','primary','teen','rainy','send'];
   for(const filter of guideFilters){
     const guideUrl=BASE+'/halloween-half-term-guide/guide/?filter='+filter+'&utm_source=newsletter&utm_campaign=issue16_halloween#filters';
     await cmd('Page.navigate',{url:guideUrl});
     record('Guide loaded for '+filter,await ready("document.readyState==='complete'",18000));
     await sleep(500);
-    const result=await evaluate("(() => { const filter="+JSON.stringify(filter)+"; const button=document.querySelector('[data-filter=\"'+filter+'\"]'); const wrap=document.getElementById('filters'); const rect=wrap?.getBoundingClientRect(); return {path:location.pathname,hash:location.hash,query:new URLSearchParams(location.search).get('filter'),active:!!button?.classList.contains('active'),pressed:button?.getAttribute('aria-pressed'),shown:[...document.querySelectorAll('.card')].filter(el=>!el.hidden).length,top:rect?.top??9999,bottom:rect?.bottom??-9999,vh:innerHeight,viewport:innerWidth,documentWidth:document.documentElement.scrollWidth};})()");
+    const result=await evaluate("(() => { const filter="+JSON.stringify(filter)+"; const button=document.querySelector('[data-filter=\"'+filter+'\"]'); const wrap=document.getElementById('filters'); const rect=wrap?.getBoundingClientRect(); return {path:location.pathname,hash:location.hash,query:new URLSearchParams(location.search).get('filter'),active:!!button?.classList.contains('active'),pressed:button?.getAttribute('aria-pressed'),shown:[...document.querySelectorAll('.card')].filter(el=>!el.hidden).length,expiredShown:[...document.querySelectorAll('.card')].filter(el=>!el.hidden && el.dataset.dateStatus==='expired').length,emptyShown:!!document.getElementById('no-results')?.classList.contains('show'),emptyText:document.getElementById('no-results')?.textContent||'',top:rect?.top??9999,bottom:rect?.bottom??-9999,vh:innerHeight,viewport:innerWidth,documentWidth:document.documentElement.scrollWidth};})()");
     record('No signup landing redirect for '+filter,result.path.replace(/\/$/,'')==='/halloween-half-term-guide/guide',result.path);
     record('Filter query and anchor retained '+filter,result.query===filter&&result.hash==='#filters');
     record('Requested filter activated '+filter,result.active&&result.pressed==='true');
-    record('Filtered ideas visible '+filter,result.shown>0,String(result.shown));
+    record('Expired Halloween cards remain hidden '+filter,result.expiredShown===0,String(result.expiredShown));
+    const usefulEmptyState=result.emptyShown && /dated events have finished|no current activity matches/i.test(result.emptyText);
+    record(guideSeasonEnded?'Current results or honest expired-season fallback '+filter:'Filtered ideas visible '+filter,
+      guideSeasonEnded?(result.shown>0||usefulEmptyState):result.shown>0,
+      JSON.stringify({shown:result.shown,emptyShown:result.emptyShown,emptyText:result.emptyText}));
     record('Mobile filter controls visible '+filter,result.bottom>0&&result.top<result.vh*0.75,JSON.stringify({top:result.top,bottom:result.bottom,vh:result.vh}));
     record('Guide mobile width fits '+filter,result.documentWidth<=result.viewport+1,String(result.documentWidth)+'/'+String(result.viewport));
     if(filter==='rainy')await screenshot('halloween-rainy-filter-mobile.png');
   }
-  console.log('Current My SK8 actions, safely retired historic links and all eight Halloween Guide filters passed.');
+  console.log('Current My SK8 actions, safely retired historic links and season-accurate Halloween Guide filter states passed.');
 
 }finally{
   try{ws.close();}catch{}
