@@ -120,7 +120,7 @@ try{
   await screenshot('email-action-320-mobile.png');
   // Every filtered Halloween Guide link used in Issue 16 must remain direct, active and useful.
   await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:844,screenWidth:390,screenHeight:844,deviceScaleFactor:1,mobile:true});
-  const guideSeasonEnded=Boolean(await evaluate("typeof SK8GuideExpiry==='object' && SK8GuideExpiry.ukToday()>'2026-11-01'"));
+  const guideSeasonEnded=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/London'}).format(new Date())>'2026-11-01';
   const guideFilters=['local','free','under10','under5','primary','teen','rainy','send'];
   for(const filter of guideFilters){
     const guideUrl=BASE+'/halloween-half-term-guide/guide/?filter='+filter+'&utm_source=newsletter&utm_campaign=issue16_halloween#filters';
