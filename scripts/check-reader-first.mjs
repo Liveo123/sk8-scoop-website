@@ -89,12 +89,12 @@ assert.deepEqual(homepageData.explore.map(x=>x.title), priority,
   'Six useful non-duplicated categories match reader intent and live fallback');
 assert.ok(homepageData.explore.every(x=>x.status==='OPEN' && x.href && !x.href.includes('coming-soon')),
   'Category navigation must use live available pages');
-const featured=homepageData.stories.find(x=>x.mode==='DO' && x.title.includes('Woodford Bonfire'));
-assert.ok(featured, 'Current checked, time-bound event must be in authoritative homepage data');
-assert.equal(featured?.href,'/whats-on/?event=woodford-community-bonfire-2026-11-05',
-  'Featured event must link to the checked event listing, not the newsletter archive');
+const featured=homepageData.stories.find(x=>x.mode==='DO'&&x.href==='/whats-on/?filter=weekend');
+assert.ok(featured, 'Homepage DO feature must offer a usable, current local-events continuation');
+assert.ok(!featured.expires || featured.expires>=today,
+  'Featured local-events continuation must not be expired');
 assertIncludes(html,featured.href,'Fallback story URL matches live dynamic source');
-assertIncludes(html,'data-nue-type="verified-event-detail"','Featured event is a useful, checkable continuation');
+assertIncludes(html,'data-nue-type="current-events"','Featured event route is a genuine calendar continuation');
 assertIncludes(homepageJs,"'/free-cheap-guide/': '/free-cheap-guide/guide/'",
   'Returning subscribers get the full free/cheap guide');
 assertIncludes(homepageJs,"'/52-adventures/': '/52-adventures/guide/'",

@@ -69,7 +69,7 @@ requireText(v5, '.reader-proof{margin-top:0!important', 'tight proof spacing');
 
 // 3. Weekly picks have a proper editorial introduction.
 requireText(home, 'Know · Do · Discover', 'weekly-picks editorial framing');
-requireText(home, 'Gatley path changes, a Woodford Bonfire booking tip and a wonderfully odd piece of Heald Green history.', 'current-picks explanation');
+requireText(home, 'Gatley path changes, this weekend’s local events and a wonderfully odd piece of Heald Green history.', 'current-picks explanation');
 requireText(v4, '.home-worth-head', 'weekly-picks heading layout');
 
 // 4. Story cards are visually consistent and CTA-aligned.

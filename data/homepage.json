@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24",
+  "updated": "2026-11-09",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
@@ -19,18 +19,17 @@
     },
     {
       "mode": "DO",
-      "label": "BOOK AHEAD",
-      "title": "Woodford Bonfire: 5 November, tickets and travel",
-      "meta": "Woodford · Thursday 5 November · Ticket only",
-      "summary": "Two firework displays, advance tickets and no parking at the community centre. Check the organiser's current advice.",
-      "href": "/whats-on/?event=woodford-community-bonfire-2026-11-05",
-      "linkLabel": "See the event and booking details →",
-      "visualType": "dicm",
+      "label": "PLAN THIS WEEKEND",
+      "title": "What’s on around SK8 this weekend?",
+      "meta": "Cheadle · Cheadle Hulme · Gatley · Heald Green",
+      "summary": "Browse current dates, prices and booking information for local events and activities. Check the organiser’s latest details before heading out.",
+      "href": "/whats-on/?filter=weekend",
+      "linkLabel": "See this weekend’s listings →",
+      "visualType": "photo",
       "fit": "cover",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792772464/issue18-qa-asset-18.jpg",
-      "alt": "Original editorial illustration of a bonfire; not a photograph of the Woodford event",
-      "expires": "2026-11-05"
+      "image": "/assets/images/nue/explore-outdoors.webp",
+      "alt": "Illustrative outdoor scene for local ideas, not a photograph of a particular listed event"
     },
     {
       "mode": "DISCOVER",

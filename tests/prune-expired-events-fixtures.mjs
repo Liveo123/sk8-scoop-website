@@ -60,4 +60,15 @@ const invalidOcc={...series,occurrences:['2026-12-31']};
 const illegal=run([invalidOcc,future],[],true);
 assert.notEqual(illegal.status,0);
 assert.deepEqual(illegal.before,illegal.after,'invalid recurrence must fail before writing');
-console.log('Expiry safety net: dry-run, 14-event style retirement, historical handoff, idempotency, range, confirmed dates, exhausted series, no-core, invalid date and invalid occurrence passed.');
+const orphan = {id:'historical-missing',event_id:'not-in-active-json',
+  disposition:'whats_on',reason:'Previously featured, missing from active catalogue.'};
+const reconciled = run([future],[orphan],true);
+assert.equal(reconciled.status,0,reconciled.stderr);
+assert.equal(reconciled.handoffs[0].disposition,'whats_on_unavailable');
+assert.match(reconciled.handoffs[0].reason,/does not prove cancellation or expiry/);
+const reconciledAgain = run(reconciled.records,reconciled.handoffs,true);
+assert.deepEqual(reconciledAgain.before,reconciledAgain.after,'orphan reconciliation must be idempotent');
+const tooMany = run([future],Array.from({length:6},(_,i)=>({...orphan,id:'orphan'+i,event_id:'missing'+i})),true);
+assert.notEqual(tooMany.status,0,'unexpected wholesale disappearance must block changes');
+assert.deepEqual(tooMany.before,tooMany.after,'orphan safety guard must not write files');
+console.log('Expiry safety net: dry-run, 14-event style retirement, historical handoff, idempotency, range, confirmed dates, exhausted series, no-core, invalid date and invalid occurrence and orphan recovery passed.');
