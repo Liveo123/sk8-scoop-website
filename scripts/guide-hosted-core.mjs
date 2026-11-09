@@ -38,11 +38,11 @@ export function inventoryLinks(html) {
 // 'needs-review' entries are deliberately included until separately reviewed.
 export function inventoryCurrentLinks(html, today = guideExpiry.ukToday()) {
   const staticMarkup = html.replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, '');
-  const staticLinks = [...staticMarkup.matchAll(/<a\\b[^>]*\\bhref=(["'])(.*?)\\1/gi)].map(m => plain(m[2]));
+  const staticLinks = [...staticMarkup.matchAll(/<a\b[^>]*\bhref=(["'])(.*?)\1/gi)].map(m => plain(m[2]));
   const activeEntries = halloweenEntries(html).filter(entry =>
     !entry.retired && guideExpiry.status(entry.schedule, today) !== 'expired');
   return [...new Set([...staticLinks, ...activeEntries.map(entry => plain(entry.u))]
-    .filter(url => /^https:\\/\\//i.test(url)))];
+    .filter(url => /^https:\/\//i.test(url)))];
 }
 
 export function chooseSpread(items, limit) {
