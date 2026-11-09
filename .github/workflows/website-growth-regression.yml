@@ -1,0 +1,51 @@
+name: Growth header and Join regression
+on:
+  pull_request:
+    paths:
+      - 'assets/styles.css'
+      - 'assets/global-search.css'
+      - 'assets/global-search.js'
+      - 'assets/site.js'
+      - 'assets/config.js'
+      - 'join/index.html'
+      - 'sitemap.xml'
+      - 'scripts/check-header-layout.mjs'
+      - 'tests/website-growth-regression.mjs'
+      - '.github/workflows/website-growth-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-and-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Source consistency and contrast
+        run: node --test tests/website-growth-regression.mjs
+      - name: Start exact-commit local preview
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/sk8-web-server.log 2>&1 &
+          for i in $(seq 1 15); do
+            if curl -fsS http://127.0.0.1:8765/advertise.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/sk8-web-server.log
+          exit 1
+      - name: Test responsive header in Chrome
+        env:
+          HEADER_QA_BASE_URL: http://127.0.0.1:8765
+          CHROME: google-chrome
+        run: node scripts/check-header-layout.mjs
+      - name: Attach QA screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: growth-header-qa
+          path: visual-qa/header-layout/
+          if-no-files-found: ignore
