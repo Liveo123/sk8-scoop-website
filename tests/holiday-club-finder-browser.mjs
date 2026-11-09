@@ -36,13 +36,17 @@ const setFilter = async (name, value) => evalJS(
   JSON.stringify(value) + ';e.dispatchEvent(new Event("change",{bubbles:true}));return true;})()'
 );
 const count = async () => evalJS("document.querySelectorAll('#club-list .club-card').length");
+const seasonExpired = Date.now() >= Date.UTC(2026,10,1); // Same retirement boundary as the Finder.
 const screenshot = async name => {
   const value = await rpc('Page.captureScreenshot', {format:'png',captureBeyondViewport:false,fromSurface:true});
   await writeFile('visual-qa/holiday-club-finder/' + name, Buffer.from(value.data, 'base64'));
 };
 const goto = async () => {
   await rpc('Page.navigate', {url:BASE + '/kids-family/holiday-club-finder/'});
-  check(await ready("document.querySelectorAll('#club-list .club-card').length===28"), '28 club cards loaded');
+  check(await ready(seasonExpired?
+    "document.getElementById('expired')?.hidden===false":
+    "document.querySelectorAll('#club-list .club-card').length===28"),
+    seasonExpired?'Expired October finder notice loads':'28 club cards loaded');
 };
 try {
   await mkdir('visual-qa/holiday-club-finder', {recursive:true});
@@ -76,6 +80,7 @@ try {
   await goto();
   check(await evalJS("document.title.includes('Holiday Clubs')"),'Correct page title');
   check(await evalJS("document.querySelector('meta[name=robots]')?.content==='noindex,follow'"),'Seasonal finder stays non-indexed');
+  if (!seasonExpired) {
   check(await evalJS("document.querySelectorAll('#club-list .club-card a[href^=\"https://\"]').length===28"),'28 provider detail links, HTTPS');
   check(await evalJS("Boolean(document.getElementById('finder-join-free')) && document.getElementById('finder-join-free').getAttribute('href')==='/join/'"),'Optional newsletter continuation');
   check(await evalJS("document.querySelector('.finder-help')?.textContent.includes('HAF')"),'Official HAF guidance visible');
@@ -114,6 +119,35 @@ try {
     check(await evalJS("document.querySelector('#club-list .club-card').getBoundingClientRect().width<=innerWidth+1"),'Card fits phone at '+width+'px');
     check(await evalJS("document.getElementById('finder-join-free').getBoundingClientRect().height>=40"),'Join link tappable at '+width+'px');
     await screenshot('mobile-'+width+'.png');
+  }
+  } else {
+    check(await evalJS("document.getElementById('expired')?.hidden===false && document.getElementById('expired')?.textContent.includes('October 2026 is over')"),
+      'Expired October guide clearly labelled');
+    check(await count()===0,'No expired holiday club booking cards shown');
+    check(await evalJS("document.querySelector('.finder-filters')?.hidden===true"),
+      'Out-of-date date and age filters hidden');
+    check(await evalJS("document.getElementById('count')?.textContent.includes('expired')"),
+      'Results status explains expiry');
+    check(await evalJS("document.querySelector('#expired a[href=\"/kids-family/\"]')?.textContent.includes('current')"),
+      'Useful live family-content continuation without a signup barrier');
+    check(await evalJS("document.querySelectorAll('#club-list a').length===0"),
+      'No outdated October booking links offered');
+    check(await evalJS("document.getElementById('finder-join-free')?.getAttribute('href')==='/join/'"),
+      'Newsletter invitation remains optional');
+    check(await evalJS("document.documentElement.scrollWidth<=innerWidth+1"),
+      'Expired-state desktop layout fits');
+    await screenshot('desktop-expired.png');
+    for (const width of [390,360]) {
+      await rpc('Emulation.setDeviceMetricsOverride',{width,height:844,screenWidth:width,screenHeight:844,deviceScaleFactor:1,mobile:true});
+      await goto();
+      check(await count()===0,'Expired cards stay hidden at '+width+'px');
+      check(await evalJS("document.documentElement.scrollWidth<=document.documentElement.clientWidth+1"),
+        'Expired-state mobile layout fits at '+width+'px');
+      check(await evalJS("document.querySelector('#expired a')?.getBoundingClientRect().height>=28"),
+        'Current family link remains visible and operable at '+width+'px');
+      await screenshot('mobile-expired-'+width+'.png');
+    }
+    console.log('Seasonal finder correctly retires all October club cards and offers current family ideas.');
   }
   check(errors.length===0,'No uncaught browser errors: '+errors.length);
   console.log('Holiday Club Finder release-browser QA complete.');
