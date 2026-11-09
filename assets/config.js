@@ -53,8 +53,8 @@ window.SK8_CONFIG = {
     dateDisplay: "Friday 6 November 2026",
     title: "Issue 20 · Friday 6 November 2026",
     headline: "Your next two weekends: fireworks, films and street theatre",
-    summary: "Cheadle Hall beneath the Green, Stockport's Spectacular Sunday, free local ideas and the new community Noticeboard.",
-    url: "https://preview.mailerlite.io/preview/2462354/emails/203412139492247296"
+    summary: "Cheadle Hall beneath the Green, Stockport’s Spectacular Sunday, free local ideas and the new community Noticeboard.",
+    url: "/issues/issue-20/"
   },
   stripeLinks: {
     local_spotlight: "",
