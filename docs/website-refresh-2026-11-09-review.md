@@ -11,13 +11,13 @@ STATUS: PREVIEW ONLY — production approval not granted.
 - Stockport Spectacular Sunday current event entry and What's On highlight sourced from Stockport Council and Totally Stockport.
 
 ## Not complete / release blockers
-1. Issues 1–18 not comprehensively cross-checked article-by-article. Existing website has Issue 17/18 pages and older historical and outdoor features; remaining omissions need a tracked full audit.
+1. A 20-issue heading-level inventory and topic/URL disposition is recorded at `docs/issues-01-20-editorial-disposition-20261109.md`. Full paragraph-by-paragraph article verification and archive-link checks remain incomplete.
 2. Issue 19 and Issue 20 archive pages currently carry editorial story indexes, **not full newsletter text**, and are not substitutes for linked MailerLite browser versions.
-3. Existing What's On listing supply, future date accuracy, owner/cadence, filter implementation, expiry, and mobile QA must pass before claiming a complete launch. The new Spectacular Sunday highlight must disappear or be removed after 15 November 2026.
+3. The static What's On highlight was removed because automatic expiry was not confirmed. The merged #295 expiry fix cleaned the live source to 10 events; companion DRAFT PR #301 proposes 3 more, giving 13 verified-source future listings. Full cadence/filter/mobile QA and the larger target remain outstanding.
 4. The newly written pages are text-first. No photos were added without licence/approval. Source links should be click-tested and all pages should be reviewed at mobile widths.
 5. Issue 20 archive title/metadata reflects sent campaign. Retain campaign content and the resend as distinct, not merged editorial proof.
-6. Main-send performance figures deliberately remain unknown, rather than copying an outdated recipients number from Issue 18. Subscriber count is rounded, not a claimed live API total.
-7. Source branches or other parallel site PRs may supersede pages before merge. Rebase/reconcile before any publication.
+6. An additional St Mary's medieval crosses article is staged, checked against three Historic England records, without claiming a precise 11th-century date. Main-send performance figures deliberately remain unknown, rather than copying an outdated recipients number from Issue 18. Subscriber count is rounded, not a claimed live API total.
+7. PR #295 is merged. Before release, rebase/reconcile against the latest main and preserve its cleaned 10-record event feed; companion PR #301 adds three distinct entries.
 
 ## Pre-publication checks
 - Confirm latest GitHub main and current Cloudflare production revision.
@@ -33,3 +33,10 @@ STATUS: PREVIEW ONLY — production approval not granted.
 - https://gmoa.org.uk/borough_stockport/bruntwood-park-orienteering/
 - https://www.mdoc.org.uk/maps/bruntwood-park
 - https://cheadlearchive.omeka.net/collections/show/6
+
+## Additional QA completed 9 November 2026
+- Reviewed all 20 main sent MailerLite issue campaigns for topic/URL disposition, recording the results in the new 20-issue audit file.
+- Checked local href paths in ten changed HTML/config paths against the PR #296 GitHub tree: zero unmatched internal routes, a static check only.
+- PR #301 contains valid JSON with 13 distinct verified-source records; dates, source and checked date are present in the new rows. No full browser/mobile CI pass has been observed.
+- The primary archaeological project report confirms the Cheadle Hall excavation and historical details. The Cheadle Heritage Archive returned HTTP 429 and MDOC showed a verification challenge, requiring manual browser link checks.
+- Both PR #296 and PR #301 remain draft and NOT approved for production.
