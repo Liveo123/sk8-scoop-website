@@ -37,7 +37,7 @@ export function inventoryLinks(html) {
 // Historical dated links remain in inventoryLinks() and the source for editorial audit.
 // 'needs-review' entries are deliberately included until separately reviewed.
 export function inventoryCurrentLinks(html, today = guideExpiry.ukToday()) {
-  const staticMarkup = html.replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, '');
+  const staticMarkup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
   const staticLinks = [...staticMarkup.matchAll(/<a\b[^>]*\bhref=(["'])(.*?)\1/gi)].map(m => plain(m[2]));
   const activeEntries = halloweenEntries(html).filter(entry =>
     !entry.retired && guideExpiry.status(entry.schedule, today) !== 'expired');
