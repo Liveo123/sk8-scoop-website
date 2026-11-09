@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import {mkdir,writeFile} from 'node:fs/promises';
-import {inventoryImages,inventoryLinks,chooseSpread,sha256,probeImage,probeLink,safeUrl} from './guide-hosted-core.mjs';
+import {inventoryImages,inventoryLinks,inventoryCurrentLinks,chooseSpread,sha256,probeImage,probeLink,safeUrl} from './guide-hosted-core.mjs';
 
 const BASE=(process.env.GUIDE_QA_BASE_URL||'http://127.0.0.1:8769').replace(/\/$/,'');
 const IMAGE_LIMIT=Math.max(0,Math.min(30,Number(process.env.GUIDE_QA_IMAGE_LIMIT||'6')));
@@ -46,7 +46,13 @@ for(const [name,slug] of guides){
   const resolved=imageSamples.map(src=>({src,url:safeUrl(src,url)}));
   record.imageTotal=imageURLs.length;
   record.images=await concurrency(resolved,4,async({src})=>probeImage(src,url));
-  const allLinks=inventoryLinks(localHtml);
+  // Expired Halloween event cards are hidden from readers. Keep their URLs in
+  // the historical inventory, but check current browser-accessible links for release QA.
+  const historicalLinks=inventoryLinks(localHtml);
+  const allLinks=name==='Halloween'?inventoryCurrentLinks(localHtml):historicalLinks;
+  record.historicalExternalLinkCount=historicalLinks.length;
+  record.currentExternalLinkCount=allLinks.length;
+  record.archivedLinksExcludedFromCurrentProbe=historicalLinks.length-allLinks.length;
   const distinctHosts=[];
   const hostCount=new Map();
   for (const link of allLinks) {
@@ -66,6 +72,7 @@ for(const [name,slug] of guides){
     ' '+JSON.stringify(record.imageSummary)+
     '; external links sampled '+record.links.length+'/'+record.externalLinkTotal+
     ' '+JSON.stringify(record.linkSummary));
+  if(record.archivedLinksExcludedFromCurrentProbe) console.log(name+' archived dated links retained for source audit, excluded from current-link probe: '+record.archivedLinksExcludedFromCurrentProbe);
   for (const image of record.images.filter(x=>x.status!=='PASS')) console.log('IMAGE '+name+' '+image.status+' '+image.url+' '+image.reason);
   for (const link of record.links.filter(x=>x.kind!=='VERIFIED WORKING')) console.log('LINK '+name+' '+link.kind+' '+link.url+' '+(link.reason||link.note||''));
   if(STRICT_LOCAL && (!record.guideReachable || record.parity!=='PASS' ||

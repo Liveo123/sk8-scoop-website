@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
-import {inventoryImages,inventoryLinks,halloweenEntries,chooseSpread,safeUrl,imageSignature,probeImage,probeLink,sha256} from '../scripts/guide-hosted-core.mjs';
+import {inventoryImages,inventoryLinks,inventoryCurrentLinks,halloweenEntries,chooseSpread,safeUrl,imageSignature,probeImage,probeLink,sha256} from '../scripts/guide-hosted-core.mjs';
 
 const html='<img src="/guide/a.webp" alt="A"><img src="https://cdn.example.org/b.jpg">'+
   '<script id="image-data" type="application/json">'+JSON.stringify({brand:'/logo.webp',a1:'/guide/a.webp',a2:'https://cdn.example.org/b.jpg'})+'</script>'+
@@ -12,6 +12,23 @@ const dynamic='<script>const E=[{"u":"https://halloween.example.org/tickets","vi
 assert.equal(halloweenEntries(dynamic).length,1);
 assert.deepEqual(inventoryImages(dynamic),['assets/feature.webp']);
 assert.deepEqual(inventoryLinks(dynamic),['https://halloween.example.org/tickets']);
+// Date-aware live checks must not fail because a hidden October event URL went stale.
+// Retain all old source URLs in inventoryLinks for editorial/rights audit.
+const seasonal='<a href="https://example.org/current">Current static link</a><script>const E='+
+  JSON.stringify([
+    {u:'https://events.example.org/past',schedule:{kind:'dated',dates:['2026-10-20']}},
+    {u:'https://events.example.org/future',schedule:{kind:'dated',dates:['2026-11-20']}},
+    {u:'https://events.example.org/retired',retired:true,schedule:{kind:'dated',dates:['2026-11-20']}},
+    {u:'https://events.example.org/evergreen',schedule:{kind:'evergreen'}}
+  ])+';function visualFor(e){return e.visual}</script>';
+assert.equal(inventoryLinks(seasonal).length,5,'Historical URLs remain auditable');
+assert.deepEqual(inventoryCurrentLinks(seasonal,'2026-11-09'),[
+  'https://example.org/current','https://events.example.org/future','https://events.example.org/evergreen'
+],'Hidden expired/retired URLs do not count as current reader links');
+assert.deepEqual(inventoryCurrentLinks(seasonal,'2026-10-01'),[
+  'https://example.org/current','https://events.example.org/past',
+  'https://events.example.org/future','https://events.example.org/evergreen'
+],'An event remains live before its verified last date');
 assert.deepEqual(chooseSpread([1,2,3,4,5],3),[1,3,5]);
 assert.equal(safeUrl('javascript:alert(1)','https://www.sk8scoop.com/'),null);
 assert.equal(safeUrl('http://example.org/','https://www.sk8scoop.com/'),null);
