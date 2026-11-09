@@ -1,144 +1,140 @@
 {
-  "issue": 18,
-  "issue_date": "2026-10-23",
+  "issue": 20,
+  "issue_date": "2026-11-06",
   "final_issue_checked": true,
-  "checked_date": "2026-10-24",
-  "source": "As-sent MailerLite Issue 18 original campaign, council and organiser sources, verified website routes",
-  "scope": "Complete Issue 18 newsletter to website story, guide, events and search handoff. Advertiser paid copy remains separate from editorial.",
-  "previous_harvest": "data/website-harvest-issue17.json",
+  "checked_date": "2026-11-09",
+  "source": "The actually delivered SK8 Scoop Issue 20 email sent on 6 November 2026 and connected MailerLite campaign 203412139477567224 (status: sent); used for historical editorial inventory only, not as live organiser verification.",
+  "scope": "Final sent Issue 20 reviewed for selective website handoff. Past events are not promoted as current, prospective stories require original-source checks, and paid/email-only items are not silently converted to editorial web pages.",
+  "previous_harvest": "data/website-harvest-issue18.json",
+  "review_note": "This document confirms every named category's website disposition, not fact-by-fact independent verification of every organiser date, price, booking link or image right. Editorial review and owner approval remain separate release gates.",
   "items": [
     {
-      "id": "reda",
-      "title": "Reda's local history",
-      "disposition": "standalone_page",
-      "route": "/local-history/redas-boxing-kangaroo-heald-green/",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
-    },
-    {
-      "id": "paths",
-      "title": "Gatley Footpaths 48 and 51",
-      "disposition": "standalone_page",
-      "route": "/updates/gatley-footpath-closures-october-2026/",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
-    },
-    {
-      "id": "quarry",
-      "title": "Quarry Bank mapped walk",
-      "disposition": "standalone_page",
-      "route": "/outdoors/quarry-bank-southern-woods-walk/",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
-    },
-    {
-      "id": "anson",
-      "title": "Anson steam weekend",
-      "disposition": "whats_on_expired",
-      "event_id": "anson-engine-museum-steam-closing-weekend-2026-10-24",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-10-26; preserved as Issue 18 historical editorial handoff.]"
-    },
-    {
-      "id": "nixon",
-      "title": "Nixon's Halloween Play Special",
-      "disposition": "whats_on_unavailable",
-      "event_id": "nixons-halloween-play-special-heald-green-2026-10-31",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release. [No matching active event record on 2026-11-09; historical Issue 18 handoff preserved. This does not prove cancellation or expiry; editorial review should establish why the listing disappeared.]"
-    },
-    {
-      "id": "woodford",
-      "title": "Woodford Bonfire",
-      "disposition": "whats_on_expired",
-      "event_id": "woodford-community-bonfire-2026-11-05",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-11-09; preserved as Issue 18 historical editorial handoff.]"
-    },
-    {
-      "id": "market",
-      "title": "Stockport Alternative Market",
-      "disposition": "whats_on_expired",
-      "event_id": "stockport-halloween-alternative-market-2026-10-25",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-10-26; preserved as Issue 18 historical editorial handoff.]"
-    },
-    {
-      "id": "lego",
-      "title": "Stockroom Half-Term LEGO Club",
-      "disposition": "whats_on_unavailable",
-      "event_id": "stockroom-lego-club-october-half-term-2026",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release. [No matching active event record on 2026-11-09; historical Issue 18 handoff preserved. This does not prove cancellation or expiry; editorial review should establish why the listing disappeared.]"
-    },
-    {
-      "id": "ghost",
-      "title": "Stockport Museum ghost puppets",
-      "disposition": "whats_on_expired",
-      "event_id": "stockport-museum-ghost-puppets-2026-10-30",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-10-31; preserved as Issue 18 historical editorial handoff.]"
-    },
-    {
-      "id": "crafts",
-      "title": "Heald Green library crafts",
-      "disposition": "whats_on_unavailable",
-      "event_id": "heald-green-halloween-crafty-kids-2026-10-31",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release. [No matching active event record on 2026-11-09; historical Issue 18 handoff preserved. This does not prove cancellation or expiry; editorial review should establish why the listing disappeared.]"
-    },
-    {
-      "id": "stockroom-bsl",
-      "title": "Stockroom BSL Storytime",
-      "disposition": "whats_on_expired",
-      "event_id": "stockroom-bsl-signed-storytime-2026-10-26",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-10-27; preserved as Issue 18 historical editorial handoff.]"
-    },
-    {
-      "id": "half-term-guide",
-      "title": "Halloween & Half-Term Guide",
+      "id": "web-edition",
+      "title": "Issue 20 selected-story web companion",
       "disposition": "existing_surface",
-      "route": "/halloween-half-term-guide/guide/",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "route": "/issues/issue-20/",
+      "checked": "2026-11-09",
+      "reason": "Source-grounded on-site overview of confirmed sent Issue 20; full email remains accessible separately. The web companion is a partial editorial summary, not an exact email copy."
     },
     {
-      "id": "holiday-clubs",
-      "title": "October Holiday Club Finder",
+      "id": "cheadle-hall",
+      "title": "What lies beneath Cheadle Green?",
       "disposition": "no_web_add",
-      "checked": "2026-10-24",
-      "reason": "Already-promoted seasonal Holiday Club Finder is deliberately noindex, so do not add it to permanent search or sitemap; existing homepage and Kids & Family links preserved."
+      "checked": "2026-11-09",
+      "reason": "The sent Issue 20 email describes a 2010 archaeological investigation. The excavation report and reuse rights have not yet been independently reviewed for a permanent local-history page."
     },
     {
-      "id": "pointing-dog",
-      "title": "Pointing Dog set menu",
+      "id": "spectacular-sunday",
+      "title": "Stockport Spectacular Sunday, 15 November",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Dated event is described in the published email but is not present in the verified live What’s On data. Confirm council/organiser details before any fresh permanent event record."
+    },
+    {
+      "id": "manchester-fireworks",
+      "title": "Manchester free fireworks, 7 November",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-09",
+      "reason": "The date has passed as of 9 November; preserve as a historical Issue 20 reference, not an upcoming event."
+    },
+    {
+      "id": "transport-consultation",
+      "title": "Stockport transport strategy consultation closing 8 November",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-09",
+      "reason": "The response deadline has passed as of 9 November; do not present the old consultation as open."
+    },
+    {
+      "id": "symphony",
+      "title": "Stockport Symphony Orchestra concert, 7 November",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-09",
+      "reason": "The advertised concert date has passed; preserve the published email historical reference only."
+    },
+    {
+      "id": "stockroom-sound",
+      "title": "Stockroom community sound-system session, 7 November",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-09",
+      "reason": "The session date in the as-sent newsletter has passed. No claim is made about recurring availability."
+    },
+    {
+      "id": "animation-family-day",
+      "title": "Manchester Animation Festival family day, 8 November",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-09",
+      "reason": "The advertised family event is past. Do not relist based on an old email."
+    },
+    {
+      "id": "model-railways",
+      "title": "St Andrew’s Cheadle Hulme model railways, 14 November",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "An upcoming event in the published email, but a separate current organiser-source verification is required before making it a new What’s On listing."
+    },
+    {
+      "id": "noticeboard",
+      "title": "SK8 Community Noticeboard",
       "disposition": "existing_surface",
-      "route": "/food-drink/",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "route": "/noticeboard/",
+      "checked": "2026-11-09",
+      "reason": "Existing owned reader participation route; the sent issue promoted browsing and submitting notices for editorial review."
     },
     {
-      "id": "local-plan",
-      "title": "Local Plan deadline",
-      "disposition": "existing_surface",
-      "route": "/planning/heald-green-local-plan-2026/",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "id": "birth-prep-example",
+      "title": "Cheadle birth preparation community notice",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Example notice and dated sessions in the email; check the live notice and organiser before any additional promotion. No commercial endorsement implied."
     },
     {
-      "id": "issue-edition",
-      "title": "Published newsletter web edition",
-      "disposition": "existing_surface",
-      "route": "/issues/issue-18/",
-      "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "id": "bruntwood-orienteering",
+      "title": "Bruntwood Park orienteering",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Published in Issue 20 as an evergreen outing, but price and control-marker details need separate current verification. Do not restore this as a recurring newsletter walk feature."
     },
     {
-      "id": "owner-mapped-walk-unverified",
-      "title": "Requested Cheadle mapped walk",
-      "disposition": "do_not_publish",
-      "reason": "An independently navigable line, distance, accessibility and map rights were not verified; no invented route published."
+      "id": "manchester-christmas-markets",
+      "title": "Manchester Christmas Markets opening",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "The emailed opening-day information is historical and primarily outside core SK8; no separate web article without a stronger local reader case."
+    },
+    {
+      "id": "costume-exhibition",
+      "title": "Royal Exchange theatre costume exhibition",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Dated exhibition in Manchester in the sent email. Current opening details have not been independently confirmed for the website."
+    },
+    {
+      "id": "indian-tiffin-room",
+      "title": "Indian Tiffin Room Cheadle",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Food coverage was sent, but venue menu, serving times and current prices have not been independently rechecked for an indexed local story."
+    },
+    {
+      "id": "councillor-lane",
+      "title": "Councillor Lane overnight closures from 16 November",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Potentially important SK8 roadworks; independent council/road authority notice and actual diversion details required before a new permanent update."
+    },
+    {
+      "id": "reader-poll",
+      "title": "Issue 20 topic poll",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Email-specific reader poll remains in the sent newsletter; do not duplicate collection or assume Tally form availability on the website."
+    },
+    {
+      "id": "historical-photo",
+      "title": "Where Is This? historic photograph challenge",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Keep the original challenge in the sent edition until the historical image provenance and reuse rights are independently verified."
     }
   ]
 }
