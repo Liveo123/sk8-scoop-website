@@ -4,23 +4,18 @@ import core from '../assets/sk8-calendar-core.js';
 
 const base = (process.env.PREVIEW_URL || '').replace(/\/$/, '');
 if (!base) throw Error('PREVIEW_URL missing');
-const port = 9257;
+// Use the same hardened launch settings as the passing sitewide browser QA.
+const port = 9254;
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
-const chromeStartupErrors = [];
+let chromeStartupLog = '';
 const chrome = spawn(process.env.CHROME || 'google-chrome', [
   '--headless=new','--no-sandbox','--disable-gpu','--disable-dev-shm-usage',
   '--no-first-run','--disable-background-networking','--hide-scrollbars',
   '--remote-debugging-port=' + port,'--user-data-dir=/tmp/sk8-calendar-browser-' + process.pid,
   '--window-size=1366,900','about:blank'
 ],{stdio:['ignore','ignore','pipe']});
-// Preserve Chrome diagnostics rather than concealing why the browser failed to start.
-chrome.stderr?.on('data', buf => {
-  const line = String(buf);
-  chromeStartupErrors.push(line.slice(0, 1500));
-  if (chromeStartupErrors.length > 30) chromeStartupErrors.shift();
-  if (/FATAL|DevTools listening|ERROR/i.test(line)) process.stderr.write(line.slice(0, 900));
-});
-chrome.on('error', error => chromeStartupErrors.push('spawn error: ' + String(error)));
+chrome.on('error', error => { chromeStartupLog += '\nspawn: ' + error.message; });
+chrome.stderr.on('data', chunk => { chromeStartupLog = (chromeStartupLog + String(chunk)).slice(-6000); });
 let ws, serial = 0;
 const promises = new Map(), errors = [];
 const check = (condition, message) => {if(!condition) throw Error('FAIL: ' + message); console.log('PASS: ' + message);};
@@ -45,15 +40,22 @@ try {
   await mkdir('visual-qa/calendar',{recursive:true});
   let ready=false;
   for(let i=0;i<150;i++){
-    try{const r=await fetch('http://127.0.0.1:'+port+'/json/version');if(r.ok){ready=true;break;}}catch{}
-    if (chrome.exitCode !== null) break;
+    try{
+      const r=await fetch('http://127.0.0.1:'+port+'/json/version',{
+        signal: AbortSignal.timeout(1000)
+      });
+      if(r.ok){ready=true;break;}
+    }catch{}
+    if(chrome.exitCode!==null)break;
     await pause(200);
   }
-  if (!ready) console.error('Chrome startup diagnostics', JSON.stringify({
-    command: process.env.CHROME || 'google-chrome',
-    exitCode: chrome.exitCode, signalCode: chrome.signalCode,
-    stderr: chromeStartupErrors.slice(-10)
-  }));
+  if(!ready){
+    console.error('Chrome launch diagnostic:',{
+      binary:process.env.CHROME||'google-chrome',
+      exitCode:chrome.exitCode,signalCode:chrome.signalCode,
+      stderr:chromeStartupLog.slice(-4500)
+    });
+  }
   check(ready,'Chrome starts');
   const tab=await(await fetch('http://127.0.0.1:'+port+'/json/new?about:blank',{method:'PUT'})).json();
   ws=new WebSocket(tab.webSocketDebuggerUrl);
