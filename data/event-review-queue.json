@@ -301,17 +301,237 @@
       "date": "2026-11-18",
       "time": "10:00",
       "area": "Stockport",
-      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PR",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
       "cost": "Free",
       "category": "Community / Talks",
       "source_url": "https://www.stockroomsk.co.uk/events/stockport-climate-and-nature-summit?date=2026-11-18",
       "discovered": "2026-11-09",
       "checked": "2026-11-09",
-      "reason": "Official Stockroom page confirms date, start and free admission. Check booking destination, end time and capacity before moving to ready. Wider-area inclusion justified by substantive community talks and hands-on family sessions.",
+      "reason": "Official organiser event page confirms date, start and FREE sessions, including children's nature crafts and resilience workshops. Check session-specific booking availability and end times before publication.",
       "missing": [
         "booking destination",
         "end time / session selection",
         "availability"
+      ]
+    },
+    {
+      "id": "stockroom-knit-natter-2026-11-10",
+      "title": "Knit & Natter at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-10",
+      "time": "11:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Creative / Social",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-youth-night-2026-11-12",
+      "title": "Youth Night at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-12",
+      "time": "17:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Young people / Community",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-friday-drum-circle-2026-11-13",
+      "title": "Friday Drum Circle at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-13",
+      "time": "16:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Music / Community",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-brews-boardgames-2026-11-16",
+      "title": "Brews & Boardgames at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-16",
+      "time": "10:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Social / Games",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-ip-business-2026-11-17",
+      "title": "Build A Business: Intellectual Property",
+      "status": "needs_check",
+      "date": "2026-11-17",
+      "time": "10:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Business / Learning",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-knit-natter-2026-11-17",
+      "title": "Knit & Natter at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-17",
+      "time": "11:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Creative / Social",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-tarot-beginners-2026-11-19",
+      "title": "Tarot Reading for Beginners at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-19",
+      "time": "17:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Learning / Creative",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-friday-drum-circle-2026-11-20",
+      "title": "Friday Drum Circle at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-20",
+      "time": "16:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Music / Community",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-brews-boardgames-2026-11-23",
+      "title": "Brews & Boardgames at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-23",
+      "time": "10:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Social / Games",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-knit-natter-2026-11-24",
+      "title": "Knit & Natter at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-24",
+      "time": "11:00",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Creative / Social",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
+      ]
+    },
+    {
+      "id": "stockroom-qi-gong-2026-11-29",
+      "title": "Sunday Qi Gong at Stockroom",
+      "status": "needs_check",
+      "date": "2026-11-29",
+      "time": "11:30",
+      "area": "Stockport",
+      "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PW",
+      "category": "Wellbeing / Fitness",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09",
+      "reason": "Official Stockroom forward event calendar confirms the named occurrence and start time. Before publication, check that occurrence's individual primary page for price, attendance restrictions, bookings, availability and duration. Wider-Stockport relevance must be justified by reader benefit; do not automatically promote all recurring sessions.",
+      "missing": [
+        "confirmed price",
+        "individual event booking and capacity",
+        "session duration",
+        "local relevance gate"
       ]
     }
   ]
