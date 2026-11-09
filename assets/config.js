@@ -38,23 +38,23 @@ window.SK8_CONFIG = {
   publicStats: {
     subscriberCount: "800+",
     subscriberProof: "800+",
-    issuesPublished: 18,
+    issuesPublished: 20,
     checkedDate: "26 October 2026",
-    latestMainSendRecipients: 774,
+    latestMainSendRecipients: 871,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "23 October 2026",
+    latestIssueDate: "6 November 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 18,
-    dateIso: "2026-10-23",
-    dateDisplay: "Friday 23 October 2026",
-    title: "Issue 18 · Friday 23 October 2026",
-    headline: "Anson steam weekend, a boxing kangaroo and Gatley path closures",
-    summary: "Anson Museum steam weekend, Reda's boxing-kangaroo recollection, Gatley footpath changes, holiday clubs and useful half-term ideas.",
-    url: "/issues/issue-18/"
+    number: 20,
+    dateIso: "2026-11-06",
+    dateDisplay: "Friday 6 November 2026",
+    title: "Issue 20 · Friday 6 November 2026",
+    headline: "Your next two weekends: fireworks, films and street theatre",
+    summary: "Cheadle Hall beneath the Green, Stockport's Spectacular Sunday, free local ideas and the new community Noticeboard.",
+    url: "https://preview.mailerlite.io/preview/2462354/emails/203412139492247296"
   },
   stripeLinks: {
     local_spotlight: "",
