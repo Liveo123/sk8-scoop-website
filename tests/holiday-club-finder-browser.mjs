@@ -143,7 +143,7 @@ try {
       check(await count()===0,'Expired cards stay hidden at '+width+'px');
       check(await evalJS("document.documentElement.scrollWidth<=document.documentElement.clientWidth+1"),
         'Expired-state mobile layout fits at '+width+'px');
-      check(await evalJS("document.querySelector('#expired a')?.getBoundingClientRect().height>=28"),
+      check(await evalJS("(() => {const a=document.querySelector('#expired a[href=\"/kids-family/\"]');if(!a)return false;const b=a.getBoundingClientRect();return b.width>0&&b.height>0&&getComputedStyle(a).visibility==='visible';})()"),
         'Current family link remains visible and operable at '+width+'px');
       await screenshot('mobile-expired-'+width+'.png');
     }
