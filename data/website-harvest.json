@@ -42,18 +42,18 @@
     {
       "id": "nixon",
       "title": "Nixon's Halloween Play Special",
-      "disposition": "whats_on",
+      "disposition": "whats_on_unavailable",
       "event_id": "nixons-halloween-play-special-heald-green-2026-10-31",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Transferred from the sent Issue 18 and source-checked website release. [No matching active event record on 2026-11-09; historical Issue 18 handoff preserved. This does not prove cancellation or expiry; editorial review should establish why the listing disappeared.]"
     },
     {
       "id": "woodford",
       "title": "Woodford Bonfire",
-      "disposition": "whats_on",
+      "disposition": "whats_on_expired",
       "event_id": "woodford-community-bonfire-2026-11-05",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Transferred from the sent Issue 18 and source-checked website release. [Expired and removed from live event data on 2026-11-09; preserved as Issue 18 historical editorial handoff.]"
     },
     {
       "id": "market",
@@ -66,10 +66,10 @@
     {
       "id": "lego",
       "title": "Stockroom Half-Term LEGO Club",
-      "disposition": "whats_on",
+      "disposition": "whats_on_unavailable",
       "event_id": "stockroom-lego-club-october-half-term-2026",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Transferred from the sent Issue 18 and source-checked website release. [No matching active event record on 2026-11-09; historical Issue 18 handoff preserved. This does not prove cancellation or expiry; editorial review should establish why the listing disappeared.]"
     },
     {
       "id": "ghost",
@@ -82,10 +82,10 @@
     {
       "id": "crafts",
       "title": "Heald Green library crafts",
-      "disposition": "whats_on",
+      "disposition": "whats_on_unavailable",
       "event_id": "heald-green-halloween-crafty-kids-2026-10-31",
       "checked": "2026-10-24",
-      "reason": "Transferred from the sent Issue 18 and source-checked website release."
+      "reason": "Transferred from the sent Issue 18 and source-checked website release. [No matching active event record on 2026-11-09; historical Issue 18 handoff preserved. This does not prove cancellation or expiry; editorial review should establish why the listing disappeared.]"
     },
     {
       "id": "stockroom-bsl",

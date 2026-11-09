@@ -64,13 +64,33 @@ for (const item of harvest.items) {
     changedHandoffs++;
   }
 }
+// Recover historical issue handoffs removed outside the expiry-only path.
+// The source record is no longer live, but removal alone does not prove event cancellation.
+const activeIds = new Set(retained.map(e => e.id));
+let missingHistoricalHandoffs = 0;
+for (const item of harvest.items) {
+  if ((item.disposition === 'whats_on' || item.disposition === 'whats_on_sold_out') &&
+      item.event_id && !activeIds.has(item.event_id) && !expiredIds.has(item.event_id)) {
+    item.disposition = 'whats_on_unavailable';
+    item.reason = String(item.reason || 'Previously published event').trim() +
+      ' [No matching active event record on ' + today + '; historical Issue ' +
+      String(harvest.issue ?? '?') +
+      ' handoff preserved. This does not prove cancellation or expiry; editorial review should establish why the listing disappeared.]';
+    missingHistoricalHandoffs++;
+    changedHandoffs++;
+  }
+}
+// A large drop in active-source matches signals data corruption, not routine expiry.
+if (missingHistoricalHandoffs > 5) {
+  throw new Error('More than five missing historical event records; manual review required before changing files.');
+}
 console.log(JSON.stringify({
   london_date:today, total:events.length, expired:expired.length,
   current:retained.length, current_core:retained.filter(e=>core.has(e.area)).length,
-  historical_handoffs_updated:changedHandoffs, expired_ids:[...expiredIds]
+  historical_handoffs_updated:changedHandoffs, missing_historical_handoffs_reconciled:missingHistoricalHandoffs, expired_ids:[...expiredIds]
 }));
-if (apply && expired.length) {
-  fs.writeFileSync(eventsPath, JSON.stringify(retained, null, 2) + '\n');
+if (apply && (expired.length || changedHandoffs)) {
+  if (expired.length) fs.writeFileSync(eventsPath, JSON.stringify(retained, null, 2) + '\n');
   if (changedHandoffs) fs.writeFileSync(harvestPath, JSON.stringify(harvest, null, 2) + '\n');
   console.log('Applied expiry-only cleanup; no source checked dates changed.');
 } else {
