@@ -69,6 +69,25 @@ CREATE TABLE IF NOT EXISTS business_submissions (
 CREATE INDEX IF NOT EXISTS idx_business_submissions_status ON business_submissions(status);
 CREATE INDEX IF NOT EXISTS idx_business_submissions_type ON business_submissions(submission_type);
 
+-- Per-submission transactional email audit. Separate from editorial moderation.
+-- Rows are created by the business-submission worker on submission.
+CREATE TABLE IF NOT EXISTS business_submission_notifications (
+  submission_id INTEGER PRIMARY KEY,
+  inbox_status TEXT NOT NULL DEFAULT 'pending',
+  acknowledgement_status TEXT NOT NULL DEFAULT 'pending',
+  inbox_message_id TEXT,
+  acknowledgement_message_id TEXT,
+  inbox_last_error TEXT,
+  acknowledgement_last_error TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_business_submission_notifications_inbox
+  ON business_submission_notifications(inbox_status);
+CREATE INDEX IF NOT EXISTS idx_business_submission_notifications_ack
+  ON business_submission_notifications(acknowledgement_status);
+
+
 CREATE TABLE IF NOT EXISTS subscriber_preferences (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  email TEXT NOT NULL UNIQUE,
