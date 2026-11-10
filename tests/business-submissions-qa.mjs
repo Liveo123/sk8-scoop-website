@@ -122,7 +122,7 @@ try {
   const failed=await post({...valid,official_url:''},{DB:db2.db,RESEND_API_KEY:'mock-api-key'});
   assert.equal(failed.status,200);
   assert.match(failed.body.message,/saved, but the confirmation email could not be sent/);
-  assert.match(failed.body.message,/internal email alert is delayed/);
+  assert.match(failed.body.message,/internal email alert was not sent/);
   assert.equal(db2.queries.filter(x=>x.sql.startsWith('INSERT INTO business_submissions ')).length,1);
   const failures=db2.queries.filter(x=>x.sql.startsWith('UPDATE business_submission_notifications'));
   assert.equal(failures.length,2);
