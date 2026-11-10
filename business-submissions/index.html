@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Submit local information | SK8 Scoop</title>
-  <meta name="description" content="Send SK8 Scoop accurate events, openings, offers, jobs, classes and useful community information for review.">
+  <title>Send us your local news for free | SK8 Scoop</title>
+  <meta name="description" content="Submit local events, openings, offers, jobs and community notices to SK8 Scoop for free. Just send us the details.">
   <link rel="canonical" href="https://www.sk8scoop.com/business-submissions/">
-  <meta property="og:title" content="Submit local information | SK8 Scoop">
+  <meta property="og:title" content="Send us your local news for free | SK8 Scoop">
   <meta property="og:description" content="Send SK8 Scoop accurate events, openings, offers, jobs, classes and useful community information for review.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.sk8scoop.com/business-submissions/">
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../assets/participation-pages-v2.css">
   <link rel="stylesheet" href="../assets/review-fixes-v1.css">
   <link rel="stylesheet" href="../assets/qa-fixes-v1.css">
+  <link rel="stylesheet" href="../assets/business-submissions.css">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -43,103 +44,95 @@
   </header>
 
   <main id="main-content">
-    <section class="page-hero submit-hero">
-      <div class="wrap submit-hero-grid">
-        <div>
-          <div class="eyebrow">Events · openings · offers · jobs · useful updates</div>
-          <h1>Got something useful for people around SK8?</h1>
-          <p class="hero-lead">Send accurate, current local information for editorial review, or ask about a clearly labelled sponsored placement.</p>
-          <div class="micro-proof"><span>Free to submit</span><span>Editorial review</span><span>No publication guarantee</span></div>
+    <section class="business-entry">
+      <div class="wrap business-entry-grid">
+        <div class="business-entry-main">
+          <p class="eyebrow">SK8 Scoop · Free local submissions</p>
+          <h1>Got something local to share?</h1>
+          <p class="business-lead">Tell us about an event, new opening, offer, job, class or community notice. You don't need to write a press release. We'll check the details and decide what might be useful to local readers.</p>
+
+          <form class="form-card business-fast-form" action="/api/business-submission" method="post" data-api-form data-form-kind="business-submission" data-success-event="business_submission_completed" aria-label="Submit local information for free">
+            <p class="business-required-note">Just four things to complete. Fields marked * are required.</p>
+
+            <label for="business-type">What are you sharing? <span class="required-mark" aria-hidden="true">*</span></label>
+            <select id="business-type" name="submission_type" required>
+              <option value="">Choose one</option>
+              <option value="event">An event</option>
+              <option value="opening">A new opening or launch</option>
+              <option value="offer">An offer or saving</option>
+              <option value="class">A class, club or activity</option>
+              <option value="job">A local job</option>
+              <option value="community_information">A community notice or useful local update</option>
+            </select>
+
+            <label for="business-details">Tell us about it <span class="required-mark" aria-hidden="true">*</span></label>
+            <p class="field-hint" id="business-details-help">In your own words. Include where and when, if relevant. A few sentences are plenty.</p>
+            <textarea id="business-details" name="details" required minlength="8" maxlength="1800" rows="5" aria-describedby="business-details-help" placeholder="For example: Our community craft morning is on Saturday at the village hall. It's free and everyone is welcome."></textarea>
+
+            <label for="business-url">Website, booking or social link <span class="optional-mark">(optional)</span></label>
+            <p class="field-hint" id="business-url-help">You can paste a link or just type example.co.uk. No https:// needed.</p>
+            <input id="business-url" name="official_url" type="text" inputmode="url" maxlength="500" autocomplete="url" aria-describedby="business-url-help" placeholder="example.co.uk/our-event">
+
+            <label for="business-email">Your email address <span class="required-mark" aria-hidden="true">*</span></label>
+            <p class="field-hint" id="business-email-help">Only for a receipt and questions about your submission. This won't subscribe you to emails.</p>
+            <input id="business-email" name="email" type="email" autocomplete="email" maxlength="200" required aria-describedby="business-email-help" placeholder="you@example.co.uk">
+
+            <details class="business-more">
+              <summary>Have more details to add? <span>(optional)</span></summary>
+              <div class="business-more-fields">
+                <label for="business-org">Organisation or business name</label>
+                <input id="business-org" name="organisation_name" maxlength="180" autocomplete="organization">
+                <div class="business-more-grid">
+                  <div>
+                    <label for="business-area">Local area</label>
+                    <select id="business-area" name="area">
+                      <option value="">Choose if relevant</option>
+                      <option>Cheadle</option><option>Cheadle Hulme</option><option>Gatley</option><option>Heald Green</option><option>Nearby SK8</option><option>Wider Stockport — worth the trip</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="business-date">Date</label>
+                    <input id="business-date" type="date" name="relevant_date">
+                  </div>
+                </div>
+                <label for="business-price">Price or cost</label>
+                <input id="business-price" name="cost_or_pay" maxlength="160" placeholder="Free, £5 or other details">
+                <label for="business-name">Your name</label>
+                <input id="business-name" name="contact_name" autocomplete="name" maxlength="120">
+                <label for="business-image">Photograph link or image permission</label>
+                <input id="business-image" name="image_note" maxlength="500" placeholder="Optional link, or who owns the image">
+              </div>
+            </details>
+
+            <label class="checkbox-row business-consent" for="business-privacy">
+              <input id="business-privacy" type="checkbox" name="privacy_confirmed" value="yes" required>
+              <span>I agree that SK8 Scoop may store these details, send a confirmation email and contact me to check the information. <a href="../privacy.html">Privacy information</a>. <span class="required-mark" aria-hidden="true">*</span></span>
+            </label>
+
+            <div class="business-honeypot" aria-hidden="true">
+              <label for="business-fax">Company fax</label>
+              <input id="business-fax" type="text" name="company_fax" tabindex="-1" autocomplete="off">
+            </div>
+            <input type="hidden" name="sk8_started_at" value="">
+
+            <button class="button wide-button business-submit" type="submit">Send my free submission</button>
+            <p class="business-under-button">Free to submit. We check information before publication, and inclusion isn't guaranteed.</p>
+            <div class="status-box" data-form-status role="status" aria-live="polite"></div>
+          </form>
         </div>
-        <aside class="submission-brief-board" aria-label="What a useful local submission needs">
-          <span class="submission-brief-label">Before you send it</span>
-          <h2>Five things that make a local tip usable.</h2>
-          <div class="submission-brief-list">
-            <div><span>01</span><strong>What is it?</strong></div>
-            <div><span>02</span><strong>Who is it genuinely useful for?</strong></div>
-            <div><span>03</span><strong>When and where is it happening?</strong></div>
-            <div><span>04</span><strong>What does it cost?</strong></div>
-            <div><span>05</span><strong>Where can the details be checked?</strong></div>
-          </div>
-        </aside>
-      </div>
-    </section>
 
-    <section class="section white">
-      <div class="wrap">
-        <div class="section-kicker-row">
-          <div><div class="eyebrow">What can be submitted?</div><h2>One form for the useful local stuff.</h2></div>
-          <p>Editorial inclusion is based on usefulness, relevance, timeliness and verification, not payment.</p>
-        </div>
-
-        <div class="submission-types">
-          <article><span>EVENT</span><h3>Dates and activities</h3><p>Family events, community days, workshops, performances and sessions.</p></article>
-          <article><span>NEW</span><h3>Openings and launches</h3><p>New cafés, shops, services and genuinely useful local changes.</p></article>
-          <article><span>SAVE</span><h3>Offers and savings</h3><p>Clear local offers with dates, terms and a worthwhile reader benefit.</p></article>
-          <article><span>LOCAL</span><h3>Jobs and community info</h3><p>Local vacancies, classes, clubs, notices and practical updates.</p></article>
-        </div>
-
-        <section class="submission-review-board" aria-labelledby="review-board-title">
-          <div class="submission-review-head">
-            <div><div class="eyebrow">Editorial review DICM</div><h2 id="review-board-title">How a tip becomes something publishable</h2></div>
-            <p>The point is not to collect everything. It is to turn useful, checkable local information into something a reader can act on.</p>
+        <aside class="business-aside">
+          <div class="business-trust">
+            <h2>What happens next?</h2>
+            <p>We'll email you to confirm we've received it. Then we review what's useful, local and checkable.</p>
+            <p>We may ask for more details. You won't need to fill in the whole form again.</p>
+            <a href="../editorial-policy.html">How we choose what to publish</a>
           </div>
-          <div class="submission-review-flow">
-            <article class="submission-review-step"><small>01 / LOCAL</small><strong>Is it actually SK8-relevant?</strong><span>Specific place, audience or local consequence.</span></article>
-            <article class="submission-review-step"><small>02 / CURRENT</small><strong>Is the timing still useful?</strong><span>Dates, deadlines and availability checked.</span></article>
-            <article class="submission-review-step"><small>03 / VERIFIED</small><strong>Can the facts be checked?</strong><span>Official source, organiser or responsible contact.</span></article>
-            <article class="submission-review-step"><small>04 / USEFUL</small><strong>Why should a reader care?</strong><span>Clear benefit, change, saving or reason to know.</span></article>
-            <article class="submission-review-step result"><small>05 / RESULT</small><strong>Publish, hold or ask</strong><span>Useful facts move forward. Weak ones do not.</span></article>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <section class="section soft-teal">
-      <div class="wrap form-layout">
-        <form class="form-card premium-form long-form" action="/api/business-submission" method="post" data-api-form data-form-kind="business-submission" data-success-event="business_submission_completed">
-          <div class="form-step"><span>1</span><div><h2>What are you submitting?</h2><p>Choose the closest type and give us the headline facts.</p></div></div>
-          <div class="field-grid">
-            <label>Submission type<select name="submission_type" required><option value="">Choose one</option><option value="event">Event</option><option value="opening">New opening or launch</option><option value="offer">Offer or saving</option><option value="class">Class, club or activity</option><option value="job">Local job</option><option value="community_information">Community or practical information</option><option value="advertising_enquiry">Advertising enquiry</option></select></label>
-            <label>Organisation or business<input name="organisation_name" required></label>
-          </div>
-          <label>Headline or item name<input name="title" placeholder="Keep it clear and factual" required></label>
-          <div class="field-grid">
-            <label>Main area<select name="area" required><option value="">Choose area</option><option>Cheadle</option><option>Cheadle Hulme</option><option>Gatley</option><option>Heald Green</option><option>Nearby SK8</option><option>Wider Stockport — worth the trip</option></select></label>
-            <label>Relevant date <small>(if applicable)</small><input type="date" name="relevant_date"></label>
-          </div>
-          <label>Price, offer, pay or “Free” <small>(if applicable)</small><input name="cost_or_pay" placeholder="e.g. Free, £5, £12/hour, 10% off until 31 August"></label>
-          <label>Official page where details can be checked<input type="url" name="official_url" placeholder="https://" required></label>
-
-          <div class="form-step"><span>2</span><div><h2>Why should readers care?</h2><p>Give the details needed to understand and verify it.</p></div></div>
-          <label>Useful details<textarea name="details" required placeholder="Include dates, times, location, booking route, audience, restrictions and why this is useful for SK8 readers."></textarea></label>
-          <label>Image permission or image link <small>(optional)</small><input name="image_note" placeholder="Link to an image you own, or explain who can give permission"></label>
-
-          <div class="form-step"><span>3</span><div><h2>Who can confirm it?</h2><p>These details are for verification and are not automatically published.</p></div></div>
-          <div class="field-grid">
-            <label>Contact name<input name="contact_name" autocomplete="name" required></label>
-            <label>Email<input type="email" name="email" autocomplete="email" required></label>
-          </div>
-          <label>Interested in sponsored placement?<select name="sponsored_interest"><option value="no">No — editorial consideration only</option><option value="possibly">Possibly — send information</option><option value="yes">Yes — discuss a local campaign</option></select></label>
-          <label class="checkbox-row"><input type="checkbox" name="accuracy_confirmed" value="yes" required><span>I confirm the information is accurate and current.</span></label>
-          <label class="checkbox-row"><input type="checkbox" name="terms_accepted" value="yes" required><span>I understand that submission does not guarantee publication and that editorial inclusion is separate from advertising.</span></label>
-          <button class="button wide-button" type="submit">Send local information for review</button>
-          <div class="status-box" data-form-status aria-live="polite"></div>
-        </form>
-
-        <aside class="submission-sidebar">
-          <div class="policy-panel sticky-panel">
-            <h3>What gets prioritised</h3>
-            <ul class="clean-list checks"><li>Strong SK8 relevance</li><li>Useful dates, prices and links</li><li>Free or affordable family value</li><li>Important practical updates</li><li>Something genuinely new or distinctive</li></ul>
-            <h3>What usually gets held back</h3>
-            <ul class="clean-list cross-list"><li>Expired or vague information</li><li>No checkable source</li><li>Ordinary promotion with no reader value</li><li>Claims that cannot be supported</li></ul>
-            <a class="text-link arrow-link" href="../editorial-policy.html">Read the editorial policy</a>
-          </div>
-          <div class="sponsor-nudge">
-            <span>NEED GUARANTEED VISIBILITY?</span>
-            <h3>Editorial review cannot be bought.</h3>
-            <p>Suitable organisations can separately discuss a clearly labelled paid campaign.</p>
-            <a class="button secondary" href="../advertise.html">See advertising options</a>
+          <div class="business-paid">
+            <span class="business-paid-label">Separate from free submissions</span>
+            <h2>Want to pay for an advert?</h2>
+            <p>Our clearly labelled advertising is separate from SK8 Scoop's editorial decisions.</p>
+            <a href="../advertise.html">Explore advertising options</a>
           </div>
         </aside>
       </div>
@@ -156,6 +149,7 @@
   </footer>
 
   <script src="../assets/config.js"></script>
+  <script src="../assets/business-submissions.js"></script>
   <script src="../assets/site.js"></script>
 </body>
 </html>
