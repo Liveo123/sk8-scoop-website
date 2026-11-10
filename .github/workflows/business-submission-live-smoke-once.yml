@@ -1,0 +1,74 @@
+name: One-time business submission delivery smoke
+
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - '.github/workflows/business-submission-live-smoke-once.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  production-delivery-test:
+    if: github.event.pull_request.head.ref == 'test/business-submissions-live-smoke-20261111'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run one approved test submission against the deployed form
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+
+          const pageUrl = 'https://www.sk8scoop.com/business-submissions/';
+          const apiUrl = 'https://www.sk8scoop.com/api/business-submission';
+          let deployed = false;
+          for (let attempt = 1; attempt <= 4; attempt++) {
+            const res = await fetch(pageUrl, { cache: 'no-store' });
+            const html = await res.text();
+            if (res.ok && html.includes('business-fast-form') && html.includes('Send my free submission')) {
+              deployed = true;
+              break;
+            }
+            console.log('Form not yet live; check '+attempt+'/4 (HTTP '+res.status+')');
+            if (attempt < 4) await new Promise(resolve=>setTimeout(resolve,15000));
+          }
+          assert(deployed, 'New page is not active. No live submission was made.');
+          console.log('PASS: deployed submission page contains the new form.');
+
+          // One expressly approved internal test; not a real community item.
+          // Using the SK8 contact inbox avoids sending mail to an uninvolved person.
+          const payload = {
+            submission_type: 'community_information',
+            details: 'INTERNAL SYSTEM TEST ONLY 11 NOVEMBER 2026. Please disregard. This is not a real event or notice. Used to confirm the SK8 Scoop submission form, database and two transactional email notifications after approved deployment.',
+            email: 'contact@sk8scoop.com',
+            privacy_confirmed: 'yes',
+            organisation_name: 'SK8 Scoop internal QA',
+            official_url: 'www.sk8scoop.com',
+            sk8_started_at: Date.now() - 3200
+          };
+          const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json', origin: 'https://www.sk8scoop.com' },
+            body: JSON.stringify(payload)
+          });
+          const text = await res.text();
+          console.log('Live API HTTP status:',res.status);
+          let body;
+          try { body = JSON.parse(text); } catch { throw Error('Submission endpoint returned non-JSON data'); }
+          if (!res.ok) {
+            console.error('Live submission rejected:',body.error || 'Unknown error');
+            process.exitCode=1;
+          } else {
+            assert(Number.isInteger(body.submissionId) && body.submissionId > 0,'Database reference was not returned');
+            console.log('D1 submission reference:',body.submissionId);
+            console.log('API acknowledgement:',body.message);
+            assert(/confirmation email is on its way/i.test(String(body.message||'')),'Resend customer receipt was not accepted');
+            assert(!/internal email alert was not sent/i.test(String(body.message||'')),'Resend inbox alert was not accepted');
+            console.log('PASS: one D1 submission saved; both Resend requests accepted. Check provider delivery status separately.');
+          }
+          NODE
