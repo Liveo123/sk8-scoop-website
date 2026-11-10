@@ -81,6 +81,9 @@ for (const [index,event] of events.entries()) {
   for (const key of ['source_url','booking_url']) {
     const value = String(event[key] || '').trim();
     if (value && !/^https:\/\//.test(value)) failures.push(`${event.id}: ${key} must use https`);
+    if (/^https:\/\/www\.stockport\.gov\.uk\/events\/events\//i.test(value)) {
+      failures.push(`${event.id}: ${key} duplicates /events/ in Stockport Council URL`);
+    }
   }
   if (event.status !== 'verified') failures.push(`${event.id}: status must be verified`);
 
