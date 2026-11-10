@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-13",
+  "updated": "2026-11-09",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -216,6 +216,53 @@
       "status": "needs_check",
       "discovered": "2026-10-08",
       "checked": "2026-10-08"
+    },
+    {
+      "id": "cheadle-hulme-jai-yoga-2026-11-10",
+      "title": "Beginners and progressive yoga at Jai Yoga Studio",
+      "date": "2026-11-10",
+      "area": "Cheadle Hulme",
+      "source_url": "https://www.stockport.gov.uk/events",
+      "missing": [
+        "cost",
+        "class duration",
+        "booking and remaining places",
+        "individual organiser confirmation"
+      ],
+      "reason": "Stockport Council lists the 10 November class at 6.15pm; actual charge and booking availability not confirmed.",
+      "status": "needs_check",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09"
+    },
+    {
+      "id": "stockroom-friday-drum-circle-nov2026-review",
+      "title": "Friday Drum Circle at Stockroom",
+      "date": "2026-11-13",
+      "area": "Stockport",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "missing": [
+        "resolve November 4pm versus later 5.30pm session schedule",
+        "individual session price and drop-in rules"
+      ],
+      "reason": "Current Stockroom calendar lists November Friday Drum Circle at 4pm; another dated organiser page advertises 5.30pm for a later date, so hold until specific November session details are reconciled.",
+      "status": "needs_check",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09"
+    },
+    {
+      "id": "stockroom-subtext-archive-workshop-2026-11-14-review",
+      "title": "SUBTEXT x North West Film Archive workshop",
+      "date": "2026-11-14",
+      "area": "Stockport",
+      "source_url": "https://www.stockroomsk.co.uk/events/subtext-collections-connections-1?date=2026-11-14",
+      "missing": [
+        "booking/capacity",
+        "event age requirements"
+      ],
+      "reason": "Organiser confirms free creative workshop on 14 November. Exact booking requirement and intended ages not yet fully resolved.",
+      "status": "needs_check",
+      "discovered": "2026-11-09",
+      "checked": "2026-11-09"
     }
   ]
 }
