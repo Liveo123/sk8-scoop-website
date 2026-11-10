@@ -279,7 +279,7 @@ async function handleBusinessSubmissionWithNotification(request, env) {
     ? 'Thank you. Your submission has been saved. A confirmation email is on its way.'
     : 'Thank you. Your submission has been saved, but the confirmation email could not be sent. You do not need to submit it again.';
   if (inbox.status !== 'sent') {
-    message += ' Our internal email alert is delayed, but your details are safely stored for review.';
+    message += ' Our internal email alert was not sent, but your details are stored for review.';
   }
   return json({ message, submissionId });
 }
