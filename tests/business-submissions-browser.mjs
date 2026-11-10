@@ -128,6 +128,8 @@ try {
   assert(mobile.top<650,'mobile form should begin in first screen');
   assert(mobile.width<=mobile.viewport+3,'mobile page must not scroll sideways');
   assert(mobile.buttonHeight>=44,'submit button must meet touch target guidance');
+  await evaluate("(()=>{const f=document.querySelector('.business-fast-form');f.reset();const s=f.querySelector('[data-form-status]');s.className='status-box';s.textContent='';return true;})()");
+  await sleep(100);
   mkdirSync('visual-qa/business-submissions',{recursive:true});
   const screenshot=await cmd('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});
   writeFileSync('visual-qa/business-submissions/mobile.png',Buffer.from(screenshot.data,'base64'));
