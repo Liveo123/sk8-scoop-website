@@ -14,7 +14,9 @@ assert.match(formMatch[0], /name="details" required/);
 assert.match(formMatch[0], /name="email" type="email"[^>]*required/);
 assert.match(formMatch[0], /name="privacy_confirmed" value="yes" required/);
 assert.match(formMatch[0], /name="official_url" type="text"/, 'link is optional free-text, not strict type=url');
-assert.match(page, /href="\.\.\/advertise\.html"/);
+assert.doesNotMatch(page, /class="business-paid"/, 'business submissions page must not display a paid advertising panel');
+assert.doesNotMatch(page, /Want to pay for an advert\?/, 'no advertising upsell within the free submission page');
+// The standard shared header/footer navigation is intentionally preserved.
 assert.match(page, /business-submissions\.css/);
 assert.match(page, /business-submissions\.js/);
 assert.doesNotMatch(formMatch[0], /name="sponsored_interest"/, 'no commercial upsell in the free form');

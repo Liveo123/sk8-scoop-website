@@ -111,13 +111,6 @@ body[data-page="business-submissions"] .business-aside p {
 body[data-page="business-submissions"] .business-aside a {
   font-weight:800; text-underline-offset:3px;
 }
-body[data-page="business-submissions"] .business-paid {
-  background:#fff8ee!important; border-color:#e9d9bc!important;
-}
-body[data-page="business-submissions"] .business-paid-label {
-  display:block; font-size:.73rem; font-weight:800; text-transform:uppercase;
-  color:#795227; letter-spacing:.03em; margin-bottom:7px;
-}
 @media (max-width: 850px) {
   body[data-page="business-submissions"] .business-entry-grid { grid-template-columns:1fr; }
   body[data-page="business-submissions"] .business-aside { padding-top:0; }
