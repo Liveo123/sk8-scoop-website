@@ -28,6 +28,10 @@ export default {
       return secureResponse(await awardReferral(request, env), url);
     }
 
+    if (url.pathname === '/api/business-submission' && request.method === 'POST') {
+      return secureResponse(await handleBusinessSubmissionWithNotification(request, env), url);
+    }
+
     if (url.pathname === '/api/advertiser-enquiry' && request.method === 'POST') {
       return secureResponse(await handleAdvertiserEnquiryWithNotification(request, env, ctx), url);
     }
@@ -112,6 +116,211 @@ function secureResponse(response, url) {
     statusText: response.statusText,
     headers
   });
+}
+
+
+// Business submissions: free editorial tips, with transactional notifications only.
+// Keep the original D1 row even when Resend is unavailable; do not promise publication.
+const BUSINESS_SUBMISSION_NOTIFICATION_TABLE = "CREATE TABLE IF NOT EXISTS business_submission_notifications (" +
+  "submission_id INTEGER PRIMARY KEY, " +
+  "inbox_status TEXT NOT NULL DEFAULT 'pending', " +
+  "acknowledgement_status TEXT NOT NULL DEFAULT 'pending', " +
+  "inbox_message_id TEXT, acknowledgement_message_id TEXT, " +
+  "inbox_last_error TEXT, acknowledgement_last_error TEXT, " +
+  "created_at TEXT NOT NULL DEFAULT (datetime('now')), " +
+  "updated_at TEXT NOT NULL DEFAULT (datetime('now'))" +
+  ")";
+
+async function handleBusinessSubmissionWithNotification(request, env) {
+  const url = new URL(request.url);
+  const origin = request.headers.get('origin');
+  if (origin) {
+    try {
+      if (new URL(origin).origin !== url.origin) return json({ error: 'Invalid request origin.' }, 403);
+    } catch {
+      return json({ error: 'Invalid request origin.' }, 403);
+    }
+  }
+
+  let d;
+  try {
+    d = await request.json();
+  } catch {
+    return json({ error: 'Please refresh the page and try again.' }, 400);
+  }
+  if (!d || typeof d !== 'object' || Array.isArray(d)) {
+    return json({ error: 'Please refresh the page and try again.' }, 400);
+  }
+
+  // Low-friction anti-bot measures already used by other SK8 enquiry forms.
+  if (String(d.company_fax || '').trim()) {
+    return json({ message: 'Thank you. Your information has been received.' });
+  }
+  const startedAt = Number(d.sk8_started_at || 0);
+  const ageMs = Date.now() - startedAt;
+  if (!Number.isFinite(startedAt) || startedAt <= 0 || ageMs < 1200 || ageMs > 6 * 60 * 60 * 1000) {
+    return json({ error: 'This form has expired. Please refresh the page and try again.' }, 400);
+  }
+  const allowed = ['event', 'opening', 'offer', 'class', 'job', 'community_information', 'advertising_enquiry'];
+  if (!allowed.includes(String(d.submission_type || ''))) {
+    return json({ error: 'Please choose what you are sharing.' }, 400);
+  }
+  const details = String(d.details || '').trim();
+  if (details.length < 8 || details.length > 1800) {
+    return json({ error: 'Please give a little more detail (8 to 1,800 characters).' }, 400);
+  }
+  const email = String(d.email || '').trim().toLowerCase();
+  if (email.length > 200 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    return json({ error: 'Please provide a valid email address.' }, 400);
+  }
+  if (String(d.privacy_confirmed || '') !== 'yes') {
+    return json({ error: 'Please agree to the privacy notice so we can review your submission and contact you.' }, 400);
+  }
+  const officialUrl = normaliseBusinessUrl(d.official_url);
+  if (officialUrl === null || officialUrl.length > 500) {
+    return json({ error: 'Please enter a website link such as example.co.uk, or leave it blank.' }, 400);
+  }
+
+  if (!env.DB) return json({ error: 'Submissions are temporarily unavailable. Please try again later.' }, 503);
+  const c = (value, length) => String(value || '').trim().slice(0, length);
+  const title = c(d.title, 180) || details.replace(/\s+/g, ' ').slice(0, 100);
+  const organisation = c(d.organisation_name, 180);
+  const area = c(d.area, 80);
+  const contact = c(d.contact_name, 120);
+
+  // A separate table is non-destructive for existing D1 rows and captures both failure states.
+  // Create/check it before accepting the submission so there is no unmonitored success path.
+  try {
+    await env.DB.prepare(BUSINESS_SUBMISSION_NOTIFICATION_TABLE).run();
+  } catch (error) {
+    console.error('business_submission_notification_table_unavailable', error);
+    return json({ error: 'Submissions are temporarily unavailable. Please try again later.' }, 503);
+  }
+
+  let submissionId;
+  try {
+    const result = await env.DB.prepare(
+      "INSERT INTO business_submissions " +
+      "(submission_type,organisation_name,title,area,relevant_date,cost_or_pay,official_url,details,image_note,contact_name,email,sponsored_interest,status,created_at) " +
+      "VALUES (?,?,?,?,?,?,?,?,?,?,?,'no','pending',datetime('now'))"
+    ).bind(
+      c(d.submission_type, 60), organisation, title, area, c(d.relevant_date, 20),
+      c(d.cost_or_pay, 160), officialUrl, details, c(d.image_note, 500),
+      contact, email
+    ).run();
+    submissionId = result && result.meta && result.meta.last_row_id;
+    if (!submissionId) throw Error('No submission ID returned');
+  } catch (error) {
+    console.error('business_submission_store_failed', error);
+    return json({ error: 'Your submission could not be saved. Please try again.' }, 503);
+  }
+
+  try {
+    await env.DB.prepare(
+      "INSERT OR IGNORE INTO business_submission_notifications (submission_id) VALUES (?)"
+    ).bind(submissionId).run();
+  } catch (error) {
+    // The row is already saved: flag this rather than returning a misleading submission failure.
+    console.error('business_submission_notification_initialisation_failed', submissionId, error);
+  }
+
+  const friendlyType = {
+    event: 'Event', opening: 'New opening', offer: 'Offer or saving',
+    class: 'Class or club', job: 'Local job', community_information: 'Community notice',
+    advertising_enquiry: 'Earlier advertising enquiry'
+  }[String(d.submission_type)] || 'Local information';
+
+  const inbox = await sendResendEmail(env, {
+    to: CONTACT_INBOX,
+    subject: '[SK8 Scoop local submission #' + submissionId + '] ' + friendlyType,
+    text: [
+      'New free local information submission for editorial review',
+      'Submission ID: ' + submissionId,
+      'Type: ' + friendlyType,
+      'Organisation: ' + (organisation || 'Not provided'),
+      'Area: ' + (area || 'Not provided'),
+      'Date: ' + (c(d.relevant_date, 20) || 'Not provided'),
+      'Price or pay: ' + (c(d.cost_or_pay, 160) || 'Not provided'),
+      'Website or booking link: ' + (officialUrl || 'Not provided'),
+      'Name: ' + (contact || 'Not provided'),
+      'Email: ' + email,
+      'Image: ' + (c(d.image_note, 500) || 'Not provided'),
+      '',
+      'Details:',
+      details,
+      '',
+      'This is an unverified reader submission, not approval to publish.'
+    ].join('\n')
+  });
+  await updateBusinessNotificationStatus(env.DB, submissionId, 'inbox', inbox);
+
+  const acknowledgement = await sendResendEmail(env, {
+    to: email,
+    subject: 'SK8 Scoop: we have received your local submission',
+    text: [
+      'Hello,',
+      '',
+      'Thank you for sending your local information to SK8 Scoop. We have saved it for review.',
+      'Reference: ' + submissionId,
+      '',
+      'We may get in touch if we need to check a date, a price or another detail.',
+      'A submission is free and does not guarantee publication. Editorial decisions are independent of advertising.',
+      '',
+      'If you need to correct anything, reply to this email with your reference number.',
+      '',
+      'SK8 Scoop',
+      'The useful, the local and the mildly nosy.'
+    ].join('\n'),
+    replyTo: CONTACT_INBOX
+  });
+  await updateBusinessNotificationStatus(env.DB, submissionId, 'acknowledgement', acknowledgement);
+
+  let message = acknowledgement.status === 'sent'
+    ? 'Thank you. Your submission has been saved. A confirmation email is on its way.'
+    : 'Thank you. Your submission has been saved, but the confirmation email could not be sent. You do not need to submit it again.';
+  if (inbox.status !== 'sent') {
+    message += ' Our internal email alert is delayed, but your details are safely stored for review.';
+  }
+  return json({ message, submissionId });
+}
+
+function normaliseBusinessUrl(raw) {
+  const input = String(raw || '').trim();
+  if (!input) return '';
+  if (/^[a-z][a-z0-9+.-]*:\/\//i.test(input) && !/^https?:\/\//i.test(input)) return null;
+  if (input.startsWith('//')) return null;
+  try {
+    const parsed = new URL(/^https?:\/\//i.test(input) ? input : 'https://' + input);
+    if (!['http:', 'https:'].includes(parsed.protocol) ||
+        parsed.username || parsed.password ||
+        !/^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(parsed.hostname) ||
+        parsed.hostname.length > 253) return null;
+    return parsed.href;
+  } catch {
+    return null;
+  }
+}
+
+async function updateBusinessNotificationStatus(db, id, kind, result) {
+  const name = kind === 'inbox' ? 'inbox' : 'acknowledgement';
+  try {
+    await db.prepare(
+      'UPDATE business_submission_notifications SET ' +
+      name + '_status=?, ' +
+      name + '_message_id=?, ' +
+      name + '_last_error=?, updated_at=datetime(\'now\') WHERE submission_id=?'
+    ).bind(
+      result.status,
+      result.messageId || null,
+      result.status === 'sent' ? null : safeDiagnostic(result.code || result.message || result.status),
+      id
+    ).run();
+  } catch (error) {
+    console.error('business_submission_notification_status_write_failed', id, name, error);
+  }
+  if (result.status !== 'sent') {
+    console.error('business_submission_notification_failed', id, name, result.code || result.status);
+  }
 }
 
 async function handleAdvertiserEnquiryWithNotification(request, env, ctx) {
