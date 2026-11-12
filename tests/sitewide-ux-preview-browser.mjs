@@ -347,11 +347,15 @@ try {
   // No external booking, email submission or payment is triggered by this QA.
   const pilotEvents=[
     ['cheadle-library-christmas-craft-night-2026-11-12',
-      '/whats-on/events/cheadle-library-christmas-craft-night-2026/'],
+      '/whats-on/events/cheadle-library-christmas-craft-night-2026/', '2026-11-12'],
     ['lum-head-2027-intake-open-day-2026-11-19',
-      '/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/']
+      '/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/', '2026-11-19']
   ];
-  for (const [eventId,route] of pilotEvents) {
+  // One-off events must drop out of live calendars after their date, while historical
+  // article pages may remain. Only current events can be required in the active feed.
+  const todayUK=await evaluate("new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())");
+  const activePilotEvents=pilotEvents.filter(([,route,date])=>date>=todayUK);
+  for (const [eventId,route] of activePilotEvents) {
     await navigate(route);
     await waitFor("Boolean(document.querySelector('[data-sk8-event-actions] .my-sk8-save'))",
       'local save and plan controls on '+route);
@@ -391,16 +395,21 @@ try {
       JSON.stringify(pageInfo));
     await screenshot('mobile-event-'+eventId+'.png');
   }
-  await navigate('/search/?q=Christmas+Craft+Night');
-  await waitFor("Boolean(document.querySelector('.search-result-card a[href*=christmas-craft-night]'))",
-    'source-checked event page appears in search');
-  check('Search links directly to the new eligible event page',
-    await evaluate("Boolean(document.querySelector('.search-result-card a[href=\"/whats-on/events/cheadle-library-christmas-craft-night-2026/\"]'))"));
+  if (activePilotEvents.some(([id])=>id==='cheadle-library-christmas-craft-night-2026-11-12')) {
+    await navigate('/search/?q=Christmas+Craft+Night');
+    await waitFor("Boolean(document.querySelector('.search-result-card a[href*=christmas-craft-night]'))",
+      'source-checked upcoming event page appears in search');
+    check('Search links directly to the eligible event page',
+      await evaluate("Boolean(document.querySelector('.search-result-card a[href=\"/whats-on/events/cheadle-library-christmas-craft-night-2026/\"]'))"));
+  }
   await navigate('/whats-on/');
-  await waitFor("document.querySelectorAll('.whats-on-pilot-links li').length===2",
-    'two dated static event links at the end of calendar');
-  check('What’s On contains two crawlable pilot routes',
-    await evaluate("['/whats-on/events/cheadle-library-christmas-craft-night-2026/','/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/'].every(h=>Boolean(document.querySelector('.whats-on-pilot-pages a[href=\"'+h+'\"]')))"));
+  await waitFor("Boolean(window.SK8_EVENT_DATA)",'live event data loaded for spotlight expiry checks');
+  const activePilotHrefs=activePilotEvents.map(([,route])=>route);
+  const spotlightLinks=await evaluate("[...document.querySelectorAll('.whats-on-pilot-pages a[href]')].map(a=>a.getAttribute('href'))");
+  check('What’s On shows only date-valid crawlable pilot routes',
+    spotlightLinks.length===activePilotHrefs.length &&
+    activePilotHrefs.every(href=>spotlightLinks.includes(href)),
+    JSON.stringify({todayUK,spotlightLinks,activePilotHrefs}));
 
   await navigate('/whats-on/?filter=weekend&area=Gatley');
   const compact=await evaluate(`(() => {
