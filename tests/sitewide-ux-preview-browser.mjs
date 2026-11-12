@@ -320,15 +320,27 @@ try {
     const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
     const viable=list.filter(e=>e.status==='verified' && e.id && String(e.date||'')>=today);
     const item=viable[0]||list.find(e=>e.status==='verified' && e.id);
-    return item?{id:item.id,title:item.title}:null;
+    return item?{id:item.id,title:item.title,date:item.date,slug:item.seo?.slug||''}:null;
   })()`);
   check('Verified source contains a real event for search QA',Boolean(pick));
   await navigate('/search/?q='+encodeURIComponent(pick.title));
-  const exactLink=JSON.stringify('/whats-on/?event='+encodeURIComponent(pick.id));
+  const eventSlug=/^[a-z0-9-]+$/.test(pick.slug) ? pick.slug : '';
+  const eventHref=eventSlug ? '/whats-on/events/'+eventSlug+'/' : '/whats-on/?event='+encodeURIComponent(pick.id);
+  const exactLink=JSON.stringify(eventHref);
   await waitFor("Boolean([...document.querySelectorAll('.search-result-card a')].find(a => a.getAttribute('href')==="+exactLink+"))",
     'current verified event deep-link');
   check('Search event routes to exact SK8 details before external booking',
     await evaluate("Boolean([...document.querySelectorAll('.search-result-card a')].find(a=>a.getAttribute('href')==="+exactLink+"))"));
+  await navigate(eventHref);
+  if (eventSlug) {
+    const leafMatches="(() => { const h=document.querySelector('main h1'); const script=document.querySelector('#sk8-single-event-schema'); let event; try { event=JSON.parse(script?.textContent||'null'); } catch { return false; } return h?.textContent?.trim()==="+JSON.stringify(pick.title)+" && event?.['@type']==='Event' && event?.name==="+JSON.stringify(pick.title)+" && String(event?.startDate||'').slice(0,10)==="+JSON.stringify(pick.date)+"; })()";
+    await waitFor(leafMatches,'search result leads to matching event leaf and date');
+    check('Search event detail leaf has matching title, date and Event schema',await evaluate(leafMatches));
+  } else {
+    const eventFound="Boolean([...document.querySelectorAll('[data-event-id]')].find(e=>e.dataset.eventId==="+JSON.stringify(pick.id)+"||e.dataset.seriesId==="+JSON.stringify(pick.id)+"))";
+    await waitFor(eventFound,'search result leads to matching calendar card');
+    check('Search event detail calendar route identifies the correct event',await evaluate(eventFound));
+  }
   await screenshot('mobile-search-verified.png');
 
   // Validate real static event leaf pages against the same checked event feed.
