@@ -220,9 +220,9 @@ try {
   const detailUrl=new URL(detailHref,BASE);
   check('Homepage event offers an internal detail route with a verified date',
     detailUrl.origin===new URL(BASE).origin && detailUrl.pathname.startsWith('/whats-on/') &&
-    Boolean(detailTitle) && /^\\d{4}-\\d{2}-\\d{2}$/.test(detailSession || ''));
+    Boolean(detailTitle) && /^\d{4}-\d{2}-\d{2}$/.test(detailSession || ''));
   await navigate(detailHref);
-  if (/^\\/whats-on\\/events\\/[a-z0-9-]+\\/$/.test(detailUrl.pathname)) {
+  if (/^\/whats-on\/events\/[a-z0-9-]+\/$/.test(detailUrl.pathname)) {
     // The first upcoming event may have a dedicated SEO leaf page, not a ?event= calendar link.
     // Confirm the leaf's visible headline and its Event JSON-LD both match the selected event/date.
     const detailMatches="(() => { const h=document.querySelector('main h1'); const script=document.getElementById('sk8-single-event-schema'); let event; try { event=JSON.parse(script?.textContent||'null'); } catch { return false; } return h?.textContent?.trim()==="+JSON.stringify(detailTitle)+" && event?.['@type']==='Event' && event?.name==="+JSON.stringify(detailTitle)+" && String(event?.startDate||'').slice(0,10)==="+JSON.stringify(detailSession)+"; })()";
