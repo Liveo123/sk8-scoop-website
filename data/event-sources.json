@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-25",
+  "updated": "2026-11-09",
   "purpose": "Rolling discovery registry for SK8 Scoop What's On. Discovery is not verification: publishable event facts should be checked against an organiser, venue, council or other primary source wherever practical.",
   "policy": {
     "core_areas": [
@@ -10,14 +10,15 @@
       "Heald Green",
       "nearby SK8"
     ],
-    "wider_rule": "Use wider Stockport, nearby Cheshire and Greater Manchester only when the event is especially useful, distinctive or worth the trip for SK8 readers.",
+    "wider_rule": "SK8 first, then worthwhile verified events around Bramhall, Stockport, Didsbury, Wilmslow and places roughly 20-30 minutes away; prioritise reader utility over geographic expansion.",
     "target_forward_window_days": 42,
-    "target_live_listings": "20-35 useful future listings, quality first",
+    "target_live_listings": "40-60 verified, relevant current listings, including recurring sessions; quality first; never pad",
     "default_harvest_days": [
-      "Monday",
-      "Thursday"
+      "Tuesday",
+      "Friday"
     ],
-    "primary_source_required_for_publication": true
+    "primary_source_required_for_publication": true,
+    "recurring_activities": "Include verified yoga, Pilates, reading groups, walking groups, craft groups, quizzes, children's groups, talks, clubs and similar; record only explicitly verified occurrences and booking restrictions."
   },
   "sources": [
     {
