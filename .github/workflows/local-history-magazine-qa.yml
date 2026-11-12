@@ -1,0 +1,95 @@
+name: Local History magazine QA
+
+on:
+  pull_request:
+    paths:
+      - 'local-history/index.html'
+      - 'assets/local-history-magazine.css'
+      - 'scripts/check-local-history-magazine.mjs'
+      - '.github/workflows/local-history-magazine-qa.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'local-history/index.html'
+      - 'assets/local-history-magazine.css'
+      - 'scripts/check-local-history-magazine.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  source:
+    name: Local History content and rights references
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check local assets, historic facts, links and accessible layout
+        run: node scripts/check-local-history-magazine.mjs
+
+  preview-browser:
+    if: github.event_name == 'pull_request'
+    name: Local History desktop and mobile preview
+    needs: source
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve branch preview when new content is present
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          set -eu
+          slug="$(printf '%s' "$HEAD_REF" | sed 's#[^A-Za-z0-9-]#-#g')"
+          base="https://${slug}.previews.sk8scoop.com"
+          for n in $(seq 1 28); do
+            if curl -fsSL --max-time 20 "$base/local-history/" -o /tmp/sk8-history-preview.html 2>/dev/null &&
+               grep -q 'history-visual-gallery' /tmp/sk8-history-preview.html &&
+               grep -q 'The buildings stayed. Their jobs changed.' /tmp/sk8-history-preview.html &&
+               curl -fsSL --max-time 20 "$base/assets/local-history-magazine.css?v=20261024a" -o /tmp/sk8-history-magazine.css 2>/dev/null &&
+               cmp -s assets/local-history-magazine.css /tmp/sk8-history-magazine.css; then
+              echo "PREVIEW_URL=$base" >> "$GITHUB_ENV"
+              echo "MATCHED PREVIEW: $base/local-history/"
+              exit 0
+            fi
+            echo "Waiting for Cloudflare preview: attempt $n"
+            sleep 10
+          done
+          echo "Cloudflare preview failed to show current Local History CSS and content"
+          exit 1
+
+      - name: Ensure all 8 new local artwork paths serve images
+        shell: bash
+        run: |
+          set -eu
+          for asset in             /assets/images/editorial-20261010/SK8-08-heald-green-overview.webp             /assets/images/editorial-20261010/SK8-14-cheadle-former-station.webp             /assets/images/editorial-20261010/SK8-18-gatley-shouter.webp             /assets/images/editorial-20261010/SK8-19-heald-green-mercury.webp             /assets/images/editorial-20261010/SK8-20-heald-green-wartime.webp             /52-adventures/guide/assets/adventure-04.webp             /52-adventures/guide/assets/adventure-05.webp \
+            /52-adventures/guide/assets/adventure-07.webp; do
+            target="$PREVIEW_URL$asset"
+            content_type="$(curl -fsSLI --max-time 20 "$target" | tr -d '\r' | grep -i '^content-type:' | head -1)"
+            case "$content_type" in
+              *image/*) echo "OK image: $asset";;
+              *) echo "FAILED image: $asset (type=$content_type)"; exit 1;;
+            esac
+          done
+
+      - name: Capture Local History desktop and phone renders
+        shell: bash
+        run: |
+          set -eu
+          if command -v google-chrome >/dev/null 2>&1; then CHROME=google-chrome;
+          elif command -v chromium >/dev/null 2>&1; then CHROME=chromium;
+          else echo "Chrome or Chromium missing"; exit 1; fi
+          mkdir -p visual-qa/local-history-magazine
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=1440,7000 --virtual-time-budget=6000 --screenshot=visual-qa/local-history-magazine/desktop.png "$PREVIEW_URL/local-history/"
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=390,10000 --force-device-scale-factor=1 --virtual-time-budget=7000 --screenshot=visual-qa/local-history-magazine/phone.png "$PREVIEW_URL/local-history/"
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=5000 --dump-dom "$PREVIEW_URL/local-history/" > visual-qa/local-history-magazine/rendered.html
+          grep -q 'history-gallery-card--hero' visual-qa/local-history-magazine/rendered.html
+          grep -q 'historic.*evidence\|history-document-evidence' visual-qa/local-history-magazine/rendered.html
+
+      - name: Retain screenshots for editorial review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-history-magazine-desktop-phone
+          path: visual-qa/local-history-magazine/
+          retention-days: 7
