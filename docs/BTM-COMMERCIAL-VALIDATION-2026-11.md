@@ -44,7 +44,7 @@ These are advertised prices only; they provide **no evidence of unit sales** for
 ## Unit economics
 
 - Payhip Free Forever: 5% per sale on GBP 14.99 = GBP 0.7495. Gross remaining **GBP 14.24** (rounded) before Stripe charges, taxes, refunds and support.
-- Payhip Plus USD 29 per month + 2%: saves only 3% of GBP 14.99 = ~GBP 0.45 per sale before exchange-rate differences, implying ~65 sales per month before the subscription is justified (USD/GBP exchange rate prevents a reliable exact breakeven without live FX).
+- Payhip Plus USD 29 per month + 2%: saves only 3% of GBP 14.99 = about GBP 0.45 per sale. The subscription is charged in USD, so the actual break-even depends on the GBP/USD rate and any card conversion fees; it requires many dozens of monthly sales rather than the first few.
 - No paid ads until real measured checkout conversion is known.
 - A referral reward costs one additional digital fulfilment and possible platform/payment processing or support; three new subscribers are not automatically profit. Verify value and fraud controls.
 
