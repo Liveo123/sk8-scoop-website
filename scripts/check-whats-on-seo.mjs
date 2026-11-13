@@ -45,7 +45,19 @@ assert.ok(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(head),
 assert.ok(!robots.includes('Disallow: /whats-on/'),"Canonical What’s On route blocked by robots");
 assert.ok(sitemap.includes('<loc>'+canonicalUrl+'</loc>'),'Canonical calendar absent from sitemap');
 const leafEvents=JSON.parse(read('data/events.json')).filter(e=>e.seo);
-assert.equal(leafEvents.length,2,'Exactly two fact-checked leaf pilots until release review');
+const approvedLeafPilotIds=new Set([
+  'cheadle-library-christmas-craft-night-2026-11-12',
+  'lum-head-2027-intake-open-day-2026-11-19'
+]);
+// As dated pilots expire, the approved set may shrink. Never require
+// an expired event to remain in the current source or allow a third
+// unreviewed rich-result page without its own approval.
+assert.ok(leafEvents.length<=approvedLeafPilotIds.size,
+  'More than the two approved event-leaf pilots appeared without review');
+for(const e of leafEvents){
+  assert.ok(approvedLeafPilotIds.has(e.id),
+    'Unapproved event leaf requires editorial and schema review: '+e.id);
+}
 for(const e of leafEvents){
   const leaf='https://www.sk8scoop.com/whats-on/events/'+e.seo.slug+'/';
   assert.ok(sitemap.includes('<loc>'+leaf+'</loc>'),'Source-checked event leaf missing from sitemap: '+e.id);
