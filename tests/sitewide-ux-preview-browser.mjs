@@ -215,11 +215,26 @@ try {
   await navigate('/');
   await waitFor("Boolean(document.querySelector('.reader-first-event h3 a'))",'first verified homepage event');
   const detailHref=await evaluate("document.querySelector('.reader-first-event h3 a')?.getAttribute('href')");
-  const detailId=new URL(BASE+detailHref).searchParams.get('event');
-  const detailMatches="Boolean([...document.querySelectorAll('[data-event-id]')].find(x=>x.dataset.eventId==="+JSON.stringify(detailId)+"||x.dataset.seriesId==="+JSON.stringify(detailId)+"))";
+  const detailTitle=await evaluate("document.querySelector('.reader-first-event h3 a')?.textContent?.trim()");
+  const detailSession=await evaluate("document.querySelector('.reader-first-event time')?.getAttribute('datetime')");
+  const detailUrl=new URL(detailHref,BASE);
+  check('Homepage event offers an internal detail route with a verified date',
+    detailUrl.origin===new URL(BASE).origin && detailUrl.pathname.startsWith('/whats-on/') &&
+    Boolean(detailTitle) && /^\d{4}-\d{2}-\d{2}$/.test(detailSession || ''));
   await navigate(detailHref);
-  await waitFor(detailMatches,'homepage event has an actual calendar detail card');
-  check('NUE event continuation reaches the corresponding full event detail', await evaluate(detailMatches));
+  if (/^\/whats-on\/events\/[a-z0-9-]+\/$/.test(detailUrl.pathname)) {
+    // The first upcoming event may have a dedicated SEO leaf page, not a ?event= calendar link.
+    // Confirm the leaf's visible headline and its Event JSON-LD both match the selected event/date.
+    const detailMatches="(() => { const h=document.querySelector('main h1'); const script=document.getElementById('sk8-single-event-schema'); let event; try { event=JSON.parse(script?.textContent||'null'); } catch { return false; } return h?.textContent?.trim()==="+JSON.stringify(detailTitle)+" && event?.['@type']==='Event' && event?.name==="+JSON.stringify(detailTitle)+" && String(event?.startDate||'').slice(0,10)==="+JSON.stringify(detailSession)+"; })()";
+    await waitFor(detailMatches,'homepage event links to matching dated event leaf with Event schema');
+    check('NUE event continuation reaches the matching full event leaf', await evaluate(detailMatches));
+  } else {
+    const detailId=detailUrl.searchParams.get('event');
+    check('Homepage calendar fallback identifies a specific event',Boolean(detailId));
+    const detailMatches="Boolean([...document.querySelectorAll('[data-event-id]')].find(x=>x.dataset.eventId==="+JSON.stringify(detailId)+"||x.dataset.seriesId==="+JSON.stringify(detailId)+"))";
+    await waitFor(detailMatches,'homepage event has an actual calendar detail card');
+    check('NUE event continuation reaches the corresponding full event detail',await evaluate(detailMatches));
+  }
   await navigate('/whats-on/?filter=weekend');
   await waitFor(
     "document.querySelector('button[data-event-filter=weekend]')?.getAttribute('aria-pressed') === 'true'",
@@ -305,26 +320,42 @@ try {
     const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
     const viable=list.filter(e=>e.status==='verified' && e.id && String(e.date||'')>=today);
     const item=viable[0]||list.find(e=>e.status==='verified' && e.id);
-    return item?{id:item.id,title:item.title}:null;
+    return item?{id:item.id,title:item.title,date:item.date,slug:item.seo?.slug||''}:null;
   })()`);
   check('Verified source contains a real event for search QA',Boolean(pick));
   await navigate('/search/?q='+encodeURIComponent(pick.title));
-  const exactLink=JSON.stringify('/whats-on/?event='+encodeURIComponent(pick.id));
+  const eventSlug=/^[a-z0-9-]+$/.test(pick.slug) ? pick.slug : '';
+  const eventHref=eventSlug ? '/whats-on/events/'+eventSlug+'/' : '/whats-on/?event='+encodeURIComponent(pick.id);
+  const exactLink=JSON.stringify(eventHref);
   await waitFor("Boolean([...document.querySelectorAll('.search-result-card a')].find(a => a.getAttribute('href')==="+exactLink+"))",
     'current verified event deep-link');
   check('Search event routes to exact SK8 details before external booking',
     await evaluate("Boolean([...document.querySelectorAll('.search-result-card a')].find(a=>a.getAttribute('href')==="+exactLink+"))"));
+  await navigate(eventHref);
+  if (eventSlug) {
+    const leafMatches="(() => { const h=document.querySelector('main h1'); const script=document.querySelector('#sk8-single-event-schema'); let event; try { event=JSON.parse(script?.textContent||'null'); } catch { return false; } return h?.textContent?.trim()==="+JSON.stringify(pick.title)+" && event?.['@type']==='Event' && event?.name==="+JSON.stringify(pick.title)+" && String(event?.startDate||'').slice(0,10)==="+JSON.stringify(pick.date)+"; })()";
+    await waitFor(leafMatches,'search result leads to matching event leaf and date');
+    check('Search event detail leaf has matching title, date and Event schema',await evaluate(leafMatches));
+  } else {
+    const eventFound="Boolean([...document.querySelectorAll('[data-event-id]')].find(e=>e.dataset.eventId==="+JSON.stringify(pick.id)+"||e.dataset.seriesId==="+JSON.stringify(pick.id)+"))";
+    await waitFor(eventFound,'search result leads to matching calendar card');
+    check('Search event detail calendar route identifies the correct event',await evaluate(eventFound));
+  }
   await screenshot('mobile-search-verified.png');
 
   // Validate real static event leaf pages against the same checked event feed.
   // No external booking, email submission or payment is triggered by this QA.
   const pilotEvents=[
     ['cheadle-library-christmas-craft-night-2026-11-12',
-      '/whats-on/events/cheadle-library-christmas-craft-night-2026/'],
+      '/whats-on/events/cheadle-library-christmas-craft-night-2026/', '2026-11-12'],
     ['lum-head-2027-intake-open-day-2026-11-19',
-      '/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/']
+      '/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/', '2026-11-19']
   ];
-  for (const [eventId,route] of pilotEvents) {
+  // One-off events must drop out of live calendars after their date, while historical
+  // article pages may remain. Only current events can be required in the active feed.
+  const todayUK=await evaluate("new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())");
+  const activePilotEvents=pilotEvents.filter(([,route,date])=>date>=todayUK);
+  for (const [eventId,route] of activePilotEvents) {
     await navigate(route);
     await waitFor("Boolean(document.querySelector('[data-sk8-event-actions] .my-sk8-save'))",
       'local save and plan controls on '+route);
@@ -364,16 +395,21 @@ try {
       JSON.stringify(pageInfo));
     await screenshot('mobile-event-'+eventId+'.png');
   }
-  await navigate('/search/?q=Christmas+Craft+Night');
-  await waitFor("Boolean(document.querySelector('.search-result-card a[href*=christmas-craft-night]'))",
-    'source-checked event page appears in search');
-  check('Search links directly to the new eligible event page',
-    await evaluate("Boolean(document.querySelector('.search-result-card a[href=\"/whats-on/events/cheadle-library-christmas-craft-night-2026/\"]'))"));
+  if (activePilotEvents.some(([id])=>id==='cheadle-library-christmas-craft-night-2026-11-12')) {
+    await navigate('/search/?q=Christmas+Craft+Night');
+    await waitFor("Boolean(document.querySelector('.search-result-card a[href*=christmas-craft-night]'))",
+      'source-checked upcoming event page appears in search');
+    check('Search links directly to the eligible event page',
+      await evaluate("Boolean(document.querySelector('.search-result-card a[href=\"/whats-on/events/cheadle-library-christmas-craft-night-2026/\"]'))"));
+  }
   await navigate('/whats-on/');
-  await waitFor("document.querySelectorAll('.whats-on-pilot-links li').length===2",
-    'two dated static event links at the end of calendar');
-  check('What’s On contains two crawlable pilot routes',
-    await evaluate("['/whats-on/events/cheadle-library-christmas-craft-night-2026/','/whats-on/events/lum-head-gatley-nursery-reception-open-day-2026/'].every(h=>Boolean(document.querySelector('.whats-on-pilot-pages a[href=\"'+h+'\"]')))"));
+  await waitFor("Boolean(window.SK8_EVENT_DATA)",'live event data loaded for spotlight expiry checks');
+  const activePilotHrefs=activePilotEvents.map(([,route])=>route);
+  const spotlightLinks=await evaluate("[...document.querySelectorAll('.whats-on-pilot-pages a[href]')].map(a=>a.getAttribute('href'))");
+  check('What’s On shows only date-valid crawlable pilot routes',
+    spotlightLinks.length===activePilotHrefs.length &&
+    activePilotHrefs.every(href=>spotlightLinks.includes(href)),
+    JSON.stringify({todayUK,spotlightLinks,activePilotHrefs}));
 
   await navigate('/whats-on/?filter=weekend&area=Gatley');
   const compact=await evaluate(`(() => {
