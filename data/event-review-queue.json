@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-13",
+  "updated": "2026-11-13",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -33,16 +33,13 @@
     {
       "id": "john-lewis-laura-mercier-mint-velvet-2026-10-28",
       "title": "Laura Mercier & Mint Velvet: Beauty and Fashion styling for A/W",
-      "status": "needs_check",
+      "status": "rejected",
       "date": "2026-10-28",
       "area": "Cheadle",
       "source_url": "https://www.johnlewis.com/our-shops/cheadle/whats-on",
       "discovered": "2026-10-01",
       "checked": "2026-10-01",
-      "reason": "Current John Lewis Cheadle primary page confirms 28 Oct 2026 and £10, but the accessible listing does not expose the session start time. Keep for verification rather than publish with an assumed time.",
-      "missing": [
-        "exact start time"
-      ]
+      "reason": "Historical 28 October session has passed; no verified future occurrence, so reject rather than keep an impossible future check."
     },
     {
       "id": "john-lewis-winter-capsule-wardrobe-cheadle-2026",
@@ -140,12 +137,8 @@
       "end_date": "2026-12-06",
       "venue": "Heald Green Theatre, Motcombe Grove (off Styal Road), SK8 3TW",
       "source_url": "https://www.hgtheatre.co.uk/post/chairperson-s-update-september-2026",
-      "reason": "The theatre confirms the 2026 pantomime run 30 November–6 December. Individual evening/matinee dates, admission prices and booking availability are not yet independently verified.",
-      "missing": [
-        "confirmed individual show dates and times",
-        "ticket prices and booking availability"
-      ],
-      "status": "needs_check",
+      "reason": "Semantic duplicate of existing verified heald-green-theatre-jack-beanstalk-2026-11-30 in current main; not a separate publishable event.",
+      "status": "rejected",
       "discovered": "2026-10-08",
       "checked": "2026-10-08"
     },
@@ -216,6 +209,22 @@
       "status": "needs_check",
       "discovered": "2026-10-08",
       "checked": "2026-10-08"
+    },
+    {
+      "id": "stockroom-friday-drum-circle-nov2026-review",
+      "title": "Friday Drum Circle at Stockroom",
+      "date": "2026-11-13",
+      "area": "Stockport",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "discovered": "2026-11-13",
+      "checked": "2026-11-13",
+      "status": "needs_check",
+      "reason": "Official venue and council event indexes disagree over the 13 November start: 4pm versus 5:30pm. Hold future dates until the organiser's individual event pages reconcile start time and current admission.",
+      "missing": [
+        "current individual event start times",
+        "future dated session confirmation",
+        "attendance conditions"
+      ]
     }
   ]
 }
