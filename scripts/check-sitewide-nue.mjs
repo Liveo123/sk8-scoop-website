@@ -105,7 +105,7 @@ assert.ok(files.guide.includes('data-subscriber-guide="/free-cheap-guide/guide/"
   'Existing recognised-reader free guide route retained');
 
 for(const route of ['/','/guides/','/whats-on/']){
-  contains(files.sitemap,'<loc>https://www.sk8scoop.com'+route+'</loc><lastmod>2026-10-23</lastmod>',
+  contains(files.sitemap,'<loc>https://www.sk8scoop.com'+route+'</loc><lastmod>2026-11-14</lastmod>',
     'Sitemap dates follow actual changed routes');
 }
 assert.ok((files.sitemap.match(/<url>/g)||[]).length>=68,
