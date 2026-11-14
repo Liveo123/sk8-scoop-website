@@ -523,5 +523,24 @@
     "verification": "MANCHESTER_COFFEE_FESTIVAL_2026_PRIMARY_SITE_2026_11_14",
     "status": "verified",
     "checked": "2026-11-14"
+  },
+  {
+    "id": "moya-cole-heald-green-style-glamour-2026-11-15",
+    "title": "Moya Cole Hospice Style & Glamour Shopping Day",
+    "date": "2026-11-15",
+    "time": "10:00",
+    "end_time": "16:00",
+    "area": "Heald Green",
+    "venue": "Moya Cole Hospice shop, 230 Finney Lane, Heald Green SK8 3QA",
+    "cost": "Free entry; 20% off all clothing; purchases extra",
+    "cost_type": "free_optional_extras",
+    "category": "Charity / Shopping",
+    "description": "One-day winter and partywear event with a 20% discount on all clothing, plus a raffle and tombola. Source-confirmed Sunday shop opening for the special event.",
+    "source_url": "https://moyacole.org.uk/events/style-glamour-shopping-day-heald-green-shop/",
+    "booking_url": "https://moyacole.org.uk/events/style-glamour-shopping-day-heald-green-shop/",
+    "checked": "2026-11-14",
+    "verification": "MOYA_COLE_HOSPICE_PRIMARY_HEALD_GREEN_EVENT_2026_11_14",
+    "status": "verified",
+    "source_issue": "SK8 Scoop Issue 21 A/B Pinboard"
   }
 ]
