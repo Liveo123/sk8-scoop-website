@@ -1,49 +1,49 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-14",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "Gatley footpaths 48 and 51: closures from 26 October",
-      "meta": "Gatley · Yew Tree Grove and Motcombe Grove · From Monday",
-      "summary": "The council says both paths will close for development works from 26 October, with no official diversion provided.",
-      "href": "/updates/gatley-footpath-closures-october-2026/",
-      "linkLabel": "Check the footpaths and council notices →",
+      "title": "Stockport station: what would actually change?",
+      "meta": "Transport · Consultation deadline 19 November 2026",
+      "summary": "New station buildings, a footbridge and lifts are proposed. The consultation closes 19 November; the article explains the scheme and where to check its status.",
+      "href": "/updates/stockport-station-consultation-2026/",
+      "linkLabel": "Understand the station proposals →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792772459/issue18-qa-asset-17.jpg",
-      "alt": "Original illustration of a temporarily closed autumn path, not the actual Gatley paths",
-      "expires": "2027-04-26"
+      "image": "/assets/images/editorial-20261010/SK8-13-useful-updates.webp",
+      "alt": "General SK8 Scoop illustration for practical transport news, not an image of the proposed station",
+      "expires": "2026-11-19"
     },
     {
       "mode": "DO",
-      "label": "PLAN THIS WEEKEND",
-      "title": "What’s on around SK8 this weekend?",
+      "label": "PLAN YOUR WEEK",
+      "title": "What's on around SK8?",
       "meta": "Cheadle · Cheadle Hulme · Gatley · Heald Green",
-      "summary": "Browse current dates, prices and booking information for local events and activities. Check the organiser’s latest details before heading out.",
+      "summary": "Find checked dates and prices for local theatre, Christmas events, inclusive activities and cheaper outings. Past listings hide automatically.",
       "href": "/whats-on/?filter=weekend",
-      "linkLabel": "See this weekend’s listings →",
+      "linkLabel": "Browse current events →",
       "visualType": "photo",
       "fit": "cover",
       "position": "center",
       "image": "/assets/images/nue/explore-outdoors.webp",
-      "alt": "Illustrative outdoor scene for local ideas, not a photograph of a particular listed event"
+      "alt": "Illustrative outdoor scene for local ideas, not a photograph of a listed event"
     },
     {
       "mode": "DISCOVER",
       "label": "DISCOVER THIS",
-      "title": "Reda’s and Heald Green’s boxing-kangaroo story",
-      "meta": "Finney Lane · Local history · Remembered in 1963",
-      "summary": "Pat Phoenix, old TV-shop adverts and a kangaroo in boxing gloves: an unusual tale built from local residents' memories.",
-      "href": "/local-history/redas-boxing-kangaroo-heald-green/",
-      "linkLabel": "Read the sourced Reda’s story →",
+      "title": "The cotton factory behind Gatley Hall",
+      "meta": "Old Hall Road, Gatley · Georgian history",
+      "summary": "Historic England's listing confirms a former cotton-manufactory wing behind an 18th-century house. What happened there is still a local mystery.",
+      "href": "/local-history/gatley-hall-cotton-manufactory/",
+      "linkLabel": "Read the Gatley Hall story →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792772420/issue18-qa-asset-13.jpg",
-      "alt": "Original illustration of a 1960s electrical shop and kangaroo; not an archival photograph"
+      "image": "/assets/images/editorial-20261010/SK8-12-local-history.webp",
+      "alt": "General SK8 Scoop local-history illustration, not a photograph of Gatley Hall"
     }
   ],
   "explore": [

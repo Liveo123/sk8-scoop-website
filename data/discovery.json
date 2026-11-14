@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24",
+  "updated": "2026-11-14",
   "records": [
     {
       "id": "issue-18-october-23-2026",
@@ -1284,6 +1284,125 @@
       "freshness": "dated",
       "checked": "2026-11-09",
       "expires": "2026-11-15"
+    },
+    {
+      "id": "issue-21-november-13-2026",
+      "type": "Stories",
+      "category": "Newsletter",
+      "title": "SK8 Scoop Issue 21: lanterns, Gatley Hall, station plans and Pinboard",
+      "summary": "A combined index of both published Issue 21 editions, with all four original Pinboard cards and a corrected Heald Green farming story.",
+      "href": "/issues/issue-21/",
+      "area": "All areas",
+      "tags": [
+        "issue 21",
+        "newsletter",
+        "pinboard",
+        "gatley hall",
+        "stockport station",
+        "daisy bank farm",
+        "november 2026"
+      ],
+      "freshness": "dated",
+      "checked": "2026-11-14"
+    },
+    {
+      "id": "heald-green-farm-correction-nov-2026",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Chamber Hall Farm cattle, not Daisy Bank: a correction",
+      "summary": "Heald Green Heritage confirmed that Chamber Hall Farm's cows crossed Simonsway. Daisy Bank Farm is a separate site on Finney Lane.",
+      "href": "/local-history/heald-green-farms-correction-2026/",
+      "area": "Heald Green",
+      "tags": [
+        "chamber hall",
+        "daisy bank",
+        "simonsway",
+        "cattle",
+        "heald green",
+        "correction"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-14"
+    },
+    {
+      "id": "gatley-hall-cotton-manufactory",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "Gatley Hall's Georgian cotton manufactory wing",
+      "summary": "Historic England records an 18th-century rear cotton-manufactory wing behind the Grade II-listed Gatley house, but the precise operation remains a mystery.",
+      "href": "/local-history/gatley-hall-cotton-manufactory/",
+      "area": "Gatley",
+      "tags": [
+        "gatley hall",
+        "cotton factory",
+        "old hall road",
+        "georgian",
+        "historic england",
+        "local history"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-14"
+    },
+    {
+      "id": "daisy-bank-farm-planning-nov-2026",
+      "type": "Stories",
+      "category": "Planning & Development",
+      "title": "Daisy Bank Farm: local heritage and proposed housing",
+      "summary": "The history of Daisy Bank Farm and the September 2026 draft Local Plan's proposed housing allocation, including the reported heritage-retention safeguard.",
+      "href": "/planning/daisy-bank-farm-heald-green-2026/",
+      "area": "Heald Green",
+      "tags": [
+        "daisy bank farm",
+        "finney lane",
+        "housing allocation",
+        "heritage",
+        "local plan",
+        "132 homes"
+      ],
+      "freshness": "current",
+      "checked": "2026-11-14"
+    },
+    {
+      "id": "stockport-station-proposals-nov-2026",
+      "type": "Useful updates",
+      "category": "Transport",
+      "title": "Stockport station proposals: consultation to 19 November 2026",
+      "summary": "Proposed station buildings, new footbridge, lifts and connections, with the council's 19 November response deadline and an automatic expiry notice.",
+      "href": "/updates/stockport-station-consultation-2026/",
+      "area": "Stockport",
+      "tags": [
+        "stockport station",
+        "consultation",
+        "19 november",
+        "railway",
+        "bridge",
+        "lifts",
+        "transport"
+      ],
+      "freshness": "current",
+      "checked": "2026-11-14",
+      "expires": "2026-11-19"
+    },
+    {
+      "id": "tatton-park-yuletide-2026",
+      "type": "Guides",
+      "category": "Seasonal Days Out",
+      "title": "Tatton Park Yuletide 2026: prices, dates and practical tips",
+      "summary": "2026 selected entry dates, family ticket costs, parking, trail length caveats and access guidance verified against the organiser.",
+      "href": "/stories/tatton-park-yuletide-2026/",
+      "area": "Cheshire",
+      "tags": [
+        "tatton park",
+        "yuletide",
+        "christmas",
+        "tickets",
+        "prices",
+        "family",
+        "light trail"
+      ],
+      "freshness": "dated",
+      "checked": "2026-11-14",
+      "expires": "2026-12-23"
     }
   ]
 }
