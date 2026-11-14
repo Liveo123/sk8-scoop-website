@@ -476,5 +476,52 @@
     "verification": "ROCHDALE_COUNCIL_PRIMARY_2026_11_12_RELEASE",
     "source_issue": "SK8 Scoop Issue 21 A/B",
     "status": "verified"
+  },
+  {
+    "id": "bramhall-superhero-princess-meet-2026-11-21",
+    "title": "Superheroes and princesses at Bramhall Village Square",
+    "date": "2026-11-21",
+    "time": "11:00",
+    "end_time": "15:00",
+    "area": "Bramhall",
+    "venue": "The Village Square by M, Bramhall SK7 1AW",
+    "cost": "Free entry and free family activities",
+    "cost_type": "free",
+    "category": "Children / Family",
+    "audience_tags": [
+      "family",
+      "children"
+    ],
+    "description": "Meet Spider-Man, Batman and a Disney Princess. Free activities include superhero training, workshops and face painting, with a princess singalong at 2pm. Organiser says 11am–3pm.",
+    "booking_url": "https://bramhallvillagesquare.co.uk/news/meet-your-favourite-characters-at-the-village-square-by-m/",
+    "source_url": "https://bramhallvillagesquare.co.uk/news/meet-your-favourite-characters-at-the-village-square-by-m/",
+    "source_issue": "SK8 Scoop Issue 21 B",
+    "verification": "BRAMHALL_VILLAGE_SQUARE_ORGANISER_PRIMARY_2026_11_14",
+    "status": "verified",
+    "checked": "2026-11-14"
+  },
+  {
+    "id": "manchester-coffee-festival-2026-nov",
+    "title": "Manchester Coffee Festival 2026",
+    "date": "2026-11-21",
+    "end_date": "2026-11-22",
+    "date_mode": "specific_dates",
+    "occurrences": [
+      "2026-11-21",
+      "2026-11-22"
+    ],
+    "date_range": "Public sessions 21–22 November; Friday trade session only",
+    "area": "Trafford",
+    "venue": "Bowlers Exhibition Centre, Longbridge Road, Trafford Park, Stretford M17 1SN",
+    "cost": "Ticketed; check organiser's live ticket options (under-12s may claim a free accompanied pass)",
+    "cost_type": "paid",
+    "category": "Food & Drink",
+    "description": "Speciality coffee exhibitors, tasters, talks, competitions and DJs. Friday 20 November is trade only; the public sessions are Saturday and Sunday. Under-12s require an accompanying ticket-holding adult and the organiser's booking code.",
+    "booking_url": "https://www.manchestercoffeefest.com/tickets",
+    "source_url": "https://www.manchestercoffeefest.com/faq",
+    "source_issue": "SK8 Scoop Issue 21 A/B",
+    "verification": "MANCHESTER_COFFEE_FESTIVAL_2026_PRIMARY_SITE_2026_11_14",
+    "status": "verified",
+    "checked": "2026-11-14"
   }
 ]
