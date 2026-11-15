@@ -60,23 +60,6 @@
     "status": "verified"
   },
   {
-    "id": "cheadle-hulme-con-club-hannah-louise-2026-11-14",
-    "title": "Hannah Louise live at Cheadle Hulme Conservative Club",
-    "date": "2026-11-14",
-    "time": "20:45",
-    "area": "Cheadle Hulme",
-    "venue": "Cheadle Hulme Conservative Club, Mellor Road, Cheadle Hulme SK8 5AT",
-    "cost": "Free for members; £5 non-members",
-    "cost_type": "members_only_free",
-    "category": "Live Music",
-    "description": "Female vocalist Hannah Louise performs on Saturday evening. The venue’s current diary lists an 8.45pm start, free entry for members and £5 for non-members.",
-    "booking_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
-    "source_url": "https://www.cheadlehulmeconclub.org.uk/calendarofevents.html",
-    "verification": "VENUE_PRIMARY_EVENT_DIARY",
-    "checked": "2026-11-01",
-    "status": "verified"
-  },
-  {
     "id": "cheadle-hulme-con-club-dance-night-2026-11-15",
     "title": "Dance Night at Cheadle Hulme Conservative Club",
     "date": "2026-11-15",
@@ -173,24 +156,6 @@
     "verification": "VENUE_PRIMARY_CURRENT_PRODUCTION_PAGE",
     "checked": "2026-11-01",
     "status": "verified"
-  },
-  {
-    "id": "bramhall-early-festive-market-2026-11-14",
-    "title": "Bramhall Early Festive Market",
-    "status": "verified",
-    "date": "2026-11-14",
-    "time": "10:00",
-    "end_time": "15:00",
-    "area": "Bramhall",
-    "venue": "Village Square, Bramhall, Stockport SK7 1AW",
-    "cost": "Free entry; purchases extra",
-    "cost_type": "free",
-    "category": "Market / Family",
-    "description": "A free early festive market with local makers, handmade decorations, gifts and food stalls. Worker Bee Markets also advertises face painting and children's activities; purchases and optional extras cost extra.",
-    "source_url": "https://www.stockport.gov.uk/events/bramhall-early-festive-market",
-    "booking_url": "https://www.stockport.gov.uk/events/bramhall-early-festive-market",
-    "verification": "STOCKPORT_COUNCIL_PRIMARY_EVENT_LISTING_2026_11_09",
-    "checked": "2026-11-09"
   },
   {
     "id": "stockport-spectacular-sunday-2026-11-15",
