@@ -45,13 +45,32 @@ assert.ok(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(head),
 assert.ok(!robots.includes('Disallow: /whats-on/'),"Canonical What’s On route blocked by robots");
 assert.ok(sitemap.includes('<loc>'+canonicalUrl+'</loc>'),'Canonical calendar absent from sitemap');
 const leafEvents=JSON.parse(read('data/events.json')).filter(e=>e.seo);
-assert.equal(leafEvents.length,2,'Exactly two fact-checked leaf pilots until release review');
+const approvedLeafPilotIds=new Set([
+  'cheadle-library-christmas-craft-night-2026-11-12',
+  'lum-head-2027-intake-open-day-2026-11-19'
+]);
+// As dated pilots expire, the approved set may shrink. Never require
+// an expired event to remain in the current source or allow a third
+// unreviewed rich-result page without its own approval.
+assert.ok(leafEvents.length<=approvedLeafPilotIds.size,
+  'More than the two approved event-leaf pilots appeared without review');
+for(const e of leafEvents){
+  assert.ok(approvedLeafPilotIds.has(e.id),
+    'Unapproved event leaf requires editorial and schema review: '+e.id);
+}
 for(const e of leafEvents){
   const leaf='https://www.sk8scoop.com/whats-on/events/'+e.seo.slug+'/';
   assert.ok(sitemap.includes('<loc>'+leaf+'</loc>'),'Source-checked event leaf missing from sitemap: '+e.id);
-  assert.ok(html.includes('href="/whats-on/events/'+e.seo.slug+'/"'),'Calendar must contain crawlable event link: '+e.id);
+  assert.ok(read('whats-on/events/'+e.seo.slug+'/index.html').includes('application/ld+json'),
+    'Approved event leaf must have its own rendered schema: '+e.id);
 }
 
+assert.ok(html.includes('<ul class="whats-on-pilot-links"></ul>'),
+  'Calendar spotlights must be populated from the live verified event feed');
+assert.ok(eventJs.includes('spotlightList.replaceChildren()') && eventJs.includes('core.confirmedDates(event)'),
+  'Dated event spotlights must use confirmed current source occurrences');
+assert.ok(!/data-event-spotlight-date="\d{4}-\d{2}-\d{2}"/.test(html),
+  'Static calendar HTML must not retain dated event promotions');
 assert.equal((html.match(/<h1\b/g)||[]).length,1,'Exactly one H1 expected');
 assert.ok(html.includes('<h1>What’s on around SK8?</h1>'),'Visible on-page H1 should remain accurate');
 assert.ok(!html.includes('See current listings</a>'),'No SEO-motivated reversion to a big decorative hero');

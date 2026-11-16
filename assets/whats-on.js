@@ -505,14 +505,33 @@
             ? core.confirmedDates(event).some(date => core.withinHorizon(date, today))
             : String(event.end_date || event.date) >= today && event.date < core.anniversaryExclusive(today)))
         .sort((a, b) => `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`));
-      // Static, crawlable spotlights are a useful fallback for visitors and
-      // search crawlers. After an event's date has passed, do not continue to
-      // recommend it even if the source feed has not yet been regenerated.
-      document.querySelectorAll('[data-event-spotlight-date]').forEach(node => {
-        if (String(node.dataset.eventSpotlightDate || '') < today) node.remove();
-      });
+      // Only render dated spotlight links from the verified, current feed.
+      // Hard-coded HTML dates outlive events and can mislead crawlers before
+      // JavaScript removes old links. A failed fetch must not show stale events.
       const spotlights = document.querySelector('.whats-on-pilot-pages');
-      if (spotlights && !spotlights.querySelector('li')) spotlights.remove();
+      const spotlightList = spotlights?.querySelector('.whats-on-pilot-links');
+      if (spotlightList) {
+        spotlightList.replaceChildren();
+        for (const event of events.filter(e => e.status === 'verified' &&
+          /^[a-z0-9-]+$/.test(String(e.seo?.slug || '')))) {
+          const nextDate = core.mode(event) === 'specific_dates'
+            ? core.confirmedDates(event).find(date => date >= today)
+            : (event.date > today ? event.date : today);
+          if (!nextDate || !core.validDate(nextDate)) continue;
+          const li = document.createElement('li');
+          li.dataset.eventSpotlightDate = nextDate;
+          const link = document.createElement('a');
+          link.href = '/whats-on/events/' + event.seo.slug + '/';
+          link.textContent = event.title;
+          const time = document.createElement('time');
+          time.dateTime = nextDate;
+          time.textContent = new Date(nextDate + 'T12:00:00Z').toLocaleDateString(
+            'en-GB', { timeZone: 'Europe/London', weekday: 'long', day: 'numeric', month: 'long' });
+          li.append(link, time);
+          spotlightList.append(li);
+        }
+        spotlights.hidden = spotlightList.children.length === 0;
+      }
       window.SK8_EVENT_DATA = events;
       window.dispatchEvent(new CustomEvent('sk8:events-loaded',{detail:{events}}));
       render();

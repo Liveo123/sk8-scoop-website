@@ -82,8 +82,22 @@ try{
   const events=await evaluate("fetch('/data/events.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(Error('not found')))");
   const retiredIssue16Ids=historicalIssue16Ids.filter(id=>!events.some(e=>e.id===id));
   console.log('INFO: '+retiredIssue16Ids.length+' historic Issue 16 events have been retired from current listings.');
-  const currentIds=events.filter(e=>e.status==='verified'&&e.id&&String(e.date||'').length===10&&String(e.date)[4]==='-').slice(0,7).map(e=>e.id);
-  record('Seven current verified dated events available for action regression',currentIds.length===7);
+  // The expiry maintenance may legitimately shrink the feed. Four distinct
+  // current events are enough to exercise save, reminder, calendar and directions.
+  // Never count an expired or unconfirmed recurring occurrence as a current event.
+  const todayUK=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const currentIds=events.filter(e=>{
+    if(e.status!=='verified'||!e.id)return false;
+    if(e.date_mode==='specific_dates'){
+      return Array.isArray(e.occurrences)&&e.occurrences.some(raw=>{
+        const occurrence=typeof raw==='string'?{date:raw}:raw;
+        return occurrence&&occurrence.date>=todayUK&&!['cancelled','unverified'].includes(occurrence.status);
+      });
+    }
+    return String(e.end_date||e.date||'')>=todayUK;
+  }).slice(0,7).map(e=>e.id);
+  record('At least four current verified events available for all action regressions',currentIds.length>=4,
+    String(currentIds.length));
   for(const archivedId of retiredIssue16Ids){
     await visit('save',archivedId);
     record('Retired Issue 16 event fails safely: '+archivedId,(await heading())==='This action was not completed');
@@ -97,7 +111,7 @@ try{
     record('No horizontal overflow at 390px',Boolean(await evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth+1')));
   }
   const count=(await saved()).length;
-  record('Exactly seven events saved',count===currentIds.length,String(count));
+  record('Every selected current event saved',count===currentIds.length,String(count));
   await visit('save',currentIds[0]);
   record('Idempotent repeat click',(await saved()).length===currentIds.length);
   await screenshot('email-save-confirmation-mobile.png');
