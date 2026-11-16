@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Earn Birthday Time Machine | SK8 Scoop referral reward</title><meta name="description" content="Existing SK8 Scoop subscribers can earn Birthday Time Machine after three verified new subscribers join through a personal referral link."><link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/styles.css"><style>
+:root{--ink:#193a37;--teal:#0f6470;--deep:#0e302f;--gold:#bb9358;--cream:#fff9ed;--paper:#f0e7d5}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Arial,sans-serif}a{color:#0b6875}a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+header{padding:15px 5%;background:#fff8ed;border-bottom:1px solid #d2bd98;display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px}header a{color:var(--ink);font-weight:bold;text-decoration:none}
+main{max-width:940px;margin:0 auto;padding:40px 22px 90px}.eyebrow{color:#986a32;font:bold 12px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:2px}
+h1{font:bold clamp(37px,5.5vw,63px)/1.06 Georgia,serif;margin:12px 0 14px;letter-spacing:-1px}.lead{font:19px/1.5 Georgia,serif;color:#375d55;max-width:710px}
+.card{background:var(--cream);border:1px solid #d7c39e;box-shadow:0 8px 27px #a38f7040;padding:26px;margin-top:24px}.rule{border-left:5px solid var(--gold);padding:0 0 0 15px;margin:0 0 15px;font-weight:bold}.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:28px 0}.step{padding:20px;border:1px solid #cbb58e;background:#fffaf0}.step b{font:700 30px Georgia,serif;color:#966d35}.step h2{font:bold 22px Georgia,serif;margin:7px 0}.step p{margin:0;font-size:14px}
+label{font-weight:bold;display:block;margin:12px 0 6px}input[type=email]{width:100%;max-width:600px;min-height:48px;padding:12px 14px;border:1px solid #a8a18f;border-radius:3px;font-size:17px;background:white}
+button,.button{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;border:0;min-height:50px;padding:14px 22px;font:800 15px Arial,sans-serif;cursor:pointer;border-radius:3px}button[disabled]{opacity:.6;cursor:not-allowed}.fine{color:#5a665d;font-size:13px}.status{font-size:14px;font-weight:bold;margin:14px 0}.status.error{color:#a42a2a}.status.success{color:#13654d}.code{font:700 19px Georgia,serif;letter-spacing:2px;background:#eee3cf;padding:10px 12px;display:inline-block;margin-top:5px}
+[hidden]{display:none!important}footer{background:#113734;color:#f4efe1;padding:25px;text-align:center;font-size:13px}footer a{color:#ffe0b1}
+@media(max-width:690px){.steps{grid-template-columns:1fr}main{padding:28px 15px 60px}.card{padding:18px}}
+</style></head>
+<body><header><a href="/">SK8 Scoop / Adventures</a><a href="/adventures/birthday-time-machine/">Back to the adventure</a></header>
+<main>
+  <span class="eyebrow">Birthday Time Machine / Reader reward</span>
+  <h1>Three friends. One time-travelling prize.</h1>
+  <p class="lead">Already subscribe to SK8 Scoop? Invite three genuinely new readers to the free Friday email. Once their signups have been checked, the Birthday Time Machine game is yours.</p>
+  <div class="steps"><div class="step"><b>01</b><h2>Get a personal link</h2><p>Existing subscribers request their own private referral code. It never contains an email address.</p></div><div class="step"><b>02</b><h2>Invite three readers</h2><p>Friends choose to sign themselves up, using your unique link. No collecting their email addresses for them.</p></div><div class="step"><b>03</b><h2>Claim your game</h2><p>We check for three new, active, separate subscriptions before issuing a one-use free game coupon.</p></div></div>
+  <section class="card" id="get-link"><p class="rule">Already an SK8 Scoop subscriber?</p><h2 style="font:700 26px Georgia,serif;margin:0 0 8px">Request your personal link</h2><p>For the first small test, referral links are issued manually so the counts can be checked properly. Ask using the email address that receives SK8 Scoop. We will verify your subscription before issuing a code.</p><a class="button" href="mailto:contact@sk8scoop.com?subject=Birthday%20Time%20Machine%20referral%20link&amp;body=Please%20send%20a%20personal%20Birthday%20Time%20Machine%20referral%20link%20to%20my%20newsletter%20email%20address.">Request a referral link</a></section>
+  <section class="card" id="referee"><p class="rule">Have a personal invitation?</p><h2 style="font:700 26px Georgia,serif;margin:0 0 8px">Join the free Friday email</h2>
+    <div id="missing-ref"><p>To credit the friend who invited you, please open their personal referral link. Or <a href="/join/">join SK8 Scoop normally</a> without a referral code.</p></div>
+    <div id="referral-form-wrap" hidden><p>You have been invited through referral code <span class="code" id="code-display"></span>. SK8 Scoop is free, arrives weekly and covers useful local news, events and discoveries around SK8.</p>
+      <form action="/api/newsletter-signup" method="post" data-signup-form data-form-position="birthday-time-machine-referral" data-success-url="/signup-success/" id="btm-referee-form">
+        <label for="referee-email">Your email address</label>
+        <input id="referee-email" type="email" name="fields[email]" placeholder="you@example.com" autocomplete="email" required maxlength="254">
+        <input type="hidden" name="fields[birthday_time_machine_referral_code]" id="referral-code-field">
+        <input type="hidden" name="sk8_form_kind" value="main">
+        <input type="hidden" name="sk8_started_at" id="signup-started">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-200vw;width:1px;height:1px" value="">
+        <div id="turnstile-widget" style="margin:16px 0"></div>
+        <p class="status" id="challenge-status" role="status">Loading the human check...</p>
+        <button type="submit" id="referee-submit" disabled>Join SK8 Scoop for free</button>
+      </form>
+      <p class="fine">By joining, you agree to receive the free SK8 Scoop newsletter. Unsubscribe at any time. Referral codes help us check reward eligibility; we do not share your email address with the person who invited you. See <a href="/privacy.html">Privacy</a>.</p>
+      <p class="fine">A form submission is not automatically a qualifying referral. Existing subscribers and ineligible signups do not count towards the reward. The scheme is in prelaunch testing and no prize has yet been awarded.</p>
+    </div>
+  </section>
+  <p class="fine" style="margin:26px 0">Reward rules (pilot): One prize per qualifying referrer; three different new active subscribers; no self-referrals, existing addresses or artificial signups. We review genuine eligibility manually and provide a product-specific single-use coupon. Full terms and the date the offer opens will be confirmed before launch.</p>
+</main><footer>SK8 Scoop Adventures &nbsp; <a href="/privacy.html">Privacy</a> &nbsp; <a href="mailto:contact@sk8scoop.com">Questions?</a></footer>
+<script>
+(function(){
+  'use strict';
+  var params=new URLSearchParams(location.search);
+  var ref=String(params.get('ref')||'').toUpperCase().trim();
+  var valid=/^BTM-[A-Z0-9]{8,12}$/.test(ref);
+  if(!valid)return;
+  document.getElementById('missing-ref').hidden=true;
+  document.getElementById('referral-form-wrap').hidden=false;
+  document.getElementById('code-display').textContent=ref;
+  document.getElementById('referral-code-field').value=ref;
+  document.getElementById('signup-started').value=Date.now().toString();
+  var status=document.getElementById('challenge-status');
+  var button=document.getElementById('referee-submit');
+  var ready=false;
+  async function init(){
+    try{
+      var response=await fetch('/api/signup-config',{headers:{'accept':'application/json'}});
+      var result=await response.json();
+      if(!response.ok||!result.siteKey)throw new Error('Signup protection is not available.');
+      var n=0;
+      while(!window.turnstile&&n<70){await new Promise(function(resolve){setTimeout(resolve,100)});n++;}
+      if(!window.turnstile)throw new Error('Human check could not load.');
+      window.turnstile.render('#turnstile-widget',{
+        sitekey:result.siteKey,action:'newsletter_signup',
+        callback:function(){ready=true;button.disabled=false;status.textContent='Ready to join.';},
+        'expired-callback':function(){ready=false;button.disabled=true;status.textContent='Please complete the human check again.';},
+        'error-callback':function(){ready=false;button.disabled=true;status.textContent='Human check could not be completed. Please try again.';}
+      });
+      status.textContent='Complete the human check to continue.';
+    }catch(e){status.textContent='Referrals are not available right now. Please try again later.';}
+  }
+  init();
+})();
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script src="/assets/config.js"></script><script src="/assets/site.js"></script>
+</body></html>
