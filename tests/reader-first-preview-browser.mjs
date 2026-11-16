@@ -215,11 +215,26 @@ try {
   await navigate('/');
   await waitFor("Boolean(document.querySelector('.reader-first-event h3 a'))",'first verified homepage event');
   const detailHref=await evaluate("document.querySelector('.reader-first-event h3 a')?.getAttribute('href')");
-  const detailId=new URL(BASE+detailHref).searchParams.get('event');
-  const detailMatches="Boolean([...document.querySelectorAll('[data-event-id]')].find(x=>x.dataset.eventId==="+JSON.stringify(detailId)+"||x.dataset.seriesId==="+JSON.stringify(detailId)+"))";
+  const detailTitle=await evaluate("document.querySelector('.reader-first-event h3 a')?.textContent?.trim()");
+  const detailSession=await evaluate("document.querySelector('.reader-first-event time')?.getAttribute('datetime')");
+  const detailUrl=new URL(detailHref,BASE);
+  check('Homepage event offers an internal detail route with a verified date',
+    detailUrl.origin===new URL(BASE).origin && detailUrl.pathname.startsWith('/whats-on/') &&
+    Boolean(detailTitle) && /^\d{4}-\d{2}-\d{2}$/.test(detailSession || ''));
   await navigate(detailHref);
-  await waitFor(detailMatches,'homepage event has an actual calendar detail card');
-  check('NUE event continuation reaches the corresponding full event detail', await evaluate(detailMatches));
+  if (/^\/whats-on\/events\/[a-z0-9-]+\/$/.test(detailUrl.pathname)) {
+    // The first upcoming event may have a dedicated SEO leaf page, not a ?event= calendar link.
+    // Confirm the leaf's visible headline and its Event JSON-LD both match the selected event/date.
+    const detailMatches="(() => { const h=document.querySelector('main h1'); const script=document.getElementById('sk8-single-event-schema'); let event; try { event=JSON.parse(script?.textContent||'null'); } catch { return false; } return h?.textContent?.trim()==="+JSON.stringify(detailTitle)+" && event?.['@type']==='Event' && event?.name==="+JSON.stringify(detailTitle)+" && String(event?.startDate||'').slice(0,10)==="+JSON.stringify(detailSession)+"; })()";
+    await waitFor(detailMatches,'homepage event links to matching dated event leaf with Event schema');
+    check('NUE event continuation reaches the matching full event leaf', await evaluate(detailMatches));
+  } else {
+    const detailId=detailUrl.searchParams.get('event');
+    check('Homepage calendar fallback identifies a specific event',Boolean(detailId));
+    const detailMatches="Boolean([...document.querySelectorAll('[data-event-id]')].find(x=>x.dataset.eventId==="+JSON.stringify(detailId)+"||x.dataset.seriesId==="+JSON.stringify(detailId)+"))";
+    await waitFor(detailMatches,'homepage event has an actual calendar detail card');
+    check('NUE event continuation reaches the corresponding full event detail',await evaluate(detailMatches));
+  }
   await navigate('/whats-on/?filter=weekend');
   await waitFor(
     "document.querySelector('button[data-event-filter=weekend]')?.getAttribute('aria-pressed') === 'true'",
