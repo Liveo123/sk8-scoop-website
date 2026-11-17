@@ -1,13 +1,13 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-12",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "Gatley footpaths 48 and 51: closures from 26 October",
-      "meta": "Gatley · Yew Tree Grove and Motcombe Grove · From Monday",
-      "summary": "The council says both paths will close for development works from 26 October, with no official diversion provided.",
+      "title": "Gatley footpaths 48 and 51: temporary closure order",
+      "meta": "Gatley · Yew Tree Grove and Motcombe Grove · Check signs",
+      "summary": "A temporary order covers both paths during housing works. No official diversion is provided; check the latest notice and on-site signs.",
       "href": "/updates/gatley-footpath-closures-october-2026/",
       "linkLabel": "Check the footpaths and council notices →",
       "visualType": "dicm",
