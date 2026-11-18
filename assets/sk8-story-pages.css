@@ -1,0 +1,20 @@
+/* SK8 Scoop long-form story handoff. Draft until owner approval. */
+:root{--ink:#20313a;--teal:#0f6470;--raspberry:#af315c;--paper:#fffdfa;--cream:#f4f0e8;--coral:#ff7065;--line:#dfded6}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.65}
+a{color:var(--raspberry);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}
+.skip-link{position:absolute;left:-999em}.skip-link:focus{left:1em;top:1em;background:white;padding:8px;z-index:5}
+.site-head{background:#fff;border-bottom:1px solid var(--line)}
+.site-head-inner{width:min(850px,calc(100% - 36px));margin:auto;padding:13px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand img{max-width:220px;height:auto;display:block}.site-head nav{display:flex;gap:14px;flex-wrap:wrap;font-size:.88rem;font-weight:bold}
+.site-head nav a{color:var(--teal)}
+main{width:min(800px,calc(100% - 32px));margin:30px auto 70px;background:var(--paper);padding:clamp(22px,5vw,58px);border:1px solid var(--line);border-radius:14px}
+.eyebrow{color:var(--teal);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:850}
+h1,h2{line-height:1.15;letter-spacing:-.025em;color:#183b40}h1{font-size:clamp(2rem,5vw,3.15rem);margin:14px 0}h2{font-size:1.5rem;margin:1.65em 0 .5em}p,ul{margin:.8em 0}li{margin:.3em 0}
+.lead{font-size:1.2rem;line-height:1.5;color:#253e45}.meta{font-size:.86rem;color:#526368}
+.fact-box{background:#ffe9e3;border-left:5px solid var(--coral);padding:15px 20px;margin:26px 0;border-radius:5px}
+.fact-box strong{color:#172638}.action{display:inline-block;padding:12px 20px;background:var(--teal);color:white;text-decoration:none;border-radius:7px;font-weight:bold;margin:10px 0;min-height:48px}
+.action:hover{background:#06444d}.note{background:#edf3f1;padding:13px 18px;border-radius:8px;color:#28474e;font-size:.94rem}
+.sources{font-size:.85rem;border-top:1px solid var(--line);padding-top:15px;margin-top:35px}
+footer{padding:20px 15px 35px;text-align:center;color:#596a6e;font-size:.82rem}
+@media(max-width:600px){body{font-size:17px}main{margin:12px auto 34px;padding:23px 19px}.site-head-inner{justify-content:center}.site-head nav{justify-content:center}h1{font-size:2rem}h2{font-size:1.32rem}}
