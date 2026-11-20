@@ -1,21 +1,20 @@
 {
-  "updated": "2026-11-14",
+  "updated": "2026-11-20",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "Stockport station: what would actually change?",
-      "meta": "Transport · Consultation deadline 19 November 2026",
-      "summary": "New station buildings, a footbridge and lifts are proposed. The consultation closes 19 November; the article explains the scheme and where to check its status.",
-      "href": "/updates/stockport-station-consultation-2026/",
-      "linkLabel": "Understand the station proposals →",
+      "title": "Daisy Bank Farm: what does the draft plan actually say?",
+      "meta": "Finney Lane, Heald Green · Heritage and planning",
+      "summary": "The draft Local Plan proposes homes nearby but calls for the historic farmhouse to be retained. A proposal is not planning permission.",
+      "href": "/planning/daisy-bank-farm-heald-green-2026/",
+      "linkLabel": "Read the farmhouse and planning story →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
-      "image": "/assets/images/editorial-20261010/SK8-13-useful-updates.webp",
-      "alt": "General SK8 Scoop illustration for practical transport news, not an image of the proposed station",
-      "expires": "2026-11-19"
+      "image": "/assets/images/editorial-20261010/SK8-12-local-history.webp",
+      "alt": "General SK8 Scoop heritage illustration, not a photograph of Daisy Bank Farm"
     },
     {
       "mode": "DO",

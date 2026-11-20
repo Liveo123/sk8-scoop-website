@@ -39,7 +39,7 @@ window.SK8_CONFIG = {
     subscriberCount: "900+",
     subscriberProof: "900+",
     issuesPublished: 21,
-    checkedDate: "14 November 2026",
+    checkedDate: "20 November 2026",
     latestMainSendRecipients: null,
     latestMainOpenRate: null,
     latestClickRate: null,

@@ -69,7 +69,7 @@ requireText(v5, '.reader-proof{margin-top:0!important', 'tight proof spacing');
 
 // 3. Weekly picks have a proper editorial introduction.
 requireText(home, 'Know · Do · Discover', 'weekly-picks editorial framing');
-requireText(home, 'Station proposals, useful dates in the local calendar, and the cotton factory once attached to a Gatley house.', 'current-picks explanation');
+requireText(home, 'Daisy Bank's planning questions, current local outings and the cotton factory behind Gatley Hall.', 'current-picks explanation');
 requireText(v4, '.home-worth-head', 'weekly-picks heading layout');
 
 // 4. Story cards are visually consistent and CTA-aligned.

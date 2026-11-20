@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14",
+  "updated": "2026-11-20",
   "records": [
     {
       "id": "issue-18-october-23-2026",
@@ -1367,7 +1367,7 @@
       "type": "Useful updates",
       "category": "Transport",
       "title": "Stockport station proposals: consultation to 19 November 2026",
-      "summary": "Proposed station buildings, new footbridge, lifts and connections, with the council's 19 November response deadline and an automatic expiry notice.",
+      "summary": "The 19 November consultation closed; read the station development proposals and follow the council's next decisions.",
       "href": "/updates/stockport-station-consultation-2026/",
       "area": "Stockport",
       "tags": [
@@ -1379,9 +1379,8 @@
         "lifts",
         "transport"
       ],
-      "freshness": "current",
-      "checked": "2026-11-14",
-      "expires": "2026-11-19"
+      "freshness": "dated",
+      "checked": "2026-11-20"
     },
     {
       "id": "tatton-park-yuletide-2026",
