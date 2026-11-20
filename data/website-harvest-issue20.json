@@ -1,0 +1,158 @@
+{
+  "issue": 20,
+  "issue_date": "2026-11-06",
+  "final_issue_checked": true,
+  "checked_date": "2026-11-09",
+  "source": "As-sent MailerLite campaign 203412139477567224 (Issue 20 original, sent 6 Nov 2026), cross-checked with the resend for additional context; primary verification recorded per standalone page.",
+  "scope": "Final published Issue 20 article/notice/puzzle/house content disposition for the website; historical events must not be misrepresented as active. Companion PR #301 stages three future listings on top of the merged #295 clean event feed.",
+  "previous_harvest": "data/website-harvest-issue18.json",
+  "items": [
+    {
+      "id": "issue20",
+      "title": "Final sent Issue 20 original newsletter",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-20/",
+      "checked": "2026-11-09",
+      "reason": "Historical editorial index; final campaign checked."
+    },
+    {
+      "id": "fireworks",
+      "title": "Manchester free fireworks mentioned in Issue 20",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Event took place before 9 November; keep historical only."
+    },
+    {
+      "id": "spectacular",
+      "title": "Stockport's Spectacular Sunday",
+      "disposition": "standalone_page",
+      "route": "/whats-on/events/stockport-spectacular-sunday-2026/",
+      "checked": "2026-11-09",
+      "reason": "Primary council and BID sources checked 9 November; date-specific page with expiry requirement."
+    },
+    {
+      "id": "cheadle-green",
+      "title": "What lies beneath Cheadle Green?",
+      "disposition": "standalone_page",
+      "route": "/local-history/cheadle-green-hall-archaeology/",
+      "checked": "2026-11-09",
+      "reason": "Historically durable primary archaeological project reporting; new standalone page."
+    },
+    {
+      "id": "transport",
+      "title": "Transport consultation deadline",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-09",
+      "reason": "The 2-day deadline promoted on 6 November had passed by 9 November; do not present as open."
+    },
+    {
+      "id": "orchestra",
+      "title": "Orchestral Saturday with free tickets for children",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Book-ahead event; exact current ticket conditions and availability not reverified for website release."
+    },
+    {
+      "id": "stockroom",
+      "title": "Stockroom newly built sound system",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Date and ongoing access/session terms not reverified for website release."
+    },
+    {
+      "id": "animation",
+      "title": "Animation Festival family day",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Sunday family event in sent edition was time-limited and has passed."
+    },
+    {
+      "id": "model-trains",
+      "title": "Free model trains you can operate",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Recheck the exact upcoming public session dates before live events feed inclusion."
+    },
+    {
+      "id": "noticeboard",
+      "title": "SK8 Community Noticeboard",
+      "disposition": "existing_surface",
+      "route": "/noticeboard/",
+      "checked": "2026-11-09",
+      "reason": "Existing submission/browse surface; no need to duplicate weekly notice copy."
+    },
+    {
+      "id": "bruntwood",
+      "title": "Bruntwood Park orienteering",
+      "disposition": "standalone_page",
+      "route": "/outdoors/bruntwood-park-orienteering/",
+      "checked": "2026-11-09",
+      "reason": "Durable outdoor activity. Source checked via Greater Manchester Orienteering Activities."
+    },
+    {
+      "id": "christmas-markets",
+      "title": "Manchester Christmas Markets opening",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Wider Manchester event; site should not simply copy general seasonal opening news without SK8-specific utility."
+    },
+    {
+      "id": "costumes",
+      "title": "Fifty years of theatre costumes exhibition",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Exhibition dates and public access not independently reverified for a current dedicated website entry."
+    },
+    {
+      "id": "thali",
+      "title": "Indian Tiffin Room Cheadle thali",
+      "disposition": "existing_surface",
+      "route": "/food-drink/",
+      "checked": "2026-11-09",
+      "reason": "Food category exists; prices and dishes need a current business menu check before standalone promotion."
+    },
+    {
+      "id": "councillor-lane",
+      "title": "Councillor Lane overnight closures",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Future roadwork dates and diversion need fresh council/TfGM confirmation before being shown as live travel advice."
+    },
+    {
+      "id": "birth-class",
+      "title": "Cheadle birth-preparation course",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Future class; availability and exact booking terms need a current provider recheck."
+    },
+    {
+      "id": "poll",
+      "title": "Issue 20 reader poll",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Issue-specific newsletter feedback mechanism; no evergreen article value."
+    },
+    {
+      "id": "puzzle",
+      "title": "Issue 19 answer and Issue 20 Where Is This photo",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Newsletter participation feature; image reuse and context need separate approval."
+    },
+    {
+      "id": "voice",
+      "title": "Sapura's approved comments and editor's sign-off",
+      "disposition": "no_web_add",
+      "checked": "2026-11-09",
+      "reason": "Keep the personal voice in the historic email; do not duplicate it as a standalone website page."
+    },
+    {
+      "id": "house",
+      "title": "Other house promotions and sign-up panels",
+      "disposition": "existing_surface",
+      "route": "/join/",
+      "checked": "2026-11-09",
+      "reason": "Join, submit and paid routes already exist; no duplicate page required."
+    }
+  ]
+}

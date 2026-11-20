@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24",
+  "updated": "2026-11-20",
   "records": [
     {
       "id": "issue-18-october-23-2026",
@@ -1284,6 +1284,156 @@
       "freshness": "dated",
       "checked": "2026-11-09",
       "expires": "2026-11-15"
+    },
+    {
+      "id": "issue22-riverside",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "The lost buildings beside Stockport's rivers",
+      "summary": "The unexplained giant doorway in an archive photo and the excavated remains beneath Heaton Lane.",
+      "href": "/local-history/stockport-riverside-lost-buildings/",
+      "area": "Stockport",
+      "tags": [
+        "stockport",
+        "riverbank",
+        "millgate bridge",
+        "wellington bridge",
+        "archive",
+        "mystery"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "issue22-gatley-tram",
+      "type": "Stories",
+      "category": "Local History",
+      "title": "The pub at the end of Gatley's tram line",
+      "summary": "A c.1905 Stockport Image Archive photo shows a tram by Gatley's Horse and Farrier.",
+      "href": "/local-history/gatley-tram-horse-farrier/",
+      "area": "Gatley",
+      "tags": [
+        "gatley",
+        "horse and farrier",
+        "tram",
+        "transport",
+        "history",
+        "archive"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "issue22-bramall-roof",
+      "type": "Stories",
+      "category": "Useful Updates",
+      "title": "Bramall Hall's restored roof and Christmas opening",
+      "summary": "Roof restoration, normal admission charges and the separate 2026 Elf Trail booking requirements.",
+      "href": "/updates/bramall-hall-roof-christmas-2026/",
+      "area": "Bramhall",
+      "tags": [
+        "bramall hall",
+        "roof",
+        "christmas",
+        "heritage",
+        "elf trail"
+      ],
+      "freshness": "dated",
+      "checked": "2026-11-20",
+      "expires": "2026-12-31"
+    },
+    {
+      "id": "issue22-warm-libraries",
+      "type": "Stories",
+      "category": "Useful Updates",
+      "title": "Free warm spaces and digital help at SK8 libraries",
+      "summary": "Warm library facilities and a free Cheadle Library digital help drop-in on 27 November 2026.",
+      "href": "/updates/warm-libraries-digital-help-november-2026/",
+      "area": "Cheadle",
+      "tags": [
+        "warm spaces",
+        "libraries",
+        "digital skills",
+        "free",
+        "wifi",
+        "cheadle"
+      ],
+      "freshness": "dated",
+      "checked": "2026-11-20",
+      "expires": "2026-12-31"
+    },
+    {
+      "id": "issue22-farm-correction",
+      "type": "Stories",
+      "category": "Useful Updates",
+      "title": "Correction: Chamber Hall Farm and Daisy Bank Farm",
+      "summary": "Correcting the Simonsway cattle account: Chamber Hall Farm, not Daisy Bank Farm on Finney Lane.",
+      "href": "/updates/heald-green-farm-correction-2026/",
+      "area": "Heald Green",
+      "tags": [
+        "chamber hall",
+        "daisy bank",
+        "simonsway",
+        "heritage",
+        "correction"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "issue22-coderdojo",
+      "type": "Stories",
+      "category": "Useful Updates",
+      "title": "Cheadle CoderDojo's last session after 12 years",
+      "summary": "The volunteer coding club's final meeting on 21 November 2026 and a request for members' memories.",
+      "href": "/updates/cheadle-coderdojo-final-session-2026/",
+      "area": "Cheadle",
+      "tags": [
+        "coderdojo",
+        "coding",
+        "volunteers",
+        "kids",
+        "community"
+      ],
+      "freshness": "dated",
+      "checked": "2026-11-20",
+      "expires": "2026-12-31"
+    },
+    {
+      "id": "issue21-sent-index",
+      "type": "Stories",
+      "category": "Newsletter Archive",
+      "title": "Issue 21: lanterns, Gatley history and station plans",
+      "summary": "Historical story index for the newsletter sent Friday 13 November 2026.",
+      "href": "/issues/issue-21/",
+      "area": "SK8",
+      "tags": [
+        "issue 21",
+        "newsletter",
+        "archive",
+        "november"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "issue22-web-companion",
+      "type": "Stories",
+      "category": "Newsletter Web Companion",
+      "title": "Issue 22 website companion: CoderDojo and the riverside mystery",
+      "summary": "Website-first research companion from the private Issue 22 draft; not evidence of an email send.",
+      "href": "/issues/issue-22/",
+      "area": "SK8",
+      "tags": [
+        "issue 22",
+        "newsletter",
+        "website",
+        "coderdojo",
+        "bramall hall",
+        "history"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-20"
     }
   ]
 }

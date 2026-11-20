@@ -27,6 +27,7 @@ on:
       - '.github/workflows/sitewide-nue-qa.yml'
 permissions:
   contents: read
+  checks: read
   issues: read
   pull-requests: read
 concurrency:
@@ -90,36 +91,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Resolve exact Cloudflare preview commit
+      - name: Resolve exact Cloudflare preview with SHA and served-file parity
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
           PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+          PREVIEW_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           set -euo pipefail
-          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
-          short_sha="${PREVIEW_SHA:0:7}"
-          for n in $(seq 1 30); do
-            response="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "$api" || true)"
-            body="$(printf '%s' "$response" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // ""' 2>/dev/null || true)"
-            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
-            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
-            sha="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
-            if [ "$sha" = "$short_sha" ] && [ -n "$url" ]; then
-              code="$(curl -sSL --max-time 20 -o /tmp/sk8-sitewide-preview.html -w '%{http_code}' "$url/" || true)"
-              css="$(curl -sSL --max-time 20 -o /tmp/sk8-sitewide-ux.css -w '%{http_code}' "$url/assets/sitewide-ux.css" || true)"
-              if [ "$code" = 200 ] && [ "$css" = 200 ] && grep -Fq 'sitewide-clear-filters' /tmp/sk8-sitewide-ux.css; then
-                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
-                echo "Validated exact preview SHA $sha: $url"
-                exit 0
-              fi
-            fi
-            echo "Waiting for exact sitewide preview $short_sha ($n/30)"
-            sleep 10
-          done
-          echo "No matching preview revision was verified"
-          exit 1
+          bash -n scripts/resolve-cloudflare-preview.sh
+          preview_url="$(bash scripts/resolve-cloudflare-preview.sh)"
+          echo "PREVIEW_URL=$preview_url" >> "$GITHUB_ENV"
       - name: Select available Chrome browser
         shell: bash
         run: |

@@ -1,21 +1,20 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-20",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "Gatley footpaths 48 and 51: closures from 26 October",
-      "meta": "Gatley · Yew Tree Grove and Motcombe Grove · From Monday",
-      "summary": "The council says both paths will close for development works from 26 October, with no official diversion provided.",
-      "href": "/updates/gatley-footpath-closures-october-2026/",
-      "linkLabel": "Check the footpaths and council notices →",
+      "title": "Bramall Hall's roof is back for Christmas",
+      "meta": "Bramhall · Tudor history · Christmas visits",
+      "summary": "Major roof work is finished. What visitors can see, what Hall admission costs and why the Elf Trail needs a separate ticket.",
+      "href": "/updates/bramall-hall-roof-christmas-2026/",
+      "linkLabel": "Check Bramall Hall prices and visiting details →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792772459/issue18-qa-asset-17.jpg",
-      "alt": "Original illustration of a temporarily closed autumn path, not the actual Gatley paths",
-      "expires": "2027-04-26"
+      "image": "/assets/images/editorial-20261010/SK8-13-useful-updates.webp",
+      "alt": "General SK8 Scoop editorial illustration about local updates; not a photograph of Bramall Hall"
     },
     {
       "mode": "DO",
@@ -34,16 +33,16 @@
     {
       "mode": "DISCOVER",
       "label": "DISCOVER THIS",
-      "title": "Reda’s and Heald Green’s boxing-kangaroo story",
-      "meta": "Finney Lane · Local history · Remembered in 1963",
-      "summary": "Pat Phoenix, old TV-shop adverts and a kangaroo in boxing gloves: an unusual tale built from local residents' memories.",
-      "href": "/local-history/redas-boxing-kangaroo-heald-green/",
-      "linkLabel": "Read the sourced Reda’s story →",
+      "title": "Stockport's mysterious giant doorway",
+      "meta": "Stockport · Local riverside history · Unresolved",
+      "summary": "An archive photo shows a doorway roughly nine metres high, but its original site and purpose remain unknown.",
+      "href": "/local-history/stockport-riverside-lost-buildings/",
+      "linkLabel": "Investigate the riverside mystery →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
-      "image": "https://res.cloudinary.com/gocq00bt/image/upload/v1792772420/issue18-qa-asset-13.jpg",
-      "alt": "Original illustration of a 1960s electrical shop and kangaroo; not an archival photograph"
+      "image": "/assets/images/editorial-20261010/SK8-12-local-history.webp",
+      "alt": "Symbolic SK8 Scoop local-history illustration, not the actual riverside doorway photograph"
     }
   ],
   "explore": [

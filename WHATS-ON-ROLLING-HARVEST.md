@@ -1,18 +1,18 @@
 # SK8 Scoop Rolling What's On Harvest
 
-**Status:** PREVIEW IMPLEMENTATION  
-**Branch:** `preview/usability-simplification-v1`  
+**Status:** VERIFIED EXISTING TWICE-WEEKLY HARVEST AUTOMATION; source and data code changes on review PR are not yet live  
+**Checked:** 20 November 2026  
 **Purpose:** keep What's On useful between weekly newsletter releases without turning SK8 Scoop into a generic event directory.
 
 ## Operating goal
 
-Maintain roughly **20–35 useful future listings** at a time, looking **42 days ahead**. This is a quality target, not a quota. A smaller list is acceptable when supply is weak; filler is not.
+Aim for **40–60 verified, relevant future listings** (including individually dated recurring activities), looking **42 days ahead**, as specified in the newer `data/event-sources.json` policy. This is a discovery/quality target, not a publishing quota; fewer listings are acceptable where evidence or value is weak. A smaller list is acceptable when supply is weak; filler is not.
 
 Core geography remains Cheadle, Cheadle Hulme, Gatley and Heald Green, plus nearby SK8. Wider Stockport and nearby Cheshire/Greater Manchester items enter only when they are especially useful, distinctive or worth the trip.
 
 ## Cadence
 
-Run the rolling harvest **twice each week**, normally Monday and Thursday.
+**Existing enabled task:** `SK8 What’s On Harvest` (automation ID `6ab64979cc0c8191ba9771af1c12935b`) runs **Tuesday and Friday at 09:00 Europe/London**. Confirmed in the saved automation on 20 November 2026; last scheduled run 20 November, next 24 November. That latest run completed its research but **held production publication** because a required event-leaf static QA failed. A task-run timestamp is not proof of a published update. Do not create a second GitHub scheduled discovery job. GitHub's separate daily expiry workflow removes ended listings only.
 
 The weekly Newsletter Factory / Website Harvest remains a major feeder. The rolling harvest fills the gap between newsletter runs and looks farther ahead so the site does not empty as events expire.
 
@@ -45,7 +45,7 @@ The queue is an editorial control, not a public page.
 
 Use `node scripts/promote-ready-events.mjs` first in dry-run mode. It reports the exact `ready` items eligible to move into `data/events.json` and makes no changes.
 
-After verification and editorial review on a preview/staging branch only, `node scripts/promote-ready-events.mjs --apply` may promote those `ready` items, remove them from the review queue and keep `needs_check` / `rejected` items in place. Production merge remains separately owner-approved.
+After verification and editorial review on a preview/staging branch only, `node scripts/promote-ready-events.mjs --apply` may promote those `ready` items, remove them from the review queue and keep `needs_check` / `rejected` items in place. **Owner-approved exception:** the existing 9 November 2026 Tuesday/Friday automation may merge and publish *event-data-only* (`data/events.json`, `data/event-review-queue.json`) after all its prescribed release and production-parity gates pass. It may not publish source-registry, code, site design, documentation or other changes without separate approval.
 
 ## Harvest sequence
 
@@ -66,7 +66,7 @@ After verification and editorial review on a preview/staging branch only, `node 
 15. Retain `needs_check` and recent `rejected` records in the queue with clear reasons.
 16. Stage changes on preview.
 17. Run review-queue QA, event-data QA, link/freshness checks and relevant mobile QA.
-18. Production remains human approval-gated.
+18. Follow the existing Harvest task's event-data-only publication authorisation and verification gates; all non-event-data releases remain explicitly approval-gated.
 
 ## Dedupe rules
 
@@ -92,7 +92,7 @@ Strongest:
 8. useful adult classes and social activities;
 9. distinctive wider-Stockport or nearby outings.
 
-Avoid filling the page with ordinary weekly services, commercial classes or generic listings merely because they are available.
+Regular classes can be included when a reader gains something actionable (for example an accessible, distinctive, affordable local yoga, Pilates, craft or social session). Check each advertised occurrence, cost and joining conditions, especially around holidays. Avoid filling the page with undated ordinary weekly services, repetitive commercial classes or generic listings merely because they are available.
 
 ## Required event fields
 
@@ -111,6 +111,10 @@ Minimum publishable fields:
 - `status: "verified"`
 
 Use `end_date` and `date_range` for multi-day events. Use `booking_url` when distinct from the evidence source.
+
+## Approval and execution status
+
+The **existing enabled ChatGPT Harvest automation** is the scheduled research-and-event-data-release owner. Its updated instructions (20 November 2026) require each run to cover all four core areas, rotate the controlled wider source registry and actively search yoga, Pilates, Tai Chi, walking, crafts, book groups, quizzes, parent/child and adult social activities. Every run must report checked/deferred/unavailable areas and categories. Event-data-only changes retain the prior approval; code and source-registry changes stay behind separate approval. The latest 20 November run was recorded as completed, but publication failed its static QA gate. Do not declare website freshness from schedule alone. No redundant GitHub discovery schedule should be installed. Never assume a recurring timetable automatically confirms bank-holiday or Christmas sessions.
 
 ## Freshness
 
