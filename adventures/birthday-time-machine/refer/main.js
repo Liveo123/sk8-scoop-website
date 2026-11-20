@@ -1,7 +1,7 @@
 (()=>{'use strict';
 const qs=id=>document.getElementById(id);const status=qs('launch-status'),ask=qs('request-form'),join=qs('join-form');
 const ref=String(new URLSearchParams(location.search).get('ref')||'').trim().toUpperCase(),valid=/^BTM-[A-HJ-NP-Z2-9]{12}$/.test(ref);
-if(valid){qs('missing-code').classList.add('hidden');qs('join-with-code').classList.remove('hidden');qs('claimed-code').value=ref;qs('code-display').textContent=ref;}
+if(valid){qs('joined-at').value=String(Date.now());qs('missing-code').classList.add('hidden');qs('join-with-code').classList.remove('hidden');qs('claimed-code').value=ref;qs('code-display').textContent=ref;}
 let askToken='',joinToken='',askWidget=null,joinWidget=null,turnstile=null;
 function say(id,msg,error=false){const s=qs(id);s.textContent=msg;s.classList.toggle('error',error);}
 async function loadTurnstile(){
@@ -34,13 +34,13 @@ ask.addEventListener('submit',async e=>{
 });
 join.addEventListener('submit',async e=>{
  e.preventDefault();if(!valid||!join.reportValidity()||!joinToken)return;
- const b=qs('join-submit');b.disabled=true;qs('joined-at').value=String(Date.now());say('join-status','Joining…');
+ const b=qs('join-submit');b.disabled=true;say('join-status','Joining…');
  try{
   const r=await fetch('/api/sk8-btm-signup',{method:'POST',credentials:'same-origin',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(join))}),j=await r.json();
   if(!r.ok||j.success!==true)throw Error(j.error||'Signup could not be completed.');
   if(j.already_subscribed===true)say('join-status','This email is already subscribed to SK8 Scoop, so it cannot count as a new referral.');
   else say('join-status','You are subscribed. Please check your inbox and independently confirm the referral email within 48 hours to credit your friend.');
  }catch(err){say('join-status',err.message||'Please try again.',true);}
- finally{joinToken='';qs('join-turnstile-token').value='';if(turnstile&&joinWidget!==null)turnstile.reset(joinWidget);b.disabled=true;}
+ finally{joinToken='';qs('joined-at').value=String(Date.now());qs('join-turnstile-token').value='';if(turnstile&&joinWidget!==null)turnstile.reset(joinWidget);b.disabled=true;}
 });
 })();
