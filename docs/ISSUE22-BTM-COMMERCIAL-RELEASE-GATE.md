@@ -16,6 +16,11 @@ Status: **PRIVATE REVIEW / NOT DEPLOYED / NOT SENT**. Owner choices received on 
 - Keep original logo and verified v15 image credits and the v13 NUE link map. Do not promote unpublished poll, guessing form or placeholder links.
 - Preserve a dated v16 handover; never overwrite v15 or the master.
 
+## Coupon state confirmed by owner screenshot (20 November 2026)
+- **Created:** `SK8CLOCK5` for Birthday Time Machine, fixed amount 5.00 (creation form explicitly showed GBP), no uses so far. The list view displays **$5.00 off**, so **checkout currency and actual amount have NOT been verified**. Do not claim the live checkout is £9.99 until a test proves it.
+- **Expiry currently shown:** 4 December 2026. Payhip documentation says coupons expire at **00:00 UTC at the start of the chosen end date**. If an approved email goes out on **20 November 2026 at 18:00 UTC**, a full 14-day validity requires expiry at least 4 December 18:00 UTC. To cover the full day on a date-only picker, choose **5 December 2026** (expiry 00:00 UTC), which provides 14 days plus six hours. If send delayed, move expiry accordingly.
+- **Next owner action:** verify GBP product and exact £9.99 total at checkout after the correct release ZIP is attached and the product is switched to Unlisted for a controlled test. A real card payment is not authorised.
+
 ## Reader-paid checkout (Payhip, no development necessary)
 - Product: `https://payhip.com/b/r5tML` (from owner setup). Historical configured price **£14.99 GBP** and Stripe connected in Payhip.
 - **To set up in Payhip, owner must authorise/test:** create a **product-specific £5.00 discount code**, proposed label `SK8CLOCK5`. This makes £14.99 - £5.00 = £9.99.
