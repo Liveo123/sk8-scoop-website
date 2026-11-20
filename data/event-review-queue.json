@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-17",
+  "updated": "2026-11-20",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -276,6 +276,107 @@
       ],
       "status": "needs_check",
       "discovered": "2026-11-17"
+    },
+    {
+      "id": "gatley-urc-winter-groups-2026",
+      "title": "Gatley United Reformed Church winter groups",
+      "area": "Gatley",
+      "source_url": "https://www.gatleyurc.com/",
+      "reason": "Recurring community activity lead; no individually verified future sessions, holiday exceptions or entry terms yet.",
+      "missing": [
+        "specific future dates and times",
+        "cost and booking arrangements",
+        "organiser confirmation of winter schedule"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-11-20",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "heald-green-village-hall-classes-winter-2026",
+      "title": "Heald Green Village Hall: line dancing, Tai Chi, sewing and bridge",
+      "area": "Heald Green",
+      "source_url": "https://www.healdgreenvillagehall.co.uk/community-hall-regular-users",
+      "reason": "Official hall user list establishes recurring groups, but not each November/December 2026 occurrence or booking terms.",
+      "missing": [
+        "session-by-session dates and Christmas closures",
+        "prices and advance booking details",
+        "current organiser or leader contact confirmation"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-11-20",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "yoga-sangha-regular-pilates-classes-winter-2026",
+      "title": "Yoga Sangha weekly Pilates and yoga classes",
+      "area": "Cheadle",
+      "source_url": "https://yogasangha.co.uk/classes/",
+      "reason": "The studio advertises an ongoing class programme; repeating days are not automatically confirmed bookable November/December sessions.",
+      "missing": [
+        "specific class times and dated availability",
+        "drop-in costs and member/first-timer terms",
+        "booking link and holiday schedule"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-11-20",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "stockroom-friday-drum-circle-nov-dec2026",
+      "title": "Friday Drum Circle at Stockroom",
+      "area": "Stockport",
+      "source_url": "https://www.stockroomsk.co.uk/events?free=true&page=1&pageSize=60",
+      "reason": "Stockroom calendar advertises dated Friday afternoon sessions, but specialist value and full session terms merit checking before promotion to the more selective SK8 calendar.",
+      "missing": [
+        "event-specific format and age restrictions",
+        "confirmed end time and attendance terms"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-11-20",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "stockroom-sunday-qi-gong-2026-11-29",
+      "title": "Sunday Qi Gong at Stockroom",
+      "area": "Stockport",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "reason": "Venue index advertises 29 November 11.30am; venue-specific price, joining terms and exact duration need recovery.",
+      "missing": [
+        "event-specific cost and booking terms",
+        "end time and suitability restrictions"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-11-20",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "stockroom-festive-poetry-2026-12-03",
+      "title": "Festive Poetry Night at Stockroom",
+      "area": "Stockport",
+      "source_url": "https://www.stockroomsk.co.uk/events",
+      "reason": "Venue calendar lists an evening poetry event; details, costs and family suitability not established.",
+      "missing": [
+        "venue page with full programme and restrictions",
+        "price and booking status"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-11-20",
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "yoga-sangha-goh-yin-yoga-2026-12-06",
+      "title": "Surrender Sunday Series: Yin Yoga Workshop",
+      "area": "Cheadle",
+      "source_url": "https://yogasangha.co.uk/upcoming-events/",
+      "reason": "Primary listing says 6 December 1–3pm, £30; booking inventory and cancellation terms not yet checked.",
+      "missing": [
+        "date-specific live checkout availability",
+        "booking restrictions or cancellation terms"
+      ],
+      "status": "needs_check",
+      "discovered": "2026-11-20",
+      "checked": "2026-11-20"
     }
   ]
 }
