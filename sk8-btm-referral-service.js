@@ -248,7 +248,7 @@ export async function requestSk8BtmCode(request,env){
        '',
        'Existing SK8 readers, self-referrals and duplicate mailboxes do not qualify. Do not send us anyone else’s email address. This does not enrol anyone automatically.',
        'Terms: https://www.sk8scoop.com/adventures/birthday-time-machine/refer/terms/'
-     ].join('\n'););
+     ].join('\n');
     const sent=await send(env,email,'Your SK8 Scoop Birthday Time Machine referral code',emailText).catch(()=>false);
     if(sent)await env.DB.prepare("UPDATE sk8_btm_referral_codes SET last_sent_at=datetime('now') WHERE subscriber_id=?").bind(String(user.id)).run();
   }
