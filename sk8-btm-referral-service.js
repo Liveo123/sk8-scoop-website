@@ -60,7 +60,7 @@ async function send(env,to,subject,text,idempotencyKey=''){
     body:JSON.stringify({from:SENDER,to:[to],subject,text,reply_to:'contact@sk8scoop.com'})});
   return res.ok;
 }
-// One verified, independent referral. Email fulfilment uses the already configured
+// Three verified, independent referrals. Email fulfilment uses the already configured
 // transactional sender, NOT the broken MailerLite MCP or a reward automation.
 // Resend accepts an idempotency key; the durable D1 row prevents future re-awards.
 // One reward per eligible SK8 subscriber. A D1 compare-and-set prevents duplicate
@@ -189,11 +189,11 @@ export async function registerSk8BtmMember(env,user){
   if(!result?.meta?.changes){const after=await env.DB.prepare('SELECT code FROM sk8_btm_referral_codes WHERE subscriber_id=?').bind(String(user.id)).first();return {ready:!!after?.code,code:after?.code||null};}
   return {ready:true,code};
 }
-// The signup API runs this AFTER MailerLite has confirmed a new SK8 Scoop membership.
+// The signup API runs this only after MailerLite has confirmed new SK8 Scoop membership.
 // Referrals never re-subscribe, alter status, or award points at signup.
-export async function recordSk8BtmReferral(env,{referee,claimedCode,existingSK8 Scoop}){
+export async function recordSk8BtmReferral(env,{referee,claimedCode,existingSk8}){
   if(env.SK8_BTM_REFERRAL_ENABLED!=='true'||!claimedCode)return {pending:false,reason:'disabled_or_unclaimed'};
-  if(!env.DB||!validId(referee?.id)||!validCode(claimedCode)||existingSK8 Scoop)return {pending:false,reason:'ineligible'};
+  if(!env.DB||!validId(referee?.id)||!validCode(claimedCode)||existingSk8)return {pending:false,reason:'ineligible'};
   await ensure(env.DB);
   const owner=await env.DB.prepare('SELECT subscriber_id FROM sk8_btm_referral_codes WHERE code=?').bind(claimedCode).first();
   if(!owner?.subscriber_id||owner.subscriber_id===String(referee.id))return {pending:false,reason:'unrecognised_or_self'};
