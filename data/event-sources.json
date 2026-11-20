@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-09",
+  "updated": "2026-11-20",
   "purpose": "Rolling discovery registry for SK8 Scoop What's On. Discovery is not verification: publishable event facts should be checked against an organiser, venue, council or other primary source wherever practical.",
   "policy": {
     "core_areas": [
@@ -944,6 +944,16 @@
         "site:stockport.gov.uk/events Life Leisure Cheadle",
         "site:healthystockport.co.uk/events Life Leisure Cheadle"
       ]
+    },
+    {
+      "id": "yoga-sangha",
+      "name": "Yoga Sangha Cheadle events and weekly class timetable",
+      "tier": "A",
+      "area": "Cheadle",
+      "role": "primary+regular-activities",
+      "cadence_days": 7,
+      "mode": "fetch",
+      "url": "https://yogasangha.co.uk/upcoming-events/"
     }
   ]
 }
