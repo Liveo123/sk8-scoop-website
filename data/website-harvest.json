@@ -1,158 +1,289 @@
 {
-  "issue": 20,
-  "issue_date": "2026-11-06",
+  "issue": 21,
+  "issue_date": "2026-11-13",
   "final_issue_checked": true,
-  "checked_date": "2026-11-09",
-  "source": "As-sent MailerLite campaign 203412139477567224 (Issue 20 original, sent 6 Nov 2026), cross-checked with the resend for additional context; primary verification recorded per standalone page.",
-  "scope": "Final published Issue 20 article/notice/puzzle/house content disposition for the website; historical events must not be misrepresented as active. Companion PR #301 stages three future listings on top of the merged #295 clean event feed.",
-  "previous_harvest": "data/website-harvest-issue18.json",
+  "checked_date": "2026-11-14",
+  "source": "As-sent MailerLite 204021913731728560, two published A/B newsletter versions sent 13 November 2026; Saturday correction verified in sent resend 204100849851434619 on 14 November; local history corrected against Heald Green Heritage correspondence, events rechecked with primary organisers/councils.",
+  "scope": "Issue 21 website harvest covering both final published A/B variants, Pinboard and corrections: useful new web pages, current event feed additions, historical archive-only content, and evidence-backed no-add dispositions. No production merge or Cloudflare deployment.",
+  "previous_harvest": "data/website-harvest-issue20.json",
   "items": [
     {
-      "id": "issue20",
-      "title": "Final sent Issue 20 original newsletter",
+      "id": "issue21-combined",
+      "title": "Issue 21, Design A and B, final published 13 November",
       "disposition": "existing_surface",
-      "route": "/issues/issue-20/",
-      "checked": "2026-11-09",
-      "reason": "Historical editorial index; final campaign checked."
+      "checked": "2026-11-14",
+      "reason": "A/B unique content merged in a dated historical index; not two duplicate archives.",
+      "route": "/issues/issue-21/"
     },
     {
-      "id": "fireworks",
-      "title": "Manchester free fireworks mentioned in Issue 20",
-      "disposition": "expired_no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Event took place before 9 November; keep historical only."
-    },
-    {
-      "id": "spectacular",
-      "title": "Stockport's Spectacular Sunday",
+      "id": "station-consultation",
+      "title": "Stockport railway station redevelopment consultation",
       "disposition": "standalone_page",
-      "route": "/whats-on/events/stockport-spectacular-sunday-2026/",
-      "checked": "2026-11-09",
-      "reason": "Primary council and BID sources checked 9 November; date-specific page with expiry requirement."
+      "checked": "2026-11-14",
+      "reason": "Substantial, timely public-transport proposal with an actionable 19 November deadline and later automatic closed status.",
+      "route": "/updates/stockport-station-consultation-2026/"
     },
     {
-      "id": "cheadle-green",
-      "title": "What lies beneath Cheadle Green?",
+      "id": "gatley-hall-cotton",
+      "title": "Gatley Hall's former cotton-manufactory wing",
       "disposition": "standalone_page",
-      "route": "/local-history/cheadle-green-hall-archaeology/",
-      "checked": "2026-11-09",
-      "reason": "Historically durable primary archaeological project reporting; new standalone page."
+      "checked": "2026-11-14",
+      "reason": "Durable Grade II history with direct Historic England and council evidence; no invented workers or unlicensed historic imagery.",
+      "route": "/local-history/gatley-hall-cotton-manufactory/"
     },
     {
-      "id": "transport",
-      "title": "Transport consultation deadline",
-      "disposition": "expired_no_web_add",
-      "checked": "2026-11-09",
-      "reason": "The 2-day deadline promoted on 6 November had passed by 9 November; do not present as open."
-    },
-    {
-      "id": "orchestra",
-      "title": "Orchestral Saturday with free tickets for children",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Book-ahead event; exact current ticket conditions and availability not reverified for website release."
-    },
-    {
-      "id": "stockroom",
-      "title": "Stockroom newly built sound system",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Date and ongoing access/session terms not reverified for website release."
-    },
-    {
-      "id": "animation",
-      "title": "Animation Festival family day",
-      "disposition": "expired_no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Sunday family event in sent edition was time-limited and has passed."
-    },
-    {
-      "id": "model-trains",
-      "title": "Free model trains you can operate",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Recheck the exact upcoming public session dates before live events feed inclusion."
-    },
-    {
-      "id": "noticeboard",
-      "title": "SK8 Community Noticeboard",
-      "disposition": "existing_surface",
-      "route": "/noticeboard/",
-      "checked": "2026-11-09",
-      "reason": "Existing submission/browse surface; no need to duplicate weekly notice copy."
-    },
-    {
-      "id": "bruntwood",
-      "title": "Bruntwood Park orienteering",
+      "id": "heald-green-farm-correction",
+      "title": "Correct attribution for cattle crossing Simonsway",
       "disposition": "standalone_page",
-      "route": "/outdoors/bruntwood-park-orienteering/",
-      "checked": "2026-11-09",
-      "reason": "Durable outdoor activity. Source checked via Greater Manchester Orienteering Activities."
+      "checked": "2026-11-14",
+      "reason": "Material Issue 21 error corrected in Saturday resend using direct Heald Green Heritage correspondence.",
+      "route": "/local-history/heald-green-farms-correction-2026/"
     },
     {
-      "id": "christmas-markets",
-      "title": "Manchester Christmas Markets opening",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Wider Manchester event; site should not simply copy general seasonal opening news without SK8-specific utility."
+      "id": "daisy-bank-farm-planning",
+      "title": "Daisy Bank Farm history and draft housing allocation",
+      "disposition": "standalone_page",
+      "checked": "2026-11-14",
+      "reason": "Durable local history plus developing proposal, separating non-designated heritage retention from permission to build.",
+      "route": "/planning/daisy-bank-farm-heald-green-2026/"
     },
     {
-      "id": "costumes",
-      "title": "Fifty years of theatre costumes exhibition",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Exhibition dates and public access not independently reverified for a current dedicated website entry."
+      "id": "tatton-yuletide-guide",
+      "title": "Yuletide at Tatton Park 2026, dates and family costs",
+      "disposition": "standalone_page",
+      "checked": "2026-11-14",
+      "reason": "Useful full decision guide to booked slots, prices, access, parking and conflicting organiser trail-length estimates.",
+      "route": "/stories/tatton-park-yuletide-2026/"
     },
     {
-      "id": "thali",
-      "title": "Indian Tiffin Room Cheadle thali",
+      "id": "tatton-yuletide-events",
+      "title": "Confirmed remaining Tatton Yuletide sessions",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Organiser's selected 2026 dates, deliberately not a daily continuous event.",
+      "event_id": "tatton-yuletide-2026"
+    },
+    {
+      "id": "moya-heald-green-shopping",
+      "title": "Moya Cole Heald Green 20%-off clothing shopping day",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Source-verified Pinboard item on 15 November, core SK8 and future at time of check.",
+      "event_id": "moya-cole-heald-green-style-glamour-2026-11-15"
+    },
+    {
+      "id": "lum-head-open-day",
+      "title": "Lum Head nursery and Reception open day",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Existing source-verified 19 November Gatley event; retain detailed live event route.",
+      "event_id": "lum-head-2027-intake-open-day-2026-11-19"
+    },
+    {
+      "id": "pinboard-anniversary",
+      "title": "The SK8 Pinboard anniversary message",
       "disposition": "existing_surface",
-      "route": "/food-drink/",
-      "checked": "2026-11-09",
-      "reason": "Food category exists; prices and dishes need a current business menu check before standalone promotion."
+      "checked": "2026-11-14",
+      "reason": "Preserved the original published reader-facing message verbatim in Issue 21 combined archive.",
+      "route": "/issues/issue-21/"
     },
     {
-      "id": "councillor-lane",
-      "title": "Councillor Lane overnight closures",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Future roadwork dates and diversion need fresh council/TfGM confirmation before being shown as live travel advice."
-    },
-    {
-      "id": "birth-class",
-      "title": "Cheadle birth-preparation course",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Future class; availability and exact booking terms need a current provider recheck."
-    },
-    {
-      "id": "poll",
-      "title": "Issue 20 reader poll",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Issue-specific newsletter feedback mechanism; no evergreen article value."
-    },
-    {
-      "id": "puzzle",
-      "title": "Issue 19 answer and Issue 20 Where Is This photo",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Newsletter participation feature; image reuse and context need separate approval."
-    },
-    {
-      "id": "voice",
-      "title": "Sapura's approved comments and editor's sign-off",
-      "disposition": "no_web_add",
-      "checked": "2026-11-09",
-      "reason": "Keep the personal voice in the historic email; do not duplicate it as a standalone website page."
-    },
-    {
-      "id": "house",
-      "title": "Other house promotions and sign-up panels",
+      "id": "pinboard-code",
+      "title": "The SK8 Pinboard coded message",
       "disposition": "existing_surface",
-      "route": "/join/",
-      "checked": "2026-11-09",
-      "reason": "Join, submit and paid routes already exist; no duplicate page required."
+      "checked": "2026-11-14",
+      "reason": "Preserved published A1Z26 code and accompanying clue in Issue 21 archive without an isolated page.",
+      "route": "/issues/issue-21/"
+    },
+    {
+      "id": "ashton-lantern",
+      "title": "Ashton lantern parade 14 November",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "Outside the usual SK8 patch; already the day of the refresh and no remaining planning lead time. Historical archive preserved."
+    },
+    {
+      "id": "stockroom-film-workshop",
+      "title": "Stockroom free SUBTEXT 11–25 film workshop, 14 November",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "Time-limited 14 November workshop with unclear remaining places at website refresh; archived only."
+    },
+    {
+      "id": "spectacular-sunday",
+      "title": "Stockport's Spectacular Sunday, 15 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Existing verified future Stockport outing in live date-aware event feed.",
+      "event_id": "stockport-spectacular-sunday-2026-11-15"
+    },
+    {
+      "id": "bramhall-market",
+      "title": "Bramhall Early Festive Market, 14 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Existing verified near-SK8 same-day market in What’s On; auto-expiry after 14 November.",
+      "event_id": "bramhall-early-festive-market-2026-11-14"
+    },
+    {
+      "id": "asian-food-market",
+      "title": "Asian Food Night Market, 13 November",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-14",
+      "reason": "Event took place on the send date, before the 14 November web harvest; archive reference only."
+    },
+    {
+      "id": "oleanna-chads",
+      "title": "Oleanna at CHADS Theatre",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "Near-end performance run, no verified future ticket availability; avoid misleading live listing."
+    },
+    {
+      "id": "snowman-brass",
+      "title": "The Snowman with live brass band",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "No fresh primary source confirmation of useful remaining sessions before publication; historical index only."
+    },
+    {
+      "id": "pokemon-rocket",
+      "title": "Pokémon GO Rocket Takeover",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "Short-lived event, precise local participation conditions not independently verified for website."
+    },
+    {
+      "id": "hat-works-behind-scenes",
+      "title": "Behind the scenes at Hat Works",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "Future session/booking details not independently confirmed for a fresh web entry."
+    },
+    {
+      "id": "seventy-years-song",
+      "title": "Seventy Years of Song concert",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "Remaining performance/session dates and access terms not independently verified."
+    },
+    {
+      "id": "james-bond-concert",
+      "title": "A James Bond Concert Spectacular",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "Upcoming availability, precise venue and ticket details not reverified for active web listing."
+    },
+    {
+      "id": "bramall-hall-decorations",
+      "title": "Bramall Hall Christmas musical decorations, 18–22 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Council-confirmed specific daily dates and visitor admission conditions.",
+      "event_id": "bramall-hall-christmas-music-2026-11-18-22"
+    },
+    {
+      "id": "bramall-hall-elf",
+      "title": "Bramall Hall's festive Elf Trail, 18–22 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Council-confirmed daily festive children's trail, with child charge and adult admission caveat.",
+      "event_id": "bramall-hall-elf-trail-2026-11-18-22"
+    },
+    {
+      "id": "autisk-playzone",
+      "title": "Autisk Friday Play Zone, 20/27 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Council-verified specific sessions; family sensory and gaming access with £5/£10 charges.",
+      "event_id": "autisk-play-zone-2026-11-20-27"
+    },
+    {
+      "id": "rope-players",
+      "title": "Rope at Players Theatre, 16–21 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Venue and ticketing evidence, with Saturday matinee and separate weekday performance times.",
+      "event_id": "players-theatre-rope-2026-11-16-21"
+    },
+    {
+      "id": "frozen-brookdale",
+      "title": "Frozen at Brookdale Youth Theatre, 15–21 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Organiser confirms production week only; source record uses range_unspecified and does not invent daily showtimes.",
+      "event_id": "brookdale-youth-theatre-frozen-2026-11-15-21"
+    },
+    {
+      "id": "moya-clearance",
+      "title": "Moya Cole Hospice 50p Christmas clearance, 21 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Organiser-confirmed low-cost good-cause event, timed 9am–11am.",
+      "event_id": "moya-cole-hospice-clearance-2026-11-21"
+    },
+    {
+      "id": "woodbank-gathering",
+      "title": "Woodbank Winter Gathering, 21 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Council-published community event, free entry and optional paid workshops.",
+      "event_id": "woodbank-winter-gathering-2026-11-21"
+    },
+    {
+      "id": "rochdale-ignite",
+      "title": "Rochdale Ignite Fire Festival, 20–22 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Wider trip justified by unusually distinctive free fire and light installation; council verified.",
+      "event_id": "rochdale-ignite-fire-festival-2026"
+    },
+    {
+      "id": "bramhall-characters",
+      "title": "Bramhall Village Square free superheroes and princesses, 21 November",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Core-area free 11am–3pm family event confirmed on the venue's own event page.",
+      "event_id": "bramhall-superhero-princess-meet-2026-11-21"
+    },
+    {
+      "id": "manchester-coffee",
+      "title": "Manchester Coffee Festival 2026",
+      "disposition": "whats_on",
+      "checked": "2026-11-14",
+      "reason": "Clearly marked wider trip, ticketed, public 21–22 November; Friday industry-only sessions excluded.",
+      "event_id": "manchester-coffee-festival-2026-nov"
+    },
+    {
+      "id": "gatley-where-is-this",
+      "title": "Issue 21 Where Is This historic photograph puzzle",
+      "disposition": "existing_surface",
+      "checked": "2026-11-14",
+      "reason": "Published text in combined archive, without lifting third-party historical image or asserting an unverified answer.",
+      "route": "/issues/issue-21/"
+    },
+    {
+      "id": "issue21-poll",
+      "title": "Design A/B reader vote and issue-specific polling",
+      "disposition": "no_web_add",
+      "checked": "2026-11-14",
+      "reason": "One-off newsletter response mechanism, not a durable website page or a current poll."
+    },
+    {
+      "id": "free-guide-promo",
+      "title": "Free & Cheap Guide house promotion",
+      "disposition": "existing_surface",
+      "checked": "2026-11-14",
+      "reason": "Existing, useful owned guide destination; no extra seasonal guide or repeated lead-capture page.",
+      "route": "/free-cheap-guide/"
+    },
+    {
+      "id": "pinboard-submission",
+      "title": "Community notice and local event submissions",
+      "disposition": "existing_surface",
+      "checked": "2026-11-14",
+      "reason": "Existing verified event submission destination; no duplicate paywall or contact collection.",
+      "route": "/submit-event/"
     }
   ]
 }
