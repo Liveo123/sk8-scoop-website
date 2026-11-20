@@ -9,9 +9,16 @@ on:
       - 'tests/holiday-club-finder-browser.mjs'
       - '.github/workflows/holiday-club-finder-qa.yml'
   workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number whose exact preview must be verified'
+        required: true
+        type: number
 
 permissions:
   contents: read
+  issues: read
+  pull-requests: read
 
 jobs:
   holiday-finder-qa:
@@ -79,10 +86,40 @@ jobs:
             echo "Chrome/Chromium unavailable"
             exit 1
           fi
+      - name: Resolve Cloudflare exact-revision preview
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          [ -n "${PR_NUMBER}" ] || { echo "Manual run needs PR number"; exit 1; }
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
+          short_sha="${HEAD_SHA:0:7}"
+          for n in $(seq 1 30); do
+            payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "$api" || true)"
+            body="$(printf '%s' "$payload" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // ""' 2>/dev/null || true)"
+            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
+            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
+            reported="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
+            if [ "$reported" = "$short_sha" ] && [ -n "$url" ]; then
+              code="$(curl -sSL --max-time 20 -o /tmp/sk8-finder-exact-preview.html -w '%{http_code}' "${url}/kids-family/holiday-club-finder/" || true)"
+              if [ "$code" = 200 ] && grep -Fq "holiday_club_booking_click" /tmp/sk8-finder-exact-preview.html; then
+                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
+                echo "Verified finder route at exact commit ${short_sha}"
+                exit 0
+              fi
+            fi
+            echo "Waiting for exact finder preview $short_sha ($n/30)"
+            sleep 10
+          done
+          echo "No matching Cloudflare finder preview; refusing obsolete October branch URL" >&2
+          exit 1
       - name: Wait for Cloudflare finder route and assets
         shell: bash
         env:
-          PREVIEW_URL: https://feature-holiday-clubs-oct26-batch2.previews.sk8scoop.com
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
         run: |
           set -eu
           found=false
@@ -105,7 +142,7 @@ jobs:
           test -s /tmp/sk8-finder-site.js
       - name: Exercise hosted Cloudflare finder on desktop and phone
         env:
-          PREVIEW_URL: https://feature-holiday-clubs-oct26-batch2.previews.sk8scoop.com
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
         run: node tests/holiday-club-finder-browser.mjs
       - name: Store hosted finder screenshots
         if: always()
