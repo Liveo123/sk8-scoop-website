@@ -1,5 +1,7 @@
 import siteWorker from './worker-protected.js';
 import { handleRadarSignup } from './radar-signup-api.js';
+import { handleSk8BtmSignup } from './sk8-btm-signup-api.js';
+import { requestSk8BtmCode, confirmSk8BtmReferral, awardSk8BtmReferral, downloadSk8BtmReward, purgeOldSk8BtmRecords } from './sk8-btm-referral-service.js';
 import { requestReferralCode, confirmReferral, awardReferral, purgeOldRadarReferralRecords } from './radar-referral-service.js';
 
 const CONTACT_INBOX = 'contact@sk8scoop.com';
@@ -8,6 +10,28 @@ const RESEND_SENDER = 'alerts@notify.sk8scoop.com';
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    // New Birthday Time Machine pilot: all new routes are separately gated OFF.
+    if (url.pathname === '/api/sk8-btm-referral-status' && request.method === 'GET') {
+      return secureResponse(new Response(JSON.stringify({
+        enabled: env.SK8_BTM_REFERRAL_ENABLED === 'true' && env.SK8_BTM_SIGNUP_ENABLED === 'true'
+      }), {headers:{'content-type':'application/json','cache-control':'no-store'}}),url);
+    }
+    if (url.pathname === '/api/sk8-btm-referral-code' && request.method === 'POST') {
+      return secureResponse(await requestSk8BtmCode(request,env),url);
+    }
+    if (url.pathname === '/api/sk8-btm-signup' && request.method === 'POST') {
+      return secureResponse(await handleSk8BtmSignup(request,env),url);
+    }
+    if (url.pathname === '/api/sk8-btm-referral-confirm' && request.method === 'POST') {
+      return secureResponse(await confirmSk8BtmReferral(request,env),url);
+    }
+    if (url.pathname === '/api/admin/sk8-btm-referral-award' && request.method === 'POST') {
+      return secureResponse(await awardSk8BtmReferral(request,env),url);
+    }
+    if (url.pathname === '/api/sk8-btm-download' && request.method === 'GET') {
+      return secureResponse(await downloadSk8BtmReward(request,env),url);
+    }
 
     if (url.pathname === '/api/radar-signup' && request.method === 'POST') {
       return secureResponse(await handleRadarSignup(request, env), url);
@@ -51,6 +75,7 @@ export default {
     await purgeExpiredEditorialRecords(env.DB);
     try {
       await purgeOldRadarReferralRecords(env);
+      await purgeOldSk8BtmRecords(env);
     } catch {
       // A referral pilot cleanup error must not break unrelated editorial retention.
       console.error('radar_referral_retention_failed');
