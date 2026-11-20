@@ -1,7 +1,6 @@
 import { registerSk8BtmMember, recordSk8BtmReferral } from './sk8-btm-referral-service.js';
-// South Manchester SK8 Scoop: isolated, single-opt-in MailerLite signup.
-// Served on the existing Cloudflare Worker with an existing, private API key.
-// IMPORTANT: never add SK8 Scoop readers to an SK8 Scoop group.
+// SK8 Scoop Birthday Time Machine: isolated opt-in signup for three-reader referral pilot.
+// Existing Radar-only members may join SK8 voluntarily; never add SK8 members to Radar.
 const SK8_GROUP = '190964754190174086';
 const PRODUCTION_HOSTS = new Set(['www.sk8scoop.com', 'sk8scoop.com']);
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
