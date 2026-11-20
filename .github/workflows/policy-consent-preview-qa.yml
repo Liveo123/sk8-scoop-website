@@ -2,6 +2,11 @@ name: Policy and Consent Preview QA
 
 on:
   workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number whose exact preview must be verified'
+        required: true
+        type: number
   pull_request:
     paths:
       - 'privacy.html'
@@ -14,6 +19,8 @@ on:
 
 permissions:
   contents: read
+  issues: read
+  pull-requests: read
 
 jobs:
   policy-browser:
@@ -33,22 +40,40 @@ jobs:
           else
             exit 1
           fi
-      - name: Wait for updated policy preview
+      - name: Resolve exact current Cloudflare policy preview
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
-          for attempt in $(seq 1 25); do
-            code="$(curl -sSL --max-time 20 -o /tmp/sk8-policy-preview.html -w '%{http_code}' https://release-policies-sole-trader-20261008.previews.sk8scoop.com/privacy.html || true)"
-            if [ "$code" = "200" ] && grep -Fq 'Paul Livesey' /tmp/sk8-policy-preview.html; then
-              echo "Policy preview detected"
-              exit 0
+          set -euo pipefail
+          [ -n "${PR_NUMBER}" ] || { echo "Manual run needs PR number"; exit 1; }
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
+          short_sha="${HEAD_SHA:0:7}"
+          for n in $(seq 1 30); do
+            payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "$api" || true)"
+            body="$(printf '%s' "$payload" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // ""' 2>/dev/null || true)"
+            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
+            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
+            reported="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
+            if [ "$reported" = "$short_sha" ] && [ -n "$url" ]; then
+              code="$(curl -sSL --max-time 20 -o /tmp/sk8-policy-preview.html -w '%{http_code}' "${url}/privacy.html" || true)"
+              if [ "$code" = 200 ] && grep -Fq 'Paul Livesey' /tmp/sk8-policy-preview.html; then
+                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
+                echo "Verified current policy preview commit ${short_sha}"
+                exit 0
+              fi
             fi
-            sleep 8
+            echo "Waiting for exact policy preview $short_sha ($n/30)"
+            sleep 10
           done
+          echo "No exact policy preview; historical URL is deliberately rejected" >&2
           exit 1
       - name: Check script syntax
         run: node --check tests/policy-consent-preview-browser.mjs
       - name: Browser consent, operator and policy QA
         env:
-          PREVIEW_URL: https://release-policies-sole-trader-20261008.previews.sk8scoop.com
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
           CHROME: ${{ env.CHROME }}
         run: node tests/policy-consent-preview-browser.mjs
