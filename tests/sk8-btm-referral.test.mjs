@@ -8,7 +8,7 @@ import {
 } from '../sk8-btm-referral-service.js';
 
 const GROUP='190964754190174086';
-const id=n=>String(300000000000000000+n);
+const id=n=>String(300000000000000000n+BigInt(n));
 const ownerId=id(1);
 const owner={id:ownerId,email:'owner@example.test',status:'active',groups:[{id:GROUP}],fields:{}};
 let people, emails, resendFail, turnstileOK, r2Head;
