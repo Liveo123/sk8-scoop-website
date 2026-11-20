@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: read
+  checks: read
   issues: read
   pull-requests: read
 
@@ -51,37 +52,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Resolve matching Cloudflare branch-preview deployment
+      - name: Resolve exact Cloudflare preview with SHA and served-file parity
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
           PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+          PREVIEW_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           set -euo pipefail
-          comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100"
-          short_sha="$(printf '%s' "${PREVIEW_SHA}" | cut -c1-7)"
-          for attempt in $(seq 1 30); do
-            payload="$(curl -fsSL --max-time 20 -H "Authorization: Bearer ${GH_TOKEN}" \
-              -H "Accept: application/vnd.github+json" "$comments_api" || true)"
-            body="$(printf '%s' "$payload" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // ""' 2>/dev/null || true)"
-            line="$(printf '%s\n' "$body" | grep -F '### Preview URL:' | head -n 1 || true)"
-            url="$(printf '%s\n' "$line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
-            reported="$(printf '%s\n' "$line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
-            if [ "$reported" = "$short_sha" ] && [ -n "$url" ]; then
-              code="$(curl -sSL --max-time 20 -o /tmp/sk8-reader-first-preview.html -w '%{http_code}' "${url}/" || true)"
-              if [ "$code" = "200" ] && grep -Fq 'reader-first-mode' /tmp/sk8-reader-first-preview.html; then
-                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
-                echo "Verified exact matching preview SHA ${reported}: $url"
-                exit 0
-              fi
-            fi
-            echo "Waiting for exact preview ${short_sha} (attempt $attempt/30)"
-            sleep 10
-          done
-          echo "No validated preview for current commit; refusing to test stale revision"
-          exit 1
-
+          bash -n scripts/resolve-cloudflare-preview.sh
+          preview_url="$(bash scripts/resolve-cloudflare-preview.sh)"
+          echo "PREVIEW_URL=$preview_url" >> "$GITHUB_ENV"
       - name: Select Chrome or Chromium
         shell: bash
         run: |
