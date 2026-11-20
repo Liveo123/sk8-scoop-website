@@ -36,8 +36,8 @@ window.SK8_CONFIG = {
   metaPixelId: "4649116095416763",
   formsparkContactEndpoint: "https://submit-form.com/X3MWnWHXI",
   publicStats: {
-    subscriberCount: "970+",
-    subscriberProof: "970+",
+    subscriberCount: "890+",
+    subscriberProof: "890+",
     issuesPublished: 21,
     checkedDate: "20 November 2026",
     latestMainSendRecipients: null,
