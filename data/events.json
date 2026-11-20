@@ -139,60 +139,6 @@
     "checked": "2026-11-17"
   },
   {
-    "id": "lum-head-2027-intake-open-day-2026-11-19",
-    "title": "Lum Head nursery and reception open day",
-    "date": "2026-11-19",
-    "time": "14:00",
-    "end_time": "15:00",
-    "area": "Gatley",
-    "venue": "Lum Head Primary School, Troutbeck Road, Gatley SK8 4RR",
-    "cost": "Free; advance tour booking requested",
-    "cost_type": "free",
-    "category": "Schools / Family",
-    "description": "Families considering nursery or reception places for September 2027 can look around Lum Head Primary School and meet staff. The school asks visitors to book a tour by calling 0161 428 7992 or emailing its school office.",
-    "source_url": "https://www.stockport.gov.uk/events/nursery-and-reception-open-day-nov?date=2026-11-19",
-    "booking_url": "https://www.stockport.gov.uk/events/nursery-and-reception-open-day-nov?date=2026-11-19",
-    "verification": "STOCKPORT_COUNCIL_PRIMARY_EVENT_LISTING_RECHECKED",
-    "status": "verified",
-    "checked": "2026-11-01",
-    "seo": {
-      "slug": "lum-head-gatley-nursery-reception-open-day-2026",
-      "venue_name": "Lum Head Primary School",
-      "address": {
-        "streetAddress": "Troutbeck Road",
-        "addressLocality": "Gatley",
-        "postalCode": "SK8 4RR",
-        "addressCountry": "GB"
-      },
-      "organizer": {
-        "name": "Lum Head Primary School",
-        "url": "https://www.lumhead.stockport.sch.uk/"
-      },
-      "access": "Public open day for families considering nursery or reception in September 2027. Book a place with the school before visiting.",
-      "image_basis": "TEXT-ONLY",
-      "meta_description": "Visit Lum Head Primary School in Gatley on 19 November 2026, 2–3pm, to explore nursery and reception places for 2027. Free; book your tour.",
-      "search_title": "Lum Head School Open Day, Gatley | 19 Nov 2026 | SK8 Scoop"
-    }
-  },
-  {
-    "status": "verified",
-    "checked": "2026-11-13",
-    "id": "stockroom-tarot-beginners-2026-11-19",
-    "title": "Tarot Reading for Beginners at Stockroom",
-    "date": "2026-11-19",
-    "time": "17:00",
-    "end_time": "19:00",
-    "date_mode": "single",
-    "area": "Stockport",
-    "venue": "Stockroom, Merseyway Shopping Centre, Stockport, SK1 1PR",
-    "cost": "Free",
-    "cost_type": "free",
-    "category": "Workshops / Community",
-    "description": "Free, playful introduction to reading tarot cards as conversation and reflection prompts. Stockroom's Learn a Skill / Share a Skill social is open to adults of all experience levels; arrive from 5pm, activities from about 5:30pm, leave any time before 7pm. Worth the nearby trip for an unusual low-cost evening.",
-    "source_url": "https://www.stockroomsk.co.uk/events/learn-a-skill-share-a-skill-tarot-reading-for-beginners?date=2026-11-19",
-    "verification": "VENUE_PRIMARY_DATE_SPECIFIC_EVENT_PAGE"
-  },
-  {
     "status": "verified",
     "checked": "2026-11-13",
     "id": "stockroom-youth-night-nov-dec2026",
