@@ -181,7 +181,7 @@ const selected=all.filter(e=>e.seo);
 const check=process.argv.includes('--check');
 const write=process.argv.includes('--write');
 if(check===write)throw Error('Pass exactly one of --check or --write');
-if(!selected.length)throw Error('No checked event leaf pages configured');
+if(!selected.length){console.log('PASS No current event-leaf pilots: both original pilots have expired and must not be reintroduced as live events.');process.exit(0);}
 const todayParts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
 const fields=Object.fromEntries(todayParts.map(part=>[part.type,part.value]));
 const today=fields.year+'-'+fields.month+'-'+fields.day;
