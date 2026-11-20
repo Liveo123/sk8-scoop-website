@@ -178,6 +178,14 @@
         "source_url": "https://www.stockport.gov.uk/events/bramall-hall-decorated-for-christmas-2026-a-musical-celebration-18-to-22-nov?date=2026-11-20"
       },
       {
+        "date": "2026-11-21",
+        "source_url": "https://www.stockport.gov.uk/events/bramall-hall-decorated-for-christmas-2026-a-musical-celebration-18-to-22-nov?date=2026-11-21"
+      },
+      {
+        "date": "2026-11-22",
+        "source_url": "https://www.stockport.gov.uk/events/bramall-hall-decorated-for-christmas-2026-a-musical-celebration-18-to-22-nov?date=2026-11-22"
+      },
+      {
         "date": "2026-11-28",
         "source_url": "https://www.stockport.gov.uk/events/bramall-hall-decorated-for-christmas-2026-a-musical-celebration-25-to-29-nov?date=2026-11-28"
       }
@@ -191,8 +199,8 @@
     "category": "Heritage / Christmas",
     "description": "Bramall Hall's volunteer floral displays take their theme from Christmas music. The council confirms these two individual public dates, Friday 20 and Saturday 28 November, 11am–4:30pm. Walk-up tickets from the Museum Visitor Centre; last admission 3:45pm. Particularly worthwhile for nearby SK8 families and heritage lovers. Other run dates are not inferred.",
     "source_url": "https://www.stockport.gov.uk/events/bramall-hall-decorated-for-christmas-2026-a-musical-celebration-18-to-22-nov?date=2026-11-20",
-    "verification": "COUNCIL_TWO_DATE_SPECIFIC_ORGANISER_SUBMISSIONS_PRICE_WALK_UP",
-    "checked": "2026-11-17"
+    "verification": "COUNCIL_TWO_DATE_SPECIFIC_ORGANISER_SUBMISSIONS_PLUS_21_22_NOV_ISSUE22_CHECK",
+    "checked": "2026-11-20"
   },
   {
     "id": "players-rope-final-performances-2026-11-20",
@@ -244,14 +252,13 @@
     "title": "Bramall Hall Elf Trail",
     "status": "verified",
     "date": "2026-11-21",
-    "time": "11:00",
     "date_mode": "specific_dates",
     "area": "Bramhall",
     "venue": "Bramall Hall, Hall Road, Bramhall SK7 3NX",
     "cost": "£3 per child plus booking fee; usual Hall admission for adults",
     "cost_type": "paid",
     "category": "Family / Christmas",
-    "description": "Children aged 3+ can hunt for elves in the decorated Tudor rooms and collect a prize. Book a separate timed Elf Trail slot; normal Hall admission applies to accompanying adults. Event listing covers 21 and 22 November only.",
+    "description": "Children aged 3+ can hunt for elves in the decorated Tudor rooms and collect a prize. Book a separate timed Elf Trail slot; normal Hall admission applies to accompanying adults. Event listing covers 21 and 22 November only. Trail session times vary by booking slot; do not assume the Hall's opening time is the booked start.",
     "source_url": "https://www.stockport.gov.uk/events/the-elf-trail-at-bramall-hall-2026-18-to-22-nov?date=2026-11-22",
     "verification": "ISSUE_22_FACT_REGISTER_AND_LINKED_PRIMARY_SOURCE_2026_11_20",
     "checked": "2026-11-20",
@@ -270,7 +277,7 @@
     "time": "10:10",
     "date_mode": "specific_dates",
     "area": "Stockport",
-    "venue": "The Light, Redrock, Stockport SK1",
+    "venue": "The Light Cinema, Redrock, Stockport",
     "cost": "Price varies; check this screening",
     "cost_type": "unknown",
     "category": "Family / Cinema",
