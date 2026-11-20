@@ -36,25 +36,25 @@ window.SK8_CONFIG = {
   metaPixelId: "4649116095416763",
   formsparkContactEndpoint: "https://submit-form.com/X3MWnWHXI",
   publicStats: {
-    subscriberCount: "900+",
-    subscriberProof: "900+",
-    issuesPublished: 20,
-    checkedDate: "9 November 2026",
+    subscriberCount: "970+",
+    subscriberProof: "970+",
+    issuesPublished: 21,
+    checkedDate: "20 November 2026",
     latestMainSendRecipients: null,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "6 November 2026",
+    latestIssueDate: "13 November 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 20,
-    dateIso: "2026-11-06",
-    dateDisplay: "Friday 6 November 2026",
-    title: "Issue 20 · Friday 6 November 2026",
-    headline: "Free street theatre, Cheadle history and useful local discoveries",
-    summary: "Stockport’s Spectacular Sunday, the history beneath Cheadle Green, Bruntwood Park orienteering and local practical updates.",
-    url: "/issues/issue-20/"
+    number: 21,
+    dateIso: "2026-11-13",
+    dateDisplay: "Friday 13 November 2026",
+    title: "Issue 21 · Friday 13 November 2026",
+    headline: "Lantern parade, Gatley history and your station deadline",
+    summary: "Ashton’s lantern parade, Heald Green farm history and the Stockport station consultation, with subsequent corrections clearly linked.",
+    url: "/issues/issue-21/"
   },
   stripeLinks: {
     local_spotlight: "",
