@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 
-const BASE=(process.env.PREVIEW_URL||'https://release-policies-sole-trader-20261008.previews.sk8scoop.com').replace(/\/$/,'');
-if (!/\.previews\.sk8scoop\.com$/.test(new URL(BASE).hostname)) throw Error('Preview URL only');
+const BASE=(process.env.PREVIEW_URL||'').replace(/\/$/,'');
+if (!BASE) throw Error('An exact-revision PREVIEW_URL must be provided by the CI workflow');
+const previewOrigin=new URL(BASE);
+if (previewOrigin.protocol!=='https:' || !/(?:^|\.)previews\.sk8scoop\.com$|(?:^|\.)workers\.dev$/.test(previewOrigin.hostname)) throw Error('Cloudflare HTTPS Preview URL only');
 const chrome=spawn(process.env.CHROME||'google-chrome',[
   '--headless=new','--no-sandbox','--disable-gpu','--disable-background-networking',
   '--remote-debugging-port=9237','--user-data-dir=/tmp/sk8-policy-consent-preview',
