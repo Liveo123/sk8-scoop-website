@@ -1,0 +1,251 @@
+{
+  "issue": 22,
+  "issue_date": "2026-11-20",
+  "final_issue_checked": false,
+  "checked_date": "2026-11-20",
+  "source": "User-provided SK8 Scoop Issue 22 - Draft 3.pdf (private review), plus current Issue 22 facts/rights register. This is a website adaptation, NOT proof that Issue 22 was sent.",
+  "publication_status": "website-staged-awaiting-PR-and-production-verification",
+  "latest_sent_issue_confirmed": 21,
+  "latest_sent_date": "2026-11-13",
+  "verified_mailerlite_active_subscribers": 972,
+  "subscriber_check_date": "2026-11-20",
+  "scope": "Distinct permanent pages, 15 vetted dated event records, current category links, corrected prior issue, current public stats and SEO. Live changes depend on clean CI and verified deployment.",
+  "items": [
+    {
+      "id": "riverside",
+      "title": "The lost buildings beside Stockport's rivers",
+      "disposition": "standalone_page",
+      "route": "/local-history/stockport-riverside-lost-buildings/",
+      "checked": "2026-11-20",
+      "reason": "Feature adapted from uploaded Issue 22 Draft 3, uncertainties labelled; no archive photograph copied."
+    },
+    {
+      "id": "gatley-tram",
+      "title": "The pub at the end of Gatley's tram line",
+      "disposition": "standalone_page",
+      "route": "/local-history/gatley-tram-horse-farrier/",
+      "checked": "2026-11-20",
+      "reason": "Gatley archive image linked rather than reused without rights record."
+    },
+    {
+      "id": "bramall",
+      "title": "Bramall Hall restoration and Christmas",
+      "disposition": "standalone_page",
+      "route": "/updates/bramall-hall-roof-christmas-2026/",
+      "checked": "2026-11-20",
+      "reason": "Council roof restoration and dated visiting/Elf admission kept distinct."
+    },
+    {
+      "id": "library-help",
+      "title": "Stockport warm libraries and Cheadle digital help",
+      "disposition": "standalone_page",
+      "route": "/updates/warm-libraries-digital-help-november-2026/",
+      "checked": "2026-11-20",
+      "reason": "Practical evergreen warm-space help with dated 27 November 2026 drop-in."
+    },
+    {
+      "id": "farm-correction",
+      "title": "Chamber Hall Farm vs Daisy Bank Farm correction",
+      "disposition": "standalone_page",
+      "route": "/updates/heald-green-farm-correction-2026/",
+      "checked": "2026-11-20",
+      "reason": "Correct prior edition's Simonsway cattle attribution and preserve permanent record."
+    },
+    {
+      "id": "coderdojo-feature",
+      "title": "Cheadle CoderDojo final session",
+      "disposition": "standalone_page",
+      "route": "/updates/cheadle-coderdojo-final-session-2026/",
+      "checked": "2026-11-20",
+      "reason": "Time-sensitive feature; ongoing memory prompt included."
+    },
+    {
+      "id": "issue-22-companion",
+      "title": "Issue 22 website research companion",
+      "disposition": "website_companion",
+      "route": "/issues/issue-22/",
+      "checked": "2026-11-20",
+      "reason": "Clearly distinguished from latest sent newsletter; PDF draft was not a sent email."
+    },
+    {
+      "id": "issue-21-index",
+      "title": "Issue 21 historical sent issue index",
+      "disposition": "standalone_page",
+      "route": "/issues/issue-21/",
+      "checked": "2026-11-20",
+      "reason": "Historical index created because last sent MailerLite issue is 21, rather than falsely promoting 22."
+    },
+    {
+      "id": "bramall-elf",
+      "title": "Bramall Hall Elf Trail",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Date-specific premium child admission; listed separately from Hall admission."
+    },
+    {
+      "id": "woodbank",
+      "title": "Woodbank Winter Gathering",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Free entry with optional workshop price and reported availability caveat."
+    },
+    {
+      "id": "cbeebies",
+      "title": "CBeebies Treasure Island screenings",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "21/22 November screenings; exact ticket price not invented."
+    },
+    {
+      "id": "rope",
+      "title": "Rope final performances",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Different Friday/Saturday session times; seats not guaranteed."
+    },
+    {
+      "id": "revu",
+      "title": "Underground Revue",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Adult cabaret access warning preserved."
+    },
+    {
+      "id": "warehouse",
+      "title": "Warehouse Project x Eat Your Own Ears",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Age, photo ID and bag restrictions preserved."
+    },
+    {
+      "id": "vinyl",
+      "title": "Stockport Vinyl Record Fair",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "£1 cash entry, date-specific."
+    },
+    {
+      "id": "digital",
+      "title": "Cheadle Library digital help",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Free 27 November help for beginners."
+    },
+    {
+      "id": "upper-room",
+      "title": "The Upper Room café",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Costs unconfirmed and clearly identified."
+    },
+    {
+      "id": "lego",
+      "title": "LEGO Art Club",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Age, time, fee and access note."
+    },
+    {
+      "id": "robin",
+      "title": "Robin Ince at Serenity",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Booking availability changes and must be rechecked."
+    },
+    {
+      "id": "baby-sensory",
+      "title": "Baby Sensory Saturday Special",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Two distinct age-specific £9.50 sessions; no unlicensed general class photograph."
+    },
+    {
+      "id": "quarry",
+      "title": "Quarry Bank Enchanted Winter Walk",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Eleven specifically verified dates inherited from open verified harvest PR; no invented daily schedule."
+    },
+    {
+      "id": "northern",
+      "title": "Northern Lights Manchester",
+      "disposition": "source_link_only",
+      "route": "/issues/issue-22/",
+      "checked": "2026-11-20",
+      "reason": "Broad advertised season, no individually confirmed date inventory; do not manufacture 42 daily event cards."
+    },
+    {
+      "id": "pinboard",
+      "title": "SK8 Pinboard community notices",
+      "disposition": "existing_surface",
+      "route": "/noticeboard/",
+      "checked": "2026-11-20",
+      "reason": "Uses verified organiser-sourced notices, not falsely labelled as reader submissions. Existing editorial exclusions respected."
+    },
+    {
+      "id": "insects",
+      "title": "Insect identification resource",
+      "disposition": "external_source_only",
+      "route": "/issues/issue-22/",
+      "checked": "2026-11-20",
+      "reason": "Links to Wildlife Trust guide; no illustration copied."
+    },
+    {
+      "id": "mystery",
+      "title": "New Where Is This? mystery",
+      "disposition": "held_unpublished",
+      "checked": "2026-11-20",
+      "reason": "Working PDF lacks approved mystery image and functional verified guessing route."
+    },
+    {
+      "id": "poll",
+      "title": "Issue 22 reader poll",
+      "disposition": "held_unpublished",
+      "checked": "2026-11-20",
+      "reason": "Linked Tally form remains a draft, not published; no false functional call-to-action."
+    },
+    {
+      "id": "birthday",
+      "title": "Birthday Time Machine offer/referrals",
+      "disposition": "held_unpublished",
+      "checked": "2026-11-20",
+      "reason": "PDF explicitly marks checkout and referral buttons as nonfunctional private placeholders."
+    },
+    {
+      "id": "lunch",
+      "title": "SK8 lunch deal submissions",
+      "disposition": "existing_surface",
+      "route": "/food-drink/",
+      "checked": "2026-11-20",
+      "reason": "Free editorial invitation to contact, not a published unverified price list."
+    },
+    {
+      "id": "aap",
+      "title": "Aap Ka Sahara memory cafe",
+      "disposition": "held_editorial_policy",
+      "checked": "2026-11-20",
+      "reason": "Current site exclusions prohibit this organiser/source in new event promotions; retain PDF historical source but do not add into live event feed."
+    },
+    {
+      "id": "weekend-other",
+      "title": "Other dated weekend events",
+      "disposition": "whats_on",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Reuses original records for Liam Gallagher tribute, Bramall displays, Heald Green market and panto. No duplication."
+    }
+  ]
+}
