@@ -1,0 +1,63 @@
+name: SK8 What's On Tuesday-Friday discovery
+
+on:
+  # 07:00 UTC = 07:00 GMT / 08:00 BST, Tuesday and Friday.
+  schedule:
+    - cron: '0 7 * * 2,5'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/discover-whats-on.mjs'
+      - 'tests/discover-whats-on-fixtures.mjs'
+      - 'data/event-sources.json'
+      - '.github/workflows/whats-on-twice-weekly-discovery.yml'
+
+concurrency:
+  group: whats-on-discovery-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fixture-qa:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax, fixture tests and registry validation
+        run: |
+          node --check scripts/discover-whats-on.mjs
+          node tests/discover-whats-on-fixtures.mjs
+          node scripts/check-event-source-registry.mjs
+          node scripts/check-event-review-queue.mjs
+
+  discover:
+    # On PR: fixture tests only. Scheduled runs remain inactive until approved merge to main.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: fixture-qa
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Scan controlled primary-source pages and update editorial issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/discover-whats-on.mjs --update-issue
+      - name: Retain machine-readable leads and verification exceptions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sk8-whats-on-discovery-${{ github.run_number }}
+          path: |
+            out/whats-on-discovery.json
+            out/whats-on-discovery.md
+          if-no-files-found: warn
+          retention-days: 30
