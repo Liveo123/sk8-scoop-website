@@ -298,13 +298,13 @@ export async function awardSk8BtmReferral(request,env){
 }
 // Existing daily Worker cron may call this after the pilot is enabled.
 // Expired pending claims are removed; reward audit rows expire after one year.
-export async function purgeOldSK8 ScoopReferralRecords(env) {
+export async function purgeOldSk8BtmRecords(env) {
   if (env.SK8_BTM_REFERRAL_ENABLED !== 'true' || !env.DB) return {skipped:true};
   await ensure(env.DB);
   const oldClaims = await env.DB.prepare(`DELETE FROM sk8_btm_referral_claims
     WHERE (status='pending' AND datetime(expires_at) < datetime('now','-7 days'))
        OR datetime(claimed_at) < datetime('now','-365 days')`).run();
   const oldRewards = await env.DB.prepare(`DELETE FROM sk8_btm_referral_rewards
-    WHERE datetime(claimed_at) < datetime('now','-365 days')`).run();
+    WHERE datetime(created_at) < datetime('now','-365 days')`).run();
   return {claims_removed:oldClaims?.meta?.changes||0, rewards_removed:oldRewards?.meta?.changes||0};
 }
