@@ -234,7 +234,7 @@ jobs:
             echo "OK critical image: $label (bytes=$bytes; type=$kind)"
           }
           check_image_asset 'https://res.cloudinary.com/gocq00bt/image/upload/f_auto,q_auto,w_900/v1790422941/sk8-scoop/52-adventures/52-adventures-guide-logo-official.png' '52 Adventures official guide logo'
-          check_page '/planning/heald-green-local-plan-2026/' '1,672 homes'
+          check_page '/planning/heald-green-local-plan-2026/' '1,736 homes'
           check_page '/local-history/heald-green-north-history-walk/' '22 history stops'
           check_page '/local-history/cheadle-war-memorial-air-raid-victims/' 'eight civilian names'
           check_page '/data/events.json' '"status": "verified"'
