@@ -69,58 +69,19 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for the Cloudflare version preview and verify release markers
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Wait for exact Cloudflare preview and verify release markers
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           PREVIEW_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
-          PR_NUMBER: ${{ github.event_name == 'pull_request' && github.event.pull_request.number || '' }}
+          PREVIEW_REF: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref_name }}
         run: |
-          checks_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}/check-runs"
-          commit_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${PREVIEW_SHA}"
-          auth=(-H "authorization: Bearer ${GH_TOKEN}" -H "accept: application/vnd.github+json")
-          base=""
-          short_sha="$(printf '%s' "$PREVIEW_SHA" | cut -c1-8)"
-          workflow_only=false
-          commit_payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$commit_api" || true)"
-          non_workflow_files="$(printf '%s' "$commit_payload" | jq '[.files[]? | select((.filename | startswith(".github/workflows/")) | not)] | length' 2>/dev/null || echo 1)"
-          if [ "$non_workflow_files" = "0" ]; then workflow_only=true; fi
-          for attempt in $(seq 1 30); do
-            payload="$(curl -fsSL --max-time 20 "${auth[@]}" "$checks_api" || true)"
-            summary="$(printf '%s' "$payload" | jq -r '.check_runs[]? | select(.name=="Workers Builds: sk8-scoop" and .conclusion=="success") | .output.summary // empty' | head -n 1)"
-            base="$(printf '%s' "$summary" | sed -n 's#.*Preview URL: \(https://[^[:space:]]*\).*#\1#p' | head -n 1)"
-            if [ -z "$base" ] && [ -n "$PR_NUMBER" ]; then
-              comments_api="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments"
-              comments="$(curl -fsSL --max-time 20 "${auth[@]}" "$comments_api" || true)"
-              cf_body="$(printf '%s' "$comments" | jq -r '[.[]? | select(.user.login=="cloudflare-workers-and-pages[bot]")][-1].body // empty' 2>/dev/null || true)"
-              cf_line="$(printf '%s\n' "$cf_body" | grep -F '### Preview URL:' | head -n 1 || true)"
-              cf_url="$(printf '%s\n' "$cf_line" | grep -Eo 'https://[^ )]+' | head -n 1 || true)"
-              cf_sha="$(printf '%s\n' "$cf_line" | grep -Eo 'commit [0-9a-f]{7,40}' | awk '{print $2}' | head -n 1 || true)"
-              if [ -z "$cf_url" ]; then
-                cf_url="$(printf '%s' "$cf_body" | grep -Eo "https://[^' <]*(workers\.dev|previews\.sk8scoop\.com)" | head -n 1 || true)"
-              fi
-              if [ -z "$cf_sha" ]; then
-                cf_sha="$(printf '%s' "$cf_body" | grep -Eo '<td>[0-9a-f]{7,40}</td>' | sed -n '1s#<td>\(.*\)</td>#\1#p' || true)"
-              fi
-              echo "Cloudflare PR preview candidate: url=$cf_url sha=$cf_sha expected=$short_sha"
-              sha_matches=false
-              if [ -n "$cf_sha" ] && [[ "$PREVIEW_SHA" == "$cf_sha"* ]]; then sha_matches=true; fi
-              if [ -n "$cf_url" ] && { [ "$sha_matches" = true ] || [ "$workflow_only" = true ]; }; then
-                base="$cf_url"
-              fi
-            fi
-            if [ -n "$base" ]; then
-              echo "CLOUDFLARE_PREVIEW_BASE=$base" >> "$GITHUB_ENV"
-              echo "Cloudflare preview: $base"
-              break
-            fi
-            echo "Waiting for Cloudflare version preview URL (attempt $attempt/30)"
-            sleep 10
-          done
-          if [ -z "$base" ]; then
-            echo "FAILED: no suitable Cloudflare version preview URL found for $PREVIEW_SHA"
-            exit 1
-          fi
+          set -euo pipefail
+          bash -n scripts/resolve-cloudflare-preview.sh
+          base="$(bash scripts/resolve-cloudflare-preview.sh)"
+          echo "CLOUDFLARE_PREVIEW_BASE=$base" >> "$GITHUB_ENV"
           check_page() {
             path="$1"
             marker="$2"
