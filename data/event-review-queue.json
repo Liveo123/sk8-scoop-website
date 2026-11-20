@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-17",
+  "updated": "2026-11-20",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -276,6 +276,118 @@
       ],
       "status": "needs_check",
       "discovered": "2026-11-17"
+    },
+    {
+      "id": "cheadle-coderdojo-final-2026-11-21",
+      "title": "Cheadle CoderDojo: the final coding club session",
+      "status": "ready",
+      "date": "2026-11-21",
+      "time": "11:00",
+      "end_time": "14:00",
+      "date_mode": "single",
+      "area": "Cheadle",
+      "venue": "Moseley Hall, first floor, The Upper Room, 11 Wilmslow Road, Cheadle SK8 1DW",
+      "cost": "Free; advance booking essential",
+      "cost_type": "free",
+      "category": "Kids / Coding",
+      "description": "The last ever Cheadle CoderDojo session after 12 years. A free volunteer-led coding club for young people, with places booked through the organiser's Code Club page. Bring a laptop if possible; under-13s must attend with an adult. The club's booking form displays selectable Young Coders tickets at the source check; places may change.",
+      "source_url": "https://codeclub.org/en/clubs/gb/cheadle/cheadle",
+      "booking_url": "https://codeclub.org/en/events/Z2lkOi8vY2x1YnMtYXBpL0V2ZW50L2FkNTE5OTYzLWU4MTAtNDFjOC1iMjA5LWZhMTAzZmVmODM5MA/bookings/new",
+      "verification": "ORGANISER_PRIMARY_LIVE_2026_11_20_DATE_TIME_FREE_BOOKING_RESTRICTIONS",
+      "checked": "2026-11-20",
+      "discovered": "2026-11-20",
+      "reason": "One-off final core-Cheadle coding session: organiser's live dated page and booking form re-examined 20 Nov, free entry, selectable ticket types and guardian restrictions confirmed."
+    },
+    {
+      "id": "quarry-bank-enchanted-winter-walk-2026-dec",
+      "title": "Enchanted Winter Walk at Quarry Bank",
+      "status": "ready",
+      "date": "2026-12-04",
+      "end_date": "2026-12-28",
+      "date_mode": "specific_dates",
+      "occurrences": [
+        "2026-12-04",
+        "2026-12-05",
+        "2026-12-11",
+        "2026-12-12",
+        "2026-12-18",
+        "2026-12-19",
+        "2026-12-20",
+        "2026-12-21",
+        "2026-12-22",
+        "2026-12-23",
+        "2026-12-28"
+      ],
+      "time": "17:00",
+      "area": "Styal",
+      "venue": "Quarry Bank, Styal, Wilmslow, Cheshire SK9 4HP",
+      "cost": "£9.95 per adult or child; under-12-month babies free; eligible carers free with a paid ticket",
+      "cost_type": "paid",
+      "category": "Family / Outdoors",
+      "description": "A roughly 30-minute illuminated walk in the Upper Garden, with a hot drink included; children also receive reindeer food (or a New Year treat from 28 December). Eleven December dates are each shown on the National Trust's 2026 timetable, with timed arrival slots beginning at 5pm and continuing into the evening. Booking essential; remaining places vary by date and slot. Tickets are non-refundable and non-transferable unless the organiser cancels; some flashing lights. A genuinely distinctive short trip from SK8.",
+      "source_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/7c778026-50ab-489f-8103-6ef82f0c39ce",
+      "booking_url": "https://www.nationaltrust-tickets.org.uk/event-tickets/34692?branches.branchID=2484&catID=33475&clearInProgress=1",
+      "verification": "NATIONAL_TRUST_PRIMARY_DATED_SLOTS_AND_BOOKING_PORTAL_CHECKED_2026_11_20",
+      "checked": "2026-11-20",
+      "discovered": "2026-11-20",
+      "reason": "Selected in verified Issue 22 Website Harvest as a distinctive Styal excursion; organiser individually lists all eleven upcoming dates, exact per-person pricing and ticketing restrictions."
+    },
+    {
+      "id": "cheadle-library-digital-help-2026-11-27-review",
+      "title": "Digital support drop-in at Cheadle Library, 27 November",
+      "status": "needs_check",
+      "date": "2026-11-27",
+      "area": "Cheadle",
+      "source_url": "https://www.stockport.gov.uk/events/digital-support-drop-in-at-cheadle-library-sept-to-dec",
+      "discovered": "2026-11-20",
+      "reason": "Council's 20 Nov indexed Digital Skills calendar lists a 27 Nov 10:30am session at Cheadle Library and the recurring activity detail historically states free and no booking. Direct current single-date detail was blocked, so current conditions still need primary confirmation before publication.",
+      "missing": [
+        "current event-detail confirmation of free entry and drop-in terms for 27 Nov",
+        "current source page access / change or cancellation check"
+      ]
+    },
+    {
+      "id": "st-catherines-heald-green-christmas-trees-2026-11-28-review",
+      "title": "St Catherine's Heald Green Christmas Tree Festival, 28–29 November",
+      "status": "needs_check",
+      "date": "2026-11-28",
+      "end_date": "2026-11-29",
+      "area": "Heald Green",
+      "source_url": "https://www.achurchnearyou.com/church/12897/service-and-events/events/1368659/",
+      "discovered": "2026-11-20",
+      "reason": "The church's indexed event page confirms both dates and free public access, with Saturday opening at 10am. Fresh source retrieval failed and Sunday's hours are not visible; hold rather than imply all-day access or invent entry conditions.",
+      "missing": [
+        "fresh current organiser page retrieval",
+        "Sunday opening hours / finish times and current attendance terms"
+      ]
+    },
+    {
+      "id": "chmc-knit-craft-natter-2026-12-07-review",
+      "title": "Knit, Craft and Natter at Cheadle Hulme Methodist Church, 7 December",
+      "status": "needs_check",
+      "date": "2026-12-07",
+      "area": "Cheadle Hulme",
+      "source_url": "https://www.chmc.org.uk/groups/Knit-Craft-and-Natter",
+      "discovered": "2026-11-20",
+      "reason": "Official group page individually lists Monday 7 December 7–9pm and asks for voluntary refreshments donations. It does not explicitly confirm the admission fee/free status or current participation conditions.",
+      "missing": [
+        "explicit cost of entry or confirmation no attendance fee",
+        "current public drop-in / booking restrictions"
+      ]
+    },
+    {
+      "id": "heaton-moor-lego-art-club-2026-11-27-review",
+      "title": "Lego at Art Club in Heaton Moor, 27 November",
+      "status": "needs_check",
+      "date": "2026-11-27",
+      "area": "Heaton Moor",
+      "source_url": "https://www.stockport.gov.uk/events/lego-at-art-club-nov-dec",
+      "discovered": "2026-11-20",
+      "reason": "Council's individually dated listing gives Friday 27 Nov 4–5pm, £5, age 6+, at Art Club, Heaton Moor. Its current places/booking link could not be independently opened on this run. £5 creative club suitable for SK8 children if booking checks out.",
+      "missing": [
+        "live current booking inventory and booking conditions",
+        "fresh organiser / council page access"
+      ]
     }
   ]
 }
