@@ -60,10 +60,6 @@ async function send(env,to,subject,text,idempotencyKey=''){
     body:JSON.stringify({from:SENDER,to:[to],subject,text,reply_to:'contact@sk8scoop.com'})});
   return res.ok;
 }
-function validGuideUrl(value){
-  try{const url=new URL(String(value||''));return url.protocol==='https:'&&!url.username&&!url.password}
-  catch{return false}
-}
 // One verified, independent referral. Email fulfilment uses the already configured
 // transactional sender, NOT the broken MailerLite MCP or a reward automation.
 // Resend accepts an idempotency key; the durable D1 row prevents future re-awards.
