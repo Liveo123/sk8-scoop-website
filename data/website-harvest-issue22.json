@@ -7,8 +7,10 @@
   "publication_status": "website-staged-awaiting-PR-and-production-verification",
   "latest_sent_issue_confirmed": 21,
   "latest_sent_date": "2026-11-13",
-  "verified_mailerlite_active_subscribers": 972,
+  "verified_mailerlite_account_active_subscribers": 972,
+  "verified_sk8_group_members": 899,
   "subscriber_check_date": "2026-11-20",
+  "subscriber_note": "SK8 group 899 members; distinct from account-wide active count 972. No active-only group estimate is made.",
   "scope": "Distinct permanent pages, 15 vetted dated event records, current category links, corrected prior issue, current public stats and SEO. Live changes depend on clean CI and verified deployment.",
   "items": [
     {
