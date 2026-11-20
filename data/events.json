@@ -139,60 +139,6 @@
     "checked": "2026-11-17"
   },
   {
-    "id": "lum-head-2027-intake-open-day-2026-11-19",
-    "title": "Lum Head nursery and reception open day",
-    "date": "2026-11-19",
-    "time": "14:00",
-    "end_time": "15:00",
-    "area": "Gatley",
-    "venue": "Lum Head Primary School, Troutbeck Road, Gatley SK8 4RR",
-    "cost": "Free; advance tour booking requested",
-    "cost_type": "free",
-    "category": "Schools / Family",
-    "description": "Families considering nursery or reception places for September 2027 can look around Lum Head Primary School and meet staff. The school asks visitors to book a tour by calling 0161 428 7992 or emailing its school office.",
-    "source_url": "https://www.stockport.gov.uk/events/nursery-and-reception-open-day-nov?date=2026-11-19",
-    "booking_url": "https://www.stockport.gov.uk/events/nursery-and-reception-open-day-nov?date=2026-11-19",
-    "verification": "STOCKPORT_COUNCIL_PRIMARY_EVENT_LISTING_RECHECKED",
-    "status": "verified",
-    "checked": "2026-11-01",
-    "seo": {
-      "slug": "lum-head-gatley-nursery-reception-open-day-2026",
-      "venue_name": "Lum Head Primary School",
-      "address": {
-        "streetAddress": "Troutbeck Road",
-        "addressLocality": "Gatley",
-        "postalCode": "SK8 4RR",
-        "addressCountry": "GB"
-      },
-      "organizer": {
-        "name": "Lum Head Primary School",
-        "url": "https://www.lumhead.stockport.sch.uk/"
-      },
-      "access": "Public open day for families considering nursery or reception in September 2027. Book a place with the school before visiting.",
-      "image_basis": "TEXT-ONLY",
-      "meta_description": "Visit Lum Head Primary School in Gatley on 19 November 2026, 2–3pm, to explore nursery and reception places for 2027. Free; book your tour.",
-      "search_title": "Lum Head School Open Day, Gatley | 19 Nov 2026 | SK8 Scoop"
-    }
-  },
-  {
-    "status": "verified",
-    "checked": "2026-11-13",
-    "id": "stockroom-tarot-beginners-2026-11-19",
-    "title": "Tarot Reading for Beginners at Stockroom",
-    "date": "2026-11-19",
-    "time": "17:00",
-    "end_time": "19:00",
-    "date_mode": "single",
-    "area": "Stockport",
-    "venue": "Stockroom, Merseyway Shopping Centre, Stockport, SK1 1PR",
-    "cost": "Free",
-    "cost_type": "free",
-    "category": "Workshops / Community",
-    "description": "Free, playful introduction to reading tarot cards as conversation and reflection prompts. Stockroom's Learn a Skill / Share a Skill social is open to adults of all experience levels; arrive from 5pm, activities from about 5:30pm, leave any time before 7pm. Worth the nearby trip for an unusual low-cost evening.",
-    "source_url": "https://www.stockroomsk.co.uk/events/learn-a-skill-share-a-skill-tarot-reading-for-beginners?date=2026-11-19",
-    "verification": "VENUE_PRIMARY_DATE_SPECIFIC_EVENT_PAGE"
-  },
-  {
     "status": "verified",
     "checked": "2026-11-13",
     "id": "stockroom-youth-night-nov-dec2026",
@@ -266,6 +212,25 @@
     "verification": "VENUE_PRIMARY_DATE_SPECIFIC_INDEXED_EVENT_PAGE"
   },
   {
+    "id": "cheadle-coderdojo-final-2026-11-21",
+    "title": "Cheadle CoderDojo: the final coding club session",
+    "status": "verified",
+    "date": "2026-11-21",
+    "time": "11:00",
+    "end_time": "14:00",
+    "date_mode": "single",
+    "area": "Cheadle",
+    "venue": "Moseley Hall, first floor, The Upper Room, 11 Wilmslow Road, Cheadle SK8 1DW",
+    "cost": "Free; advance booking essential",
+    "cost_type": "free",
+    "category": "Kids / Coding",
+    "description": "The last ever Cheadle CoderDojo session after 12 years. A free volunteer-led coding club for young people, with places booked through the organiser's Code Club page. Bring a laptop if possible; under-13s must attend with an adult. The club's booking form displays selectable Young Coders tickets at the source check; places may change.",
+    "source_url": "https://codeclub.org/en/clubs/gb/cheadle/cheadle",
+    "booking_url": "https://codeclub.org/en/events/Z2lkOi8vY2x1YnMtYXBpL0V2ZW50L2FkNTE5OTYzLWU4MTAtNDFjOC1iMjA5LWZhMTAzZmVmODM5MA/bookings/new",
+    "verification": "ORGANISER_PRIMARY_LIVE_2026_11_20_DATE_TIME_FREE_BOOKING_RESTRICTIONS",
+    "checked": "2026-11-20"
+  },
+  {
     "id": "liam-gallagher-tribute-cheadle-hulme-2026-11-21",
     "title": "Liam Gallagher / Oasis tribute night",
     "date": "2026-11-21",
@@ -327,6 +292,38 @@
     "verification": "VENUE_PRIMARY_CURRENT_PRODUCTION_PAGE",
     "checked": "2026-11-01",
     "status": "verified"
+  },
+  {
+    "id": "quarry-bank-enchanted-winter-walk-2026-dec",
+    "title": "Enchanted Winter Walk at Quarry Bank",
+    "status": "verified",
+    "date": "2026-12-04",
+    "end_date": "2026-12-28",
+    "date_mode": "specific_dates",
+    "occurrences": [
+      "2026-12-04",
+      "2026-12-05",
+      "2026-12-11",
+      "2026-12-12",
+      "2026-12-18",
+      "2026-12-19",
+      "2026-12-20",
+      "2026-12-21",
+      "2026-12-22",
+      "2026-12-23",
+      "2026-12-28"
+    ],
+    "time": "17:00",
+    "area": "Styal",
+    "venue": "Quarry Bank, Styal, Wilmslow, Cheshire SK9 4HP",
+    "cost": "£9.95 per adult or child; under-12-month babies free; eligible carers free with a paid ticket",
+    "cost_type": "paid",
+    "category": "Family / Outdoors",
+    "description": "A roughly 30-minute illuminated walk in the Upper Garden, with a hot drink included; children also receive reindeer food (or a New Year treat from 28 December). Eleven December dates are each shown on the National Trust's 2026 timetable, with timed arrival slots beginning at 5pm and continuing into the evening. Booking essential; remaining places vary by date and slot. Tickets are non-refundable and non-transferable unless the organiser cancels; some flashing lights. A genuinely distinctive short trip from SK8.",
+    "source_url": "https://www.nationaltrust.org.uk/visit/cheshire-greater-manchester/quarry-bank/events/7c778026-50ab-489f-8103-6ef82f0c39ce",
+    "booking_url": "https://www.nationaltrust-tickets.org.uk/event-tickets/34692?branches.branchID=2484&catID=33475&clearInProgress=1",
+    "verification": "NATIONAL_TRUST_PRIMARY_DATED_SLOTS_AND_BOOKING_PORTAL_CHECKED_2026_11_20",
+    "checked": "2026-11-20"
   },
   {
     "status": "verified",
