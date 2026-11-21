@@ -1,0 +1,39 @@
+name: SK8 Birthday Time Machine Referral QA
+on:
+  pull_request:
+    paths:
+      - 'sk8-btm-referral-service.js'
+      - 'sk8-btm-signup-api.js'
+      - 'adventures/birthday-time-machine/**'
+      - 'worker-business-v2.js'
+      - 'wrangler.toml'
+      - 'tests/sk8-btm-referral.test.mjs'
+      - '.github/workflows/sk8-btm-referral-qa.yml'
+  workflow_dispatch:
+jobs:
+  btm-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check all staged JavaScript syntax
+        run: |
+          node --check sk8-btm-referral-service.js
+          node --check sk8-btm-signup-api.js
+          node --check worker-business-v2.js
+          node --check adventures/birthday-time-machine/refer/main.js
+          node --check adventures/birthday-time-machine/refer/confirm.js
+      - name: Run three-referral and safe-download regression tests
+        run: node --test tests/sk8-btm-referral.test.mjs
+      - name: Require SK8 pilot switches to remain off
+        run: |
+          grep -F 'SK8_BTM_SIGNUP_ENABLED = "false"' wrangler.toml
+          grep -F 'SK8_BTM_REFERRAL_ENABLED = "false"' wrangler.toml
+          grep -F 'SK8_BTM_REWARD_ENABLED = "false"' wrangler.toml
+      - name: Verify no public game ZIP entered the website repository
+        run: |
+          ! git ls-files | grep -E '(^|/)(Birthday_Time_Machine.*\.zip|BTM.*\.zip)$'
