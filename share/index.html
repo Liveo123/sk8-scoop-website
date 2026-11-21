@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Share SK8 Scoop | Local events and useful updates</title>
+<meta name="description" content="Share SK8 Scoop with someone in Cheadle, Cheadle Hulme, Gatley or Heald Green.">
+<link rel="canonical" href="https://www.sk8scoop.com/share/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SK8 Scoop">
+<meta property="og:title" content="SK8 Scoop | The useful, the local and the mildly nosy.">
+<meta property="og:description" content="Local events, good-value ideas and useful updates for Cheadle, Cheadle Hulme, Gatley and Heald Green.">
+<meta property="og:url" content="https://www.sk8scoop.com/share/">
+<meta property="og:image" content="https://www.sk8scoop.com/assets/images/sk8-miniature-hero-hires-v3.png">
+<link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="../assets/styles.css">
+<style>
+:root{color-scheme:light}body{margin:0;background:#f5f3ed;color:#253238;font-family:Arial,Helvetica,sans-serif}
+main{max-width:680px;margin:2.5rem auto;padding:0 20px}header{background:white;padding:18px 20px;border-bottom:4px solid #0f6470;text-align:center}header img{width:min(280px,80vw);height:auto}
+h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.12}p{line-height:1.6}
+.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}
+a.button,button.button{display:block;box-sizing:border-box;width:100%;background:#0f6470;color:#fff;text-decoration:none;border:0;border-radius:8px;padding:15px 14px;text-align:center;font-size:1rem;font-weight:bold;cursor:pointer}
+a.button:focus-visible,button.button:focus-visible{outline:3px solid #dd7336;outline-offset:3px}
+.secondary{background:#253238!important}.note{font-size:.88rem;color:#52616a}.card{background:white;border-radius:12px;padding:25px;box-shadow:0 2px 12px #18292b14}
+@media(max-width:450px){.actions{grid-template-columns:1fr}main{margin:18px auto}}
+</style>
+</head>
+<body>
+<header><a href="/" aria-label="SK8 Scoop home"><img src="../assets/sk8-scoop-logo.webp" alt="SK8 Scoop"></a></header>
+<main><section class="card"><h1>Know someone who'd enjoy the Scoop?</h1>
+<p>Useful local events, free and cheap ideas, and the mildly nosy bits from Cheadle, Cheadle Hulme, Gatley and Heald Green. Share the link, or have a look first.</p>
+<div class="actions" aria-label="Ways to share SK8 Scoop">
+<a class="button" href="https://api.whatsapp.com/send?text=SK8%20Scoop%3A%20useful%20local%20events%20and%20updates%20around%20Cheadle%2C%20Gatley%20and%20Heald%20Green.%20https%3A%2F%2Fwww.sk8scoop.com%2Fshare%2F%3Futm_source%3Dwhatsapp%2526utm_medium%3Dreferral%2526utm_campaign%3Dreader_share" target="_blank" rel="noopener noreferrer">Share on WhatsApp</a>
+<a class="button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.sk8scoop.com%2Fshare%2F%3Futm_source%3Dfacebook%26utm_medium%3Dreferral%26utm_campaign%3Dreader_share" target="_blank" rel="noopener noreferrer">Share on Facebook</a>
+<a class="button" href="mailto:?subject=SK8%20Scoop%3A%20worth%20a%20look&amp;body=Here's%20SK8%20Scoop%2C%20with%20useful%20local%20events%20and%20updates%3A%0Ahttps%3A%2F%2Fwww.sk8scoop.com%2Fshare%2F%3Futm_source%3Demail%26utm_medium%3Dreferral%26utm_campaign%3Dreader_share">Share by email</a>
+<button class="button" type="button" id="copy">Copy link</button>
+</div>
+<p class="note" id="copy-status" role="status" aria-live="polite"></p>
+<p><a href="/latest/">Read the latest edition</a> · <a href="/join/?utm_source=sk8_owned&amp;utm_medium=share_page&amp;utm_campaign=reader_share">Get the free Friday email</a></p>
+<p class="note">The share buttons link to this permanent introduction, not to a particular dated edition. No friend's details are collected by SK8 Scoop.</p>
+</section></main>
+<script>
+document.querySelector('#copy').addEventListener('click',async()=>{
+const link='https://www.sk8scoop.com/share/?utm_source=copy_link&utm_medium=referral&utm_campaign=reader_share';
+try{await navigator.clipboard.writeText(link);document.querySelector('#copy-status').textContent='Link copied.'}
+catch(e){document.querySelector('#copy-status').textContent='Copy this link: '+link}
+});
+</script>
+</body></html>
