@@ -203,68 +203,6 @@
     "checked": "2026-11-20"
   },
   {
-    "id": "bramall-hall-elf-trail-2026-11-21",
-    "title": "Bramall Hall Elf Trail",
-    "status": "verified",
-    "date": "2026-11-21",
-    "date_mode": "specific_dates",
-    "area": "Bramhall",
-    "venue": "Bramall Hall, Hall Road, Bramhall SK7 3NX",
-    "cost": "£3 per child plus booking fee; usual Hall admission for adults",
-    "cost_type": "paid",
-    "category": "Family / Christmas",
-    "description": "Children aged 3+ can hunt for elves in the decorated Tudor rooms and collect a prize. Book a separate timed Elf Trail slot; normal Hall admission applies to accompanying adults. Event listing covers 21 and 22 November only. Trail session times vary by booking slot; do not assume the Hall's opening time is the booked start.",
-    "source_url": "https://www.stockport.gov.uk/events/the-elf-trail-at-bramall-hall-2026-18-to-22-nov?date=2026-11-22",
-    "verification": "ISSUE_22_FACT_REGISTER_AND_LINKED_PRIMARY_SOURCE_2026_11_20",
-    "checked": "2026-11-20",
-    "end_date": "2026-11-22",
-    "occurrences": [
-      "2026-11-21",
-      "2026-11-22"
-    ],
-    "booking_url": "https://www.stockport.gov.uk/events/the-elf-trail-at-bramall-hall-2026-18-to-22-nov?date=2026-11-22"
-  },
-  {
-    "id": "cbeebies-treasure-island-stockport-2026-11-21",
-    "title": "CBeebies Panto: Treasure Island at The Light",
-    "status": "verified",
-    "date": "2026-11-21",
-    "time": "10:10",
-    "date_mode": "specific_dates",
-    "area": "Stockport",
-    "venue": "The Light Cinema, Redrock, Stockport",
-    "cost": "Price varies; check this screening",
-    "cost_type": "unknown",
-    "category": "Family / Cinema",
-    "description": "Cinema screening of the U-rated 70-minute CBeebies Treasure Island pantomime at 10.10am on Saturday 21 and Sunday 22 November. The cinema advertises a Family Special range, but this particular screening's price is not confirmed; check price and seats before booking.",
-    "source_url": "https://stockport.thelight.co.uk/family-specials",
-    "verification": "ISSUE_22_FACT_REGISTER_AND_LINKED_PRIMARY_SOURCE_2026_11_20",
-    "checked": "2026-11-20",
-    "end_date": "2026-11-22",
-    "occurrences": [
-      "2026-11-21",
-      "2026-11-22"
-    ]
-  },
-  {
-    "id": "stockport-vinyl-record-fair-2026-11-22",
-    "title": "Stockport Vinyl Record Fair",
-    "status": "verified",
-    "date": "2026-11-22",
-    "time": "09:00",
-    "date_mode": "single",
-    "area": "Stockport",
-    "venue": "Masonic Guildhall, 169 Wellington Road South, Stockport",
-    "cost": "£1 cash entry; rear parking £1",
-    "cost_type": "paid",
-    "category": "Markets / Music",
-    "description": "Two rooms of records and CDs, with live music planned around midday. The fair runs 9am–3pm. Bring cash for admission and inspect used records before buying.",
-    "source_url": "https://www.stockport.gov.uk/events/vinyl-record-fair-nov?date=2026-11-22",
-    "verification": "ISSUE_22_FACT_REGISTER_AND_LINKED_PRIMARY_SOURCE_2026_11_20",
-    "checked": "2026-11-20",
-    "end_time": "15:00"
-  },
-  {
     "id": "upper-room-cafe-drop-in-2026-11-23",
     "title": "The Upper Room café and support drop-in",
     "status": "verified",
