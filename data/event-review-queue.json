@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-20",
+  "updated": "2026-11-24",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -44,16 +44,12 @@
     {
       "id": "john-lewis-winter-capsule-wardrobe-cheadle-2026",
       "title": "How To Build The Perfect Winter Capsule Wardrobe",
-      "status": "needs_check",
+      "status": "rejected",
       "area": "Cheadle",
       "source_url": "https://www.johnlewis.com/our-shops/cheadle/whats-on",
       "discovered": "2026-10-01",
       "checked": "2026-10-01",
-      "reason": "Current John Lewis Cheadle primary page confirms a £10 event series with multiple dates through 20 Nov, but does not expose the individual Cheadle dates/times in the accessible listing. A third-party listing suggests dates beginning 5 Nov, which is not strong enough evidence to publish.",
-      "missing": [
-        "exact individual dates within the 42-day window",
-        "exact start times"
-      ]
+      "reason": "Past event or advertised series ended before 24 November 2026; retain as historical lead only. Current John Lewis Cheadle primary page confirms a £10 event series with multiple dates through 20 Nov, but does not expose the individual Cheadle dates/times in the accessible listing. A third-party listing suggests dates beginning 5 Nov, which is not strong enough evidence to publish."
     },
     {
       "id": "john-lewis-cheadle-baby-beyond-2026-10-08",
@@ -85,13 +81,8 @@
       "end_date": "2026-11-23",
       "venue": "Players Theatre, Anfield Road, Cheadle Hulme SK8 5EX",
       "source_url": "https://www.playersdramatic.co.uk/post/2026-2027-season-announcement",
-      "reason": "The official 2026/27 season announcement gives 16–23 Nov, while the current programme labels the run Monday–Saturday starting 16 Nov. Dates conflict; do not publish until individual performances are verified.",
-      "missing": [
-        "resolve 16–23 Nov versus Monday–Saturday date conflict",
-        "exact performances and start times",
-        "ticket prices and confirmed booking route"
-      ],
-      "status": "needs_check",
+      "reason": "Past event or advertised series ended before 24 November 2026; retain as historical lead only. The official 2026/27 season announcement gives 16–23 Nov, while the current programme labels the run Monday–Saturday starting 16 Nov. Dates conflict; do not publish until individual performances are verified.",
+      "status": "rejected",
       "discovered": "2026-10-08",
       "checked": "2026-10-08"
     },
@@ -255,12 +246,8 @@
       "date": "2026-11-20",
       "area": "Bramhall",
       "source_url": "https://www.stockport.gov.uk/events?Category=Libraries",
-      "reason": "Council's current dated index shows a Friday 20 November 2pm talk at Bramhall Library, but event-specific end time, price, booking and attendance conditions were not independently recovered.",
-      "missing": [
-        "individual event page price and booking terms",
-        "end time if given"
-      ],
-      "status": "needs_check",
+      "reason": "Past event or advertised series ended before 24 November 2026; retain as historical lead only. Council's current dated index shows a Friday 20 November 2pm talk at Bramhall Library, but event-specific end time, price, booking and attendance conditions were not independently recovered.",
+      "status": "rejected",
       "discovered": "2026-11-17"
     },
     {
@@ -377,6 +364,156 @@
       "status": "needs_check",
       "discovered": "2026-11-20",
       "checked": "2026-11-20"
+    },
+    {
+      "id": "gatley-knitwits-2026-12-12-review",
+      "title": "Gatley KnitWits December meet-up",
+      "area": "Gatley",
+      "source_url": "https://stayhappening.com/e/knitwits-meet-up-saturday-12-dec-2026-E2ISYVK0UDV",
+      "date": "2026-12-12",
+      "reason": "Secondary listing names 2–4pm and suggested 50p refreshments donation; URC site confirms venue but not this occurrence.",
+      "missing": [
+        "primary dated organiser confirmation",
+        "attendance and price"
+      ],
+      "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "heald-green-st-catherines-tree-festival-2026-review",
+      "title": "St Catherine's Christmas Tree Festival",
+      "area": "Heald Green",
+      "source_url": "https://www.achurchnearyou.com/church/12897/service-and-events/events/1368659/",
+      "date": "2026-11-28",
+      "reason": "Official church listing confirms 28–29 Nov, free and open to all, but gives a continuous elapsed duration rather than actual daily opening hours.",
+      "missing": [
+        "Saturday closing and Sunday opening hours",
+        "confirm drop-in arrangements"
+      ],
+      "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "cheadle-drill-hall-pilates-yoga-dec2026-review",
+      "title": "Yoga Cheadle December Pilates and yoga blocks",
+      "area": "Cheadle",
+      "source_url": "https://www.yogacheadle.com/yoga-courses",
+      "date": "2026-12-01",
+      "reason": "Indexed organiser page lists specific December blocks and prices, but direct page retrieval returns August/September dates.",
+      "missing": [
+        "consistent current December timetable",
+        "booking inventory and precise venue details"
+      ],
+      "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "walking-mums-cheadle-hulme-brunch-2026-12-11-review",
+      "title": "Walking Mums festive brunch and optional walk",
+      "area": "Cheadle Hulme",
+      "source_url": "https://www.walkingmums.com/meetup/walking-mums-festive-cheadle-hulme-brunch-club/",
+      "date": "2026-12-11",
+      "reason": "Indexed organiser details show 10:30–12 and £13.50 non-member; direct page unavailable.",
+      "missing": [
+        "exact venue",
+        "current booking availability"
+      ],
+      "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "yoga-sangha-christmas-mysore-2026-review",
+      "title": "Christmas Ashtanga Vinyasa Mysore",
+      "area": "Cheadle",
+      "source_url": "https://yogasangha.co.uk/event/christmas-mysore-26/",
+      "date": "2026-12-28",
+      "reason": "Organiser confirms four daily sessions 28–31 Dec, 9–11am, £12 drop-in or £40 block; booking page could not be retrieved.",
+      "missing": [
+        "current in-person availability"
+      ],
+      "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "woodford-players-living-with-lois-2026-review",
+      "title": "Living with Lois at Woodford Community Centre",
+      "area": "Woodford",
+      "source_url": "https://www.ticketsource.com/woodfordplayers/",
+      "date": "2026-11-24",
+      "reason": "Organiser ticket index lists performances but displays multi-day end times on individual entries; secondary source shows £13.",
+      "missing": [
+        "exact individual performance duration and current ticket availability",
+        "price on ticket page"
+      ],
+      "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "bramhall-light-up-2026-review",
+      "title": "Light Up Bramhall",
+      "area": "Bramhall",
+      "source_url": "https://bramhalltogethertrust.com/",
+      "date": "2026-11-28",
+      "reason": "Trader lists 11am–7pm but organiser homepage does not expose a current timed programme.",
+      "missing": [
+        "organiser-confirmed 2026 opening hours and admission"
+      ],
+      "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "heald-green-winter-reset-2026-12-02-review",
+      "title": "Winter reset restorative movement and sound bath",
+      "area": "Heald Green",
+      "source_url": "https://eventslist.co.uk/manchester/events/winter-reset-restorative-practice-sound-bath-with-reiki-2026-12-02",
+      "date": "2026-12-02",
+      "reason": "Secondary listing gives 7–8:25pm but £16 versus £18.04 including possible fees.",
+      "missing": [
+        "primary booking page",
+        "total price and availability"
+      ],
+      "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "cheadle-makers-market-2026-12-05",
+      "title": "Cheadle Makers Market",
+      "date": "2026-12-05",
+      "time": "10:00",
+      "end_time": "16:00",
+      "area": "Cheadle",
+      "venue": "Cheadle Green, Cheadle",
+      "cost": "Free entry; purchases optional",
+      "cost_type": "free",
+      "category": "Markets / Community",
+      "description": "Browse local makers, artwork, handmade gifts and food stalls on Cheadle Green. Outdoor market with free public entry; no ticket is listed. Check the organiser before travelling.",
+      "source_url": "https://www.themakersmarket.co.uk/market/cheadle-13/",
+      "verification": "ORGANISER_PRIMARY_DATED_MARKET_AND_VENUE_FREE_ENTRY",
+      "reason": "Dated organiser market page and organiser venue entry information checked; useful core SK8 Christmas shopping.",
+      "status": "ready",
+      "date_mode": "single",
+      "discovered": "2026-11-24",
+      "checked": "2026-11-24"
+    },
+    {
+      "id": "heald-green-library-jane-preece-storytime-2026-12-05",
+      "title": "Storytime with Jane Preece at Heald Green Library",
+      "date": "2026-12-05",
+      "time": "11:00",
+      "end_time": "12:00",
+      "area": "Heald Green",
+      "venue": "Heald Green Library, Finney Lane, Heald Green SK8 3JB",
+      "cost": "Free",
+      "cost_type": "free",
+      "category": "Family / Library",
+      "description": "Local children's author and illustrator Jane Preece joins the library for storytelling, songs and activities. The council lists free entry and does not specify advance booking; check the event page before attending.",
+      "source_url": "https://www.stockport.gov.uk/events/storytime-with-jane-preece?date=2026-12-05",
+      "verification": "COUNCIL_PRIMARY_DATED_LIBRARY_EVENT",
+      "reason": "Library-submitted listing confirms date, time, address and free cost; distinct from 19 December Christmas storytime.",
+      "status": "ready",
+      "date_mode": "single",
+      "discovered": "2026-11-24",
+      "checked": "2026-11-24"
     }
   ]
 }
