@@ -20,6 +20,13 @@ permissions:
   issues: read
   pull-requests: read
 
+# Cloudflare's branch preview advances to the latest PR commit.
+# Cancel superseded PR runs rather than reporting missing previews for old commits.
+# Keep manually requested verification runs independent of automatic PR runs.
+concurrency:
+  group: holiday-finder-qa-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   holiday-finder-qa:
     runs-on: ubuntu-latest
