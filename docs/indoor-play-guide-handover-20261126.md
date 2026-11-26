@@ -37,3 +37,16 @@ Edit data/indoor-play.json and run node scripts/build-indoor-play.mjs from repo 
 
 ## Second verification and functional pass · 26 November 2026
 Fixed missing prices: null, never zero; excluded ambiguous totals from budget. Six age tariffs validated; 5 fixed sample estimates at or under £20 (Run of the Mill; Tumble Jacks; Wacky Warehouse at Barlow Croft; Curious Little Ones; Little World for Scholars). JS calculations tested for example totals, one child, uncertain baby prices, stale prices, sensory age and special-session costs. Added quick comparison, type filter, source-linked review summaries (limited, not independent inspections), corrections to compulsory grip socks and clearer price conflict caveats. No final quality scores yet. Checked Image Rights Register updated.md and Image Rights Register.md for all venue names: no relevant cleared image located. TEXT-ONLY; no rights inferred. Browser layout and hosted preview remain pending. No production deployment.
+
+
+## Offline browser QA and mobile revisions
+A separate offline review snapshot used the exact current branch filter logic and a fixture of all 15 venue records (abbreviated display copy, stand-in text masthead, no shared site scripts). Chromium tests passed: 15 initial profiles; five under £20; single child price; uncertain baby tariff; age/SEN restrictions; no results; reset; area/type filters; anchor reset; stale price exclusion; no page script errors; no horizontal overflow at 320/390/768/1280 px. Visual screenshots revealed truncated budget wording and excessive intro copy; shortened labels/intro, improved checkbox target. Stale fixed-price rows now hidden, stale picks labelled, type options rebuilt from dataset. Host preview status unavailable; actual shared navigation and production CSS still need hosted smoke/visual QA.
+
+## Image rights decision
+Both reusable register versions searched: no relevant cleared venue photo found. Candidate source pages (not permissions): https://www.nixonsfarmshop.co.uk/play-areas ; https://www.headoverheelsplay.co.uk/book-tickets-wilmslow ; https://www.wildthingssoftplay.co.uk/about . Direct venue images returned cache misses in the research environment and written permission was not established. Wikimedia generic indoor-play images were located with CC BY 2.0, but not selected because they show identifiable children and are not evidence of local venues. Keep TEXT-ONLY until editorial/rights approval. No asset purchased, uploaded or permission request sent.
+
+## Scoring launch gate
+Each profile has a documented editorial reason and practical source caveats. Eight have limited review observations. Seven have no suitable sample. Score remains null for every venue because reviews, parent experience, exact cost/session and access are not comparably established. No public quality rating or claim of personal inspection. Use the scoring evidence checklist in docs/indoor-play-scoring-evidence-20261126.md for quarterly review.
+
+## Final newsletter copy
+See docs/indoor-play-newsletter-launch-20261126.md; supersedes the earlier handover excerpt.
