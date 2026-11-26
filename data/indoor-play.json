@@ -145,7 +145,7 @@
       "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "£17–£21*",
+      "costDisplay": "£17–£21",
       "tariff": null,
       "sensoryMin": null,
       "priceNote": "£17–£21 for two children and one adult across conflicting operator snapshots; not a confirmed current tariff.",
@@ -271,7 +271,7 @@
       "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "£30 + socks*",
+      "costDisplay": "£30 + socks",
       "tariff": null,
       "sensoryMin": null,
       "priceNote": "Two £15 child tickets. New grip socks £3 each if needed; confirm adult supervision for both under-sixes and whether an extra adult/ticket is required. £36–£39 with 2–3 new pairs, before any additional adult ticket.",
@@ -349,7 +349,8 @@
         "license": "https://creativecommons.org/licenses/by-sa/2.0/",
         "basis": "LICENCE",
         "alt": "Entrance to the former Pear Mill, Bredbury",
-        "note": "Exterior/location photograph, not a current view of either play facility."
+        "note": "Exterior/location photograph, not a current view of either play facility.",
+        "image": "https://s3.geograph.org.uk/geophotos/07/43/13/7431319_d30d9c5e_1024x1024.jpg"
       },
       "location": {
         "lat": 53.413769,
@@ -425,13 +426,14 @@
       },
       "sensoryMin": 0,
       "photo": {
-        "title": "Goyt Mill, March 2009",
-        "author": "Chris Allen",
-        "source": "https://commons.wikimedia.org/wiki/File:Goyt_Mill_-_geograph.org.uk_-_1205281.jpg",
+        "title": "Goyt Mill, reflected, May 2024",
+        "author": "Christine Johnstone",
+        "source": "https://www.geograph.org.uk/photo/7822173",
         "license": "https://creativecommons.org/licenses/by-sa/2.0/",
         "basis": "LICENCE",
-        "alt": "Exterior of Goyt Mill in Marple",
-        "note": "Historical exterior/location photograph; not a current view inside Tumble Jacks."
+        "alt": "Goyt Mill reflected in the Macclesfield Canal",
+        "note": "Exterior/location photograph, not an image of the play facility.",
+        "image": "https://s0.geograph.org.uk/geophotos/07/82/21/7822173_283c8dd0.jpg"
       },
       "location": {
         "lat": 53.385335,
@@ -552,7 +554,8 @@
         "license": "https://creativecommons.org/licenses/by-sa/2.0/",
         "basis": "LICENCE",
         "alt": "Entrance to the former Pear Mill, Bredbury",
-        "note": "Exterior/location photograph, not a current view of either play facility."
+        "note": "Exterior/location photograph, not a current view of either play facility.",
+        "image": "https://s3.geograph.org.uk/geophotos/07/43/13/7431319_d30d9c5e_1024x1024.jpg"
       },
       "location": {
         "lat": 53.413769,
@@ -596,7 +599,7 @@
       "primary": "https://oxygenactiveplay.co.uk/activity-parks/wilmslow/",
       "secondary": "https://oxygenactiveplay.co.uk/activity-parks/wilmslow/softplay/",
       "confidence": "Moderate",
-      "additional": "https://oxygenactiveplay.co.uk/faq/",
+      "additional": "https://oxygenactiveplay.co.uk/faqs/",
       "review": "Tripadvisor reports from February–October 2026 include positive comments on activities and staff, and criticism of upkeep, crowding or costs. These cover different products and are not independent inspections.",
       "reviewSource": "https://www.tripadvisor.co.uk/Attraction_Review-g580421-d25044858-Reviews-Oxygen_Wilmslow-Wilmslow_Cheshire_England.html",
       "checked": "2026-11-26",
@@ -719,7 +722,7 @@
       "confidence": "Limited",
       "additional": "https://www.sparkhubfamily.co.uk/place/sk_pure_imagination_poynton",
       "review": "Kidzdays reproduces a positive Google-rating snapshot; the sample and date distribution of original reviews were not independently checked. Not used as a comparable quality rating.",
-      "reviewSource": "https://www.kidzdays.co.uk/",
+      "reviewSource": "https://www.kidzdays.co.uk/place/pure-imagination-poynton",
       "checked": "2026-11-26",
       "reviewChecked": "2026-11-26",
       "score": null,
@@ -837,7 +840,7 @@
       "confidence": "Moderate",
       "additional": "https://www.littleworldforscholars.co.uk/faqs/",
       "review": "Directory evidence corroborates themed role-play and practical facilities; syndicated review ratings are not a representative independently checked sample.",
-      "reviewSource": "https://visitaltrincham.com/",
+      "reviewSource": "https://www.kidzdays.co.uk/place/little-world-for-scholars",
       "checked": "2026-11-26",
       "reviewChecked": "2026-11-26",
       "score": null,
@@ -910,7 +913,7 @@
       "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "£32.15–£41.15*",
+      "costDisplay": "£32.15–£41.15",
       "tariff": null,
       "sensoryMin": 0,
       "priceNote": "£32.15 off-peak or £36.15–£41.15 peak; weekday term-time and holiday prices differ. Confirm exact slot and optional activities.",
