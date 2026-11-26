@@ -33,3 +33,7 @@ Edit data/indoor-play.json and run node scripts/build-indoor-play.mjs from repo 
 8. Mobile and accessibility: semantic cards, labelled selects, clear empty state, keyboard focus, 44px controls; browser rendering not yet tested.
 9. Independence: paid positions excluded; no unlicensed photos.
 10. Maintenance: data-driven static output, stale-price flag, corrections and dated changelog. Remaining gates: live preview/mobile/filter QA, broader independent reviews and 100-point scoring, active club finder refresh, optional embedded map, owner approval. No production merge.
+
+
+## Second verification and functional pass · 26 November 2026
+Fixed missing prices: null, never zero; excluded ambiguous totals from budget. Six age tariffs validated; 5 fixed sample estimates at or under £20 (Run of the Mill; Tumble Jacks; Wacky Warehouse at Barlow Croft; Curious Little Ones; Little World for Scholars). JS calculations tested for example totals, one child, uncertain baby prices, stale prices, sensory age and special-session costs. Added quick comparison, type filter, source-linked review summaries (limited, not independent inspections), corrections to compulsory grip socks and clearer price conflict caveats. No final quality scores yet. Checked Image Rights Register updated.md and Image Rights Register.md for all venue names: no relevant cleared image located. TEXT-ONLY; no rights inferred. Browser layout and hosted preview remain pending. No production deployment.
