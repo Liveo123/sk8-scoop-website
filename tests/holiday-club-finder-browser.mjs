@@ -123,6 +123,23 @@ try {
     await screenshot('mobile-'+width+'.png');
   }
   }
+
+  // Exercise the exact guide on the same preview origin before the expiry clock changes.
+  await rpc('Emulation.setDeviceMetricsOverride',{width:1280,height:900,screenWidth:1280,screenHeight:900,deviceScaleFactor:1,mobile:false});
+  await rpc('Page.navigate',{url:BASE+'/indoor-play/'});
+  check(await ready("document.querySelectorAll('.ip-card').length===15 && document.getElementById('ip-live')?.hidden===false"),'15 indoor-play cards and live finder loaded');
+  check(await evalJS("document.querySelectorAll('.ip-compare-row').length===15"),'All price scenarios present');
+  check(await evalJS("document.querySelectorAll('.ip-map-venue').length===15"),'All 15 mapped venues have links');
+  check(await evalJS("document.querySelectorAll('.ip-location-photo').length===2 && Array.from(document.querySelectorAll('.ip-location-photo')).every(x=>!x.getAttribute('src')&&x.dataset.src.startsWith('https://'))"),'Two attributed opt-in location photos; no initial external image request');
+  check(await evalJS("(()=>{const f=document.getElementById('ip-filters');const r=f.querySelector('input[name=ip-zone][value=SK8]');r.click();return document.querySelectorAll('.ip-card:not([hidden])').length===2})()"),'SK8 radio instantly filters to two sites');
+  check(await evalJS("(()=>{document.getElementById('ip-reset-top').click();return document.querySelectorAll('.ip-card:not([hidden])').length===15})()"),'Guide reset restores all sites');
+  check(await evalJS("(()=>{document.getElementById('ip-age').value='7';document.getElementById('ip-age').dispatchEvent(new Event('change',{bubbles:true}));return document.querySelector('#awesome-walls [data-price-value]').textContent==='£30.00'})()"),'Eligible older-child climbing package calculates £30');
+  check(await evalJS("(()=>{document.getElementById('ip-reset-top').click();document.getElementById('ip-load-map').click();return !document.getElementById('ip-map-canvas').hidden&&document.querySelectorAll('.ip-map-pin').length>0&&document.querySelector('.ip-map-credit').textContent.includes('OpenStreetMap')})()"),'Click-to-load map pins and attribution');
+  check(await evalJS("(()=>{document.getElementById('ip-load-map').click();return document.getElementById('ip-map-canvas').hidden})()"),'Map closes without removing list');
+  await screenshot('indoor-play-desktop.png');
+  for(const width of [390,360]){await rpc('Emulation.setDeviceMetricsOverride',{width,height:844,screenWidth:width,screenHeight:844,deviceScaleFactor:1,mobile:true});check(await evalJS("document.documentElement.scrollWidth<=document.documentElement.clientWidth+1"),'Indoor-play layout fits at '+width+'px');await screenshot('indoor-play-'+width+'.png');}
+  await rpc('Page.navigate',{url:BASE+'/kids-family/what-indoor-play-really-costs/'});
+  check(await ready("document.body?.innerText.includes('play trip really cost') && !!document.querySelector('a[href=\\\"/indoor-play/#finder\\\"]')"),'Supporting article and live finder link load');
   await rpc('Page.removeScriptToEvaluateOnNewDocument',{identifier:clock.identifier});
   await freeze('2027-01-01T12:00:00Z'); seasonExpired=true;
   await goto();
