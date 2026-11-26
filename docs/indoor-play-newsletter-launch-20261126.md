@@ -1,17 +1,17 @@
-# Newsletter handover — launch feature (exact website opening)
+# Newsletter launch copy — indoor play guide
 
-**It's raining. The kids are climbing the furniture. What will soft play actually cost?**
+**What does a rainy-day play trip really cost?**
 
-It's raining. The children are climbing the sofa, and you're calculating how much longer the sofa can take it. Soft play seems like the obvious answer. Until you start comparing prices.
+It’s raining, the children are climbing the sofa, and you’re calculating how much longer the sofa can take it.
 
-Take two children, aged two and five, and one adult. At Wacky Warehouse in East Didsbury, published standard admission adds up to £12. At Head Over Heels in Stanley Green, two official pages put a 90-minute visit at £29.88 and £34.15 respectively. That's before anybody orders a coffee. Check the final price when you book.
+Take two children, aged two and five, and one adult. At Wacky Warehouse in East Didsbury, published standard admission adds up to £12. At Head Over Heels in Stanley Green, two official price pages give £29.88 and £34.15 for a 90-minute visit. That’s before anybody orders a coffee.
 
-Of course, these aren't identical experiences. A larger venue may offer more equipment, while a smaller one might be exactly right for an hour. But which places give you the most for your money, which suit a toddler and an older sibling, and where can you actually sit down?
+These are different kinds of outing, of course. But price is only half the story. Where can a toddler and an older sibling play, where can you stay without watching the clock, and where can you actually sit down?
 
-We've pulled together 15 indoor play options around SK8, Stockport and just beyond, including a farm play barn, a miniature role-play village and a climbing centre for older children. The most useful discovery isn't a single winner: it's how much the right answer depends on your family.
+We’ve built a new guide to 15 indoor play venues around SK8 and beyond. There are some useful alternatives to the usual soft-play frame, plus a live finder that changes as you choose ages, budget and area.
 
-**CTA:** Read the full article and find your rainy-day option
+**Read the full article and find your rainy-day option →**
 
-**Destination (only after approved production deployment and live verification):** https://www.sk8scoop.com/kids-family/what-indoor-play-really-costs/?utm_source=sk8_scoop&utm_medium=email&utm_campaign=issue_23&utm_content=indoor_play_feature
+Destination (only after approved production deployment and live verification): https://www.sk8scoop.com/kids-family/what-indoor-play-really-costs/?utm_source=sk8_scoop&utm_medium=email&utm_campaign=issue_23&utm_content=indoor_play_feature
 
-**Image:** TEXT-ONLY until a relevant photo is cleared. Do not use an unlicensed venue image. A typographic lead-in with the two published prices is permitted, without presenting it as a like-for-like quality comparison. Verify the issue campaign label before sending.
+Price-source links: https://www.wackywarehouse.co.uk/play-area/greater-manchester/barlow-croft · https://www.headoverheelsplay.co.uk/prices-wilmslow · https://www.headoverheelsplay.co.uk/book-tickets-wilmslow. Two Head Over Heels official pages differ; do not treat either as confirmed checkout. TEXT-ONLY until a venue photograph is cleared. Update campaign parameter if issue changes.
