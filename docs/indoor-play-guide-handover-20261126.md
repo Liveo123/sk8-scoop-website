@@ -50,3 +50,9 @@ Each profile has a documented editorial reason and practical source caveats. Eig
 
 ## Final newsletter copy
 See docs/indoor-play-newsletter-launch-20261126.md; supersedes the earlier handover excerpt.
+
+
+## V3 live-filter revision, 26 November 2026
+- User requested live selection and a more readable, attractive panel. The finder now uses native radio labels for area and budget, exact-age selects and consolidated play-type filters. No Apply button. Selected states, count, shortlist, matching results, pricing assumptions, excluded-price warning and zero-result recovery update together. Source remains static-first; no-JavaScript readers retain all profiles. Stale prices stay excluded.
+- Price validation: refreshed official tariffs for Let Loose, Tumble Jacks, Curious Little Ones, Oxygen, Head Over Heels, Wacky Warehouse, Play Factore and Run of the Mill. Added single baby + adult rate at Curious Little Ones; month-sensitive tariffs still not estimated without sufficient detail. Little World includes pre-walkers with a paid ticket; unknown baby totals remain unquoted. Oxygen's type filter respects advertised soft-play 0–5 and open-play 4+ bands. Other suitability ranges are approximate. No numerical venue quality scores or unlicensed images added.
+- New assets: assets/indoor-play-enhancements.css, updated assets/indoor-play.js, regenerated static cards, updated dataset and maintenance script. If adding a new venue, confirm play-type categorisation and any product-specific age constraints in facet() before release. Existing 15 profiles, review observations, sources, picks, comparison, change log and tracked paths retained. Article and newsletter excerpt aligned. Offline Chromium passed 73 assertions across five widths (320/390/768/1024/1280 px); visual iteration fixed mobile price wrapping, shorter labels and top count. Exact shared production header/style interaction, link redirects and hosted Cloudflare preview still unverified; no deployment.
