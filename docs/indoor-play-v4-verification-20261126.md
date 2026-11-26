@@ -17,3 +17,8 @@ Source data: five general club locations and four football programmes. Exact sch
 
 ## Map
 All 15 venue postcodes sourced individually, pins approximate. Click-to-load OSM raster tiles with attribution and no bulk requests; list and direct directions always available. Tile loading requires external network; hosted verification pending. No location tracking or API key.
+
+
+## Photo and test follow-up
+- Image search returned the actual Pear Mill entrance image URL and visible photograph: https://s3.geograph.org.uk/geophotos/07/43/13/7431319_d30d9c5e_1024x1024.jpg . Goyt Mill replaced with more recent 10 May 2024 exterior by Christine Johnstone, source https://www.geograph.org.uk/photo/7822173 ; CC BY-SA 2.0 licence verified from source link; direct file https://s0.geograph.org.uk/geophotos/07/82/21/7822173_283c8dd0.jpg . Both loaded only on reader request, credited, unmodified, original link fallback; actual files not locally downloaded, remote delivery not independently verified. No interior photography rights established.
+- Christmas browser test updated from October assertions. Deterministic clock tests before season and after 1 January, original filters, tracking and mobile tests retained. Additional actual-branch indoor-play browser assertions added. Workflow results must be checked against latest head, not historical V3 preview.
