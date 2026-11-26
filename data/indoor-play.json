@@ -19,7 +19,7 @@
       "min": 0,
       "max": 10,
       "ages": "Up to 10",
-      "price": "Booking page says £6 online per child but also refers to £10; adult fee not confirmed.",
+      "price": "Operator snapshots conflict: £6 or £10 per child; booking service starts at £2 but does not identify the adult tariff.",
       "cost": null,
       "session": "105 minutes",
       "booking": "Online booking advised; check daily sessions and current availability.",
@@ -33,15 +33,34 @@
       "secondary": "https://www.nixonsfarmshop.co.uk/book-online",
       "confidence": "Moderate",
       "additional": "https://www.nixonsfarmshop.co.uk/contact-us",
-      "review": "",
-      "reviewSource": "",
+      "review": "A 31 August 2026 TripAdvisor report criticised upkeep of the play barn; other reviews on the same page are about the farm shop or café. Insufficient comparable play-specific reviews.",
+      "reviewSource": "https://www.tripadvisor.co.uk/Restaurant_Review-g1237511-d9585482-Reviews-Nixons_Farm_Shop_and_Tea_Room-Cheadle_Greater_Manchester_England.html",
       "checked": "2026-11-26",
-      "reviewChecked": null,
+      "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "Check total",
+      "costDisplay": "Adult fee unknown",
       "tariff": null,
-      "sensoryMin": null
+      "sensoryMin": null,
+      "priceNote": "Two child tickets £12 or £20 depending on the tariff; adult charge and final checkout unresolved.",
+      "location": {
+        "lat": 53.360832,
+        "lon": -2.230925,
+        "postcode": "SK8 3PS",
+        "source": "https://www.getthedata.com/postcode/SK8-3PS",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Needs checkout",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 5,
+        "visitPlanning": 10,
+        "parentInfo": 5,
+        "accessInfo": 0,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 45
     },
     {
       "id": "head-over-heels",
@@ -75,7 +94,26 @@
       "status": "listed",
       "costDisplay": "£29.88–£34.15",
       "tariff": null,
-      "sensoryMin": null
+      "sensoryMin": null,
+      "priceNote": "Two operator pages disagree for a 90-minute visit: £29.88 or £34.15 (ages 2 and 5 plus adult). Confirm selected session at checkout.",
+      "location": {
+        "lat": 53.354166,
+        "lon": -2.203695,
+        "postcode": "SK8 6QH",
+        "source": "https://www.getthedata.com/postcode/SK8-6QH",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Conflicting tariffs",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 10,
+        "visitPlanning": 15,
+        "parentInfo": 5,
+        "accessInfo": 10,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 65
     },
     {
       "id": "wild-things",
@@ -87,7 +125,7 @@
       "min": 0,
       "max": 10,
       "ages": "Up to 10",
-      "price": "Current total unconfirmed. Retrieved older operator page: £7.50 child + £2 adult; earlier operator snapshot £9.50 child, directory £8.50.",
+      "price": "Operator about-page snapshots list child prices of £7.50 or £9.50 and £2 per adult; another directory lists £8.50.",
       "cost": null,
       "session": "2 hours advertised",
       "booking": "Book online, particularly weekends",
@@ -107,9 +145,28 @@
       "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "Check price",
+      "costDisplay": "£17–£21*",
       "tariff": null,
-      "sensoryMin": null
+      "sensoryMin": null,
+      "priceNote": "£17–£21 for two children and one adult across conflicting operator snapshots; not a confirmed current tariff.",
+      "location": {
+        "lat": 53.372113,
+        "lon": -2.152905,
+        "postcode": "SK7 3AN",
+        "source": "https://www.getthedata.com/postcode/SK7-3AN",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Conflicting tariffs",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 10,
+        "visitPlanning": 15,
+        "parentInfo": 5,
+        "accessInfo": 0,
+        "reviewInfo": 0,
+        "distinctiveInfo": 0
+      },
+      "evidenceScore": 50
     },
     {
       "id": "let-loose",
@@ -163,7 +220,26 @@
           ]
         ]
       },
-      "sensoryMin": null
+      "sensoryMin": null,
+      "location": {
+        "lat": 53.377892,
+        "lon": -2.137067,
+        "postcode": "SK7 5DP",
+        "source": "https://www.ukpostcodecheck.com/postcode/sk7-5dp",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Published standard example",
+      "priceNote": "Published standard admission for ages 2 and 5 plus one adult; confirm booking and compulsory extras.",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 20,
+        "visitPlanning": 10,
+        "parentInfo": 5,
+        "accessInfo": 0,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 60
     },
     {
       "id": "jump-heaven",
@@ -181,7 +257,7 @@
       "booking": "Pre-book; walk-in supplement £2 per ticket",
       "features": "Trampolines, climbing wall, slides and airbags.",
       "pick": "For energetic children who want more than a standard frame.",
-      "caution": "Two £15 child tickets before compulsory grip socks. Everyone accessing the arena, including a supervising adult, needs suitable socks (£3 each if required). Confirm supervision, age and waiver rules; some equipment has age restrictions.",
+      "caution": "Confirm one-adult supervision rules for your children's ages and any sock or adult ticket costs before booking.",
       "parent": "Café; operator FAQ lists around 100 car spaces and disabled parking. Sightlines, toilets/changing and noise unassessed.",
       "access": "Ask about individual access needs and session adjustments",
       "sensory": false,
@@ -195,9 +271,28 @@
       "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "£30 + socks",
+      "costDisplay": "£30 + socks*",
       "tariff": null,
-      "sensoryMin": null
+      "sensoryMin": null,
+      "priceNote": "Two £15 child tickets. New grip socks £3 each if needed; confirm adult supervision for both under-sixes and whether an extra adult/ticket is required. £36–£39 with 2–3 new pairs, before any additional adult ticket.",
+      "location": {
+        "lat": 53.378051,
+        "lon": -2.139697,
+        "postcode": "SK7 5BW",
+        "source": "https://www.getthedata.com/postcode/SK7-5BW",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Conditional admission",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 10,
+        "visitPlanning": 15,
+        "parentInfo": 5,
+        "accessInfo": 0,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 55
     },
     {
       "id": "run-of-the-mill",
@@ -246,7 +341,35 @@
           ]
         ]
       },
-      "sensoryMin": null
+      "sensoryMin": null,
+      "photo": {
+        "title": "Entrance to Pear Mill, February 2023",
+        "author": "Gerald England",
+        "source": "https://www.geograph.org.uk/photo/7431319",
+        "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "basis": "LICENCE",
+        "alt": "Entrance to the former Pear Mill, Bredbury",
+        "note": "Exterior/location photograph, not a current view of either play facility."
+      },
+      "location": {
+        "lat": 53.413769,
+        "lon": -2.133811,
+        "postcode": "SK6 2BP",
+        "source": "https://www.getthedata.com/postcode/SK6-2BP",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Published standard example",
+      "priceNote": "Published standard admission for ages 2 and 5 plus one adult; confirm booking and compulsory extras.",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 20,
+        "visitPlanning": 5,
+        "parentInfo": 5,
+        "accessInfo": 0,
+        "reviewInfo": 0,
+        "distinctiveInfo": 0
+      },
+      "evidenceScore": 50
     },
     {
       "id": "tumble-jacks",
@@ -300,7 +423,35 @@
           ]
         ]
       },
-      "sensoryMin": 0
+      "sensoryMin": 0,
+      "photo": {
+        "title": "Goyt Mill, March 2009",
+        "author": "Chris Allen",
+        "source": "https://commons.wikimedia.org/wiki/File:Goyt_Mill_-_geograph.org.uk_-_1205281.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "basis": "LICENCE",
+        "alt": "Exterior of Goyt Mill in Marple",
+        "note": "Historical exterior/location photograph; not a current view inside Tumble Jacks."
+      },
+      "location": {
+        "lat": 53.385335,
+        "lon": -2.064474,
+        "postcode": "SK6 7HX",
+        "source": "https://www.getthedata.com/postcode/SK6-7HX",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Published standard example",
+      "priceNote": "Published standard admission for ages 2 and 5 plus one adult; confirm booking and compulsory extras.",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 20,
+        "visitPlanning": 10,
+        "parentInfo": 5,
+        "accessInfo": 10,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 70
     },
     {
       "id": "place-to-play",
@@ -312,29 +463,48 @@
       "min": 0,
       "max": 8,
       "ages": "Young children; check suitability",
-      "price": "Current full booking total not confirmed",
+      "price": "Booking listings start from £1; the published FAQ does not identify the paid child and adult tariff. Non-walkers free with a paying child and adult.",
       "cost": null,
-      "session": "Weekday stay-and-play; weekend sessions",
+      "session": "Weekday stay-and-play 9:30–15:00; Saturday 9:30–13:00; Sunday 10:00–13:00 (check booking)",
       "booking": "Booking recommended; limited spaces",
       "features": "Over 12 pretend-play areas with a small café.",
       "pick": "Children who enjoy shops, stories and imaginative play.",
       "caution": "Not a large climbing-frame centre; cashless; front street parking limited to one hour.",
       "parent": "Café; on-street parking at side/rear; baby changing confirmed; sightlines/noise unassessed",
-      "access": "Baby changing confirmed; step-free, accessible WC and quieter sessions unconfirmed",
+      "access": "Operator FAQ confirms sensory room and discussion of SEND requirements; specific current dedicated dates, step-free access and accessible WC unconfirmed.",
       "sensory": false,
       "primary": "https://www.theplacetoplay.net/",
       "secondary": "https://www.stockport.gov.uk/events/the-place-to-play-reddish?date=2026-07-04",
       "confidence": "Moderate",
-      "additional": "",
+      "additional": "https://www.theplacetoplay.net/general-5",
       "review": "",
       "reviewSource": "",
       "checked": "2026-11-26",
       "reviewChecked": null,
       "score": null,
       "status": "listed",
-      "costDisplay": "Check total",
+      "costDisplay": "Checkout needed",
       "tariff": null,
-      "sensoryMin": null
+      "sensoryMin": null,
+      "priceNote": "The £1 minimum is not a family admission quote. Check the full amount for two children and one adult.",
+      "location": {
+        "lat": 53.44592,
+        "lon": -2.156963,
+        "postcode": "SK5 6RN",
+        "source": "https://www.getthedata.com/postcode/SK5-6RN",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Needs checkout",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 0,
+        "visitPlanning": 15,
+        "parentInfo": 5,
+        "accessInfo": 10,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 55
     },
     {
       "id": "awesome-walls",
@@ -366,9 +536,42 @@
       "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "Not comparable",
-      "tariff": null,
-      "sensoryMin": null
+      "costDisplay": "Ages 6+: £30 family",
+      "tariff": {
+        "kind": "family",
+        "price": 30,
+        "min": 6,
+        "max": 17
+      },
+      "sensoryMin": null,
+      "priceNote": "Standard ages 2 and 5 are not eligible. £30 family climbing for up to three eligible climbers, equipment included; confirm supervision and booking.",
+      "photo": {
+        "title": "Entrance to Pear Mill, February 2023",
+        "author": "Gerald England",
+        "source": "https://www.geograph.org.uk/photo/7431319",
+        "license": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "basis": "LICENCE",
+        "alt": "Entrance to the former Pear Mill, Bredbury",
+        "note": "Exterior/location photograph, not a current view of either play facility."
+      },
+      "location": {
+        "lat": 53.413769,
+        "lon": -2.133811,
+        "postcode": "SK6 2BP",
+        "source": "https://www.getthedata.com/postcode/SK6-2BP",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Different age group",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 10,
+        "visitPlanning": 10,
+        "parentInfo": 5,
+        "accessInfo": 0,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 50
     },
     {
       "id": "oxygen",
@@ -380,36 +583,55 @@
       "min": 0,
       "max": 16,
       "ages": "Soft play 0–5; open play 4+",
-      "price": "Soft play £5.95 per toddler; supervising parents free; booking fee",
+      "price": "Soft play (0–5) £5.95 per child; supervising adults free; £1.50 service fee per order.",
       "cost": null,
       "session": "60 min soft play/open play",
       "booking": "Book session",
       "features": "Toddler soft play, trampolines, sports and airbags.",
       "pick": "Separate play options for younger and older children, not one shared ticket.",
-      "caution": "Soft play 0–5, open play 4+. Mixed ages may require different products. Two soft-play tickets £11.90 plus advertised £1.50 service fee; check checkout. Register your car on arrival.",
+      "caution": "Soft play is for ages 0–5. Open play and Peaceful Play use different prices and age rules. Confirm socks and parking registration.",
       "parent": "Café and seating by soft play; free parking with registration; changing/noise unassessed",
       "access": "Peaceful Play 4+ advertises reduced capacity, quieter music, no strobes and eligible carer entry (£9.95 plus booking fee). Other access details unconfirmed.",
       "sensory": true,
       "primary": "https://oxygenactiveplay.co.uk/activity-parks/wilmslow/",
       "secondary": "https://oxygenactiveplay.co.uk/activity-parks/wilmslow/softplay/",
       "confidence": "Moderate",
-      "additional": "https://oxygenactiveplay.co.uk/activity-parks/wilmslow/peaceful-play/",
+      "additional": "https://oxygenactiveplay.co.uk/faq/",
       "review": "Tripadvisor reports from February–October 2026 include positive comments on activities and staff, and criticism of upkeep, crowding or costs. These cover different products and are not independent inspections.",
       "reviewSource": "https://www.tripadvisor.co.uk/Attraction_Review-g580421-d25044858-Reviews-Oxygen_Wilmslow-Wilmslow_Cheshire_England.html",
       "checked": "2026-11-26",
       "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "£11.90 + fee",
+      "costDisplay": "£13.40 + check socks",
       "tariff": null,
-      "sensoryMin": 4
+      "sensoryMin": 4,
+      "priceNote": "Two eligible soft-play tickets £11.90 + £1.50 order fee = £13.40. Confirm any activity-specific sock requirements; open play is a different tariff.",
+      "location": {
+        "lat": 53.3503,
+        "lon": -2.2108,
+        "postcode": "SK9 3PW",
+        "source": "https://postcodedatabase.uk/sk93pw",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Published admission + possible extras",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 15,
+        "visitPlanning": 15,
+        "parentInfo": 5,
+        "accessInfo": 10,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 70
     },
     {
       "id": "barlow-croft",
       "name": "Wacky Warehouse at Barlow Croft",
       "zone": "Nearby",
       "area": "East Didsbury",
-      "address": "Barlow Croft, East Didsbury, Manchester",
+      "address": "Barlow Croft, Parrs Wood Entertainment Centre, East Didsbury, M20 5PG",
       "type": "Pub soft play",
       "min": 0,
       "max": 10,
@@ -428,10 +650,10 @@
       "secondary": "",
       "confidence": "Moderate",
       "additional": "",
-      "review": "",
-      "reviewSource": "",
+      "review": "Syndicated Google review excerpts include a report of refusal of admission near closing time, consistent with a last-admission policy. Not a representative review sample.",
+      "reviewSource": "https://www.softplayfinder.co.uk/soft-plays/manchester/barlow-croft-wacky-warehouse-manchester/",
       "checked": "2026-11-26",
-      "reviewChecked": null,
+      "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
       "costDisplay": "£12.00",
@@ -451,7 +673,26 @@
           ]
         ]
       },
-      "sensoryMin": null
+      "sensoryMin": null,
+      "priceNote": "The current structured admission block says £6 per child (adults free); older promotional wording says from £5.50. £12 is the published standard two-child estimate.",
+      "location": {
+        "lat": 53.408664,
+        "lon": -2.219511,
+        "postcode": "M20 5PG",
+        "source": "https://www.getthedata.com/postcode/M20-5PG",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Published standard example",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 20,
+        "visitPlanning": 10,
+        "parentInfo": 5,
+        "accessInfo": 0,
+        "reviewInfo": 0,
+        "distinctiveInfo": 0
+      },
+      "evidenceScore": 55
     },
     {
       "id": "pure-imagination",
@@ -463,9 +704,9 @@
       "min": 0,
       "max": 7,
       "ages": "Preschool and early primary",
-      "price": "Older operator booking page lists £10 for child + adult and a one-adult discount code; current final price unconfirmed.",
+      "price": "£10 child-and-adult ticket; ONLY1ADULT code advertised when booking multiple children with one adult. Discount amount not published.",
       "cost": null,
-      "session": "90 min (directory; confirm booking)",
+      "session": "90 minutes advertised; confirm booking",
       "booking": "Book ahead",
       "features": "Pretend shops, fantasy scenes and jobs in a themed indoor play world.",
       "pick": "Worth leaving SK8 for make-believe rather than another climbing frame.",
@@ -477,15 +718,39 @@
       "secondary": "https://www.pureimaginationplay.co.uk/",
       "confidence": "Limited",
       "additional": "https://www.sparkhubfamily.co.uk/place/sk_pure_imagination_poynton",
-      "review": "",
-      "reviewSource": "",
+      "review": "Kidzdays reproduces a positive Google-rating snapshot; the sample and date distribution of original reviews were not independently checked. Not used as a comparable quality rating.",
+      "reviewSource": "https://www.kidzdays.co.uk/",
       "checked": "2026-11-26",
-      "reviewChecked": null,
+      "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "Check discount",
-      "tariff": null,
-      "sensoryMin": null
+      "costDisplay": "£20 before discount",
+      "tariff": {
+        "kind": "single",
+        "price": 10,
+        "min": 1,
+        "max": 7
+      },
+      "sensoryMin": null,
+      "priceNote": "Two £10 tickets before the advertised one-adult discount; final checkout amount unconfirmed. One child aged 1–7 plus one adult £10.",
+      "location": {
+        "lat": 53.3465,
+        "lon": -2.1243,
+        "postcode": "SK12 1NJ",
+        "source": "https://www.postcodedatabase.uk/sk121nj",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Discount to confirm",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 10,
+        "visitPlanning": 15,
+        "parentInfo": 5,
+        "accessInfo": 10,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 65
     },
     {
       "id": "curious-little-ones",
@@ -526,7 +791,26 @@
         "max": 6,
         "babySolo": 6.95
       },
-      "sensoryMin": null
+      "sensoryMin": null,
+      "location": {
+        "lat": 53.3378,
+        "lon": -2.1327,
+        "postcode": "SK10 4NL",
+        "source": "https://www.postcodedatabase.uk/sk104nl",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Published standard example",
+      "priceNote": "Published standard admission for ages 2 and 5 plus one adult; confirm booking and compulsory extras.",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 20,
+        "visitPlanning": 10,
+        "parentInfo": 5,
+        "accessInfo": 10,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 70
     },
     {
       "id": "little-world",
@@ -540,7 +824,7 @@
       "ages": "Little walkers to about 5; pre-walkers with a paid ticket",
       "price": "£9.95 child including adult; pre-walkers free with paying ticket",
       "cost": 19.9,
-      "session": "Check session length (published listings differ)",
+      "session": "80 minutes (operator FAQ and rules)",
       "booking": "Book ahead",
       "features": "Small themed play den where children create their own stories.",
       "pick": "A different option for preschool pretend play near the town centre.",
@@ -551,11 +835,11 @@
       "primary": "https://www.littleworldforscholars.co.uk/pricing/",
       "secondary": "https://www.littleworldforscholars.co.uk/faqs/",
       "confidence": "Moderate",
-      "additional": "https://www.littleworldforscholars.co.uk/eat/",
-      "review": "",
-      "reviewSource": "",
+      "additional": "https://www.littleworldforscholars.co.uk/faqs/",
+      "review": "Directory evidence corroborates themed role-play and practical facilities; syndicated review ratings are not a representative independently checked sample.",
+      "reviewSource": "https://visitaltrincham.com/",
       "checked": "2026-11-26",
-      "reviewChecked": null,
+      "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
       "costDisplay": "£19.90",
@@ -575,41 +859,79 @@
           ]
         ]
       },
-      "sensoryMin": null
+      "sensoryMin": null,
+      "priceNote": "Two £9.95 child tickets = £19.90. One adult included; the published extra-adult tariffs differ, which does not affect this one-adult example.",
+      "location": {
+        "lat": 53.387474,
+        "lon": -2.34866,
+        "postcode": "WA14 1EJ",
+        "source": "https://www.getthedata.com/postcode/WA14-1EJ",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Published standard example",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 20,
+        "visitPlanning": 15,
+        "parentInfo": 5,
+        "accessInfo": 10,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 75
     },
     {
       "id": "play-factore",
       "name": "Play Factore",
       "zone": "Nearby",
       "area": "TraffordCity",
-      "address": "BEYOND, TraffordCity, Manchester",
+      "address": "Beyond, Trafford Park, Manchester, M41 7JA",
       "type": "Large indoor adventure",
       "min": 0,
       "max": 16,
       "ages": "Toddlers to 16; main slide ages 5–16",
-      "price": "Peak: age 2 £12.95–£13.95; age 5 £17.95–£21.95; adult £5.25",
+      "price": "Ages 2 and 5 + adult: term-time off-peak £32.15; peak £36.15–£41.15, depending on booking slot.",
       "cost": null,
-      "session": "2 hours off-peak; peak times vary",
+      "session": "2 hours off-peak; peak 2–2.5 hours depending on booking",
       "booking": "Online booking required",
       "features": "Large indoor frame with a long slide, separate toddler area and optional zip wire.",
       "pick": "Worth a longer journey for scale and older siblings.",
       "caution": "Peak example £36.15–£41.15; off-peak £32.15. Optional zip wire and arcade cost extra. Check booking duration and age/height limits.",
-      "parent": "Parent comfort, parking, changing and noise not independently assessed",
-      "access": "Separate toddler area; accessibility and sensory sessions unconfirmed",
-      "sensory": false,
+      "parent": "Operator FAQ advertises free parking (300 spaces) and accessible bays; independent comfort, viewing, changing and noise assessment outstanding.",
+      "access": "Dedicated SEN sessions advertised on first off-peak Tuesday of the month, 2–6pm, two-hour visit; adjusted music/lighting and eligible carer entry with ID. Confirm timetable and access.",
+      "sensory": true,
       "primary": "https://www.playfactore.com/prices/",
       "secondary": "https://www.playfactore.com/facilities/",
       "confidence": "Moderate",
-      "additional": "",
-      "review": "",
-      "reviewSource": "",
+      "additional": "https://www.playfactore.com/sen-play-sessions/",
+      "review": "TripAdvisor and a separate syndicated Google snapshot differ in rating. No pooled rating or quality ranking: platforms, sample dates and visit types differ.",
+      "reviewSource": "https://www.tripadvisor.co.uk/",
       "checked": "2026-11-26",
-      "reviewChecked": null,
+      "reviewChecked": "2026-11-26",
       "score": null,
       "status": "listed",
-      "costDisplay": "£36.15–£41.15",
+      "costDisplay": "£32.15–£41.15*",
       "tariff": null,
-      "sensoryMin": null
+      "sensoryMin": 0,
+      "priceNote": "£32.15 off-peak or £36.15–£41.15 peak; weekday term-time and holiday prices differ. Confirm exact slot and optional activities.",
+      "location": {
+        "lat": 53.468029,
+        "lon": -2.361493,
+        "postcode": "M41 7JA",
+        "source": "https://www.getthedata.com/postcode/M41-7JA",
+        "accuracy": "postcode centroid; not exact entrance"
+      },
+      "priceStatus": "Off-peak / peak",
+      "evidence": {
+        "ageAndActivities": 20,
+        "priceInformation": 15,
+        "visitPlanning": 15,
+        "parentInfo": 0,
+        "accessInfo": 10,
+        "reviewInfo": 0,
+        "distinctiveInfo": 5
+      },
+      "evidenceScore": 65
     }
   ],
   "picks": [
@@ -626,7 +948,7 @@
     [
       "Lowest confirmed fixed example",
       "barlow-croft",
-      "£12 for two paying children and one adult; confirm session length. Other places have unresolved prices."
+      "£12 for two paying children and one adult on its published standard tariff. Oxygen's £13.40 soft-play admission excludes possible socks; other prices vary."
     ],
     [
       "Stay as long as you like",
@@ -666,6 +988,10 @@
     {
       "date": "2026-11-26",
       "detail": "Rebuilt live finder: radio filters, instant shortlist and visible count, results directly below controls, combined play categories, clearer age-dependent tariffs, mobile layout and accessible no-JavaScript fallback."
+    },
+    {
+      "date": "2026-11-26",
+      "detail": "V4: all 15 price scenarios, documented-information scores, 15 mapped postcodes, verified Christmas programme links and licensed location-photo references. No unsupported venue-quality rankings."
     }
   ]
 }
