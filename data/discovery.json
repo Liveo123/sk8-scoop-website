@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20",
+  "updated": "2026-11-27",
   "records": [
     {
       "id": "issue-18-october-23-2026",
@@ -1421,7 +1421,7 @@
       "type": "Stories",
       "category": "Newsletter Web Companion",
       "title": "Issue 22 website companion: CoderDojo and the riverside mystery",
-      "summary": "Website-first research companion from the private Issue 22 draft; not evidence of an email send.",
+      "summary": "Website companion to Issue 22, sent 20 November 2026, with related articles and dated event links.",
       "href": "/issues/issue-22/",
       "area": "SK8",
       "tags": [
@@ -1433,7 +1433,44 @@
         "history"
       ],
       "freshness": "evergreen",
-      "checked": "2026-11-20"
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "issue23-web-companion",
+      "type": "Stories",
+      "category": "Newsletter Archive",
+      "title": "Issue 23: Heald Green, Gatley and indoor play",
+      "summary": "A website companion to the 27 November newsletter: a free market, Gatley railway history and a rainy-day price comparison.",
+      "href": "/issues/issue-23/",
+      "area": "SK8",
+      "tags": [
+        "issue 23",
+        "newsletter",
+        "market",
+        "railway history",
+        "indoor play"
+      ],
+      "freshness": "evergreen",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "what-indoor-play-really-costs",
+      "type": "Guides",
+      "category": "Kids & Family",
+      "title": "What does a rainy-day play trip really cost?",
+      "summary": "Compare local indoor play venues by age, area and example price. Check actual session availability and prices with venues.",
+      "href": "/kids-family/what-indoor-play-really-costs/",
+      "area": "SK8 and nearby",
+      "tags": [
+        "indoor play",
+        "soft play",
+        "kids",
+        "family",
+        "prices",
+        "rainy day"
+      ],
+      "freshness": "current",
+      "checked": "2026-11-27"
     }
   ]
 }
