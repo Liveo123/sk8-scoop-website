@@ -9,6 +9,11 @@ RADAR_REFERRAL_ENABLED = "true"
 RADAR_REFERRAL_REWARD_ENABLED = "true"
 RADAR_GUIDE_WEB_URL = "https://www.sk8scoop.com/radar/adventure-atlas/"
 RADAR_GUIDE_PDF_URL = "https://www.sk8scoop.com/radar/adventure-atlas/download.pdf"
+# Separately approval-gated Birthday Time Machine pilot. Remain OFF until live readiness.
+SK8_BTM_SIGNUP_ENABLED = "false"
+SK8_BTM_REFERRAL_ENABLED = "false"
+SK8_BTM_REWARD_ENABLED = "false"
+BTM_REWARD_OBJECT_KEY = "birthday-time-machine/Birthday_Time_Machine_Release_Candidate.zip"
 
 # Worker Previews do not inherit production secrets or D1. Keep signups safely off.
 # Explicit nested block prevents a stray 'previews' production var in TOML.
@@ -18,6 +23,10 @@ RADAR_REFERRAL_ENABLED = "false"
 RADAR_REFERRAL_REWARD_ENABLED = "false"
 RADAR_GUIDE_WEB_URL = "https://www.sk8scoop.com/radar/adventure-atlas/"
 RADAR_GUIDE_PDF_URL = "https://www.sk8scoop.com/radar/adventure-atlas/download.pdf"
+SK8_BTM_SIGNUP_ENABLED = "false"
+SK8_BTM_REFERRAL_ENABLED = "false"
+SK8_BTM_REWARD_ENABLED = "false"
+BTM_REWARD_OBJECT_KEY = "birthday-time-machine/Birthday_Time_Machine_Release_Candidate.zip"
 
 [triggers]
 # Daily UTC cleanup of expired first-party editorial search / Trail feedback records.
