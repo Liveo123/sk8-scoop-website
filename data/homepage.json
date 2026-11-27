@@ -1,20 +1,20 @@
 {
-  "updated": "2026-11-20",
+  "updated": "2026-11-27",
   "visualStandard": "DICM_BOS_DOUBLE_PASS_NO_CROP_LOSS",
   "stories": [
     {
       "mode": "KNOW",
       "label": "KNOW THIS",
-      "title": "Bramall Hall's roof is back for Christmas",
-      "meta": "Bramhall · Tudor history · Christmas visits",
-      "summary": "Major roof work is finished. What visitors can see, what Hall admission costs and why the Elf Trail needs a separate ticket.",
-      "href": "/updates/bramall-hall-roof-christmas-2026/",
-      "linkLabel": "Check Bramall Hall prices and visiting details →",
+      "title": "What does a rainy-day play trip really cost?",
+      "meta": "SK8 and nearby · Indoor play · Family budgets",
+      "summary": "Compare example admission prices by area, ages and budget, then check the venue’s actual booking price.",
+      "href": "/kids-family/what-indoor-play-really-costs/",
+      "linkLabel": "Compare indoor play prices →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
       "image": "/assets/images/editorial-20261010/SK8-13-useful-updates.webp",
-      "alt": "General SK8 Scoop editorial illustration about local updates; not a photograph of Bramall Hall"
+      "alt": "General SK8 Scoop editorial illustration, not a photograph of an indoor play venue"
     },
     {
       "mode": "DO",
@@ -33,16 +33,16 @@
     {
       "mode": "DISCOVER",
       "label": "DISCOVER THIS",
-      "title": "Stockport's mysterious giant doorway",
-      "meta": "Stockport · Local riverside history · Unresolved",
-      "summary": "An archive photo shows a doorway roughly nine metres high, but its original site and purpose remain unknown.",
-      "href": "/local-history/stockport-riverside-lost-buildings/",
-      "linkLabel": "Investigate the riverside mystery →",
+      "title": "A closer look at Gatley station",
+      "meta": "Gatley · Railway history",
+      "summary": "Spot the original Platform 1 building and the wooden supports beneath it next time you pass through Gatley.",
+      "href": "/issues/issue-23/#gatley",
+      "linkLabel": "Explore Gatley’s railway history →",
       "visualType": "dicm",
       "fit": "cover",
       "position": "center",
       "image": "/assets/images/editorial-20261010/SK8-12-local-history.webp",
-      "alt": "Symbolic SK8 Scoop local-history illustration, not the actual riverside doorway photograph"
+      "alt": "Symbolic SK8 Scoop local-history illustration, not a photograph of Gatley station"
     }
   ],
   "explore": [
