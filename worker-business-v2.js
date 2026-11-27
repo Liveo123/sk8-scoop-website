@@ -1,5 +1,6 @@
 import siteWorker from './worker-protected.js';
 import { handleRadarSignup } from './radar-signup-api.js';
+import { christmasEntry, christmasSignup } from './radar-christmas-ab.js';
 import { requestReferralCode, confirmReferral, awardReferral, purgeOldRadarReferralRecords } from './radar-referral-service.js';
 
 const CONTACT_INBOX = 'contact@sk8scoop.com';
@@ -9,8 +10,11 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    const christmas = await christmasEntry(request, env);
+    if (christmas) return secureResponse(christmas, url);
+
     if (url.pathname === '/api/radar-signup' && request.method === 'POST') {
-      return secureResponse(await handleRadarSignup(request, env), url);
+      return secureResponse(await christmasSignup(request, env, handleRadarSignup), url);
     }
     // Do not expose a reward until the independent Radar referral pilot is enabled.
     if (url.pathname === '/api/radar-referral-status' && request.method === 'GET') {
