@@ -39,7 +39,10 @@ join.addEventListener('submit',async e=>{
   const r=await fetch('/api/sk8-btm-signup',{method:'POST',credentials:'same-origin',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(join))}),j=await r.json();
   if(!r.ok||j.success!==true)throw Error(j.error||'Signup could not be completed.');
   if(j.already_subscribed===true)say('join-status','This email is already subscribed to SK8 Scoop, so it cannot count as a new referral.');
-  else say('join-status','You are subscribed. Please check your inbox and independently confirm the referral email within 48 hours to credit your friend.');
+  else if(j.referral_confirmation_status==='email_accepted')say('join-status','You are subscribed. Look for the separate referral confirmation email and confirm within 48 hours.');
+  else if(j.referral_confirmation_status==='not_counted')say('join-status','You are subscribed. This referral could not be counted. Contact us if you believe this is an error.');
+  else if(j.referral_confirmation_status==='not_requested')say('join-status','You are subscribed. No referral confirmation was requested.');
+  else say('join-status','You are subscribed, but the referral confirmation could not be verified. Please contact contact@sk8scoop.com for help.');
  }catch(err){say('join-status',err.message||'Please try again.',true);}
  finally{joinToken='';qs('joined-at').value=String(Date.now());qs('join-turnstile-token').value='';if(turnstile&&joinWidget!==null)turnstile.reset(joinWidget);b.disabled=true;}
 });

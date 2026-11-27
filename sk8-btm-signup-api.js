@@ -140,7 +140,7 @@ export async function handleSk8BtmSignup(request, env) {
     if (!existing) {
       fields.acquisition_channel = 'Referral';
       fields.signup_source = 'Birthday Time Machine';
-      fields.signup_campaign = 'issue_22_btm';
+      fields.signup_campaign = 'btm_referral';
       fields.signup_landing_page = 'Birthday Time Machine referral';
     }
     const payload = { email, groups: [SK8_GROUP], ...(Object.keys(fields).length ? {fields} : {}), resubscribe: false };
@@ -183,23 +183,25 @@ export async function handleSk8BtmSignup(request, env) {
     // An optional claimed code is NOT a reward. Register the new member's
     // code in D1; only an independently confirmed mailbox can earn credit.
     // Any referral failure must not undo an otherwise valid SK8 Scoop signup.
+    let referralConfirmationStatus = claimedCode ? 'temporarily_unavailable' : 'not_requested';
     if (referralEnabled) {
       try {
         const registered = await registerSk8BtmMember(env, { id: String(created.data.id) });
         if (claimedCode && registered.ready) {
-          await recordSk8BtmReferral(env, {
+          const claim = await recordSk8BtmReferral(env, {
             referee: { id: String(created.data.id), email },
             claimedCode, existingSk8: false
           });
+          referralConfirmationStatus = claim.pending && claim.email_sent === true ? 'email_accepted' : claim.pending ? 'delivery_unverified' : 'not_counted';
         }
       } catch {
         console.error('sk8_btm_referral_recording_unavailable');
       }
     }
-    const source = body.get('source') === 'issue22' ? 'issue22_btm_referral' : 'btm_referral_page';
+    const source = 'btm_referral_page';
     // Aggregate channel only. Never log email, consent data or IP.
     console.log('sk8_btm_signup_success', source);
-    return reply({ success: true, already_subscribed: false });
+    return reply({ success: true, already_subscribed: false, referral_confirmation_status: referralConfirmationStatus });
   } catch (error) {
     console.error('sk8_btm_signup_service_error', String(error && error.message || 'upstream'));
     return reply({ error: 'Subscription service temporarily unavailable.' }, 502);

@@ -241,12 +241,12 @@ export async function requestSk8BtmCode(request,env){
     const emailText=[
        'Your personal Birthday Time Machine referral code is '+code+'.',
        '',
-       'Your personal invite link: '+signupUrl,
+       'Your personal registration URL: '+signupUrl,
        '',
-       'Share this link with three genuinely new SK8 Scoop readers. They join for free using their own email address, and independently confirm the separate referral-verification email within 48 hours.',
+       'When three genuinely new SK8 Scoop readers independently subscribe using your personal code and confirm their referral email within 48 hours, you qualify for the reward.',
        'After three distinct confirmed referrals, you automatically receive one free digital copy of The Clockmaker’s Archive.',
        '',
-       'Existing SK8 readers, self-referrals and duplicate mailboxes do not qualify. Do not send us anyone else’s email address. This does not enrol anyone automatically.',
+       'Existing SK8 readers, self-referrals and duplicate mailboxes do not qualify. Do not supply anyone else’s contact details. Participation is voluntary and no one is enrolled automatically.',
        'Terms: https://www.sk8scoop.com/adventures/birthday-time-machine/refer/terms/'
      ].join('\n');
     const sent=await send(env,email,'Your SK8 Scoop Birthday Time Machine referral code',emailText).catch(()=>false);

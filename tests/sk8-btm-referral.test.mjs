@@ -7,6 +7,8 @@ import {
   downloadSk8BtmReward
 } from '../sk8-btm-referral-service.js';
 
+import {handleSk8BtmSignup} from '../sk8-btm-signup-api.js';
+
 const GROUP='190964754190174086';
 const id=n=>String(300000000000000000n+BigInt(n));
 const ownerId=id(1);
@@ -54,6 +56,13 @@ async function fixture(){
 }
 globalThis.fetch=async(url,opts={})=>{
  const link=String(url);
+ if(link==='https://connect.mailerlite.com/api/subscribers'&&opts.method==='POST'){
+  const payload=JSON.parse(opts.body||'{}');
+  const current=[...people.values()].find(p=>p.email===payload.email);
+  const person={...(current||{}),id:current?.id||id(90+people.size),email:payload.email,status:'active',groups:payload.groups.map(id=>({id})),fields:{...(current?.fields||{}),...(payload.fields||{})}};
+  people.set(person.id,person);
+  return new Response(JSON.stringify({data:person}),{status:200});
+ }
  if(link.includes('connect.mailerlite.com/api/subscribers/')){
   const who=decodeURIComponent(link.split('/').at(-1));
   const person=people.get(who)||[...people.values()].find(p=>p.email===who);
@@ -158,4 +167,62 @@ test('referral code delivery: only subscribed members receive a code; no address
  const unknown=await requestSk8BtmCode(request('/api/sk8-btm-referral-code',{email:'not-a-member@example.test',turnstile:'mock'}),env);
  assert.equal(unknown.status,200);
  assert.equal(emails.length,1);
+});
+
+ 
+// All integrations below are mocked: no real subscriptions, inboxes, payments or storage.
+function signupRequest(email,code,host='www.sk8scoop.com'){
+ const origin='https://'+host;
+ const body=new URLSearchParams({email,consent:'yes',referral_code:code||'',started_at:String(Date.now()-3000),'cf-turnstile-response':'mock',source:'issue22'});
+ return new Request(origin+'/api/sk8-btm-signup',{method:'POST',headers:{origin,'content-type':'application/x-www-form-urlencoded'},body});
+}
+test('signup pilot: valid code reports email acceptance and stable attribution',async()=>{
+ const env=await fixture();env.SK8_BTM_SIGNUP_ENABLED='true';
+ const code=(await registerSk8BtmMember(env,owner)).code;
+ const res=await handleSk8BtmSignup(signupRequest('valid-new@example.test',code),env);
+ assert.equal(res.status,200);
+ const out=await res.json();assert.equal(out.success,true);assert.equal(out.referral_confirmation_status,'email_accepted');
+ const added=[...people.values()].find(x=>x.email==='valid-new@example.test');
+ assert.equal(added.fields.signup_campaign,'btm_referral');
+ assert.equal(added.fields.birthday_time_machine_referral_code,code);
+ assert.equal(emails.filter(x=>x.data.subject.startsWith('Confirm your')).length,1);
+});
+test('signup pilot: unknown code does not falsely promise a confirmation email',async()=>{
+ const env=await fixture();env.SK8_BTM_SIGNUP_ENABLED='true';
+ const res=await handleSk8BtmSignup(signupRequest('unknown-code@example.test','BTM-AAAAAAAAAAAA'),env);
+ assert.equal(res.status,200);assert.equal((await res.json()).referral_confirmation_status,'not_counted');assert.equal(emails.length,0);
+});
+test('signup pilot: provider failure preserves signup and reports uncertain delivery',async()=>{
+ const env=await fixture();env.SK8_BTM_SIGNUP_ENABLED='true';
+ const code=(await registerSk8BtmMember(env,owner)).code;resendFail=true;
+ const res=await handleSk8BtmSignup(signupRequest('send-failure@example.test',code),env);
+ assert.equal(res.status,200);const out=await res.json();assert.equal(out.success,true);assert.equal(out.referral_confirmation_status,'delivery_unverified');
+ assert.ok([...people.values()].some(x=>x.email==='send-failure@example.test'&&x.status==='active'));
+});
+test('signup pilot: disabled and preview routes cannot add subscribers or send email',async()=>{
+ const env=await fixture();
+ assert.equal((await handleSk8BtmSignup(signupRequest('disabled@example.test',''),env)).status,503);
+ env.SK8_BTM_SIGNUP_ENABLED='true';
+ assert.equal((await handleSk8BtmSignup(signupRequest('preview@example.test','','previews.sk8scoop.com'),env)).status,503);
+ assert.equal(people.size,1);assert.equal(emails.length,0);
+});
+test('signup pilot: existing subscriber cannot earn a new referral',async()=>{
+ const env=await fixture();env.SK8_BTM_SIGNUP_ENABLED='true';
+ const code=(await registerSk8BtmMember(env,owner)).code;
+ const existing=addFriend(2,'existing@example.test');
+ const res=await handleSk8BtmSignup(signupRequest(existing.email,code),env);
+ assert.equal((await res.json()).already_subscribed,true);assert.equal(emails.length,0);
+});
+test('signup pilot: no code is a normal voluntary subscription',async()=>{
+ const env=await fixture();env.SK8_BTM_SIGNUP_ENABLED='true';
+ const res=await handleSk8BtmSignup(signupRequest('no-code@example.test',''),env);
+ assert.equal(res.status,200);assert.equal((await res.json()).referral_confirmation_status,'not_requested');assert.equal(emails.length,0);
+});
+test('referral pilot: expired confirmation cannot count',async()=>{
+ const env=await fixture();const code=(await registerSk8BtmMember(env,owner)).code;
+ const friend=addFriend(2,'expired@example.test');
+ await recordSk8BtmReferral(env,{referee:friend,claimedCode:code,existingSk8:false});
+ await env.DB.prepare("UPDATE sk8_btm_referral_claims SET expires_at='2000-01-01T00:00:00Z' WHERE referee_id=?").bind(friend.id).run();
+ assert.equal((await confirmFromLatest(env,friend.email)).status,410);
+ assert.equal(emails.filter(x=>x.data.subject==='Your Birthday Time Machine is ready').length,0);
 });

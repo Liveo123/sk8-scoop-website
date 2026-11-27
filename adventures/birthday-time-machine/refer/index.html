@@ -29,10 +29,10 @@ footer{text-align:center;background:#113b3d;color:#f6eee0;padding:24px}footer a{
 <main>
  <span class="eyebrow">Birthday Time Machine · SK8 Scoop reader reward</span>
  <h1>Three new readers. One free time-travelling game.</h1>
- <p class="lead">Already receive SK8 Scoop? Introduce three genuinely new readers to our free local newsletter. When all three independently confirm their referral, we'll email you the complete Birthday Time Machine digital game.</p>
+ <p class="lead">Already receive SK8 Scoop? When three genuinely new readers subscribe using your personal code and independently confirm their referrals, you earn one free Birthday Time Machine digital game.</p>
  <div class="steps">
   <div class="step"><span>01</span><h2>Get your link</h2><p>Request a personal link using the email address where you receive SK8 Scoop.</p></div>
-  <div class="step"><span>02</span><h2>Invite three readers</h2><p>They subscribe voluntarily and confirm their address using a separate email link.</p></div>
+  <div class="step"><span>02</span><h2>Three confirmed new readers</h2><p>Each chooses to subscribe using your code and independently confirms the referral by email.</p></div>
   <div class="step"><span>03</span><h2>Get the game</h2><p>After three distinct verified new readers, an automatic email gives you a private copy.</p></div>
  </div>
  <p id="launch-status" class="note" role="status">Checking referral programme availability…</p>
@@ -41,11 +41,11 @@ footer{text-align:center;background:#113b3d;color:#f6eee0;padding:24px}footer a{
   <form id="request-form"><label for="request-email">Your SK8 Scoop email</label><input id="request-email" name="email" type="email" maxlength="254" autocomplete="email" placeholder="you@example.com" required>
    <div id="request-turnstile" style="margin:15px 0"></div><button id="request-submit" type="submit" disabled>Send my personal link</button><p id="request-status" class="status" aria-live="polite"></p></form>
  </section>
- <section id="join" class="card"><h2>Have a friend's referral link?</h2>
-  <p id="missing-code">Open the personal link your friend sent you to give them referral credit. You can always <a href="/join/">join SK8 Scoop directly</a> without a code.</p>
+ <section id="join" class="card"><h2>Have a referral code?</h2>
+  <div id="missing-code"><p>Enter a personal referral code if you have one. You can always <a href="/join/">join SK8 Scoop directly</a> without a code.</p><form method="get" action="/adventures/birthday-time-machine/refer/"><label for="enter-code">Referral code</label><input id="enter-code" name="ref" type="text" maxlength="16" autocomplete="off" required style="min-height:49px;max-width:100%;padding:8px;font:16px Arial;border:1px solid #6b807c;border-radius:4px"><button type="submit">Continue with this code</button></form></div>
   <div id="join-with-code" class="hidden">
    <p>Your invite code: <code id="code-display"></code>. Joining SK8 Scoop is free; this is not a paid product order.</p>
-   <form id="join-form"><input type="hidden" name="referral_code" id="claimed-code"><input type="hidden" name="source" value="issue22"><input type="hidden" id="joined-at" name="started_at">
+   <form id="join-form"><input type="hidden" name="referral_code" id="claimed-code"><input type="hidden" name="source" value="btm_referral_page"><input type="hidden" id="joined-at" name="started_at">
     <label for="join-email">Your own email address</label><input name="email" type="email" id="join-email" maxlength="254" autocomplete="email" placeholder="you@example.com" required>
     <label><input type="checkbox" name="consent" value="yes" required> I agree to receive the free SK8 Scoop weekly newsletter. I can unsubscribe at any time.</label>
     <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-300vw;width:1px;height:1px">
@@ -56,7 +56,7 @@ footer{text-align:center;background:#113b3d;color:#f6eee0;padding:24px}footer a{
   </div>
  </section>
  <p class="note"><strong>Who qualifies?</strong> Three different genuinely new SK8 Scoop readers, not existing subscribers, your own accounts or repeat signups. One game per referrer. No automatic marketing messages sent on your behalf. <a href="/adventures/birthday-time-machine/refer/terms/">Read full terms</a>.</p>
- <p class="fine">The programme is not yet live. This draft page does not issue codes or deliver games until separately authorised and switched on.</p>
+ <p class="fine">The reward is available only while the programme is open and all eligibility conditions are met. Please check the programme status above.</p>
 </main>
 <footer>SK8 Scoop · The useful, the local and the mildly nosy. · <a href="/privacy.html">Privacy</a> · <a href="mailto:contact@sk8scoop.com">Contact us</a></footer>
 <script defer src="/adventures/birthday-time-machine/refer/main.js"></script>
