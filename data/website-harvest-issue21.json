@@ -1,0 +1,65 @@
+{
+  "issue": 21,
+  "issue_date": "2026-11-13",
+  "final_issue_checked": true,
+  "checked_date": "2026-11-20",
+  "source": "Sent MailerLite SK8 Scoop Issue 21 original A/B campaign 204021913731728560, sent 13 November 2026, cross-checked for core story topics; historical indexed website adaptation.",
+  "scope": "Latest SENT newsletter Website Harvest, separate from private Issue 22 draft and public Issue 22 WEBSITE companion. Dated 14 November parade and 19 November station consultation not presented as current.",
+  "previous_harvest": "data/website-harvest-issue20.json",
+  "items": [
+    {
+      "id": "issue21-index",
+      "title": "Sent Issue 21 historical story index",
+      "disposition": "existing_surface",
+      "route": "/issues/issue-21/",
+      "checked": "2026-11-20",
+      "reason": "Permanent historical index sourced from sent MailerLite campaign."
+    },
+    {
+      "id": "issue21-parade",
+      "title": "Ashton lantern parade from 14 November 2026",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-20",
+      "reason": "Already past, preserved only in Issue 21 historical index."
+    },
+    {
+      "id": "issue21-station",
+      "title": "Stockport railway station public consultation",
+      "disposition": "expired_no_web_add",
+      "checked": "2026-11-20",
+      "reason": "Deadline 19 November passed; no current call-to-action."
+    },
+    {
+      "id": "issue21-farm",
+      "title": "Heald Green farms attribution and later correction",
+      "disposition": "existing_surface",
+      "route": "/updates/heald-green-farm-correction-2026/",
+      "checked": "2026-11-20",
+      "reason": "Preserve permanent public correction without repeating an inaccurate earlier claim."
+    },
+    {
+      "id": "issue21-notices",
+      "title": "SK8 Pinboard community notices",
+      "disposition": "existing_surface",
+      "route": "/noticeboard/",
+      "checked": "2026-11-20",
+      "reason": "Current noticeboard remains owned resource; dated notices must expire."
+    },
+    {
+      "id": "issue21-current-calendar",
+      "title": "Current dates after historical Issue 21",
+      "disposition": "existing_surface",
+      "route": "/whats-on/",
+      "checked": "2026-11-20",
+      "reason": "Do not keep old Issue 21 events current when publication week ends."
+    },
+    {
+      "id": "issue21-subscriber",
+      "title": "Newsletter subscriber acquisition",
+      "disposition": "existing_surface",
+      "route": "/join/",
+      "checked": "2026-11-20",
+      "reason": "Existing join form; public 890+ SK8 group member snapshot grounded by 899 group members checked 20 Nov; account-wide active is 972, not identical."
+    }
+  ]
+}

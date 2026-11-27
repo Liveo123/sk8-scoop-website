@@ -1,65 +1,79 @@
 {
-  "issue": 21,
-  "issue_date": "2026-11-13",
+  "issue": 23,
+  "issue_date": "2026-11-27",
   "final_issue_checked": true,
-  "checked_date": "2026-11-20",
-  "source": "Sent MailerLite SK8 Scoop Issue 21 original A/B campaign 204021913731728560, sent 13 November 2026, cross-checked for core story topics; historical indexed website adaptation.",
-  "scope": "Latest SENT newsletter Website Harvest, separate from private Issue 22 draft and public Issue 22 WEBSITE companion. Dated 14 November parade and 19 November station consultation not presented as current.",
-  "previous_harvest": "data/website-harvest-issue20.json",
+  "checked_date": "2026-11-27",
+  "source": "Sent original MailerLite Issue 23 full-list content split campaign 205288711100827311; 450 A and 449 B delivered, complete 18:03:49 UK on 27 November.",
+  "scope": "Public companion and confirmed future events from the exact sent bodies. No images from the email reused; no subscriber-only survey, sale or referral links.",
+  "previous_harvest": "data/website-harvest-issue21.json",
   "items": [
     {
-      "id": "issue21-index",
-      "title": "Sent Issue 21 historical story index",
+      "id": "issue23-companion",
+      "title": "Issue 23 website companion",
       "disposition": "existing_surface",
-      "route": "/issues/issue-21/",
-      "checked": "2026-11-20",
-      "reason": "Permanent historical index sourced from sent MailerLite campaign."
+      "checked": "2026-11-27",
+      "route": "/issues/issue-23/",
+      "reason": "Latest and archive point to the public companion."
     },
     {
-      "id": "issue21-parade",
-      "title": "Ashton lantern parade from 14 November 2026",
-      "disposition": "expired_no_web_add",
-      "checked": "2026-11-20",
-      "reason": "Already past, preserved only in Issue 21 historical index."
+      "id": "issue23-market",
+      "title": "Heald Green Christmas Markets",
+      "disposition": "whats_on",
+      "checked": "2026-11-27",
+      "event_id": "heald-green-christmas-market-2026-11-29",
+      "reason": "Existing verified event refreshed; council source does not confirm separate switch-on time."
     },
     {
-      "id": "issue21-station",
-      "title": "Stockport railway station public consultation",
-      "disposition": "expired_no_web_add",
-      "checked": "2026-11-20",
-      "reason": "Deadline 19 November passed; no current call-to-action."
-    },
-    {
-      "id": "issue21-farm",
-      "title": "Heald Green farms attribution and later correction",
+      "id": "issue23-station",
+      "title": "Gatley station history",
       "disposition": "existing_surface",
-      "route": "/updates/heald-green-farm-correction-2026/",
-      "checked": "2026-11-20",
-      "reason": "Preserve permanent public correction without repeating an inaccurate earlier claim."
+      "checked": "2026-11-27",
+      "route": "/issues/issue-23/#gatley",
+      "reason": "A short public companion section uses the photographed station record."
     },
     {
-      "id": "issue21-notices",
-      "title": "SK8 Pinboard community notices",
+      "id": "issue23-indoor",
+      "title": "Indoor play costs",
       "disposition": "existing_surface",
-      "route": "/noticeboard/",
-      "checked": "2026-11-20",
-      "reason": "Current noticeboard remains owned resource; dated notices must expire."
+      "checked": "2026-11-27",
+      "route": "/kids-family/what-indoor-play-really-costs/",
+      "reason": "Existing independent price comparison; check actual provider booking prices."
     },
     {
-      "id": "issue21-current-calendar",
-      "title": "Current dates after historical Issue 21",
-      "disposition": "existing_surface",
-      "route": "/whats-on/",
-      "checked": "2026-11-20",
-      "reason": "Do not keep old Issue 21 events current when publication week ends."
+      "id": "issue23-fayre",
+      "title": "Stockport Town Hall Christmas Fayre",
+      "disposition": "whats_on",
+      "checked": "2026-11-27",
+      "event_id": "stockport-town-hall-christmas-fayre-2026-12-03"
     },
     {
-      "id": "issue21-subscriber",
-      "title": "Newsletter subscriber acquisition",
-      "disposition": "existing_surface",
-      "route": "/join/",
-      "checked": "2026-11-20",
-      "reason": "Existing join form; public 890+ SK8 group member snapshot grounded by 899 group members checked 20 Nov; account-wide active is 972, not identical."
+      "id": "issue23-stockroom",
+      "title": "Stockport Zine & Print Fair",
+      "disposition": "whats_on",
+      "checked": "2026-11-27",
+      "event_id": "stockroom-zine-print-fair-2026-12-06",
+      "reason": "Existing calendar row refreshed, not duplicated."
+    },
+    {
+      "id": "issue23-play",
+      "title": "The Game’s Afoot",
+      "disposition": "do_not_publish",
+      "checked": "2026-11-27",
+      "reason": "Organiser confirmed sold out; removed from original production issue."
+    },
+    {
+      "id": "issue23-holiday-clubs",
+      "title": "Holiday Club Finder",
+      "disposition": "no_web_add",
+      "checked": "2026-11-27",
+      "reason": "Keep existing surface intact; no new public promotion until dated availability/rendered fallback are rechecked."
+    },
+    {
+      "id": "issue23-paid",
+      "title": "Birthday Time Machine",
+      "disposition": "do_not_publish",
+      "checked": "2026-11-27",
+      "reason": "Interest-only in email; no verified live product or referral flow."
     }
   ]
 }

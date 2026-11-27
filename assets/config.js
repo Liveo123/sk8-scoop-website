@@ -38,23 +38,23 @@ window.SK8_CONFIG = {
   publicStats: {
     subscriberCount: "890+",
     subscriberProof: "890+",
-    issuesPublished: 21,
-    checkedDate: "20 November 2026",
+    issuesPublished: 23,
+    checkedDate: "27 November 2026",
     latestMainSendRecipients: null,
     latestMainOpenRate: null,
     latestClickRate: null,
     latestCTOR: null,
-    latestIssueDate: "13 November 2026",
+    latestIssueDate: "27 November 2026",
     latestMetricsCheckedDate: null
   },
   currentIssue: {
-    number: 21,
-    dateIso: "2026-11-13",
-    dateDisplay: "Friday 13 November 2026",
-    title: "Issue 21 · Friday 13 November 2026",
-    headline: "Lantern parade, Gatley history and your station deadline",
-    summary: "Ashton’s lantern parade, Heald Green farm history and the Stockport station consultation, with subsequent corrections clearly linked.",
-    url: "/issues/issue-21/"
+    number: 23,
+    dateIso: "2026-11-27",
+    dateDisplay: "Friday 27 November 2026",
+    title: "Issue 23 · Friday 27 November 2026",
+    headline: "Heald Green Christmas markets, Gatley’s railway history and indoor play",
+    summary: "A free Heald Green market, a closer look at Gatley station and a guide to what indoor play really costs.",
+    url: "/issues/issue-23/"
   },
   stripeLinks: {
     local_spotlight: "",

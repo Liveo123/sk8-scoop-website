@@ -243,10 +243,10 @@
     "cost_type": "free",
     "category": "Market / Community",
     "description": "Community Christmas market with stalls, entertainment and the local Christmas lights switch-on. Organised by Heald Green and Long Lane Ratepayers Association; check the organiser's programme closer to the day.",
-    "booking_url": "https://www.stockport.gov.uk/events/heald-green-christmas-markets?date=2026-11-29",
-    "source_url": "https://www.stockport.gov.uk/events/heald-green-christmas-markets?date=2026-11-29",
-    "checked": "2026-11-09",
-    "verification": "STOCKPORT_COUNCIL_ORGANISER_SUBMITTED_LISTING_2026_11_09"
+    "booking_url": "https://www.stockport.gov.uk/events/heald-green-christmas-markets",
+    "source_url": "https://www.stockport.gov.uk/events/heald-green-christmas-markets",
+    "checked": "2026-11-27",
+    "verification": "STOCKPORT_COUNCIL_ORGANISER_SUBMITTED_LISTING_2026_11_27"
   },
   {
     "status": "verified",
@@ -401,7 +401,7 @@
   },
   {
     "status": "verified",
-    "checked": "2026-11-20",
+    "checked": "2026-11-27",
     "id": "stockroom-zine-print-fair-2026-12-06",
     "title": "Stockport Zine & Print Fair",
     "date": "2026-12-06",
@@ -414,7 +414,7 @@
     "category": "Art / Market",
     "description": "Free drop-in fair featuring more than 40 zine and print traders, a pop-up zine library and free all-ages zine-making workshops. Sunday 6 December, 11am–4pm in Stockroom Studios.",
     "source_url": "https://www.stockroomsk.co.uk/events/stockport-zine-and-print-fair-winter-2026?date=2026-12-06",
-    "verification": "ORGANISER_OR_VENUE_PRIMARY_DATE_SPECIFIC_2026_11_20",
+    "verification": "ORGANISER_OR_VENUE_PRIMARY_DATE_SPECIFIC_2026_11_27",
     "end_time": "16:00"
   },
   {
@@ -635,5 +635,23 @@
     "description": "Stockroom's free Christmas storytime with Father Christmas has two sessions on Wednesday 23 December, at 11am and 2pm. Drop-in, no advance booking indicated on the venue listing. Check before travelling in case space is limited.",
     "source_url": "https://www.stockroomsk.co.uk/events/father-christmas-storytime-special?date=2026-12-23",
     "verification": "ORGANISER_OR_VENUE_PRIMARY_DATE_SPECIFIC_2026_11_20"
+  },
+  {
+    "id": "stockport-town-hall-christmas-fayre-2026-12-03",
+    "title": "Stockport Town Hall Christmas Fayre",
+    "status": "verified",
+    "date": "2026-12-03",
+    "date_mode": "single",
+    "time": "12:00",
+    "end_time": "18:00",
+    "area": "Stockport",
+    "venue": "Stockport Town Hall, Edward Street, SK1 3DQ",
+    "cost": "Free entry; Santa grotto costs extra",
+    "cost_type": "free",
+    "category": "Market / Community",
+    "description": "Festive stalls, live entertainment and a silent disco at Stockport Town Hall. Free entry; check the organiser for grotto details.",
+    "source_url": "https://www.stockport.gov.uk/events/christmas-fayre",
+    "checked": "2026-11-27",
+    "verification": "STOCKPORT_COUNCIL_ORGANISER_SUBMITTED_LISTING_2026_11_27"
   }
 ]
