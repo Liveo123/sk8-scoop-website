@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-24",
+  "updated": "2026-11-27",
   "purpose": "Staging queue for Rolling What's On discovery before verified events enter data/events.json.",
   "statuses": {
     "ready": "Verified and suitable to stage for publication.",
@@ -371,7 +371,7 @@
       "area": "Gatley",
       "source_url": "https://stayhappening.com/e/knitwits-meet-up-saturday-12-dec-2026-E2ISYVK0UDV",
       "date": "2026-12-12",
-      "reason": "Secondary listing names 2–4pm and suggested 50p refreshments donation; URC site confirms venue but not this occurrence.",
+      "reason": "Secondary listing names 2–4pm and suggested 50p refreshments donation; URC site confirms venue but not this occurrence. 27 Nov: secondary listing and URC venue checked; still no primary dated organiser confirmation.",
       "missing": [
         "primary dated organiser confirmation",
         "attendance and price"
@@ -385,10 +385,9 @@
       "area": "Heald Green",
       "source_url": "https://www.achurchnearyou.com/church/12897/service-and-events/events/1368659/",
       "date": "2026-11-28",
-      "reason": "Official church listing confirms 28–29 Nov, free and open to all, but gives a continuous elapsed duration rather than actual daily opening hours.",
+      "reason": "Official church listing confirms 28–29 Nov, free and open to all, but gives a continuous elapsed duration rather than actual daily opening hours. 27 Nov: current church page confirms both days; Issue 23 private review says Sat 10–16 and Sun noon–16 but exact primary hours not independently recovered.",
       "missing": [
-        "Saturday closing and Sunday opening hours",
-        "confirm drop-in arrangements"
+        "primary confirmation of each day's hours and drop-in arrangements"
       ],
       "discovered": "2026-11-24",
       "status": "needs_check"
@@ -440,13 +439,14 @@
       "area": "Woodford",
       "source_url": "https://www.ticketsource.com/woodfordplayers/",
       "date": "2026-11-24",
-      "reason": "Organiser ticket index lists performances but displays multi-day end times on individual entries; secondary source shows £13.",
+      "reason": "Organiser ticket index lists performances but displays multi-day end times on individual entries; secondary source shows £13. 27 Nov: Issue 23 review confirms final advertised performance 28 Nov, 19:30, £12 plus fee; actual booking remains unverified.",
       "missing": [
         "exact individual performance duration and current ticket availability",
         "price on ticket page"
       ],
       "discovered": "2026-11-24",
-      "status": "needs_check"
+      "status": "needs_check",
+      "end_date": "2026-11-28"
     },
     {
       "id": "bramhall-light-up-2026-review",
@@ -473,6 +473,173 @@
         "total price and availability"
       ],
       "discovered": "2026-11-24",
+      "status": "needs_check"
+    },
+    {
+      "id": "chmc-knit-craft-natter-2026-12-07",
+      "title": "Knit, Craft and Natter at Cheadle Hulme Methodist Church",
+      "area": "Cheadle Hulme",
+      "venue": "Coffee Lounge, Cheadle Hulme Methodist Church, Ramillies Avenue, Cheadle Hulme SK8 7AL",
+      "date": "2026-12-07",
+      "date_mode": "single",
+      "time": "19:00",
+      "end_time": "21:00",
+      "cost": "Donations for refreshments welcomed",
+      "cost_type": "optional_donation",
+      "category": "Crafts / Community",
+      "description": "Bring your own knitting, crochet, sewing or other craft project for an informal evening of conversation and shared ideas. The organiser lists this specific December session and welcomes people between projects too. Refreshment donations welcomed; check with the group if attending for the first time.",
+      "source_url": "https://www.chmc.org.uk/groups/Knit-Craft-and-Natter",
+      "verification": "ORGANISER_PRIMARY_INDIVIDUALLY_DATED_SESSION_AND_ATTENDANCE_DETAILS",
+      "status": "ready",
+      "discovered": "2026-11-27",
+      "checked": "2026-11-27",
+      "reason": "Current primary organiser page examined 27 November; named individual dates and attendance details."
+    },
+    {
+      "id": "chmc-toddlers-dec-2026",
+      "title": "Toddlers at Cheadle Hulme Methodist Church",
+      "area": "Cheadle Hulme",
+      "venue": "Main hall, Cheadle Hulme Methodist Church, Ramillies Avenue, Cheadle Hulme SK8 7AL",
+      "date": "2026-12-02",
+      "end_date": "2026-12-16",
+      "date_mode": "specific_dates",
+      "occurrences": [
+        "2026-12-02",
+        "2026-12-09",
+        "2026-12-16"
+      ],
+      "time": "10:30",
+      "end_time": "11:45",
+      "cost": "£2 per family (organiser's advertised price)",
+      "cost_type": "paid",
+      "category": "Toddlers / Community",
+      "description": "Drop-in preschool group with songs, toys, free play and a separate baby area. Drinks and snacks for carers are included; bring your child's drink. The organiser lists these three December dates, with no booking needed. The price is still displayed on the current page but the original price note dates to 2021; confirm if concerned.",
+      "source_url": "https://chmc.org.uk/groups/toddlers",
+      "verification": "ORGANISER_PRIMARY_INDIVIDUALLY_DATED_TERM_TIME_SESSIONS_AND_DROP_IN_PRICE",
+      "status": "ready",
+      "discovered": "2026-11-27",
+      "checked": "2026-11-27",
+      "reason": "Current primary organiser page examined 27 November; named individual dates and attendance details."
+    },
+    {
+      "id": "together-trust-roughleys-toy-run-2026-12-06",
+      "title": "Roughley’s Bikers Christmas Toy Run",
+      "area": "Cheadle",
+      "venue": "Together Trust, Schools Hill, Cheadle SK8 1JE",
+      "date": "2026-12-06",
+      "date_mode": "single",
+      "time": "11:00",
+      "end_time": "13:00",
+      "cost": "Free",
+      "cost_type": "free",
+      "category": "Community / Christmas",
+      "description": "Watch the local motorcycle group arrive dressed as festive characters to deliver donated Christmas gifts to Together Trust. The charity explicitly invites local residents to cheer the riders on. Free spectator event; check the organiser for last-minute changes.",
+      "source_url": "https://www.togethertrust.org.uk/events/roughleys-bikers-christmas-toy-run-2026",
+      "verification": "ORGANISER_PRIMARY_DATED_PUBLIC_INVITATION_FREE_ENTRY",
+      "status": "ready",
+      "discovered": "2026-11-27",
+      "checked": "2026-11-27",
+      "reason": "Current primary organiser page examined 27 November; named individual dates and attendance details."
+    },
+    {
+      "id": "chmc-wobblers-dec-2026-review",
+      "title": "Wobblers at Cheadle Hulme Methodist Church",
+      "area": "Cheadle Hulme",
+      "source_url": "https://www.chmc.org.uk/groups/wobblers",
+      "date": "2026-12-04",
+      "reason": "Organiser lists 4 and 11 Dec at 10:30–11:45, £1.50/family for crawling babies to 24 months.",
+      "missing": [
+        "Confirm attendance/booking and currency of fee (2021 price note)."
+      ],
+      "discovered": "2026-11-27",
+      "status": "needs_check"
+    },
+    {
+      "id": "red-lion-christmas-music-quiz-2026-review",
+      "title": "Christmas live music quiz at Red Lion",
+      "area": "Cheadle",
+      "source_url": "https://www.robinsonsbrewery.com/pubs/red-lion-cheadle/",
+      "date": "2026-12-22",
+      "reason": "Venue confirms holiday exception Tuesday 22 Dec, 19:30, £2/player, six maximum per team, booking essential via ResDiary.",
+      "missing": [
+        "Current quiz table availability and any age restrictions."
+      ],
+      "discovered": "2026-11-27",
+      "status": "needs_check"
+    },
+    {
+      "id": "seashell-cads-winter-2026-review",
+      "title": "Seashell inclusive CADS Saturday and holiday sessions",
+      "area": "Cheadle Hulme",
+      "source_url": "https://www.seashelltrust.org.uk/seashell-active/cads/",
+      "reason": "Official inclusive programme lists ages 8–16, Saturday termly and school holiday sessions; not a dated December timetable.",
+      "missing": [
+        "Individual December/January dates, fee, current booking eligibility and capacity."
+      ],
+      "discovered": "2026-11-27",
+      "status": "needs_check"
+    },
+    {
+      "id": "gatley-carrs-conservation-winter-2026-review",
+      "title": "Gatley Carrs conservation volunteer sessions",
+      "area": "Gatley",
+      "source_url": "https://www.gatleycarrs.org.uk/",
+      "reason": "Organiser invites volunteers but latest dated news is from 2024.",
+      "missing": [
+        "Current dated task day, meeting point, participation terms."
+      ],
+      "discovered": "2026-11-27",
+      "status": "needs_check"
+    },
+    {
+      "id": "rise-cheadle-hulme-winter-classes-2026-review",
+      "title": "RISE fitness, yoga and Pilates sessions",
+      "area": "Cheadle Hulme",
+      "source_url": "https://risefitnesscheadle.co.uk/",
+      "reason": "Official studio offers classes and introductory passes but no individual festive dates verified.",
+      "missing": [
+        "Dated class inventory, price/eligibility and holiday opening."
+      ],
+      "discovered": "2026-11-27",
+      "status": "needs_check"
+    },
+    {
+      "id": "into-stillness-cheadle-hulme-2026-11-29-review",
+      "title": "Into Stillness sound bath",
+      "area": "Cheadle Hulme",
+      "source_url": "https://thetranquilityhavenbylouise.co.uk/events/into-stillness-1",
+      "date": "2026-11-29",
+      "reason": "Issue 23 draft lead; organiser confirms date 19:00–20:00, limited places; checkout redirects and could not be read.",
+      "missing": [
+        "Live ticket price, remaining availability and precise venue/access on booking page."
+      ],
+      "discovered": "2026-11-27",
+      "status": "needs_check"
+    },
+    {
+      "id": "gatley-piccolo-santa-lunch-2026-12-12-review",
+      "title": "Piccolo lunch with Father Christmas",
+      "area": "Gatley",
+      "source_url": "https://timperleyfamily.co.uk/events/lunch-with-father-christmas-piccolo-gatley/",
+      "date": "2026-12-12",
+      "reason": "Secondary listing cites timed lunch and £10 child price plus possible fees; last checked by publisher 21 Oct.",
+      "missing": [
+        "Current primary ticket listing, price including fees and available slots."
+      ],
+      "discovered": "2026-11-27",
+      "status": "needs_check"
+    },
+    {
+      "id": "quarry-bank-operation-elf-dec-2026-review",
+      "title": "Operation Elf indoor festive play space",
+      "area": "Styal",
+      "source_url": "https://www.sparkhubfamily.co.uk/event/evt_sk_quarry_bank_operation_elf_play_space_2026_12",
+      "date": "2026-12-02",
+      "reason": "Secondary lead for under-12 indoor play at Quarry Bank; normal admission reportedly applies.",
+      "missing": [
+        "Primary National Trust timetable, exact admission and holiday closures."
+      ],
+      "discovered": "2026-11-27",
       "status": "needs_check"
     }
   ]
