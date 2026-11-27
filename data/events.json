@@ -35,11 +35,11 @@
   },
   {
     "status": "verified",
-    "checked": "2026-11-13",
+    "checked": "2026-11-27",
     "id": "stockroom-brews-boardgames-nov-dec2026",
     "title": "Brews & Boardgames at Stockroom",
     "date": "2026-11-16",
-    "end_date": "2026-12-21",
+    "end_date": "2027-01-04",
     "date_mode": "specific_dates",
     "occurrences": [
       "2026-11-16",
@@ -47,7 +47,9 @@
       "2026-11-30",
       "2026-12-07",
       "2026-12-14",
-      "2026-12-21"
+      "2026-12-21",
+      "2026-12-28",
+      "2027-01-04"
     ],
     "time": "10:00",
     "area": "Stockport",
@@ -55,18 +57,18 @@
     "cost": "Free participation; refreshments not included in cost claim",
     "cost_type": "free",
     "category": "Games / Community",
-    "description": "Free daytime games get-together as part of Stockport's Warm + Well programme, with chess, jigsaws, Uno, Catan and more. Venue calendar separately lists the six Monday dates, starting 10am. Refreshments should not be assumed free. A useful nearby social option for SK8 readers.",
+    "description": "Free daytime games get-together as part of Stockport's Warm + Well programme, with chess, jigsaws, Uno, Catan and more. Venue calendar lists individual Monday dates, starting 10am, including 28 December and 4 January. Refreshments should not be assumed free. A useful nearby social option for SK8 readers.",
     "source_url": "https://www.stockroomsk.co.uk/events?free=true&page=1&pageSize=60",
-    "booking_url": "https://www.stockroomsk.co.uk/events/brews-and-boardgames?date=2026-11-23",
-    "verification": "VENUE_PRIMARY_INDIVIDUAL_DATE_CALENDAR_AND_EVENT_PAGE"
+    "booking_url": "https://www.stockroomsk.co.uk/events?free=true&page=1&pageSize=60",
+    "verification": "VENUE_PRIMARY_INDEXED_INDIVIDUAL_DATE_CALENDAR_AND_EVENT_PAGE"
   },
   {
     "status": "verified",
-    "checked": "2026-11-13",
+    "checked": "2026-11-27",
     "id": "stockroom-knit-natter-nov-dec2026",
     "title": "Knit & Natter at Stockroom",
     "date": "2026-11-17",
-    "end_date": "2026-12-22",
+    "end_date": "2027-01-05",
     "date_mode": "specific_dates",
     "occurrences": [
       "2026-11-17",
@@ -74,7 +76,9 @@
       "2026-12-01",
       "2026-12-08",
       "2026-12-15",
-      "2026-12-22"
+      "2026-12-22",
+      "2026-12-29",
+      "2027-01-05"
     ],
     "time": "11:00",
     "area": "Stockport",
@@ -82,10 +86,10 @@
     "cost": "Free",
     "cost_type": "free",
     "category": "Crafts / Community",
-    "description": "A free, friendly knitting and crochet gathering where beginners and people who just want a chat are welcome. Bring a project if you wish. Drop in, no booking required. Only the six individually listed future Tuesday dates on Stockroom's event calendar are included.",
+    "description": "A free, friendly knitting and crochet gathering where beginners and people who just want a chat are welcome. Bring a project if you wish. Drop in, no booking required. Individual dates on Stockroom's event calendar include 29 December and 5 January.",
     "source_url": "https://www.stockroomsk.co.uk/events?free=true&page=1&pageSize=60",
-    "booking_url": "https://www.stockroomsk.co.uk/events/knit-natter?date=2026-12-15",
-    "verification": "VENUE_PRIMARY_INDIVIDUAL_DATE_CALENDAR_AND_EVENT_PAGE"
+    "booking_url": "https://www.stockroomsk.co.uk/events?free=true&page=1&pageSize=60",
+    "verification": "VENUE_PRIMARY_INDEXED_INDIVIDUAL_DATE_CALENDAR_AND_EVENT_PAGE"
   },
   {
     "status": "verified",
@@ -175,23 +179,6 @@
     "source_url": "https://www.stockport.gov.uk/events/bramall-hall-decorated-for-christmas-2026-a-musical-celebration-18-to-22-nov?date=2026-11-20",
     "verification": "COUNCIL_TWO_DATE_SPECIFIC_ORGANISER_SUBMISSIONS_PLUS_21_22_NOV_ISSUE22_CHECK",
     "checked": "2026-11-20"
-  },
-  {
-    "status": "verified",
-    "checked": "2026-11-20",
-    "id": "stockroom-book-club-2026-11-26",
-    "title": "Stockroom Book Club: The Alchemist",
-    "date": "2026-11-26",
-    "time": "17:00",
-    "date_mode": "single",
-    "area": "Stockport",
-    "venue": "Stockroom, Merseyway Shopping Centre, Stockport SK1 1PR",
-    "cost": "Free",
-    "cost_type": "free",
-    "category": "Reading / Community",
-    "description": "A free last-Thursday book club, meeting from 5pm with discussion from 5.30pm. November's book is The Alchemist by Paulo Coelho. The venue advertises this as an informal reading community; check the event page for attendance details.",
-    "source_url": "https://www.stockroomsk.co.uk/events/stockroom-book-club-november?date=2026-11-26",
-    "verification": "ORGANISER_OR_VENUE_PRIMARY_DATE_SPECIFIC_2026_11_20"
   },
   {
     "id": "cheadle-library-digital-support-2026-11-27",
@@ -312,6 +299,30 @@
     "status": "verified"
   },
   {
+    "id": "chmc-toddlers-dec-2026",
+    "title": "Toddlers at Cheadle Hulme Methodist Church",
+    "area": "Cheadle Hulme",
+    "venue": "Main hall, Cheadle Hulme Methodist Church, Ramillies Avenue, Cheadle Hulme SK8 7AL",
+    "date": "2026-12-02",
+    "end_date": "2026-12-16",
+    "date_mode": "specific_dates",
+    "occurrences": [
+      "2026-12-02",
+      "2026-12-09",
+      "2026-12-16"
+    ],
+    "time": "10:30",
+    "end_time": "11:45",
+    "cost": "£2 per family (organiser's advertised price)",
+    "cost_type": "paid",
+    "category": "Toddlers / Community",
+    "description": "Drop-in preschool group with songs, toys, free play and a separate baby area. Drinks and snacks for carers are included; bring your child's drink. The organiser lists these three December dates, with no booking needed. The price is still displayed on the current page but the original price note dates to 2021; confirm if concerned.",
+    "source_url": "https://chmc.org.uk/groups/toddlers",
+    "verification": "ORGANISER_PRIMARY_INDIVIDUALLY_DATED_TERM_TIME_SESSIONS_AND_DROP_IN_PRICE",
+    "status": "verified",
+    "checked": "2026-11-27"
+  },
+  {
     "status": "verified",
     "checked": "2026-11-20",
     "id": "stockroom-winter-creative-networking-2026-12-03",
@@ -417,6 +428,24 @@
     "checked": "2026-11-24"
   },
   {
+    "id": "together-trust-roughleys-toy-run-2026-12-06",
+    "title": "Roughley’s Bikers Christmas Toy Run",
+    "area": "Cheadle",
+    "venue": "Together Trust, Schools Hill, Cheadle SK8 1JE",
+    "date": "2026-12-06",
+    "date_mode": "single",
+    "time": "11:00",
+    "end_time": "13:00",
+    "cost": "Free",
+    "cost_type": "free",
+    "category": "Community / Christmas",
+    "description": "Watch the local motorcycle group arrive dressed as festive characters to deliver donated Christmas gifts to Together Trust. The charity explicitly invites local residents to cheer the riders on. Free spectator event; check the organiser for last-minute changes.",
+    "source_url": "https://www.togethertrust.org.uk/events/roughleys-bikers-christmas-toy-run-2026",
+    "verification": "ORGANISER_PRIMARY_DATED_PUBLIC_INVITATION_FREE_ENTRY",
+    "status": "verified",
+    "checked": "2026-11-27"
+  },
+  {
     "status": "verified",
     "checked": "2026-11-20",
     "id": "stockroom-zine-print-fair-2026-12-06",
@@ -433,6 +462,24 @@
     "source_url": "https://www.stockroomsk.co.uk/events/stockport-zine-and-print-fair-winter-2026?date=2026-12-06",
     "verification": "ORGANISER_OR_VENUE_PRIMARY_DATE_SPECIFIC_2026_11_20",
     "end_time": "16:00"
+  },
+  {
+    "id": "chmc-knit-craft-natter-2026-12-07",
+    "title": "Knit, Craft and Natter at Cheadle Hulme Methodist Church",
+    "area": "Cheadle Hulme",
+    "venue": "Coffee Lounge, Cheadle Hulme Methodist Church, Ramillies Avenue, Cheadle Hulme SK8 7AL",
+    "date": "2026-12-07",
+    "date_mode": "single",
+    "time": "19:00",
+    "end_time": "21:00",
+    "cost": "Donations for refreshments welcomed",
+    "cost_type": "optional_donation",
+    "category": "Crafts / Community",
+    "description": "Bring your own knitting, crochet, sewing or other craft project for an informal evening of conversation and shared ideas. The organiser lists this specific December session and welcomes people between projects too. Refreshment donations welcomed; check with the group if attending for the first time.",
+    "source_url": "https://www.chmc.org.uk/groups/Knit-Craft-and-Natter",
+    "verification": "ORGANISER_PRIMARY_INDIVIDUALLY_DATED_SESSION_AND_ATTENDANCE_DETAILS",
+    "status": "verified",
+    "checked": "2026-11-27"
   },
   {
     "status": "verified",
