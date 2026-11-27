@@ -401,7 +401,7 @@
   },
   {
     "status": "verified",
-    "checked": "2026-11-20",
+    "checked": "2026-11-27",
     "id": "stockroom-zine-print-fair-2026-12-06",
     "title": "Stockport Zine & Print Fair",
     "date": "2026-12-06",
@@ -414,7 +414,7 @@
     "category": "Art / Market",
     "description": "Free drop-in fair featuring more than 40 zine and print traders, a pop-up zine library and free all-ages zine-making workshops. Sunday 6 December, 11am–4pm in Stockroom Studios.",
     "source_url": "https://www.stockroomsk.co.uk/events/stockport-zine-and-print-fair-winter-2026?date=2026-12-06",
-    "verification": "ORGANISER_OR_VENUE_PRIMARY_DATE_SPECIFIC_2026_11_20",
+    "verification": "ORGANISER_OR_VENUE_PRIMARY_DATE_SPECIFIC_2026_11_27",
     "end_time": "16:00"
   },
   {
@@ -653,23 +653,5 @@
     "source_url": "https://www.stockport.gov.uk/events/christmas-fayre",
     "checked": "2026-11-27",
     "verification": "STOCKPORT_COUNCIL_ORGANISER_SUBMITTED_LISTING_2026_11_27"
-  },
-  {
-    "id": "stockport-zine-print-fair-2026-12-06",
-    "title": "Stockport Zine & Print Fair",
-    "status": "verified",
-    "date": "2026-12-06",
-    "date_mode": "single",
-    "time": "11:00",
-    "end_time": "16:00",
-    "area": "Stockport",
-    "venue": "Stockroom Studios, Merseyway Shopping Centre, SK1 1PR",
-    "cost": "Free drop-in",
-    "cost_type": "free",
-    "category": "Arts / Community",
-    "description": "Browse local zines and prints, drop into a zine-making workshop or contribute to a collaborative zine. Free drop-in at Stockroom Studios.",
-    "source_url": "https://www.stockroomsk.co.uk/events/stockport-zine-and-print-fair-winter-2026?date=2026-12-06",
-    "checked": "2026-11-27",
-    "verification": "STOCKROOM_PRIMARY_DATE_SPECIFIC_INDEXED_PAGE_2026_11_27"
   }
 ]
