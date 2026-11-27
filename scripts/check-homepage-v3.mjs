@@ -69,7 +69,7 @@ requireText(v5, '.reader-proof{margin-top:0!important', 'tight proof spacing');
 
 // 3. Weekly picks have a proper editorial introduction.
 requireText(home, 'Know · Do · Discover', 'weekly-picks editorial framing');
-requireText(home, 'A restored landmark, current weekend ideas and an unsolved Stockport riverside mystery.', 'current-picks explanation');
+requireText(home, 'Indoor play prices, current weekend ideas and a closer look at Gatley station.', 'current-picks explanation');
 requireText(v4, '.home-worth-head', 'weekly-picks heading layout');
 
 // 4. Story cards are visually consistent and CTA-aligned.
