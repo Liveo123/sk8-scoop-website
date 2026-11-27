@@ -1,0 +1,194 @@
+[
+  {
+    "name": "LSC · Thorn Grove Primary",
+    "area": "Cheadle Hulme",
+    "type": "Multi-activity",
+    "ages": [
+      4,
+      11
+    ],
+    "days": [
+      21,
+      22,
+      23,
+      29,
+      30,
+      31
+    ],
+    "date": "21–23 and 29–31 Dec",
+    "venue": "Thorn Grove Primary, SK8 7LD",
+    "price": "From £29 short / £34 standard",
+    "hours": "9:30–15:30 short; 8:00–18:00 standard",
+    "detail": "Reception to Year 6; pack lunch; final price and places at booking.",
+    "url": "https://wearelsc.co.uk/holiday-clubs/thorn-grove-primary-school/",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  },
+  {
+    "name": "Fun Fest · Bramhall",
+    "area": "Bramhall",
+    "type": "Multi-activity",
+    "ages": [
+      3,
+      11
+    ],
+    "days": [
+      21,
+      22,
+      23,
+      24,
+      29,
+      30,
+      31
+    ],
+    "date": "21–31 Dec (check 28 Dec)",
+    "venue": "Queensgate Primary, SK7 1NE",
+    "price": "£40 full / £24 half; sibling full day £36",
+    "hours": "7:30–18:00; 24 & 31 Dec finish 15:00",
+    "detail": "Closed Christmas Day, Boxing Day and New Year's Day. Ask about the 28 Dec substitute bank holiday before booking; voucher/payment transition notice.",
+    "url": "https://fun-fest.co.uk/cheview/",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  },
+  {
+    "name": "LSC · St Winifred’s",
+    "area": "Heaton Mersey",
+    "type": "Multi-activity",
+    "ages": [
+      4,
+      11
+    ],
+    "days": [
+      21,
+      22,
+      23,
+      29,
+      30,
+      31
+    ],
+    "date": "21–23 and 29–31 Dec",
+    "venue": "St Winifred’s RC Primary, SK4 3JH",
+    "price": "General LSC rates from £29/£34; confirm",
+    "hours": "Standard 8:00–18:00; confirm short day",
+    "detail": "Reception to Year 6; pack lunch; check price and spaces.",
+    "url": "https://wearelsc.co.uk/holiday-clubs/st-winifreds-primary-school/",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  },
+  {
+    "name": "LSC · Broadstone Hall",
+    "area": "Heaton Chapel",
+    "type": "Multi-activity",
+    "ages": [
+      4,
+      11
+    ],
+    "days": [
+      21,
+      22,
+      23
+    ],
+    "date": "21–23 Dec",
+    "venue": "Broadstone Hall Primary, SK4 5JD",
+    "price": "£27 short / £31 standard",
+    "hours": "9:30–15:30 short; 8:00–17:00 standard",
+    "detail": "Reception to Year 6; pack lunch; confirm current booking.",
+    "url": "https://wearelsc.co.uk/holiday-clubs/broadstone-hall-primary-school/",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  },
+  {
+    "name": "LSC · St Catherine’s",
+    "area": "Didsbury",
+    "type": "Multi-activity",
+    "ages": [
+      4,
+      11
+    ],
+    "days": [
+      21,
+      22,
+      23,
+      29,
+      30,
+      31
+    ],
+    "date": "21–23 and 29–31 Dec",
+    "venue": "St Catherine’s Primary School, Didsbury",
+    "price": "Confirm price at booking",
+    "hours": "Confirm session options",
+    "detail": "Reception to Year 6; check exact venue address, dates and charges.",
+    "url": "https://wearelsc.co.uk/holiday-clubs/st-catherines-primary-school/",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  },
+  {
+    "name": "UK Sports · Pre-Academy",
+    "area": "Bredbury",
+    "type": "Football",
+    "ages": null,
+    "days": [
+      21
+    ],
+    "date": "21 Dec",
+    "venue": "UK Sports Arena, Welkin Mill, SK6 2BH",
+    "price": "Check booking price",
+    "hours": "9:00–15:30; early drop-off 8:30",
+    "detail": "U7–U8 football groups; confirm age/season eligibility, late collection and costs.",
+    "url": "https://www.uksportscoaching.co.uk/christmas-football-camps-stockport-2026",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  },
+  {
+    "name": "UK Sports · Striker",
+    "area": "Bredbury",
+    "type": "Football",
+    "ages": null,
+    "days": [
+      22,
+      29
+    ],
+    "date": "22 and 29 Dec",
+    "venue": "UK Sports Arena, Welkin Mill, SK6 2BH",
+    "price": "Check booking price",
+    "hours": "9:00–15:30; early drop-off 8:30",
+    "detail": "U7–U11 groups; confirm age/season eligibility, late collection and costs.",
+    "url": "https://www.uksportscoaching.co.uk/christmas-football-camps-stockport-2026",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  },
+  {
+    "name": "UK Sports · Technical Futsal",
+    "area": "Bredbury",
+    "type": "Football",
+    "ages": null,
+    "days": [
+      23
+    ],
+    "date": "23 Dec",
+    "venue": "UK Sports Arena, Welkin Mill, SK6 2BH",
+    "price": "Check booking price",
+    "hours": "9:00–15:30; early drop-off 8:30",
+    "detail": "U7–U12 groups; confirm age/season eligibility, late collection and costs.",
+    "url": "https://www.uksportscoaching.co.uk/christmas-football-camps-stockport-2026",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  },
+  {
+    "name": "UK Sports · Goalkeeper",
+    "area": "Bredbury",
+    "type": "Football",
+    "ages": null,
+    "days": [
+      30
+    ],
+    "date": "30 Dec",
+    "venue": "UK Sports Arena, Welkin Mill, SK6 2BH",
+    "price": "Check booking price",
+    "hours": "9:00–15:30; early drop-off 8:30",
+    "detail": "U7–U11 groups; confirm age/season eligibility, late collection and costs.",
+    "url": "https://www.uksportscoaching.co.uk/christmas-football-camps-stockport-2026",
+    "source": "Operator programme and booking information",
+    "checked": "26 November 2026"
+  }
+]

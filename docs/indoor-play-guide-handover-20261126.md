@@ -1,0 +1,58 @@
+# Indoor Play Guide — 26 November 2026 draft
+
+Permanent guide: /indoor-play/. Supporting feature: /kids-family/what-indoor-play-really-costs/.
+
+## Newsletter excerpt (copy as opening)
+
+**It's raining. The kids are climbing the furniture. What will soft play actually cost?**
+
+It's raining. The children are climbing the sofa, and you're calculating how much longer the sofa can take it. Soft play seems like the obvious answer. Until you start comparing prices.
+
+Take two children, aged two and five, and one adult. At Wacky Warehouse in East Didsbury, the published standard admission works out at £12. At Head Over Heels in Stanley Green, one official booking page puts a 90-minute visit at £34.15 (another official price page lists £29.88). That's before anybody orders a coffee.
+
+Of course, these aren't identical experiences. A larger venue can offer a whole afternoon of adventure, while a smaller one might be exactly right for an hour. But which places give you the most for your money, which suit a toddler and an older sibling, and where can you actually sit down?
+
+We've pulled together 15 indoor play options around SK8, Stockport and just beyond, including a farm play barn, a miniature role-play village and a climbing centre for older children. The most useful discovery isn't a single winner: it's how much the right answer depends on your family.
+
+**Read the full article and find your rainy-day option**
+
+Target after approved deployment: https://www.sk8scoop.com/kids-family/what-indoor-play-really-costs/?utm_source=sk8_scoop&utm_medium=email&utm_campaign=issue_23&utm_content=indoor_play_feature
+
+## Maintenance
+
+Edit data/indoor-play.json and run node scripts/build-indoor-play.mjs from repo root. This rebuilds picks, venue profiles and changes; review the static hero, rainy-day choices and launch article separately when material claims change. Use prices for the same family scenario; use null for conflicting, incomplete or ineligible totals. Date each source check truthfully. Check prices and opening/booking monthly; flag at 90 days; facilities at 180 days; refresh reviews every six months; reassess awards quarterly. Keep permanent IDs; status can be changed to unlisted rather than deleting the record. Record material changes in updates. Collect private tips via contact; do not automatically publish reviews. Independent review sampling and access questions remain open; no full scores until sufficiently evidenced. No venue photos are included (TEXT-ONLY). Map links use published addresses; no embedded map yet. No live capacity or safety inspection. Holiday club finder is still October archive; refresh before promoting as active. Public links verified in canonical repository where web cache not available.
+
+## Critique/fix (ten lenses)
+1. Local relevance: SK8 first, wider Stockport, selective nearby choices.
+2. Value: compare identical family ages, exclude unknown totals from budget filter.
+3. Price conflicts: explicit Head Over Heels range and Nixon booking inconsistency; no invented final prices.
+4. Age and eligibility: two independent filters, warn about height/session rules.
+5. Parent needs: separate practical parent details and unknowns.
+6. Access: concrete advertised adaptations, no blanket SEND/accessibility promises.
+7. Review fairness: source links, limited samples explicitly qualified; score withheld.
+8. Mobile and accessibility: semantic cards, labelled selects, clear empty state, keyboard focus, 44px controls; browser rendering not yet tested.
+9. Independence: paid positions excluded; no unlicensed photos.
+10. Maintenance: data-driven static output, stale-price flag, corrections and dated changelog. Remaining gates: live preview/mobile/filter QA, broader independent reviews and 100-point scoring, active club finder refresh, optional embedded map, owner approval. No production merge.
+
+
+## Second verification and functional pass · 26 November 2026
+Fixed missing prices: null, never zero; excluded ambiguous totals from budget. Six age tariffs validated; 5 fixed sample estimates at or under £20 (Run of the Mill; Tumble Jacks; Wacky Warehouse at Barlow Croft; Curious Little Ones; Little World for Scholars). JS calculations tested for example totals, one child, uncertain baby prices, stale prices, sensory age and special-session costs. Added quick comparison, type filter, source-linked review summaries (limited, not independent inspections), corrections to compulsory grip socks and clearer price conflict caveats. No final quality scores yet. Checked Image Rights Register updated.md and Image Rights Register.md for all venue names: no relevant cleared image located. TEXT-ONLY; no rights inferred. Browser layout and hosted preview remain pending. No production deployment.
+
+
+## Offline browser QA and mobile revisions
+A separate offline review snapshot used the exact current branch filter logic and a fixture of all 15 venue records (abbreviated display copy, stand-in text masthead, no shared site scripts). Chromium tests passed: 15 initial profiles; five under £20; single child price; uncertain baby tariff; age/SEN restrictions; no results; reset; area/type filters; anchor reset; stale price exclusion; no page script errors; no horizontal overflow at 320/390/768/1280 px. Visual screenshots revealed truncated budget wording and excessive intro copy; shortened labels/intro, improved checkbox target. Stale fixed-price rows now hidden, stale picks labelled, type options rebuilt from dataset. Host preview status unavailable; actual shared navigation and production CSS still need hosted smoke/visual QA.
+
+## Image rights decision
+Both reusable register versions searched: no relevant cleared venue photo found. Candidate source pages (not permissions): https://www.nixonsfarmshop.co.uk/play-areas ; https://www.headoverheelsplay.co.uk/book-tickets-wilmslow ; https://www.wildthingssoftplay.co.uk/about . Direct venue images returned cache misses in the research environment and written permission was not established. Wikimedia generic indoor-play images were located with CC BY 2.0, but not selected because they show identifiable children and are not evidence of local venues. Keep TEXT-ONLY until editorial/rights approval. No asset purchased, uploaded or permission request sent.
+
+## Scoring launch gate
+Each profile has a documented editorial reason and practical source caveats. Eight have limited review observations. Seven have no suitable sample. Score remains null for every venue because reviews, parent experience, exact cost/session and access are not comparably established. No public quality rating or claim of personal inspection. Use the scoring evidence checklist in docs/indoor-play-scoring-evidence-20261126.md for quarterly review.
+
+## Final newsletter copy
+See docs/indoor-play-newsletter-launch-20261126.md; supersedes the earlier handover excerpt.
+
+
+## V3 live-filter revision, 26 November 2026
+- User requested live selection and a more readable, attractive panel. The finder now uses native radio labels for area and budget, exact-age selects and consolidated play-type filters. No Apply button. Selected states, count, shortlist, matching results, pricing assumptions, excluded-price warning and zero-result recovery update together. Source remains static-first; no-JavaScript readers retain all profiles. Stale prices stay excluded.
+- Price validation: refreshed official tariffs for Let Loose, Tumble Jacks, Curious Little Ones, Oxygen, Head Over Heels, Wacky Warehouse, Play Factore and Run of the Mill. Added single baby + adult rate at Curious Little Ones; month-sensitive tariffs still not estimated without sufficient detail. Little World includes pre-walkers with a paid ticket; unknown baby totals remain unquoted. Oxygen's type filter respects advertised soft-play 0–5 and open-play 4+ bands. Other suitability ranges are approximate. No numerical venue quality scores or unlicensed images added.
+- New assets: assets/indoor-play-enhancements.css, updated assets/indoor-play.js, regenerated static cards, updated dataset and maintenance script. If adding a new venue, confirm play-type categorisation and any product-specific age constraints in facet() before release. Existing 15 profiles, review observations, sources, picks, comparison, change log and tracked paths retained. Article and newsletter excerpt aligned. Offline Chromium passed 73 assertions across five widths (320/390/768/1024/1280 px); visual iteration fixed mobile price wrapping, shorter labels and top count. Exact shared production header/style interaction, link redirects and hosted Cloudflare preview still unverified; no deployment.
