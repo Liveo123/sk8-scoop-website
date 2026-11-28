@@ -4,7 +4,7 @@ compatibility_date = "2026-07-24"
 keep_vars = true
 
 [vars]
-RADAR_CHRISTMAS_AB_ENABLED = "false"
+RADAR_CHRISTMAS_AB_ENABLED = "true"
 RADAR_SIGNUP_ENABLED = "true"
 RADAR_REFERRAL_ENABLED = "true"
 RADAR_REFERRAL_REWARD_ENABLED = "true"
